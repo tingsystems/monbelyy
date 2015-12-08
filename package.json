@@ -1,0 +1,42 @@
+{
+  "name": "mmovil",
+  "version": "0.0.1",
+  "description": "Client of MM",
+  "bugs": {
+    "url": "http://tingsystems.com",
+    "email": "soporte@tingsystems.com"
+  },
+  "license": "MIT",
+  "author": "Tingsystems <info@tingsystems.com> - http://tingsystems.com",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/tingsystems/leonor"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "animate": "0.0.5",
+    "connect-history-api-fallback": "^1.1.0",
+    "gulp": "^3.9.0",
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-angular-templatecache": "^1.8.0",
+    "gulp-bower-files": "^0.2.7",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-if": "^2.0.0",
+    "gulp-inject": "^3.0.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-stylus": "^2.1.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-uncss": "^1.0.4",
+    "gulp-useref": "^3.0.3",
+    "gulp-webserver": "^0.9.1",
+    "jshint": "^2.9.1-rc1",
+    "jshint-stylish": "^2.1.0",
+    "nib": "^1.1.0",
+    "readable-stream": "^2.0.4",
+    "wiredep": "^3.0.0-beta"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "mmovil",
+  "version": "0.0.1",
+  "description": "Client for MM",
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.1.4",
+    "angular-resource": "~1.4.8",
+    "angular-ui-router": "~0.2.15"
+  }
+}
