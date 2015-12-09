@@ -1,12 +1,6 @@
 'use strict';
 
 (function () {
-    angular.module('hq', ['ui.router', 'app.controllers'])
-        .config(Routes)
-        .run(Run);
-
-    Run.$inject = ['$http'];
-    Routes.$inject = ['$stateProvider', '$urlRouterProvider'];
     /**
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
@@ -27,4 +21,11 @@
             });
         $urlRouterProvider.otherwise('/');
     }
+
+    angular.module('hq', ['ui.router', 'app.controllers'])
+        .config(Routes)
+        .run(Run);
+
+    Run.$inject = ['$http'];
+    Routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 })();

@@ -8,6 +8,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="viewport" content="width=device-width"/>
     <!-- bower:css -->
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/main.css">
@@ -21,8 +22,16 @@
     Para mejorar la experiencia..
 </p>
 <![endif]-->
-<p>Hola Mundo! Hay vamos!!</p>
+<p class="text-success">Hola Mundo! Hay vamos!!</p>
+
+<div class="container" ui-view="content"></div>
+
 <!-- bower:js -->
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
 <!-- inject:js -->
 <script src="/js/app.js"></script>
