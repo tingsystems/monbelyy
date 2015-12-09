@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-    angular.module('hq', ['ui.router', 'app.controllers', 'templates'])
+    angular.module('hq', ['ui.router', 'app.controllers'])
         .config(Routes)
         .run(Run);
 

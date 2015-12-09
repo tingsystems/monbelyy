@@ -1,12 +1,12 @@
 {
-  "name": "mmovil",
+  "name": "tingsystems",
   "version": "0.0.1",
-  "description": "Client for MM",
+  "description": "Web for Tingsystems",
   "dependencies": {
-    "angular": "~1.4.8",
-    "bootstrap": "~3.3.6",
     "jquery": "~2.1.4",
     "angular-resource": "~1.4.8",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8"
   }
 }
