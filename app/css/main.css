@@ -63,6 +63,7 @@ p {
   top: 0px;
   left: 0;
   right: 0;
+  z-index: 99999;
 }
 .header .mainmenu .main-nav {
   padding-top: 15px;
@@ -77,8 +78,8 @@ p {
   padding-bottom: 400px;
   background-position: center center;
 }
-.header-padding {
-  padding-top: 150px;
+.header-margin {
+  margin-top: 150px;
 }
 .logo {
   margin-top: 0;

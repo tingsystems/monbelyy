@@ -28,6 +28,56 @@
                         controller: 'HomeCtrl'
                     }
                 }
+            })
+            .state('contact', {
+                url: '/contact',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/contact.html',
+                        controllerAs: 'contact',
+                        controller: 'ContactCtrl'
+                    }
+                }
+            })
+            .state('blog', {
+                url: '/blog/:kind',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/blog.html',
+                        controllerAs: 'post',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
+            .state('post_detail', {
+                url: '/:slug\.html',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/single.html',
+                        controllerAs: 'post',
+                        controller: 'PostDetailCtrl'
+                    }
+                }
+            })
+            .state('page', {
+                url: '/page/:slug',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/page.html',
+                        controllerAs: 'page',
+                        controller: 'PostDetailCtrl'
+                    }
+                }
+            })
+            .state('projects', {
+                url: '/projects/:kind',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/projects.html',
+                        controllerAs: 'post',
+                        controller: 'PostCtrl'
+                    }
+                }
             });
         $urlRouterProvider.otherwise('/');
     }
