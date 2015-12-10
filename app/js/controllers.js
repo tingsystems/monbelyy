@@ -13,7 +13,11 @@
         });
 
         PostDetailSrv.get({slug: 'metodologia-de-trabajo'}).$promise.then(function(results){
-           self.featured_post = results;
+           self.featuredPost = results;
+        });
+
+        PostSrv.get({kind: 'client'}).$promise.then(function(results){
+            self.clients = results;
         });
     }
 
