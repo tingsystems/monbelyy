@@ -57,7 +57,6 @@ p {
   background: url("../img/bg.jpg");
   padding-top: 35px;
   padding-bottom: 400px;
-/*background-size: cover;*/
   background-position: center center;
 }
 .header_padding {
@@ -66,15 +65,10 @@ p {
 .logo {
   margin-top: 0px;
 }
-.logo h2 a {
-  color: #fff;
-  text-decoration: none;
-}
 .navbar-nav>li>a {
   font-size: 18px;
   color: #555;
   font-family: 'Roboto', sans-serif;
-/* text-transform: uppercase; */
   font-weight: 700;
 }
 .navbar-nav>li>a:hover,
@@ -84,17 +78,14 @@ p {
 }
 .header_area_text {
   text-align: center;
-/*padding-top: 200px;
-    padding-bottom: 200px;
-    padding-right: 500px;*/
-}
-.header_area_text h2 {
-  font-size: 45px;
-  color: #555;
 }
 .header_area_text p {
   color: #555;
   margin: 30px 0px;
+}
+.header_area_text h2 {
+  font-size: 45px;
+  color: #555;
 }
 #features_area h2 {
   color: #555;
@@ -112,8 +103,21 @@ p {
   padding: 20px;
   color: #555;
 }
+.single_feature h3 {
+  margin-top: 35px;
+  color: #555;
+}
+.single_feature i {
+  font-size: 50px;
+  padding: 20px;
+  color: #555;
+}
 #story_area {
   background: #e9ebea;
+}
+.story_text h2,
+.story_text story_text h2 {
+  margin-bottom: 40px;
 }
 .story_text h2,
 .experience h2 {
@@ -151,14 +155,19 @@ p {
   background: #fff;
   position: relative;
 }
-#portfolio_area h2 {
-  margin-bottom: 15px;
-}
 #portfolio_area p {
   margin-bottom: 50px;
 }
+#portfolio_area h2 {
+  margin-bottom: 15px;
+}
 .portfolio_content {
   position: relative;
+  margin-bottom: 0px;
+}
+.portfolio_content p {
+  border: 2px solid #e3e3e3;
+  padding: 20px 40px;
 }
 .portfolio_content h3 {
   position: absolute;
@@ -172,15 +181,8 @@ p {
   background: transparent;
   text-shadow: 0px 1px 4px rgba(0,0,0,0.51);
 }
-.portfolio_content {
-  margin-bottom: 0px;
-}
 .clients_say_list {
   margin-top: 20px;
-}
-.portfolio_content p {
-  border: 2px solid #e3e3e3;
-  padding: 20px 40px;
 }
 .say {
   text-align: right;
@@ -232,9 +234,9 @@ p {
   margin-right: 10px;
 }
 #caal_to_action_area {
-  background: #e9ebea;
+  background: #ff801a;
   padding: 30px 0px;
-  color: #555;
+  color: #fff;
 }
 .call_to_action_text h2 {
   margin: 0;
@@ -283,5 +285,26 @@ p {
   color: #fff;
   font-weight: 700;
   border-radius: 5px;
+}
+.btn-white-clear {
+  background: transparent;
+  display: inline-block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  border: 3px solid #fff;
+  border-radius: 5px;
+}
+.btn-white-clear:hover,
+.btn-white-clear:focus {
+  background: #fff;
+  display: inline-block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  color: #ff801a;
+  font-weight: 700;
+  border-radius: 5px;
+  border: 3px solid #fff;
 }
 /*---------------------------------------------------------------------------------*/
