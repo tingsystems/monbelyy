@@ -1,42 +1,12 @@
 <section id="portfolio_area" class="section_padding no-padding">
     <div class="container container-portfolio">
         <div class="row">
-            <div class="col-sm-4 no-padding">
+            <div class="col-sm-4 no-padding" ng-repeat="project in home.projects.results">
                 <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
-                    <a href="*">
-                        <h3>Mercado Móvil</h3>
+                    <a ui-sref="post_detail({slug: project.slug})">
+                        <h3>{{ project.title }}</h3>
                         <img class="portfolio_img" src="../img/mm.jpg">
                     </a>
-                </div>
-            </div>
-            <div class="col-sm-4 no-padding">
-                <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
-                    <h3>Periódico la verdad</h3>
-                    <img class="portfolio_img" src="../img/periodico-la-verdad.png">
-                </div>
-            </div>
-            <div class="col-sm-4 no-padding">
-                <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
-                    <h3>Dachvill</h3>
-                    <img class="portfolio_img" src="../img/dachvill.jpg">
-                </div>
-            </div>
-            <div class="col-sm-4 no-padding">
-                <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
-                    <h3>Super 24</h3>
-                    <img class="portfolio_img" src="../img/super24.jpg">
-                </div>
-            </div>
-            <div class="col-sm-4 no-padding">
-                <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
-                    <h3>Ofertas la Ciénega</h3>
-                    <img class="portfolio_img" src="../img/ofertas-cienega.jpg">
-                </div>
-            </div>
-            <div class="col-sm-4 no-padding">
-                <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
-                    <h3>Corredor Insurgentes</h3>
-                    <img class="portfolio_img" src="../img/corredor.jpg">
                 </div>
             </div>
         </div>
@@ -49,15 +19,15 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="story_image wow slideInLeft" data-wow-duration="2s">
-                    <img src="../img/work-team.png" alt="">
+                    <img src="{{ home.featured_post.featuredImage }}" alt="{{ home.featured_post.title }}">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="story_text wow slideInRight" data-wow-duration="2s">
-                    <h2>{{ home.featured_post.title }}</h2>
+                    <h2>{{ home.featuredPost.title }}</h2>
 
-                    <p>{{ home.featured_post.excerpt }}</p>
-                    <a ui-sref="post_detail({slug: home.featured_post.slug})">Más a cerca de nosotros</a>
+                    <p>{{ home.featuredPost.excerpt }}</p>
+                    <a ui-sref="post_detail({slug: home.featuredPost.slug})">Más a cerca de nosotros</a>
                 </div>
             </div>
         </div>
@@ -100,24 +70,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3" ng-repeat="client in home.clients.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="single_blog wow slideInUp" data-wow-duration="2s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="single_blog wow slideInUp" data-wow-duration="3s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="single_blog wow slideInUp" data-wow-duration="3s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
+                    <img class="img-responsive" src="../img/corredor.jpg" alt="{{ client.title }}">
                 </div>
             </div>
         </div>
