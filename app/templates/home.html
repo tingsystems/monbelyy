@@ -54,10 +54,10 @@
             </div>
             <div class="col-md-6">
                 <div class="story_text wow slideInRight" data-wow-duration="2s">
-                    <h2>{{ home.featured_post.title }}</h2>
+                    <h2>{{ home.featuredPost.title }}</h2>
 
-                    <p>{{ home.featured_post.excerpt }}</p>
-                    <a ui-sref="post_detail({slug: home.featured_post.slug})">Más a cerca de nosotros</a>
+                    <p>{{ home.featuredPost.excerpt }}</p>
+                    <a ui-sref="post_detail({slug: home.featuredPost.slug})">Más a cerca de nosotros</a>
                 </div>
             </div>
         </div>
@@ -100,24 +100,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3" ng-repeat="client in home.clients.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="single_blog wow slideInUp" data-wow-duration="2s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="single_blog wow slideInUp" data-wow-duration="3s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="single_blog wow slideInUp" data-wow-duration="3s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="">
+                    <img class="img-responsive" src="../img/corredor.jpg" alt="{{ client.title }}">
                 </div>
             </div>
         </div>
