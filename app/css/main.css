@@ -53,14 +53,32 @@ p {
   font-weight: 400;
   font-size: 14px;
 }
-#header_area {
+.header {
+  position: relative;
+}
+.header .mainmenu {
+  position: absolute;
+  background: #ebebeb;
+  padding: 20px 0;
+  top: 0px;
+  left: 0;
+  right: 0;
+}
+.header .mainmenu .main-nav {
+  padding-top: 15px;
+}
+.header .mainmenu .navbar-brand {
+  float: left;
+  height: auto;
+}
+#slider-area {
   background: url("../img/bg.jpg");
   padding-top: 35px;
   padding-bottom: 400px;
   background-position: center center;
 }
-.header_padding {
-  padding-top: 85px;
+.header-padding {
+  padding-top: 150px;
 }
 .logo {
   margin-top: 0;
@@ -76,14 +94,14 @@ p {
 .navbar-nav>li>a:focus {
   background: none;
 }
-.header_area_text {
+.slider-area-text {
   text-align: center;
 }
-.header_area_text p {
+.slider-area-text p {
   color: #555;
   margin: 30px 0;
 }
-.header_area_text h2 {
+.slider-area-text h2 {
   font-size: 45px;
   color: #555;
 }
@@ -145,7 +163,7 @@ p {
   margin-top: 20px;
   text-transform: uppercase;
 }
-.container_portfolio {
+.container-portfolio {
   width: 100%;
 }
 .portfolio_img {
@@ -246,24 +264,34 @@ p {
   padding: 30px 0;
   color: #fff;
 }
-.divider_footer {
+#footer_area .social-media {
+  padding: 5px;
+}
+#footer_area .footer-links {
+  color: #fff;
+}
+#footer_area .footer-links:hover,
+#footer_area .footer-links:focus {
+  color: #ff801a;
+}
+#footer_area .divider_footer {
   border-top: 1px solid #565656;
 }
-.company_logo {
+#footer_area .company_logo {
   margin: 50px;
 }
-.company_address {
+#footer_area .company_address {
   padding: 10px 30px;
 }
-.company_address h2 {
+#footer_area .company_address h2 {
   font-size: 18px;
   text-transform: uppercase;
 }
-.company_address p {
+#footer_area .company_address p {
   font-size: 14px;
   font-weight: 300;
 }
-.company_address h3 {
+#footer_area .company_address h3 {
   font-size: 14px;
   font-weight: 300;
 }

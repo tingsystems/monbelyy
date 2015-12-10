@@ -117,7 +117,8 @@
 92 verbose linkBins tingsystems@0.0.1
 93 verbose linkMans tingsystems@0.0.1
 94 verbose rebuildBundles tingsystems@0.0.1
-95 verbose rebuildBundles [ '.bin',
+95 verbose rebuildBundles [ '.DS_Store',
+95 verbose rebuildBundles   '.bin',
 95 verbose rebuildBundles   'animate',
 95 verbose rebuildBundles   'connect-history-api-fallback',
 95 verbose rebuildBundles   'gulp',

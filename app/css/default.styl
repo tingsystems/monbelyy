@@ -57,36 +57,54 @@ p
   font-size 14px
 
 /************** main css ******************/
+.header
+  position relative
+
+  .mainmenu
+    position absolute
+    background #EBEBEB
+    padding 20px 0
+    top 0px
+    left 0
+    right 0
+
+    .main-nav
+      padding-top 15px
+
+    .navbar-brand
+      float left
+      height auto
+
 /************** header css ******************/
 
-#header_area
-    background url(../img/bg.jpg)
-    padding-top 35px
-    padding-bottom: 400px
-    background-position:center center
+#slider-area
+  background url(../img/bg.jpg)
+  padding-top 35px
+  padding-bottom: 400px
+  background-position:center center
 
 
-.header_padding
-    padding-top 85px
+.header-padding
+  padding-top 150px
 
 
 .logo
-    margin-top 0
+  margin-top 0
 
 .navbar-nav>li>a
-    font-size: 18px
-    color: #555
-    font-family 'Roboto', sans-serif
-    font-weight 700
+  font-size: 18px
+  color: #555
+  font-family 'Roboto', sans-serif
+  font-weight 700
 
 
 .navbar-nav>li>a:hover,
 .navbar-nav>li>a:active,
 .navbar-nav>li>a:focus
-    background none
+  background none
 
 
-.header_area_text
+.slider-area-text
   text-align center
   p
     color #555
@@ -170,9 +188,8 @@ p
     text-transform uppercase
 
 
-.container_portfolio
+.container-portfolio
   width 100%
-
 
 .portfolio_img
   width 100%
@@ -280,31 +297,43 @@ p
 /************** footer area css ******************/
 
 #footer_area
-    background #444
-    padding 30px 0
+  background #444
+  padding 30px 0
+  color #fff
+
+  .social-media
+    padding 5px
+
+  .footer-links
     color #fff
+    &:hover, &:focus
+      color #ff801a
 
-.divider_footer
-    border-top 1px solid #565656
 
-.company_logo
-    margin 50px
 
-.company_address
-    padding 10px 30px
+  .divider_footer
+      border-top 1px solid #565656
 
-.company_address
-  h2
-    font-size 18px
-    text-transform uppercase
+  .company_logo
+      margin 50px
 
-  p
-    font-size 14px
-    font-weight 300
+  .company_address
+      padding 10px 30px
 
-  h3
-    font-size 14px
-    font-weight 300
+  .company_address
+    h2
+      font-size 18px
+      text-transform uppercase
+
+    p
+      font-size 14px
+      font-weight 300
+
+    h3
+      font-size 14px
+      font-weight 300
+
+
 
 /**************** Buttons ***************/
 
