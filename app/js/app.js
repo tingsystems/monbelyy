@@ -82,7 +82,7 @@
         $urlRouterProvider.otherwise('/');
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ngSanitize'])
         .config(Routes)
         .run(Run);
 
