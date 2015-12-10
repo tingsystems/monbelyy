@@ -1,27 +1,35 @@
 'use strict';
 
 (function () {
-    function HomeCtrl(PostSrv) {
+    function HomeCtrl(PostSrv, TaxonomySrv, PostDetailSrv) {
         var self = this; // save reference of the scope
 
-        PostSrv.get({kind: 'post'}).$promise.then(function (results) {
+        TaxonomySrv.get({slug: 'skills'}).$promise.then(function(results){
+            self.skills = results;
+        });
+
+        PostSrv.get({kind: 'project'}).$promise.then(function(results){
+            self.projects = results;
+        });
+
+        PostDetailSrv.get({slug: 'metodologia-de-trabajo'}).$promise.then(function(results){
+           self.featured_post = results;
+        });
+    }
+
+    function PostCtrl(PostSrv, $stateParams){
+        var self = this;
+
+        PostSrv.get({kind: $stateParams.kind}).$promise.then(function(results){
             self.list = results;
         });
     }
 
-    function PostCtrl(PostSrv){
+    function PostDetailCtrl(PostDetailSrv, $stateParams){
         var self = this;
 
-        PostSrv.get({kind: 'post'}).$promise.then(function(results){
-            self.list = results;
-        });
-    }
-
-    function PageCtrl(PostSrv){
-        var self = this;
-
-        PostSrv.get({kind: 'page'}).$promise.then(function(results){
-            self.list = results;
+        PostDetailSrv.get({slug: $stateParams.slug}).$promise.then(function(results){
+            self.detail = results;
         });
     }
 
@@ -29,9 +37,10 @@
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
         .controller('PostCtrl', PostCtrl)
-        .controller('PageCtrl', PageCtrl);
+        .controller('PostDetailCtrl', PostDetailCtrl);
+
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv'];
-    PostCtrl.$inject = ['PostSrv'];
-    PageCtrl.$inject = ['PostSrv'];
+    HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', 'PostDetailSrv'];
+    PostCtrl.$inject = ['PostSrv', '$stateParams'];
+    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams'];
 })();

@@ -40,7 +40,7 @@
                 }
             })
             .state('blog', {
-                url: '/blog',
+                url: '/blog/:kind',
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -65,7 +65,17 @@
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'page',
-                        controller: 'PageCtrl'
+                        controller: 'PostDetailCtrl'
+                    }
+                }
+            })
+            .state('projects', {
+                url: '/projects/:kind',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/projects.html',
+                        controllerAs: 'post',
+                        controller: 'PostCtrl'
                     }
                 }
             });

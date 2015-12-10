@@ -54,17 +54,10 @@
             </div>
             <div class="col-md-6">
                 <div class="story_text wow slideInRight" data-wow-duration="2s">
-                    <h2>Metodología de trabajo</h2>
+                    <h2>{{ home.featured_post.title }}</h2>
 
-                    <p>Tingsystems nació en el año 2011 como comunidad de desarrollo web integrada por alumnos y
-                        docentes del Instituto Tecnológico de Jiquilpan con la misión de llevar conocimiento y apoyo al
-                        mundo. Durante el tiempo como comunidad tuvimos la oportunidad de desarrollar varios proyectos y
-                        generar experiencia.</p>
-
-                    <p>En el 2014 Tingsystems se forma como empresa ofreciendo servicios de diseño web, registro de
-                        dominios, alojamiento web y marketing online. Trabajamos día con día para expandir nuestros
-                        servicios.</p>
-                    <a href="">Más a cerca de nosotros</a>
+                    <p>{{ home.featured_post.excerpt }}</p>
+                    <a ui-sref="post_detail({slug: home.featured_post.slug})">Más a cerca de nosotros</a>
                 </div>
             </div>
         </div>
@@ -84,25 +77,12 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="skills">
-                    <h2>Skills</h2>
+                <div class="skills" ng-repeat="skill in home.skills.results">
+                    <h2>{{ skill.name }}</h2>
 
                     <div class="skill_right">
-
-                        <div class="wow slideInUp">
-                            <h3>User experience design</h3>
-                        </div>
-
-                        <div class="wow slideInUp">
-                            <h3>E-commerce</h3>
-                        </div>
-
-                        <div class="wow slideInUp">
-                            <h3>Mobile</h3>
-                        </div>
-
-                        <div class="wow slideInUp">
-                            <h3>Add-words</h3>
+                        <div class="wow slideInUp" ng-repeat="child in skill.children">
+                            <h3>{{ child.name }}</h3>
                         </div>
                     </div>
                 </div>
