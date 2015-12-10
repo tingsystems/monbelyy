@@ -1,0 +1,168 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.12.1
+3 info using node@v0.12.7
+4 verbose node symlink /usr/local/bin/node
+5 verbose readDependencies loading dependencies from /Users/fenix/webapps/themes-annalise/package.json
+6 warn package.json tingsystems@0.0.1 No README data
+7 verbose install where, deps [ '/Users/fenix/webapps/themes-annalise',
+7 verbose install   [ 'animate',
+7 verbose install     'connect-history-api-fallback',
+7 verbose install     'gulp',
+7 verbose install     'gulp-angular-filesort',
+7 verbose install     'gulp-angular-templatecache',
+7 verbose install     'gulp-bower-files',
+7 verbose install     'gulp-concat',
+7 verbose install     'gulp-connect',
+7 verbose install     'gulp-filter',
+7 verbose install     'gulp-if',
+7 verbose install     'gulp-inject',
+7 verbose install     'gulp-jshint',
+7 verbose install     'gulp-livereload',
+7 verbose install     'gulp-minify-css',
+7 verbose install     'gulp-stylus',
+7 verbose install     'gulp-uglify',
+7 verbose install     'gulp-uncss',
+7 verbose install     'gulp-useref',
+7 verbose install     'gulp-webserver',
+7 verbose install     'jshint',
+7 verbose install     'jshint-stylish',
+7 verbose install     'nib',
+7 verbose install     'readable-stream',
+7 verbose install     'wiredep' ] ]
+8 verbose install where, peers [ '/Users/fenix/webapps/themes-annalise', [] ]
+9 verbose installManyTop reading for lifecycle /Users/fenix/webapps/themes-annalise/package.json
+10 info preinstall tingsystems@0.0.1
+11 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/animate/package.json
+12 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/connect-history-api-fallback/package.json
+13 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp/package.json
+14 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-angular-filesort/package.json
+15 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-angular-templatecache/package.json
+16 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-bower-files/package.json
+17 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-concat/package.json
+18 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-connect/package.json
+19 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-filter/package.json
+20 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-if/package.json
+21 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-inject/package.json
+22 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-jshint/package.json
+23 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-livereload/package.json
+24 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-minify-css/package.json
+25 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-stylus/package.json
+26 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-uglify/package.json
+27 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-uncss/package.json
+28 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-useref/package.json
+29 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-webserver/package.json
+30 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/jshint/package.json
+31 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/jshint-stylish/package.json
+32 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/nib/package.json
+33 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/readable-stream/package.json
+34 verbose installManyTop reading scoped package data from /Users/fenix/webapps/themes-annalise/node_modules/wiredep/package.json
+35 info package.json gulp-inject@3.0.0 No license field.
+36 verbose readDependencies loading dependencies from /Users/fenix/webapps/themes-annalise/package.json
+37 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/animate/package.json
+38 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/connect-history-api-fallback/package.json
+39 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp/package.json
+40 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-angular-filesort/package.json
+41 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-angular-templatecache/package.json
+42 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-bower-files/package.json
+43 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-concat/package.json
+44 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-connect/package.json
+45 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-filter/package.json
+46 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-if/package.json
+47 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-inject/package.json
+48 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-jshint/package.json
+49 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-livereload/package.json
+50 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-minify-css/package.json
+51 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-stylus/package.json
+52 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-uglify/package.json
+53 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-uncss/package.json
+54 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-useref/package.json
+55 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/gulp-webserver/package.json
+56 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/jshint/package.json
+57 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/jshint-stylish/package.json
+58 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/nib/package.json
+59 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/readable-stream/package.json
+60 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/wiredep/package.json
+61 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/.bin/gulp/package.json
+62 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/.bin/jshint/package.json
+63 verbose targetResolver reading package data from /Users/fenix/webapps/themes-annalise/node_modules/.bin/wiredep/package.json
+64 verbose already installed skipping gulp-uncss@^1.0.4 /Users/fenix/webapps/themes-annalise
+65 verbose already installed skipping gulp-useref@^3.0.3 /Users/fenix/webapps/themes-annalise
+66 verbose already installed skipping gulp-webserver@^0.9.1 /Users/fenix/webapps/themes-annalise
+67 verbose already installed skipping jshint@^2.9.1-rc1 /Users/fenix/webapps/themes-annalise
+68 verbose already installed skipping jshint-stylish@^2.1.0 /Users/fenix/webapps/themes-annalise
+69 verbose already installed skipping nib@^1.1.0 /Users/fenix/webapps/themes-annalise
+70 verbose already installed skipping readable-stream@^2.0.4 /Users/fenix/webapps/themes-annalise
+71 verbose already installed skipping wiredep@^3.0.0-beta /Users/fenix/webapps/themes-annalise
+72 verbose already installed skipping animate@0.0.5 /Users/fenix/webapps/themes-annalise
+73 verbose already installed skipping connect-history-api-fallback@^1.1.0 /Users/fenix/webapps/themes-annalise
+74 verbose already installed skipping gulp@^3.9.0 /Users/fenix/webapps/themes-annalise
+75 verbose already installed skipping gulp-angular-filesort@^1.1.1 /Users/fenix/webapps/themes-annalise
+76 verbose already installed skipping gulp-angular-templatecache@^1.8.0 /Users/fenix/webapps/themes-annalise
+77 verbose already installed skipping gulp-bower-files@^0.2.7 /Users/fenix/webapps/themes-annalise
+78 verbose already installed skipping gulp-concat@^2.6.0 /Users/fenix/webapps/themes-annalise
+79 verbose already installed skipping gulp-connect@^2.2.0 /Users/fenix/webapps/themes-annalise
+80 verbose already installed skipping gulp-filter@^3.0.1 /Users/fenix/webapps/themes-annalise
+81 verbose already installed skipping gulp-if@^2.0.0 /Users/fenix/webapps/themes-annalise
+82 verbose already installed skipping gulp-inject@^3.0.0 /Users/fenix/webapps/themes-annalise
+83 verbose already installed skipping gulp-jshint@^2.0.0 /Users/fenix/webapps/themes-annalise
+84 verbose already installed skipping gulp-livereload@^3.8.1 /Users/fenix/webapps/themes-annalise
+85 verbose already installed skipping gulp-minify-css@^1.2.2 /Users/fenix/webapps/themes-annalise
+86 verbose already installed skipping gulp-stylus@^2.1.0 /Users/fenix/webapps/themes-annalise
+87 verbose already installed skipping gulp-uglify@^1.5.1 /Users/fenix/webapps/themes-annalise
+88 silly install resolved []
+89 info build /Users/fenix/webapps/themes-annalise
+90 info linkStuff tingsystems@0.0.1
+91 silly linkStuff tingsystems@0.0.1 has /Users/fenix/webapps as its parent node_modules
+92 verbose linkBins tingsystems@0.0.1
+93 verbose linkMans tingsystems@0.0.1
+94 verbose rebuildBundles tingsystems@0.0.1
+95 verbose rebuildBundles [ '.bin',
+95 verbose rebuildBundles   'animate',
+95 verbose rebuildBundles   'connect-history-api-fallback',
+95 verbose rebuildBundles   'gulp',
+95 verbose rebuildBundles   'gulp-angular-filesort',
+95 verbose rebuildBundles   'gulp-angular-templatecache',
+95 verbose rebuildBundles   'gulp-bower-files',
+95 verbose rebuildBundles   'gulp-concat',
+95 verbose rebuildBundles   'gulp-connect',
+95 verbose rebuildBundles   'gulp-filter',
+95 verbose rebuildBundles   'gulp-if',
+95 verbose rebuildBundles   'gulp-inject',
+95 verbose rebuildBundles   'gulp-jshint',
+95 verbose rebuildBundles   'gulp-livereload',
+95 verbose rebuildBundles   'gulp-minify-css',
+95 verbose rebuildBundles   'gulp-stylus',
+95 verbose rebuildBundles   'gulp-uglify',
+95 verbose rebuildBundles   'gulp-uncss',
+95 verbose rebuildBundles   'gulp-useref',
+95 verbose rebuildBundles   'gulp-webserver',
+95 verbose rebuildBundles   'jshint',
+95 verbose rebuildBundles   'jshint-stylish',
+95 verbose rebuildBundles   'nib',
+95 verbose rebuildBundles   'readable-stream',
+95 verbose rebuildBundles   'wiredep' ]
+96 info install tingsystems@0.0.1
+97 info postinstall tingsystems@0.0.1
+98 info prepublish tingsystems@0.0.1
+99 verbose validateInstall loading /Users/fenix/webapps/themes-annalise/package.json for validation
+100 verbose stack Error: The package jshint does not satisfy its siblings' peerDependencies requirements!
+100 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
+100 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:267:7
+100 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
+100 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+100 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+100 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+100 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+100 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+100 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+100 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+101 verbose cwd /Users/fenix/webapps/themes-annalise
+102 error Darwin 14.5.0
+103 error argv "node" "/usr/local/bin/npm" "install"
+104 error node v0.12.7
+105 error npm  v2.12.1
+106 error code EPEERINVALID
+107 error peerinvalid The package jshint does not satisfy its siblings' peerDependencies requirements!
+107 error peerinvalid Peer gulp-jshint@2.0.0 wants jshint@2.x
+108 verbose exit [ 1, true ]
