@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="logo">
-                    <h2><a href=""><img src="../img/logo.png"></a></h2>
+                    <h2><a ui-sref="home"><img src="../img/logo.png"></a></h2>
                 </div>
             </div>
             <div class="col-sm-8">
@@ -54,10 +54,10 @@
 
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="#">Proyectos</a></li>
-                                <li><a href="#">Nosotros</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contacto</a></li>
+                                <li><a href="*">Proyectos</a></li>
+                                <li><a ui-sref="page({slug: 'nosotros'})">Nosotros</a></li>
+                                <li><a ui-sref="blog">Blog</a></li>
+                                <li><a ui-sref="contact">Contacto</a></li>
                             </ul>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
 
                     <p class="wow slideInUp" data-wow-duration="3s">Te ayudamos a revolucionar tu empresa, adentrandose
                         en el mundo digital </p>
-                    <a class="btn-green wow slideInUp" data-wow-duration="3s" href="#">Hablanos de tu
+                    <a class="btn-green wow slideInUp" data-wow-duration="3s" href="*">Hablanos de tu
                         proyecto </a>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                 <div class="company_address wow slideInDown">
                     <h2>Contacto</h2>
 
-                    <p>Colonia Hospitales, Calzada Juarez #367 Jiquilpan, Michoacán, México
+                    <p>Colonia Hospitales, Calzada Juarez *367 Jiquilpan, Michoacán, México
                     </p>
 
                     <h3>
@@ -126,7 +126,7 @@
     <hr class="divider_footer"/>
     <div class="container">
         <div class="text-center">
-            Diseño y desarrollo 2015 por <a href="#">Tingsystems</a>
+            Diseño y desarrollo 2015 por <a href="*">Tingsystems</a>
         </div>
     </div>
 </footer>
