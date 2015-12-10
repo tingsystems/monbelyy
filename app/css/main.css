@@ -23,7 +23,7 @@
   margin: 0 auto 15px;
 }
 a:focus {
-  outline: 0px solid;
+  outline: 0 solid;
 }
 a:hover {
   text-decoration: none;
@@ -46,7 +46,7 @@ h6 {
   font-family: 'Roboto', sans-serif;
 }
 .section_padding {
-  padding: 80px 0px;
+  padding: 80px 0;
 }
 p {
   font-family: 'Roboto', sans-serif;
@@ -63,7 +63,7 @@ p {
   padding-top: 85px;
 }
 .logo {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .navbar-nav>li>a {
   font-size: 18px;
@@ -81,7 +81,7 @@ p {
 }
 .header_area_text p {
   color: #555;
-  margin: 30px 0px;
+  margin: 30px 0;
 }
 .header_area_text h2 {
   font-size: 45px;
@@ -163,7 +163,7 @@ p {
 }
 .portfolio_content {
   position: relative;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 .portfolio_content p {
   border: 2px solid #e3e3e3;
@@ -179,7 +179,7 @@ p {
   color: #fff;
   line-height: 120px;
   background: transparent;
-  text-shadow: 0px 1px 4px rgba(0,0,0,0.51);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.51);
 }
 .clients_say_list {
   margin-top: 20px;
@@ -224,7 +224,7 @@ p {
   margin-top: 20px;
 }
 .single_blog p {
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 .comment_area {
   color: #999;
@@ -235,7 +235,7 @@ p {
 }
 #caal_to_action_area {
   background: #ff801a;
-  padding: 30px 0px;
+  padding: 30px 0;
   color: #fff;
 }
 .call_to_action_text h2 {
@@ -243,7 +243,7 @@ p {
 }
 #footer_area {
   background: #444;
-  padding: 30px 0px;
+  padding: 30px 0;
   color: #fff;
 }
 .divider_footer {
