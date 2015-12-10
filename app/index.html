@@ -8,8 +8,8 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="viewport" content="width=device-width"/>
     <!-- bower:css -->
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="lib/animate.css/animate.css"/>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="lib/animate.css/animate.css" />
     <!-- endbower -->
 
     <!--Favicon-->
@@ -50,14 +50,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse">
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="2s"><a
-                                ui-sref="projects({kind: 'project'})">Nosotros</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="2s"><a ui-sref="projects({kind: 'project'})">Proyectos</a>
+                        <li class="wow fadeInDown" data-wow-delay="2s">
+                            <a ui-sref="page({slug: 'nosotros'})">Nosotros</a>
                         </li>
-                        <li class="wow fadeInDown" data-wow-delay="2s"><a ui-sref="projects({kind: 'project'})">Blog</a>
+                        <li class="wow fadeInDown" data-wow-delay="2s">
+                            <a ui-sref="projects({kind: 'project'})">Proyectos</a>
                         </li>
-                        <li class="wow fadeInDown" data-wow-delay="2s"><a
-                                ui-sref="projects({kind: 'project'})">Contacto</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="2s">
+                            <a ui-sref="blog({kind: 'post'})">Blog</a>
+                        </li>
+                        <li class="wow fadeInDown" data-wow-delay="2s"><a ui-sref="contact">Contacto</a></li>
                     </ul>
                 </div>
             </div>
@@ -68,26 +70,6 @@
     </nav>
 </header>
 <!-- end header top area -->
-
-<!-- slider -->
-
-<div id="slider-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 header-margin">
-                <div class="slider-area-text">
-                    <h2 class="wow slideInUp" data-wow-duration="2s">Tu consultor tecnológico</h2>
-
-                    <p class="wow slideInUp" data-wow-duration="3s">Te ayudamos a revolucionar tu empresa, adentrandose
-                        en el mundo digital </p>
-                    <a class="btn-green wow slideInUp" data-wow-duration="3s" href="*">Hablanos de tu
-                        proyecto </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <div ui-view="content"></div>
 
@@ -103,7 +85,7 @@
                 <div class="company_address wow slideInDown">
                     <h2>Contacto</h2>
 
-                    <p>Colonia Hospitales, Calzada Juarez *367 Jiquilpan, Michoacán, México
+                    <p>Colonia Hospitales, Calzada Juarez #367 Jiquilpan, Michoacán, México
                     </p>
 
                     <h3>
@@ -126,7 +108,7 @@
                     <h2>Información</h2>
                     <a class="footer-links" href="">Programa de afiliados</a>
                     <a class="footer-links" href="">Preguntas frecuentes</a>
-                    <a class="footer-links" href="">Política de privacidad</a>
+                    <a class="footer-links" href="">Políticas de privacidad</a>
                     <a class="footer-links" href="">Buzón de quejas y sugerencias</a>
                 </div>
             </div>
@@ -145,11 +127,8 @@
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-resource/angular-resource.js"></script>
 <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="lib/wow/dist/wow.js"></script>
-<script>
-    new WOW().init();
-</script>
 <script src="lib/angular-sanitize/angular-sanitize.js"></script>
 <!-- endbower -->
 <!-- inject:js -->
