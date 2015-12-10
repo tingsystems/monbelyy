@@ -44,7 +44,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="../img/logo.png"
+                    <a class="navbar-brand" href="/"><img src="img/logo.png"
                                                           class="logo" alt="Tingsystems"></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -71,7 +71,13 @@
 </header>
 <!-- end header top area -->
 
-<div ui-view="content"></div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div ui-view="content"></div>
+        </div>
+    </div>
+</div>
 
 <footer id="footer_area">
     <div class="container">
@@ -106,10 +112,10 @@
             <div class="col-sm-3">
                 <div class="company_address wow slideInDown">
                     <h2>Información</h2>
-                    <a class="footer-links" href="">Programa de afiliados</a>
-                    <a class="footer-links" href="">Preguntas frecuentes</a>
-                    <a class="footer-links" href="">Políticas de privacidad</a>
-                    <a class="footer-links" href="">Buzón de quejas y sugerencias</a>
+                    <a class="footer-links" ui-sref="page({slug: 'programa-de-afiliados'})">Programa de afiliados</a>
+                    <a class="footer-links" ui-sref="page({slug: 'preguntas-frecuentes'})">Preguntas frecuentes</a>
+                    <a class="footer-links" ui-sref="page({slug: 'politicas-de-privacidad'})">Políticas de privacidad</a>
+                    <a class="footer-links" ui-sref="page({slug: 'buzon-de-quejas-y-sugerencias'})">Buzón de quejas y sugerencias</a>
                 </div>
             </div>
         </div>
