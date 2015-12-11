@@ -22,6 +22,9 @@
   display: block;
   margin: 0 auto 15px;
 }
+.padding {
+  padding: 20px 0;
+}
 a:focus {
   outline: 0 solid;
 }
@@ -222,6 +225,9 @@ p {
 #clients_area .title {
   color: #949494;
 }
+#clients_area h4.title {
+  font-weight: 400;
+}
 .clients_say_list {
   margin-top: 20px;
 }
@@ -273,6 +279,18 @@ p {
 .date i,
 .comment i {
   margin-right: 10px;
+}
+#content-area {
+  margin: 200px 0px 60px;
+}
+#content-area .title {
+  color: #737373;
+}
+#content-area .divider {
+  border: 1px solid #f5f5f5;
+}
+#content-area .content-pages {
+  padding: 20px 0;
 }
 #caal_to_action_area {
   background: #ff801a;
