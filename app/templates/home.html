@@ -8,7 +8,7 @@
 
                     <p class="wow slideInUp" data-wow-duration="3s">Te ayudamos a revolucionar tu empresa, adentrandose
                         en el mundo digital </p>
-                    <a class="btn-green wow slideInUp" data-wow-duration="3s" href="#">Hablanos de tu
+                    <a class="btn-green wow slideInUp" data-wow-duration="3s" href="*">Hablanos de tu proyecto</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
 
                     <div ng-bind-html="home.featuredPost.excerpt"></div>
 
-                    <a ui-sref="post_detail({slug: home.featuredPost.slug})">Más a cerca de nosotros</a>
+                    <a ui-sref="post_detail({slug: home.featuredPost.slug})">Más acerca de nosotros</a>
                 </div>
             </div>
         </div>
@@ -89,9 +89,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3" ng-repeat="partern in home.parterns.results">
+            <div class="col-sm-3" ng-repeat="partner in home.parterns.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                    <img class="img-responsive" {{ client.featuredImage }} alt="{{ client.title }}">
+                    <img class="img-responsive" {{ partner.featuredImage }} alt="{{ partner.title }}">
                 </div>
             </div>
         </div>
