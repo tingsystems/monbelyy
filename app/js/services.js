@@ -1,6 +1,5 @@
-'use strict';
-
 (function () {
+    'use strict';
 
     var siteId = '57091aee-863f-4acf-972f-5b24fbe98d1f';
     var baseUrl = 'https://tingsystems.com/api/v1/site/' + siteId + '/';

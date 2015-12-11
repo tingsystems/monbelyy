@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="story_image wow slideInLeft" data-wow-duration="2s">
-                    <img ng-src="{{ home.featuredPost.featuredImage }}" alt="{{ home.featured_post.title }}">
+                    <img ng-src="{{ home.featuredPost.featuredImage }}" alt="{{ home.featuredPost.title }}">
                 </div>
             </div>
             <div class="col-md-6">
@@ -84,12 +84,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="title">Nuestros Clientes</h2>
+                <h2 class="title">Alianzas</h2>
                 <h4 class="title">El buen servicio y los buenos resultados conducen a la confianza</h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3" ng-repeat="client in home.clients.results">
+            <div class="col-sm-3" ng-repeat="partern in home.parterns.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
                     <img class="img-responsive" {{ client.featuredImage }} alt="{{ client.title }}">
                 </div>
