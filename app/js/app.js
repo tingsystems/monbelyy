@@ -10,7 +10,7 @@
 
     }
 
-    function Routes($stateProvider, $urlRouterProvider) {
+    function Routes($stateProvider, $urlRouterProvider, $locationProvider) {
 
         $stateProvider
             .state('index', {
@@ -91,6 +91,7 @@
                 }
             });
         $urlRouterProvider.otherwise('/');
+        $locationProvider.html5Mode(true);
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ngSanitize', 'app.templates'])
@@ -98,5 +99,5 @@
         .run(Run);
 
     Run.$inject = ['$http'];
-    Routes.$inject = ['$stateProvider', '$urlRouterProvider'];
+    Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 })();
