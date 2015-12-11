@@ -37,14 +37,20 @@
         });
     }
 
+    function ContactCtrl(){
+        var self = this;
+    }
+
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
         .controller('PostCtrl', PostCtrl)
-        .controller('PostDetailCtrl', PostDetailCtrl);
+        .controller('PostDetailCtrl', PostDetailCtrl)
+        .controller('ContactCtrl', ContactCtrl);
 
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', 'PostDetailSrv'];
     PostCtrl.$inject = ['PostSrv', '$stateParams'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams'];
+    ContactCtrl.$inject = [];
 })();

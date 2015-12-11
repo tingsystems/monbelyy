@@ -74,7 +74,17 @@
                 views: {
                     'content': {
                         templateUrl: '/templates/projects.html',
-                        controllerAs: 'post',
+                        controllerAs: 'project',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
+            .state('project_detail', {
+                url: '/projects/:slug',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/project_detail.html',
+                        controllerAs: 'project',
                         controller: 'PostCtrl'
                     }
                 }
