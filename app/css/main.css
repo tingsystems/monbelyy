@@ -72,6 +72,25 @@ p {
   float: left;
   height: auto;
 }
+.header .mainmenu .navbar-toggle {
+  position: relative;
+  float: right;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: #4ecb8c;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.header .mainmenu .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+  background: #fff;
+}
 #slider-area {
   background: url("../img/bg.jpg");
   padding-top: 35px;
@@ -199,6 +218,9 @@ p {
   line-height: 120px;
   background: transparent;
   text-shadow: 0 1px 4px rgba(0,0,0,0.51);
+}
+#clients_area .title {
+  color: #949494;
 }
 .clients_say_list {
   margin-top: 20px;
@@ -335,5 +357,137 @@ p {
   font-weight: 700;
   border-radius: 5px;
   border: 3px solid #fff;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .header_area_text {
+    padding-right: 160px;
+  }
+  .single_feature i {
+    left: 38%;
+  }
+  .story_image {
+    margin-bottom: 20px;
+  }
+  .skills {
+    margin-top: 50px;
+  }
+  .company_address {
+    padding: 10px 26px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .main-nav {
+    background: #ddd;
+  }
+  .container-main {
+    width: 100%;
+    padding: 0;
+  }
+  .logo {
+    margin-top: 0;
+    width: 180px;
+    margin-top: -5px;
+  }
+  #header_area {
+    padding-top: 5px;
+    background-size: cover;
+  }
+  .navbar-toggle {
+    background-color: #4ecb8c;
+  }
+  .header_area_text h2 {
+    font-size: 30px;
+  }
+  .header_area_text {
+    padding-right: 0px;
+  }
+  .navbar-toggle .icon-bar {
+    background-color: #fff;
+  }
+  .header_area_text {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .header_area_text a,
+  .story_text a,
+  .experience a,
+  .call_project a {
+    padding: 8px 10px;
+    margin-top: 0px;
+  }
+  .single_feature {
+    margin-bottom: 60px;
+  }
+  .single_feature i {
+    left: 40%;
+  }
+  .story_text h2,
+  .experience h2 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .clients_say p::before {
+    display: none;
+  }
+  .say {
+    width: 85%;
+  }
+  .c_img {
+    width: 15%;
+  }
+  .clients_say p {
+    padding: 10px;
+  }
+  .clients_say {
+    margin-bottom: 60px;
+  }
+  .skills h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .single_blog h2 {
+    font-size: 16px;
+  }
+  .single_blog p {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .single_blog {
+    margin-bottom: 30px;
+  }
+  .call_to_action_text h2 {
+    font-size: 22px;
+  }
+  .call_to_action_text p {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .text-right {
+    text-align: left;
+  }
+  p {
+    font-size: 12px;
+  }
+  h2 {
+    font-size: 22px;
+  }
+  .company_address p {
+    font-size: 12px;
+  }
+  .company_address h2 {
+    font-size: 16px;
+  }
+  .company_address {
+    padding: 10px 15px;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .single_feature i {
+    left: 46%;
+    top: -22%;
+  }
+  .single_blog img {
+    width: 100%;
+  }
 }
 /*---------------------------------------------------------------------------------*/
