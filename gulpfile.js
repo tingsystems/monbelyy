@@ -114,7 +114,7 @@ gulp.task('uncss', function () {
 
 //	Vigila	cambios	que	se	produzcan	en	el	código y	lanza	las	tareas	relacionadas
 gulp.task('watch', function () {
-    gulp.watch(['./app/**/*.html'], ['html']);
+    gulp.watch(['./app/**/*.html'], ['html', 'templates']);
     gulp.watch(['./app/css/**/*.styl'], ['css', 'inject']);
     gulp.watch(['./app/js/**/*.js', './gulpfile.js', './bower.js'], ['jshint', 'inject']);
 });
