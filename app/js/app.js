@@ -6,10 +6,11 @@
      */
     function Run($http) {
         $http.defaults.headers.common['TS-TOKEN'] = 'MTej3ZSvJquIbp2gByoFBUJKeS7mtOJ05GOt9dqx';
+        //$http.defaults.headers.common['TS-TOKEN'] = 'AjFPLkeDMc5InbYZE2gbQiUtzi5F7LxHJE0sPAPb';
 
     }
 
-    function Routes($stateProvider, $urlRouterProvider) {
+    function Routes($stateProvider, $urlRouterProvider, $locationProvider) {
 
         $stateProvider
             .state('index', {
@@ -90,6 +91,7 @@
                 }
             });
         $urlRouterProvider.otherwise('/');
+        $locationProvider.html5Mode(true);
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ngSanitize', 'app.templates'])
@@ -97,5 +99,5 @@
         .run(Run);
 
     Run.$inject = ['$http'];
-    Routes.$inject = ['$stateProvider', '$urlRouterProvider'];
+    Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 })();

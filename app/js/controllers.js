@@ -39,6 +39,10 @@
 
     function ContactCtrl(){
         var self = this;
+
+        self.formSubmit = function(){
+            // ajax request to send the formData
+        }
     }
 
     // create the module and assign controllers
