@@ -120,4 +120,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['server', 'inject', 'watch']);
-gulp.task('build', ['templates', 'compress', 'copy', 'uncss']);
+gulp.task('build', ['templates', 'compress', 'copy']);
