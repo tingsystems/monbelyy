@@ -23,7 +23,7 @@
                 <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
                     <a ui-sref="post_detail({slug: project.slug})">
                         <h3>{{ project.title }}</h3>
-                        <img class="portfolio_img" src="../img/mm.jpg">
+                        <img class="portfolio_img" ng-src="{{ project.featuredImage }}" alt="{{ project.title }}">
                     </a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="story_image wow slideInLeft" data-wow-duration="2s">
-                    <img ng-src="{{ home.featuredPost.featuredImage }}" alt="{{ home.featured_post.title }}">
+                    <img ng-src="{{ home.featuredPost.featuredImage }}" alt="{{ home.featuredPost.title }}">
                 </div>
             </div>
             <div class="col-md-6">
@@ -91,7 +91,7 @@
         <div class="row">
             <div class="col-sm-3" ng-repeat="client in home.clients.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="{{ client.title }}">
+                    <img class="img-responsive" ng-src="{{ client.featuredImage }}" alt="{{ client.title }}">
                 </div>
             </div>
         </div>
