@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, TaxonomySrv, PostDetailSrv) {
+    function HomeCtrl(PostSrv, TaxonomySrv, PostDetailSrv, $rootScope) {
         var self = this; // save reference of the scope
 
         TaxonomySrv.get({slug: 'skills'}).$promise.then(function(results){
@@ -18,6 +18,10 @@
 
         PostSrv.get({kind: 'partner'}).$promise.then(function(results){
             self.parterns = results;
+        });
+
+        PostSrv.get({kind: 'footer-info'}).$promise.then(function(results){
+            $rootScope.footer_info = results;
         });
     }
 
@@ -53,7 +57,7 @@
         .controller('ContactCtrl', ContactCtrl);
 
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', 'PostDetailSrv'];
+    HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams'];
     ContactCtrl.$inject = [];

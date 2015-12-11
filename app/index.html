@@ -111,10 +111,7 @@
             <div class="col-sm-3">
                 <div class="company_address wow slideInDown">
                     <h2>Información</h2>
-                    <a class="footer-links" ui-sref="page({slug: 'programa-de-afiliados'})">Programa de afiliados</a>
-                    <a class="footer-links" ui-sref="page({slug: 'preguntas-frecuentes'})">Preguntas frecuentes</a>
-                    <a class="footer-links" ui-sref="page({slug: 'politicas-de-privacidad'})">Políticas de privacidad</a>
-                    <a class="footer-links" ui-sref="page({slug: 'buzon-de-quejas-y-sugerencias'})">Buzón de quejas y sugerencias</a>
+                    <a class="footer-links" ui-sref="page({slug: footer_link.slug})" ng-repeat="footer_link in footer_info.results">{{ footer_link.title }}</a>
                 </div>
             </div>
         </div>
