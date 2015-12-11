@@ -2,8 +2,8 @@
 
 (function () {
 
-    var siteId = '167b5b84-2df8-46b1-b1fa-af42ad6432de';
-    var baseUrl = 'http://localhost:8000/api/v1/site/' + siteId + '/';
+    var siteId = '57091aee-863f-4acf-972f-5b24fbe98d1f';
+    var baseUrl = 'http://api.tingsystems.com/v1/site/' + siteId + '/';
 
     function PostSrv($resource) {
         return $resource(baseUrl + 'posts');

@@ -8,7 +8,7 @@
 
                     <p class="wow slideInUp" data-wow-duration="3s">Te ayudamos a revolucionar tu empresa, adentrandose
                         en el mundo digital </p>
-                    <a class="btn-green wow slideInUp" data-wow-duration="3s" href="*">Hablanos de tu
+                    <a class="btn-green wow slideInUp" data-wow-duration="3s" href="#">Hablanos de tu
                         proyecto </a>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
                     <a ui-sref="post_detail({slug: project.slug})">
                         <h3>{{ project.title }}</h3>
-                        <img class="portfolio_img" src="../img/mm.jpg">
+                        <img class="portfolio_img" ng-src="{{ project.featuredImage }}" alt="{{ project.title }}">
                     </a>
                 </div>
             </div>
@@ -43,6 +43,7 @@
             <div class="col-md-6">
                 <div class="story_text wow slideInRight" data-wow-duration="2s">
                     <h2>{{ home.featuredPost.title }}</h2>
+
                     <div ng-bind-html="home.featuredPost.excerpt"></div>
 
                     <a ui-sref="post_detail({slug: home.featuredPost.slug})">Más a cerca de nosotros</a>
@@ -90,7 +91,7 @@
         <div class="row">
             <div class="col-sm-3" ng-repeat="client in home.clients.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                    <img class="img-responsive" src="../img/corredor.jpg" alt="{{ client.title }}">
+                    <img class="img-responsive" {{ client.featuredImage }} alt="{{ client.title }}">
                 </div>
             </div>
         </div>
