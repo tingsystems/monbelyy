@@ -16,6 +16,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="lib/animate.css/animate.css" />
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/main.css">
@@ -36,7 +37,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar navbar-nobg">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-mainmenu">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -46,7 +47,7 @@
                                                           class="logo" alt="Tingsystems"></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse">
+                <div class="collapse navbar-collapse" id="header-mainmenu">
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="2s">
                             <a ui-sref="page({slug: 'nosotros'})">Nosotros</a>
@@ -110,10 +111,7 @@
             <div class="col-sm-3">
                 <div class="company_address wow slideInDown">
                     <h2>Información</h2>
-                    <a class="footer-links" ui-sref="page({slug: 'programa-de-afiliados'})">Programa de afiliados</a>
-                    <a class="footer-links" ui-sref="page({slug: 'preguntas-frecuentes'})">Preguntas frecuentes</a>
-                    <a class="footer-links" ui-sref="page({slug: 'politicas-de-privacidad'})">Políticas de privacidad</a>
-                    <a class="footer-links" ui-sref="page({slug: 'buzon-de-quejas-y-sugerencias'})">Buzón de quejas y sugerencias</a>
+                    <a class="footer-links" ui-sref="page({slug: footer_link.slug})" ng-repeat="footer_link in footer_info.results">{{ footer_link.title }}</a>
                 </div>
             </div>
         </div>
