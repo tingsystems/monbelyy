@@ -1,6 +1,6 @@
-'use strict';
-
 (function () {
+    'use strict';
+
     function HomeCtrl(PostSrv, TaxonomySrv, PostDetailSrv) {
         var self = this; // save reference of the scope
 

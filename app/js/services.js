@@ -1,6 +1,5 @@
-'use strict';
-
 (function () {
+    'use strict';
 
     var siteId = '167b5b84-2df8-46b1-b1fa-af42ad6432de';
     var baseUrl = 'http://localhost:8000/api/v1/site/' + siteId + '/';
