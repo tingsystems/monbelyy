@@ -106,7 +106,7 @@ gulp.task('copy', function () {
 gulp.task('uncss', function () {
     gulp.src('./dist/css/style.min.css')
         .pipe(uncss({
-            html: ['./app/index.html']
+            html: ['./app/index.html', './app/templates/blog.html', './app/templates/home.html', './app/templates/page.html', './app/templates/single.html', './app/templates/projects.html', './app/templates/project_detail.html']
         }))
         .pipe(gulp.dest('./dist/css'));
 });
