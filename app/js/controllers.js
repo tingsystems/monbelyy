@@ -16,8 +16,8 @@
            self.featuredPost = results;
         });
 
-        PostSrv.get({kind: 'client'}).$promise.then(function(results){
-            self.clients = results;
+        PostSrv.get({kind: 'partner'}).$promise.then(function(results){
+            self.parterns = results;
         });
     }
 
