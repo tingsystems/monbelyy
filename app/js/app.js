@@ -6,8 +6,6 @@
      */
     function Run($http) {
         $http.defaults.headers.common['TS-TOKEN'] = 'MTej3ZSvJquIbp2gByoFBUJKeS7mtOJ05GOt9dqx';
-        //$http.defaults.headers.common['TS-TOKEN'] = 'AjFPLkeDMc5InbYZE2gbQiUtzi5F7LxHJE0sPAPb';
-
     }
 
     function Routes($stateProvider, $urlRouterProvider, $locationProvider) {
