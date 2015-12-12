@@ -8,8 +8,9 @@
         </div>
         <div class="row">
             <div class="col-md-12 content-pages">
-                <!--content here-->
-                {{ post.detail.content }}
+                <div class="container">
+                    <div ng-bind-html="post.detail.content"></div>
+                </div>
             </div>
         </div>
     </div>
