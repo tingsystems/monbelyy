@@ -2,15 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="title">< Proyect detail ></h2>
+                <h2 class="title">< {{ project.detail.title }} ></h2>
                 <hr class="divider"/>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <!--content here-->
-                    content detail
+                    <div ng-bind-html="project.detail.content"></div>
                 </div>
             </div>
         </div>
