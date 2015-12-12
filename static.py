@@ -17,6 +17,7 @@ location_fonts = 'static/fonts'
 templates_dir = 'temp/'
 static_dir = 'static/'
 failed = open('failers.log', 'w')
+aws_path = None
 
 abs_template_dir = os.path.abspath(templates_dir)
 
@@ -46,10 +47,10 @@ for t in templates:
         aws_path = os.path.join(location_js, os.path.basename(t))
     elif '.css' in file_extension:
         aws_path = os.path.join(location_css, os.path.basename(t))
-    # elif '.jpg' or '.ico' or '.png' in file_extension:
-    #     aws_path = os.path.join(location_img, os.path.basename(t))
-    # elif '.otf' or '.eot' or '.svg' or '.woff' or '.woff2' in file_extension:
-    #     aws_path = os.path.join(location_fonts, os.path.basename(t))
+    elif '.jpg' or '.ico' or '.png' in file_extension:
+         aws_path = os.path.join(location_img, os.path.basename(t))
+    elif '.otf' or '.eot' or '.svg' or '.woff' or '.woff2' in file_extension:
+         aws_path = os.path.join(location_fonts, os.path.basename(t))
     else:
         print("No se subio " + os.path.basename(t))
         print(os.path.basename(t))
