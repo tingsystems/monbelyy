@@ -91,7 +91,10 @@
         <div class="row">
             <div class="col-sm-3" ng-repeat="partner in home.parterns.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                    <img class="img-responsive" {{ partner.featuredImage }} alt="{{ partner.title }}">
+                    <a href="{{ partner.link }}" target="_blank" ng-if="partner.link">
+
+                        <img class="img-responsive" {{ partner.featuredImage }} alt="{{ partner.title }}">
+                    </a>
                 </div>
             </div>
         </div>
