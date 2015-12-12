@@ -13,7 +13,7 @@
                         <div class="portfolio_content" data-wow-duration="2s">
                             <a ui-sref="post_detail({slug: project.slug})">
                                 <h3>{{ project.title }}</h3>
-                                <img class="portfolio_img" src="../img/mm.jpg">
+                                <img class="portfolio_img" ng-src="{{ project.featuredImage }}">
                             </a>
                         </div>
                     </div>

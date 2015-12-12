@@ -9,25 +9,25 @@
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <div class="col-sm-3">
-                        <div class="single_blog" data-wow-duration="1s">
-                            <img class="img-responsive" src="images/1.jpg" alt="">
-
-                            <h2>Title post</h2>
+                    <div class="col-sm-3" ng-repeat="post in post.list.results">
+                        <div class="single_blog wow slideInUp" data-wow-duration="1s">
+                            <a title="Ver detalle" ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" ng-src="{{ post.featuredImage }}" alt="{{ post.title }}">
+                            </a>
+                            <h2>{{ post.title }}</h2>
 
                             <div class="comment_area fix">
-                                <p>Shortly thereafter, I was working with RetailMeNot, tasked with designing its iOS and
-                                    Android app tutorial ..</p>
+                                <p ng-bind-html="post.excerpt"></p>
 
                                 <div class="date floatleft">
-                                    <p><span><i class="fa fa-calendar-o"></i></span> 4 Marzo 2015</p>
+                                    <p><span><i class="fa fa-calendar-o"></i></span> {{ post.createdAt|date:'d/MM/yyyy' }}</p>
                                 </div>
                                 <div class="comment floatright">
-                                    <p><span><i class="fa fa-user"></i></span> María Isabel T.</p>
+                                    <p><span><i class="fa fa-user"></i></span> {{ post.author }}.</p>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <a class="btn btn-green btn-sm btn-block " ui-sref="post_detail({slug: post.list.results[0].slug})">detail</a>
+                                <a class="btn btn-green btn-sm btn-block " ui-sref="post_detail({slug: post.slug})">Detalle</a>
                             </div>
                         </div>
                     </div>
