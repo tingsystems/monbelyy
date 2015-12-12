@@ -53,16 +53,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="header-mainmenu">
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="2s">
+                        <li>
                             <a ui-sref="page({slug: 'nosotros'})">Nosotros</a>
                         </li>
-                        <li class="wow fadeInDown" data-wow-delay="2s">
+                        <li>
                             <a ui-sref="projects({kind: 'project'})">Proyectos</a>
                         </li>
-                        <li class="wow fadeInDown" data-wow-delay="2s">
+                        <li >
                             <a ui-sref="blog({kind: 'post'})">Blog</a>
                         </li>
-                        <li class="wow fadeInDown" data-wow-delay="2s"><a ui-sref="contact">Contacto</a></li>
+                        <li><a ui-sref="contact">Contacto</a></li>
                     </ul>
                 </div>
             </div>
@@ -86,12 +86,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <div class="company_logo wow slideInDown">
+                <div class="company_logo">
                     <img src="../img/icon.png">
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="company_address wow slideInDown">
+                <div class="company_address">
                     <h2>Contacto</h2>
 
                     <p>Colonia Hospitales, Calzada Juarez #367 Jiquilpan, Michoacán, México
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="company_address wow slideInDown">
+                <div class="company_address">
                     <h2>Síguenos en</h2>
 
                     <a class="footer-links social-media" href="https://www.facebook.com/tingsystems" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="company_address wow slideInDown">
+                <div class="company_address">
                     <h2>Información</h2>
                     <a class="footer-links" ui-sref="page({slug: footer_link.slug})"
                        ng-repeat="footer_link in footerInfo.results">{{ footer_link.title }}</a>
@@ -123,7 +123,7 @@
     </div>
     <hr class="divider_footer"/>
     <div class="container">
-        <div class="text-center">
+        <div class="text-center wow slideInDown">
             Diseño y desarrollo 2015 por <a class="footer-links" href="http://www.tingsystems.com/">Tingsystems</a>
         </div>
     </div>
