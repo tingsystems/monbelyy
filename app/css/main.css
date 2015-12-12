@@ -547,15 +547,16 @@ p {
     margin-top: 20px;
     margin-bottom: 10px;
   }
+  .single_blog {
+    margin-bottom: 30px;
+    padding: 20px;
+  }
   .single_blog h2 {
     font-size: 16px;
   }
   .single_blog p {
     font-size: 12px;
     margin-top: 5px;
-  }
-  .single_blog {
-    margin-bottom: 30px;
   }
   .call_to_action_text h2 {
     font-size: 22px;
