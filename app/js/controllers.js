@@ -21,7 +21,7 @@
         });
 
         PostSrv.get({kind: 'footer-info'}).$promise.then(function(results){
-            $rootScope.footer_info = results;
+            $rootScope.footerInfo = results;
         });
     }
 
@@ -46,7 +46,7 @@
 
         self.formSubmit = function(){
             // ajax request to send the formData
-        }
+        };
     }
 
     // create the module and assign controllers
