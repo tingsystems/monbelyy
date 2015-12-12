@@ -1,7 +1,6 @@
 /* Custom js */
-
+'use strict';
 $(document).ready(function () {
-    'use strict';
 
     // wow init
     new WOW().init();
