@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-sm-4 no-padding" ng-repeat="project in home.projects.results">
                 <div class="portfolio_content" data-wow-duration="2s">
-                    <a title="Leer más" ui-sref="post_detail({slug: project.slug})">
+                    <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }" ui-sref="post_detail({slug: project.slug})">
                         <h3>{{ project.title }}</h3>
                         <img class="portfolio_img" ng-src="{{ project.featuredImage }}" alt="{{ project.title }}">
                     </a>
@@ -45,7 +45,7 @@
 
                     <div ng-bind-html="home.featuredPost.excerpt"></div>
 
-                    <a ui-sref="post_detail({slug: home.featuredPost.slug})">Leer más</a>
+                    <a title="Leer mas" post-link="{ link: {url: home.featuredPost.link, target: '_blank'} }" ui-sref="post_detail({slug: home.featuredPost.slug})">Leer más</a>
                 </div>
             </div>
         </div>
@@ -91,10 +91,7 @@
         <div class="row">
             <div class="col-sm-3" ng-repeat="partner in home.parterns.results">
                 <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                    <a href="{{ partner.link }}" target="_blank" ng-if="partner.link">
-                        <img class="img-responsive" ng-src="{{ partner.featuredImage }}" alt="{{ partner.title }}">
-                    </a>
-                    <a ui-sref="post_detail({slug: project.slug})" ng-if="!partner.link">
+                    <a title="Leer más" post-link="{ link: {url: partner.link, target: '_blank'} }" ui-sref="post_detail({slug: partner.slug})">
                         <img class="img-responsive" ng-src="{{ partner.featuredImage }}" alt="{{ partner.title }}">
                     </a>
                 </div>

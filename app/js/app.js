@@ -102,7 +102,7 @@
         $locationProvider.html5Mode(true);
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ngSanitize', 'app.templates'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives','ngSanitize', 'app.templates'])
         .config(Routes)
         .run(Run);
 
