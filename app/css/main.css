@@ -199,6 +199,18 @@ p {
 #portfolio_area h2 {
   margin-bottom: 15px;
 }
+.alliance {
+  padding: 10px;
+}
+.portfolio_page {
+  padding-bottom: 35px;
+}
+.portfolio_page h3 {
+  font-size: 18px;
+  padding-top: 15px;
+  color: #6b6b6b;
+  text-align: center;
+}
 .portfolio_content {
   position: relative;
   margin-bottom: 0;
@@ -272,7 +284,8 @@ p {
   color: #6b6b6b;
 }
 .single_blog img {
-  width: 100%;
+  width: 400px;
+  height: 200px;
 }
 .single_blog .comment-area {
   color: #999;
