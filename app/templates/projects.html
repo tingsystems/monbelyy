@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="title">< Proyectos ></h2>
+                <h2 class="title">Proyectos</h2>
                 <hr class="divider"/>
             </div>
         </div>
@@ -11,7 +11,7 @@
                 <div class="container">
                     <div class="col-sm-4 no-padding" ng-repeat="project in project.list.results">
                         <div class="portfolio_content wow slideInUp" data-wow-duration="2s">
-                            <a ui-sref="post_detail({slug: project.slug})">
+                            <a title="Leer más" post-link="{ link: {url: project.link, target: '_blank'} }" ui-sref="post_detail({slug: project.slug})">
                                 <h3>{{ project.title }}</h3>
                                 <img class="portfolio_img" ng-src="{{ project.featuredImage }}">
                             </a>

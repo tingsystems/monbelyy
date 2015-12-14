@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="title">< Blog ></h2>
+                <h2 class="title">Blog</h2>
                 <hr class="divider"/>
             </div>
         </div>
@@ -11,8 +11,8 @@
                 <div class="container">
                     <div class="col-sm-3" ng-repeat="post in post.list.results">
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                            <a title="Ver detalle" ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" ng-src="{{ post.featuredImage }}" alt="{{ post.title }}">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" ng-src="{{ post.featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}" alt="{{ post.title }}">
                             </a>
                             <h2>{{ post.title }}</h2>
 
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <a class="btn btn-green btn-sm btn-block " ui-sref="post_detail({slug: post.slug})">Detalle</a>
+                                <a class="btn btn-green btn-sm btn-block" title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">Leer más</a>
                             </div>
                         </div>
                     </div>

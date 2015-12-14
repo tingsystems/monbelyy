@@ -6,9 +6,7 @@
      */
     function Run($http, $rootScope) {
         $http.defaults.headers.common['TS-TOKEN'] = 'MTej3ZSvJquIbp2gByoFBUJKeS7mtOJ05GOt9dqx';
-        //$http.defaults.headers.common['TS-TOKEN'] = 'AjFPLkeDMc5InbYZE2gbQiUtzi5F7LxHJE0sPAPb';
-
-        $rootScope.$on("$locationChangeSuccess", function (event, newUrl, oldUrl) {
+        $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainmenu').collapse('hide');
         });
     }
@@ -26,6 +24,7 @@
             .state('home', {
                 url: '/',
                 views: {
+                    'title': {template: '<title>Tingsystems - Inicio</title>'},
                     'content': {
                         templateUrl: '/templates/home.html',
                         controllerAs: 'home',
@@ -36,6 +35,7 @@
             .state('contact', {
                 url: '/contact',
                 views: {
+                    'title': {template: '<title>Tingsystems - Contacto</title>'},
                     'content': {
                         templateUrl: '/templates/contact.html',
                         controllerAs: 'contact',
@@ -46,6 +46,7 @@
             .state('blog', {
                 url: '/blog/:kind',
                 views: {
+                    'title': {template: '<title>Tingsystems - Blog</title>'},
                     'content': {
                         templateUrl: '/templates/blog.html',
                         controllerAs: 'post',
@@ -56,6 +57,7 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
+                    'title': {template: '<title>Tingsystems - Detalle del post</title>'},
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'post',
@@ -66,6 +68,7 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
+                    'title': {template: '<title>Tingsystems - Página</title>'},
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'page',
@@ -76,6 +79,7 @@
             .state('projects', {
                 url: '/projects/:kind',
                 views: {
+                    'title': {template: '<title>Tingsystems - Projectos</title>'},
                     'content': {
                         templateUrl: '/templates/projects.html',
                         controllerAs: 'project',
@@ -86,6 +90,7 @@
             .state('project_detail', {
                 url: '/projects/:slug',
                 views: {
+                    'title': {template: '<title>Tingsystems - Detalle del proyecto </title>'},
                     'content': {
                         templateUrl: '/templates/project_detail.html',
                         controllerAs: 'project',
@@ -97,7 +102,7 @@
         $locationProvider.html5Mode(true);
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ngSanitize', 'app.templates'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives','ngSanitize', 'app.templates'])
         .config(Routes)
         .run(Run);
 
