@@ -1,15 +1,5 @@
 (function () {
     'use strict';
-    /**
-     * @name Run
-     * @desc Update xsrf $http headers to align with Django's defaults
-     */
-    function Run($http, $rootScope) {
-        $http.defaults.headers.common['TS-TOKEN'] = 'MTej3ZSvJquIbp2gByoFBUJKeS7mtOJ05GOt9dqx';
-        $rootScope.$on('$locationChangeSuccess', function () {
-            $('#header-mainmenu').collapse('hide');
-        });
-    }
 
     function Routes($stateProvider, $urlRouterProvider, $locationProvider) {
 
@@ -100,6 +90,17 @@
             });
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
+    }
+
+    /**
+     * @name Run
+     * @desc Update xsrf $http headers to align with Django's defaults
+     */
+    function Run($http, $rootScope) {
+        $http.defaults.headers.common['TS-TOKEN'] = 'MTej3ZSvJquIbp2gByoFBUJKeS7mtOJ05GOt9dqx';
+        $rootScope.$on('$locationChangeSuccess', function () {
+            $('#header-mainmenu').collapse('hide');
+        });
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ngSanitize', 'app.templates'])
