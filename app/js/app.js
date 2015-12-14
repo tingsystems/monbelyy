@@ -91,7 +91,7 @@
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
     }
-
+    
     /**
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
