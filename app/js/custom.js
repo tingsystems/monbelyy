@@ -1,7 +1,7 @@
 /* Custom js */
 'use strict';
-$(document).ready(function () {
 
+$(document).ready(function () {
     // wow init
     new WOW().init();
 });
@@ -24,16 +24,11 @@ $(document).ready(function () {
 
 (function (window) {
 
-    'use strict';
-
-// class helper functions from bonzo https://github.com/ded/bonzo
 
     function classReg(className) {
-        return new RegExp("(^|\\s+)" + className + "(\\s+|$)");
+        return new RegExp('(^|\\s+)' + className + '(\\s+|$)');
     }
 
-// classList support for class management
-// altho to be fair, the api sucks because it won't accept multiple classes at once
     var hasClass, addClass, removeClass;
 
     if ('classList' in document.documentElement) {
@@ -94,12 +89,12 @@ function init() {
     window.addEventListener('scroll', function (e) {
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 300,
-            header = document.querySelector("header");
+            header = document.querySelector('header');
         if (distanceY > shrinkOn) {
-            classie.add(header, "smaller");
+            classie.add(header, 'smaller');
         } else {
-            if (classie.has(header, "smaller")) {
-                classie.remove(header, "smaller");
+            if (classie.has(header, 'smaller')) {
+                classie.remove(header, 'smaller');
             }
         }
     });
