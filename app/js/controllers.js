@@ -33,6 +33,14 @@
         });
     }
 
+    function BlogCtrl(PostSrv) {
+        var self = this;
+
+        PostSrv.get({kind: 'blog'}).$promise.then(function (results) {
+            self.list = results;
+        });
+    }
+
     function PostDetailCtrl(PostDetailSrv, $stateParams) {
         var self = this;
 
@@ -56,10 +64,12 @@
         .controller('HomeCtrl', HomeCtrl)
         .controller('PostCtrl', PostCtrl)
         .controller('PostDetailCtrl', PostDetailCtrl)
-        .controller('ContactCtrl', ContactCtrl);
+        .controller('ContactCtrl', ContactCtrl)
+        .controller('BlogCtrl', BlogCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams'];
     ContactCtrl.$inject = [];
+    BlogCtrl.$inject = ['PostSrv'];
 })();

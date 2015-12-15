@@ -34,13 +34,13 @@
                 }
             })
             .state('blog', {
-                url: '/blog/:kind',
+                url: '/blog',
                 views: {
                     'title': {template: '<title>Tingsystems - Blog</title>'},
                     'content': {
                         templateUrl: '/templates/blog.html',
                         controllerAs: 'post',
-                        controller: 'PostCtrl'
+                        controller: 'BlogCtrl'
                     }
                 }
             })
@@ -103,7 +103,7 @@
         });
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ngSanitize', 'app.templates'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives','ngSanitize', 'app.templates'])
         .config(Routes)
         .run(Run);
 
