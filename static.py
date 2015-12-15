@@ -8,7 +8,7 @@ AWS_API_KEY = 'AKIAJ5322OE4UXMGOOCA'
 AWS_SECRET_KEY = '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'
 AWS_CF_S3_BUCKETS = ('prueba-ts',)
 AWS_S3_BUCKET = 'annalise-tingsystems'
-location_base = 'prueba/'
+location_base = 'static/'
 # destination directory name (on s3)
 location_js = location_base + 'js'
 location_img = location_base + 'img'
