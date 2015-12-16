@@ -8,56 +8,45 @@
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: post.slug})">
                                 <img class="img-responsive img-outstanding"
-                                     ng-src="{{ post.featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}"
-                                     alt="{{ post.title }}">
+                                     ng-src="{{ post.list.results[0].featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}" alt="{{ post.title }}">
 
-                                <h2 class="title-outstanding">Hello there</h2>
+                                <h2 class="title-outstanding">{{ post.list.results[0].title }}</h2>
+
                                 <div class="comment-area fix post-out ">
-                                    <p class="post-oustanding">Hello here we go!!</p>
+                                    <p class="post-oustanding">{{ post.list.results[0].excerpt }}</p>
                                 </div>
                                 <div class="comment-area fix outstanding-cmmnt">
 
                                     <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span>12/12/2015</p>
+                                        <p><span><i class="fa fa-calendar-o"></i></span>{{ post.list.results[0].createdAt|date:'d/MM/yyyy' }}</p>
                                     </div>
                                     <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> pollitux.</p>
+                                        <p><span><i class="fa fa-user"></i></span> {{ post.list.results[0].author.nick }}</p>
                                     </div>
                                 </div>
                             </a>
-                            <!--<div class="text-center">-->
-                            <!--<a class="btn btn-green btn-sm btn-block" title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">Leer más</a>-->
-                            <!--</div>-->
                         </div>
                     </div>
-                    <div class="col-sm-3 col-sm-6  col-xs-6" ng-repeat="post in post.list.results">
+                    <div class="col-sm-3 col-sm-6 col-xs-6" ng-repeat="post in post.list.results" ng-if="$index >= 1">
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: post.slug})">
                                 <img class="img-responsive"
-                                     ng-src="{{ post.featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}"
-                                     alt="{{ post.title }}">
+                                     ng-src="{{ post.featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}" alt="{{ post.title }}">
 
                                 <h2>{{ post.title }}</h2>
 
                                 <div class="comment-area fix">
-                                    <!--<p ng-bind-html="post.excerpt"></p>-->
-
                                     <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> {{
-                                            post.createdAt|date:'d/MM/yyyy' }}</p>
+                                        <p><span><i class="fa fa-calendar-o"></i></span> {{post.createdAt|date:'d/MM/yyyy' }}</p>
                                     </div>
                                     <div class="comment floatright">
                                         <p><span><i class="fa fa-user"></i></span> {{ post.author.nick }}.</p>
                                     </div>
                                 </div>
                             </a>
-                            <!--<div class="text-center">-->
-                            <!--<a class="btn btn-green btn-sm btn-block" title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">Leer más</a>-->
-                            <!--</div>-->
                         </div>
                     </div>
-
                 </div>
                 <!--post list -->
             </div>
