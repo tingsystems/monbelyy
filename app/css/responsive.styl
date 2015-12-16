@@ -4,6 +4,25 @@
 
 
 /* Tablet Layout: 768px. */
+@media only screen and (min-width: 991px) and (max-width: 1024px)
+  .single_blog .comment-area
+    margin-top -5px
+  .outstanding-cmmnt
+    margin-top -1px !important
+  .single_blog
+    .title-outstanding
+      font-size 32px !important
+      padding 15px 10px !important
+    h2
+      display inline-block
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      -o-text-overflow ellipsis
+      width 100%
+    img
+      width 100%
+      height 100%
 
 @media only screen and (min-width: 768px) and (max-width: 991px)
   .header_area_text
@@ -24,11 +43,106 @@
   .company_address
     padding 10px 26px
 
+  .single_blog .comment-area
+    margin-top -5px
+  .outstanding-cmmnt
+    margin-top -1px !important
+
+  .single_blog
+    .title-outstanding
+      font-size 32px !important
+      padding 15px 10px !important
+    h2
+      display inline-block
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      -o-text-overflow ellipsis
+      width 100%
+    img
+      width 100%
+      height 100%
 
 
+@media only screen and (min-width: 481px) and (max-width: 640px)
+  .post-oustanding
+    padding 5px 0px
+    display inline-block
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+    -o-text-overflow ellipsis
+    width 100%
+
+  .single_blog
+    .title-outstanding
+      font-size 16px !important
+      padding 20px 10px !important
+     h2
+      display inline-block
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      -o-text-overflow ellipsis
+      width 100%
+    p
+      font-size: 12px
+      margin-top: 5px
+
+    img
+      width 100%
+      height 100%
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  .post-out
+    display none
+
+  header
+    .mainmenu
+      padding-top 10px
+      position absolute
+      background #EBEBEB !important
+      /*padding 25px 0 0*/
+      top 0px
+      left 0
+      right 0
+      z-index 99999
+
+  .navbar
+    border none
+    background #EBEBEB
+    margin-bottom 0px
+  header.smaller
+    height 250px
+    box-shadow none
+    .mainmenu
+      padding-top 0px
+      box-shadow 0 0 10px #999
+
+  header
+    width 100%
+    height 250px
+    overflow hidden
+    position fixed
+    top 0
+    left 0
+    z-index 999
+    background-color transparent
+    -webkit-transition height 0.3s
+    -moz-transition height 0.3s
+    -ms-transition height 0.3s
+    -o-transition height 0.3s
+    transition height 0.3s
+
+    header.smaller h1#logo
+      width 150px
+      height 75px
+      line-height: 75px
+      font-size 30px
+
+    header.smaller nav a
+      line-height 75px
 
   #content-area
     margin 160px 0px 60px

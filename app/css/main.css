@@ -84,7 +84,7 @@ header transition height 0.3s header.smaller nav a {
   line-height: 75px;
 }
 .header .mainmenu {
-  padding-top: 20px;
+  padding-top: 10px;
   position: absolute;
   background: transparent;
 /*padding 25px 0 0*/
@@ -230,6 +230,10 @@ header transition height 0.3s header.smaller nav a {
 .alliance {
   padding: 10px;
 }
+.alliance .img-alliance {
+  width: 200px;
+  margin: 0 auto;
+}
 .portfolio_page {
   padding-bottom: 35px;
 }
@@ -238,6 +242,8 @@ header transition height 0.3s header.smaller nav a {
   padding-top: 15px;
   color: #6b6b6b;
   text-align: center;
+  border: 1px solid #f5f5f5;
+  padding-bottom: 25px;
 }
 .portfolio_content {
   position: relative;
@@ -301,11 +307,30 @@ header transition height 0.3s header.smaller nav a {
 #blog_area {
   background: #fff;
 }
+.img-outstanding {
+  width: 100% !important;
+  height: 100% !important;
+}
+.outstanding-cmmnt {
+  margin-top: -1px;
+}
+h2.title-outstanding {
+  font-size: 32px !important;
+  padding: 38px 10px !important;
+}
+.post-oustanding {
+  padding: 30px 10px;
+}
+.single_blog {
+  margin-bottom: 30px;
+}
 .single_blog h2 {
   font-size: 18px;
   color: #6b6b6b;
   font-weight: 700;
-  margin-top: 20px;
+  padding: 20px 10px;
+  border: 1px solid #f5f5f5;
+  margin-bottom: -1px;
 }
 .single_blog p {
   margin: 10px 0;
@@ -317,6 +342,8 @@ header transition height 0.3s header.smaller nav a {
 }
 .single_blog .comment-area {
   color: #999;
+  border: 1px solid #f5f4f4;
+  padding: 0 10px;
 }
 .single-proyect h2 {
   font-size: 18px;
@@ -467,6 +494,30 @@ header transition height 0.3s header.smaller nav a {
   -webkit-box-shadow: 0 0 0 9px rgba(0,0,0,0.075);
   box-shadow: 0 0 0 9px rgba(0,0,0,0.075);
 }
+@media only screen and (min-width: 991px) and (max-width: 1024px) {
+  .single_blog .comment-area {
+    margin-top: -5px;
+  }
+  .outstanding-cmmnt {
+    margin-top: -1px !important;
+  }
+  .single_blog .title-outstanding {
+    font-size: 32px !important;
+    padding: 15px 10px !important;
+  }
+  .single_blog h2 {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 100%;
+  }
+  .single_blog img {
+    width: 100%;
+    height: 100%;
+  }
+}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .header_area_text {
     padding-right: 160px;
@@ -483,8 +534,111 @@ header transition height 0.3s header.smaller nav a {
   .company_address {
     padding: 10px 26px;
   }
+  .single_blog .comment-area {
+    margin-top: -5px;
+  }
+  .outstanding-cmmnt {
+    margin-top: -1px !important;
+  }
+  .single_blog .title-outstanding {
+    font-size: 32px !important;
+    padding: 15px 10px !important;
+  }
+  .single_blog h2 {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 100%;
+  }
+  .single_blog img {
+    width: 100%;
+    height: 100%;
+  }
+}
+@media only screen and (min-width: 481px) and (max-width: 640px) {
+  .post-oustanding {
+    padding: 5px 0px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 100%;
+  }
+  .single_blog .title-outstanding {
+    font-size: 16px !important;
+    padding: 20px 10px !important;
+  }
+  .single_blog h2 {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 100%;
+  }
+  .single_blog p {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .single_blog img {
+    width: 100%;
+    height: 100%;
+  }
 }
 @media only screen and (max-width: 767px) {
+  .post-out {
+    display: none;
+  }
+  header .mainmenu {
+    padding-top: 10px;
+    position: absolute;
+    background: #ebebeb !important;
+/*padding 25px 0 0*/
+    top: 0px;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+  }
+  .navbar {
+    border: none;
+    background: #ebebeb;
+    margin-bottom: 0px;
+  }
+  header.smaller {
+    height: 250px;
+    box-shadow: none;
+  }
+  header.smaller .mainmenu {
+    padding-top: 0px;
+    box-shadow: 0 0 10px #999;
+  }
+  header {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: transparent;
+    -webkit-transition: height 0.3s;
+    -moz-transition: height 0.3s;
+    -ms-transition: height 0.3s;
+    -o-transition: height 0.3s;
+    transition: height 0.3s;
+  }
+  header header.smaller h1#logo {
+    width: 150px;
+    height: 75px;
+    line-height: 75px;
+    font-size: 30px;
+  }
+  header header.smaller nav a {
+    line-height: 75px;
+  }
   #content-area {
     margin: 160px 0px 60px;
   }

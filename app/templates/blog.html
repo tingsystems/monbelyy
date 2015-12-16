@@ -1,34 +1,60 @@
 <section id="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center">
-                <h2 class="title">Blog</h2>
-                <hr class="divider"/>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <div class="col-sm-3" ng-repeat="post in post.list.results">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" ng-src="{{ post.featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}" alt="{{ post.title }}">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive img-outstanding"
+                                     ng-src="{{ post.featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}"
+                                     alt="{{ post.title }}">
+
+                                <h2 class="title-outstanding">Hello there</h2>
+                                <div class="comment-area fix post-out ">
+                                    <p class="post-oustanding">Hello here we go!!</p>
+                                </div>
+                                <div class="comment-area fix outstanding-cmmnt">
+
+                                    <div class="date floatleft">
+                                        <p><span><i class="fa fa-calendar-o"></i></span>12/12/2015</p>
+                                    </div>
+                                    <div class="comment floatright">
+                                        <p><span><i class="fa fa-user"></i></span> pollitux.</p>
+                                    </div>
+                                </div>
                             </a>
-                            <h2>{{ post.title }}</h2>
+                            <!--<div class="text-center">-->
+                            <!--<a class="btn btn-green btn-sm btn-block" title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">Leer más</a>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-sm-6  col-xs-6" ng-repeat="post in post.list.results">
+                        <div class="single_blog wow slideInUp" data-wow-duration="1s">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive"
+                                     ng-src="{{ post.featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}"
+                                     alt="{{ post.title }}">
 
-                            <div class="comment_area fix">
-                                <p ng-bind-html="post.excerpt"></p>
+                                <h2>{{ post.title }}</h2>
 
-                                <div class="date floatleft">
-                                    <p><span><i class="fa fa-calendar-o"></i></span> {{ post.createdAt|date:'d/MM/yyyy' }}</p>
+                                <div class="comment-area fix">
+                                    <!--<p ng-bind-html="post.excerpt"></p>-->
+
+                                    <div class="date floatleft">
+                                        <p><span><i class="fa fa-calendar-o"></i></span> {{
+                                            post.createdAt|date:'d/MM/yyyy' }}</p>
+                                    </div>
+                                    <div class="comment floatright">
+                                        <p><span><i class="fa fa-user"></i></span> {{ post.author.nick }}.</p>
+                                    </div>
                                 </div>
-                                <div class="comment floatright">
-                                    <p><span><i class="fa fa-user"></i></span> {{ post.author.nick }}.</p>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <a class="btn btn-green btn-sm btn-block" title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">Leer más</a>
-                            </div>
+                            </a>
+                            <!--<div class="text-center">-->
+                            <!--<a class="btn btn-green btn-sm btn-block" title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }" ui-sref="post_detail({slug: post.slug})">Leer más</a>-->
+                            <!--</div>-->
                         </div>
                     </div>
 
