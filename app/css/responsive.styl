@@ -95,6 +95,9 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  h2.title-outstanding
+    font-size 16px !important
+    padding 20px 10px !important
   .post-out
     display none
 
@@ -122,7 +125,7 @@
 
   header
     width 100%
-    height 250px
+    height 210px
     overflow hidden
     position fixed
     top 0
@@ -146,7 +149,8 @@
 
   #content-area
     margin 160px 0px 60px
-
+  .content-blog
+    margin 0px 0px 60px !important
   #slider-area
     padding-bottom 300px
 
@@ -257,10 +261,18 @@
 
   .single_blog
     margin-bottom 30px
-    padding 20px
+    padding 0px
     h2
+      width 100%
       font-size 16px
-
+      display inline-block
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      -o-text-overflow ellipsis
+    img
+      width 100%
+      height 100%
 
      p
       font-size 12px
