@@ -3,7 +3,7 @@
 
     function postLink() {
         return {
-            restrict: "A",
+            restrict: 'A',
             link: function (scope, element, attrs) {
                 // observe the postLink directive
                 attrs.$observe('postLink', function (value) {
@@ -17,7 +17,7 @@
                     }
                 });
             }
-        }
+        };
     }
 
     // create the module and assign controllers
