@@ -6,7 +6,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
+                               ui-sref="post_detail({slug: post.list.results[0].slug})">
                                 <img class="img-responsive img-outstanding"
                                      ng-src="{{ post.list.results[0].featuredImage ? post.featuredImage : 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg' }}" alt="{{ post.title }}">
 
