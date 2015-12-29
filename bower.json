@@ -11,6 +11,7 @@
     "animate.css": "~3.4.0",
     "font-awesome": "fontawesome#~4.5.0",
     "angular-sanitize": "~1.4.8",
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "angular-loading-bar": "~0.8.0"
   }
 }

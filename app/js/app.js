@@ -91,6 +91,11 @@
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
     }
+
+    function AppConfig(cfpLoadingBarProvider){
+        // turn off the spinner of the loading bar
+        cfpLoadingBarProvider.includeSpinner = false;
+    }
     
     /**
      * @name Run
@@ -103,10 +108,12 @@
         });
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives','ngSanitize', 'app.templates'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives','ngSanitize', 'app.templates', 'angular-loading-bar'])
         .config(Routes)
+        .config(AppConfig)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+    AppConfig.$inject = ['cfpLoadingBarProvider'];
 })();
