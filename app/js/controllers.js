@@ -43,9 +43,11 @@
 
     function PostDetailCtrl(PostDetailSrv, $stateParams) {
         var self = this;
+        self.pageTitle = 'Tingsystems - ';
 
         PostDetailSrv.get({slug: $stateParams.slug}).$promise.then(function (results) {
             self.detail = results;
+            self.pageTitle = 'Tingsystems - ' + results.title;
         });
     }
 

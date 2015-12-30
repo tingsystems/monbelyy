@@ -47,7 +47,11 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
-                    'title': {template: '<title>Tingsystems - Detalle del post</title>'},
+                    'title': {
+                        template: '<title>{{TitleCtrl.pageTitle}}</title>',
+                        controller: 'PostDetailCtrl',
+                        controllerAs: 'TitleCtrl'
+                    },
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'post',
@@ -58,7 +62,11 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
-                    'title': {template: '<title>Tingsystems - Página</title>'},
+                    'title': {
+                        template: '<title>{{TitleCtrl.pageTitle}}</title>',
+                        controller: 'PostDetailCtrl',
+                        controllerAs: 'TitleCtrl'
+                    },
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'page',
@@ -78,13 +86,17 @@
                 }
             })
             .state('project_detail', {
-                url: '/projects/:slug',
+                url: '/projects/detail/:slug',
                 views: {
-                    'title': {template: '<title>Tingsystems - Detalle del proyecto </title>'},
+                    'title': {
+                        template: '<title>{{TitleCtrl.pageTitle}}</title>',
+                        controller: 'PostDetailCtrl',
+                        controllerAs: 'TitleCtrl'
+                    },
                     'content': {
                         templateUrl: '/templates/project_detail.html',
                         controllerAs: 'project',
-                        controller: 'PostCtrl'
+                        controller: 'PostDetailCtrl'
                     }
                 }
             });
