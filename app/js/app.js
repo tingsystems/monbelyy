@@ -14,7 +14,7 @@
             .state('home', {
                 url: '/',
                 views: {
-                    'title': {template: '<title>Tingsystems - Inicio</title>'},
+                    'title': {template: '<title>Tingsystems - Tu consultor tecnológico</title>'},
                     'content': {
                         templateUrl: '/templates/home.html',
                         controllerAs: 'home',
@@ -47,11 +47,7 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
-                    'title': {
-                        template: '<title>{{TitleCtrl.pageTitle}}</title>',
-                        controller: 'PostDetailCtrl',
-                        controllerAs: 'TitleCtrl'
-                    },
+                    'title': { template: '<title>{{pageTitle}}</title>' },
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'post',
@@ -62,11 +58,7 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
-                    'title': {
-                        template: '<title>{{TitleCtrl.pageTitle}}</title>',
-                        controller: 'PostDetailCtrl',
-                        controllerAs: 'TitleCtrl'
-                    },
+                    'title': { template: '<title>{{pageTitle}}</title>' },
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'page',
@@ -88,11 +80,7 @@
             .state('project_detail', {
                 url: '/projects/detail/:slug',
                 views: {
-                    'title': {
-                        template: '<title>{{TitleCtrl.pageTitle}}</title>',
-                        controller: 'PostDetailCtrl',
-                        controllerAs: 'TitleCtrl'
-                    },
+                    'title': { template: '<title>{{pageTitle}}</title>' },
                     'content': {
                         templateUrl: '/templates/project_detail.html',
                         controllerAs: 'project',
