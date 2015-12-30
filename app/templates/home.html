@@ -8,8 +8,10 @@
 
                     <p class="wow slideInUp" data-wow-duration="3s">Te ayudamos a revolucionar tu empresa, adentrandose
                         en el mundo digital </p>
-                    <a class="btn-green wow slideInUp" data-wow-duration="3s" ui-sref="contact">Hablanos de tu proyecto</a><br/>
-                    <a href="#portfolio_area" class="wow bounceInUp scrollme" title="Más información"> <i class="fa fa-angle-down fa-4x"></i></a>
+                    <a class="btn-green wow slideInUp" data-wow-duration="3s" ui-sref="contact">Hablanos de tu
+                        proyecto</a><br/>
+                    <a href="#portfolio_area" class="wow bounceInUp scrollme" title="Más información"> <i
+                            class="fa fa-angle-down fa-4x"></i></a>
                 </div>
             </div>
         </div>
@@ -21,7 +23,8 @@
         <div class="row">
             <div class="col-sm-4 no-padding" ng-repeat="project in home.projects.results">
                 <div class="portfolio_content" data-wow-duration="2s">
-                    <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }" ui-sref="post_detail({slug: project.slug})">
+                    <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }"
+                       ui-sref="post_detail({slug: project.slug})">
                         <h3>{{ project.title }}</h3>
                         <img class="portfolio_img" ng-src="{{ project.featuredImage }}" alt="{{ project.title }}">
                     </a>
@@ -46,7 +49,8 @@
 
                     <div ng-bind-html="home.featuredPost.excerpt"></div>
 
-                    <a title="Leer mas" post-link="{ link: {url: home.featuredPost.link, target: '_blank'} }" ui-sref="post_detail({slug: home.featuredPost.slug})">Leer más</a>
+                    <a title="Leer mas" post-link="{ link: {url: home.featuredPost.link, target: '_blank'} }"
+                       ui-sref="post_detail({slug: home.featuredPost.slug})">Leer más</a>
                 </div>
             </div>
         </div>
@@ -69,9 +73,11 @@
                 <div class="skills" ng-repeat="skill in home.skills.results">
                     <h2>{{ skill.name }}</h2>
 
-                    <div class="skill_right">
-                        <div class="wow slideInUp" ng-repeat="child in skill.children">
-                            <h3>{{ child.name }}</h3>
+                    <div class="col-md-12 no-padding">
+                        <div class="skill_right">
+                            <div class="wow slideInUp col-md-6 pd-skill" ng-repeat="child in skill.children">
+                                <h3>{{ child.name }}</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,8 +98,10 @@
         <div class="row">
             <div class="col-sm-4" ng-repeat="partner in home.parterns.results">
                 <div class="alliance wow slideInUp" data-wow-duration="1s">
-                    <a title="Leer más" post-link="{ link: {url: partner.link, target: '_blank'} }" ui-sref="post_detail({slug: partner.slug})">
-                        <img class="img-responsive img-alliance" ng-src="{{ partner.featuredImage }}" alt="{{ partner.title }}">
+                    <a title="Leer más" post-link="{ link: {url: partner.link, target: '_blank'} }"
+                       ui-sref="post_detail({slug: partner.slug})">
+                        <img class="img-responsive img-alliance" ng-src="{{ partner.featuredImage }}"
+                             alt="{{ partner.title }}">
                     </a>
                 </div>
             </div>

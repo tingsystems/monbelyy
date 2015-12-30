@@ -302,6 +302,9 @@ header transition height 0.3s header.smaller nav a {
   background: #353535;
   color: #fff;
 }
+.pd-skill {
+  padding: 0px 15px 0px 0px;
+}
 .skills h2 {
   margin-bottom: 40px;
 }
