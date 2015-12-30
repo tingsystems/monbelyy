@@ -19,16 +19,13 @@
 </div>
 
 <section id="portfolio_area" class="section_padding no-padding">
-    <div class="container container-portfolio">
-        <div class="row">
-            <div class="col-sm-4 no-padding" ng-repeat="project in home.projects.results">
-                <div class="portfolio_content" data-wow-duration="2s">
-                    <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }"
-                       ui-sref="post_detail({slug: project.slug})">
-                        <h3>{{ project.title }}</h3>
-                        <img class="portfolio_img" ng-src="{{ project.featuredImage }}" alt="{{ project.title }}">
-                    </a>
-                </div>
+    <div class="container container-portfolio no-padding">
+        <div class="col-sm-4 no-padding" ng-repeat="project in home.projects.results">
+            <div class="portfolio_content box-portfolio " data-wow-duration="2s">
+                <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }"  ui-sref="post_detail({slug: project.slug})">
+                    <img class="portfolio_img" ng-src="{{ project.featuredImage }}" alt="{{ project.title }}">
+                    <h3>{{ project.title }}</h3>
+                </a>
             </div>
         </div>
     </div>
