@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <div class="col-sm-3" ng-repeat="project in project.list.results">
+                    <div class="col-sm-4" ng-repeat="project in project.list.results">
                         <div class="portfolio_page wow slideInUp" data-wow-duration="2s">
                             <a title="Leer más" post-link="{ link: {url: project.link, target: '_blank'} }" ui-sref="project_detail({slug: project.slug})">
                                 <img class="portfolio_img" ng-src="{{ project.featuredImage }}">
