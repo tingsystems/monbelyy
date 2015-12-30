@@ -41,11 +41,13 @@
         });
     }
 
-    function PostDetailCtrl(PostDetailSrv, $stateParams) {
+    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
         var self = this;
+        $rootScope.pageTitle = 'Tingsystems - ';
 
         PostDetailSrv.get({slug: $stateParams.slug}).$promise.then(function (results) {
             self.detail = results;
+            $rootScope.pageTitle = 'Tingsystems - ' + results.title;
         });
     }
 
@@ -69,7 +71,7 @@
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams'];
-    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams'];
+    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
     ContactCtrl.$inject = [];
     BlogCtrl.$inject = ['PostSrv'];
 })();
