@@ -248,7 +248,7 @@ header transition height 0.3s header.smaller nav a {
 .portfolio_page h3 {
   font-size: 18px;
   padding-top: 15px;
-  color: #ff7260;
+  color: #5e5e65;
   text-align: center;
   padding-bottom: 25px;
 }
@@ -261,7 +261,7 @@ header transition height 0.3s header.smaller nav a {
   padding: 20px 40px;
 }
 .portfolio_content h3 {
-  color: #ff7260;
+  color: #5e5e65;
   text-align: center;
   padding: 20px 0px 0px 0px;
 /*position absolute*/
