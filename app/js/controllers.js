@@ -4,23 +4,23 @@
     function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
 
-        TaxonomySrv.get({slug: 'skills', isActive: true}).$promise.then(function (results) {
+        TaxonomySrv.get({slug: 'skills', isActive: 'True'}).$promise.then(function (results) {
             self.skills = results;
         });
 
-        PostSrv.get({kind: 'project', isActive: true}).$promise.then(function (results) {
+        PostSrv.get({kind: 'project', isActive: 'True'}).$promise.then(function (results) {
             self.projects = results;
         });
 
-        PostSrv.get({kind: 'main-post', isActive: true}).$promise.then(function (results) {
+        PostSrv.get({kind: 'main-post', isActive: 'True'}).$promise.then(function (results) {
             self.featuredPost = results.results[0];
         });
 
-        PostSrv.get({kind: 'partner', isActive: true}).$promise.then(function (results) {
+        PostSrv.get({kind: 'partner', isActive: 'True'}).$promise.then(function (results) {
             self.parterns = results;
         });
 
-        PostSrv.get({kind: 'footer-info', isActive: true}).$promise.then(function (results) {
+        PostSrv.get({kind: 'footer-info', isActive: 'True'}).$promise.then(function (results) {
             $rootScope.footerInfo = results;
         });
     }
@@ -28,7 +28,7 @@
     function PostCtrl(PostSrv, $stateParams) {
         var self = this;
 
-        PostSrv.get({kind: $stateParams.kind, isActive: true}).$promise.then(function (results) {
+        PostSrv.get({kind: $stateParams.kind, isActive: 'True'}).$promise.then(function (results) {
             self.list = results;
         });
     }
@@ -36,7 +36,7 @@
     function BlogCtrl(PostSrv) {
         var self = this;
 
-        PostSrv.get({kind: 'blog', isActive: true}).$promise.then(function (results) {
+        PostSrv.get({kind: 'post', isActive: 'True'}).$promise.then(function (results) {
             self.list = results;
         });
     }
@@ -45,7 +45,7 @@
         var self = this;
         $rootScope.pageTitle = 'Tingsystems - ';
 
-        PostDetailSrv.get({slug: $stateParams.slug, isActive: true}).$promise.then(function (results) {
+        PostDetailSrv.get({slug: $stateParams.slug, isActive: 'True'}).$promise.then(function (results) {
             self.detail = results;
             $rootScope.pageTitle = 'Tingsystems - ' + results.title;
         });
