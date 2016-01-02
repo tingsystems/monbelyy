@@ -9,7 +9,7 @@
     }
 
     function PostDetailSrv($resource) {
-        return $resource(baseUrl + 'posts/:slug');
+        return $resource(baseUrl + 'posts/detail/:slug');
     }
 
     function TaxonomySrv($resource) {
