@@ -23,7 +23,7 @@
         <div class="col-sm-4 no-padding" ng-repeat="project in home.projects.results">
             <div class="portfolio_content box-portfolio " data-wow-duration="2s">
                 <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }"  ui-sref="post_detail({slug: project.slug})">
-                    <img class="portfolio_img" ng-src="{{ project.featuredImage }}" alt="{{ project.title }}">
+                    <img class="portfolio_img" post-image="{url:project.urlImg}" alt="{{ project.title }}">
                     <h3>{{ project.title }}</h3>
                 </a>
             </div>
@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="story_image wow slideInUp" data-wow-duration="2s">
-                    <img ng-src="{{ home.featuredPost.featuredImage }}" alt="{{ home.featuredPost.title }}">
+                    <img post-image="{url:home.featuredPost.urlImg}" alt="{{ home.featuredPost.title }}">
                 </div>
             </div>
             <div class="col-md-6">
@@ -97,7 +97,7 @@
                 <div class="alliance wow slideInUp" data-wow-duration="1s">
                     <a title="Leer más" post-link="{ link: {url: partner.link, target: '_blank'} }"
                        ui-sref="post_detail({slug: partner.slug})">
-                        <img class="img-responsive img-alliance" ng-src="{{ partner.featuredImage }}"
+                        <img class="img-responsive img-alliance" post-image="{url:partner.urlImg}"
                              alt="{{ partner.title }}">
                     </a>
                 </div>
