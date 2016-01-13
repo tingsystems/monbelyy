@@ -7,7 +7,7 @@
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: post.list.results[0].slug})">
-                                <img class="img-responsive img-outstanding" post-image="{url:post.list.results[0].urlImg}" alt="{{ post.title }}">
+                                <img class="img-responsive img-outstanding" post-image="{url:post.list.results[0].urlImages.original}" alt="{{ post.title }}">
 
                                 <h2 class="title-outstanding">{{ post.list.results[0].title }}</h2>
 
@@ -30,7 +30,7 @@
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{url:post.urlImg}" alt="{{ post.title }}">
+                                <img class="img-responsive" post-image="{url:post.urlImages.original}" alt="{{ post.title }}">
 
                                 <h2>{{ post.title }}</h2>
 
