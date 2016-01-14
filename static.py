@@ -8,7 +8,7 @@ AWS_API_KEY = 'AKIAJ5322OE4UXMGOOCA'
 AWS_SECRET_KEY = '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'
 AWS_CF_S3_BUCKETS = ('prueba-ts',)
 AWS_S3_BUCKET = 'annalise-tingsystems'
-location_base = 'static/'
+location_base = 'static/tingsystems/'
 # destination directory name (on s3)
 location_js = location_base + 'js'
 location_img = location_base + 'img'
@@ -76,16 +76,16 @@ else:
 if continued == 'S' or continued == 's':
     print('Remplazando...')
     replacements = {
-        '<link href="img/favicon.ico" rel="shortcut icon" type="favicon">': '<link href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/favicon.ico" rel="shortcut icon" type="favicon">',
-        '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-144-precomposed.png">',
-        '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-114-precomposed.png">',
-        '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-72-precomposed.png">',
-        '<link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">': '<link rel="apple-touch-icon-precomposed" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-57-precomposed.png">',
-        '<link rel="stylesheet" href="css/style.min.css">': '<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/css/style.min.css">',
-        '<a class="navbar-brand" ui-sref="home"><img src="img/logo.png"': '<a class="navbar-brand" href="/"><img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/logo.png"',
-        '<img src="../img/icon.png">': '<img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/icon.png">',
-        '<script src="js/vendor.min.js"></script>': '<script src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/js/vendor.min.js"></script>',
-        '<script src="js/annalise.min.js"></script>': '<script src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/js/annalise.min.js"></script>'}
+        '<link href="img/favicon.ico" rel="shortcut icon" type="favicon">': '<link href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/favicon.ico" rel="shortcut icon" type="favicon">',
+        '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/ico/apple-touch-icon-144-precomposed.png">',
+        '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/ico/apple-touch-icon-114-precomposed.png">',
+        '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/ico/apple-touch-icon-72-precomposed.png">',
+        '<link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">': '<link rel="apple-touch-icon-precomposed" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/ico/apple-touch-icon-57-precomposed.png">',
+        '<link rel="stylesheet" href="css/style.min.css">': '<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/css/style.min.css">',
+        '<a class="navbar-brand" ui-sref="home"><img src="img/logo.png"': '<a class="navbar-brand" href="/"><img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/logo.png"',
+        '<img src="../img/icon.png">': '<img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/icon.png">',
+        '<script src="js/vendor.min.js"></script>': '<script src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/js/vendor.min.js"></script>',
+        '<script src="js/annalise.min.js"></script>': '<script src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/js/annalise.min.js"></script>'}
     lines = []
     with open('temp/index.html') as infile:
         if sys.version_info[0] is 3:
