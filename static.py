@@ -83,7 +83,7 @@ if continued == 'S' or continued == 's':
         '<link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">': '<link rel="apple-touch-icon-precomposed" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/ico/apple-touch-icon-57-precomposed.png">',
         '<link rel="stylesheet" href="css/style.min.css">': '<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/css/style.min.css">',
         '<a class="navbar-brand" ui-sref="home"><img src="img/logo.png"': '<a class="navbar-brand" href="/"><img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/logo.png"',
-        '<img src="../img/icon.png">': '<img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/icon.png">',
+        '<img src="img/icon.png">': '<img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/icon.png">',
         '<script src="js/vendor.min.js"></script>': '<script src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/js/vendor.min.js"></script>',
         '<script src="js/annalise.min.js"></script>': '<script src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/js/annalise.min.js"></script>'}
     lines = []
