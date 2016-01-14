@@ -77,6 +77,10 @@ if continued == 'S' or continued == 's':
     print('Remplazando...')
     replacements = {
         '<link href="img/favicon.ico" rel="shortcut icon" type="favicon">': '<link href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/favicon.ico" rel="shortcut icon" type="favicon">',
+        '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-144-precomposed.png">',
+        '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-114-precomposed.png">',
+        '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">': '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-72-precomposed.png">',
+        '<link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">': '<link rel="apple-touch-icon-precomposed" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/ico/apple-touch-icon-57-precomposed.png">',
         '<link rel="stylesheet" href="css/style.min.css">': '<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/css/style.min.css">',
         '<a class="navbar-brand" ui-sref="home"><img src="img/logo.png"': '<a class="navbar-brand" href="/"><img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/logo.png"',
         '<img src="../img/icon.png">': '<img src="https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/icon.png">',

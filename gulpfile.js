@@ -74,30 +74,33 @@ gulp.task('inject', function () {
         .pipe(gulp.dest('./app'));
 });
 
-gulp.task('templates', function () {
+gulp.task('templates', function (done) {
     gulp.src('./app/templates/**/*.html')
         .pipe(templateCache({
             root: '/templates/',
             module: 'app.templates',
             standalone: true
         }))
-        .pipe(gulp.dest('./app/js'));
+        .pipe(gulp.dest('./app/js'))
+        .on('end', done);
 });
 
-gulp.task('compress', function () {
+gulp.task('compress', function (done) {
     gulp.src('./app/index.html')
         .pipe(useref())
         .pipe(gulpif('*.js', uglify({mangle: false, compress: true})))
         .pipe(gulpif('*.css', minifyCss()))
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./dist'))
+        .on('end', done);
 });
 
-gulp.task('copy', function () {
+gulp.task('copy', function (done) {
     gulp.src('./app/index.html')
         .pipe(useref())
         .pipe(gulp.dest('./dist'));
     gulp.src('./app/lib/font-awesome/fonts/**')
-        .pipe(gulp.dest('./dist/fonts'));
+        .pipe(gulp.dest('./dist/fonts'))
+        .on('end', done);
 });
 
 gulp.task('uncss', function () {
