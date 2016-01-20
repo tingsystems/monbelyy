@@ -121,7 +121,7 @@ if continued == 'S' or continued == 's':
         'css/style.min.css': 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/css/%s' %
                              new_files[2],
         'img/logo.png': 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/logo.png',
-        'img/icon.png>': 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/icon.png',
+        'img/icon.png': 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/img/icon.png',
         'js/vendor.min.js': 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/js/%s' %
                             new_files[1],
         'js/annalise.min.js': 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/tingsystems/js/%s' %
