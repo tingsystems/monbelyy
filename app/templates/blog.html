@@ -6,21 +6,21 @@
                     <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.list.results[0].slug})">
-                                <img class="img-responsive img-outstanding" post-image="{url:post.list.results[0].urlImages.original}" alt="{{ post.title }}">
+                               ui-sref="post_detail({slug: post.singlePost.slug})">
+                                <img class="img-responsive img-outstanding" post-image="{{ post.singlePost.urlImages.original }}" alt="{{ post.title }}">
 
-                                <h2 class="title-outstanding">{{ post.list.results[0].title }}</h2>
+                                <h2 class="title-outstanding">{{ post.singlePost.title }}</h2>
 
                                 <div class="comment-area fix post-out ">
-                                    <p class="post-oustanding">{{ post.list.results[0].excerpt }}</p>
+                                    <p class="post-oustanding">{{ post.singlePost.excerpt }}</p>
                                 </div>
                                 <div class="comment-area fix outstanding-cmmnt">
 
                                     <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span>{{ post.list.results[0].createdAt|date:'d/MM/yyyy' }}</p>
+                                        <p><span><i class="fa fa-calendar-o"></i></span>{{ post.singlePost.createdAt|date:'d/MM/yyyy' }}</p>
                                     </div>
                                     <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> {{ post.list.results[0].author.nick }}</p>
+                                        <p><span><i class="fa fa-user"></i></span> {{ post.singlePost.author.nick }}</p>
                                     </div>
                                 </div>
                             </a>
@@ -30,7 +30,7 @@
                         <div class="single_blog wow slideInUp" data-wow-duration="1s">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{url:post.urlImages.original}" alt="{{ post.title }}">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}" alt="{{ post.title }}">
 
                                 <h2>{{ post.title }}</h2>
 

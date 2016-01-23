@@ -24,15 +24,24 @@
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                // observe the post image directive
+                // Listen for errors on the element and if there are any replace the source with the fallback source
+                var defaultImage = 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg';
+                // if image error put default
+                element.bind('error', function () {
+                    attrs.$set('src', defaultImage);
+                });
                 attrs.$observe('postImage', function (value) {
                     // convert the interpolated value to an object
-                    var obj = scope.$eval(value);
+                    var obj = {url: value};
                     // default image value
-                    attrs.$set('src', 'https://s3-us-west-2.amazonaws.com/annalise-tingsystems/static/img/post-default.jpg');
+                    attrs.$set('src', defaultImage);
                     if (obj.url) {
-                        // if there are url image add the src of the image
-                        attrs.$set('src', obj.url);
+                        // Load the image source in the background and replace the element source once it's ready
+                        var img = new Image();
+                        img.src = obj.url;
+                        img.onload = function(){
+                            attrs.$set('src', obj.url);
+                        };
                     }
                 })
             }

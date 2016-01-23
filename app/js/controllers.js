@@ -28,7 +28,7 @@
     function PostCtrl(PostSrv, $stateParams) {
         var self = this;
 
-        PostSrv.get({kind: $stateParams.kind, isActive: 'True', sizePage: 10}).$promise.then(function (results) {
+        PostSrv.get({kind: $stateParams.kind, isActive: 'True', sizePage: 10, ordering: '-createdAt'}).$promise.then(function (results) {
             self.list = results;
         });
     }
@@ -36,8 +36,11 @@
     function BlogCtrl(PostSrv) {
         var self = this;
 
-        PostSrv.get({kind: 'post', isActive: 'True', sizePage: 10}).$promise.then(function (results) {
+        PostSrv.get({kind: 'post', isActive: 'True', sizePage: 10, ordering: '-createdAt'}).$promise.then(function (results) {
             self.list = results;
+            if(self.list.results){
+                self.singlePost = self.list.results[0];
+            }
         });
     }
 
