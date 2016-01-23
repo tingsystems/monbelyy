@@ -8,7 +8,7 @@
             self.skills = results;
         });
 
-        PostSrv.get({kind: 'project', isActive: 'True', sizePage: 10}).$promise.then(function (results) {
+        PostSrv.get({kind: 'project', isActive: 'True', sizePage: 10, ordering: '-createdAt'}).$promise.then(function (results) {
             self.projects = results;
         });
 
