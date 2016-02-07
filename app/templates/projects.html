@@ -8,14 +8,22 @@
         </div>
         <div class="row">
             <div class="col-md-12 content-pages">
-                <div class="container">
-                    <div class="col-sm-4" ng-repeat="project in project.list.results">
+                <div class="container" infinite-scroll='project.getMorePosts()' infinite-scroll-disabled='project.busy || !project.next'>
+                    <div class="col-sm-4" ng-repeat="project in project.list">
                         <div class="portfolio_page wow slideInUp" data-wow-duration="2s">
                             <a title="Leer más" post-link="{ link: {url: project.link, target: '_blank'} }" ui-sref="project_detail({slug: project.slug})">
                                 <img class="portfolio_img" post-image="{{ project.urlImages.original }}">
                                 <h3>{{ project.title }}</h3>
                             </a>
                         </div>
+                    </div>
+                    <div class="col-sm-12" ng-show="project.busy">
+                        <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
+                    </div>
+
+                    <div class="col-sm-12" ng-show="!project.busy">
+                        <h2 class="text-center" ng-show="!project.list.length">Lo sentimos no contamos con contenido
+                        disponible</h2>
                     </div>
                 </div>
             </div>

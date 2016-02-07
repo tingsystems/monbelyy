@@ -28,9 +28,27 @@
     function PostCtrl(PostSrv, $stateParams) {
         var self = this;
 
-        PostSrv.get({kind: $stateParams.kind, isActive: 'True', sizePage: 10, ordering: '-createdAt'}).$promise.then(function (results) {
-            self.list = results;
-        });
+        self.list = [];
+        self.page = 0;
+        self.next = true;
+        self.busy = false;
+
+        self.getMorePosts = function () {
+            if(self.busy || !self.next)return;
+            self.page += 1;
+            self.busy = true;
+
+            PostSrv.get({kind: $stateParams.kind, isActive: 'True', sizePage: 10, ordering: '-createdAt', page: self.page}).$promise.then(function (results) {
+                self.list = self.list.concat(results.results);
+                if(self.list.length){
+                    self.singlePost = self.list[0];
+                }
+                self.busy = false;
+                self.next = results.next;
+            });
+        };
+
+        self.getMorePosts();
     }
 
     function BlogCtrl(PostSrv) {
@@ -63,9 +81,11 @@
         var self = this;
         $rootScope.pageTitle = 'Tingsystems - ';
 
+        self.busy = true;
         PostDetailSrv.get({slug: $stateParams.slug, isActive: 'True'}).$promise.then(function (results) {
             self.detail = results;
             $rootScope.pageTitle = 'Tingsystems - ' + results.title;
+            self.busy = false;
         });
     }
 
