@@ -36,12 +36,27 @@
     function BlogCtrl(PostSrv) {
         var self = this;
 
-        PostSrv.get({kind: 'post', isActive: 'True', sizePage: 10, ordering: '-createdAt'}).$promise.then(function (results) {
-            self.list = results;
-            if(self.list.results){
-                self.singlePost = self.list.results[0];
-            }
-        });
+        self.list = [];
+        self.page = 0;
+        self.next = true;
+        self.busy = false;
+
+        self.getMorePosts = function () {
+            if(self.busy || !self.next)return;
+            self.page += 1;
+            self.busy = true;
+
+            PostSrv.get({kind: 'post', isActive: 'True', sizePage: 10, ordering: '-createdAt', page: self.page}).$promise.then(function (results) {
+                self.list = self.list.concat(results.results);
+                if(self.list.length){
+                    self.singlePost = self.list[0];
+                }
+                self.busy = false;
+                self.next = results.next;
+            });
+        };
+
+        self.getMorePosts();
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
