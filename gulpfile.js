@@ -95,9 +95,6 @@ gulp.task('compress', function (done) {
 });
 
 gulp.task('copy', function (done) {
-    gulp.src('./app/index.html')
-        .pipe(useref())
-        .pipe(gulp.dest('./dist'));
     gulp.src('./app/lib/font-awesome/fonts/**')
         .pipe(gulp.dest('./dist/fonts'))
         .on('end', done);
