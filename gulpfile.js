@@ -117,4 +117,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['server', 'inject', 'watch']);
+gulp.task('dist', ['server-dist', 'inject', 'watch']);
 gulp.task('build', ['templates', 'compress', 'copy']);
