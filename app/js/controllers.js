@@ -8,9 +8,14 @@
             self.skills = results;
         });
 
-        PostSrv.get({kind: 'project', isActive: 'True', sizePage: 10, ordering: '-createdAt'}).$promise.then(function (results) {
-            self.projects = results;
-        });
+        PostSrv.get({
+            kind: 'project',
+            isActive: 'True',
+            sizePage: 10,
+            ordering: '-createdAt'
+        }).$promise.then(function (results) {
+                self.projects = results;
+            });
 
         PostSrv.get({kind: 'main-post', isActive: 'True', sizePage: 1}).$promise.then(function (results) {
             self.featuredPost = results.results[0];
@@ -34,18 +39,24 @@
         self.busy = false;
 
         self.getMorePosts = function () {
-            if(self.busy || !self.next)return;
+            if (self.busy || !self.next)return;
             self.page += 1;
             self.busy = true;
 
-            PostSrv.get({kind: $stateParams.kind, isActive: 'True', sizePage: 10, ordering: '-createdAt', page: self.page}).$promise.then(function (results) {
-                self.list = self.list.concat(results.results);
-                if(self.list.length){
-                    self.singlePost = self.list[0];
-                }
-                self.busy = false;
-                self.next = results.next;
-            });
+            PostSrv.get({
+                kind: $stateParams.kind,
+                isActive: 'True',
+                sizePage: 10,
+                ordering: '-createdAt',
+                page: self.page
+            }).$promise.then(function (results) {
+                    self.list = self.list.concat(results.results);
+                    if (self.list.length) {
+                        self.singlePost = self.list[0];
+                    }
+                    self.busy = false;
+                    self.next = results.next;
+                });
         };
 
         self.getMorePosts();
@@ -60,43 +71,76 @@
         self.busy = false;
 
         self.getMorePosts = function () {
-            if(self.busy || !self.next)return;
+            if (self.busy || !self.next)return;
             self.page += 1;
             self.busy = true;
 
-            PostSrv.get({kind: 'post', isActive: 'True', sizePage: 10, ordering: '-createdAt', page: self.page}).$promise.then(function (results) {
-                self.list = self.list.concat(results.results);
-                if(self.list.length){
-                    self.singlePost = self.list[0];
-                }
-                self.busy = false;
-                self.next = results.next;
-            });
+            PostSrv.get({
+                kind: 'post',
+                isActive: 'True',
+                sizePage: 10,
+                ordering: '-createdAt',
+                page: self.page
+            }).$promise.then(function (results) {
+                    self.list = self.list.concat(results.results);
+                    if (self.list.length) {
+                        self.singlePost = self.list[0];
+                    }
+                    self.busy = false;
+                    self.next = results.next;
+                });
         };
 
         self.getMorePosts();
     }
 
-    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
+    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, $sce) {
         var self = this;
         $rootScope.pageTitle = 'Tingsystems - ';
 
         self.busy = true;
         PostDetailSrv.get({slug: $stateParams.slug, isActive: 'True'}).$promise.then(function (results) {
             self.detail = results;
+            self.detail.content = $sce.trustAsHtml(self.detail.content);
+            $rootScope.post = self.detail;
+            if (!self.detail.urlImages.original) {
+                self.detail.urlImages.original = 'https://www.tingsystems.com/img/logo.png';
+            }
             $rootScope.pageTitle = 'Tingsystems - ' + results.title;
             self.busy = false;
         });
     }
 
-    function ContactCtrl() {
+    function ContactCtrl(MessageSrv, NotificationSrv) {
         var self = this;
 
-        self.formSubmit = function () {
+        self.contactInitialState = function () {
+            self.notification = {};
+            self.notification.name = '';
+            self.notification.email = '';
+            self.notification.message = '';
+            self.notification.phone = '';
+            //Notification kind
+            self.notification.kind = '';
+            self.context = {};
+
+        };
+        self.contactInitialState();
+        self.createNotification = function (kind) {
             // ajax request to send the formData
+            self.notification.kind = kind;
+            self.context.context = angular.copy(self.notification);
+            var context = self.context;
+            MessageSrv.create(context).$promise.then(function (data) {
+                    self.contactInitialState();
+                    NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                },
+                function (data) {
+                    //error
+                    NotificationSrv.error('Hubo ' + ' un error al procesar el formulario, intenta más tarde por favor');
+                });
         };
     }
-
 
 
     // create the module and assign controllers
@@ -109,7 +153,7 @@
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams'];
-    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
+    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce'];
     ContactCtrl.$inject = [];
     BlogCtrl.$inject = ['PostSrv'];
 })();

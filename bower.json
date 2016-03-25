@@ -13,7 +13,9 @@
     "angular-sanitize": "~1.4.8",
     "bootstrap": "~3.3.6",
     "angular-loading-bar": "~0.8.0",
-    "ngInfiniteScroll": "~1.2.2"
+    "ngInfiniteScroll": "~1.2.2",
+    "angular-toasty": "^1.0.5",
+    "angular-scroll": "^1.0.0"
   },
   "overrides": {
     "bootstrap": {
