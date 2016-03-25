@@ -10,7 +10,8 @@
                         en el mundo digital </p>
                     <a class="btn-green wow slideInUp" data-wow-duration="3s" ui-sref="contact">Hablanos de tu
                         proyecto</a><br/>
-                    <a href="#portfolio_area" du-smooth-scroll duration="1500" class="wow bounceInUp scrollme" title="Más información"> <i
+                    <a href="#portfolio_area" du-smooth-scroll duration="1500" class="wow bounceInUp scrollme"
+                       title="Más información"> <i
                             class="fa fa-angle-down fa-4x"></i></a>
                 </div>
             </div>
@@ -22,9 +23,10 @@
     <div class="container container-portfolio no-padding">
         <div class="col-sm-4 no-padding" ng-repeat="project in home.projects.results">
             <div class="portfolio_content box-portfolio " data-wow-duration="2s">
-                <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }"  ui-sref="post_detail({slug: project.slug})">
+                <a title="Leer mas" post-link="{ link: {url: project.link, target: '_blank'} }"
+                   ui-sref="post_detail({slug: project.slug})">
                     <img class="portfolio_img" post-image="{{ project.urlImages.original }}" alt="{{ project.title }}">
-                    <h3>{{ project.title }}</h3>
+                    <h4 class="text-center">{{ project.title }}</h4>
                 </a>
             </div>
         </div>
