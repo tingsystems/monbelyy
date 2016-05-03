@@ -3,6 +3,17 @@
 
     function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
+        self.slider = [];
+        // Controller for slider
+        PostSrv.get({
+            category : 'slider',
+            isActive: 'True',
+            sizePage: 10,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug'
+        }).$promise.then(function (results) {
+                self.slider = results.results;
+            });
 
 
     }
