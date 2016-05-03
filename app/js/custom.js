@@ -90,4 +90,8 @@ $('ul.nav li.dropdown').hover(function() {
 }, function() {
   $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideUp();
 });
+/* owl */
+$(document).ready(function(){
+  $('.owl-carousel').owlCarousel();
+});
 window.onload = init();
