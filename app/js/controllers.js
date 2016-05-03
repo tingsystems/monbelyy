@@ -4,30 +4,7 @@
     function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
 
-        TaxonomySrv.get({slug: 'skills', isActive: 'True', sizePage: 10}).$promise.then(function (results) {
-            self.skills = results;
-        });
 
-        PostSrv.get({
-            kind: 'project',
-            isActive: 'True',
-            sizePage: 10,
-            ordering: '-createdAt'
-        }).$promise.then(function (results) {
-                self.projects = results;
-            });
-
-        PostSrv.get({kind: 'main-post', isActive: 'True', sizePage: 1}).$promise.then(function (results) {
-            self.featuredPost = results.results[0];
-        });
-
-        PostSrv.get({kind: 'partner', isActive: 'True', sizePage: 10}).$promise.then(function (results) {
-            self.parterns = results;
-        });
-
-        PostSrv.get({kind: 'footer-info', isActive: 'True', sizePage: 10}).$promise.then(function (results) {
-            $rootScope.footerInfo = results;
-        });
     }
 
     function PostCtrl(PostSrv, $stateParams) {
@@ -96,7 +73,7 @@
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, $sce) {
         var self = this;
-        $rootScope.pageTitle = 'Tingsystems - ';
+        $rootScope.pageTitle = 'Blue Mia - ';
 
         self.busy = true;
         PostDetailSrv.get({slug: $stateParams.slug, isActive: 'True'}).$promise.then(function (results) {
@@ -106,7 +83,7 @@
             if (!self.detail.urlImages.original) {
                 self.detail.urlImages.original = 'https://www.tingsystems.com/img/logo.png';
             }
-            $rootScope.pageTitle = 'Tingsystems - ' + results.title;
+            $rootScope.pageTitle = 'Blue Mia - ' + results.title;
             self.busy = false;
         });
     }

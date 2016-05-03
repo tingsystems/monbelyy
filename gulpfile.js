@@ -105,6 +105,8 @@ gulp.task('htmlcompress', function (done) {
 gulp.task('copy', function (done) {
     gulp.src('./app/lib/font-awesome/fonts/**')
         .pipe(gulp.dest('./dist/fonts'));
+    gulp.src('./app/lib/bootstrap/fonts/**')
+        .pipe(gulp.dest('./dist/fonts'));
     gulp.src('./app/img/**')
         .pipe(gulp.dest('./dist/img'))
         .on('end', done);

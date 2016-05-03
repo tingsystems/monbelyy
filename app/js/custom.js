@@ -1,11 +1,6 @@
 /* Custom js */
 'use strict';
 
-$(document).ready(function () {
-    // wow init
-    new WOW().init();
-});
-
 /*scrolling menu*/
 /*!
  * classie v1.0.0
@@ -90,4 +85,3 @@ $('ul.nav li.dropdown').hover(function() {
 }, function() {
   $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideUp();
 });
-window.onload = init();

@@ -14,7 +14,7 @@
             .state('home', {
                 url: '/',
                 views: {
-                    'title': {template: '<title>Tingsystems - Tu consultor tecnológico</title>'},
+                    'title': {template: '<title>Blue Mia - Especialistas en ropa deportiva para Dama</title>'},
                     'content': {
                         templateUrl: '/templates/home.html',
                         controllerAs: 'home',
@@ -25,7 +25,7 @@
             .state('contact', {
                 url: '/contact',
                 views: {
-                    'title': {template: '<title>Tingsystems - Contacto</title>'},
+                    'title': {template: '<title>Blue Mia - Contacto</title>'},
                     'content': {
                         templateUrl: '/templates/contact.html',
                         controllerAs: 'contact',
@@ -36,7 +36,7 @@
             .state('blog', {
                 url: '/blog',
                 views: {
-                    'title': {template: '<title>Tingsystems - Blog</title>'},
+                    'title': {template: '<title>Blue Mia - Blog</title>'},
                     'content': {
                         templateUrl: '/templates/blog.html',
                         controllerAs: 'post',
@@ -69,7 +69,7 @@
             .state('projects', {
                 url: '/projects/:kind',
                 views: {
-                    'title': {template: '<title>Tingsystems - Projectos</title>'},
+                    'title': {template: '<title>Blue Mia - Projectos</title>'},
                     'content': {
                         templateUrl: '/templates/projects.html',
                         controllerAs: 'project',
@@ -103,7 +103,7 @@
      */
     function Run($http, $rootScope, $state, $window, $location) {
         $rootScope.$state = $state;
-        $http.defaults.headers.common['TS-TOKEN'] = 'MTej3ZSvJquIbp2gByoFBUJKeS7mtOJ05GOt9dqx';
+        $http.defaults.headers.common['TS-TOKEN'] = 'bPAUWlNi19ueOvIPac8p8H6GqDy5N93kGjGc1T2T';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainmenu').collapse('hide');
         });
@@ -124,7 +124,7 @@
         });
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll', 'duScroll'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
