@@ -68,12 +68,51 @@ header
     -webkit-box-shadow 0 0 15px rgba(0, 0, 0, 0.43)
     -moz-box-shadow 0 0 15px rgba(0, 0, 0, 0.43)
     box-shadow 0 0 15px rgba(0, 0, 0, 0.43)
+    margin-bottom 0
     .navbar-nav > li > a
       padding 40px 18px
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color #eeedec
+      color #e50983
     .main-nav
       border-left 1px solid #ccc
+      .dropdown:hover .dropdown-toggle
+        background-color #E50983 !important
+        color #eeedec !important
+      .dropdown
+        .user-help
+          right -126px
+          border-top 5px solid #E50983 !important
+          border-top-left-radius 0px
+          border-top-right-radius 0px
+          .dropdown-header
+            font-size 18px
+            font-weight bold
+        .user-log
+          border-top 5px solid #E50983 !important
+          border-top-left-radius 0px
+          border-top-right-radius 0px
+          right -68px
+          min-width 200px
+          .dropdown-header
+            font-size 18px
+            font-weight bold
+        .user-shopping
+          border-top 5px solid #E50983 !important
+          border-top-left-radius 0px
+          border-top-right-radius 0px
+          min-width 250px
+          padding-bottom 0
+          .dropdown-header
+            font-size 16px
+            font-weight bold
+          .list-payment
+            margin 10px 0
+            color #555555 !important
+          .list-total
+            margin 10px 0
+            font-weight bold
+
     .main-nav > li > a
       padding 32px 18px
       color #e50983
@@ -88,6 +127,9 @@ header
         .dropdown-menu
           background-color #eeedec
           border none
+          -webkit-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
+          -moz-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
+          box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
         .dropdown-menu >  li > a
           color #8e8e8e
           font-size 16px
@@ -201,168 +243,7 @@ header
     margin-top 20px
     text-transform uppercase
 
-.container-portfolio
-  width 100%
-.box-portfolio
-  padding 40px
-  border 1px solid #F6F6F6
-
-.portfolio_img
-  width 100%
-
-#portfolio_area
-  background #fff
-  position relative
-  p
-    margin-bottom: 50px
-  h2
-    margin-bottom: 15px
-
-.alliance
-  padding 10px
-  .img-alliance
-    width: 200px;
-    margin: 0 auto;
-
-.portfolio_page
-  padding-bottom 35px
-  h3
-    font-size 18px
-    padding-top 15px
-    color #5E5E65
-    text-align center
-    padding-bottom 25px
-.portfolio_content
-  position relative
-  margin-bottom: 0
-  p
-    border 2px solid #E3E3E3
-    padding 20px 40px
-  h3
-    color #5E5E65
-    text-align center
-    padding 20px 0px 0px 0px
-    /*position absolute*/
-    /*width 100%*/
-    /*height auto*/
-    /*top 197px*/
-    /*text-align center*/
-    /*font-size 24px*/
-    /*color #fff*/
-    /*line-height 160px*/
-    /*background transparent*/
-    /*text-shadow 0 1px 4px rgba(0, 0, 0, 0.51)*/
-
-#clients_area
-  .title
-    color: #949494;
-  h4.title
-    font-weight 400
-
-.clients_say_list
-  margin-top 20px
-
-.say
-  text-align: right;
-  width: 90%;
-  margin-top: 10px
-  h5
-    margin 0
-    color #000
-  h6
-    margin 0
-    color #666666
-
-.c_img
-  width 10%
-  text-align right
-
-  img
-    border-radius 50%
-
-#Experience_area
-  background #353535
-  color #fff
-.pd-skill
-  padding 0px 15px 0px 0px
-.skills
-  h2
-    margin-bottom 40px
-
-.progress-bar
-  background #36C36E
-
-/************** blog area css ******************/
-
-#blog_area
-  background #fff
-
-.img-outstanding
-  width 100% !important
-  height 100% !important
-
-.outstanding-cmmnt
-  margin-top -1px
-h2.title-outstanding
-  font-size 32px !important
-  padding 38px 10px !important
-.post-oustanding
-  padding 22px 10px
-.single_blog
-  margin-bottom 30px
-  h2
-    font-size 18px
-    color #6B6B6B
-    font-weight 700
-    padding 20px 10px
-    border 1px solid #f5f5f5
-    margin-bottom -1px
-    display inline-block
-    white-space nowrap
-    overflow hidden
-    text-overflow ellipsis
-    -o-text-overflow ellipsis
-    width 100%
-
-
-  p
-    margin 10px 0
-    color #6B6B6B
-
-  img
-    width: 400px;
-    height: 200px;
-
-  .comment-area
-    color #999999
-    border 1px solid #f5f4f4
-    padding 0 10px
-
-.single-proyect
-  h2
-    font-size 18px
-    color #6B6B6B
-    font-weight 700
-    margin-top 20px
-  p
-    margin 10px 0
-
-  img
-    width 100%
-
-  .comment-area
-    color #999999
-
-  .date i,
-  .comment i
-    margin-right 10px
-
 /************** content area default ****************/
-.content-blog
-  margin   150px 0px 60px !important
-.post-out
-  margin-top -5px
-
 #content-area
   margin 200px 0px 60px
   .title
@@ -374,16 +255,6 @@ h2.title-outstanding
     border: 1px solid #f5f5f5;
   .content-pages
     padding 20px 0
-
-/************** call to action css ******************/
-
-#caal_to_action_area
-  background #FF801A
-  padding 30px 0
-  color #fff
-
-.call_to_action_text h2
-  margin 0
 
 /************** footer area css ******************/
 
@@ -427,6 +298,25 @@ h2.title-outstanding
 /* buttons sizes */
 .btn-sm
   padding: 5px 10px !important
+
+.btn-yellow
+  background #cbae00;
+  display inline-block
+  padding 10px 15px
+  text-transform uppercase
+  color #fff
+  font-weight 700
+  border-radius 5px
+  border none
+  border-radius 0
+  &:hover, &:focus
+    background #AE9400
+    display: inline-block
+    padding 10px 15px
+    text-transform uppercase
+    color #fff
+    font-weight 700
+    border-radius 0px
 
 .btn-green
   background #4ECB8C;

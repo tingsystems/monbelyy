@@ -64,6 +64,7 @@ header .navbar-default {
   -webkit-box-shadow: 0 0 15px rgba(0,0,0,0.43);
   -moz-box-shadow: 0 0 15px rgba(0,0,0,0.43);
   box-shadow: 0 0 15px rgba(0,0,0,0.43);
+  margin-bottom: 0;
 }
 header .navbar-default .navbar-nav > li > a {
   padding: 40px 18px;
@@ -71,9 +72,54 @@ header .navbar-default .navbar-nav > li > a {
 header .navbar-default .navbar-nav > li > a:hover,
 header .navbar-default .navbar-nav > li > a:focus {
   background-color: #eeedec;
+  color: #e50983;
 }
 header .navbar-default .main-nav {
   border-left: 1px solid #ccc;
+}
+header .navbar-default .main-nav .dropdown:hover .dropdown-toggle {
+  background-color: #e50983 !important;
+  color: #eeedec !important;
+}
+header .navbar-default .main-nav .dropdown .user-help {
+  right: -126px;
+  border-top: 5px solid #e50983 !important;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+header .navbar-default .main-nav .dropdown .user-help .dropdown-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+header .navbar-default .main-nav .dropdown .user-log {
+  border-top: 5px solid #e50983 !important;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  right: -68px;
+  min-width: 200px;
+}
+header .navbar-default .main-nav .dropdown .user-log .dropdown-header {
+  font-size: 18px;
+  font-weight: bold;
+}
+header .navbar-default .main-nav .dropdown .user-shopping {
+  border-top: 5px solid #e50983 !important;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  min-width: 250px;
+  padding-bottom: 0;
+}
+header .navbar-default .main-nav .dropdown .user-shopping .dropdown-header {
+  font-size: 16px;
+  font-weight: bold;
+}
+header .navbar-default .main-nav .dropdown .user-shopping .list-payment {
+  margin: 10px 0;
+  color: #555 !important;
+}
+header .navbar-default .main-nav .dropdown .user-shopping .list-total {
+  margin: 10px 0;
+  font-weight: bold;
 }
 header .navbar-default .main-nav > li > a {
   padding: 32px 18px;
@@ -91,6 +137,9 @@ header .navbar-default .navbar-nav .dropdown:hover .dropdown-toggle {
 header .navbar-default .navbar-nav .dropdown .dropdown-menu {
   background-color: #eeedec;
   border: none;
+  -webkit-box-shadow: 0px 5px 5px rgba(0,0,0,0.33);
+  -moz-box-shadow: 0px 5px 5px rgba(0,0,0,0.33);
+  box-shadow: 0px 5px 5px rgba(0,0,0,0.33);
 }
 header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a {
   color: #8e8e8e;
@@ -200,180 +249,6 @@ header .logo {
   margin-top: 20px;
   text-transform: uppercase;
 }
-.container-portfolio {
-  width: 100%;
-}
-.box-portfolio {
-  padding: 40px;
-  border: 1px solid #f6f6f6;
-}
-.portfolio_img {
-  width: 100%;
-}
-#portfolio_area {
-  background: #fff;
-  position: relative;
-}
-#portfolio_area p {
-  margin-bottom: 50px;
-}
-#portfolio_area h2 {
-  margin-bottom: 15px;
-}
-.alliance {
-  padding: 10px;
-}
-.alliance .img-alliance {
-  width: 200px;
-  margin: 0 auto;
-}
-.portfolio_page {
-  padding-bottom: 35px;
-}
-.portfolio_page h3 {
-  font-size: 18px;
-  padding-top: 15px;
-  color: #5e5e65;
-  text-align: center;
-  padding-bottom: 25px;
-}
-.portfolio_content {
-  position: relative;
-  margin-bottom: 0;
-}
-.portfolio_content p {
-  border: 2px solid #e3e3e3;
-  padding: 20px 40px;
-}
-.portfolio_content h3 {
-  color: #5e5e65;
-  text-align: center;
-  padding: 20px 0px 0px 0px;
-/*position absolute*/
-/*width 100%*/
-/*height auto*/
-/*top 197px*/
-/*text-align center*/
-/*font-size 24px*/
-/*color #fff*/
-/*line-height 160px*/
-/*background transparent*/
-/*text-shadow 0 1px 4px rgba(0, 0, 0, 0.51)*/
-}
-#clients_area .title {
-  color: #949494;
-}
-#clients_area h4.title {
-  font-weight: 400;
-}
-.clients_say_list {
-  margin-top: 20px;
-}
-.say {
-  text-align: right;
-  width: 90%;
-  margin-top: 10px;
-}
-.say h5 {
-  margin: 0;
-  color: #000;
-}
-.say h6 {
-  margin: 0;
-  color: #666;
-}
-.c_img {
-  width: 10%;
-  text-align: right;
-}
-.c_img img {
-  border-radius: 50%;
-}
-#Experience_area {
-  background: #353535;
-  color: #fff;
-}
-.pd-skill {
-  padding: 0px 15px 0px 0px;
-}
-.skills h2 {
-  margin-bottom: 40px;
-}
-.progress-bar {
-  background: #36c36e;
-}
-#blog_area {
-  background: #fff;
-}
-.img-outstanding {
-  width: 100% !important;
-  height: 100% !important;
-}
-.outstanding-cmmnt {
-  margin-top: -1px;
-}
-h2.title-outstanding {
-  font-size: 32px !important;
-  padding: 38px 10px !important;
-}
-.post-oustanding {
-  padding: 22px 10px;
-}
-.single_blog {
-  margin-bottom: 30px;
-}
-.single_blog h2 {
-  font-size: 18px;
-  color: #6b6b6b;
-  font-weight: 700;
-  padding: 20px 10px;
-  border: 1px solid #f5f5f5;
-  margin-bottom: -1px;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  width: 100%;
-}
-.single_blog p {
-  margin: 10px 0;
-  color: #6b6b6b;
-}
-.single_blog img {
-  width: 400px;
-  height: 200px;
-}
-.single_blog .comment-area {
-  color: #999;
-  border: 1px solid #f5f4f4;
-  padding: 0 10px;
-}
-.single-proyect h2 {
-  font-size: 18px;
-  color: #6b6b6b;
-  font-weight: 700;
-  margin-top: 20px;
-}
-.single-proyect p {
-  margin: 10px 0;
-}
-.single-proyect img {
-  width: 100%;
-}
-.single-proyect .comment-area {
-  color: #999;
-}
-.single-proyect .date i,
-.single-proyect .comment i {
-  margin-right: 10px;
-}
-.content-blog {
-  margin: 150px 0px 60px !important;
-}
-.post-out {
-  margin-top: -5px;
-}
 #content-area {
   margin: 200px 0px 60px;
 }
@@ -389,14 +264,6 @@ h2.title-outstanding {
 }
 #content-area .content-pages {
   padding: 20px 0;
-}
-#caal_to_action_area {
-  background: #ff801a;
-  padding: 30px 0;
-  color: #fff;
-}
-.call_to_action_text h2 {
-  margin: 0;
 }
 #footer_area {
   background: #444;
@@ -436,6 +303,27 @@ h2.title-outstanding {
 }
 .btn-sm {
   padding: 5px 10px !important;
+}
+.btn-yellow {
+  background: #cbae00;
+  display: inline-block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 5px;
+  border: none;
+  border-radius: 0;
+}
+.btn-yellow:hover,
+.btn-yellow:focus {
+  background: #ae9400;
+  display: inline-block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 0px;
 }
 .btn-green {
   background: #4ecb8c;
