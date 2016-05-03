@@ -12,7 +12,9 @@
     "type": "git",
     "url": "https://gitlab.com/tingsystems/leonor"
   },
-  "dependencies": {},
+  "dependencies": {
+    "owl.carousel": "0.0.1"
+  },
   "devDependencies": {
     "animate": "0.0.5",
     "connect-history-api-fallback": "^1.1.0",

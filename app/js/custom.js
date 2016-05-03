@@ -84,4 +84,10 @@ $('ul.nav li.dropdown').hover(function() {
   $(this).find('.dropdown-menu').first().stop(true, true).delay(150).slideDown();
 }, function() {
   $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideUp();
+
 });
+/* owl */
+$(document).ready(function(){
+  $('.owl-carousel').owlCarousel();
+});
+window.onload = init();

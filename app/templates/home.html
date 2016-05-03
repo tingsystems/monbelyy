@@ -20,27 +20,87 @@
     </a>
 </div>
 
-<section class="section_padding">
-    
+<section id="section-sports" class="section_padding">
+    <div class="container">
+        <h3 class="white">¿Cuál es tu deporte?</h3>
+
+        <div class="col-md-2">
+            <a href="#"><img src="img/icons-sport/aerobico.png" alt=""/></a>
+            <h4>Aeróbico</h4>
+        </div>
+        <div class="col-md-2">
+            <a href="#"><img src="img/icons-sport/baile.png" alt=""/></a>
+            <h4>Danza</h4>
+        </div>
+        <div class="col-md-2">
+            <a href="#"> <img src="img/icons-sport/caminata.png" alt=""/></a>
+            <h4>Caminata</h4>
+        </div>
+        <div class="col-md-2">
+            <a href="#"><img src="img/icons-sport/correr.png" alt=""/></a>
+            <h4>Correr</h4>
+        </div>
+        <div class="col-md-2">
+            <a href="#"><img src="img/icons-sport/crossfit.png" alt=""/></a>
+            <h4>Crossfit</h4>
+        </div>
+        <div class="col-md-2">
+            <a href="#"><img src="img/icons-sport/yoga.png" alt=""/></a>
+            <h4>Yoga</h4>
+        </div>
+    </div>
 </section>
 <!-- end portfolio say area -->
 
 <section id="story_area" class="section_padding">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="story_image wow slideInUp" data-wow-duration="2s">
-                    <img post-image="{{ home.featuredPost.urlImages.original }}" alt="{{ home.featuredPost.title }}">
+        <div class="owl-carousel owl-theme">
+            <div class="box-default">
+                <div class="box-header">
+                    <a href="#"> <img src="img/sujetador-deportivo1.jpg" alt=""/></a> 
+                </div>
+                <div class="box-container">
+                    <h1>Sujetador Blue Mía</h1>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="story_text wow slideInUp" data-wow-duration="2s">
-                    <h2>{{ home.featuredPost.title }}</h2>
-
-                    <div ng-bind-html="home.featuredPost.excerpt"></div>
-
-                    <a title="Leer mas" post-link="{ link: {url: home.featuredPost.link, target: '_blank'} }"
-                       ui-sref="post_detail({slug: home.featuredPost.slug})">Leer más</a>
+            <div class="box-default">
+                <div class="box-header">
+                    <a href="#"><img src="img/sujetador-deportivo1.jpg" alt=""/></a>
+                </div>
+                <div class="box-container">
+                    <h1>Sujetador Blue Mía</h1>
+                </div>
+            </div>
+            <div class="box-default">
+                <div class="box-header">
+                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
+                </div>
+                <div class="box-container">
+                    <h1>Sujetador Blue Mía</h1>
+                </div>
+            </div>
+            <div class="box-default">
+                <div class="box-header">
+                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
+                </div>
+                <div class="box-container">
+                    <h1>Sujetador Blue Mía</h1>
+                </div>
+            </div>
+            <div class="box-default">
+                <div class="box-header">
+                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
+                </div>
+                <div class="box-container">
+                    <h1>Sujetador Blue Mía</h1>
+                </div>
+            </div>
+            <div class="box-default">
+                <div class="box-header">
+                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
+                </div>
+                <div class="box-container">
+                    <h1>Sujetador Blue Mía</h1>
                 </div>
             </div>
         </div>
