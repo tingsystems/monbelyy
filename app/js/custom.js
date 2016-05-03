@@ -85,18 +85,9 @@ $(document).ready(function () {
 
 })(window);
 
-function init() {
-    window.addEventListener('scroll', function (e) {
-        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-            shrinkOn = 100,
-            header = document.querySelector("header");
-        if (distanceY > shrinkOn) {
-            classie.add(header, 'smaller');
-        } else {
-            if (classie.has(header, 'smaller')) {
-                classie.remove(header, 'smaller');
-            }
-        }
-    });
-}
+$('ul.nav li.dropdown').hover(function() {
+  $(this).find('.dropdown-menu').first().stop(true, true).delay(150).slideDown();
+}, function() {
+  $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideUp();
+});
 window.onload = init();
