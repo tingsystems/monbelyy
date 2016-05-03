@@ -90,4 +90,3 @@ $('ul.nav li.dropdown').hover(function() {
 $(document).ready(function(){
   $('.owl-carousel').owlCarousel();
 });
-window.onload = init();
