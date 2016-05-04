@@ -13,8 +13,8 @@
             })
             .state('home', {
                 url: '/',
+                data: {pageTitle: 'Blue Mia - Especialistas en ropa deportiva para Dama'},
                 views: {
-                    'title': {template: '<title>Blue Mia - Especialistas en ropa deportiva para Dama</title>'},
                     'content': {
                         templateUrl: '/templates/home.html',
                         controllerAs: 'Home',
@@ -144,6 +144,24 @@
                 }
             };
         });
+        // Get options for "accesorios"
+        TaxonomySrv.query({
+            parent: '387a3351-3ac6-4bbb-93da-6103d9a8fd8d',
+            isActive: 'True',
+            fields: 'name,slug'
+        }).$promise.then(function (response) {
+                $rootScope.accesorios = response;
+            });
+        // Get options for "ropa"
+        TaxonomySrv.query({
+            parent: 'c30c8b8a-e19e-4ac4-bfee-8524c3a02d31',
+            isActive: 'True',
+            fields: 'name,slug'
+        }).$promise.then(function (response) {
+                $rootScope.ropa = response;
+            });
+        // intit for page title
+        $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama'
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll', 'ui.bootstrap'])
