@@ -3,7 +3,7 @@
 
     function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
-        self.slider = [];
+        self.sliders = [];
         // Controller for slider
         PostSrv.get({
             category : 'slider',
@@ -12,7 +12,7 @@
             ordering: '-createdAt',
             fields: 'urlImages,title,link,slug'
         }).$promise.then(function (results) {
-                self.slider = results.results;
+                self.sliders = results.results;
             });
 
         self.sports = [];

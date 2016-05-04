@@ -3,12 +3,11 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        <uib-carousel interval="5300" template-url="/templates/partials/slider-template.html">
-            <uib-slide ng-repeat="slide in Home.slider">
+        <uib-carousel  template-url="/templates/partials/carousel.html">
+            <uib-slide ng-repeat="slide in Home.sliders">
                 <div class="item">
-                    <a post-link="{ link: {url: slide.link, target: 'slide.target'} }"
-                       ui-sref="post_detail({slug: slide.slug})">
-                        <img post-image="{{ slide.urlImages.original }}" class="img-slide" alt="{{ slide.title }}">
+                    <a post-link="{ link: {url: slide.link, target: 'slide.target'} }">
+                        <img post-image="{{ slide.urlImages.original }}" alt="{{ slide.title }}">
                     </a>
                 </div>
             </uib-slide>
