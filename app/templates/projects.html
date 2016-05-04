@@ -16,7 +16,7 @@
                     <div class="col-sm-6 no-padding" ng-repeat=" sport in Post.list">
                         <div class="img-size wow slideInUp" data-wow-duration="2s">
                             <a title="Leer más" post-link="{ link: {url: sport.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: sport.slug})">
+                               ui-sref="project_detail({slug: sport.slug})">
                                 <img class="portfolio_img" post-image="{{ sport.urlImages.medium }}">
                                 <h1>{{ sport.title }}</h1>
                             </a>
