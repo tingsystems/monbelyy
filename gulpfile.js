@@ -14,7 +14,8 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     useref = require('gulp-useref'),
     uglify = require('gulp-uglify'),
-    uncss = require('gulp-uncss');
+    uncss = require('gulp-uncss'),
+    htmlmin = require('gulp-htmlmin');
 
 //	Servidor	web	de	desarrollo
 gulp.task('server', function () {
@@ -94,9 +95,20 @@ gulp.task('compress', function (done) {
         .on('end', done);
 });
 
+gulp.task('htmlcompress', function (done) {
+    gulp.src('./dist/*.html')
+        .pipe(htmlmin({collapseWhitespace: true, removeComments: true}))
+        .pipe(gulp.dest('./dist'))
+        .on('end', done);
+});
+
 gulp.task('copy', function (done) {
     gulp.src('./app/lib/font-awesome/fonts/**')
-        .pipe(gulp.dest('./dist/fonts'))
+        .pipe(gulp.dest('./dist/fonts'));
+    gulp.src('./app/lib/bootstrap/fonts/**')
+        .pipe(gulp.dest('./dist/fonts'));
+    gulp.src('./app/img/**')
+        .pipe(gulp.dest('./dist/img'))
         .on('end', done);
 });
 
@@ -113,8 +125,9 @@ gulp.task('uncss', function () {
 gulp.task('watch', function () {
     gulp.watch(['./app/**/*.html'], ['html', 'templates']);
     gulp.watch(['./app/css/**/*.styl'], ['css', 'inject']);
-    gulp.watch(['./app/js/**/*.js', './gulpfile.js', './bower.js'], ['jshint', 'inject']);
+    gulp.watch(['./app/js/**/*.js', './gulpfile.js', './bower.js'], ['inject']);
 });
 
 gulp.task('default', ['server', 'inject', 'watch']);
+gulp.task('dist', ['server-dist', 'inject', 'watch']);
 gulp.task('build', ['templates', 'compress', 'copy']);
