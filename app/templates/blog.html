@@ -1,45 +1,167 @@
 <section id="content-area" class="content-blog">
     <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-left"></i> Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ol>
         <div class="row">
-            <div class="col-md-12 content-pages">
-                <div class="container" infinite-scroll='post.getMorePosts()' infinite-scroll-disabled='post.busy || !post.next'>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <div class="single_blog wow slideInUp" data-wow-duration="1s">
+            <div class="col-md-12">
+                <h2 class="title">Blog</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9 content-pages">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="box-default box-blog">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.singlePost.slug})">
-                                <img class="img-responsive img-outstanding" post-image="{{ post.singlePost.urlImages.original }}" alt="{{ post.title }}">
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
+                                     alt="{{ post.title }}">
 
-                                <h2 class="title-outstanding">{{ post.singlePost.title }}</h2>
+                                <h2>hello</h2>
 
-                                <div class="comment-area fix post-out ">
-                                    <p class="post-oustanding">{{ post.singlePost.excerpt }}</p>
-                                </div>
-                                <div class="comment-area fix outstanding-cmmnt">
+                                <p>Lorem impsu detal log to me</p>
 
+                                <div class="comment-area">
                                     <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span>{{ post.singlePost.createdAt|date:'d/MM/yyyy' }}</p>
+                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
                                     </div>
                                     <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> {{ post.singlePost.author.nick }}</p>
+                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div class="col-sm-3 col-sm-6 col-xs-6" ng-repeat="post in post.list" ng-if="$index >= 1">
-                        <div class="single_blog wow slideInUp" data-wow-duration="1s">
+                    <div class="col-sm-4">
+                        <div class="box-default box-blog">
                             <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}" alt="{{ post.title }}">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
+                                     alt="{{ post.title }}">
 
-                                <h2>{{ post.title }}</h2>
+                                <h2>hello</h2>
 
-                                <div class="comment-area fix">
+                                <p>Lorem impsu detal log to me</p>
+
+                                <div class="comment-area">
                                     <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> {{post.createdAt|date:'d/MM/yyyy' }}</p>
+                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
                                     </div>
                                     <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> {{ post.author.nick }}.</p>
+                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="box-default box-blog">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
+                                     alt="{{ post.title }}">
+
+                                <h2>hello</h2>
+
+                                <p>Lorem impsu detal log to me</p>
+
+                                <div class="comment-area">
+                                    <div class="date floatleft">
+                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
+                                    </div>
+                                    <div class="comment floatright">
+                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="box-default box-blog">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
+                                     alt="{{ post.title }}">
+
+                                <h2>hello</h2>
+
+                                <p>Lorem impsu detal log to me</p>
+
+                                <div class="comment-area">
+                                    <div class="date floatleft">
+                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
+                                    </div>
+                                    <div class="comment floatright">
+                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="box-default box-blog">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
+                                     alt="{{ post.title }}">
+
+                                <h2>hello</h2>
+
+                                <p>Lorem impsu detal log to me</p>
+
+                                <div class="comment-area">
+                                    <div class="date floatleft">
+                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
+                                    </div>
+                                    <div class="comment floatright">
+                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="box-default box-blog">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
+                                     alt="{{ post.title }}">
+
+                                <h2>hello</h2>
+
+                                <p>Lorem impsu detal log to me</p>
+
+                                <div class="comment-area">
+                                    <div class="date floatleft">
+                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
+                                    </div>
+                                    <div class="comment floatright">
+                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="box-default box-blog">
+                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: post.slug})">
+                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
+                                     alt="{{ post.title }}">
+
+                                <h2>hello</h2>
+
+                                <p>Lorem impsu detal log to me</p>
+
+                                <div class="comment-area">
+                                    <div class="date floatleft">
+                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
+                                    </div>
+                                    <div class="comment floatright">
+                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
                                     </div>
                                 </div>
                             </a>
@@ -51,10 +173,40 @@
 
                     <div class="col-sm-12" ng-show="!post.busy">
                         <h2 class="text-center" ng-show="!post.list.length">Lo sentimos no contamos con contenido
-                        disponible</h2>
+                            disponible</h2>
                     </div>
                 </div>
                 <!--post list -->
+            </div>
+            <div class="col-md-3 widgets">
+                <div class="box-sidebar">
+                    <div class="box-header">
+                        Prendas destacadas
+                    </div>
+                    <div class="box-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item">Morbi leo risus</li>
+                            <li class="list-group-item">Porta ac consectetur ac</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-sidebar">
+                    <div class="box-header">
+                        Contáctanos
+                    </div>
+                    <div class="box-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item">Morbi leo risus</li>
+                            <li class="list-group-item">Porta ac consectetur ac</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
