@@ -8,16 +8,16 @@
                 url: '/',
                 abstract: true,
                 templateUrl: '/static/app/index.html',
-                controllerAs: 'home',
+                controllerAs: 'Home',
                 controller: 'HomeCtrl'
             })
             .state('home', {
                 url: '/',
+                data: {pageTitle: 'Blue Mia - Especialistas en ropa deportiva para Dama'},
                 views: {
-                    'title': {template: '<title>Blue Mia - Especialistas en ropa deportiva para Dama</title>'},
                     'content': {
                         templateUrl: '/templates/home.html',
-                        controllerAs: 'home',
+                        controllerAs: 'Home',
                         controller: 'HomeCtrl'
                     }
                 }
@@ -28,7 +28,7 @@
                     'title': {template: '<title>Blue Mia - Contacto</title>'},
                     'content': {
                         templateUrl: '/templates/contact.html',
-                        controllerAs: 'contact',
+                        controllerAs: 'Contact',
                         controller: 'ContactCtrl'
                     }
                 }
@@ -39,7 +39,7 @@
                     'title': {template: '<title>Blue Mia - Blog</title>'},
                     'content': {
                         templateUrl: '/templates/blog.html',
-                        controllerAs: 'post',
+                        controllerAs: 'Post',
                         controller: 'BlogCtrl'
                     }
                 }
@@ -50,7 +50,7 @@
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/single.html',
-                        controllerAs: 'post',
+                        controllerAs: 'Post',
                         controller: 'PostDetailCtrl'
                     }
                 }
@@ -61,7 +61,7 @@
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/page.html',
-                        controllerAs: 'page',
+                        controllerAs: 'Page',
                         controller: 'PostDetailCtrl'
                     }
                 }
@@ -87,6 +87,39 @@
                         controller: 'PostDetailCtrl'
                     }
                 }
+            })
+            .state('post_category', {
+                url: '/category/:slug',
+                data: {pageTitle: 'Blue Mia - Especialistas'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/projects.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
+            .state('category', {
+                url: '/cate/:slug',
+                data: {pageTitle: 'Blue Mia - Especialistas'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/categories.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
+            .state('sports', {
+                url: '/sports/:slug',
+                views: {
+                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'content': {
+                        templateUrl: '/templates/sports.html',
+                        controllerAs: 'Sport',
+                        controller: 'SportCtrl'
+                    }
+                }
             });
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);
@@ -101,7 +134,7 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv) {
         $rootScope.$state = $state;
         $http.defaults.headers.common['TS-TOKEN'] = 'bPAUWlNi19ueOvIPac8p8H6GqDy5N93kGjGc1T2T';
         $rootScope.$on('$locationChangeSuccess', function () {
@@ -122,14 +155,34 @@
                 }
             };
         });
+        // Get options for "accesorios"
+        TaxonomySrv.query({
+            parent: '387a3351-3ac6-4bbb-93da-6103d9a8fd8d',
+            isActive: 'True',
+            fields: 'name,slug'
+        }).$promise.then(function (response) {
+                $rootScope.accesorios = response;
+            });
+        // Get options for "ropa"
+        TaxonomySrv.query({
+            parent: 'c30c8b8a-e19e-4ac4-bfee-8524c3a02d31',
+            isActive: 'True',
+            fields: 'name,slug'
+        }).$promise.then(function (response) {
+                $rootScope.ropa = response;
+            });
+        // intit for page title
+        $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama'
+
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates',
+        'angular-loading-bar', 'ui.bootstrap', 'infinite-scroll'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
 
-    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location'];
+    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['cfpLoadingBarProvider'];
 })();

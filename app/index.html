@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <link rel="icon" type="image/png" href="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title-placeholder ui-view="title" autoscroll></title-placeholder>
+    <title ng-bind="pageTitle">Blue Mia - Especialistas en ropa deportiva para Dama</title>
     <meta name="keywords"
           content="Especialistas en ropa deportiva para Dama">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
@@ -29,22 +29,6 @@
     <link rel="stylesheet" href="/css/main.css">
     <!-- endinject -->
     <!-- endbuild -->
-    <!-- Smartsupp Live Chat script -->
-    <script type="text/javascript">var _smartsupp = _smartsupp || {};
-    _smartsupp.key = 'db3cb0c6f69ab5b0b611e01a1b4eb25832c8f25a';
-    window.smartsupp || (function (d) {
-        var s, c, o = smartsupp = function () {
-            o._.push(arguments)
-        };
-        o._ = [];
-        s = d.getElementsByTagName('script')[0];
-        c = d.createElement('script');
-        c.type = 'text/javascript';
-        c.charset = 'utf-8';
-        c.async = true;
-        c.src = '//www.smartsuppchat.com/loader.js?';
-        s.parentNode.insertBefore(c, s);
-    })(document);</script>
 </head>
 <body>
 <!--[if	lt	IE	8]>
@@ -133,25 +117,18 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Ropa <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Playeras</a></li>
-                            <li><a href="#">Chamarras </a></li>
-                            <li><a href="#">Sudaderas</a></li>
-                            <li><a href="#">Pants y sudaderas</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li ng-repeat="item in ropa"><a ui-sref="category({slug: item.slug})">{{ item.name }}</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Accesorios <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Gorras</a></li>
-                            <li><a href="#">Bufandas </a></li>
-                            <li><a href="#">Calcetines</a></li>
-                            <li><a href="#">Guantes</a></li>
+                            <li ng-repeat="item in accesorios"><a ui-sref="category({slug: item.slug})">{{ item.name }}</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a ui-sref="projects({kind: 'project'})">Deporte</a>
+                        <a ui-sref="sports">Deporte</a>
                     </li>
                     <li>
                         <a ui-sref="page({slug: 'nosotros'})">Blog</a>
@@ -239,6 +216,7 @@
 <script src="lib/angular-loading-bar/build/loading-bar.js"></script>
 <script src="lib/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
 <script src="lib/owl.carousel/dist/owl.carousel.js"></script>
+<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js js/annalise.min.js -->
@@ -262,9 +240,6 @@
         a.src = g;
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-47259316-3', 'tingsystems.com');
-    ga('require', 'displayfeatures');
-    ga('send', 'pageview');
 </script>
 </body>
 </html>
