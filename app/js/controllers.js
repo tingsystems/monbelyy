@@ -10,7 +10,7 @@
             parent: '974f0e85-3f52-42b5-a059-c492787599c2',
             isActive: 'True',
             ordering: 'order',
-            fields: 'name,slug,urlImages,category'
+            fields: 'name,slug,urlImages'
         }).$promise.then(function (results) {
                 self.sports = results;
             })
@@ -29,12 +29,13 @@
             TaxonomySrv.get({
                 slug: $stateParams.slug,
                 isActive: 'True',
-                sizePage: 1}).$promise.then(function (results) {
-                if (results.results.length) {
-                    self.categoryName = results.results[0].name;
-                    $rootScope.pageTitle = 'Blue Mia - ' + self.categoryName;
-                }
-            });
+                sizePage: 1
+            }).$promise.then(function (results) {
+                    if (results.results.length) {
+                        self.categoryName = results.results[0].name;
+                        $rootScope.pageTitle = 'Blue Mia - ' + self.categoryName;
+                    }
+                });
         }
 
         self.getMorePosts = function () {
@@ -141,6 +142,19 @@
         };
     }
 
+    function SportCtrl(TaxonomySrv) {
+        var self = this;
+        //Sports home
+        TaxonomySrv.query({
+            parent: '974f0e85-3f52-42b5-a059-c492787599c2',
+            isActive: 'True',
+            ordering: 'order',
+            fields: 'name,slug,urlImages'
+        }).$promise.then(function (results) {
+                self.sports = results;
+            })
+    }
+
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -148,6 +162,7 @@
         .controller('PostCtrl', PostCtrl)
         .controller('PostDetailCtrl', PostDetailCtrl)
         .controller('ContactCtrl', ContactCtrl)
+        .controller('SportCtrl', SportCtrl)
         .controller('BlogCtrl', BlogCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
@@ -155,4 +170,5 @@
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce'];
     ContactCtrl.$inject = [];
     BlogCtrl.$inject = ['PostSrv'];
+    SportCtrl.$inject = ['TaxonomySrv'];
 })();
