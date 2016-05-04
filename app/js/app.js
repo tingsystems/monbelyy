@@ -8,7 +8,7 @@
                 url: '/',
                 abstract: true,
                 templateUrl: '/static/app/index.html',
-                controllerAs: 'home',
+                controllerAs: 'Home',
                 controller: 'HomeCtrl'
             })
             .state('home', {
@@ -17,7 +17,7 @@
                     'title': {template: '<title>Blue Mia - Especialistas en ropa deportiva para Dama</title>'},
                     'content': {
                         templateUrl: '/templates/home.html',
-                        controllerAs: 'home',
+                        controllerAs: 'Home',
                         controller: 'HomeCtrl'
                     }
                 }
@@ -85,6 +85,17 @@
                         templateUrl: '/templates/project_detail.html',
                         controllerAs: 'project',
                         controller: 'PostDetailCtrl'
+                    }
+                }
+            })
+            .state('post_category', {
+                url: '/category/:slug',
+                views: {
+                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'content': {
+                        templateUrl: '/templates/projects.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
                     }
                 }
             });

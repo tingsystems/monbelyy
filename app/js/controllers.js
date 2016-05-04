@@ -4,10 +4,19 @@
     function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
 
-
+        self.sports = [];
+        //Sports home
+        TaxonomySrv.query({
+            parent: '974f0e85-3f52-42b5-a059-c492787599c2',
+            isActive: 'True',
+            ordering: 'order',
+            fields: 'name,slug,urlImages,category'
+        }).$promise.then(function (results) {
+                self.sports = results;
+            })
     }
 
-    function PostCtrl(PostSrv, $stateParams) {
+    function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
         var self = this;
 
         self.list = [];
@@ -15,13 +24,26 @@
         self.next = true;
         self.busy = false;
 
+        // get post by category
+        if ($stateParams.slug) {
+            TaxonomySrv.get({
+                slug: $stateParams.slug,
+                isActive: 'True',
+                sizePage: 1}).$promise.then(function (results) {
+                if (results.results.length) {
+                    self.categoryName = results.results[0].name;
+                    $rootScope.pageTitle = 'Blue Mia - ' + self.categoryName;
+                }
+            });
+        }
+
         self.getMorePosts = function () {
             if (self.busy || !self.next)return;
             self.page += 1;
             self.busy = true;
 
             PostSrv.get({
-                kind: $stateParams.kind,
+                category: $stateParams.slug,
                 isActive: 'True',
                 sizePage: 10,
                 ordering: '-createdAt',
@@ -129,7 +151,7 @@
         .controller('BlogCtrl', BlogCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
-    PostCtrl.$inject = ['PostSrv', '$stateParams'];
+    PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce'];
     ContactCtrl.$inject = [];
     BlogCtrl.$inject = ['PostSrv'];
