@@ -99,6 +99,17 @@
                     }
                 }
             })
+            .state('category', {
+                url: '/cate/:slug',
+                views: {
+                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'content': {
+                        templateUrl: '/templates/categories.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
             .state('sports', {
                 url: '/sports/:slug',
                 views: {
