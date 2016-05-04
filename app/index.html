@@ -29,6 +29,22 @@
     <link rel="stylesheet" href="/css/main.css">
     <!-- endinject -->
     <!-- endbuild -->
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript">var _smartsupp = _smartsupp || {};
+    _smartsupp.key = 'db3cb0c6f69ab5b0b611e01a1b4eb25832c8f25a';
+    window.smartsupp || (function (d) {
+        var s, c, o = smartsupp = function () {
+            o._.push(arguments)
+        };
+        o._ = [];
+        s = d.getElementsByTagName('script')[0];
+        c = d.createElement('script');
+        c.type = 'text/javascript';
+        c.charset = 'utf-8';
+        c.async = true;
+        c.src = '//www.smartsuppchat.com/loader.js?';
+        s.parentNode.insertBefore(c, s);
+    })(document);</script>
 </head>
 <body>
 <!--[if	lt	IE	8]>
@@ -74,7 +90,7 @@
                             <li class="dropdown-header">Bienvenido Ángel</li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Mi perfil </a></li>
-                            <li><a href="#">Cerrar sesión</a></li> 
+                            <li><a href="#">Cerrar sesión</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -87,12 +103,12 @@
                                     1 Chamarra Postale
                                 </div>
                                 <div class="col-md-2">
-                                   $250.00
+                                    $250.00
                                 </div>
                             </li>
-                           <li class="col-md-12 list-payment no-padding">
+                            <li class="col-md-12 list-payment no-padding">
                                 <div class="col-md-8">
-                                   1 Chamarra Postale
+                                    1 Chamarra Postale
                                 </div>
                                 <div class="col-md-2">
                                     $250.00
@@ -169,44 +185,37 @@
 <footer id="footer_area">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="company_logo">
-                    <img src="img/icon.png">
-                </div>
-            </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="company_address">
-                    <h2>Contacto</h2>
-
-                    <p>Colonia Hospitales, Calzada Juarez #367 Jiquilpan, Michoacán, México
-                    </p>
+                    <h2>Información de la empresa</h2>
 
                     <h3>
-                        <a class="footer-links" href="tel:013531283781">01(353) 128 3781</a><br/><br/>
-                        <a class="footer-links" href="mailto:info@tingsystems.com">info@tingsystems.com</a><br/><br/>
-                        <a ui-sref="contact" class="footer-links">+ Información</a>
+                        <a class="footer-links" href="#">Acerca de Blue Mía</a><br/><br/>
+                        <a class="footer-links" href="#">Términos y condicione</a><br/><br/>
+                        <a ui-sref="contact" class="footer-links">Aviso de privacidad</a>
                     </h3>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="company_address">
-                    <h2>Síguenos en</h2>
+                    <h2>Información de la empresa</h2>
 
-                    <a class="footer-links social-media" href="https://www.facebook.com/tingsystems" target="_blank"><i
-                            class="fa fa-facebook"></i></a>
-                    <a class="footer-links social-media" href="https://twitter.com/Tingsystems" target="_blank"><i
-                            class="fa fa-twitter"></i></a>
-                    <a class="footer-links social-media" href="https://www.linkedin.com/company/tingsystems"
-                       target="_blank"><i class="fa fa-linkedin-square"></i></a>
-                    <a class="footer-links social-media" href="https://www.instagram.com/tingsystems/"
-                       target="_blank"><i class="fa fa-instagram"></i></a>
+                    <h3>
+                        <a class="footer-links" href="#">Envío</a><br/><br/>
+                        <a class="footer-links" href="#">¿Cómo comprar?</a><br/><br/>
+                        <a ui-sref="contact" class="footer-links">Pago</a>
+                    </h3>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="company_address">
-                    <h2>Información</h2>
-                    <a class="footer-links" ui-sref="page({slug: footer_link.slug})"
-                       ng-repeat="footer_link in footerInfo.results">{{ footer_link.title }}</a>
+                    <h2>Información de la empresa</h2>
+
+                    <h3>
+                        <a class="footer-links" href="#">¿Qué usar para el gym?</a><br/><br/>
+                        <a class="footer-links" href="#">Comodidad ante todo</a><br/><br/>
+                        <a ui-sref="contact" class="footer-links">¿Por qué Blue Mía?</a>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -214,7 +223,7 @@
     <hr class="divider_footer"/>
     <div class="container">
         <div class="text-center">
-            Diseño y desarrollo 2015 por <a class="footer-links" href="http://www.tingsystems.com/">Tingsystems</a>
+            Diseño y desarrollo 2016 por <a class="footer-links" href="http://www.tingsystems.com/">Tingsystems</a>
         </div>
     </div>
 </footer>
@@ -254,6 +263,9 @@
         a.src = g;
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-47259316-3', 'tingsystems.com');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
 </script>
 </body>
 </html>

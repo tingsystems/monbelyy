@@ -1,19 +1,23 @@
 <section id="content-area">
     <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-left"></i> Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ol>
         <div class="row">
-            <div class="col-md-12 text-center">
-                <h2 class="title">Proyectos</h2>
-                <hr class="divider"/>
+            <div class="col-md-12">
+                <h2 class="title">¿Cuál es tu deporte?</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 content-pages">
-                <div class="container" infinite-scroll='project.getMorePosts()' infinite-scroll-disabled='project.busy || !project.next'>
-                    <div class="col-sm-4" ng-repeat="project in project.list">
-                        <div class="portfolio_page wow slideInUp" data-wow-duration="2s">
-                            <a title="Leer más" post-link="{ link: {url: project.link, target: '_blank'} }" ui-sref="project_detail({slug: project.slug})">
+                <div class="container">
+                    <div class="col-sm-6 no-padding">
+                        <div class="img-size wow slideInUp" data-wow-duration="2s">
+                            <a title="Leer más" post-link="{ link: {url: project.link, target: '_blank'} }"
+                               ui-sref="project_detail({slug: project.slug})">
                                 <img class="portfolio_img" post-image="{{ project.urlImages.original }}">
-                                <h3>{{ project.title }}</h3>
                             </a>
                         </div>
                     </div>
@@ -23,7 +27,7 @@
 
                     <div class="col-sm-12" ng-show="!project.busy">
                         <h2 class="text-center" ng-show="!project.list.length">Lo sentimos no contamos con contenido
-                        disponible</h2>
+                            disponible</h2>
                     </div>
                 </div>
             </div>
