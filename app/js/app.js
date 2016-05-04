@@ -87,6 +87,28 @@
                         controller: 'PostDetailCtrl'
                     }
                 }
+            })
+            .state('post_category', {
+                url: '/category/:slug',
+                views: {
+                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'content': {
+                        templateUrl: '/templates/projects.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
+            .state('sports', {
+                url: '/sports/:slug',
+                views: {
+                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'content': {
+                        templateUrl: '/templates/sports.html',
+                        controllerAs: 'Sport',
+                        controller: 'SportCtrl'
+                    }
+                }
             });
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true);

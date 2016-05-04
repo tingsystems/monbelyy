@@ -21,30 +21,9 @@
 <section id="section-sports" class="section_padding">
     <div class="container">
         <h3 class="white">¿Cuál es tu deporte?</h3>
-
-        <div class="col-md-2">
-            <a href="#"><img src="img/icons-sport/aerobico.png" alt=""/></a>
-            <h4>Aeróbico</h4>
-        </div>
-        <div class="col-md-2">
-            <a href="#"><img src="img/icons-sport/baile.png" alt=""/></a>
-            <h4>Danza</h4>
-        </div>
-        <div class="col-md-2">
-            <a href="#"> <img src="img/icons-sport/caminata.png" alt=""/></a>
-            <h4>Caminata</h4>
-        </div>
-        <div class="col-md-2">
-            <a href="#"><img src="img/icons-sport/correr.png" alt=""/></a>
-            <h4>Correr</h4>
-        </div>
-        <div class="col-md-2">
-            <a href="#"><img src="img/icons-sport/crossfit.png" alt=""/></a>
-            <h4>Crossfit</h4>
-        </div>
-        <div class="col-md-2">
-            <a href="#"><img src="img/icons-sport/yoga.png" alt=""/></a>
-            <h4>Yoga</h4>
+        <div class="col-md-2" ng-repeat = "sport in Home.sports">
+            <a ui-sref="post_category({slug: sport.slug})"><img post-image="{{ sport.urlImages.original }}" alt=""/></a>
+            <h4>{{ sport.name }}</h4>
         </div>
     </div>
 </section>

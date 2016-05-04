@@ -13,20 +13,20 @@
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <div class="col-sm-6 no-padding" ng-repeat=" sport in Post.list">
+                    <div class="col-sm-6 no-padding" ng-repeat=" sport in Sport.sports">
                         <div class="img-size wow slideInUp" data-wow-duration="2s">
                             <a title="Leer más" post-link="{ link: {url: sport.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: sport.slug})">
-                                <img class="portfolio_img" post-image="{{ sport.urlImages.medium }}">
-                                <h1>{{ sport.title }}</h1>
+                               ui-sref="post_category({slug: sport.slug})">
+                                <img post-image="{{ sport.urlImages.medium }}">
+                                <h1>{{ sport.name }}</h1>
                             </a>
                         </div>
                     </div>
-                    <div class="col-sm-12" ng-show="Post.busy">
+                    <div class="col-sm-12" ng-show="Sport.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                     </div>
 
-                    <div class="col-sm-12" ng-show="!Post.busy">
+                    <div class="col-sm-12" ng-show="!Sport.busy">
                         <h2 class="text-center" ng-show="!Post.list.length">Lo sentimos no contamos con contenido
                             disponible</h2>
                     </div>
