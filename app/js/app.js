@@ -176,7 +176,8 @@
 
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll', 'ui.bootstrap'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates',
+        'angular-loading-bar', 'ui.bootstrap', 'infinite-scroll'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
