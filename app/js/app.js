@@ -8,7 +8,7 @@
                 url: '/',
                 abstract: true,
                 templateUrl: '/static/app/index.html',
-                controllerAs: 'home',
+                controllerAs: 'Home',
                 controller: 'HomeCtrl'
             })
             .state('home', {
@@ -17,7 +17,7 @@
                     'title': {template: '<title>Blue Mia - Especialistas en ropa deportiva para Dama</title>'},
                     'content': {
                         templateUrl: '/templates/home.html',
-                        controllerAs: 'home',
+                        controllerAs: 'Home',
                         controller: 'HomeCtrl'
                     }
                 }
@@ -28,7 +28,7 @@
                     'title': {template: '<title>Blue Mia - Contacto</title>'},
                     'content': {
                         templateUrl: '/templates/contact.html',
-                        controllerAs: 'contact',
+                        controllerAs: 'Contact',
                         controller: 'ContactCtrl'
                     }
                 }
@@ -39,7 +39,7 @@
                     'title': {template: '<title>Blue Mia - Blog</title>'},
                     'content': {
                         templateUrl: '/templates/blog.html',
-                        controllerAs: 'post',
+                        controllerAs: 'Post',
                         controller: 'BlogCtrl'
                     }
                 }
@@ -50,7 +50,7 @@
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/single.html',
-                        controllerAs: 'post',
+                        controllerAs: 'Post',
                         controller: 'PostDetailCtrl'
                     }
                 }
@@ -61,7 +61,7 @@
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/page.html',
-                        controllerAs: 'page',
+                        controllerAs: 'Page',
                         controller: 'PostDetailCtrl'
                     }
                 }
@@ -124,7 +124,7 @@
         });
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll'])
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll', 'ui.bootstrap'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
