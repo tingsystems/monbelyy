@@ -50,14 +50,17 @@
         </div>
     </div>
 </section>
-<!-- end portfolio say area -->
 
-<section id="story_area" class="section_padding">
+<!-- recommendations -->
+<section id="recommendation" class="section_padding">
     <div class="container">
+        <div class="title text-center">
+            <h1>Te recomendamos</h1>
+        </div>
         <div class="owl-carousel owl-theme">
             <div class="box-default">
                 <div class="box-header">
-                    <a href="#"> <img src="img/sujetador-deportivo1.jpg" alt=""/></a> 
+                    <a href="#"> <img src="img/sujetador-deportivo1.jpg" alt=""/></a>
                 </div>
                 <div class="box-container">
                     <h1>Sujetador Blue Mía</h1>
@@ -107,75 +110,36 @@
     </div>
 </section>
 
-<section id="Experience_area" class="section_padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="experience wow slideInUp">
-                    <h2>Nuestra experiencia</h2>
+<div class="parallax">
+    <div class="parallax__group">
+        <div class="parallax__layer parallax__layer--back">
+            <div class="text-center title">
+                <h3>¿No eres distribuidor y te gustó una prenda?</h3>
 
-                    <p>A lo largo de los años nos hemos convertido en expertos en realizar proyectos que satisfagan las
-                        necesidades de nuestros clientes, sin embargo siempre tratamos de mantenernos a la vanguardia
-                        usando nuevas tecnologías que beneficien nuestros proyectos y a nuestros clientes.</p>
+                <h1>Contáctanos</h1>
+            </div>
+            <div class="container content-contact">
+                <div class="col-md-6 contact">
+                    <a href="tel:353 112 1214"><i class="fa fa-phone"></i> 01 353 112 1214</a>
+                </div>
+                <div class="col-md-6 contact">
+                    <a href="mailto:info@bluemia.com"><i class="fa fa-envelope"></i> info@bluemia.com</a>
+                </div>
+                <div class="social">
+                    <a href="#"><i class="fa fa-facebook-square"></i></a>
+                    <a href="#"><i class="fa fa-twitter-square"></i></a>
+                    <a href="#"><i class="fa fa-pinterest-square"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="skills" ng-repeat="skill in home.skills.results">
-                    <h2>{{ skill.name }}</h2>
 
-                    <div class="col-md-12 no-padding">
-                        <div class="skill_right">
-                            <div class="wow slideInUp col-md-6 pd-skill" ng-repeat="child in skill.children">
-                                <h3>{{ child.name }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="parallax__layer parallax__layer--base">
+            <img src="img/parallax.jpg" alt=""/>
         </div>
     </div>
-</section>
-<!-- end experience area -->
-
-<section id="clients_area" class="section_padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h2 class="title">Alianzas</h2>
-                <h4 class="title">El buen servicio y los buenos resultados conducen a la confianza</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4" ng-repeat="partner in home.parterns.results">
-                <div class="alliance wow slideInUp" data-wow-duration="1s">
-                    <a title="Leer más" post-link="{ link: {url: partner.link, target: '_blank'} }"
-                       ui-sref="post_detail({slug: partner.slug})">
-                        <img class="img-responsive img-alliance" post-image="{{ partner.urlImages.original }}"
-                             alt="{{ partner.title }}">
-                    </a>
-                </div>
-            </div>
-        </div>
+    <div class="parallax__group">
+        ...
     </div>
-</section>
-<!-- end clients area -->
+</div>
 
-<section id="caal_to_action_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="call_to_action_text" data-wow-duration="2s">
-                    <h2>¡Hablanos de tu proyecto!</h2>
-
-                    <p>Envíanos un mensaje, dinos cuales son tus dudas y te atenderemos de ¡inmediato!</p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="call_project text-right" data-wow-duration="2s">
-                    <a ui-sref="contact" class="btn-white-clear">Comenzar mi proyecto</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- end call to action area -->

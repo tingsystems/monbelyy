@@ -223,8 +223,79 @@ header .logo {
   margin-top: 15px;
   color: #fff;
 }
+#recommendation .title {
+  padding-bottom: 40px;
+  color: #5d5d5d;
+}
+.box-default {
+  padding: 20px;
+}
+.box-default .box-header img {
+  width: 100%;
+}
+.box-default .box-container {
+  text-align: center;
+}
+.box-default .box-container h1 {
+  color: #5d5d5d;
+  font-weight: 300;
+  font-size: 22px;
+  margin: 10px 0;
+}
+.parallax {
+  perspective: 1px;
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #172031;
+}
+.parallax__layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.parallax__layer--base {
+  transform: translateZ(0);
+}
+.parallax__layer--base img {
+  width: 100% !important;
+}
+.parallax__layer--back {
+  transform: translateZ(-1px);
+  z-index: 99999;
+}
+.parallax__layer--back .title h1 {
+  font-size: 65px;
+  color: #e6b52a;
+  text-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+.parallax__layer--back .title h3 {
+  font-size: 56px;
+  color: #e6b52a;
+  text-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+.parallax__layer--back .contact a {
+  color: #fff;
+  font-size: 45px;
+}
+.parallax__layer--back .social {
+  text-align: center;
+  padding: 60px 0;
+  clear: both;
+}
+.parallax__layer--back .social a {
+  font-size: 70px;
+  color: #fff;
+  padding: 0 25px;
+}
+.parallax__layer--back .content-contact {
+  text-align: center;
+  padding: 60px 0;
+}
 #footer_area {
-  background: #444;
+  background: #172031;
   padding: 30px 0;
   color: #fff;
 }
