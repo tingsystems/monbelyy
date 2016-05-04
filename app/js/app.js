@@ -123,7 +123,7 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv) {
         $rootScope.$state = $state;
         $http.defaults.headers.common['TS-TOKEN'] = 'bPAUWlNi19ueOvIPac8p8H6GqDy5N93kGjGc1T2T';
         $rootScope.$on('$locationChangeSuccess', function () {
@@ -144,6 +144,22 @@
                 }
             };
         });
+        // Get options for "accesorios"
+        TaxonomySrv.query({
+            parent: '387a3351-3ac6-4bbb-93da-6103d9a8fd8d',
+            isActive: 'True',
+            fields: 'name,slug'
+        }).$promise.then(function (response) {
+                $rootScope.accesorios = response;
+            });
+        // Get options for "ropa"
+        TaxonomySrv.query({
+            parent: 'c30c8b8a-e19e-4ac4-bfee-8524c3a02d31',
+            isActive: 'True',
+            fields: 'name,slug'
+        }).$promise.then(function (response) {
+                $rootScope.ropa = response;
+            });
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll'])
@@ -151,7 +167,7 @@
         .config(AppConfig)
         .run(Run);
 
-    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location'];
+    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['cfpLoadingBarProvider'];
 })();

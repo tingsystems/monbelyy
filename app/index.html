@@ -117,21 +117,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Ropa <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Playeras</a></li>
-                            <li><a href="#">Chamarras </a></li>
-                            <li><a href="#">Sudaderas</a></li>
-                            <li><a href="#">Pants y sudaderas</a></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li ng-repeat="item in ropa"><a ui-sref="post_category({slug: item.slug})">{{ item.name }}</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Accesorios <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Gorras</a></li>
-                            <li><a href="#">Bufandas </a></li>
-                            <li><a href="#">Calcetines</a></li>
-                            <li><a href="#">Guantes</a></li>
+                            <li ng-repeat="item in accesorios"><a ui-sref="post_category({slug: item.slug})">{{ item.name }}</a></li>
                         </ul>
                     </li>
                     <li>
