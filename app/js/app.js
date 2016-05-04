@@ -90,10 +90,21 @@
             })
             .state('post_category', {
                 url: '/category/:slug',
+                data: {pageTitle: 'Blue Mia - Especialistas'},
                 views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/projects.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
+            .state('category', {
+                url: '/cate/:slug',
+                data: {pageTitle: 'Blue Mia - Especialistas'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/categories.html',
                         controllerAs: 'Post',
                         controller: 'PostCtrl'
                     }
@@ -123,7 +134,7 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv) {
         $rootScope.$state = $state;
         $http.defaults.headers.common['TS-TOKEN'] = 'bPAUWlNi19ueOvIPac8p8H6GqDy5N93kGjGc1T2T';
         $rootScope.$on('$locationChangeSuccess', function () {
@@ -162,6 +173,7 @@
             });
         // intit for page title
         $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama'
+
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates', 'angular-loading-bar', 'infinite-scroll', 'ui.bootstrap'])
@@ -169,7 +181,7 @@
         .config(AppConfig)
         .run(Run);
 
-    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location'];
+    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['cfpLoadingBarProvider'];
 })();

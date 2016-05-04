@@ -62,9 +62,6 @@
                 page: self.page
             }).$promise.then(function (results) {
                     self.list = self.list.concat(results.results);
-                    if (self.list.length) {
-                        self.singlePost = self.list[0];
-                    }
                     self.busy = false;
                     self.next = results.next;
                 });
@@ -153,8 +150,9 @@
         };
     }
 
-    function SportCtrl(TaxonomySrv) {
+    function SportCtrl(TaxonomySrv, $rootScope) {
         var self = this;
+        $rootScope.pageTitle = 'Blue Mia - Deportes';
         //Sports home
         TaxonomySrv.query({
             parent: '974f0e85-3f52-42b5-a059-c492787599c2',
@@ -181,5 +179,5 @@
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce'];
     ContactCtrl.$inject = [];
     BlogCtrl.$inject = ['PostSrv'];
-    SportCtrl.$inject = ['TaxonomySrv'];
+    SportCtrl.$inject = ['TaxonomySrv', '$rootScope'];
 })();
