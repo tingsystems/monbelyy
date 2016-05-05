@@ -9,6 +9,8 @@
             <div class="col-md-9">
                 <h2 class="title">{{ Post.detail.title }}</h2>
 
+                <img ng-src="{{ Post.detail.urlImages.medium }}" alt=""/>
+
                 <div ng-bind-html="Post.detail.content"></div>
                 <!--gallery here-->
                 <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
@@ -23,6 +25,21 @@
                 </div>
             </div>
             <div class="col-md-3 widgets">
+                <div class="box-sidebar">
+                    <!-- Blog Search -->
+                    <div class="box-header">
+                        Prendas destacadas
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                    
+                </div>
                 <div class="box-sidebar">
                     <div class="box-header">
                         Prendas destacadas
