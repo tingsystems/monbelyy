@@ -9,7 +9,7 @@
             <div class="col-md-9">
                 <h2 class="title">{{ Post.detail.title }}</h2>
 
-                <img ng-src="{{ Post.detail.urlImages.medium }}" alt=""/>
+                <img ng-src="{{ Post.detail.urlImages.medium }}" alt="{{ Post.detail.title }}"/>
 
                 <div ng-bind-html="Post.detail.content"></div>
                 <!--gallery here-->
@@ -38,7 +38,7 @@
                             </button>
                         </span>
                     </div>
-                    
+
                 </div>
                 <div class="box-sidebar">
                     <div class="box-header">
