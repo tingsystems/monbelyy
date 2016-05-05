@@ -7,14 +7,14 @@
         </ol>
         <div class="row">
             <div class="col-md-12">
-                <h2 class="title">{{ post.detail.title }}</h2>
+                <h2 class="title">{{ Post.detail.title }}</h2>
             </div>
         </div>
-        <div class="contaoner">
+        <div class="container">
             <div class="col-md-9 content-pages">
                 <div class="row">
-                    <div ng-bind-html="post.detail.content"></div>
-                    <div class="col-sm-12" ng-show="post.busy">
+                    <div ng-bind-html="Post.detail.content"></div>
+                    <div class="col-sm-12" ng-show="Post.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                     </div>
                 </div>

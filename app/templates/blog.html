@@ -11,168 +11,34 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-9 content-pages">
+            <div class="col-md-9 content-pages" infinite-scroll='Post.getMorePosts()'
+                 infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" ng-repeat="entry in Post.list">
                         <div class="box-default box-blog">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
-                                     alt="{{ post.title }}">
+                            <a post-link="{ link: {url: entry.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
+                                <img class="img-responsive" post-image="{{ entry.urlImages.thumbnails }}"
+                                     alt="{{ entry.title }}">
 
-                                <h2>hello</h2>
+                                <h2>{{ entry.title }}</h2>
 
-                                <p>Lorem impsu detal log to me</p>
+                                <p>{{ entry.excerpt }}</p>
 
                                 <div class="comment-area">
                                     <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
-                                    </div>
-                                    <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
+                                        <p><span><i class="fa fa-calendar-o"></i></span> {{ entry.createdAt | date : shortDate }} </p>
                                     </div>
                                 </div>
                             </a>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="box-default box-blog">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
-                                     alt="{{ post.title }}">
-
-                                <h2>hello</h2>
-
-                                <p>Lorem impsu detal log to me</p>
-
-                                <div class="comment-area">
-                                    <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
-                                    </div>
-                                    <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="box-default box-blog">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
-                                     alt="{{ post.title }}">
-
-                                <h2>hello</h2>
-
-                                <p>Lorem impsu detal log to me</p>
-
-                                <div class="comment-area">
-                                    <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
-                                    </div>
-                                    <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="box-default box-blog">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
-                                     alt="{{ post.title }}">
-
-                                <h2>hello</h2>
-
-                                <p>Lorem impsu detal log to me</p>
-
-                                <div class="comment-area">
-                                    <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
-                                    </div>
-                                    <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="box-default box-blog">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
-                                     alt="{{ post.title }}">
-
-                                <h2>hello</h2>
-
-                                <p>Lorem impsu detal log to me</p>
-
-                                <div class="comment-area">
-                                    <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
-                                    </div>
-                                    <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="box-default box-blog">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
-                                     alt="{{ post.title }}">
-
-                                <h2>hello</h2>
-
-                                <p>Lorem impsu detal log to me</p>
-
-                                <div class="comment-area">
-                                    <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
-                                    </div>
-                                    <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="box-default box-blog">
-                            <a title="Leer más" post-link="{ link: {url: post.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: post.slug})">
-                                <img class="img-responsive" post-image="{{ post.urlImages.original }}"
-                                     alt="{{ post.title }}">
-
-                                <h2>hello</h2>
-
-                                <p>Lorem impsu detal log to me</p>
-
-                                <div class="comment-area">
-                                    <div class="date floatleft">
-                                        <p><span><i class="fa fa-calendar-o"></i></span> 12/08/2016 </p>
-                                    </div>
-                                    <div class="comment floatright">
-                                        <p><span><i class="fa fa-user"></i></span> María Eugenia R.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-12" ng-show="post.busy">
+                    <div class="col-sm-12" ng-show="Post.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                     </div>
 
-                    <div class="col-sm-12" ng-show="!post.busy">
-                        <h2 class="text-center" ng-show="!post.list.length">Lo sentimos no contamos con contenido
+                    <div class="col-sm-12" ng-show="!Post.busy">
+                        <h2 class="text-center" ng-show="!Post.list.length">Lo sentimos no contamos con contenido
                             disponible</h2>
                     </div>
                 </div>

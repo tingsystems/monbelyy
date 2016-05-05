@@ -6,7 +6,7 @@
         self.sliders = [];
         // Controller for slider
         PostSrv.get({
-            category : 'slider',
+            category: 'slider',
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
@@ -78,14 +78,25 @@
         self.next = true;
         self.busy = false;
 
+        self.errorRecovery = function () {
+            self.page -= 1;
+            self.next = true;
+            self.busy = false;
+            self.loadPostError = false;
+            self.getMorePosts();
+        };
+
         self.getMorePosts = function () {
             if (self.busy || !self.next)return;
             self.page += 1;
             self.busy = true;
+            self.loadPosts = self.page % 3 == 0;
 
             PostSrv.get({
                 kind: 'post',
+                category: 'blog',
                 isActive: 'True',
+                fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 10,
                 ordering: '-createdAt',
                 page: self.page
