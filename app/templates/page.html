@@ -1,18 +1,53 @@
 <section id="content-area">
     <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-left"></i> Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ol>
         <div class="row">
-            <div class="col-md-12 text-center">
-                <h2 class="title">{{ page.detail.title }}</h2>
-                <hr class="divider"/>
+            <div class="col-md-12">
+                <h2 class="title">hello there</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 content-pages">
-                <div class="container">
+            <div class="col-md-9 content-pages">
+                <div class="row">
                     <!--content here-->
-                    <div ng-bind-html="page.detail.content"></div>
+                    <div class="content-detail">
+                        <p>Lorem inpsum to said cool</p>
+                    </div>
                     <div class="col-sm-12" ng-show="page.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 widgets">
+                <div class="box-sidebar">
+                    <div class="box-header">
+                        Prendas destacadas
+                    </div>
+                    <div class="box-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box-sidebar">
+                    <div class="box-header">
+                        Contáctanos
+                    </div>
+                    <div class="box-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                            <li class="list-group-item"><a href="#">Cras justo odio</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -509,8 +509,8 @@ color
   color: #ffa500;
 }
 .form-section {
-  background: #f5f5f5;
-  padding: 60px 0;
+  background: transparent;
+  padding: 0;
 }
 .form-section .title,
 .form-section .text-form {
@@ -538,7 +538,7 @@ color
   box-shadow: ease-in-out 0.15s;
 }
 .form-control:focus {
-  border-color: #fff;
+  border-color: #e50983;
   outline: 0;
   -webkit-box-shadow: 0 0 0 9px rgba(0,0,0,0);
   box-shadow: 0 0 0 9px rgba(0,0,0,0);

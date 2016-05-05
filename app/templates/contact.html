@@ -1,59 +1,83 @@
 <section id="content-area">
     <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-angle-left"></i> Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ol>
         <div class="row">
-            <div class="col-md-12 text-center">
-                <h2 class="title"> Identifica el medio por el cual quieres contactarte con nosotros</h2>
-                <hr class="divider"/>
+            <div class="col-md-12">
+                <h2 class="title"> Contacto</h2>
             </div>
         </div>
+        <div class="form-section">
+            <div class="container">
+                <form class="padding" method="post" ng-submit="contact.createNotification('CONTACT_FORM')">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="text-form" for="name">Nombre *</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
+                                   required ng-model="contact.notification.name">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-form" for="email">Correo electrónico *</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="Correo electrónico" required ng-model="contact.notification.email">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-form" for="phone1">Teléfono *</label>
+                            <input type="text" class="form-control" id="phone1" name="phone1"
+                                   placeholder="Teléfono"
+                                   required ng-model="contact.notification.phone">
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            <label class="text-form" for="message">Escribenos cuales son tus necesidades *</label>
+                                <textarea class="form-control" id="message" name="message" rows="7"
+                                          placeholder="Escribe tu mensaje aquí" required
+                                          ng-model="contact.notification.message"></textarea>
+                        </div>
+                        <div class="pull-right">
+                            <button type="submit" class="btn-yellow">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr/>
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
                     <div class="col-md-12 social-media">
-                        <div class="col-sm-4 wow slideInUp">
-                            <div class="text-center">
-                                <a href="https://www.facebook.com/tingsystems" class="facebook" target="_blank">
-                                    <i class="fa fa-facebook fa-4x"></i> <br/> Facebook <br/> /tingsystems
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 wow slideInUp">
-                            <div class="text-center">
-                                <a href="https://twitter.com/Tingsystems" class="twitter" target="_blank">
-                                    <i class="fa fa-twitter fa-4x"></i> <br/> Twitter <br/> @Tingsystems
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 wow slideInUp">
-                            <div class="text-center">
-                                <a href="https://www.linkedin.com/company/tingsystems" class="linkedin" target="_blank">
-                                    <i class="fa fa-linkedin fa-4x"></i> <br/> Linkendin <br/>/tingsystems
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 social-media">
-                        <div class="col-sm-4 wow slideInUp">
+                        <div class="col-sm-3 wow slideInUp">
                             <div class=" text-center">
-                                <a href="tel:013531283781" class="phone">
+                                <a href="tel:013531121214" class="phone">
                                     <i class="fa fa-phone fa-4x"></i> <br/> Teléfono <br/>
-                                    01(353) 128 3781
+                                    01 353 112 1214
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-4 wow slideInUp">
+                        <div class="col-sm-3 wow slideInUp">
                             <div class="text-center">
-                                <p class="marker">
-                                    <i class="fa fa-map-marker fa-4x"></i> <br/> Ubicación <br/>
-                                    Colonia Hospitales, Calzada Juarez #367 Jiquilpan, Michoacán, México
-                                </p>
+                                <a href="mailto:info@bluemia.com" class="mail">
+                                    <i class="fa fa-envelope-o fa-4x"></i> <br/> Correo Electrónico <br/>
+                                    info@bluemia.com
+                                </a>
                             </div>
                         </div>
-                        <div class="col-sm-4 wow slideInUp">
+                        <div class="col-sm-3 wow slideInUp">
                             <div class="text-center">
-                                <a href="mailto:info@tingsystems.com" class="mail">
-                                    <i class="fa fa-envelope-o fa-4x"></i> <br/> Correo Electrónico <br/>
-                                    info@tingsystems.com
+                                <a href="https://www.facebook.com/BLUE-MIA-623634654365499/?fref=ts" class="facebook"
+                                   target="_blank">
+                                    <i class="fa fa-facebook fa-4x"></i> <br/> Facebook
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 wow slideInUp">
+                            <div class="text-center">
+                                <a href="https://twitter.com/" class="twitter" target="_blank">
+                                    <i class="fa fa-twitter fa-4x"></i> <br/> Twitter
                                 </a>
                             </div>
                         </div>
@@ -61,44 +85,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>
-<div class="form-section">
-    <div class="container">
-        <h3 class="title text-center">O llena el siguiente formulario y describe cuáles son tus dudas o
-            que proyecto tienes
-            en mente</h3>
-
-        <form class="padding" method="post" ng-submit="contact.createNotification('CONTACT_FORM')">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="text-form" for="name">Nombre *</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
-                           required ng-model="contact.notification.name">
-                </div>
-                <div class="form-group">
-                    <label class="text-form" for="email">Correo electrónico *</label>
-                    <input type="email" class="form-control" id="email" name="email"
-                           placeholder="Correo electrónico" required ng-model="contact.notification.email">
-                </div>
-                <div class="form-group">
-                    <label class="text-form" for="phone1">Teléfono *</label>
-                    <input type="text" class="form-control" id="phone1" name="phone1"
-                           placeholder="Teléfono"
-                           required ng-model="contact.notification.phone">
-                </div>
-            </div>
-            <div class="col-md-6 ">
-                <div class="form-group">
-                    <label class="text-form" for="message">Escribenos cuales son tus necesidades *</label>
-                                <textarea class="form-control" id="message" name="message" rows="7"
-                                          placeholder="Escribe tu mensaje aquí" required
-                                          ng-model="contact.notification.message"></textarea>
-                </div>
-                <div class="pull-right">
-                    <button type="submit" class="btn-green">Enviar</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
