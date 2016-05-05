@@ -100,5 +100,11 @@ $(document).ready(function () {
             }
         }
     });
+    // config for lightbox2
+    lightbox.option({
+        'resizeDuration': 500,
+        'wrapAround': true,
+        albumLabel: "Imagen %1 de %2"
+    });
 
 });

@@ -97,14 +97,11 @@
                 category: 'blog',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
-                sizePage: 10,
+                sizePage: 9,
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
                     self.list = self.list.concat(results.results);
-                    if (self.list.length) {
-                        self.singlePost = self.list[0];
-                    }
                     self.busy = false;
                     self.next = results.next;
                 });

@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="lib/angular-loading-bar/build/loading-bar.css" />
     <link rel="stylesheet" href="lib/owl.carousel/dist/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="lib/lightbox2/dist/css/lightbox.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/main.css">
@@ -117,14 +118,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Ropa <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li ng-repeat="item in ropa"><a ui-sref="category({slug: item.slug})">{{ item.name }}</a></li>
+                            <li ng-repeat="item in ropa"><a ui-sref="category({slug: item.slug})">{{ item.name }}</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Accesorios <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li ng-repeat="item in accesorios"><a ui-sref="category({slug: item.slug})">{{ item.name }}</a></li>
+                            <li ng-repeat="item in accesorios"><a
+                                    ui-sref="category({slug: item.slug})">{{ item.name }}</a></li>
                         </ul>
                     </li>
                     <li>
@@ -217,6 +220,8 @@
 <script src="lib/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
 <script src="lib/owl.carousel/dist/owl.carousel.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="lib/angular-deckgrid/angular-deckgrid.js"></script>
+<script src="lib/lightbox2/dist/js/lightbox.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js js/annalise.min.js -->
@@ -233,8 +238,8 @@
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
         a = s.createElement(o), m = s.getElementsByTagName(o)[0];
         a.async = 1;
         a.src = g;

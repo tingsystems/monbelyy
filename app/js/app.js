@@ -177,7 +177,7 @@
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates',
-        'angular-loading-bar', 'ui.bootstrap', 'infinite-scroll'])
+        'angular-loading-bar', 'ui.bootstrap', 'infinite-scroll', 'akoenig.deckgrid'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);

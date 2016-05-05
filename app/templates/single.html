@@ -6,16 +6,19 @@
             <li class="active">Data</li>
         </ol>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <h2 class="title">{{ Post.detail.title }}</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="col-md-9 content-pages">
-                <div class="row">
-                    <div ng-bind-html="Post.detail.content"></div>
-                    <div class="col-sm-12" ng-show="Post.busy">
-                        <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
+
+                <div ng-bind-html="Post.detail.content"></div>
+                <!--gallery here-->
+                <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
+                    <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
+                        <a post-link="{ link: {url: card.link, target: '_blank'} }"
+                           href="{{ card.urlImages.original }}"
+                           data-lightbox="gallery-images">
+                            <img class="thumbnail img-responsive" post-image="{{ card.urlImages.large }}"
+                                 alt="{{ card.title }}">
+                        </a>
                     </div>
                 </div>
             </div>
