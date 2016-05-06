@@ -115,7 +115,11 @@
         $rootScope.pageTitle = 'Blue Mia - ';
 
         self.busy = true;
-        PostDetailSrv.get({slug: $stateParams.slug, isActive: 'True'}).$promise.then(function (results) {
+        PostDetailSrv.get({
+            slug: $stateParams.slug,
+            isActive: 'True',
+            fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
+        }).$promise.then(function (results) {
             self.detail = results;
             self.detail.content = $sce.trustAsHtml(self.detail.content);
             $rootScope.post = self.detail;
