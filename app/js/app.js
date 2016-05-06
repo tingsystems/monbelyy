@@ -24,8 +24,8 @@
             })
             .state('contact', {
                 url: '/contact',
+                data: {pageTitle: 'Blue Mia - Contactanos'},
                 views: {
-                    'title': {template: '<title>Blue Mia - Contacto</title>'},
                     'content': {
                         templateUrl: '/templates/contact.html',
                         controllerAs: 'Contact',
@@ -35,8 +35,8 @@
             })
             .state('blog', {
                 url: '/blog',
+                data: {pageTitle: 'Blue Mia - Blog'},
                 views: {
-                    'title': {template: '<title>Blue Mia - Blog</title>'},
                     'content': {
                         templateUrl: '/templates/blog.html',
                         controllerAs: 'Post',
