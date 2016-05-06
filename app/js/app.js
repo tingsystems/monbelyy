@@ -134,7 +134,7 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv) {
         $rootScope.$state = $state;
         $http.defaults.headers.common['TS-TOKEN'] = 'bPAUWlNi19ueOvIPac8p8H6GqDy5N93kGjGc1T2T';
         $rootScope.$on('$locationChangeSuccess', function () {
@@ -171,6 +171,16 @@
         }).$promise.then(function (response) {
                 $rootScope.ropa = response;
             });
+        // Get destacadas
+        PostSrv.get({
+            category: 'destacado',
+            isActive: 'True',
+            sizePage: 5,
+            ordering: '-createdAt',
+            fields: 'title,link,slug'
+        }).$promise.then(function (results) {
+                $rootScope.outstandings = results.results;
+            });
         // intit for page title
         $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama'
 
@@ -182,7 +192,7 @@
         .config(AppConfig)
         .run(Run);
 
-    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv'];
+    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', 'PostSrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['cfpLoadingBarProvider'];
 })();
