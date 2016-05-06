@@ -14,10 +14,11 @@
             <div class="content-pages">
                 <div class="container">
                     <div class="col-sm-4 no-padding">
-                        <a href="#">
+                        <a href="{{ Item.detail.urlImages.original }}"
+                           data-lightbox="gallery-images">
                             <div class="box-default">
                                 <div class="box-header">
-                                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
+                                    <img ng-src="{{ Item.detail.urlImages.medium }}" alt=""/>
                                 </div>
                                 <div class="box-container">
                                     <h1>{{ Item.detail.title }}</h1>
