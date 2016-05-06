@@ -4,6 +4,7 @@
     function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
         self.sliders = [];
+        $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama';
         // Controller for slider
         PostSrv.get({
             category: 'slider',
@@ -70,7 +71,7 @@
         self.getMorePosts();
     }
 
-    function BlogCtrl(PostSrv) {
+    function BlogCtrl(PostSrv, $rootScope) {
         var self = this;
 
         self.list = [];
@@ -108,6 +109,7 @@
         };
 
         self.getMorePosts();
+        $rootScope.pageTitle = 'Blue Mia - Blog';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, $sce) {
@@ -120,19 +122,20 @@
             isActive: 'True',
             fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
         }).$promise.then(function (results) {
-            self.detail = results;
-            self.detail.content = $sce.trustAsHtml(self.detail.content);
-            $rootScope.post = self.detail;
-            if (!self.detail.urlImages.original) {
-                self.detail.urlImages.original = 'https://www.tingsystems.com/img/logo.png';
-            }
-            $rootScope.pageTitle = 'Blue Mia - ' + results.title;
-            self.busy = false;
-        });
+                self.detail = results;
+                self.detail.content = $sce.trustAsHtml(self.detail.content);
+                $rootScope.post = self.detail;
+                if (!self.detail.urlImages.original) {
+                    self.detail.urlImages.original = 'https://www.tingsystems.com/img/logo.png';
+                }
+                $rootScope.pageTitle = 'Blue Mia - ' + results.title;
+                self.busy = false;
+            });
     }
 
-    function ContactCtrl(MessageSrv, NotificationSrv) {
+    function ContactCtrl(MessageSrv, NotificationSrv, $rootScope) {
         var self = this;
+        $rootScope.pageTitle = 'Blue Mia - Contacto';
 
         self.contactInitialState = function () {
             self.notification = {};
@@ -189,7 +192,7 @@
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce'];
-    ContactCtrl.$inject = [];
-    BlogCtrl.$inject = ['PostSrv'];
+    ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv','$rootScope'];
+    BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     SportCtrl.$inject = ['TaxonomySrv', '$rootScope'];
 })();

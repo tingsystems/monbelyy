@@ -93,14 +93,14 @@
                 data: {pageTitle: 'Blue Mia - Especialistas'},
                 views: {
                     'content': {
-                        templateUrl: '/templates/projects.html',
+                        templateUrl: '/templates/categories.html',
                         controllerAs: 'Post',
                         controller: 'PostCtrl'
                     }
                 }
             })
             .state('category', {
-                url: '/cate/:slug',
+                url: '/category/:slug',
                 data: {pageTitle: 'Blue Mia - Especialistas'},
                 views: {
                     'content': {
