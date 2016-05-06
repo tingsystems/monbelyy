@@ -7,7 +7,7 @@
         </ol>
         <div class="row">
             <div class="col-md-12">
-                <h2 class="title">title detail sport</h2>
+                <h2 class="title">{{ Item.detail.title }}</h2>
             </div>
         </div>
         <div class="row">
@@ -20,7 +20,7 @@
                                     <img src="img/sujetador-deportivo1.jpg" alt=""/>
                                 </div>
                                 <div class="box-container">
-                                    <h1>Sujetador Blue Mía</h1>
+                                    <h1>{{ Item.detail.title }}</h1>
                                 </div>
                             </div>
                         </a>
@@ -28,19 +28,9 @@
                     <div class="col-md-8">
                         <div class="box-detail">
                             <div class="title">
-                                <h1>Sudadera Blue Mía</h1>
+                                <h1>{{ Item.detail.title }}</h1>
                             </div>
-                            <div class="description">
-                                <p>
-                                    -Fabricación de 52% Poliéster Reciclado / 48% Poliéster
-                                    con paneles de malla para transpirabilidad con ligereza.
-                                    Cada fibra cuenta: El poliéster reciclado ahorra recursos
-                                    y disminuye las emisiones.
-
-                                    -Ajuste Regular - no muy apretado, no muy holgado,
-                                    perfecto para todos los entrenamientos.
-                                </p>
-                            </div>
+                            <div class="description" ng-bind-html="Item.detail.content"></div>
                             <!-- se muestra si es distribuidor (log)-->
                             <div class="no-distribuidor">
                                 <p>
@@ -63,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12" ng-show="project.busy">
+                    <div class="col-sm-12" ng-show="Item.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                     </div>
                 </div>

@@ -83,7 +83,7 @@
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/project_detail.html',
-                        controllerAs: 'project',
+                        controllerAs: 'Item',
                         controller: 'PostDetailCtrl'
                     }
                 }
