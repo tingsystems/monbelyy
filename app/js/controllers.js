@@ -3,7 +3,7 @@
 
     function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
-        self.sliders = [];
+        self.mainSlider = [];
         $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama';
         // Controller for slider
         PostSrv.get({
@@ -13,7 +13,7 @@
             ordering: '-createdAt',
             fields: 'urlImages,title,link,slug'
         }).$promise.then(function (results) {
-                self.sliders = results.results;
+                self.mainSlider = results.results;
             });
 
         self.sports = [];
@@ -69,6 +69,7 @@
         };
 
         self.getMorePosts();
+
     }
 
     function BlogCtrl(PostSrv, $rootScope) {
@@ -112,7 +113,7 @@
         $rootScope.pageTitle = 'Blue Mia - Blog';
     }
 
-    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, $sce) {
+    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, $sce, PostSrv) {
         var self = this;
         $rootScope.pageTitle = 'Blue Mia - ';
 
@@ -130,6 +131,16 @@
                 }
                 $rootScope.pageTitle = 'Blue Mia - ' + results.title;
                 self.busy = false;
+            });
+        // Controller for slider
+        PostSrv.get({
+            category: 'slider',
+            isActive: 'True',
+            sizePage: 10,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug'
+        }).$promise.then(function (results) {
+                self.mainSlider = results.results;
             });
     }
 
@@ -191,8 +202,8 @@
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
-    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce'];
-    ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv','$rootScope'];
+    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce', 'PostSrv'];
+    ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope'];
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     SportCtrl.$inject = ['TaxonomySrv', '$rootScope'];
 })();

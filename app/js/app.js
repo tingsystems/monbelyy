@@ -141,11 +141,11 @@
             $('#header-mainmenu').collapse('hide');
         });
         // initialise google analytics
-        $window.ga('create', 'UA-47259316-3', 'tingsystems.com');
+        //$window.ga('create', 'UA-47259316-3', 'tingsystems.com');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
-            $window.ga('send', 'pageview', $location.path());
-            $window.ga('require', 'displayfeatures');
+            //$window.ga('send', 'pageview', $location.path());
+            //$window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Tingsystems',
@@ -177,17 +177,17 @@
             isActive: 'True',
             sizePage: 5,
             ordering: '-createdAt',
-            fields: 'title,link,slug'
+            fields: 'title,link,slug,urlImages'
         }).$promise.then(function (results) {
                 $rootScope.outstandings = results.results;
             });
-        // intit for page title
+        // init for page title
         $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama'
 
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates',
-        'angular-loading-bar', 'ui.bootstrap', 'infinite-scroll', 'akoenig.deckgrid'])
+        'angular-loading-bar', 'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);

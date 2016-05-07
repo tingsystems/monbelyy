@@ -1,29 +1,19 @@
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Wrapper for slides -->
+<div class="carousel slide">
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="img/slide.jpg" alt="...">
-        </div>
-        <div class="item">
-            <img src="img/slide-2.jpg" alt="...">
-        </div>
+        <uib-carousel>
+            <uib-slide ng-repeat="slide in Home.mainSlider">
+                <div class="item">
+                    <img ng-src="{{ slide.urlImages.original }}">
+                </div>
+            </uib-slide>
+        </uib-carousel>
     </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
-
 <section id="section-sports" class="section_padding">
     <div class="container">
         <h3 class="white">¿Cuál es tu deporte?</h3>
-        <div class="col-md-2" ng-repeat = "sport in Home.sports">
+
+        <div class="col-md-2" ng-repeat="sport in Home.sports">
             <a ui-sref="post_category({slug: sport.slug})"><img post-image="{{ sport.urlImages.original }}" alt=""/></a>
             <h4>{{ sport.name }}</h4>
         </div>
@@ -37,52 +27,12 @@
             <h1>Te recomendamos</h1>
         </div>
         <div class="owl-carousel owl-theme">
-            <div class="box-default">
+            <div class="box-default" ng-repeat="outstanding in outstandings">
                 <div class="box-header">
-                    <a href="#"> <img src="img/sujetador-deportivo1.jpg" alt=""/></a>
+                    <a href="#"> <img ng-src="{{ outstanding.urlImages.thumbnails }}" alt=""/></a>
                 </div>
                 <div class="box-container">
-                    <h1>Sujetador Blue Mía</h1>
-                </div>
-            </div>
-            <div class="box-default">
-                <div class="box-header">
-                    <a href="#"><img src="img/sujetador-deportivo1.jpg" alt=""/></a>
-                </div>
-                <div class="box-container">
-                    <h1>Sujetador Blue Mía</h1>
-                </div>
-            </div>
-            <div class="box-default">
-                <div class="box-header">
-                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
-                </div>
-                <div class="box-container">
-                    <h1>Sujetador Blue Mía</h1>
-                </div>
-            </div>
-            <div class="box-default">
-                <div class="box-header">
-                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
-                </div>
-                <div class="box-container">
-                    <h1>Sujetador Blue Mía</h1>
-                </div>
-            </div>
-            <div class="box-default">
-                <div class="box-header">
-                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
-                </div>
-                <div class="box-container">
-                    <h1>Sujetador Blue Mía</h1>
-                </div>
-            </div>
-            <div class="box-default">
-                <div class="box-header">
-                    <img src="img/sujetador-deportivo1.jpg" alt=""/>
-                </div>
-                <div class="box-container">
-                    <h1>Sujetador Blue Mía</h1>
+                    <h1>{{ outstanding.title }}</h1>
                 </div>
             </div>
         </div>
