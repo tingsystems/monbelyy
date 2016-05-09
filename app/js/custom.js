@@ -86,10 +86,6 @@ $('ul.nav li.dropdown').hover(function () {
 });
 /* owl */
 $(document).ready(function () {
-/*    $('.owl-carousel').owlCarousel({
-        margin: 10,
-        center: true
-    });*/
     // config for lightbox2
     lightbox.option({
         'resizeDuration': 500,
