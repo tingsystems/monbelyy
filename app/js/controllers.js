@@ -30,9 +30,19 @@
         self.carouselInitializer = function () {
             $(".owl-carousel").owlCarousel({
                 //get items to proportionate num of items
-                items: $rootScope.outstandings.length,
-                navigation: true,
-                pagination: false
+                //items: 4,
+                //navigation: true,
+                //pagination: false,
+                autoplay: true,
+                center: true,
+                items: 2,
+                loop: true,
+                margin: 10,
+                responsive: {
+                    600: {
+                        items: 4
+                    }
+                }
             });
         }
     }
