@@ -205,6 +205,10 @@
             fields: 'name,slug,urlImages'
         }).$promise.then(function (results) {
                 self.sports = results;
+                angular.forEach(self.sports, function (obj, ind) {
+                    self.sports[ind].imgXtra = 'img/sports/' + obj.slug + '.jpg';
+                });
+                console.log(self.sports);
             })
     }
 
