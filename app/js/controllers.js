@@ -25,7 +25,16 @@
             fields: 'name,slug,urlImages'
         }).$promise.then(function (results) {
                 self.sports = results;
-            })
+            });
+
+        self.carouselInitializer = function () {
+            $(".owl-carousel").owlCarousel({
+                //get items to proportionate num of items
+                items: $rootScope.outstandings.length,
+                navigation: true,
+                pagination: false
+            });
+        }
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
