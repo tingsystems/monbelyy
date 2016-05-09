@@ -182,12 +182,13 @@
                 $rootScope.outstandings = results.results;
             });
         // init for page title
-        $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama'
+        $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama';
+        $rootScope.ShopMode = true;
 
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates',
-        'angular-loading-bar', 'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap','ocNgRepeat'])
+        'angular-loading-bar', 'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);

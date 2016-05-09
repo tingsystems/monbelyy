@@ -34,7 +34,6 @@
                 //navigation: true,
                 //pagination: false,
                 autoplay: true,
-                center: true,
                 items: 2,
                 loop: true,
                 margin: 10,

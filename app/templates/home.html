@@ -27,9 +27,11 @@
             <h1>Te recomendamos</h1>
         </div>
         <div class="owl-carousel owl-theme">
-            <div class="box-default" ng-repeat="outstanding in outstandings" ng-repeat-owl-carousel carousel-init="Home.carouselInitializer">
+            <div class="box-default" ng-repeat="outstanding in outstandings" ng-repeat-owl-carousel
+                 carousel-init="Home.carouselInitializer" ng-if="outstanding">
                 <div class="box-header item">
-                    <a ui-sref="project_detail({slug: outstanding.slug})"> <img ng-src="{{ outstanding.urlImages.medium }}" alt=""/></a>
+                    <a ui-sref="project_detail({slug: outstanding.slug})"> <img
+                            ng-src="{{ outstanding.urlImages.medium }}" alt="{{ outstanding.title }}"/></a>
                 </div>
                 <div class="box-container">
                     <h1>{{ outstanding.title }}</h1>
