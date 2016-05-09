@@ -88,7 +88,12 @@ $('ul.nav li.dropdown').hover(function () {
 $(document).ready(function () {
     $('.owl-carousel').owlCarousel({
         margin: 10,
-        center: true
+        center: true,
+        items: 4,
+        loop: true,
+        autoplay: false,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: false
     });
     // config for lightbox2
     lightbox.option({

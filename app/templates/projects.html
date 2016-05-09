@@ -8,11 +8,12 @@
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <div class="col-md-4" ng-repeat="entry in Post.list">
+                    <div class="col-md-6" ng-repeat="entry in Post.list">
                         <div class="box-default">
                             <div class="box-header">
-                                <a ui-sref="project_detail({slug: entry.slug})"><img
-                                        post-image="{{ entry.urlImages.medium }}" alt="{{ entry.title }}"/></a>
+                                <a ui-sref="project_detail({slug: entry.slug})">
+                                    <img src="img/sports/aerobics.jpg" alt=""/>
+                                </a>
                             </div>
                             <div class="box-container">
                                 <h1>{{ entry.title }}</h1>

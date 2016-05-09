@@ -1,22 +1,14 @@
 <section id="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h2 class="title">{{ Item.detail.title }}</h2>
-            </div>
-        </div>
-        <div class="row">
             <div class="content-pages">
                 <div class="container">
                     <div class="col-sm-4 no-padding">
                         <a href="{{ Item.detail.urlImages.original }}"
                            data-lightbox="gallery-images">
-                            <div class="box-default">
+                            <div class="">
                                 <div class="box-header">
-                                    <img ng-src="{{ Item.detail.urlImages.medium }}" alt=""/>
-                                </div>
-                                <div class="box-container">
-                                    <h1>{{ Item.detail.title }}</h1>
+                                    <img width="100%" ng-src="{{ Item.detail.urlImages.medium }}" alt=""/>
                                 </div>
                             </div>
                         </a>
@@ -35,26 +27,47 @@
                                     te atenderemos.
                                 </p>
                             </div>
+                            <button class="btn-orange"><i class="fa fa-envelope"></i> Contactar</button>
                             <!-- Se muestra cuando eres distribuidor -->
-                            <div class="distribuidor">
+                            <!--<div class="distribuidor col-sm-3 no-padding">
                                 <label for="selectItems">Selecciona la cantidad</label>
-                                <select name="" id="selectItems">
+                                <select class="form-control " name="" id="selectItems">
                                     <option value="">1</option>
                                     <option value="">2</option>
                                     <option value="">3</option>
                                     <option value="">4</option>
                                 </select>
                             </div>
-                            <button class="btn-orange btn-block"><i class="fa fa-shopping-cart"></i> Agregar a carrito
-                            </button>
+                            <button class="btn-orange"><i class="fa fa-shopping-cart"></i> Agregar</button>
+                        </div>-->
                         </div>
                     </div>
-
+                    <div class="col-md-12 recommendations-detail">
+                        <div class="container">
+                            <div class="title">
+                                <h3>Te recomendamos</h1>
+                                <hr/>
+                            </div>
+                            <div class="owl-carousel owl-theme">
+                                <div>
+                                    <a href="#">
+                                        <div class="box-default">
+                                            <div class="box-header">
+                                                <img ng-src="{{ outstanding.urlImages.thumbnails }}" alt=""/>
+                                            </div>
+                                            <div class="box-container">
+                                                <h1>{{ outstanding.title }}</h1>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-sm-12" ng-show="Item.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>

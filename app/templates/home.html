@@ -27,13 +27,17 @@
             <h1>Te recomendamos</h1>
         </div>
         <div class="owl-carousel owl-theme">
-            <div class="box-default" ng-repeat="outstanding in outstandings">
-                <div class="box-header">
-                    <a href="#"> <img ng-src="{{ outstanding.urlImages.thumbnails }}" alt=""/></a>
-                </div>
-                <div class="box-container">
-                    <h1>{{ outstanding.title }}</h1>
-                </div>
+            <div>
+                <a href="#" ng-repeat="outstanding in outstandings">
+                    <div class="box-default">
+                        <div class="box-header">
+                            <img ng-src="{{ outstanding.urlImages.thumbnails }}" alt=""/>
+                        </div>
+                        <div class="box-container">
+                            <h1>{{ outstanding.title }}</h1>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
