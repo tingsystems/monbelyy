@@ -66,36 +66,14 @@
                     }
                 }
             })
-            .state('projects', {
-                url: '/projects/:kind',
-                views: {
-                    'title': {template: '<title>Blue Mia - Projectos</title>'},
-                    'content': {
-                        templateUrl: '/templates/projects.html',
-                        controllerAs: 'project',
-                        controller: 'PostCtrl'
-                    }
-                }
-            })
-            .state('project_detail', {
-                url: '/projects/detail/:slug',
+            .state('product_detail', {
+                url: '/detail/:slug',
                 views: {
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
-                        templateUrl: '/templates/project_detail.html',
+                        templateUrl: '/templates/product_detail.html',
                         controllerAs: 'Item',
                         controller: 'PostDetailCtrl'
-                    }
-                }
-            })
-            .state('post_category', {
-                url: '/category/:slug',
-                data: {pageTitle: 'Blue Mia - Especialistas'},
-                views: {
-                    'content': {
-                        templateUrl: '/templates/categories.html',
-                        controllerAs: 'Post',
-                        controller: 'PostCtrl'
                     }
                 }
             })

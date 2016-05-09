@@ -30,7 +30,7 @@
             <div class="box-default" ng-repeat="outstanding in outstandings" ng-repeat-owl-carousel
                  carousel-init="Home.carouselInitializer" ng-if="outstanding">
                 <div class="box-header item">
-                    <a ui-sref="project_detail({slug: outstanding.slug})"> <img
+                    <a ui-sref="product_detail({slug: outstanding.slug})"> <img
                             ng-src="{{ outstanding.urlImages.medium }}" alt="{{ outstanding.title }}"/></a>
                 </div>
                 <div class="box-container">
