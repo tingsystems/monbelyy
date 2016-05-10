@@ -82,7 +82,7 @@
                 data: {pageTitle: 'Blue Mia - Especialistas'},
                 views: {
                     'content': {
-                        templateUrl: '/templates/categories.html',
+                        templateUrl: '/templates/products.html',
                         controllerAs: 'Post',
                         controller: 'PostCtrl'
                     }
@@ -98,7 +98,18 @@
                         controller: 'SportCtrl'
                     }
                 }
+            })
+            .state('search', {
+                url: '/busqueda',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/search.html',
+                        controllerAs: 'Search',
+                        controller: 'SearchCtrl'
+                    }
+                }
             });
+
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(false);
     }
@@ -161,7 +172,7 @@
             });
         // init for page title
         $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama';
-        $rootScope.ShopMode = true;
+        $rootScope.ShopMode = false;
 
     }
 

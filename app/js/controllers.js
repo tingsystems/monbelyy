@@ -211,6 +211,86 @@
             })
     }
 
+    function GetQuerySearchCtrl($rootScope, $state) {
+        var self = this;
+
+        $rootScope.searchTerm = '';
+
+        self.globalSearch = function () {
+            $rootScope.searchTerm = angular.copy(self.searchTerm);
+            $state.go('search');
+            self.searchTerm = '';
+        };
+
+    }
+
+    function SearchCtrl(PostSrv, $rootScope, $scope) {
+        var self = this;
+
+        self.listSearch = [];
+        self.page = 0;
+        self.next = true;
+        self.busy = false;
+        self.searchTerm = angular.copy($rootScope.searchTerm);
+        $rootScope.searchTerm = '';
+
+        // watch for global search term
+        $scope.$watch(function () {
+            return $rootScope.searchTerm;
+        }, function (value) {
+            if (value != '') {
+                self.searchTerm = angular.copy($rootScope.searchTerm);
+                $rootScope.searchTerm = '';
+                PostSrv.get({
+                    kind: 'post',
+                    //category: '!!,slider',
+                    isActive: 'True',
+                    sizePage: 10,
+                    ordering: '-createdAt',
+                    search: self.searchTerm,
+                    page: self.page
+                }).$promise.then(function (results) {
+                        self.listSearch = results.results;
+                    });
+            }
+        });
+
+        self.errorRecovery = function () {
+            self.page -= 1;
+            self.next = true;
+            self.busy = false;
+            self.loadPostError = false;
+            self.getMorePosts();
+        };
+
+        self.getMorePosts = function () {
+            if (self.busy || !self.next)return;
+            self.page += 1;
+            self.busy = true;
+
+            PostSrv.get({
+                kind: 'post',
+                isActive: 'True',
+                //category: '!!,slider',
+                sizePage: 10,
+                ordering: '-createdAt',
+                search: self.searchTerm,
+                page: self.page
+            }).$promise.then(function (results) {
+                    self.listSearch = self.listSearch.concat(results.results);
+                    self.busy = false;
+                    self.next = results.next;
+                    self.loadPostError = false;
+                }, function (error) {
+                    self.loadPostError = false;
+                });
+        };
+
+        self.getMorePosts();
+
+
+    }
+
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -219,6 +299,8 @@
         .controller('PostDetailCtrl', PostDetailCtrl)
         .controller('ContactCtrl', ContactCtrl)
         .controller('SportCtrl', SportCtrl)
+        .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
+        .controller('SearchCtrl', SearchCtrl)
         .controller('BlogCtrl', BlogCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
@@ -226,5 +308,7 @@
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce', 'PostSrv'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope'];
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
+    GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
+    SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     SportCtrl.$inject = ['TaxonomySrv', '$rootScope'];
 })();
