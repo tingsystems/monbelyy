@@ -243,8 +243,8 @@
                 $rootScope.searchTerm = '';
                 PostSrv.get({
                     kind: 'post',
-                    //category: '!!,slider',
                     isActive: 'True',
+                    fields: 'urlImages,title,link,slug',
                     sizePage: 10,
                     ordering: '-createdAt',
                     search: self.searchTerm,
@@ -271,8 +271,8 @@
             PostSrv.get({
                 kind: 'post',
                 isActive: 'True',
-                //category: '!!,slider',
                 sizePage: 10,
+                fields: 'urlImages,title,link,slug',
                 ordering: '-createdAt',
                 search: self.searchTerm,
                 page: self.page

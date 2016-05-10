@@ -114,9 +114,13 @@
         $locationProvider.html5Mode(false);
     }
 
-    function AppConfig(cfpLoadingBarProvider) {
-        // turn off the spinner of the loading bar
-        cfpLoadingBarProvider.includeSpinner = false;
+    function AppConfig(blockUIConfig) {
+        // Change the default overlay message
+        blockUIConfig.message = 'Cargando...';
+
+        // Change the default delay to 100ms before the blocking is visible
+        blockUIConfig.delay = 90;
+
     }
 
     /**
@@ -177,12 +181,12 @@
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates',
-        'angular-loading-bar', 'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat'])
+        'angular-loading-bar', 'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', 'PostSrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    AppConfig.$inject = ['cfpLoadingBarProvider'];
+    AppConfig.$inject = ['blockUIConfig'];
 })();
