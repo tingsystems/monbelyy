@@ -729,6 +729,20 @@ color
   }
 }
 @media only screen and (max-width: 767px) {
+  .navbar-default .navbar-collapse,
+  .navbar-default .navbar-form {
+    border: none;
+  }
+  .navbar-nav {
+    background: #fff;
+    margin-top: 30px;
+  }
+  header .navbar-default {
+    background: #000;
+  }
+  .navbar-fixed-top {
+    position: relative;
+  }
   h2.title-outstanding {
     font-size: 16px !important;
     padding: 20px 10px !important;
@@ -736,52 +750,12 @@ color
   .post-out {
     display: none;
   }
-  header .mainmenu {
-    padding-top: 10px;
-    position: absolute;
-    background: #ebebeb !important;
-/*padding 25px 0 0*/
-    top: 0px;
-    left: 0;
-    right: 0;
-    z-index: 99999;
+  #contact-section .contact {
+    border-left: 1px solid transparent;
   }
-  .navbar {
-    border: none;
-    background: #ebebeb;
-    margin-bottom: 0px;
-  }
-  header.smaller {
-    height: 250px;
-    box-shadow: none;
-  }
-  header.smaller .mainmenu {
-    padding-top: 0px;
-    box-shadow: 0 0 10px #999;
-  }
-  header {
-    width: 100%;
-    height: 210px;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    background-color: transparent;
-    -webkit-transition: height 0.3s;
-    -moz-transition: height 0.3s;
-    -ms-transition: height 0.3s;
-    -o-transition: height 0.3s;
-    transition: height 0.3s;
-  }
-  header header.smaller h1#logo {
-    width: 150px;
-    height: 75px;
-    line-height: 75px;
-    font-size: 30px;
-  }
-  header header.smaller nav a {
-    line-height: 75px;
+  header .navbar-default .navbar-nav > li > a {
+    color: #555;
+    padding: 10px 15px;
   }
   #content-area {
     margin: 160px 0px 60px;
@@ -822,14 +796,14 @@ color
   .logo {
     margin-top: 0;
     width: 180px;
-    margin-top: -5px;
   }
   #header_area {
     padding-top: 5px;
     background-size: cover;
   }
   .navbar-toggle {
-    background-color: #4ecb8c;
+    margin-top: 25px;
+    background-color: transparent;
   }
   .header_area_text h2 {
     font-size: 30px;
