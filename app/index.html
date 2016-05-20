@@ -40,7 +40,7 @@
 </p>
 <![endif]-->
 <header class="header">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -56,82 +56,20 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="header-mainmenu">
-                <ul class="main-nav nav navbar-nav navbar-right" ng-if="ShopMode">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-question-circle fa-2x"></i></a>
-                        <ul class="dropdown-menu user-help">
-                            <li class="dropdown-header">¿Necesitas Ayuda?</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Contacta con nosotros </a></li>
-                            <li><a href="#">Sudaderas</a></li>
-                            <li><a href="#">Preguntas frecuentes</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-user fa-2x"></i></a>
-                        <ul class="dropdown-menu user-log">
-                            <li class="dropdown-header">Bienvenido Ángel</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Mi perfil </a></li>
-                            <li><a href="#">Cerrar sesión</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-shopping-cart fa-2x"></i></a>
-                        <ul class="dropdown-menu user-shopping">
-                            <li class="dropdown-header">Carrito de compras</li>
-                            <li class="col-md-12 list-payment no-padding">
-                                <div class="col-md-8">
-                                    1 Chamarra Postale
-                                </div>
-                                <div class="col-md-2">
-                                    $250.00
-                                </div>
-                            </li>
-                            <li class="col-md-12 list-payment no-padding">
-                                <div class="col-md-8">
-                                    1 Chamarra Postale
-                                </div>
-                                <div class="col-md-2">
-                                    $250.00
-                                </div>
-                            </li>
-                            <li class="col-md-12 list-total no-padding">
-                                <div class="col-md-8">
-                                    Total
-                                </div>
-                                <div class="col-md-2">
-                                    $500.00
-                                </div>
-                            </li>
-                            <li class="col-md-12 no-padding">
-                                <button class="btn-block btn-yellow">Ir a pagar</button>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a ui-sref="Home">Inicio</a>
+                    </li>
+                    <li>
+                        <a ui-sref="sports">Nosotros</a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Ropa <span class="caret"></span></a>
+                           aria-expanded="false">Productos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li ng-repeat="item in ropa"><a ui-sref="category({slug: item.slug})">{{ item.name }}</a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Accesorios <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li ng-repeat="item in accesorios"><a
-                                    ui-sref="category({slug: item.slug})">{{ item.name }}</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a ui-sref="sports">Deporte</a>
                     </li>
                     <li>
                         <a ui-sref="blog({kind: 'post'})">Blog</a>

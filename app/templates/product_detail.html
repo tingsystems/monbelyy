@@ -1,73 +1,36 @@
 <section id="content-area">
     <div class="container">
         <div class="row">
-            <div class="content-pages">
-                <div class="container">
-                    <div class="col-sm-4 no-padding">
-                        <a href="{{ Item.detail.urlImages.original }}"
-                           data-lightbox="gallery-images">
-                            <div class="">
-                                <div class="box-header">
-                                    <img width="100%" ng-src="{{ Item.detail.urlImages.medium }}" alt=""/>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="box-detail">
-                            <div class="title">
-                                <h1>{{ Item.detail.title }}</h1>
-                            </div>
-                            <div class="description" ng-bind-html="Item.detail.content"></div>
-                            <!-- se muestra si es distribuidor (log)-->
-                            <div class="no-distribuidor">
-                                <p>
-                                    ¿No eres distribuidor y deseas obtener esta o varias
-                                    prendas?, comunicate con nosotros y con gusto
-                                    te atenderemos.
-                                </p>
-                            </div>
-                            <button class="btn-orange"><i class="fa fa-envelope"></i> Contactar</button>
-                            <!-- Se muestra cuando eres distribuidor -->
-                            <!--<div class="distribuidor col-sm-3 no-padding">
-                                <label for="selectItems">Selecciona la cantidad</label>
-                                <select class="form-control " name="" id="selectItems">
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                </select>
-                            </div>
-                            <button class="btn-orange"><i class="fa fa-shopping-cart"></i> Agregar</button>
-                        </div>-->
-                        </div>
-                    </div>
-                    <div class="col-md-12 recommendations-detail">
-                        <div class="container">
-                            <div class="title">
-                                <h1>Te recomendamos</h1>
-                                <hr/>
-                            </div>
-                            <div class="owl-carousel owl-theme">
-                                <div>
-                                    <a href="#">
-                                        <div class="box-default">
-                                            <div class="box-header">
-                                                <img ng-src="{{ outstanding.urlImages.thumbnails }}" alt=""/>
-                                            </div>
-                                            <div class="box-container">
-                                                <h1>{{ outstanding.title }}</h1>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12" ng-show="Item.busy">
-                        <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
-                    </div>
+            <div class="col-md-9">
+                <div class="col-md-12 title-post">
+                    <h2 class="title">Plataforma 40 pies carga total (para high cube)</h2>
                 </div>
+                <!-- Gallery -->
+                <div class="col-md-12 gallery">
+                    <div class="col-md-3">
+                        <img class="img-responsive" src="img/img-default.jpg" alt=""/>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3"></div>
+                </div>
+                <div class="col-md-12 title-post">
+                    <h2 class="title">Descripción</h2>
+                </div>
+                <div class="col-md-12 description-post">
+                    <p>Chasis: fabricado con solera de 1/2*6 por la parte superior, solera 3/4*6 en la parte inferior
+                        y alma 1/4 con altura de 18 pulgadas con puentes fabricados en viga ipr de 12*4 material.
+
+                        Suspensión: neumática tipo ht-300 para 2 ejes (componentes hendrickson con brazos y
+                        perchas en fabricacion nacional).
+
+                        Candados portacontenedor: 8 tipo buffer escondibles.</p>
+                </div>
+
+            </div>
+            <div class="col-md-3 widgets">
+                <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
             </div>
         </div>
+    </div>
 </section>
