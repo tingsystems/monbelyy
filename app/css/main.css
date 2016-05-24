@@ -181,6 +181,7 @@ header .logo {
 }
 #content-area .title-post {
   background: #9c161d;
+  clear: both;
 }
 #content-area .title-post .title {
   color: #fff;
@@ -761,7 +762,7 @@ color
     padding: 10px 15px;
   }
   #content-area {
-    margin: 160px 0px 60px;
+    margin: 30px 0px 60px;
   }
   .content-blog {
     margin: 25px 0px 60px !important;
