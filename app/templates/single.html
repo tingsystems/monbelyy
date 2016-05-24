@@ -5,9 +5,9 @@
                 <div class="col-md-12 title-post">
                     <h2 class="title">{{ Post.detail.title }}</h2>
                 </div>
-
-                <img ng-src="{{ Post.detail.urlImages.medium }}" alt="{{ Post.detail.title }}"/>
-
+                <div style="width: 50%;margin: 0 auto;"><img ng-src="{{ Post.detail.urlImages.medium }}"
+                                                             class="img-responsive"
+                                                             alt="{{ Post.detail.title }}"/></div>
                 <div ng-bind-html="Post.detail.content | trustHtml"></div>
                 <!--gallery here-->
                 <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">

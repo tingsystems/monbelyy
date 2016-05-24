@@ -2,14 +2,12 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="company_address">
-                <h2>Contacto</h2>
+                <h2>Productos</h2>
 
                 <h3>
-                    <a class="footer-links" ui-sref="page({slug: 'acerca-de-blue-mia'})">Contenedores</a><br/><br/>
-                    <a class="footer-links" ui-sref="page({slug: 'terminos-y-condiciones'})">Carrocerías</a><br/><br/>
-                    <a ui-sref="page({slug: 'aviso-de-privacidad'})" class="footer-links">Dolly</a><br/><br/>
-                    <a ui-sref="page({slug: 'aviso-de-privacidad'})" class="footer-links">Abatibles</a><br/><br/>
-                    <a ui-sref="page({slug: 'aviso-de-privacidad'})" class="footer-links">Jaulas</a>
+                    <a class="footer-links" ng-repeat="item in mainNavMenu"
+                       ui-sref="category_product({slug: item.slug})">{{ item.name }}
+                        <br/></a>
                 </h3>
             </div>
         </div>
