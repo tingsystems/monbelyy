@@ -8,7 +8,7 @@
 
                 <img ng-src="{{ Post.detail.urlImages.medium }}" alt="{{ Post.detail.title }}"/>
 
-                <div ng-bind-html="Post.detail.content"></div>
+                <div ng-bind-html="Post.detail.content | trustHtml"></div>
                 <!--gallery here-->
                 <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
                     <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">

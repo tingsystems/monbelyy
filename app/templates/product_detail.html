@@ -3,28 +3,25 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="col-md-12 title-post">
-                    <h2 class="title">Plataforma 40 pies carga total (para high cube)</h2>
+                    <h2 class="title">{{ Item.detail.title }}</h2>
                 </div>
                 <!-- Gallery -->
-                <div class="col-md-12 gallery">
-                    <div class="col-md-3">
-                        <img class="img-responsive" src="img/img-default.jpg" alt=""/>
+                <!--gallery here-->
+
+                <div deckgrid class="deckgrid gallery" source="Item.detail.galleryImages">
+                    <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
+                        <a post-link="{ link: {url: card.link, target: '_blank'} }"
+                           href="{{ card.urlImages.original }}"
+                           data-lightbox="gallery-images">
+                            <img class="thumbnail img-responsive" post-image="{{ card.urlImages.large }}"
+                                 alt="{{ card.title }}">
+                        </a>
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
                 </div>
                 <div class="col-md-12 title-post">
                     <h2 class="title">Descripción</h2>
                 </div>
-                <div class="col-md-12 description-post">
-                    <p>Chasis: fabricado con solera de 1/2*6 por la parte superior, solera 3/4*6 en la parte inferior
-                        y alma 1/4 con altura de 18 pulgadas con puentes fabricados en viga ipr de 12*4 material.
-
-                        Suspensión: neumática tipo ht-300 para 2 ejes (componentes hendrickson con brazos y
-                        perchas en fabricacion nacional).
-
-                        Candados portacontenedor: 8 tipo buffer escondibles.</p>
+                <div class="col-md-12 description-post" ng-bind-html="Item.detail.content | trustHtml">
                 </div>
 
             </div>
