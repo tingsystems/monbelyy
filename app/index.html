@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title ng-bind="pageTitle">Remolques Magu - Trabajo y material de calidad</title>
     <meta name="keywords"
-          content="Especialistas en ropa deportiva para Dama">
+          content="Remolques y carrocerias para camiones">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <base href="/">
     <!--Favicon-->
@@ -14,7 +14,27 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">
+<!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="{{ post.title }}" ng-if="post">
+    <meta itemprop="description" content="{{ post.excerpt }}" ng-if="post">
+    <meta itemprop="image" content="{{ post.urlImages.original }}" ng-if=" post">
 
+    <!-- Twitter Card data -->
+    <meta name="twitter:title" content="{{ post.title }}" ng-if="post">
+    <meta name="twitter:description" content="{{ post.excerpt }}" ng-if="post">
+    <!-- Twitter summary card with large image must be at least 280x150px -->
+    <meta name="twitter:image:src"
+          content="{{ post.urlImages.original }}"
+          ng-if="post">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="{{ post.title }}" ng-if="post"/>
+    <meta property="og:description" content="{{ post.excerpt }}" ng-if="post"/>
+    <meta property="og:image"
+          content="{{ post.urlImages.original }}"
+          ng-if="post"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.naturaceutics.mx{{ $state.href($state.current.name) }}"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
