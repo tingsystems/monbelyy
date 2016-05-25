@@ -135,11 +135,11 @@
             $('#header-mainmenu').collapse('hide');
         });
         // initialise google analytics
-        //$window.ga('create', 'UA-47259316-3', 'tingsystems.com');
+        $window.ga('create', 'UA-53555832-25', 'remolquesmagu.com');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
-            //$window.ga('send', 'pageview', $location.path());
-            //$window.ga('require', 'displayfeatures');
+            $window.ga('send', 'pageview', $location.path());
+            $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Remolques Magu',
