@@ -153,7 +153,7 @@
                 self.detail = results;
                 $rootScope.post = self.detail;
                 if (!self.detail.urlImages.original) {
-                    self.detail.urlImages.original = 'https://www.tingsystems.com/img/logo.png';
+                    self.detail.urlImages.original = 'http://www.remolquesmagu.com/img/img-default.jpg';
                 }
                 $rootScope.pageTitle = 'Remolques Magu - ' + results.title;
                 self.busy = false;
