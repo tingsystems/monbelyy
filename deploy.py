@@ -8,7 +8,7 @@ import paramiko
 remote_server_host = "45.55.165.140"
 remote_user_server_host = "root"
 remote_port_server_host = 8513
-remote_user_file = "blue-mia"
+remote_user_file = "magu"
 path_file_server = "/home/" + remote_user_file + "/www/"
 dist_dir = "dist/"
 tar_file = 'dist.tar.gz'

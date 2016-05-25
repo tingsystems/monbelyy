@@ -1,14 +1,14 @@
 <section id="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 title-post">
                 <h2 class="title">{{ Post.categoryName }}</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <div class="col-md-4" ng-repeat="entry in Post.list">
+                    <div class="col-md-4 no-padding" ng-repeat="entry in Post.list">
                         <div class="box-default">
                             <div class="box-header">
                                 <a ui-sref="product_detail({slug: entry.slug})"><img

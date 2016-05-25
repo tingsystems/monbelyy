@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, TaxonomySrv, $rootScope) {
+    function HomeCtrl(PostSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama';
+        $rootScope.pageTitle = 'Remolques Magu - Trabajo y material de calidad';
         // Controller for slider
         PostSrv.get({
-            category: 'slider',
+            category: 'slide',
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
@@ -15,16 +15,14 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
-
-        self.sports = [];
-        //Sports home
-        TaxonomySrv.query({
-            parent: '974f0e85-3f52-42b5-a059-c492787599c2',
+        PostSrv.get({
+            category: 'product',
             isActive: 'True',
-            ordering: 'order',
-            fields: 'name,slug,urlImages'
+            sizePage: 10,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug,categories'
         }).$promise.then(function (results) {
-                self.sports = results;
+                self.products = results.results;
             });
 
         self.carouselInitializer = function () {
@@ -37,9 +35,20 @@
                 items: 2,
                 loop: true,
                 margin: 10,
+                responsiveClass: true,
                 responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
                     600: {
-                        items: 4
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 4,
+                        nav: true,
+                        loop: false
                     }
                 }
             });
@@ -63,7 +72,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = 'Blue Mia - ' + self.categoryName;
+                        $rootScope.pageTitle = 'Remolques Magu - ' + self.categoryName;
                     }
                 });
         }
@@ -128,10 +137,10 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blue Mia - Blog';
+        $rootScope.pageTitle = 'Remolques Magu - Blog';
     }
 
-    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, $sce, PostSrv) {
+    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv) {
         var self = this;
         $rootScope.pageTitle = 'Blue Mia - ';
 
@@ -142,12 +151,11 @@
             fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
         }).$promise.then(function (results) {
                 self.detail = results;
-                self.detail.content = $sce.trustAsHtml(self.detail.content);
                 $rootScope.post = self.detail;
                 if (!self.detail.urlImages.original) {
-                    self.detail.urlImages.original = 'https://www.tingsystems.com/img/logo.png';
+                    self.detail.urlImages.original = 'http://www.remolquesmagu.com/img/img-default.jpg';
                 }
-                $rootScope.pageTitle = 'Blue Mia - ' + results.title;
+                $rootScope.pageTitle = 'Remolques Magu - ' + results.title;
                 self.busy = false;
             });
         // Controller for slider
@@ -164,7 +172,7 @@
 
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Blue Mia - Contacto';
+        $rootScope.pageTitle = 'Remolques Magu - Contacto';
 
         self.contactInitialState = function () {
             self.notification = {};
@@ -182,6 +190,8 @@
             // ajax request to send the formData
             self.notification.kind = kind;
             self.context.context = angular.copy(self.notification);
+            self.notification.send_from = 'clientes@remolquesmagu.com';
+            self.notification.subject = 'Nuevo formulario de contacto';
             var context = self.context;
             MessageSrv.create(context).$promise.then(function (data) {
                     self.contactInitialState();
@@ -192,23 +202,6 @@
                     NotificationSrv.error('Hubo ' + ' un error al procesar el formulario, intenta más tarde por favor');
                 });
         };
-    }
-
-    function SportCtrl(TaxonomySrv, $rootScope) {
-        var self = this;
-        $rootScope.pageTitle = 'Blue Mia - Deportes';
-        //Sports home
-        TaxonomySrv.query({
-            parent: '974f0e85-3f52-42b5-a059-c492787599c2',
-            isActive: 'True',
-            ordering: 'order',
-            fields: 'name,slug,urlImages'
-        }).$promise.then(function (results) {
-                self.sports = results;
-                angular.forEach(self.sports, function (obj, ind) {
-                    self.sports[ind].imgXtra = 'img/sports/' + obj.slug + '.jpg';
-                });
-            })
     }
 
     function GetQuerySearchCtrl($rootScope, $state) {
@@ -298,17 +291,15 @@
         .controller('PostCtrl', PostCtrl)
         .controller('PostDetailCtrl', PostDetailCtrl)
         .controller('ContactCtrl', ContactCtrl)
-        .controller('SportCtrl', SportCtrl)
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
         .controller('BlogCtrl', BlogCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
-    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', '$sce', 'PostSrv'];
+    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope'];
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
-    SportCtrl.$inject = ['TaxonomySrv', '$rootScope'];
 })();

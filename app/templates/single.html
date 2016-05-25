@@ -2,22 +2,31 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <h2 class="title">{{ Post.detail.title }}</h2>
+                <div class="col-md-12 title-post">
+                    <h2 class="title">{{ Post.detail.title }}</h2>
+                </div>
+                <div class="content-post">
+                    <div style="width: 50%;margin: 0 auto; padding-bottom:20px;">
+                        <br/>
+                        <img ng-src="{{ Post.detail.urlImages.medium }}"
+                             class="img-responsive"
+                             alt="{{ Post.detail.title }}"/></div>
+                    <div ng-bind-html="Post.detail.content | trustHtml">
 
-                <img ng-src="{{ Post.detail.urlImages.medium }}" alt="{{ Post.detail.title }}"/>
-
-                <div ng-bind-html="Post.detail.content"></div>
-                <!--gallery here-->
-                <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
-                    <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
-                        <a post-link="{ link: {url: card.link, target: '_blank'} }"
-                           href="{{ card.urlImages.original }}"
-                           data-lightbox="gallery-images">
-                            <img class="thumbnail img-responsive" post-image="{{ card.urlImages.large }}"
-                                 alt="{{ card.title }}">
-                        </a>
+                    </div>
+                    <!--gallery here-->
+                    <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
+                        <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
+                            <a post-link="{ link: {url: card.link, target: '_blank'} }"
+                               href="{{ card.urlImages.original }}"
+                               data-lightbox="gallery-images">
+                                <img class="thumbnail img-responsive" post-image="{{ card.urlImages.large }}"
+                                     alt="{{ card.title }}">
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
             <div class="col-md-3 widgets">
                 <ng-include src="'/templates/partials/sidebar.html'"></ng-include>

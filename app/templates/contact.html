@@ -1,14 +1,39 @@
 <section id="content-area">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="title"> Contacto</h2>
-            </div>
+        <div class="col-md-12 title-post">
+            <h2 class="title">Contacto</h2>
         </div>
         <div class="form-section">
             <div class="container">
-                <form class="padding" method="post" ng-submit="contact.createNotification('CONTACT_FORM')">
-                    <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="social-media">
+
+                        <div class="social">
+                            <a href="tel:3535328566">
+                                <i class="fa fa-phone"></i> 01 353 532 85 66
+                            </a>
+                        </div>
+                        <div class="social">
+                            <a href="mailto:clientes@remolquesmagu.com">
+                                <i class="fa fa-envelope-o"></i> clientes@remolquesmagu.com
+                            </a>
+                        </div>
+                        <div class="social">
+                            <a href="#">
+                                <i class="fa fa-map-marker"></i> Amadeo Galvez 420, colonia
+                                Centro, Sahuayo Michoacán
+                            </a>
+                        </div>
+                        <div class="social">
+                            <a href="https://www.facebook.com/Remolques-y-Carrocerias-MAGU-157550077637501/?fref=ts"
+                               target="_blank">
+                                <i class="fa fa-facebook-square"></i> Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 social-media" style="padding-top: 15px">
+                    <form class="padding" method="post" ng-submit="contact.createNotification('CONTACT_FORM')">
                         <div class="form-group">
                             <label class="text-form" for="name">Nombre *</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
@@ -25,8 +50,6 @@
                                    placeholder="Teléfono"
                                    required ng-model="contact.notification.phone">
                         </div>
-                    </div>
-                    <div class="col-md-6 ">
                         <div class="form-group">
                             <label class="text-form" for="message">Escribenos cuales son tus necesidades *</label>
                                 <textarea class="form-control" id="message" name="message" rows="7"
@@ -34,50 +57,12 @@
                                           ng-model="contact.notification.message"></textarea>
                         </div>
                         <div class="pull-right">
-                            <button type="submit" class="btn-yellow">Enviar</button>
+                            <button type="submit" class="btn-red">Enviar</button>
+
                         </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <hr/>
-        <div class="row">
-            <div class="col-md-12 content-pages">
-                <div class="container">
-                    <div class="col-md-12 social-media">
-                        <div class="col-sm-3 wow slideInUp">
-                            <div class=" text-center">
-                                <a href="tel:013531121214" class="phone">
-                                    <i class="fa fa-phone fa-4x"></i> <br/> Teléfono <br/>
-                                    01 353 112 1214
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 wow slideInUp">
-                            <div class="text-center">
-                                <a href="mailto:info@bluemia.com" class="mail">
-                                    <i class="fa fa-envelope-o fa-4x"></i> <br/> Correo Electrónico <br/>
-                                    info@bluemia.com
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 wow slideInUp">
-                            <div class="text-center">
-                                <a href="https://www.facebook.com/BLUE-MIA-623634654365499/?fref=ts" class="facebook"
-                                   target="_blank">
-                                    <i class="fa fa-facebook fa-4x"></i> <br/> Facebook
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 wow slideInUp">
-                            <div class="text-center">
-                                <a href="https://twitter.com/" class="twitter" target="_blank">
-                                    <i class="fa fa-twitter fa-4x"></i> <br/> Twitter
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </section>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title ng-bind="pageTitle">Blue Mia - Especialistas en ropa deportiva para Dama</title>
+    <title ng-bind="pageTitle">Remolques Magu - Trabajo y material de calidad</title>
     <meta name="keywords"
           content="Especialistas en ropa deportiva para Dama">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
@@ -39,7 +39,7 @@
 </p>
 <![endif]-->
 <header class="header">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
 
@@ -55,82 +55,20 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="header-mainmenu">
-                <ul class="main-nav nav navbar-nav navbar-right" ng-if="ShopMode">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-question-circle fa-2x"></i></a>
-                        <ul class="dropdown-menu user-help">
-                            <li class="dropdown-header">¿Necesitas Ayuda?</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Contacta con nosotros </a></li>
-                            <li><a href="#">Sudaderas</a></li>
-                            <li><a href="#">Preguntas frecuentes</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-user fa-2x"></i></a>
-                        <ul class="dropdown-menu user-log">
-                            <li class="dropdown-header">Bienvenido Ángel</li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Mi perfil </a></li>
-                            <li><a href="#">Cerrar sesión</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-shopping-cart fa-2x"></i></a>
-                        <ul class="dropdown-menu user-shopping">
-                            <li class="dropdown-header">Carrito de compras</li>
-                            <li class="col-md-12 list-payment no-padding">
-                                <div class="col-md-8">
-                                    1 Chamarra Postale
-                                </div>
-                                <div class="col-md-2">
-                                    $250.00
-                                </div>
-                            </li>
-                            <li class="col-md-12 list-payment no-padding">
-                                <div class="col-md-8">
-                                    1 Chamarra Postale
-                                </div>
-                                <div class="col-md-2">
-                                    $250.00
-                                </div>
-                            </li>
-                            <li class="col-md-12 list-total no-padding">
-                                <div class="col-md-8">
-                                    Total
-                                </div>
-                                <div class="col-md-2">
-                                    $500.00
-                                </div>
-                            </li>
-                            <li class="col-md-12 no-padding">
-                                <button class="btn-block btn-yellow">Ir a pagar</button>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Ropa <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li ng-repeat="item in ropa"><a ui-sref="category({slug: item.slug})">{{ item.name }}</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Accesorios <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li ng-repeat="item in accesorios"><a
-                                    ui-sref="category({slug: item.slug})">{{ item.name }}</a></li>
-                        </ul>
+                    <li>
+                        <a ui-sref="home">Inicio</a>
                     </li>
                     <li>
-                        <a ui-sref="sports">Deporte</a>
+                        <a ui-sref="page({slug:'nosotros1464059034'})">Nosotros</a>
+                    </li>
+                    <li class="dropdown">
+                        <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Productos <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="item in mainNavMenu"><a ui-sref="category_product({slug: item.slug})">{{ item.name }}</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a ui-sref="blog({kind: 'post'})">Blog</a>
@@ -164,7 +102,6 @@
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-resource/angular-resource.js"></script>
 <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="lib/wow/dist/wow.js"></script>
 <script src="lib/angular-sanitize/angular-sanitize.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
@@ -183,6 +120,7 @@
 <script src="/js/controllers.js"></script>
 <script src="/js/custom.js"></script>
 <script src="/js/directives.js"></script>
+<script src="/js/filters.js"></script>
 <script src="/js/services.js"></script>
 <script src="/js/templates.js"></script>
 <!-- endinject -->

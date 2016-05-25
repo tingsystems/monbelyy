@@ -1,21 +1,26 @@
-<div class="carousel slide">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         <uib-carousel>
             <uib-slide ng-repeat="slide in Home.mainSlider">
-                <div class="item">
-                    <img ng-src="{{ slide.urlImages.original }}">
+                <div class="item"><a post-link="{ link: {url: slide.link, target: '_blank'} }">
+                    <img width="100%" ng-src="{{ slide.urlImages.original }}"></a>
                 </div>
             </uib-slide>
         </uib-carousel>
     </div>
 </div>
-<section id="section-sports" class="section_padding">
+<section id="contact-section" class="section_padding">
     <div class="container">
-        <h3 class="white">¿Cuál es tu deporte?</h3>
-
-        <div class="col-md-2" ng-repeat="sport in Home.sports">
-            <a ui-sref="post_category({slug: sport.slug})"><img post-image="{{ sport.urlImages.original }}" alt=""/></a>
-            <h4>{{ sport.name }}</h4>
+        <div class="col-md-4 col-sm-4">
+            <h1 class="white">Contáctanos</h1>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <h1 class="white">01 353 532 85 66</h1>
+            <span>clientes@remolquesmagu.com</span>
+        </div>
+        <div class="col-md-3 col-sm-4 contact">
+            <a href="https://www.facebook.com/Remolques-y-Carrocerias-MAGU-157550077637501/?fref=ts"><i
+                    class="fa fa-facebook-square"></i> Facebook</a>
         </div>
     </div>
 </section>
@@ -24,50 +29,21 @@
 <section id="recommendation" class="section_padding">
     <div class="container">
         <div class="title text-center">
-            <h1>Te recomendamos</h1>
+            <h1> Nuestros productos </h1>
         </div>
         <div class="owl-carousel owl-theme">
-            <div class="box-default" ng-repeat="outstanding in outstandings" ng-repeat-owl-carousel
-                 carousel-init="Home.carouselInitializer" ng-if="outstanding">
+            <div class="box-default" ng-repeat="product in Home.products" ng-repeat-owl-carousel
+                 carousel-init="Home.carouselInitializer" ng-if="product">
                 <div class="box-header item">
-                    <a ui-sref="product_detail({slug: outstanding.slug})"> <img
-                            ng-src="{{ outstanding.urlImages.medium }}" alt="{{ outstanding.title }}"/></a>
+                    <a ui-sref="product_detail({slug: product.slug})"> <img
+                            ng-src="{{ product.urlImages.medium }}" alt="{{ product.title }}"/></a>
                 </div>
                 <div class="box-container">
-                    <h1>{{ outstanding.title }}</h1>
+                    <h1>{{ product.title }}</h1>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<div class="parallax">
-    <div class="parallax__group">
-        <div class="parallax__layer parallax__layer--back">
-            <div class="text-center title">
-                <h3>¿No eres distribuidor y te gustó una prenda?</h3>
-
-                <h1>Contáctanos</h1>
-            </div>
-            <div class="container content-contact">
-                <div class="col-md-6 contact">
-                    <a href="tel:353 112 1214"><i class="fa fa-phone"></i> 01 353 112 1214</a>
-                </div>
-                <div class="col-md-6 contact">
-                    <a href="mailto:info@bluemia.com"><i class="fa fa-envelope"></i> info@bluemia.com</a>
-                </div>
-                <div class="social">
-                    <a href="#"><i class="fa fa-facebook-square"></i></a>
-                    <a href="#"><i class="fa fa-twitter-square"></i></a>
-                    <a href="#"><i class="fa fa-pinterest-square"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                </div>
-            </div>
-
-        </div>
-        <div class="parallax__layer parallax__layer--base">
-            <img src="img/parallax.jpg" alt=""/>
-        </div>
-    </div>
-</div>
 

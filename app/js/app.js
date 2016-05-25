@@ -13,7 +13,7 @@
             })
             .state('home', {
                 url: '/',
-                data: {pageTitle: 'Blue Mia - Especialistas en ropa deportiva para Dama'},
+                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -24,7 +24,7 @@
             })
             .state('contact', {
                 url: '/contact',
-                data: {pageTitle: 'Blue Mia - Contactanos'},
+                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
                 views: {
                     'content': {
                         templateUrl: '/templates/contact.html',
@@ -35,7 +35,7 @@
             })
             .state('blog', {
                 url: '/blog',
-                data: {pageTitle: 'Blue Mia - Blog'},
+                data: {pageTitle: 'Remolques Magu - Blog'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -66,20 +66,21 @@
                     }
                 }
             })
-            .state('product_detail', {
-                url: '/detail/:slug',
+
+            .state('category', {
+                url: '/category/:slug',
+                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
                 views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
-                        templateUrl: '/templates/product_detail.html',
-                        controllerAs: 'Item',
-                        controller: 'PostDetailCtrl'
+                        templateUrl: '/templates/categories.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
                     }
                 }
             })
-            .state('category', {
-                url: '/category/:slug',
-                data: {pageTitle: 'Blue Mia - Especialistas'},
+            .state('category_product', {
+                url: '/product/category/:slug',
+                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -88,14 +89,14 @@
                     }
                 }
             })
-            .state('sports', {
-                url: '/sports/:slug',
+            .state('product_detail', {
+                url: '/product/:slug',
                 views: {
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
-                        templateUrl: '/templates/sports.html',
-                        controllerAs: 'Sport',
-                        controller: 'SportCtrl'
+                        templateUrl: '/templates/product_detail.html',
+                        controllerAs: 'Item',
+                        controller: 'PostDetailCtrl'
                     }
                 }
             })
@@ -127,9 +128,9 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv, $anchorScroll) {
         $rootScope.$state = $state;
-        $http.defaults.headers.common['TS-TOKEN'] = 'bPAUWlNi19ueOvIPac8p8H6GqDy5N93kGjGc1T2T';
+        $http.defaults.headers.common['TS-TOKEN'] = 'I7NZkqNQOe0eXWXu8dkz3B6htVQxvG9JLUtl2K96';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainmenu').collapse('hide');
         });
@@ -141,52 +142,36 @@
             //$window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Tingsystems',
-                'excerpt': 'Tingsystems: Tu consultor tecnológico',
+                'title': 'Remolques Magu',
+                'excerpt': 'Trabajo y material de calidad',
                 'urlImages': {
-                    'original': 'https://www.tingsystems.com/img/logo.png'
+                    'original': 'http://www.remolquesmagu.com/img/img-default.jpg'
                 }
             };
+            $anchorScroll();
         });
-        // Get options for "accesorios"
-        TaxonomySrv.query({
-            parent: '387a3351-3ac6-4bbb-93da-6103d9a8fd8d',
-            isActive: 'True',
-            fields: 'name,slug'
-        }).$promise.then(function (response) {
-                $rootScope.accesorios = response;
-            });
-        // Get options for "ropa"
-        TaxonomySrv.query({
-            parent: 'c30c8b8a-e19e-4ac4-bfee-8524c3a02d31',
-            isActive: 'True',
-            fields: 'name,slug'
-        }).$promise.then(function (response) {
-                $rootScope.ropa = response;
-            });
-        // Get destacadas
-        PostSrv.get({
-            category: 'destacado',
-            isActive: 'True',
-            sizePage: 5,
-            ordering: '-createdAt',
-            fields: 'title,link,slug,urlImages'
-        }).$promise.then(function (results) {
-                $rootScope.outstandings = results.results;
-            });
         // init for page title
-        $rootScope.pageTitle = 'Blue Mia - Especialistas en ropa deportiva para Dama';
-        $rootScope.ShopMode = false;
+        $rootScope.pageTitle = 'Remolques Magu - Trabajo y material de calidad';
+        if (!$rootScope.mainNavMenu) {
+            TaxonomySrv.query({
+                parent: '814f21f0-7be0-4ea3-b23e-e8b8534f632f',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                    $rootScope.mainNavMenu = response;
+                }, function (error) {
+                });
+        }
 
     }
 
-    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ngSanitize', 'app.templates',
+    angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
 
-    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', 'PostSrv'];
+    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', 'PostSrv', '$anchorScroll'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['blockUIConfig'];
 })();
