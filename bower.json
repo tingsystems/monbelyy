@@ -18,7 +18,8 @@
     "angular-animate": "^1.5.5",
     "angular-bootstrap": "1.1.2",
     "ng-repeat-owl-carousel": "*",
-    "angular-block-ui": "^0.2.2"
+    "angular-block-ui": "^0.2.2",
+    "angular-toasty": "^1.0.5"
   },
   "overrides": {
     "bootstrap": {
