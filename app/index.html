@@ -35,7 +35,7 @@
           ng-if="post"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.remolquesmagu.com{{ $state.href($state.current.name) }}"/>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:400,300,500' rel='stylesheet' type='text/css'>
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/animate.css/animate.css" />
@@ -78,20 +78,20 @@
             <div class="collapse navbar-collapse" id="header-mainmenu">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a ui-sref="home">Inicio</a>
-                    </li>
-                    <li>
                         <a ui-sref="page({slug:'nosotros1464059034'})">Nosotros</a>
                     </li>
                     <li class="dropdown">
                         <a uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true"
-                           aria-expanded="false">Productos <span class="caret"></span></a>
+                           aria-expanded="false">Nuestros proyectos <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li ng-repeat="item in mainNavMenu"><a
                                     ui-sref="category_product({slug: item.slug})">{{ item.name }}</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a ui-sref="blog({kind: 'post'})">Planes de pago</a>
                     </li>
                     <li>
                         <a ui-sref="blog({kind: 'post'})">Blog</a>

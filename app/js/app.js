@@ -13,7 +13,7 @@
             })
             .state('home', {
                 url: '/',
-                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
+                data: {pageTitle: 'Vive En Armonía - Construyendo tu futuro'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -24,7 +24,7 @@
             })
             .state('contact', {
                 url: '/contact',
-                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
+                data: {pageTitle: 'Vive En Armonía - Contacto'},
                 views: {
                     'content': {
                         templateUrl: '/templates/contact.html',
@@ -35,7 +35,7 @@
             })
             .state('blog', {
                 url: '/blog',
-                data: {pageTitle: 'Remolques Magu - Blog'},
+                data: {pageTitle: 'Vive En Armonía - Blog'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -69,7 +69,7 @@
 
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
+                data: {pageTitle: 'Vive En Armonía - Construyendo tu futuro'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -80,7 +80,7 @@
             })
             .state('category_product', {
                 url: '/product/category/:slug',
-                data: {pageTitle: 'Remolques Magu - Trabajo y material de calidad'},
+                data: {pageTitle: 'Vive En Armonía - Nuestros proyectos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -142,7 +142,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Remolques Magu',
+                'title': 'Vive En Armonía',
                 'excerpt': 'Trabajo y material de calidad',
                 'urlImages': {
                     'original': 'http://www.remolquesmagu.com/img/img-default.jpg'
@@ -151,7 +151,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Remolques Magu - Trabajo y material de calidad';
+        $rootScope.pageTitle = 'Vive En Armonía - Trabajo y material de calidad';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
                 parent: '814f21f0-7be0-4ea3-b23e-e8b8534f632f',

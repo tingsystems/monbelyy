@@ -45,18 +45,18 @@ h5,
 h6
   margin 0 0 15px
   font-weight 700
-  font-family 'Roboto', sans-serif
+  font-family 'Poppins', sans-serif
 
 .section_padding
   padding: 80px 0
 
 p
-  font-family 'Roboto', sans-serif
+  font-family 'Poppins', sans-serif
   font-weight 400
   font-size 14px
 
 body
-  font-family 'Roboto', sans-serif !important
+  font-family 'Poppins', sans-serif
 
 .white
   color white !important
@@ -103,7 +103,7 @@ body
 /************** main css ******************/
 header
   .navbar-default
-    background rgba(0, 0, 0, 0.8)
+    background white
     height 100px
     border none
     border-radius 0
@@ -115,37 +115,55 @@ header
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color white
+      color #5d5d5d
       padding 40px 18px
       font-size 18px
-      font-family 'Roboto', sans-serif
-      font-weight 700
+      font-family 'Poppins', sans-serif
+      font-weight 500
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
-      background-color #9c161d
-      color white
+      background-color transparent
+      color #389c80
     .navbar-nav
       .dropdown:hover .dropdown-toggle
-        background-color #9c161d
-        color white
+        background-color transparent
+        color #389c80
       .dropdown
         .dropdown-menu
-          background-color #9c161d
+          width 100%
+          background-color white
           border none
+          border-top 2px solid #389c80 !important
           -webkit-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
           -moz-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
           box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
         .dropdown-menu >  li > a
-          color white
+          color #5d5d5d
+          font-weight 300
           font-size 16px
           padding 10px 15px
         .dropdown-menu >  li > a:hover
-          background rgba(0,0,0,0.4)
+          background rgba(56,156,128,0.4)
           color white
 
   .logo
     width auto
+    margin-top 10px
 
 /********************************/
+
+.carousel-caption
+  top 20%
+  width 80%
+  left 10%
+  .text
+    margin-top 40px
+  .box-mail
+    background rgba(255,255,255, 0.8)
+    border-radius 3px
+    padding 15px
+    h4
+      color #5d5d5d
+      text-shadow none
 
 #slider-area
   background url(../img/bg.jpg)
@@ -198,16 +216,18 @@ header
 /************** Home area css ******************/
 
 #contact-section
-  background #9c161d
+  background-image url("../img/banner-bottom.jpg")
+  background-repeat no-repeat
+  background-position cover
   text-align center
-  h1
-    text-align center
+  h3
+    text-align left
+    font-weight 300
   span
     color white
     letter-spacing 1px
     font-size 18px
   .contact
-    border-left 1px solid white
     a
       color white
       font-size 28px
@@ -450,7 +470,7 @@ header
     font-weight 700
     border-radius 0px
 .btn-orange
-  background #e6b52a
+  background #E08F17
   display inline-block
   padding 10px 15px
   text-transform uppercase
@@ -460,7 +480,7 @@ header
   border none
   border-radius 0
   &:hover, &:focus
-    background #c09723
+    background #945c21
     display: inline-block
     padding 10px 15px
     text-transform uppercase
@@ -558,7 +578,7 @@ header
   color: #555
   background-color #fff
   background-image none
-  border 2px solid #f5f5f5
+  border 1px solid #eaeaea
   border-radius 4px
   -webkit-box-shadow inset 0 1px 1px rgba(0, 0, 0, 0)
   box-shadow inset 0 1px 1px rgba(0, 0, 0, 0)
@@ -570,7 +590,7 @@ header
   box-shadow ease-in-out .15s
 
   &:focus
-    border-color #9c161d
+    border-color #389c80
     outline 0
     -webkit-box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
     box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
