@@ -17,6 +17,16 @@
             });
 
         PostSrv.get({
+            category: 'proyectos-recientes',
+            isActive: 'True',
+            sizePage: 3,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug,createdAt,excerpt'
+        }).$promise.then(function (results) {
+                self.recentProjects = results.results;
+            });
+
+        PostSrv.get({
             category: 'blog',
             isActive: 'True',
             sizePage: 4,
@@ -24,6 +34,16 @@
             fields: 'urlImages,title,link,slug,createdAt,excerpt'
         }).$promise.then(function (results) {
                 self.news = results.results;
+            });
+
+        PostSrv.get({
+            category: 'por-que-elegirnos',
+            isActive: 'True',
+            sizePage: 1,
+            kind: 'post',
+            fields:'content,link,title'
+        }).$promise.then(function (results) {
+                self.whyChooseUs = results.results;
             });
     }
 
@@ -157,7 +177,6 @@
             // ajax request to send the formData
             self.notification.kind = kind;
             self.notification.send_from = 'contacto@viveenarmonia.com.mx';
-            self.notification.subject = 'Formulario de contacto Inicio';
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {
@@ -253,7 +272,46 @@
 
     }
 
+    function PaymentPlansCtrl(PostSrv, $rootScope) {
+        var self = this;
 
+        self.list = [];
+        self.page = 0;
+        self.next = true;
+        self.busy = false;
+
+        self.errorRecovery = function () {
+            self.page -= 1;
+            self.next = true;
+            self.busy = false;
+            self.loadPostError = false;
+            self.getMorePosts();
+        };
+
+        self.getMorePosts = function () {
+            if (self.busy || !self.next)return;
+            self.page += 1;
+            self.busy = true;
+            self.loadPosts = self.page % 3 == 0;
+
+            PostSrv.get({
+                kind: 'post',
+                category: 'planes-de-pago',
+                isActive: 'True',
+                fields: 'title,slug,excerpt,urlImages,createdAt',
+                sizePage: 9,
+                ordering: '-createdAt',
+                page: self.page
+            }).$promise.then(function (results) {
+                    self.list = self.list.concat(results.results);
+                    self.busy = false;
+                    self.next = results.next;
+                });
+        };
+
+        self.getMorePosts();
+        $rootScope.pageTitle = 'Vive En Armonía - Planes de pago';
+    }
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
@@ -262,7 +320,8 @@
         .controller('ContactCtrl', ContactCtrl)
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
-        .controller('BlogCtrl', BlogCtrl);
+        .controller('BlogCtrl', BlogCtrl)
+        .controller('PaymentPlansCtrl', PaymentPlansCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
@@ -271,4 +330,5 @@
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
+    PaymentPlansCtrl.$inject = ['PostSrv', '$rootScope'];
 })();

@@ -3,13 +3,13 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="col-md-12 title-post">
-                    <h2 class="title">Blog</h2>
+                    <h2 class="title">Planes de pago</h2>
                 </div>
 
-                <div class="content-pages" infinite-scroll='Post.getMorePosts()'
-                     infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
+                <div class="content-pages" infinite-scroll='Plan.getMorePosts()'
+                     infinite-scroll-disabled='Plan.busy || !Plan.next || Plan.loadPosts'>
                     <div class="row">
-                        <div class="col-sm-4" ng-repeat="entry in Post.list">
+                        <div class="col-sm-4" ng-repeat="entry in Plan.list">
 
                             <a post-link="{ link: {url: entry.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
@@ -31,13 +31,13 @@
                             </a>
 
                         </div>
-                        <div class="col-sm-12" ng-show="Post.busy">
+                        <div class="col-sm-12" ng-show="Plan.busy">
                             <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                         </div>
 
-                        <div class="col-sm-12" ng-show="!Post.busy">
-                            <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos con
-                                contenido disponible
+                        <div class="col-sm-12" ng-show="!Plan.busy">
+                            <h2 class="text-center no-content" ng-show="!Plan.list.length">No contamos con
+                                planes disponibles
                             </h2>
                         </div>
                     </div>
