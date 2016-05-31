@@ -13,7 +13,7 @@
             })
             .state('home', {
                 url: '/',
-                data: {pageTitle: 'Vive En Armonía - Construyendo tu futuro'},
+                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -69,7 +69,7 @@
 
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Vive En Armonía - Construyendo tu futuro'},
+                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -80,7 +80,7 @@
             })
             .state('category_product', {
                 url: '/product/category/:slug',
-                data: {pageTitle: 'Vive En Armonía - Nuestros proyectos'},
+                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',

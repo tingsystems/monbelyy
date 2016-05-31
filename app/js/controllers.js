@@ -34,7 +34,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = 'Remolques Magu - ' + self.categoryName;
+                        $rootScope.pageTitle = 'Vive En Armonía - ' + self.categoryName;
                     }
                 });
         }
@@ -99,7 +99,7 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Remolques Magu - Blog';
+        $rootScope.pageTitle = 'Vive En Armonía - Blog';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv) {
@@ -117,7 +117,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = 'http://www.remolquesmagu.com/img/img-default.jpg';
                 }
-                $rootScope.pageTitle = 'Remolques Magu - ' + results.title;
+                $rootScope.pageTitle = 'Vive En Armonía - ' + results.title;
                 self.busy = false;
             });
         // Controller for slider
@@ -134,34 +134,31 @@
 
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Remolques Magu - Contacto';
+        $rootScope.pageTitle = 'Vive En Armonía - Contacto';
 
         self.contactInitialState = function () {
-            self.notification = {};
-            self.notification.name = '';
-            self.notification.email = '';
-            self.notification.message = '';
-            self.notification.phone = '';
-            //Notification kind
-            self.notification.kind = '';
+            self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
             self.context = {};
 
         };
         self.contactInitialState();
+
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
+            self.notification.send_from = 'clientes@viveenarmonia.com';
+            self.notification.subject = 'Formulario de contacto Inicio';
             self.context.context = angular.copy(self.notification);
-            self.notification.send_from = 'clientes@remolquesmagu.com';
-            self.notification.subject = 'Nuevo formulario de contacto';
-            var context = self.context;
-            MessageSrv.create(context).$promise.then(function (data) {
+            self.busy = true;
+            MessageSrv.create(self.context).$promise.then(function (data) {
                     self.contactInitialState();
                     NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                    self.busy = false;
                 },
                 function (data) {
                     //error
                     NotificationSrv.error('Hubo ' + ' un error al procesar el formulario, intenta más tarde por favor');
+                    self.busy = false;
                 });
         };
     }
