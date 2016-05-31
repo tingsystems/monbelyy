@@ -15,6 +15,16 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
+
+        PostSrv.get({
+            category: 'blog',
+            isActive: 'True',
+            sizePage: 4,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug,createdAt,excerpt'
+        }).$promise.then(function (results) {
+                self.news = results.results;
+            });
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
@@ -146,7 +156,7 @@
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
-            self.notification.send_from = 'clientes@viveenarmonia.com';
+            self.notification.send_from = 'contacto@viveenarmonia.com.mx';
             self.notification.subject = 'Formulario de contacto Inicio';
             self.context.context = angular.copy(self.notification);
             self.busy = true;

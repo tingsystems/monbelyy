@@ -172,82 +172,20 @@
         <div class="title text-center">
             <h1> Noticias </h1>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="new in Home.news">
             <div class="box-default">
-                <a href="#">
+                <a ui-sref="post_detail({slug: new.slug})" post-link="{ link: {url: new.link, target: '_self'} }">
                     <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
+                        <img class="img-responsive" post-image="{{ new.urlImages.thumbnails }}" alt="{{ new.title }}">
                     </div>
 
                     <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
+                        <h3>{{ new.title }}</h3>
 
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
+                        <p>{{ new.excerpt }}</p>
                     </div>
                     <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <div class="box-default">
-                <a href="#">
-                    <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
-                    </div>
-
-                    <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
-
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
-                    </div>
-                    <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <div class="box-default">
-                <a href="#">
-                    <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
-                    </div>
-
-                    <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
-
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
-                    </div>
-                    <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <div class="box-default">
-                <a href="#">
-                    <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
-                    </div>
-
-                    <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
-
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
-                    </div>
-                    <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
+                        <i class="fa fa-calendar"></i> {{ new.createdAt|date: 'dd/MM/yyyy' }}
                     </div>
                 </a>
             </div>
