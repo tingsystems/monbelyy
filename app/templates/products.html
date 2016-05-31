@@ -8,23 +8,27 @@
         <div class="row">
             <div class="col-md-12 content-pages">
                 <div class="container">
-                    <div class="col-md-4 no-padding" ng-repeat="entry in Post.list">
-                        <div class="box-default">
-                            <div class="box-header">
-                                <a ui-sref="product_detail({slug: entry.slug})"><img
-                                        post-image="{{ entry.urlImages.medium }}" alt="{{ entry.title }}"/></a>
+                    <div class="col-md-4 col-sm-4 no-padding" ng-repeat="entry in Post.list">
+                        <a ui-sref="product_detail({slug: entry.slug})">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <img class="img-responsive" post-image="{{ entry.urlImages.medium }}"
+                                         alt="{{ entry.title }}">
+                                </div>
+
+                                <div class="box-container">
+                                    <h3>{{ entry.title }}</h3>
+                                </div>
                             </div>
-                            <div class="box-container">
-                                <h1>{{ entry.title }}</h1>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-sm-12" ng-show="Post.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                     </div>
 
                     <div class="col-sm-12" ng-show="!Post.busy">
-                        <h2 class="text-center" ng-show="!Post.list.length">Lo sentimos no contamos con contenido
+                        <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos con
+                            contenido
                             disponible</h2>
                     </div>
                 </div>

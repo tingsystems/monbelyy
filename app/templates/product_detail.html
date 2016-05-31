@@ -1,32 +1,35 @@
-<section id="content-area">
+<section id="product-detail">
+    <div class="col-md-12 title-detail" style="background-image: url('../img/example.png');">
+        <div class="content-title">
+            <h2 class="title">{{ Item.detail.title }}</h2>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
-                <div class="col-md-12 title-post">
-                    <h2 class="title">{{ Item.detail.title }}</h2>
-                </div>
-                <!-- Gallery -->
-                <!--gallery here-->
-
-                <div deckgrid class="deckgrid gallery" source="Item.detail.galleryImages">
-                    <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
-                        <a post-link="{ link: {url: card.link, target: '_blank'} }"
-                           href="{{ card.urlImages.original }}"
-                           data-lightbox="gallery-images">
-                            <img class="thumbnail img-responsive" post-image="{{ card.urlImages.large }}"
-                                 alt="{{ card.title }}">
-                        </a>
+            <div class="col-md-12 product-description">
+                <div class="col-md-9 col-sm-9">
+                    <!-- Gallery -->
+                    <!--gallery here-->
+                    <div deckgrid class="deckgrid gallery" source="Item.detail.galleryImages">
+                        <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
+                            <a post-link="{ link: {url: card.link, target: '_blank'} }"
+                               href="{{ card.urlImages.original }}"
+                               data-lightbox="gallery-images">
+                                <img class="thumbnail img-responsive" post-image="{{ card.urlImages.large }}"
+                                     alt="{{ card.title }}">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12 title-post">
-                    <h2 class="title">Descripción</h2>
-                </div>
-                <div class="col-md-12 description-post" ng-bind-html="Item.detail.content | trustHtml">
-                </div>
+                    <div class="col-md-12" style="clear: both">
+                        <div class="col-md-12 description-post" ng-bind-html="Item.detail.content | trustHtml">
+                        </div>
+                    </div>
 
-            </div>
-            <div class="col-md-3 widgets">
-                <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
+
+                </div>
+                <div class="col-md-3 col-sm-3 widgets">
+                    <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
+                </div>
             </div>
         </div>
     </div>

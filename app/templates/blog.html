@@ -10,31 +10,34 @@
                      infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
                     <div class="row">
                         <div class="col-sm-4" ng-repeat="entry in Post.list">
-                            <div class="box-default box-blog">
-                                <a post-link="{ link: {url: entry.link, target: '_blank'} }"
-                                   ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
-                                    <img class="img-responsive" post-image="{{ entry.urlImages.thumbnails }}"
-                                         alt="{{ entry.title }}">
 
-                                    <h2>{{ entry.title }}</h2>
-
-                                    <p>{{ entry.excerpt }}</p>
-
-                                    <div class="comment-area">
-                                        <div class="date floatleft">
-                                            <p><span><i class="fa fa-calendar-o"></i></span>
-                                                {{ entry.createdAt | date : shortDate }} </p>
-                                        </div>
+                            <a post-link="{ link: {url: entry.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
+                                <div class="box-default">
+                                    <div class="box-header">
+                                        <img class="img-responsive" post-image="{{ entry.urlImages.thumbnails }}"
+                                             alt="{{ entry.title }}">
                                     </div>
-                                </a>
-                            </div>
+
+                                    <div class="box-container">
+                                        <h3>{{ entry.title }}</h3>
+                                        <p>{{ entry.excerpt }}</p>
+                                    </div>
+                                    <div class="box-footer">
+                                        <p><span><i class="fa fa-calendar-"></i></span>
+                                            {{ entry.createdAt | date : shortDate }} </p>
+                                    </div>
+                                </div>
+                            </a>
+
                         </div>
                         <div class="col-sm-12" ng-show="Post.busy">
                             <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
                         </div>
 
                         <div class="col-sm-12" ng-show="!Post.busy">
-                            <h2 class="text-center" ng-show="!Post.list.length">Lo sentimos no contamos con contenido
+                            <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos con
+                                contenido
                                 disponible</h2>
                         </div>
                     </div>

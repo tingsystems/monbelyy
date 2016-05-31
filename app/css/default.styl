@@ -195,13 +195,13 @@ header
 #content-area
   margin 160px 0px 60px
   .title-post
-    background #9c161d
+    border-bottom 1px solid #fdf5e6
     clear both
     .title
-      color white
+      color #E08F17
       line-height 40px
       margin-bottom 0
-      font-size 24px
+      font-size 26px
   .title-p
     color #737373
     font-size 18px
@@ -212,8 +212,117 @@ header
 .gallery
   padding 20px 0
   clear both
-
+.no-content
+  background oldlace
+  opacity 0.3
+  padding 20px 0
+  color orange
 /************** Home area css ******************/
+#product-detail
+  margin 100px 0
+  .title-detail
+    padding 0
+    clear both
+    height 230px
+    background-size cover
+    background-position center center
+    .content-title
+      .title
+        margin-top 100px
+        text-align left
+        padding-left 60px
+  .product-description
+    margin 40px 0
+
+  .title-detail>.content-title
+    position absolute
+    width 100%
+    height 100%
+    top 0px
+    text-align center
+    font-size 24px
+    padding 80px 20px 10px
+    color #fff
+    background rgba(224, 143, 23, 0.6)
+    text-shadow 0 0 10px #000
+#content-contact
+  background-image url("../img/background.jpg")
+  background-position center center
+  background-size cover
+#news
+  .title
+    color #555555
+    padding-bottom 15px
+.recent-work-wrap > .titles
+  position absolute
+  width 100%
+  height 100%
+  top 0px
+  text-align center
+  font-size 24px
+  padding 80px 20px 10px
+  color #fff
+  background rgba(224, 143, 23, 0.6)
+  text-shadow 0 0 10px #000
+#recent-works
+  padding 60px 0
+  .title
+    h1
+      color #555
+
+.recent-work-wrap
+  position relative
+  margin 30px
+
+.recent-work-wrap img
+  width 100%
+
+.recent-work-wrap .recent-work-inner
+  top 0
+  background transparent
+  opacity .8
+  width 100%
+  border-radius 0
+  margin-bottom 0
+
+.recent-work-wrap .recent-work-inner h3
+  margin 50px 0 0
+  text-shadow 0px 3px  4px rgba(0,0,0,0.5)
+
+.recent-work-wrap .recent-work-inner a
+  margin 15px 0
+
+.recent-work-wrap .overlay
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+  opacity 0
+  border-radius 0
+  background #E08F17
+  color #fff
+  vertical-align middle
+  -webkit-transition opacity 500ms
+  -moz-transition opacity 500ms
+  -o-transition opacity 500ms
+  transition opacity 500ms
+  padding 30px
+  text-align center
+
+
+.recent-work-wrap .overlay .preview
+  bottom 0
+  display inline-block
+  height 35px
+  line-height 35px
+  border-radius 0
+  background transparent
+  text-align center
+  color #fff
+
+.recent-work-wrap:hover .overlay
+  opacity 1
 
 #contact-section
   background-image url("../img/banner-bottom.jpg")
@@ -246,12 +355,21 @@ header
       color white
    color
 .box-default
+  margin 10px
   padding 20px
-  transition background-color 0.5s ease
-  h2
+  transition all 0.5s ease
+  a
     color #5d5d5d
-    padding 10px 0
-    font-size 24px
+  .box-footer
+    text-align center
+    border-top 1px solid #f4f4f4
+    border-bottom 1px solid #f4f4f4
+    color #c7c7c7
+    padding 5px 0
+  h3
+    color #5d5d5d
+    padding 10px 0 0
+    font-size 22px
   .comment-area
     padding-bottom 10px
     .comment, .date
@@ -260,16 +378,17 @@ header
     img
       width 100%
   .box-container
-    text-align center
+    text-align left
     h1
       color #5d5d5d
       font-weight 300
       font-size 22px
       margin 10px 0
   &:hover, &:focus
-    background #f5f5f5
+    background transparent
+    box-shadow 0 0 3px rgba(0,0,0,0.4)
     h1,h2
-      color #9c161d
+      color #e08f17
     p
       color #555
     .comment-area
@@ -278,7 +397,7 @@ header
 .widgets
   margin-top -35px
 .box-sidebar
-  padding-top 20px
+  margin-top 60px
   .box-header
     background transparent
     padding 10px
@@ -296,51 +415,30 @@ header
         border-top-right-radius 0px
 
 .parallax
-  perspective 1px
-  height 400px
-  overflow-x hidden
-  overflow-y auto
-  background #172031
-
-.parallax__layer
-  position absolute
-  top 0
-  right 0
-  bottom 0
-  left 0
-
-.parallax__layer--base
-  transform translateZ(0)
-  img
-    width 100% !important
-
-.parallax__layer--back
-  transform translateZ(-1px)
-  z-index 99999
-  .title
-    h1
-      font-size 65px
-      color #e6b52a
-      text-shadow 0 0 2px rgba(0,0,0, 0.5)
-    h3
-      font-size 56px
-      color #e6b52a
-      text-shadow 0 0 2px rgba(0,0,0, 0.5)
-  .contact
-    a
-      color white
-      font-size 45px
-  .social
-    text-align center
-    padding 60px 0
-    clear both
-    a
-      font-size 70px
-      color white
-      padding 0 25px
+  background-image url('../img/parallax.jpg')
+  background-repeat no-repeat
+  background-position center center
+  background-size cover
   .content-contact
+    line-height 50px
+  .title
+    h2,h4
+      color white
+      text-shadow 0 4px 3px rgba(0,0,0, 0.5)
+  .contact
+    margin-top 30px
+    a,p
+      color white
+      font-size 20px
+      line-height 30px
+      font-weight 300
+      text-shadow 0 2px 3px rgba(0,0,0, 0.2)
+  .social-media
     text-align center
-    padding 60px 0
+    border-top 1px solid white
+    a
+      font-size 20px
+      padding-right 30px
 
 /* Projects detail */
 .recommendations-detail
@@ -388,39 +486,18 @@ header
 /************** footer area css ******************/
 
 #footer_area
-  background #252323
+  background #f5f5f5
+  box-shadow 0 -3px 2px rgba(0,0,0,0.2)
   padding 30px 0
-  color #fff
-
-  .social-media
-    padding 5px
-
-  .footer-links
-    color #fff
-    &:hover, &:focus
-      color #9c161d
-
-  .divider_footer
-    border-top 1px solid rgba(255,255,255,0.1)
-
-  .company_logo
-    margin 50px
-
-  .company_address
-    padding 10px 30px
-
-  .company_address
-    h2
-      font-size 18px
-      text-transform uppercase
-
-    p
-      font-size 14px
-      font-weight 300
-
-    h3
-      font-size 14px
-      font-weight 300
+  color #999
+  line-height 30px
+  .contact-footer
+    a
+      color #999
+      &:hover
+        color #E08F17
+  .text
+    color #ccc
 
 /**************** Buttons ***************/
 
@@ -510,7 +587,6 @@ header
   background transparent
   display inline-block
   padding 10px 15px
-  text-transform uppercase
   color #fff
   font-weight 700
   border 3px solid #fff
@@ -520,7 +596,6 @@ header
     background #fff
     display: inline-block
     padding 10px 15px
-    text-transform uppercase
     color #FF801A
     font-weight 700
     border-radius 5px
@@ -565,8 +640,14 @@ header
 .form-section
   background transparent
   padding 0
+  margin 160px 0px 25px
   .title, .text-form
     color #565656
+.contact-section
+  background: rgba(255,255,255,0.95)
+  padding 25px
+  box-shadow 0 0 20px rgba(0, 0, 0, 0.10)
+  border-radius 5px
 
 .form-control
   display block
