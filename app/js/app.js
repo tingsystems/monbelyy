@@ -130,7 +130,7 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv, $anchorScroll) {
         $rootScope.$state = $state;
-        $http.defaults.headers.common['TS-TOKEN'] = 'I7NZkqNQOe0eXWXu8dkz3B6htVQxvG9JLUtl2K96';
+        $http.defaults.headers.common['TS-TOKEN'] = 'KCdEsjmrc9bRNjDKhbqPnt5NWOtKwDbUxNKapAPx';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainmenu').collapse('hide');
         });
@@ -143,7 +143,7 @@
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Vive En Armonía',
-                'excerpt': 'Trabajo y material de calidad',
+                'excerpt': 'Inmobiliaria',
                 'urlImages': {
                     'original': 'http://www.remolquesmagu.com/img/img-default.jpg'
                 }
@@ -151,7 +151,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Vive En Armonía - Trabajo y material de calidad';
+        $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
                 parent: '814f21f0-7be0-4ea3-b23e-e8b8534f632f',

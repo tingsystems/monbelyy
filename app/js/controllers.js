@@ -4,10 +4,10 @@
     function HomeCtrl(PostSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Remolques Magu - Trabajo y material de calidad';
-        // Controller for slider
+        $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
+
         PostSrv.get({
-            category: 'slide',
+            category: 'slider',
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
@@ -15,44 +15,6 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
-        PostSrv.get({
-            category: 'product',
-            isActive: 'True',
-            sizePage: 10,
-            ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,categories'
-        }).$promise.then(function (results) {
-                self.products = results.results;
-            });
-
-        self.carouselInitializer = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                //items: 4,
-                //navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                loop: true,
-                margin: 10,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 3,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: true,
-                        loop: false
-                    }
-                }
-            });
-        }
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
