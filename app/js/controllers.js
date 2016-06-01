@@ -134,7 +134,7 @@
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv) {
         var self = this;
-        $rootScope.pageTitle = 'Blue Mia - ';
+        $rootScope.pageTitle = 'Vive En Armonía - ';
 
         self.busy = true;
         PostDetailSrv.get({
