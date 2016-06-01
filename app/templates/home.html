@@ -2,50 +2,47 @@
     <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
             <img width="100%" ng-src="{{ slide.urlImages.large }}" alt="{{ slide.title }}">
-
-            <div class="carousel-caption">
-                <div class="col-md-12">
-                    <div class="col-md-7 text"></div>
-                    <div class="col-md-5" ng-controller="ContactCtrl as Contact">
-                        <form ng-submit="Contact.createNotification('CONTACT_FORM')"
-                                ng-init="Contact.notification.subject = 'Formulario de contacto Inicio'">
-                            <h4>Contáctanos y pregunta por nuestros planes</h4>
-
-                            <div class="form-group">
-                                <input type="name" class="form-control" name="name" placeholder="Nombre *" required
-                                        ng-model="Contact.notification.name">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Correo electrónico *"
-                                        required ng-model="Contact.notification.email">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="phone" placeholder="Teléfono *"
-                                        required ng-model="Contact.notification.phone">
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" required name="fraccionamiento"
-                                        ng-model="Contact.notification.fraccionamiento">
-                                    <option selected="selected" value="">Fraccionamiento de interés *</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="comments" cols="100%" rows="6" placeholder="Comentarios *"
-                                          required ng-model="Contact.notification.message"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-orange" ng-disabled="Contact.busy">
-                                Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </uib-slide>
     </uib-carousel>
+    <div class="carousel-caption">
+        <div class="col-md-12">
+            <div class="col-md-7 text"></div>
+            <div class="col-md-5" ng-controller="ContactCtrl as Contact">
+                <form ng-submit="Contact.createNotification('CONTACT_FORM')"
+                      ng-init="Contact.notification.subject = 'Formulario de contacto Inicio'">
+                    <h4>Contáctanos y pregunta por nuestros planes</h4>
+
+                    <div class="form-group">
+                        <input type="name" class="form-control" name="name" placeholder="Nombre *" required
+                               ng-model="Contact.notification.name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Correo electrónico *"
+                               required ng-model="Contact.notification.email">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="phone" placeholder="Teléfono *"
+                               required ng-model="Contact.notification.phone">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" required name="fraccionamiento"
+                                ng-model="Contact.notification.fraccionamiento"
+                                ng-options="fracc as fracc.title for fracc in Home.fraccionamientos track by fracc.title">
+                            <option selected="selected" value="">Fraccionamiento de interés *</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                                <textarea class="form-control" name="comments" cols="100%" rows="6"
+                                          placeholder="Comentarios *"
+                                          required ng-model="Contact.notification.message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-orange" ng-disabled="Contact.busy">
+                        Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <section id="contact-section" class="section_padding">
