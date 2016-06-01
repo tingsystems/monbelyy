@@ -25,12 +25,9 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" required name="fraccionamiento"
-                                    ng-model="Contact.notification.fraccionamiento">
+                                    ng-model="Contact.notification.fraccionamiento"
+                                    ng-options="fracc as fracc.title for fracc in Home.fraccionamientos track by fracc.id">
                                 <option selected="selected" value="">Fraccionamiento de interés *</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
                             </select>
                         </div>
                         <div class="form-group">
