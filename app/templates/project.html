@@ -11,10 +11,7 @@
                     <div class="col-md-4 col-sm-4 no-padding" ng-repeat="entry in Post.list">
                         <a ui-sref="project_detail({slug: entry.slug})">
                             <div class="box-default">
-                                <div class="box-header">
-                                    <img class="img-responsive" post-image="{{ entry.urlImages.medium }}"
-                                         alt="{{ entry.title }}">
-                                </div>
+                                <div class="box-header" style="background-image: url('{{ entry.urlImages.medium }}')"></div>
 
                                 <div class="box-container">
                                     <h3>{{ entry.title }}</h3>

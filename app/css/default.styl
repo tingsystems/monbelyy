@@ -150,7 +150,12 @@ header
     margin-top 10px
 
 /********************************/
-
+.slider-img
+  background-position center center
+  background-size cover
+  height 650px
+  background-repeat no-repeat
+  margin-top 100px
 .carousel-caption
   top 20%
   width 80%
@@ -160,6 +165,7 @@ header
   .box-mail
     background rgba(255,255,255, 0.8)
     border-radius 3px
+    box-shadow 0 0 10px rgba(0, 0, 0, 0.22)
     padding 15px
     h4
       color #5d5d5d
@@ -273,10 +279,13 @@ header
 .recent-work-wrap
   position relative
   margin 30px
+  height 250px
+  background-size cover
+  background-position center center
 
 .recent-work-wrap img
   width 100%
-
+  height 250px
 .recent-work-wrap .recent-work-inner
   top 0
   background transparent
@@ -327,7 +336,7 @@ header
 #contact-section
   background-image url("../img/banner-bottom.jpg")
   background-repeat no-repeat
-  background-position cover
+  background-size cover
   text-align center
   h3
     text-align left
@@ -375,8 +384,9 @@ header
     .comment, .date
       color #5d5d5d
   .box-header
-    img
-      width 100%
+    height 250px
+    background-size cover
+    background-position center center
   .box-container
     text-align left
     h1

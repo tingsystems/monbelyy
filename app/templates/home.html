@@ -1,50 +1,50 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
-            <img width="100%" ng-src="{{ slide.urlImages.large }}" alt="{{ slide.title }}">
+            <div class="slider-img" style="background-image:url('{{ slide.urlImages.large }}');"></div>
+        </uib-slide>
+        <div class="carousel-caption">
+            <div class="col-md-12">
+                <div class="col-md-7 text"></div>
+                <div class="col-md-5 box-mail" ng-controller="ContactCtrl as Contact">
+                    <form ng-submit="Contact.createNotification('CONTACT_FORM')"
+                          ng-init="Contact.notification.subject = 'Formulario de contacto Inicio'">
+                        <h4>Contáctanos y pregunta por nuestros planes</h4>
 
-            <div class="carousel-caption">
-                <div class="col-md-12">
-                    <div class="col-md-7 text"></div>
-                    <div class="col-md-5" ng-controller="ContactCtrl as Contact">
-                        <form ng-submit="Contact.createNotification('CONTACT_FORM')"
-                                ng-init="Contact.notification.subject = 'Formulario de contacto Inicio'">
-                            <h4>Contáctanos y pregunta por nuestros planes</h4>
-
-                            <div class="form-group">
-                                <input type="name" class="form-control" name="name" placeholder="Nombre *" required
-                                        ng-model="Contact.notification.name">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Correo electrónico *"
-                                        required ng-model="Contact.notification.email">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="phone" placeholder="Teléfono *"
-                                        required ng-model="Contact.notification.phone">
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" required name="fraccionamiento"
-                                        ng-model="Contact.notification.fraccionamiento">
-                                    <option selected="selected" value="">Fraccionamiento de interés *</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="comments" cols="100%" rows="6" placeholder="Comentarios *"
+                        <div class="form-group">
+                            <input type="name" class="form-control" name="name" placeholder="Nombre *" required
+                                   ng-model="Contact.notification.name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" placeholder="Correo electrónico *"
+                                   required ng-model="Contact.notification.email">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="phone" placeholder="Teléfono *"
+                                   required ng-model="Contact.notification.phone">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" required name="fraccionamiento"
+                                    ng-model="Contact.notification.fraccionamiento">
+                                <option selected="selected" value="">Fraccionamiento de interés *</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                                <textarea class="form-control" name="comments" cols="100%" rows="6"
+                                          placeholder="Comentarios *"
                                           required ng-model="Contact.notification.message"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-orange" ng-disabled="Contact.busy">
-                                Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
-                            </button>
-                        </form>
-                    </div>
+                        </div>
+                        <button type="submit" class="btn btn-orange" ng-disabled="Contact.busy">
+                            Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </uib-slide>
+        </div>
     </uib-carousel>
 </div>
 
@@ -67,9 +67,7 @@
             <h1> Proyectos recientes </h1>
         </div>
         <div class="col-xs-12 col-sm-4 col-md-4" ng-repeat="project in Home.recentProjects">
-            <div class="recent-work-wrap back-image">
-                <img class="img-responsive" post-image="{{ project.urlImages.thumbnails }}"
-                     alt="{{ project.title }}">
+            <div class="recent-work-wrap back-image" style="background-image:url('{{ project.urlImages.thumbnails }}')">
 
                 <div class="titles">
                     <h3>{{ project.title }}</h3>
@@ -81,7 +79,8 @@
                     <div class="recent-work-inner top">
                         <h3>{{ project.title }}</h3>
 
-                        <a ui-sref="project_detail({slug: project.slug})" post-link="{ link: {url: project.link, target: '_self'} }"
+                        <a ui-sref="project_detail({slug: project.slug})"
+                           post-link="{ link: {url: project.link, target: '_self'} }"
                            class="btn-white-clear">+ Información</a></div>
                 </div>
             </div>
