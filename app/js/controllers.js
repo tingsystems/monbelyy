@@ -4,10 +4,10 @@
     function HomeCtrl(PostSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Remolques Magu - Trabajo y material de calidad';
-        // Controller for slider
+        $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
+
         PostSrv.get({
-            category: 'slide',
+            category: 'slider',
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
@@ -15,44 +15,36 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
+
         PostSrv.get({
-            category: 'product',
+            category: 'proyectos-recientes',
             isActive: 'True',
-            sizePage: 10,
+            sizePage: 3,
             ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,categories'
+            fields: 'urlImages,title,link,slug,createdAt,excerpt'
         }).$promise.then(function (results) {
-                self.products = results.results;
+                self.recentProjects = results.results;
             });
 
-        self.carouselInitializer = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                //items: 4,
-                //navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                loop: true,
-                margin: 10,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 3,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: true,
-                        loop: false
-                    }
-                }
+        PostSrv.get({
+            category: 'blog',
+            isActive: 'True',
+            sizePage: 4,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug,createdAt,excerpt'
+        }).$promise.then(function (results) {
+                self.news = results.results;
             });
-        }
+
+        PostSrv.get({
+            category: 'por-que-elegirnos',
+            isActive: 'True',
+            sizePage: 1,
+            kind: 'post',
+            fields:'content,link,title'
+        }).$promise.then(function (results) {
+                self.whyChooseUs = results.results;
+            });
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
@@ -72,7 +64,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = 'Remolques Magu - ' + self.categoryName;
+                        $rootScope.pageTitle = 'Vive En Armonía - ' + self.categoryName;
                     }
                 });
         }
@@ -137,7 +129,7 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Remolques Magu - Blog';
+        $rootScope.pageTitle = 'Vive En Armonía - Blog';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv) {
@@ -155,7 +147,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = 'http://www.remolquesmagu.com/img/img-default.jpg';
                 }
-                $rootScope.pageTitle = 'Remolques Magu - ' + results.title;
+                $rootScope.pageTitle = 'Vive En Armonía - ' + results.title;
                 self.busy = false;
             });
         // Controller for slider
@@ -172,34 +164,30 @@
 
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Remolques Magu - Contacto';
+        $rootScope.pageTitle = 'Vive En Armonía - Contacto';
 
         self.contactInitialState = function () {
-            self.notification = {};
-            self.notification.name = '';
-            self.notification.email = '';
-            self.notification.message = '';
-            self.notification.phone = '';
-            //Notification kind
-            self.notification.kind = '';
+            self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
             self.context = {};
 
         };
         self.contactInitialState();
+
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
+            self.notification.send_from = 'contacto@viveenarmonia.com.mx';
             self.context.context = angular.copy(self.notification);
-            self.notification.send_from = 'clientes@remolquesmagu.com';
-            self.notification.subject = 'Nuevo formulario de contacto';
-            var context = self.context;
-            MessageSrv.create(context).$promise.then(function (data) {
+            self.busy = true;
+            MessageSrv.create(self.context).$promise.then(function (data) {
                     self.contactInitialState();
                     NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                    self.busy = false;
                 },
                 function (data) {
                     //error
                     NotificationSrv.error('Hubo ' + ' un error al procesar el formulario, intenta más tarde por favor');
+                    self.busy = false;
                 });
         };
     }
@@ -284,7 +272,46 @@
 
     }
 
+    function PaymentPlansCtrl(PostSrv, $rootScope) {
+        var self = this;
 
+        self.list = [];
+        self.page = 0;
+        self.next = true;
+        self.busy = false;
+
+        self.errorRecovery = function () {
+            self.page -= 1;
+            self.next = true;
+            self.busy = false;
+            self.loadPostError = false;
+            self.getMorePosts();
+        };
+
+        self.getMorePosts = function () {
+            if (self.busy || !self.next)return;
+            self.page += 1;
+            self.busy = true;
+            self.loadPosts = self.page % 3 == 0;
+
+            PostSrv.get({
+                kind: 'post',
+                category: 'planes-de-pago',
+                isActive: 'True',
+                fields: 'title,slug,excerpt,urlImages,createdAt',
+                sizePage: 9,
+                ordering: '-createdAt',
+                page: self.page
+            }).$promise.then(function (results) {
+                    self.list = self.list.concat(results.results);
+                    self.busy = false;
+                    self.next = results.next;
+                });
+        };
+
+        self.getMorePosts();
+        $rootScope.pageTitle = 'Vive En Armonía - Planes de pago';
+    }
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
@@ -293,7 +320,8 @@
         .controller('ContactCtrl', ContactCtrl)
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
-        .controller('BlogCtrl', BlogCtrl);
+        .controller('BlogCtrl', BlogCtrl)
+        .controller('PaymentPlansCtrl', PaymentPlansCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
@@ -302,4 +330,5 @@
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
+    PaymentPlansCtrl.$inject = ['PostSrv', '$rootScope'];
 })();

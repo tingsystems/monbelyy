@@ -26,31 +26,33 @@
                         </div>
                     </div>
 
-                    <form class="padding" method="post" ng-submit="contact.createNotification('CONTACT_FORM')">
+                    <form class="padding" ng-submit="Contact.createNotification('CONTACT_FORM')"
+                            ng-init="Contact.notification.subject = 'Formulario de contacto'">
                         <div class="form-group">
                             <label class="text-form" for="name">Nombre *</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
-                                   required ng-model="contact.notification.name">
+                                   required ng-model="Contact.notification.name">
                         </div>
                         <div class="form-group">
                             <label class="text-form" for="email">Correo electrónico *</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                   placeholder="Correo electrónico" required ng-model="contact.notification.email">
+                                   placeholder="Correo electrónico" required ng-model="Contact.notification.email">
                         </div>
                         <div class="form-group">
-                            <label class="text-form" for="phone1">Teléfono *</label>
-                            <input type="text" class="form-control" id="phone1" name="phone1"
-                                   placeholder="Teléfono"
-                                   required ng-model="contact.notification.phone">
+                            <label class="text-form" for="phone">Teléfono *</label>
+                            <input type="number" class="form-control" id="phone" name="phone"
+                                   placeholder="Teléfono" required ng-model="Contact.notification.phone">
                         </div>
                         <div class="form-group">
                             <label class="text-form" for="message">Escribenos cuales son tus necesidades *</label>
                                 <textarea class="form-control" id="message" name="message" rows="7"
                                           placeholder="Escribe tu mensaje aquí" required
-                                          ng-model="contact.notification.message"></textarea>
+                                          ng-model="Contact.notification.message"></textarea>
                         </div>
                         <div class="pull-right">
-                            <button type="submit" class="btn-orange">Enviar</button>
+                            <button type="submit" class="btn-orange" ng-disabled="Contact.busy">
+                                Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
+                            </button>
 
                         </div>
                     </form>
