@@ -25,7 +25,7 @@
             restrict: 'A',
             link: function (scope, element, attrs) {
                 // Listen for errors on the element and if there are any replace the source with the fallback source
-                var defaultImage = 'http://www.remolquesmagu.com/img/img-default.jpg';
+                var defaultImage = 'http://www.viveenarmonia.com.mx/img/img-default.jpg';
                 // if image error put default
                 element.bind('error', function () {
                     attrs.$set('src', defaultImage);

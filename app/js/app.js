@@ -123,7 +123,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig(blockUIConfig) {
@@ -146,7 +146,7 @@
             $('#header-mainmenu').collapse('hide');
         });
         // initialise google analytics
-        $window.ga('create', 'UA-53555832-25', 'remolquesmagu.com');
+        $window.ga('create', 'UA-53555832-27', 'viveenarmonia.com.mx');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
@@ -156,7 +156,7 @@
                 'title': 'Vive En Armonía',
                 'excerpt': 'Inmobiliaria',
                 'urlImages': {
-                    'original': 'http://www.remolquesmagu.com/img/img-default.jpg'
+                    'original': 'http://www.viveenarmonia.com.mx/img/img-default.jpg'
                 }
             };
             $anchorScroll();

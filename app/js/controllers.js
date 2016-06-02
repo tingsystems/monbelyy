@@ -45,6 +45,16 @@
         }).$promise.then(function (results) {
                 self.whyChooseUs = results.results;
             });
+
+        PostSrv.query({
+            category: 'fraccionamientos',
+            isActive: 'True',
+            kind: 'post',
+            fields:'content,link,title,id',
+            ordering: 'title'
+        }).$promise.then(function (results) {
+                self.fraccionamientos = results;
+            });
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
@@ -145,7 +155,7 @@
                 self.detail = results;
                 $rootScope.post = self.detail;
                 if (!self.detail.urlImages.original) {
-                    self.detail.urlImages.original = 'http://www.remolquesmagu.com/img/img-default.jpg';
+                    self.detail.urlImages.original = 'http://www.viveenarmonia.com.mx/img/img-default.jpg';
                 }
                 $rootScope.pageTitle = 'Vive En Armonía - ' + results.title;
                 self.busy = false;
