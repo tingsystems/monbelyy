@@ -11,7 +11,7 @@
                     <div class="col-md-4 col-sm-4 no-padding" ng-repeat="entry in Post.list">
                         <a ui-sref="project_detail({slug: entry.slug})">
                             <div class="box-default">
-                                <div class="box-header" style="background-image: url('{{ entry.urlImages.medium }}')"></div>
+                                <div class="box-header" style="background-image: url('{{ entry.urlImages.medium ? entry.urlImages.medium : 'http://media.tingsystems.com/media/vive-en-armonia/pollitux/2016/16/img-default-original.jpeg' }}')"></div>
 
                                 <div class="box-container">
                                     <h3>{{ entry.title }}</h3>
