@@ -4,43 +4,8 @@
             <div class="slider-img" style="background-image:url('{{ slide.urlImages.large }}');"></div>
         </uib-slide>
         <div class="carousel-caption">
-            <div class="col-md-12">
-                <div class="col-md-7 text"></div>
-                <div class="col-md-5 box-mail" ng-controller="ContactCtrl as Contact">
-                    <form ng-submit="Contact.createNotification('CONTACT_FORM')"
-                          ng-init="Contact.notification.subject = 'Formulario de contacto Inicio'">
-                        <h4>Contáctanos y pregunta por nuestros planes</h4>
-
-                        <div class="form-group">
-                            <input type="name" class="form-control" name="name" placeholder="Nombre *" required
-                                   ng-model="Contact.notification.name">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="Correo electrónico *"
-                                   required ng-model="Contact.notification.email">
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" id="phone" placeholder="Teléfono *"
-                                   required ng-model="Contact.notification.phone">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" required name="fraccionamiento"
-                                    ng-model="Contact.notification.fraccionamiento"
-                                    ng-options="fracc as fracc.title for fracc in Home.fraccionamientos track by fracc.id">
-                                <option selected="selected" value="">Fraccionamiento de interés *</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                                <textarea class="form-control" name="comments" cols="100%" rows="6"
-                                          placeholder="Comentarios *"
-                                          required ng-model="Contact.notification.message"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-orange" ng-disabled="Contact.busy">
-                            Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
-                        </button>
-                    </form>
-                </div>
-            </div>
+            <h3>Tú Jóven que estás comenzando a construir tu futuro contamos con los
+                los mejores planes de financiamiento, para ese proyecto que tanto anhelas</h3>
         </div>
     </uib-carousel>
 </div>
@@ -48,8 +13,8 @@
 <section id="contact-section" class="section_padding">
     <div class="container">
         <div class="col-md-8 col-sm-8">
-            <h3 class="white">Tú Jóven que estás trabajando o estudiando, contamos con
-                los mejores planes para ti; comienza a construir tu futuro.</h3>
+            <h3 class="white">Tú Jóven que estás comenzando a construir tu futuro contamos con los
+                los mejores planes de financiamiento, para ese proyecto que tanto anhelas.</h3>
         </div>
         <div class="col-md-4 col-sm-4">
             <a ui-sref="payment_plans" class="btn btn-white-clear"> Ver planes</a>
@@ -57,7 +22,7 @@
     </div>
 </section>
 
-<!-- recent works fraccionamientos -->
+<!-- fraccionamientos -->
 <section id="recent-works" class="section_padding">
     <div class="container">
         <div class="title text-center">
