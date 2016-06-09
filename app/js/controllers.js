@@ -19,7 +19,7 @@
         PostSrv.get({
             category: 'proyectos-recientes',
             isActive: 'True',
-            sizePage: 3,
+            sizePage: 4,
             ordering: '-createdAt',
             fields: 'urlImages,title,link,slug,createdAt,excerpt'
         }).$promise.then(function (results) {
