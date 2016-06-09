@@ -1,5 +1,5 @@
 <section id="product-detail">
-    <div class="col-md-12 title-detail" style="background-image: url('{{ Item.detail.urlImages.large }}');">
+    <div class="col-md-12 title-detail" style="background-image: url('{{ Item.detail.urlImages.large ? Item.detail.urlImages.large : 'http://media.tingsystems.com/media/vive-en-armonia/pollitux/2016/16/img-default-original.jpeg'}}');">
         <div class="content-title">
             <h2 class="title">{{ Item.detail.title }}</h2>
         </div>
