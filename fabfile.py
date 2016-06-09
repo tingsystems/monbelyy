@@ -3,6 +3,7 @@ from __future__ import with_statement
 import os
 from fabric.api import env, run, local, put
 from fabric.contrib.console import confirm
+from fabric.contrib.files import exists
 
 # config ssh
 
@@ -19,7 +20,8 @@ remote_tar_file = remote_path + tar_file
 
 def update():
     if confirm('¿Eliminar dist anterior?', default=True):
-        local('rm -r dist/')
+        if exists('dist/'):
+            local('rm -r dist/')
     if confirm('¿Ejecutar gulp?', default=True):
         local('gulp build')
         local('gulp htmlcompress')
