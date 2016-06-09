@@ -28,23 +28,20 @@
         <div class="title text-center">
             <h1> Proyectos recientes </h1>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-4" ng-repeat="project in Home.recentProjects">
-            <div class="recent-work-wrap back-image" style="background-image:url('{{ project.urlImages.thumbnails }}')">
-
-                <div class="titles">
-                    <h3>{{ project.title }}</h3>
-
-                    <p>{{ project.excerpt }}</p>
+        <div class="col-xs-12 col-sm-12 col-md-12 boxes-project" ng-repeat="project in Home.recentProjects">
+            <div class="col-md-4 col-sm-4">
+                <div class="recent-work-wrap back-image"
+                     style="background-image:url('{{ project.urlImages.thumbnails }}')">
+                    <div class="titles"></div>
                 </div>
+            </div>
+            <div class="col-md-8 col-sm-8 work-description">
+                <h3>{{ project.title }}</h3>
 
-                <div class="overlay">
-                    <div class="recent-work-inner top">
-                        <h3>{{ project.title }}</h3>
-
-                        <a ui-sref="project_detail({slug: project.slug})"
-                           post-link="{ link: {url: project.link, target: '_self'} }"
-                           class="btn-white-clear">+ Información</a></div>
-                </div>
+                <p>{{ project.excerpt }}</p>
+                <a ui-sref="project_detail({slug: project.slug})"
+                   post-link="{ link: {url: project.link, target: '_self'} }"
+                   class="btn-orange">+ Información</a>
             </div>
         </div>
     </div>

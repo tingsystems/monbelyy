@@ -286,30 +286,57 @@ header .logo {
   color: #555;
   padding-bottom: 15px;
 }
+.boxes-project:nth-child(3) .col-md-4,
+.boxes-project:nth-child(3) .col-sm-4 {
+  float: right;
+}
+.boxes-project:nth-child(3) .col-md-8,
+.boxes-project:nth-child(3) .col-sm-8 {
+  text-align: right;
+}
+.boxes-project:nth-child(5) .col-md-4,
+.boxes-project:nth-child(5) .col-sm-4 {
+  float: right;
+}
+.boxes-project:nth-child(5) .col-md-8,
+.boxes-project:nth-child(5) .col-sm-8 {
+  text-align: right;
+}
+.work-description {
+  margin-top: 100px;
+}
+.work-description h3 {
+  color: #555;
+}
 .recent-work-wrap > .titles {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0px;
+  border-radius: 50%;
   text-align: center;
   font-size: 24px;
   padding: 80px 20px 10px;
   color: #fff;
-  background: rgba(224,143,23,0.6);
+  background: rgba(0,0,0,0.1);
   text-shadow: 0 0 10px #000;
 }
 #recent-works {
   padding: 60px 0;
+}
+#recent-works .title {
+  padding-bottom: 40px;
 }
 #recent-works .title h1 {
   color: #555;
 }
 .recent-work-wrap {
   position: relative;
-  margin: 30px;
-  height: 250px;
+  margin: 15px;
+  height: 300px;
   background-size: cover;
   background-position: center center;
+  border-radius: 50%;
 }
 .recent-work-wrap img {
   width: 100%;
@@ -336,8 +363,8 @@ header .logo {
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   opacity: 0;
-  border-radius: 0;
   background: #e08f17;
   color: #fff;
   vertical-align: middle;
@@ -838,6 +865,12 @@ color
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .recent-work-wrap {
+    height: 200px;
+  }
+  .work-description {
+    margin-top: 50px;
+  }
   header .navbar-default .navbar-nav .dropdown .dropdown-menu {
     background: #389c80;
     box-shadow: none;
@@ -926,6 +959,29 @@ color
   }
 }
 @media only screen and (max-width: 767px) {
+  .boxes-project {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .boxes-project .work-description {
+    margin-top: 10px;
+  }
+  .boxes-project:nth-child(3) .col-md-4,
+  .boxes-project:nth-child(3) .col-sm-4 {
+    float: none;
+  }
+  .boxes-project:nth-child(3) .col-md-8,
+  .boxes-project:nth-child(3) .col-sm-8 {
+    text-align: right;
+  }
+  .boxes-project:nth-child(5) .col-md-4,
+  .boxes-project:nth-child(5) .col-sm-4 {
+    float: none;
+  }
+  .boxes-project:nth-child(5) .col-md-8,
+  .boxes-project:nth-child(5) .col-sm-8 {
+    text-align: right;
+  }
   header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a {
     color: #fff;
   }

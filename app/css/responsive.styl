@@ -65,6 +65,10 @@
 
 
 @media only screen and (min-width: 768px) and (max-width: 1024px)
+  .recent-work-wrap
+    height 200px
+  .work-description
+    margin-top 50px
 
   header .navbar-default .navbar-nav .dropdown .dropdown-menu
     background #389c80
@@ -154,6 +158,21 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  .boxes-project
+    margin-bottom 15px
+    text-align center
+    .work-description
+      margin-top 10px
+    &:nth-child(3)
+      .col-md-4,.col-sm-4
+        float none
+      .col-md-8,.col-sm-8
+        text-align right
+    &:nth-child(5)
+      .col-md-4,.col-sm-4
+        float none
+      .col-md-8,.col-sm-8
+        text-align right
 
   header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a
     color white
