@@ -13,7 +13,7 @@
             })
             .state('home', {
                 url: '/',
-                data: {pageTitle: 'Vive En Armonía - Construyendo tu futuro'},
+                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -69,7 +69,7 @@
 
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Vive En Armonía - Construyendo tu futuro'},
+                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -78,23 +78,23 @@
                     }
                 }
             })
-            .state('category_product', {
-                url: '/product/category/:slug',
-                data: {pageTitle: 'Vive En Armonía - Nuestros proyectos'},
+            .state('category_project', {
+                url: '/project/category/:slug',
+                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
                 views: {
                     'content': {
-                        templateUrl: '/templates/products.html',
+                        templateUrl: '/templates/project.html',
                         controllerAs: 'Post',
                         controller: 'PostCtrl'
                     }
                 }
             })
-            .state('product_detail', {
-                url: '/product/:slug',
+            .state('project_detail', {
+                url: '/project/:slug',
                 views: {
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
-                        templateUrl: '/templates/product_detail.html',
+                        templateUrl: '/templates/project_detail.html',
                         controllerAs: 'Item',
                         controller: 'PostDetailCtrl'
                     }
@@ -109,10 +109,21 @@
                         controller: 'SearchCtrl'
                     }
                 }
+            })
+            .state('payment_plans', {
+                url: '/payment-plans',
+                data: {pageTitle: 'Vive En Armonía - Planes de pago'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/payment-plans.html',
+                        controllerAs: 'Plan',
+                        controller: 'PaymentPlansCtrl'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig(blockUIConfig) {
@@ -130,12 +141,12 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv, $anchorScroll) {
         $rootScope.$state = $state;
-        $http.defaults.headers.common['TS-TOKEN'] = 'I7NZkqNQOe0eXWXu8dkz3B6htVQxvG9JLUtl2K96';
+        $http.defaults.headers.common['TS-TOKEN'] = 'KCdEsjmrc9bRNjDKhbqPnt5NWOtKwDbUxNKapAPx';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainmenu').collapse('hide');
         });
         // initialise google analytics
-        $window.ga('create', 'UA-53555832-25', 'remolquesmagu.com');
+        $window.ga('create', 'UA-53555832-27', 'viveenarmonia.com.mx');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
@@ -143,18 +154,18 @@
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Vive En Armonía',
-                'excerpt': 'Trabajo y material de calidad',
+                'excerpt': 'Inmobiliaria',
                 'urlImages': {
-                    'original': 'http://www.remolquesmagu.com/img/img-default.jpg'
+                    'original': 'http://www.viveenarmonia.com.mx/img/img-default.jpg'
                 }
             };
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Vive En Armonía - Trabajo y material de calidad';
+        $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: '814f21f0-7be0-4ea3-b23e-e8b8534f632f',
+                parent: '5bb6cb73-1a97-4c97-b4f6-0c9cb3a687af',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {

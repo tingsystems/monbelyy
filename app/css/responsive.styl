@@ -65,6 +65,19 @@
 
 
 @media only screen and (min-width: 768px) and (max-width: 1024px)
+  .recent-work-wrap
+    height 200px
+  .work-description
+    margin-top 50px
+
+  header .navbar-default .navbar-nav .dropdown .dropdown-menu
+    background #389c80
+    box-shadow none
+    border-radius 0
+
+  header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a
+    color white
+
   .navbar-logo
     display none
     .logo-img
@@ -90,7 +103,7 @@
     border-color transparent
 
   .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus
-    background orange
+    background transparent
 
   .navbar-default .navbar-toggle
     border-color transparent
@@ -112,18 +125,17 @@
   .navbar-nav
     background white
     margin-top 30px
+    box-shadow 0 4px 5px rgba(0,0,0,0.3)
+    border-top 1px solid #f5f5f5
 
   .carousel-inner > .item > img
     height 600px
 
-  .carousel-inner
-    margin-top 100px
-
-  .carousel-caption .box-mail
-    margin -130px 20px 0
-
   .recent-work-wrap
     margin 5px
+
+  .carousel-caption
+    top 15%
 
   .recent-work-wrap > .titles
     padding 35px 20px 10px
@@ -146,24 +158,49 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  .boxes-project
+    margin-bottom 15px
+    text-align center
+    .work-description
+      margin-top 10px
+    &:nth-child(3)
+      .col-md-4,.col-sm-4
+        float none
+      .col-md-8,.col-sm-8
+        text-align right
+    &:nth-child(5)
+      .col-md-4,.col-sm-4
+        float none
+      .col-md-8,.col-sm-8
+        text-align right
+
+  header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a
+    color white
+
+  header .navbar-default .navbar-nav .dropdown .dropdown-menu
+    background #389c80
+    box-shadow none
+    border-radius 0
+
+  .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus
+    background transparent
   .parallax .contact
     padding 20px
-  
+
   #product-detail
     margin 0
     .title-detail .content-title .title
       padding-left 0
       text-align center
-      margin-top 50px
+      margin-top 25%
   .form-section
     background transparent
     padding 0
-    margin 60px 0px 25px
-
+    margin 160px 0px 25px
+  .carousel-caption
+    top 13%
   .navbar-default .navbar-toggle
     border-color transparent
-  .carousel-caption .box-mail
-    display none
   #contact-section
     background-size cover
     padding 30px 0
@@ -185,15 +222,15 @@
   .navbar-default .navbar-collapse, .navbar-default .navbar-form
     border none
   .navbar-nav
-    background white
-    margin-top 30px
+    background #fff
+    margin-top 20px
+    box-shadow 0 4px 5px rgba(0,0,0,0.3)
+    border-top 1px solid #f5f5f5
   header .navbar-default
     background white
   header .logo
     margin-top 15px
-    width 280px
-  .navbar-fixed-top
-    position relative
+    width 230px
   h2.title-outstanding
     font-size 16px !important
     padding 20px 10px !important
@@ -204,12 +241,13 @@
 
   header .navbar-default .navbar-nav > li > a
     color #555
-    padding 10px 15px
-
+    padding 15px 15px
+  .social-media .social a
+    word-wrap break-word
   #content-area
-    margin 30px 0px 60px
+    margin 150px 0px 60px
   .content-blog
-    margin 25px 0px 60px !important
+    margin 130px 0px 60px !important
   #slider-area
     padding-bottom 300px
 

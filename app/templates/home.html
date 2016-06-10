@@ -1,140 +1,47 @@
-<div id="carousel-home" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img width="100%" src="img/slide.jpg" alt="...">
-
-            <div class="carousel-caption">
-                <div class="col-md-12">
-                    <div class="col-md-7 text"></div>
-                    <div class="col-md-5">
-                        <form class="box-mail">
-                            <h4>Contáctanos y pregunta por nuestros planes</h4>
-
-                            <div class="form-group">
-                                <input type="name" class="form-control" id="exampleInputEmail1" placeholder="Nombre">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="phone"
-                                       placeholder="Teléfono">
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control">
-                                    <option>Fraccionamiento de interés</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="text" id="" cols="100%" rows="6"
-                                          placeholder="Comentarios"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-orange">Enviar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<div class="carousel slide" id="carousel-home">
+    <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
+        <uib-slide ng-repeat="slide in Home.mainSlider">
+            <div class="slider-img" style="background-image:url('{{ slide.urlImages.large }}');"></div>
+        </uib-slide>
+        <div class="carousel-caption">
+            <h3>Tú Jóven que estás comenzando a construir tu futuro contamos con los
+                los mejores planes de financiamiento, para ese proyecto que tanto anhelas</h3>
         </div>
-    </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-home" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-home" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+    </uib-carousel>
 </div>
+
 <section id="contact-section" class="section_padding">
     <div class="container">
         <div class="col-md-8 col-sm-8">
-            <h3 class="white">Tú Jóven que estás trabajando o estudiando, contamos con
-                los mejores planes para ti; comienza a construir tu futuro.</h3>
+            <h3 class="white">Tú Jóven que estás comenzando a construir tu futuro contamos con los
+                los mejores planes de financiamiento, para ese proyecto que tanto anhelas.</h3>
         </div>
         <div class="col-md-4 col-sm-4">
-            <a href="#" class="btn btn-white-clear"> Ver planes</a>
+            <a ui-sref="payment_plans" class="btn btn-white-clear"> Ver planes</a>
         </div>
     </div>
 </section>
 
-<!-- recent works fraccionamientos -->
+<!-- fraccionamientos -->
 <section id="recent-works" class="section_padding">
     <div class="container">
         <div class="title text-center">
-            <h1> Fraccionamientos </h1>
+            <h1> Proyectos recientes </h1>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-            <div class="recent-work-wrap back-image">
-                <img class="img-responsive"
-                     src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                     alt="Restaurantes">
-
-                <div class="titles">
-                    <h3>Jardín real Mazamitla</h3>
-
-                    <p>Fraccionamiento Ubicado en Av. del Sol Col. el solecito, Sahuayo, Michoacán, Méx.</p>
-                </div>
-
-                <div class="overlay">
-                    <div class="recent-work-inner top">
-                        <h3>Jardín real Mazamitla</h3>
-
-                        <a href="#" class="btn-white-clear">+ Información</a></div>
+        <div class="col-xs-12 col-sm-12 col-md-12 boxes-project" ng-repeat="project in Home.recentProjects">
+            <div class="col-md-4 col-sm-4">
+                <div class="recent-work-wrap back-image"
+                     style="background-image:url('{{ project.urlImages.thumbnails }}')">
+                    <div class="titles"></div>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-            <div class="recent-work-wrap back-image">
-                <img class="img-responsive"
-                     src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                     alt="Restaurantes">
+            <div class="col-md-8 col-sm-8 work-description">
+                <h3>{{ project.title }}</h3>
 
-                <div class="titles">
-                    <h3>Jardín real Mazamitla</h3>
-
-                    <p>Fraccionamiento Ubicado en Av. del Sol Col. el solecito, Sahuayo, Michoacán, Méx.</p>
-                </div>
-
-                <div class="overlay">
-                    <div class="recent-work-inner top">
-                        <h3>Jardín real Mazamitla</h3>
-
-                        <a href="#" class="btn-white-clear">+ Información</a></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-            <div class="recent-work-wrap back-image">
-                <img class="img-responsive"
-                     src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                     alt="Restaurantes">
-
-                <div class="titles">
-                    <h3>Jardín real Mazamitla</h3>
-
-                    <p>Fraccionamiento Ubicado en Av. del Sol Col. el solecito, Sahuayo, Michoacán, Méx.</p>
-                </div>
-
-                <div class="overlay">
-                    <div class="recent-work-inner top">
-                        <h3>Jardín real Mazamitla</h3>
-
-                        <a href="#" class="btn-white-clear">+ Información</a></div>
-                </div>
+                <p>{{ project.excerpt }}</p>
+                <a ui-sref="project_detail({slug: project.slug})"
+                   post-link="{ link: {url: project.link, target: '_self'} }"
+                   class="btn-orange">+ Información</a>
             </div>
         </div>
     </div>
@@ -145,20 +52,12 @@
         <div class="parallax__layer parallax__layer--base">
             <div id="contact" class="container section_padding">
                 <div class="text-center title">
-                    <h2>¿Por qué elegirnos ?</h2>
+                    <h2>{{ Home.whyChooseUs[0].title }}</h2>
 
                 </div>
                 <div class="col-md-8 col-md-offset-2">
                     <div class="row">
-                        <div class="contact text-center">
-                            <p>Adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt
-
-                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum. </p>
+                        <div class="contact text-center" ng-bind-html="Home.whyChooseUs[0].content">
                         </div>
                         <div class="contact social-media">
                             <a href="tel:3531281375"><i class="fa fa-phone"></i>
@@ -184,82 +83,20 @@
         <div class="title text-center">
             <h1> Noticias </h1>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="new in Home.news">
             <div class="box-default">
-                <a href="#">
+                <a ui-sref="post_detail({slug: new.slug})" post-link="{ link: {url: new.link, target: '_self'} }">
                     <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
+                        <img class="img-responsive" post-image="{{ new.urlImages.thumbnails }}" alt="{{ new.title }}">
                     </div>
 
                     <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
+                        <h3>{{ new.title }}</h3>
 
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
+                        <p>{{ new.excerpt }}</p>
                     </div>
                     <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <div class="box-default">
-                <a href="#">
-                    <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
-                    </div>
-
-                    <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
-
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
-                    </div>
-                    <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <div class="box-default">
-                <a href="#">
-                    <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
-                    </div>
-
-                    <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
-
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
-                    </div>
-                    <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
-            <div class="box-default">
-                <a href="#">
-                    <div class="box-header">
-                        <img class="img-responsive"
-                             src="https://kendall-publielite.s3.amazonaws.com/media/categories/ico_restaurante.png"
-                             alt="Restaurantes">
-                    </div>
-
-                    <div class="box-container">
-                        <h3>sed do eiusmod tempor</h3>
-
-                        <p>Adipiscing elit, sed do eiusmod tempor incididuntut labore...</p>
-                    </div>
-                    <div class="box-footer">
-                        <i class="fa fa-calendar"></i> 22/05/2016
+                        <i class="fa fa-calendar"></i> {{ new.createdAt|date: 'dd/MM/yyyy' }}
                     </div>
                 </a>
             </div>

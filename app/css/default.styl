@@ -44,7 +44,7 @@ h4,
 h5,
 h6
   margin 0 0 15px
-  font-weight 700
+  font-weight 500
   font-family 'Poppins', sans-serif
 
 .section_padding
@@ -52,11 +52,11 @@ h6
 
 p
   font-family 'Poppins', sans-serif
-  font-weight 400
+  font-weight 300
   font-size 14px
 
 body
-  font-family 'Poppins', sans-serif
+  font-family 'Poppins', sans-serif !important
 
 .white
   color white !important
@@ -150,16 +150,24 @@ header
     margin-top 10px
 
 /********************************/
-
+.slider-img
+  background-position center center
+  background-size cover
+  height 650px
+  background-repeat no-repeat
+  margin-top 100px
 .carousel-caption
-  top 20%
-  width 80%
-  left 10%
+  top 42%
+  width 60%
+  h3
+    text-shadow 0 0 10px #000
+    font-size 26px
   .text
     margin-top 40px
   .box-mail
     background rgba(255,255,255, 0.8)
     border-radius 3px
+    box-shadow 0 0 10px rgba(0, 0, 0, 0.22)
     padding 15px
     h4
       color #5d5d5d
@@ -253,30 +261,51 @@ header
   .title
     color #555555
     padding-bottom 15px
+.boxes-project
+  &:nth-child(3)
+    .col-md-4,.col-sm-4
+      float right
+    .col-md-8,.col-sm-8
+      text-align right
+  &:nth-child(5)
+    .col-md-4,.col-sm-4
+      float right
+    .col-md-8,.col-sm-8
+      text-align right
+.work-description
+  margin-top 100px
+  h3
+    color #555
 .recent-work-wrap > .titles
   position absolute
   width 100%
   height 100%
   top 0px
+  border-radius 50%
   text-align center
   font-size 24px
   padding 80px 20px 10px
   color #fff
-  background rgba(224, 143, 23, 0.6)
+  background rgba(0,0,0,0.1)
   text-shadow 0 0 10px #000
 #recent-works
   padding 60px 0
   .title
+    padding-bottom 40px
     h1
       color #555
 
 .recent-work-wrap
   position relative
-  margin 30px
+  margin 15px
+  height 300px
+  background-size cover
+  background-position center center
+  border-radius 50%
 
 .recent-work-wrap img
   width 100%
-
+  height 250px
 .recent-work-wrap .recent-work-inner
   top 0
   background transparent
@@ -298,8 +327,8 @@ header
   left 0
   width 100%
   height 100%
+  border-radius 50%
   opacity 0
-  border-radius 0
   background #E08F17
   color #fff
   vertical-align middle
@@ -327,7 +356,7 @@ header
 #contact-section
   background-image url("../img/banner-bottom.jpg")
   background-repeat no-repeat
-  background-position cover
+  background-size cover
   text-align center
   h3
     text-align left
@@ -375,8 +404,9 @@ header
     .comment, .date
       color #5d5d5d
   .box-header
-    img
-      width 100%
+    height 250px
+    background-size cover
+    background-position center center
   .box-container
     text-align left
     h1
