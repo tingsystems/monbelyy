@@ -1,10 +1,12 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
-            <div class="slider-img" style="background-image:url('{{ slide.urlImages.large }}');"></div>
-            <div class="carousel-caption">
-                <h3><a post-link="{ link: {url: slide.link, target: '_self'} }" style="color: #fff;">{{ slide.excerpt }}</a></h3>
-            </div>
+            <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                <div class="slider-img" style="background-image:url('{{ slide.urlImages.large }}');"></div>
+                <div class="carousel-caption">
+                    <h3>{{ slide.excerpt }}</h3>
+                </div>
+            </a>
         </uib-slide>
     </uib-carousel>
 </div>
