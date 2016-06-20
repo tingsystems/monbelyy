@@ -141,16 +141,16 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv, $anchorScroll) {
         $rootScope.$state = $state;
-        $http.defaults.headers.common['TS-TOKEN'] = 'KCdEsjmrc9bRNjDKhbqPnt5NWOtKwDbUxNKapAPx';
+        $http.defaults.headers.common['TS-TOKEN'] = 'uOVTXJTCEQ7EDNpGlzvlJvDTv0NY1OF1OWCEtk3P';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainmenu').collapse('hide');
         });
         // initialise google analytics
-        $window.ga('create', 'UA-53555832-27', 'viveenarmonia.com.mx');
+        //$window.ga('create', 'UA-53555832-27', '');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
-            $window.ga('send', 'pageview', $location.path());
-            $window.ga('require', 'displayfeatures');
+            //$window.ga('send', 'pageview', $location.path());
+            //$window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Vive En Armonía',
