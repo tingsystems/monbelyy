@@ -1,108 +1,170 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-        <uib-slide ng-repeat="slide in Home.mainSlider">
+        <uib-slide>
             <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                <div class="slider-img" style="background-image:url('{{ slide.urlImages.large }}');"></div>
+                <div class="slider-img" style="background-image:url('img/slider.jpg');"></div>
                 <div class="carousel-caption">
-                    <h3>{{ slide.excerpt }}</h3>
+
+                    <h3>¿Qué puede Usted esperar de nosotros? </h3>
+
+                    <p>Le invitamos a conocer nuestra firma de abogados, con seguridad le espera un equipo dinámico de
+                        profesionales
+                        con visión multidisciplinar que integra tanto el asesoramiento
+                        Jurídico como el Económico y el Fiscal.</p>
+
                 </div>
             </a>
         </uib-slide>
     </uib-carousel>
 </div>
-
-<section id="contact-section" class="section_padding">
+<section id="who-are" class="section_padding">
     <div class="container">
-        <div class="col-md-8 col-sm-8">
-            <h3 class="white">Tú Jóven que estás comenzando a construir tu futuro contamos con los
-                los mejores planes de financiamiento, para ese proyecto que tanto anhelas.</h3>
+        <div class="col-md-4 col-sm-4">
+            <img src="img/partners.jpg" alt="¿Quiénes sómos?"/>
+        </div>
+        <div class="col-md-8 col-sm-8 description">
+            <h2>¿Quiénes sómos?</h2>
+
+            <p>Financial Coaching Services es una solución efectiva de gestión
+                de cobro concebida por profesionales del derecho y del recobro
+                con experiencia en el sector de recuperación de deudas. Es una
+                empresa experta en recobro de impagados extrajudicial y
+                judicial, con una profunda base de derecho civil y mercantil, y
+                cuando así lo amerite, del tipo penal.</p>
+        </div>
+    </div>
+</section>
+<!-- fraccionamientos -->
+<section id="services" class="section_padding">
+    <div class="container-fluid no-padding">
+        <div class="col-xs-12 col-sm-12 col-md-12 boxes-project no-padding">
+            <div class="col-md-4 col-sm-4 no-padding">
+                <div class="recent-work-wrap back-image"
+                     style="background-image:url('img/img-default.jpg')">
+                    <div class="titles"><h3>Atención Comercial</h3></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 no-padding">
+                <div class="recent-work-wrap back-image"
+                     style="background-image:url('img/img-default.jpg')">
+                    <div class="titles"><h3>Atención Comercial</h3></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 no-padding">
+                <div class="recent-work-wrap back-image"
+                     style="background-image:url('img/img-default.jpg')">
+                    <div class="titles"><h3>Atención Comercial</h3></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="politics" class="section_padding">
+    <div class="container">
+        <div class="col-md-8 col-sm-8 description">
+            <h2>Nuestra política</h2>
+
+            <p>Aunque la mejor política es la preventiva, el riesgo de sufrir
+                impagados existe en toda empresa y en ocasiones no puede
+                evitarse. Las empresas pueden tener diversos motivos para
+                no pagar aquello que deberían por la compra de un producto
+                o la prestación de un servicio, aunque en la mayoría de los
+                casos las empresas que no pagan sus deudas es...</p>
+            <button class="btn-coffee-clear">Ver más</button>
         </div>
         <div class="col-md-4 col-sm-4">
-            <a ui-sref="payment_plans" class="btn btn-white-clear"> Ver planes</a>
+            <img src="img/abogados.jpg" alt="Nuestra política"/>
         </div>
     </div>
 </section>
-
-<!-- fraccionamientos -->
-<section id="recent-works" class="section_padding">
+<section id="contract" class="section_padding">
     <div class="container">
-        <div class="title text-center">
-            <h1> Proyectos recientes </h1>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 boxes-project" ng-repeat="project in Home.recentProjects">
-            <div class="col-md-4 col-sm-4">
-                <div class="recent-work-wrap back-image"
-                     style="background-image:url('{{ project.urlImages.thumbnails }}')">
-                    <div class="titles"></div>
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-8 work-description">
-                <h3>{{ project.title }}</h3>
+        <div class="col-md-12 description">
+            <h2>¿Porqué contratarnos?</h2>
 
-                <p>{{ project.excerpt }}</p>
-                <a ui-sref="project_detail({slug: project.slug})"
-                   post-link="{ link: {url: project.link, target: '_self'} }"
-                   class="btn-orange">+ Información</a>
-            </div>
+            <p>Nuestro equipo le asegura una amplia competencia profesional. Aún así lo más importante para
+                nosotros es el contacto personal donde la mutua confianza y la franqueza son la mejor base para
+                el mejor asesoramiento posible. Por ello Usted tendrá siempre a su persona de confianza como su
+                asesor personal, que será el responsable por y para Usted y le atenderá estando siempre en
+                intercambio con sus colegas, respaldado así por un equipo especializado en cada cuestión,
+                pero integrándola al todo de la situación.</p>
         </div>
     </div>
 </section>
-
-<section class="parallax">
-    <div class="parallax__group">
-        <div class="parallax__layer parallax__layer--base">
-            <div id="contact" class="container section_padding">
-                <div class="text-center title">
-                    <h2>{{ Home.whyChooseUs[0].title }}</h2>
-
-                </div>
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="row">
-                        <div class="contact text-center" ng-bind-html="Home.whyChooseUs[0].content">
-                        </div>
-                        <div class="contact social-media">
-                            <a href="tel:3531281375"><i class="fa fa-phone"></i>
-                                01 353 128 13 75</a>
-                            <a href="tel:3531020871"><i class="fa fa-whatsapp"></i>
-                                353 102 0871</a>
-                            <a href="mailto:viveenarmonia.com.mx" style="font-size: 19px;"><i
-                                    class="fa fa-envelope"></i>
-                                info@viveenarmonia.com.mx</a>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- recent works fraccionamientos -->
-<section id="news" class="section_padding">
+<section id="presence" class="section_padding">
     <div class="container">
-        <div class="title text-center">
-            <h1> Noticias </h1>
+        <div class="col-md-12">
+            <div class="col-md-8 description">
+                <h2>Presencia</h2>
+
+                <p>Financial Coaching Services somos una empresa con
+                    presencia en todo México. Estar cerca de nuestros clientes
+                    nos permite mantener una comunicación directa y fluida.
+                    Usted, como cliente y acreedor, permanecerá constantemente
+                    informado en tiempo real de la evolución del cobro de la
+                    deuda a través de email o teléfono.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="img/icon.png" alt="Presencia"/>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="new in Home.news">
-            <div class="box-default">
-                <a ui-sref="post_detail({slug: new.slug})" post-link="{ link: {url: new.link, target: '_self'} }">
-                    <div class="box-header">
-                        <img class="img-responsive" post-image="{{ new.urlImages.thumbnails }}" alt="{{ new.title }}">
-                    </div>
+        <div class="col-md-12 process">
+            <div class="col-md-4 ">
+                <img src="img/img-abogados.jpg" alt="Procedimiento Judicial"/>
+            </div>
+            <div class="col-md-8 description">
+                <h2>Procedimiento Judicial</h2>
 
-                    <div class="box-container">
-                        <h3>{{ new.title }}</h3>
-
-                        <p>{{ new.excerpt }}</p>
-                    </div>
-                    <div class="box-footer">
-                        <i class="fa fa-calendar"></i> {{ new.createdAt|date: 'dd/MM/yyyy' }}
-                    </div>
-                </a>
+                <p>En el caso de no haber alcanzado el éxito en el cobro de la deuda
+                    por vía extrajudicial, damos la opción al cliente sin costo añadido,
+                    de iniciar el procedimiento judicial. En este punto, Financial
+                    Coaching Services prepara para el cliente la demanda o denuncia
+                    según el caso contra el deudor para presentarse ante el juzgado
+                    competente. Todos los expedientes son gestionados por abogados
+                    especialistas en el sector, garantizando una profesionalidad y
+                    diligencia única en el mercado en cuanto al servicio judicial.</p>
             </div>
         </div>
     </div>
 </section>
+<section id="contact" class="section_padding">
+    <div class="container">
+        <h3>Contáctanos</h3>
+        <hr class="divider"/>
+        <div class="col-md-6 contact-us">
+            <h4><a href="tel:3338801234"><i class="fa fa-phone"></i> (33) 3880 12 34</a></h4>
+            <h4><a href="tel:3338801200"><i class="fa fa-print"></i> Fax (33) 3880 12 00</a></h4>
+            <h4><a href="mailto:info@loredoyasociados.com.mx"><i class="fa fa-envelope"></i>
+                info@loredoyasociados.com.mx</a></h4>
+            <h4><i class="fa fa-map-marker"></i> Av. Moctezuma 3515 Local B Ciudad del Sol C.P. 45050, Zapopan Jalisco.
+            </h4>
+        </div>
+        <div class="col-md-6">
+            <form class="padding" ng-submit="Contact.createNotification('CONTACT_FORM')"
+                  ng-init="Contact.notification.subject = 'Formulario de contacto'">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
+                           required ng-model="Contact.notification.name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email"
+                           placeholder="Correo electrónico" required ng-model="Contact.notification.email">
+                </div>
+                <div class="form-group">
+                                <textarea class="form-control" id="message" name="message" rows="4"
+                                          placeholder="Comentarios *" required
+                                          ng-model="Contact.notification.message"></textarea>
+                </div>
+                <div class="pull-right">
+                    <button type="submit" class="btn-white-clear" ng-disabled="Contact.busy">
+                        Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
+                    </button>
 
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
