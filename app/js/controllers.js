@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, $rootScope) {
+    function HomeCtrl(PostSrv, PostDetailSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
@@ -17,13 +17,13 @@
             });
 
         PostSrv.get({
-            category: 'proyectos-recientes',
+            category: 'servicios',
             isActive: 'True',
-            sizePage: 4,
+            sizePage: 10,
             ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,createdAt,excerpt'
+            fields: 'urlImages,title,link,slug'
         }).$promise.then(function (results) {
-                self.recentProjects = results.results;
+                self.services = results.results;
             });
 
         PostSrv.get({
@@ -36,14 +36,12 @@
                 self.news = results.results;
             });
 
-        PostSrv.get({
-            category: 'por-que-elegirnos',
+        PostDetailSrv.get({
+            slug: 'quienes-somos1466721866',
             isActive: 'True',
-            sizePage: 1,
-            kind: 'post',
-            fields:'content,link,title'
+            fields:'title,excerpt,slug,urlImages'
         }).$promise.then(function (results) {
-                self.whyChooseUs = results.results;
+                self.about = results;
             });
 
         PostSrv.query({
@@ -333,7 +331,7 @@
         .controller('BlogCtrl', BlogCtrl)
         .controller('PaymentPlansCtrl', PaymentPlansCtrl);
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
+    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope'];

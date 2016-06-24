@@ -17,17 +17,12 @@
 <section id="who-are" class="section_padding">
     <div class="container">
         <div class="col-md-4 col-sm-4">
-            <img src="img/partners.jpg" alt="¿Quiénes sómos?"/>
+            <img post-image="{{ Home.about.urlImages.original }}" alt="¿Quiénes sómos?"/>
         </div>
         <div class="col-md-8 col-sm-8 description">
-            <h2>¿Quiénes sómos?</h2>
+            <h2>{{ Home.about.title }}</h2>
 
-            <p>Financial Coaching Services es una solución efectiva de gestión
-                de cobro concebida por profesionales del derecho y del recobro
-                con experiencia en el sector de recuperación de deudas. Es una
-                empresa experta en recobro de impagados extrajudicial y
-                judicial, con una profunda base de derecho civil y mercantil, y
-                cuando así lo amerite, del tipo penal.</p>
+            <p class="text-justify">{{ Home.about.excerpt }}</p>
         </div>
     </div>
 </section>
@@ -35,25 +30,12 @@
 <section id="services" class="section_padding">
     <div class="container-fluid no-padding">
         <div class="col-xs-12 col-sm-12 col-md-12 boxes-project no-padding">
-            <div class="col-md-4 col-sm-4 no-padding">
+            <div ng-repeat="service in Home.services" class="col-md-3 col-sm-2 no-padding">
                 <div class="recent-work-wrap back-image"
-                     style="background-image:url('img/img-default.jpg')">
-                    <div class="titles"><h3>Atención Comercial</h3></div>
+                     style="background-image:url('{{ service.urlImages.medium ? service.urlImages.medium : 'http://localhost:8080/img/img-default.jpg'  }}')">
+                    <div class="titles"><h3>{{ service.title }}</h3></div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 no-padding">
-                <div class="recent-work-wrap back-image"
-                     style="background-image:url('img/img-default.jpg')">
-                    <div class="titles"><h3>Atención Comercial</h3></div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4 no-padding">
-                <div class="recent-work-wrap back-image"
-                     style="background-image:url('img/img-default.jpg')">
-                    <div class="titles"><h3>Atención Comercial</h3></div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
