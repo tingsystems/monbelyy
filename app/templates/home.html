@@ -17,7 +17,7 @@
 <section id="who-are" class="section_padding">
     <div class="container">
         <div class="col-md-4 col-sm-4">
-            <img post-image="{{ Home.about.urlImages.original }}" alt="¿Quiénes sómos?"/>
+            <img post-image="{{ Home.about.urlImages.original }}" alt="{{ Home.about.title }}"/>
         </div>
         <div class="col-md-8 col-sm-8 description">
             <h2>{{ Home.about.title }}</h2>
@@ -31,10 +31,12 @@
     <div class="container-fluid no-padding">
         <div class="col-xs-12 col-sm-12 col-md-12 boxes-project no-padding">
             <div ng-repeat="service in Home.services" class="col-md-3 col-sm-2 no-padding">
-                <div class="recent-work-wrap back-image"
-                     style="background-image:url('{{ service.urlImages.medium ? service.urlImages.medium : 'http://localhost:8080/img/img-default.jpg'  }}')">
-                    <div class="titles"><h3>{{ service.title }}</h3></div>
-                </div>
+                <a post-link="{ link: {url: service.link, target: '_self'} }" ui-sref="post_detail({slug: service.slug })">
+                    <div class="recent-work-wrap back-image"
+                         style="background-image:url('{{ service.urlImages.medium ? service.urlImages.medium : 'http://localhost:8080/img/img-default.jpg'  }}')">
+                        <div class="titles"><h3>{{ service.title }}</h3></div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -43,32 +45,22 @@
 <section id="politics" class="section_padding">
     <div class="container">
         <div class="col-md-8 col-sm-8 description">
-            <h2>Nuestra política</h2>
+            <h2>{{ Home.our_policy.title }}</h2>
 
-            <p>Aunque la mejor política es la preventiva, el riesgo de sufrir
-                impagados existe en toda empresa y en ocasiones no puede
-                evitarse. Las empresas pueden tener diversos motivos para
-                no pagar aquello que deberían por la compra de un producto
-                o la prestación de un servicio, aunque en la mayoría de los
-                casos las empresas que no pagan sus deudas es...</p>
-            <button class="btn-coffee-clear">Ver más</button>
+            <p class="text-justify">{{ Home.our_policy.excerpt }}</p>
+            <a ui-sref="post_detail({slug: Home.our_policy.slug})" class="btn-coffee-clear">Ver más</a>
         </div>
         <div class="col-md-4 col-sm-4">
-            <img src="img/abogados.jpg" alt="Nuestra política"/>
+            <img post-image="{{ Home.our_policy.urlImages.original }}" alt="{{ Home.our_policy.title }}"/>
         </div>
     </div>
 </section>
 <section id="contract" class="section_padding">
     <div class="container">
         <div class="col-md-12 description">
-            <h2>¿Porqué contratarnos?</h2>
+            <h2>{{ Home.why.title }}</h2>
 
-            <p>Nuestro equipo le asegura una amplia competencia profesional. Aún así lo más importante para
-                nosotros es el contacto personal donde la mutua confianza y la franqueza son la mejor base para
-                el mejor asesoramiento posible. Por ello Usted tendrá siempre a su persona de confianza como su
-                asesor personal, que será el responsable por y para Usted y le atenderá estando siempre en
-                intercambio con sus colegas, respaldado así por un equipo especializado en cada cuestión,
-                pero integrándola al todo de la situación.</p>
+            <p class="text-justify">{{ Home.why.excerpt }}</p>
         </div>
     </div>
 </section>
@@ -76,17 +68,12 @@
     <div class="container">
         <div class="col-md-12">
             <div class="col-md-8 description">
-                <h2>Presencia</h2>
+                <h2>{{ Home.presence.title }}</h2>
 
-                <p>Financial Coaching Services somos una empresa con
-                    presencia en todo México. Estar cerca de nuestros clientes
-                    nos permite mantener una comunicación directa y fluida.
-                    Usted, como cliente y acreedor, permanecerá constantemente
-                    informado en tiempo real de la evolución del cobro de la
-                    deuda a través de email o teléfono.</p>
+                <p class="text-justify">{{ Home.presence.excerpt }}</p>
             </div>
             <div class="col-md-4">
-                <img src="img/icon.png" alt="Presencia"/>
+                <img post-image="{{ Home.presence.urlImages.original }}" alt="{{ Home.presence.title }}"/>
             </div>
         </div>
         <div class="col-md-12 process">
