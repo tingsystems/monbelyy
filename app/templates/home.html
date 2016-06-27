@@ -30,7 +30,7 @@
 <section id="services" class="section_padding">
     <div class="container-fluid no-padding">
         <div class="col-xs-12 col-sm-12 col-md-12 boxes-project no-padding">
-            <div ng-repeat="service in Home.services" class="col-md-3 col-sm-2 no-padding">
+            <div ng-repeat="service in Home.services" class="col-md-6 col-sm-6 no-padding">
                 <a post-link="{ link: {url: service.link, target: '_self'} }" ui-sref="post_detail({slug: service.slug })">
                     <div class="recent-work-wrap back-image"
                          style="background-image:url('{{ service.urlImages.medium ? service.urlImages.medium : 'http://localhost:8080/img/img-default.jpg'  }}')">
