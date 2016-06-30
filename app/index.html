@@ -66,7 +66,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
 
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-target="#header-mainmenu" data-toggle="collapse"
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
                         ng-click="nav.isCollapsed = !nav.isCollapsed">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -77,56 +77,111 @@
                                                             class="logo" alt="Laredo y Asociados"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" collapse="nav.isCollapsed" id="header-mainmenu">
+            <div ng-if="!showResponsive" class="collapse navbar-collapse" collapse="nav.isCollapsed">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a du-smooth-scroll duration="800" href="#who-are" ng-if="$state.current.name == 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Nosotros</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nosotros</a>
                     </li>
                     <li>
                         <a du-smooth-scroll duration="800" href="#services" ng-if="$state.current.name == 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Servicios</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Servicios</a>
                     </li>
                     <li>
                         <a du-smooth-scroll duration="800" href="#politics" ng-if="$state.current.name == 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Nuestra política</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nuestra política</a>
                     </li>
                     <li>
                         <a du-smooth-scroll duration="800" href="#contract" ng-if="$state.current.name == 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Porqué contratarnos</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Porqué contratarnos</a>
                     </li>
                     <li>
                         <a du-smooth-scroll duration="800" href="#presence" ng-if="$state.current.name == 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Presencia</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Presencia</a>
                     </li>
                     <li>
                         <a du-smooth-scroll duration="800" href="#contact" ng-if="$state.current.name == 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
                     </li>
 
                     <li>
-                        <a ui-sref="post_detail({slug: 'quienes-somos1466721866'})" ng-if="$state.current.name != 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Nosotros</a>
+                        <a ui-sref="post_detail({slug: 'quienes-somos1466721866'})"
+                           ng-if="$state.current.name != 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nosotros</a>
                     </li>
                     <li>
                         <a ui-sref="home" ng-if="$state.current.name != 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Servicios</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Servicios</a>
                     </li>
                     <li>
                         <a ui-sref="post_detail({slug: 'nuestra-politica'})" ng-if="$state.current.name == '!home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Nuestra política</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nuestra política</a>
                     </li>
                     <li>
                         <a ui-sref="post_detail({slug: 'por-que-contratarnos'})" ng-if="$state.current.name != 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Porqué contratarnos</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Porqué contratarnos</a>
                     </li>
                     <li>
                         <a ui-sref="post_detail({slug: 'presencia'})" ng-if="$state.current.name != 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Presencia</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Presencia</a>
                     </li>
                     <li>
                         <a ui-sref="contact" ng-if="$state.current.name != 'home'"
-                               ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+            <div ng-if="showResponsive" class="collapse navbar-collapse" uib-collapse="nav.isCollapsed">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a du-smooth-scroll duration="800" href="#who-are" ng-if="$state.current.name == 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nosotros</a>
+                    </li>
+                    <li>
+                        <a du-smooth-scroll duration="800" href="#services" ng-if="$state.current.name == 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Servicios</a>
+                    </li>
+                    <li>
+                        <a du-smooth-scroll duration="800" href="#politics" ng-if="$state.current.name == 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nuestra política</a>
+                    </li>
+                    <li>
+                        <a du-smooth-scroll duration="800" href="#contract" ng-if="$state.current.name == 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Porqué contratarnos</a>
+                    </li>
+                    <li>
+                        <a du-smooth-scroll duration="800" href="#presence" ng-if="$state.current.name == 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Presencia</a>
+                    </li>
+                    <li>
+                        <a du-smooth-scroll duration="800" href="#contact" ng-if="$state.current.name == 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
+                    </li>
+
+                    <li>
+                        <a ui-sref="post_detail({slug: 'quienes-somos1466721866'})"
+                           ng-if="$state.current.name != 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nosotros</a>
+                    </li>
+                    <li>
+                        <a ui-sref="home" ng-if="$state.current.name != 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Servicios</a>
+                    </li>
+                    <li>
+                        <a ui-sref="post_detail({slug: 'nuestra-politica'})" ng-if="$state.current.name == '!home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Nuestra política</a>
+                    </li>
+                    <li>
+                        <a ui-sref="post_detail({slug: 'por-que-contratarnos'})" ng-if="$state.current.name != 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Porqué contratarnos</a>
+                    </li>
+                    <li>
+                        <a ui-sref="post_detail({slug: 'presencia'})" ng-if="$state.current.name != 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Presencia</a>
+                    </li>
+                    <li>
+                        <a ui-sref="contact" ng-if="$state.current.name != 'home'"
+                           ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -179,7 +234,16 @@
 <script src="/js/templates.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
-<script>(function (i, s, o, g, r, a, m) {i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {(i[r].q = i[r].q || []).push(arguments)}, i[r].l = 1 * new Date();a = s.createElement(o), m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m)})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');</script>
+<script>(function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+    a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');</script>
 <toasty></toasty>
 </body>
 </html>

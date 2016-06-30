@@ -295,6 +295,7 @@
     function NavBarCtrl() {
         var self = this;
         self.isCollapsed = true;
+        console.log(self.isCollapsed);
 
     }
 

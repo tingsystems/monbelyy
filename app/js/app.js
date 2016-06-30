@@ -112,7 +112,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig(blockUIConfig) {
@@ -143,7 +143,7 @@
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Laredo y Asociados',
-                'excerpt': 'Inmobiliaria',
+                'excerpt': 'Somos una una solución efectiva de gestión de cobro concebida por profesionales del derecho y del recobro con experiencia en el sector de recuperación de deudas.',
                 'urlImages': {
                     'original': 'http://www.viveenarmonia.com.mx/img/img-default.jpg'
                 }
@@ -151,7 +151,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
+        $rootScope.pageTitle = 'Laredo y Asociados';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
                 parent: '5bb6cb73-1a97-4c97-b4f6-0c9cb3a687af',
@@ -162,6 +162,14 @@
                 }, function (error) {
                 });
         }
+        function showResponsive($window) {
+            if ($window.innerWidth <= 768) {
+                return true
+            }
+            return false
+        }
+
+        $rootScope.showResponsive = showResponsive($window);
 
     }
 
