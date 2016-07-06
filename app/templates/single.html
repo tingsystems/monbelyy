@@ -6,11 +6,6 @@
                     <h2 class="title">{{ Post.detail.title }}</h2>
                 </div>
                 <div class="content-post">
-                    <div style="width: 50%;margin: 0 auto; padding-bottom:20px;">
-                        <br/>
-                        <img ng-src="{{ Post.detail.urlImages.medium }}"
-                             class="img-responsive"
-                             alt="{{ Post.detail.title }}"/></div>
                     <div ng-bind-html="Post.detail.content | trustHtml">
 
                     </div>

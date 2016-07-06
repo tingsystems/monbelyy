@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, $rootScope) {
+    function HomeCtrl(PostSrv, PostDetailSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
+        $rootScope.pageTitle = 'Laredo y Asociados - Inicio';
 
         PostSrv.get({
             category: 'slider',
@@ -17,13 +17,13 @@
             });
 
         PostSrv.get({
-            category: 'proyectos-recientes',
+            category: 'servicios',
             isActive: 'True',
-            sizePage: 4,
+            sizePage: 10,
             ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,createdAt,excerpt'
+            fields: 'urlImages,title,link,slug'
         }).$promise.then(function (results) {
-                self.recentProjects = results.results;
+                self.services = results.results;
             });
 
         PostSrv.get({
@@ -36,25 +36,35 @@
                 self.news = results.results;
             });
 
-        PostSrv.get({
-            category: 'por-que-elegirnos',
+        PostDetailSrv.get({
+            slug: 'quienes-somos1466721866',
             isActive: 'True',
-            sizePage: 1,
-            kind: 'post',
-            fields:'content,link,title'
+            fields: 'title,excerpt,slug,urlImages'
         }).$promise.then(function (results) {
-                self.whyChooseUs = results.results;
+                self.about = results;
+            });
+        PostDetailSrv.get({
+            slug: 'nuestra-politica',
+            isActive: 'True',
+            fields: 'title,excerpt,slug,urlImages'
+        }).$promise.then(function (results) {
+                self.our_policy = results;
+            });
+        PostDetailSrv.get({
+            slug: 'por-que-contratarnos',
+            isActive: 'True',
+            fields: 'title,excerpt,slug,urlImages'
+        }).$promise.then(function (results) {
+                self.why = results;
+            });
+        PostDetailSrv.get({
+            slug: 'presencia',
+            isActive: 'True',
+            fields: 'title,excerpt,slug,urlImages'
+        }).$promise.then(function (results) {
+                self.presence = results;
             });
 
-        PostSrv.query({
-            category: 'fraccionamientos',
-            isActive: 'True',
-            kind: 'post',
-            fields:'content,link,title,id',
-            ordering: 'title'
-        }).$promise.then(function (results) {
-                self.fraccionamientos = results;
-            });
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
@@ -74,7 +84,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = 'Vive En Armonía - ' + self.categoryName;
+                        $rootScope.pageTitle = 'Laredo y Asociados - ' + self.categoryName;
                     }
                 });
         }
@@ -139,12 +149,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Vive En Armonía - Blog';
+        $rootScope.pageTitle = 'Laredo y Asociados - Blog';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv) {
         var self = this;
-        $rootScope.pageTitle = 'Vive En Armonía - ';
+        $rootScope.pageTitle = 'Laredo y Asociados - ';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -157,7 +167,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = 'http://www.viveenarmonia.com.mx/img/img-default.jpg';
                 }
-                $rootScope.pageTitle = 'Vive En Armonía - ' + results.title;
+                $rootScope.pageTitle = 'Laredo y Asociados- ' + results.title;
                 self.busy = false;
             });
         // Controller for slider
@@ -174,7 +184,7 @@
 
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Vive En Armonía - Contacto';
+        $rootScope.pageTitle = 'Laredo y Asociados - Contacto';
 
         self.contactInitialState = function () {
             self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
@@ -186,7 +196,7 @@
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
-            self.notification.send_from = 'contacto@viveenarmonia.com.mx';
+            self.notification.send_from = 'contacto@laredoyasociados.com.mx';
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {
@@ -282,46 +292,13 @@
 
     }
 
-    function PaymentPlansCtrl(PostSrv, $rootScope) {
+    function NavBarCtrl() {
         var self = this;
+        self.isCollapsed = true;
+        console.log(self.isCollapsed);
 
-        self.list = [];
-        self.page = 0;
-        self.next = true;
-        self.busy = false;
-
-        self.errorRecovery = function () {
-            self.page -= 1;
-            self.next = true;
-            self.busy = false;
-            self.loadPostError = false;
-            self.getMorePosts();
-        };
-
-        self.getMorePosts = function () {
-            if (self.busy || !self.next)return;
-            self.page += 1;
-            self.busy = true;
-            self.loadPosts = self.page % 3 == 0;
-
-            PostSrv.get({
-                kind: 'post',
-                category: 'planes-de-pago',
-                isActive: 'True',
-                fields: 'title,slug,excerpt,urlImages,createdAt',
-                sizePage: 9,
-                ordering: '-createdAt',
-                page: self.page
-            }).$promise.then(function (results) {
-                    self.list = self.list.concat(results.results);
-                    self.busy = false;
-                    self.next = results.next;
-                });
-        };
-
-        self.getMorePosts();
-        $rootScope.pageTitle = 'Vive En Armonía - Planes de pago';
     }
+
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
@@ -331,14 +308,14 @@
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
         .controller('BlogCtrl', BlogCtrl)
-        .controller('PaymentPlansCtrl', PaymentPlansCtrl);
+        .controller('NavBarCtrl', NavBarCtrl);
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv', 'TaxonomySrv', '$rootScope'];
+    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope'];
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
-    PaymentPlansCtrl.$inject = ['PostSrv', '$rootScope'];
+    NavBarCtrl.$inject = [];
 })();

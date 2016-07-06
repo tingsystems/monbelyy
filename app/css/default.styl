@@ -53,7 +53,7 @@ h6
 p
   font-family 'Poppins', sans-serif
   font-weight 300
-  font-size 14px
+  font-size 16px
 
 body
   font-family 'Poppins', sans-serif !important
@@ -62,7 +62,8 @@ body
   color white !important
 
 /************** Grid css******************/
-
+.content
+  margin-top 100px
 .content-post
   margin 80px 0
 
@@ -103,8 +104,8 @@ body
 /************** main css ******************/
 header
   .navbar-default
-    background white
-    height 100px
+    background #33261e
+    height 110px
     border none
     border-radius 0
     -webkit-box-shadow 0 0 15px rgba(0, 0, 0, 0.43)
@@ -115,18 +116,22 @@ header
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color #5d5d5d
-      padding 40px 18px
-      font-size 18px
+      color #f2dec7
+      padding 45px 10px 15px
+      font-size 17px
       font-family 'Poppins', sans-serif
-      font-weight 500
+      font-weight 300
+      -webkit-transition all ease-in-out .35s
+      -o-transition all ease-in-out .35s
+      transition all ease-in-out .35s
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
-      color #389c80
+      color white
+      border-bottom 3px solid white
     .navbar-nav
       .dropdown:hover .dropdown-toggle
         background-color transparent
-        color #389c80
+        color #f2dec7
       .dropdown
         .dropdown-menu
           width 100%
@@ -147,31 +152,28 @@ header
 
   .logo
     width auto
-    margin-top 10px
+    margin-top 0
 
 /********************************/
 .slider-img
   background-position center center
   background-size cover
-  height 650px
+  height 600px
   background-repeat no-repeat
-  margin-top 100px
 .carousel-caption
-  top 42%
+  top 25%
   width 60%
+  text-align left
+  left 6%
+  right 10%
+  opacity 0.8
   h3
     text-shadow 0 0 10px #000
     font-size 26px
   .text
     margin-top 40px
-  .box-mail
-    background rgba(255,255,255, 0.8)
-    border-radius 3px
-    box-shadow 0 0 10px rgba(0, 0, 0, 0.22)
-    padding 15px
-    h4
-      color #5d5d5d
-      text-shadow none
+  p
+    font-size 22px
 
 #slider-area
   background url(../img/bg.jpg)
@@ -206,7 +208,7 @@ header
     border-bottom 1px solid #fdf5e6
     clear both
     .title
-      color #E08F17
+      color #55504e
       line-height 40px
       margin-bottom 0
       font-size 26px
@@ -226,6 +228,68 @@ header
   padding 20px 0
   color orange
 /************** Home area css ******************/
+#contact
+  background #55504e
+  .divider
+    border-color #f2dec7
+  h3
+    color #f2dec7
+  .contact-us
+    padding 15px 0
+    h4 > a, h4
+      color #f2dec7
+      line-height 35px
+      font-weight 300
+#presence
+  padding 130px 0
+  .description
+    h2
+      color #584e48
+    p
+      color #584e48
+      font-size 20px
+      text-align justify
+    .process
+      h2
+        color #584e48
+      p
+        color #584e48
+        font-size 20px
+        text-align justify 
+#politics
+  .description
+    h2
+      color #584e48
+    p
+      color #584e48
+      font-size 20px
+      text-align justify
+#contract
+  background-image url('../img/parallax.jpg')
+  background-position center center
+  background-size cover
+  padding 130px 0
+  .description
+    text-align center
+    h2
+      color #f2dec1
+      text-shadow 0 0 10px rgba(0,0,0,0.5)
+    p
+      color #f2dec1
+      font-size 20px
+      text-align justify
+      text-shadow 0 0 10px rgba(0,0,0,0.5)
+
+#who-are
+  padding 130px 0
+  .description
+    margin-top 30px
+    padding-left 20px
+    h2
+      color #584e48
+    p
+      color #584e48
+      font-size 20px
 #product-detail
   margin 100px 0
   .title-detail
@@ -246,7 +310,7 @@ header
     position absolute
     width 100%
     height 100%
-    top 0px
+    top 0
     text-align center
     font-size 24px
     padding 80px 20px 10px
@@ -254,39 +318,30 @@ header
     background rgba(224, 143, 23, 0.6)
     text-shadow 0 0 10px #000
 #content-contact
-  background-image url("../img/background.jpg")
+  background #f9ece1
   background-position center center
   background-size cover
 #news
   .title
     color #555555
     padding-bottom 15px
-.boxes-project
-  &:nth-child(3)
-    .col-md-4,.col-sm-4
-      float right
-    .col-md-8,.col-sm-8
-      text-align right
-  &:nth-child(5)
-    .col-md-4,.col-sm-4
-      float right
-    .col-md-8,.col-sm-8
-      text-align right
+
 .work-description
   margin-top 100px
   h3
     color #555
+.recent-work-wrap > .titles h3
+  margin-top 170px
 .recent-work-wrap > .titles
+  border 1px solid rgba(255,255,255,0.2)
   position absolute
   width 100%
   height 100%
-  top 0px
-  border-radius 50%
+  top 0
   text-align center
   font-size 24px
-  padding 80px 20px 10px
-  color #fff
-  background rgba(0,0,0,0.1)
+  color #f2dec7
+  background rgba(41, 29, 20, 0.75)
   text-shadow 0 0 10px #000
 #recent-works
   padding 60px 0
@@ -297,11 +352,9 @@ header
 
 .recent-work-wrap
   position relative
-  margin 15px
-  height 300px
+  height 350px
   background-size cover
   background-position center center
-  border-radius 50%
 
 .recent-work-wrap img
   width 100%
@@ -327,7 +380,6 @@ header
   left 0
   width 100%
   height 100%
-  border-radius 50%
   opacity 0
   background #E08F17
   color #fff
@@ -338,7 +390,6 @@ header
   transition opacity 500ms
   padding 30px
   text-align center
-
 
 .recent-work-wrap .overlay .preview
   bottom 0
@@ -516,10 +567,9 @@ header
 /************** footer area css ******************/
 
 #footer_area
-  background #f5f5f5
-  box-shadow 0 -3px 2px rgba(0,0,0,0.2)
+  background white
   padding 30px 0
-  color #999
+  color #55504e
   line-height 30px
   .contact-footer
     a
@@ -626,10 +676,28 @@ header
     background #fff
     display: inline-block
     padding 10px 15px
-    color #FF801A
+    color #33261e
     font-weight 700
     border-radius 5px
     border 3px solid #fff
+
+.btn-coffee-clear
+  background transparent
+  display inline-block
+  padding 10px 15px
+  color #574d47
+  font-weight 700
+  border 3px solid #574d47
+  border-radius 5px
+
+  &:hover, &:focus
+    background #574d47
+    display: inline-block
+    padding 10px 15px
+    color #fff
+    font-weight 700
+    border-radius 5px
+    border 3px solid #574d47
 /*********** Page contact *************/
 .facebook
   color #666666
@@ -701,7 +769,7 @@ header
   box-shadow ease-in-out .15s
 
   &:focus
-    border-color #389c80
+    border-color #33261e
     outline 0
     -webkit-box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
     box-shadow 0 0 0 9px rgba(0, 0, 0, 0)

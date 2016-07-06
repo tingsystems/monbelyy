@@ -13,7 +13,7 @@
             })
             .state('home', {
                 url: '/',
-                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
+                data: {pageTitle: 'Laredo y Asociados - Inicio'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -24,7 +24,7 @@
             })
             .state('contact', {
                 url: '/contact',
-                data: {pageTitle: 'Vive En Armonía - Contacto'},
+                data: {pageTitle: 'Laredo y Asociados - Contacto'},
                 views: {
                     'content': {
                         templateUrl: '/templates/contact.html',
@@ -35,7 +35,7 @@
             })
             .state('blog', {
                 url: '/blog',
-                data: {pageTitle: 'Vive En Armonía - Blog'},
+                data: {pageTitle: 'Laredo y Asociados - Blog'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -69,7 +69,7 @@
 
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
+                data: {pageTitle: 'Laredo y Asociados'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -80,7 +80,7 @@
             })
             .state('category_project', {
                 url: '/project/category/:slug',
-                data: {pageTitle: 'Vive En Armonía - Inmobiliaria'},
+                data: {pageTitle: 'Laredo y Asociados'},
                 views: {
                     'content': {
                         templateUrl: '/templates/project.html',
@@ -107,17 +107,6 @@
                         templateUrl: '/templates/search.html',
                         controllerAs: 'Search',
                         controller: 'SearchCtrl'
-                    }
-                }
-            })
-            .state('payment_plans', {
-                url: '/payment-plans',
-                data: {pageTitle: 'Vive En Armonía - Planes de pago'},
-                views: {
-                    'content': {
-                        templateUrl: '/templates/payment-plans.html',
-                        controllerAs: 'Plan',
-                        controller: 'PaymentPlansCtrl'
                     }
                 }
             });
@@ -153,8 +142,8 @@
             //$window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Vive En Armonía',
-                'excerpt': 'Inmobiliaria',
+                'title': 'Laredo y Asociados',
+                'excerpt': 'Somos una una solución efectiva de gestión de cobro concebida por profesionales del derecho y del recobro con experiencia en el sector de recuperación de deudas.',
                 'urlImages': {
                     'original': 'http://www.viveenarmonia.com.mx/img/img-default.jpg'
                 }
@@ -162,7 +151,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Vive En Armonía - Inmobiliaria';
+        $rootScope.pageTitle = 'Laredo y Asociados';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
                 parent: '5bb6cb73-1a97-4c97-b4f6-0c9cb3a687af',
@@ -173,11 +162,19 @@
                 }, function (error) {
                 });
         }
+        function showResponsive($window) {
+            if ($window.innerWidth <= 768) {
+                return true
+            }
+            return false
+        }
+
+        $rootScope.showResponsive = showResponsive($window);
 
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
-        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty'])
+        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty','duScroll'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
