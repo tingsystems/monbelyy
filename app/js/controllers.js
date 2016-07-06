@@ -4,7 +4,7 @@
     function HomeCtrl(PostSrv, PostDetailSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Laredo y Asociados - Inicio';
+        $rootScope.pageTitle = 'Viajes Coral - Inicio';
 
         PostSrv.get({
             category: 'slider',
@@ -17,13 +17,33 @@
             });
 
         PostSrv.get({
-            category: 'servicios',
+            category: 'paquetes',
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
             fields: 'urlImages,title,link,slug'
         }).$promise.then(function (results) {
-                self.services = results.results;
+                self.packages = results.results;
+            });
+
+        PostSrv.get({
+            category: 'excursiones',
+            isActive: 'True',
+            sizePage: 10,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug'
+        }).$promise.then(function (results) {
+                self.excursion = results.results;
+            });
+
+        PostSrv.get({
+            category: 'destinos',
+            isActive: 'True',
+            sizePage: 10,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug'
+        }).$promise.then(function (results) {
+                self.destinations = results.results;
             });
 
         PostSrv.get({
@@ -35,35 +55,15 @@
         }).$promise.then(function (results) {
                 self.news = results.results;
             });
-
-        PostDetailSrv.get({
-            slug: 'quienes-somos1466721866',
-            isActive: 'True',
-            fields: 'title,excerpt,slug,urlImages'
-        }).$promise.then(function (results) {
-                self.about = results;
-            });
-        PostDetailSrv.get({
-            slug: 'nuestra-politica',
-            isActive: 'True',
-            fields: 'title,excerpt,slug,urlImages'
-        }).$promise.then(function (results) {
-                self.our_policy = results;
-            });
-        PostDetailSrv.get({
-            slug: 'por-que-contratarnos',
-            isActive: 'True',
-            fields: 'title,excerpt,slug,urlImages'
-        }).$promise.then(function (results) {
-                self.why = results;
-            });
-        PostDetailSrv.get({
-            slug: 'presencia',
-            isActive: 'True',
-            fields: 'title,excerpt,slug,urlImages'
-        }).$promise.then(function (results) {
-                self.presence = results;
-            });
+        /*
+         PostDetailSrv.get({
+         slug: 'presencia',
+         isActive: 'True',
+         fields: 'title,excerpt,slug,urlImages'
+         }).$promise.then(function (results) {
+         self.presence = results;
+         });
+         */
 
     }
 
@@ -84,7 +84,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = 'Laredo y Asociados - ' + self.categoryName;
+                        $rootScope.pageTitle = 'Viajes Coral - ' + self.categoryName;
                     }
                 });
         }
@@ -149,12 +149,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Laredo y Asociados - Blog';
+        $rootScope.pageTitle = 'Viajes Coral - Blog';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv) {
         var self = this;
-        $rootScope.pageTitle = 'Laredo y Asociados - ';
+        $rootScope.pageTitle = 'Viajes Coral - ';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -167,7 +167,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = 'http://www.viveenarmonia.com.mx/img/img-default.jpg';
                 }
-                $rootScope.pageTitle = 'Laredo y Asociados- ' + results.title;
+                $rootScope.pageTitle = 'Viajes Coral- ' + results.title;
                 self.busy = false;
             });
         // Controller for slider
@@ -184,7 +184,7 @@
 
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Laredo y Asociados - Contacto';
+        $rootScope.pageTitle = 'Viajes Coral - Contacto';
 
         self.contactInitialState = function () {
             self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
@@ -196,7 +196,7 @@
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
-            self.notification.send_from = 'contacto@laredoyasociados.com.mx';
+            self.notification.send_from = 'info@viajescoral.com';
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {
@@ -295,7 +295,6 @@
     function NavBarCtrl() {
         var self = this;
         self.isCollapsed = true;
-        console.log(self.isCollapsed);
 
     }
 

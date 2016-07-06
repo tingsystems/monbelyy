@@ -13,7 +13,7 @@
             })
             .state('home', {
                 url: '/',
-                data: {pageTitle: 'Laredo y Asociados - Inicio'},
+                data: {pageTitle: 'Viajes Coral - Inicio'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -24,7 +24,7 @@
             })
             .state('contact', {
                 url: '/contact',
-                data: {pageTitle: 'Laredo y Asociados - Contacto'},
+                data: {pageTitle: 'Viajes Coral - Contacto'},
                 views: {
                     'content': {
                         templateUrl: '/templates/contact.html',
@@ -35,7 +35,7 @@
             })
             .state('blog', {
                 url: '/blog',
-                data: {pageTitle: 'Laredo y Asociados - Blog'},
+                data: {pageTitle: 'Viajes Coral - Blog'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -69,7 +69,7 @@
 
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Laredo y Asociados'},
+                data: {pageTitle: 'Viajes Coral'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -80,7 +80,7 @@
             })
             .state('category_project', {
                 url: '/project/category/:slug',
-                data: {pageTitle: 'Laredo y Asociados'},
+                data: {pageTitle: 'Viajes Coral'},
                 views: {
                     'content': {
                         templateUrl: '/templates/project.html',
@@ -142,7 +142,7 @@
             //$window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Laredo y Asociados',
+                'title': 'Viajes Coral',
                 'excerpt': 'Somos una una solución efectiva de gestión de cobro concebida por profesionales del derecho y del recobro con experiencia en el sector de recuperación de deudas.',
                 'urlImages': {
                     'original': 'http://www.viveenarmonia.com.mx/img/img-default.jpg'
@@ -151,7 +151,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Laredo y Asociados';
+        $rootScope.pageTitle = 'Viajes Coral';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
                 parent: '5bb6cb73-1a97-4c97-b4f6-0c9cb3a687af',
