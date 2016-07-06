@@ -130,7 +130,7 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv, $anchorScroll) {
         $rootScope.$state = $state;
-        $http.defaults.headers.common['TS-TOKEN'] = 'uOVTXJTCEQ7EDNpGlzvlJvDTv0NY1OF1OWCEtk3P';
+        $http.defaults.headers.common['TS-TOKEN'] = 'F66sYYc2lNqdtSCivobmsL3SAoiDwv8bSXXbxV0t';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainmenu').collapse('hide');
         });
@@ -174,7 +174,8 @@
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
-        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty','duScroll'])
+        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
+        'duScroll','truncate'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
