@@ -63,7 +63,7 @@ body
 
 /************** Grid css******************/
 .content
-  margin-top 100px
+  margin-top 0px
 .content-post
   margin 80px 0
 
@@ -103,22 +103,27 @@ body
 
 /************** main css ******************/
 header
+  margin-top 0px
   .navbar-default
-    background #33261e
+    position absolute
+    left 0
+    right 0
+    top 50px
+    background white
     height 110px
     border none
     border-radius 0
-    -webkit-box-shadow 0 0 15px rgba(0, 0, 0, 0.43)
-    -moz-box-shadow 0 0 15px rgba(0, 0, 0, 0.43)
-    box-shadow 0 0 15px rgba(0, 0, 0, 0.43)
+    -webkit-box-shadow 0 0 15px rgba(0, 0, 0, 0.23)
+    -moz-box-shadow 0 0 15px rgba(0, 0, 0, 0.23)
+    box-shadow 0 0 15px rgba(0, 0, 0, 0.23)
     margin-bottom 0
     z-index 9999
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color #f2dec7
+      color #79afa0
       padding 45px 10px 15px
-      font-size 17px
+      font-size 18px
       font-family 'Poppins', sans-serif
       font-weight 300
       -webkit-transition all ease-in-out .35s
@@ -126,8 +131,8 @@ header
       transition all ease-in-out .35s
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
-      color white
-      border-bottom 3px solid white
+      color #b99a50
+      border-bottom 3px solid #b99a50
     .navbar-nav
       .dropdown:hover .dropdown-toggle
         background-color transparent
@@ -153,27 +158,99 @@ header
   .logo
     width auto
     margin-top 0
+  /* search form menu */
+#wrap
+  margin 20px 0px 15px 120px
+  display inline-block
+  position relative
+  height 60px
+  float right
+  padding 0
+  position relative
+
+
+input[type="text"]
+  height 55px
+  border 1px solid #eee
+  font-size 18px
+  display inline-block
+  font-weight 300
+  outline none
+  color #555
+  padding 3px
+  padding-right 40px
+  width 120px
+  position absolute
+  top 10px
+  right 0
+  background none
+  z-index 3
+  transition width 0.4s cubic-bezier(0, 0.795, 0, 1)
+  cursor pointer
+  padding-left 15px
+
+
+input[type="text"]:focus:hover
+  border none
+  border-bottom 1px solid #BBB !important
+
+
+input[type="text"]:focus
+  width 750px
+  background white
+  z-index 1
+  border none
+  border-bottom 1px solid #BBB !important
+  cursor text
+
+input[type="submit"]
+  height 45px
+  width 45px
+  display inline-block
+  colorred
+  float right
+  background transparent
+  text-indent -10000px
+  border none
+  position absolute
+  top 0
+  right 0
+  z-index 2
+  cursor pointer
+  opacity 0.4
+  cursor pointer
+  transition opacity .4s ease
+
+input[type="submit"]:hover
+  opacity 0.8
+
+.btn-white
+  background white
+
+#search_submit
+  margin-top 20px
+  color #555
 
 /********************************/
 .slider-img
   background-position center center
   background-size cover
-  height 600px
+  height 650px
   background-repeat no-repeat
 .carousel-caption
-  top 25%
+  top 40%
   width 60%
   text-align left
   left 6%
   right 10%
-  opacity 0.8
+  opacity 1
   h3
     text-shadow 0 0 10px #000
-    font-size 26px
+    font-size 46px
   .text
     margin-top 40px
   p
-    font-size 22px
+    font-size 42px
 
 #slider-area
   background url(../img/bg.jpg)
@@ -434,9 +511,48 @@ header
     &:hover, &:focus
       color white
    color
+.tab-pane
+  margin-bottom 50px
+
+.nav > li > a:hover, .nav > li > a:focus
+  background-color transparent
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus
+  color #79afa0
+  background-color transparent
+  font-size 22px
+  border-bottom 4px solid #79afa0
+
+.nav-pills > li > a
+  border-radius 0
+  font-size 22px
+  color #888
+
+.nav-pills
+  border-bottom 1px solid #ccc
+
+.box-widget
+  padding 5px 20px
+  .box-widget-header
+    padding 10px 0
+    border-bottom 1px solid #ccc
+    font-size 22px
+    color #777777
+  .box-widget-container
+    padding 20px 0
+    h3>a, h2>a
+      font-size 20px
+      color #777777
+      font-weight 300
+      &:hover
+        color #bf9e4f
+    h2
+      font-size 20px
+      color #555
+
 .box-default
   margin 10px
-  padding 20px
+  padding 10px
   transition all 0.5s ease
   a
     color #5d5d5d
@@ -681,6 +797,24 @@ header
     border-radius 5px
     border 3px solid #fff
 
+.btn-green-clear
+  background transparent
+  display inline-block
+  padding 10px 15px
+  color #79afa0
+  font-weight 700
+  border 3px solid #79afa0
+  border-radius 0px
+
+  &:hover, &:focus
+    background #4f7467
+    display: inline-block
+    padding 10px 15px
+    color white
+    font-weight 700
+    border-radius 0px
+    border 3px solid #4f7467
+
 .btn-coffee-clear
   background transparent
   display inline-block
@@ -769,7 +903,7 @@ header
   box-shadow ease-in-out .15s
 
   &:focus
-    border-color #33261e
+    border-color #79afa0
     outline 0
     -webkit-box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
     box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
