@@ -1,7 +1,8 @@
+<section class="main-bg-pages" style="background-image: url('../img/imagee.jpg')"></section>
 <section id="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 title-post">
+            <div class="col-md-12 title">
                 <h2 class="title">{{ Post.categoryName }}</h2>
             </div>
         </div>
@@ -10,13 +11,14 @@
                 <div class="container">
                     <div class="col-md-4" ng-repeat="entry in Post.list">
                         <div class="box-default">
-                            <div class="box-header">
-                                <a ui-sref="product_detail({slug: entry.slug})"><img
-                                        post-image="{{ entry.urlImages.medium }}" alt="{{ entry.title }}"/></a>
-                            </div>
-                            <div class="box-container">
-                                <h1>{{ entry.title }}</h1>
-                            </div>
+                            <a ui-sref="post_detail({slug: entry.slug})">
+                                <div class="box-header" style="background-image: url('{{ entry.urlImages.medium }}"></div>
+
+                                <div class="description">
+                                    <h3><a ui-sref="product_detail({slug: entry.slug})">{{ entry.title }} </a></h3>
+                                    <h5>{{ entry.excerpt }}</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <div class="col-sm-12" ng-show="Post.busy">
@@ -24,7 +26,8 @@
                     </div>
 
                     <div class="col-sm-12" ng-show="!Post.busy">
-                        <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos con contenido
+                        <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos con
+                            contenido
                             disponible</h2>
                     </div>
                 </div>

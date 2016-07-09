@@ -183,7 +183,7 @@ header .logo {
   padding: 0;
   position: relative;
 }
-input[type="text"] {
+.input-search {
   height: 55px;
   border: 1px solid #eee;
   font-size: 18px;
@@ -243,6 +243,12 @@ input[type="submit"]:hover {
   margin-top: 20px;
   color: #555;
 }
+.main-bg-pages {
+  background-size: cover;
+  background-position: center center;
+  height: 220px;
+  background-repeat: no-repeat;
+}
 .slider-img {
   background-position: center center;
   background-size: cover;
@@ -295,24 +301,32 @@ input[type="submit"]:hover {
   color: #555;
 }
 #content-area {
-  margin: 160px 0px 60px;
+  margin: 60px 0px 60px;
 }
 #content-area .title-post {
-  border-bottom: 1px solid #fdf5e6;
+  color: #bf9e4f;
+  border-bottom: 1px solid #bf9e4f;
   clear: both;
 }
 #content-area .title-post .title {
-  color: #55504e;
+  color: #bf9e4f;
+}
+#content-area .title-single {
+  color: #787777;
   line-height: 40px;
   margin-bottom: 0;
   font-size: 26px;
+}
+#content-area .title-single .divider {
+  border-color: #ccc;
+  margin-top: 15px;
 }
 #content-area .title-p {
   color: #737373;
   font-size: 18px;
 }
 #content-area .divider {
-  border: 1px solid #f5f5f5;
+  border-color: #ccc;
 }
 #content-area .content-pages {
   padding: 20px 0;
@@ -328,13 +342,18 @@ input[type="submit"]:hover {
   color: #ffa500;
 }
 #contact {
-  background: #55504e;
+  background: #79afa0;
+  text-align: center;
 }
 #contact .divider {
   border-color: #f2dec7;
 }
 #contact h3 {
-  color: #f2dec7;
+  color: #fff;
+}
+#contact a {
+  color: #fff;
+  font-size: 18px;
 }
 #contact .contact-us {
   padding: 15px 0;
@@ -381,14 +400,15 @@ input[type="submit"]:hover {
 #contract .description {
   text-align: center;
 }
-#contract .description h2 {
-  color: #f2dec1;
+#contract .description h2,
+#contract .description h3 {
+  color: #fff;
   text-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 #contract .description p {
-  color: #f2dec1;
+  color: #fff;
   font-size: 20px;
-  text-align: justify;
+  text-align: center;
   text-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 #who-are {
@@ -590,11 +610,12 @@ color
 }
 .box-widget {
   padding: 5px 20px;
+  border-left: 1px solid #ccc;
 }
 .box-widget .box-widget-header {
   padding: 10px 0;
   border-bottom: 1px solid #ccc;
-  font-size: 22px;
+  font-size: 20px;
   color: #777;
 }
 .box-widget .box-widget-container {
@@ -602,7 +623,7 @@ color
 }
 .box-widget .box-widget-container h3>a,
 .box-widget .box-widget-container h2>a {
-  font-size: 20px;
+  font-size: 18px;
   color: #777;
   font-weight: 300;
 }
@@ -611,7 +632,7 @@ color
   color: #bf9e4f;
 }
 .box-widget .box-widget-container h2 {
-  font-size: 20px;
+  font-size: 18px;
   color: #555;
 }
 .box-default {
@@ -649,11 +670,18 @@ color
 .box-default .box-container {
   text-align: left;
 }
+.box-default .box-container a {
+  text-decoration: none;
+}
 .box-default .box-container h1 {
   color: #5d5d5d;
   font-weight: 300;
   font-size: 22px;
   margin: 10px 0;
+}
+.box-default .box-container p {
+  color: #5d5d5d;
+  text-align: justify;
 }
 .box-default:hover,
 .box-default:focus {
@@ -677,7 +705,7 @@ color
   color: #555;
 }
 .widgets {
-  margin-top: -35px;
+  margin-top: 0px;
 }
 .box-sidebar {
   margin-top: 60px;
@@ -781,9 +809,11 @@ color
   padding: 30px 0;
   color: #55504e;
   line-height: 30px;
+  border-top: 1px solid #ccc;
 }
 #footer_area .contact-footer a {
-  color: #999;
+  color: #bf9e4f;
+  font-weight: 300;
 }
 #footer_area .contact-footer a:hover {
   color: #e08f17;

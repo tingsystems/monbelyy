@@ -81,33 +81,27 @@
             <div class="collapse navbar-collapse" uib-collapse="nav.isCollapsed">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a du-smooth-scroll duration="800" href="#who-are" ng-if="$state.current.name == 'home'"
-                           ng-click="nav.isCollapsed = !nav.isCollapsed">Inicio</a>
+                        <a ui-sref="home">Inicio</a>
                     </li>
                     <li>
-                        <a du-smooth-scroll duration="800" href="#services" ng-if="$state.current.name == 'home'"
-                           ng-click="nav.isCollapsed = !nav.isCollapsed">Destinos</a>
+                        <a ui-sref="category({slug:'destinos'})">Destinos</a>
                     </li>
                     <li>
-                        <a du-smooth-scroll duration="800" href="#politics" ng-if="$state.current.name == 'home'"
-                           ng-click="nav.isCollapsed = !nav.isCollapsed">Paquetes</a>
+                        <a ui-sref="category({slug:'paquetes'})">Paquetes</a>
                     </li>
                     <li>
-                        <a du-smooth-scroll duration="800" href="#contract" ng-if="$state.current.name == 'home'"
-                           ng-click="nav.isCollapsed = !nav.isCollapsed">Excursiones</a>
+                        <a ui-sref="category({slug:'excursiones'})">Excursiones</a>
                     </li>
                     <li>
-                        <a du-smooth-scroll duration="800" href="#presence" ng-if="$state.current.name == 'home'"
-                           ng-click="nav.isCollapsed = !nav.isCollapsed">Blog</a>
+                        <a ui-sref="blog({kind: 'post'})">Blog</a>
                     </li>
                     <li>
-                        <a du-smooth-scroll duration="800" href="#contact" ng-if="$state.current.name == 'home'"
-                           ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
+                        <a ui-sref="contact({kind: 'contact'})">Contacto</a>
                     </li>
                     <li>
                         <div id="wrap">
                             <form action="" autocomplete="on">
-                                <input id="search" name="search" type="text" placeholder="Buscar">
+                                <input id="search" name="search" class="input-search" type="text" placeholder="Buscar">
                                 <button id="search_submit" class="btn btn-white" value="Rechercher" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>

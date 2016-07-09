@@ -169,7 +169,7 @@ header
   position relative
 
 
-input[type="text"]
+.input-search
   height 55px
   border 1px solid #eee
   font-size 18px
@@ -232,6 +232,11 @@ input[type="submit"]:hover
   color #555
 
 /********************************/
+.main-bg-pages
+  background-size cover
+  background-position center center
+  height 220px
+  background-repeat no-repeat
 .slider-img
   background-position center center
   background-size cover
@@ -280,20 +285,26 @@ input[type="submit"]:hover
 
 /************** content area default ****************/
 #content-area
-  margin 160px 0px 60px
+  margin 60px 0px 60px
   .title-post
-    border-bottom 1px solid #fdf5e6
+    color #bf9e4f
+    border-bottom 1px solid #bf9e4f
     clear both
     .title
-      color #55504e
-      line-height 40px
-      margin-bottom 0
-      font-size 26px
+      color #bf9e4f
+  .title-single
+    color #787777
+    line-height 40px
+    margin-bottom 0
+    font-size 26px
+    .divider
+      border-color #ccc
+      margin-top 15px
   .title-p
     color #737373
     font-size 18px
   .divider
-    border: 1px solid #f5f5f5;
+    border-color #ccc
   .content-pages
     padding 20px 0
 .gallery
@@ -306,11 +317,15 @@ input[type="submit"]:hover
   color orange
 /************** Home area css ******************/
 #contact
-  background #55504e
+  background #79afa0
+  text-align center
   .divider
     border-color #f2dec7
   h3
-    color #f2dec7
+    color white
+  a
+    color white
+    font-size 18px
   .contact-us
     padding 15px 0
     h4 > a, h4
@@ -348,13 +363,13 @@ input[type="submit"]:hover
   padding 130px 0
   .description
     text-align center
-    h2
-      color #f2dec1
+    h2,h3
+      color white
       text-shadow 0 0 10px rgba(0,0,0,0.5)
     p
-      color #f2dec1
+      color white
       font-size 20px
-      text-align justify
+      text-align center
       text-shadow 0 0 10px rgba(0,0,0,0.5)
 
 #who-are
@@ -533,21 +548,22 @@ input[type="submit"]:hover
 
 .box-widget
   padding 5px 20px
+  border-left 1px solid #ccc
   .box-widget-header
     padding 10px 0
     border-bottom 1px solid #ccc
-    font-size 22px
+    font-size 20px
     color #777777
   .box-widget-container
     padding 20px 0
     h3>a, h2>a
-      font-size 20px
+      font-size 18px
       color #777777
       font-weight 300
       &:hover
         color #bf9e4f
     h2
-      font-size 20px
+      font-size 18px
       color #555
 
 .box-default
@@ -576,11 +592,16 @@ input[type="submit"]:hover
     background-position center center
   .box-container
     text-align left
+    a
+      text-decoration none
     h1
       color #5d5d5d
       font-weight 300
       font-size 22px
       margin 10px 0
+    p
+      color #5d5d5d
+      text-align justify
   &:hover, &:focus
     background transparent
     box-shadow 0 0 3px rgba(0,0,0,0.4)
@@ -592,7 +613,7 @@ input[type="submit"]:hover
       .date, .comment
         color #555
 .widgets
-  margin-top -35px
+  margin-top 0px
 .box-sidebar
   margin-top 60px
   .box-header
@@ -687,9 +708,11 @@ input[type="submit"]:hover
   padding 30px 0
   color #55504e
   line-height 30px
+  border-top 1px solid #ccc
   .contact-footer
     a
-      color #999
+      color #bf9e4f
+      font-weight 300
       &:hover
         color #E08F17
   .text
@@ -876,7 +899,7 @@ input[type="submit"]:hover
   .title, .text-form
     color #565656
 .contact-section
-  background: rgba(255,255,255,0.95)
+  background rgba(255,255,255,0.95)
   padding 25px
   box-shadow 0 0 20px rgba(0, 0, 0, 0.10)
   border-radius 5px
