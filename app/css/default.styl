@@ -934,3 +934,20 @@ input[type="submit"]:hover
 
 .owl-nav
   display none
+
+/*transition tabs*/
+
+.tab-animation
+  & > .tab-content
+    position relative
+    & > .tab-pane
+      transition 0.3s linear opacity
+      &.active-remove
+        position absolute
+        top 0
+        width 100%
+        display block
+      &.active-remove-active
+        opacity 0
+      &.active-add
+        opacity 0

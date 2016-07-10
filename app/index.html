@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title ng-bind="pageTitle">Laredo y Asociados - Inicio</title>
+    <title ng-bind="pageTitle">Viajes Coral - Inicio</title>
     <meta name="description" content="{{ post.excerpt }}">
     <meta name="keywords"
           content="Inmobiliaria">
@@ -81,22 +81,22 @@
             <div class="collapse navbar-collapse" uib-collapse="nav.isCollapsed">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a ui-sref="home">Inicio</a>
+                        <a ui-sref="home" ng-click="nav.isCollapsed = !nav.isCollapsed">Inicio</a>
                     </li>
                     <li>
-                        <a ui-sref="category({slug:'destinos'})">Destinos</a>
+                        <a ui-sref="category({slug:'destinos'})" ng-click="nav.isCollapsed = !nav.isCollapsed">Destinos</a>
                     </li>
                     <li>
-                        <a ui-sref="category({slug:'paquetes'})">Paquetes</a>
+                        <a ui-sref="category({slug:'paquetes'})" ng-click="nav.isCollapsed = !nav.isCollapsed">Paquetes</a>
                     </li>
                     <li>
-                        <a ui-sref="category({slug:'excursiones'})">Excursiones</a>
+                        <a ui-sref="category({slug:'excursiones'})" ng-click="nav.isCollapsed = !nav.isCollapsed">Excursiones</a>
                     </li>
                     <li>
-                        <a ui-sref="blog({kind: 'post'})">Blog</a>
+                        <a ui-sref="blog({kind: 'post'})" ng-click="nav.isCollapsed = !nav.isCollapsed">Blog</a>
                     </li>
                     <li>
-                        <a ui-sref="contact({kind: 'contact'})">Contacto</a>
+                        <a ui-sref="contact({kind: 'contact'})" ng-click="nav.isCollapsed = !nav.isCollapsed">Contacto</a>
                     </li>
                     <li>
                         <div id="wrap">

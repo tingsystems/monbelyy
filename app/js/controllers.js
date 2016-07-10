@@ -298,6 +298,52 @@
 
     }
 
+    function TabsCtrl(PostSrv) {
+        var self = this;
+        self.category_1 = 'paquetes';
+        self.category_2 = 'excursiones';
+        self.category_3 = 'destinos';
+
+        self.Tab1 = function () {
+            self.list1 = [];
+            PostSrv.get({
+                category: '&&,' + self.category_1 + '',
+                isActive: 'True',
+                sizePage: 10,
+                ordering: '-createdAt',
+                fields: 'urlImages,title,link,slug,categories'
+            }).$promise.then(function (results) {
+                    self.list1 = results.results;
+                });
+
+        };
+        self.Tab2 = function () {
+            self.list2 = [];
+            PostSrv.get({
+                category: self.category_2,
+                isActive: 'True',
+                sizePage: 10,
+                ordering: '-createdAt',
+                fields: 'urlImages,title,link,slug,categories'
+            }).$promise.then(function (results) {
+                    self.list2 = results.results;
+                });
+        };
+        self.Tab3 = function () {
+            self.list3 = [];
+            PostSrv.get({
+                category: self.category_3,
+                isActive: 'True',
+                sizePage: 10,
+                ordering: '-createdAt',
+                fields: 'urlImages,title,link,slug,categories'
+            }).$promise.then(function (results) {
+                    self.list3 = results.results;
+                });
+        };
+
+    }
+
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
@@ -307,7 +353,8 @@
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
         .controller('BlogCtrl', BlogCtrl)
-        .controller('NavBarCtrl', NavBarCtrl);
+        .controller('NavBarCtrl', NavBarCtrl)
+        .controller('TabsCtrl', TabsCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
@@ -317,4 +364,5 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
+    TabsCtrl.$inject = ['PostSrv'];
 })();
