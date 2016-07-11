@@ -1103,6 +1103,18 @@ color
 .tab-animation > .tab-content > .tab-pane.active-add {
   opacity: 0;
 }
+.margin10 {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.img-gallery-single {
+  padding: 0;
+  clear: both;
+  width: 600px;
+  height: 330px;
+  background-size: cover;
+  background-position: center center;
+}
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .single_blog .comment-area {
     margin-top: -5px;
@@ -1552,6 +1564,14 @@ color
   }
   .company_address {
     padding: 10px 15px;
+  }
+  .img-gallery-single {
+    padding: 0;
+    clear: both;
+    width: 300px;
+    height: 130px;
+    background-size: cover;
+    background-position: center center;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {

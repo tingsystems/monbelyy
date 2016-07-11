@@ -15,10 +15,10 @@
                 <div class="col-md-12 title-post">
                     <h2 class="title">{{ Post.detail.title }}</h2>
                 </div>
-                <div class="content-post">
-                    <div ng-bind-html="Post.detail.content | trustHtml">
-
-                    </div>
+                <div class="content-post" ng-if="Post.isBlog">
+                    <img post-image="{{ Post.detail.urlImages.medium }}"
+                         class="pull-left img-responsive img-thumbnail margin10"/>
+                    <article ng-bind-html="Post.detail.content | trustHtml"></article>
                     <!--gallery here-->
                     <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
                         <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
@@ -30,6 +30,18 @@
                             </a>
                         </div>
                     </div>
+                </div>
+                <div class="content-post" ng-if="!Post.isBlog">
+                    <div class="pull-left margin10">
+                        <uib-carousel interval="5000" template-url="/templates/partials/carousel-single.html">
+                            <uib-slide ng-repeat="slide in Post.detail.galleryImages">
+                                <div class="img-gallery-single"
+                                     style="background-image:url('{{ slide.urlImages.original }}');"></div>
+                            </uib-slide>
+                        </uib-carousel>
+                    </div>
+
+                    <article ng-bind-html="Post.detail.content | trustHtml"></article>
                 </div>
             </div>
             <div class="col-md-3 widgets">
