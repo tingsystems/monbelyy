@@ -2,7 +2,7 @@
 <section id="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 title">
+            <div class="col-md-12 title-post">
                 <h2 class="title">{{ Post.categoryName }}</h2>
             </div>
         </div>
@@ -12,7 +12,8 @@
                     <div class="col-md-4" ng-repeat="entry in Post.list">
                         <div class="box-default">
                             <a ui-sref="post_detail({slug: entry.slug})">
-                                <div class="box-header" style="background-image: url('{{ entry.urlImages.medium }}"></div>
+                                <div class="box-header"
+                                     style="background-image: url('{{ entry.urlImages.medium }}"></div>
 
                                 <div class="description">
                                     <h3><a ui-sref="post_detail({slug: entry.slug})">{{ entry.title | characters:35 }} </a></h3>

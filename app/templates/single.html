@@ -38,6 +38,35 @@
             <div class="col-md-3 widgets">
                 <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
             </div>
+            <!-- Viajes coral te recomienda -->
+            <div class="col-md-12">
+                <div class="col-md-12 title">
+                    <h2 class="title-single">Viajes Coral te recomienda</h2>
+                    <hr class="divider"/>
+                </div>
+                <div class="col-md-3">
+                    <a post-link="{ link: {url: entry.link, target: '_blank'} }"
+                       ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
+                        <div class="box-default">
+                            <div class="box-header"
+                                 style="background-image: url('{{ entry.urlImages.thumbnails }}')">
+                            </div>
+
+                            <div class="box-container">
+                                <h3>¿Qué articulos no deben faltar en mi viaje?</h3>
+
+                                <p>Quieres viajar y no sabes que articulos llevar? es muy sencillo pensar que es lo más
+                                    importante que tienes que tener a la mano cuando viajes ..</p>
+                            </div>
+                            <div class="box-footer">
+                                <p><span><i class="fa fa-calendar-"></i></span>
+                                    17/06/2016 </p>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
         </div>
     </div>
 </section>
