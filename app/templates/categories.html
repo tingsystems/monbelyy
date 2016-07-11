@@ -15,8 +15,8 @@
                                 <div class="box-header" style="background-image: url('{{ entry.urlImages.medium }}"></div>
 
                                 <div class="description">
-                                    <h3><a ui-sref="product_detail({slug: entry.slug})">{{ entry.title }} </a></h3>
-                                    <h5>{{ entry.excerpt }}</h5>
+                                    <h3><a ui-sref="post_detail({slug: entry.slug})">{{ entry.title | characters:35 }} </a></h3>
+                                    <h5>{{ entry.excerpt | characters:70 }}</h5>
                                 </div>
                             </a>
                         </div>

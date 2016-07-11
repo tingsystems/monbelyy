@@ -152,7 +152,7 @@
         $rootScope.pageTitle = 'Viajes Coral - Blog';
     }
 
-    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv) {
+    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv, $filter) {
         var self = this;
         $rootScope.pageTitle = 'Viajes Coral - ';
 
@@ -167,6 +167,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = 'http://www.viveenarmonia.com.mx/img/img-default.jpg';
                 }
+                self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
                 $rootScope.pageTitle = 'Viajes Coral- ' + results.title;
                 self.busy = false;
             });
@@ -358,7 +359,7 @@
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
-    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv'];
+    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv', '$filter'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope'];
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
