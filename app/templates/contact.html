@@ -1,47 +1,98 @@
 <section id="content-contact">
-    <div class="container">
+    <div class="">
         <div class="form-section">
             <div class="container">
-                <div class="col-md-6 col-md-offset-3 contact-section">
+                <div class="col-md-8 col-md-offset-2 contact-section">
                     <div class="col-md-12 title-post">
                         <h2 class="title">Contacto</h2>
                     </div>
                     <br/><br/>
-                    <div class="social-media">
 
-                        <div class="social">
-                            <a href="tel:3531281375">
-                                <i class="fa fa-phone"></i> (33) 3880 12 34
-                            </a>
+                    <div class="social-media">
+                        <div class="col-md-6">
+                            <div class="social">
+                                <h2>Agencia matriz</h2>
+
+                                <h3><a href="tel:013535317300"><i class="fa fa-phone"></i> (353)531 73 00</a></h3>
+
+                                <h3><a href="tel:3531117379"><i class="fa fa-phone"></i> (353)531 82 00</a></h3>
+
+                                <h3><a href="tel:3531117379"><i class="fa fa-whatsapp"></i> 353 111 73 79</a></h3>
+
+                                <h3>
+                                    <a target="_blank"
+                                       href="https://www.google.com.mx/maps/place/Francisco+I.+Madero+318,+Santuario,+Centro+Dos,+59053+Sahuayo+de+Morelos,+Mich./@20.0634481,-102.7242179,17.35z/data=!4m5!3m4!1s0x842ee353cb621753:0x96fd76a500856667!8m2!3d20.0630961!4d-102.7220154">Dirección:
+                                        Madero 318, Sahuayo, Mich.</a></h3>
+                            </div>
                         </div>
-                        <div class="social">
-                            <a href="tel:3531020871">
-                                <i class="fa fa-print"></i> Fax (33) 3880 12 00
-                            </a>
+                        <div class="col-md-6">
+                            <div class="social">
+                                <h2>Sucursal centro</h2>
+
+                                <h3><a href="tel:013535317300"><i class="fa fa-phone"></i> (353)532 67 21</a></h3>
+
+                                <h3>
+                                    <a target="_blank"
+                                       href="https://www.google.com.mx/maps/place/Viajes+Coral+Centro/@20.0580736,-102.7251509,17z/data=!3m1!4b1!4m5!3m4!1s0x842efcad325c1be3:0x1e3d000ad6c67ed!8m2!3d20.0580736!4d-102.7229569">Dirección:
+                                        Tepeyac #75 local 1, Sahuayo, Mich.</a></h3>
+                            </div>
                         </div>
-                        <div class="social">
-                            <a href="mailto:clientes@remolquesmagu.com">
-                                <i class="fa fa-envelope-o"></i> info@loredoyasociados.com.mx
-                            </a>
+                        <div class="col-md-12">
+                            <div class="social">
+                                <div class="col-md-6">
+                                    <h3><a href="mailto:info@viajescoral.com"><i class="fa fa-envelope"></i>
+                                        info@viajescoral.com</a>
+                                    </h3>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h3><a href="mailto:viajes_coral@hotmail.com"><i class="fa fa-envelope"></i>
+                                        viajes_coral@hotmail.com</a>
+                                    </h3>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h3><a href="mailto:isa_viajes03@outlook.com"><i class="fa fa-envelope"></i>
+                                        isa_viajes03@outlook.com</a>
+                                    </h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3><a href="mailto:isa_viajes03@outlook.com"><i class="fa fa-envelope"></i>
+                                        isaviajescoral@hotmail.com</a>
+                                    </h3>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
-                    <form class="padding" ng-submit="Contact.createNotification('CONTACT_FORM')"
-                            ng-init="Contact.notification.subject = 'Formulario de contacto'">
+                    <form class="padding form-horizontal" ng-submit="Contact.createNotification('CONTACT_FORM')"
+                          ng-init="Contact.notification.subject = 'Formulario de contacto'">
                         <div class="form-group">
-                            <label class="text-form" for="name">Nombre *</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
-                                   required ng-model="Contact.notification.name">
+                            <label class="col-md-2" for="name">Nombre *</label>
+
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
+                                       required ng-model="Contact.notification.name">
+                            </div>
+
                         </div>
                         <div class="form-group">
-                            <label class="text-form" for="email">Correo electrónico *</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                   placeholder="Correo electrónico" required ng-model="Contact.notification.email">
+                            <label class="col-md-3" for="email">Correo electrónico *</label>
+
+                            <div class="col-md-9">
+                                <input type="email" class="form-control" id="email" name="email"
+                                       placeholder="Correo electrónico" required ng-model="Contact.notification.email">
+                            </div>
+
                         </div>
                         <div class="form-group">
-                            <label class="text-form" for="phone">Teléfono *</label>
-                            <input type="number" class="form-control" id="phone" name="phone"
-                                   placeholder="Teléfono" required ng-model="Contact.notification.phone">
+                            <label class="col-md-2" for="phone">Teléfono *</label>
+
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                       placeholder="Teléfono" required ng-model="Contact.notification.phone">
+                            </div>
                         </div>
                         <div class="form-group">
                                 <textarea class="form-control" id="message" name="message" rows="7"
