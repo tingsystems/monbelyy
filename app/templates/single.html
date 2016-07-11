@@ -53,23 +53,22 @@
                     <h2 class="title-single">Viajes Coral te recomienda</h2>
                     <hr class="divider"/>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" ng-repeat="entry in Post.blog">
                     <a post-link="{ link: {url: entry.link, target: '_blank'} }"
                        ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
                         <div class="box-default">
                             <div class="box-header"
-                                 style="background-image: url('{{ entry.urlImages.thumbnails }}')">
+                                 style="background-image: url('{{ entry.urlImages.medium ?  entry.urlImages.medium : 'http://localhost:8080/img/img-default.jpg'}}')">
                             </div>
 
                             <div class="box-container">
-                                <h3>¿Qué articulos no deben faltar en mi viaje?</h3>
+                                <h3>{{ entry.title | characters:35 }}</h3>
 
-                                <p>Quieres viajar y no sabes que articulos llevar? es muy sencillo pensar que es lo más
-                                    importante que tienes que tener a la mano cuando viajes ..</p>
+                                <p>{{ entry.excerpt | characters:70 }}</p>
                             </div>
                             <div class="box-footer">
                                 <p><span><i class="fa fa-calendar-"></i></span>
-                                    17/06/2016 </p>
+                                    {{ entry.createdAt | date : shortDate }} </p>
                             </div>
                         </div>
                     </a>

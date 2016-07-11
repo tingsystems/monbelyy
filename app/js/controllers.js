@@ -173,13 +173,13 @@
             });
         // Controller for slider
         PostSrv.get({
-            category: 'slider',
+            category: 'blog',
             isActive: 'True',
-            sizePage: 10,
+            sizePage: 4,
             ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug'
+            fields: 'urlImages,title,link,slug,excerpt,createdAt'
         }).$promise.then(function (results) {
-                self.mainSlider = results.results;
+                self.blog = results.results;
             });
     }
 

@@ -13,7 +13,7 @@
                         <div class="box-default">
                             <a ui-sref="post_detail({slug: entry.slug})">
                                 <div class="box-header"
-                                     style="background-image: url('{{ entry.urlImages.medium }}"></div>
+                                     style="background-image: url('{{ entry.urlImages.medium ? entry.urlImages.medium : 'http://localhost:8080/img/img-default.jpg' }}"></div>
 
                                 <div class="description">
                                     <h3><a ui-sref="post_detail({slug: entry.slug})">{{ entry.title | characters:35 }} </a></h3>
