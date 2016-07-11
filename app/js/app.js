@@ -116,6 +116,7 @@
     }
 
     function AppConfig(blockUIConfig) {
+        blockUIConfig.templateUrl = '/templates/partials/block-ui.html';
         // Change the default overlay message
         blockUIConfig.message = 'Cargando...';
 
@@ -175,7 +176,7 @@
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll','truncate'])
+        'duScroll', 'truncate'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
