@@ -133,7 +133,7 @@
         $rootScope.$state = $state;
         $http.defaults.headers.common['TS-TOKEN'] = 'F66sYYc2lNqdtSCivobmsL3SAoiDwv8bSXXbxV0t';
         $rootScope.$on('$locationChangeSuccess', function () {
-            $('#header-mainmenu').collapse('hide');
+            $('#header-mainMenu').collapse('hide');
         });
         // initialise google analytics
         //$window.ga('create', 'UA-53555832-27', '');

@@ -295,7 +295,7 @@
 
     function NavBarCtrl() {
         var self = this;
-        self.isCollapsed = true;
+        self.isCollapsed = false;
 
     }
 
