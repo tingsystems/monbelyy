@@ -2,13 +2,14 @@
     <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
             <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                <div class="bg-inner"></div>
                 <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
                 <div class="carousel-caption">
 
                     <h3>{{ slide.title }}</h3>
 
                     <p>{{ slide.excerpt }}</p>
-
+                    <a href="#" class="btn btn-white-clear">Más información</a>
                 </div>
             </a>
         </uib-slide>
@@ -16,325 +17,66 @@
 </div>
 <section class="section_padding">
     <div class="container">
-        <div class="col-md-9 col-sm-9">
-            <ul class="nav nav-pills">
-                <li class="active"><a data-toggle="pill" href="#home">Destinos</a></li>
-                <li><a data-toggle="pill" href="#menu1">Paquetes</a></li>
-                <li><a data-toggle="pill" href="#menu2">Excursiones</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div id="home" class="tab-pane fade in active">
+        <div class="col-md-9 col-sm-9" ng-controller="TabsCtrl as Tab">
+            <uib-tabset active="active" template-url="/templates/partials/tabset.html" class="tab-animation">
+                <uib-tab index="0" heading="Paquetes" select="Tab.Tab1()" template-url="/templates/partials/tab.html">
                     <div class="col-md-12 no-padding">
-                        <div class="col-md-4 col-sm-4 no-padding">
+                        <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list1">
                             <div class="box-default">
-                                <a href="#">
+                                <a ui-sref="post_detail({slug: item.slug})">
                                     <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
+                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
 
                                     <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
+                                        <h3>{{ item.title }}</h3>
                                         <h5>Quintana Roo</h5>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="menu1" class="tab-pane fade">
+                </uib-tab>
+                <uib-tab index="0" heading="Excursiones" select="Tab.Tab2()"
+                         template-url="/templates/partials/tab.html">
                     <div class="col-md-12 no-padding">
-                        <div class="col-md-4 col-sm-4 no-padding">
+                        <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list2">
                             <div class="box-default">
-                                <a href="#">
+                                <a ui-sref="post_detail({slug: item.slug})">
                                     <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
 
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
                                     <div class="description">
-                                        <h3>Cancún</h3>
+                                        <h3>{{ item.title }}</h3>
                                         <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="menu2" class="tab-pane fade">
+                </uib-tab>
+                <uib-tab index="0" heading="Destinos" select="Tab.Tab3()" template-url="/templates/partials/tab.html">
                     <div class="col-md-12 no-padding">
-                        <div class="col-md-4 col-sm-4 no-padding">
+                        <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list3">
                             <div class="box-default">
-                                <a href="#">
+                                <a ui-sref="post_detail({slug: item.slug})">
                                     <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
 
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
                                     <div class="description">
-                                        <h3>Cancún</h3>
+                                        <h3>{{ item.title }}</h3>
                                         <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 no-padding">
-                            <div class="box-default">
-                                <a href="#">
-                                    <div class="box-header"
-                                         style="background-image: url('../img/img-default.jpg')"></div>
-                                    <div class="description">
-                                        <h3>Cancún</h3>
-                                        <h5>Quintana Roo</h5>
-                                        <h5>$999.00 Precio por persona/noche</h5>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </uib-tab>
+            </uib-tabset>
         </div>
         <!-- Sidebar -->
         <div class="col-md-3 col-sm-3">
-            <div class="box-widget">
-                <div class="box-widget-header">
-                    Contáctanos
-                </div>
-                <div class="box-widget-container">
-                    <h2>Agencia matriz</h2>
-
-                    <h3><a href="tel:013535317300"><i class="fa fa-phone"></i> (353)531 73 00</a></h3>
-
-                    <h3><a href="tel:3531117379"><i class="fa fa-phone"></i> (353)531 82 00</a></h3>
-
-                    <h3><a href="tel:3531117379"><i class="fa fa-whatsapp"></i> 353 111 73 79</a></h3>
-
-                    <h3>
-                        <a href="https://www.google.com.mx/maps/place/Francisco+I.+Madero+318,+Santuario,+Centro+Dos,+59053+Sahuayo+de+Morelos,+Mich./@20.0634481,-102.7242179,17.35z/data=!4m5!3m4!1s0x842ee353cb621753:0x96fd76a500856667!8m2!3d20.0630961!4d-102.7220154">Dirección:
-                            Cll. Madero 318</a></h3>
-
-                    <h2>Sucursal centro</h2>
-
-                    <h3><a href="tel:013535317300"><i class="fa fa-phone"></i> (353)532 67 21</a></h3>
-
-                    <h3><a href="https://www.google.com.mx/maps/place/Partido+Acci%C3%B3n+Nacional/@19.9904577,-102.7242814,17z/data=!3m1!4b1!4m5!3m4!1s0x842efc7302a2e6a9:0x62748f0aafa724ba!8m2!3d19.9904527!4d-102.7220927">Dirección: Cll. Tepeyac #75 local 1</a></h3>
-
-                    <h2>Correo</h2>
-
-                    <h3><a href="mailto:viajes_coral@hotmail.com"><i class="fa fa-envelope"></i>
-                        viajes_coral@hotmail.com</a>
-                    </h3>
-
-                    <h3><a href="mailto:isa_viajes03@outlook.com"><i class="fa fa-envelope"></i>
-                        isa_viajes03@outlook.com</a>
-                    </h3>
-
-                    <h3><a href="mailto:isa_viajes03@outlook.com"><i class="fa fa-envelope"></i>
-                        isaviajescoral@hotmail.com</a>
-                    </h3>
-
-                    <h2>Síguenos en</h2>
-
-                    <h3><a href="https://www.facebook.com/viajes.coral.3/"><i class="fa fa-facebook-square"></i>
-                        @viajes.coral.3</a></h3>
-                </div>
-            </div>
-            <div class="box-widget">
-                <div class="box-widget-header">
-                    Envíanos un mensaje
-                </div>
-                <div class="box-widget-container">
-                    <form action="">
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="InputName" placeholder="Nombre">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="InputEmail1" placeholder="Correo">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="text" id="" cols="100%" rows="4" class="form-control"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-block btn-green-clear">Enviar</button>
-                    </form>
-                </div>
-            </div>
+            <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
         </div>
-    </div>
 </section>
 
 

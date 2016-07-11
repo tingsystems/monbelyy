@@ -242,6 +242,11 @@ input[type="submit"]:hover
   background-size cover
   height 650px
   background-repeat no-repeat
+.bg-inner
+  width 100%
+  position absolute
+  background rgba(0, 0, 0, 0.2)
+  height 100%
 .carousel-caption
   top 40%
   width 60%
@@ -249,6 +254,12 @@ input[type="submit"]:hover
   left 6%
   right 10%
   opacity 1
+  .btn
+    font-size 18px
+    box-shadow 0 0 5px #000
+    text-shadow 0 0 5px #000
+  a
+    color white
   h3
     text-shadow 0 0 10px #000
     font-size 46px
@@ -256,6 +267,7 @@ input[type="submit"]:hover
     margin-top 40px
   p
     font-size 42px
+    text-shadow 0 0 10px #000
 
 #slider-area
   background url(../img/bg.jpg)
@@ -533,18 +545,20 @@ input[type="submit"]:hover
 .nav > li > a:hover, .nav > li > a:focus
   background-color transparent
 
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li > a:hover
   color #79afa0
   background-color transparent
   font-size 22px
-  border-bottom 4px solid #79afa0
+  border-bottom 4px solid #79afa0 !important
+  border 0 solid transparent
 
-.nav-pills > li > a
+
+.nav-tabs > li > a
   border-radius 0
   font-size 22px
   color #888
 
-.nav-pills
+.nav-tabs
   border-bottom 1px solid #ccc
 
 .box-widget
@@ -558,7 +572,7 @@ input[type="submit"]:hover
   .box-widget-container
     padding 20px 0
     h3>a, h2>a
-      font-size 18px
+      font-size 14px
       color #777777
       font-weight 300
       &:hover
@@ -571,6 +585,9 @@ input[type="submit"]:hover
   margin 10px
   padding 10px
   transition all 0.5s ease
+  .description
+    h4
+      color #767676
   a
     color #5d5d5d
   .box-footer
@@ -936,3 +953,20 @@ input[type="submit"]:hover
 
 .owl-nav
   display none
+
+/*transition tabs*/
+
+.tab-animation
+  & > .tab-content
+    position relative
+    & > .tab-pane
+      transition 0.3s linear opacity
+      &.active-remove
+        position absolute
+        top 0
+        width 100%
+        display block
+      &.active-remove-active
+        opacity 0
+      &.active-add
+        opacity 0
