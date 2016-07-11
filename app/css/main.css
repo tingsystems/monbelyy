@@ -456,9 +456,10 @@ input[type="submit"]:hover {
   text-shadow: 0 0 10px #000;
 }
 #content-contact {
-  background: #f9ece1;
+  background-image: url("../img/imagee.jpg");
   background-position: center center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 #news .title {
   color: #555;
@@ -1027,6 +1028,7 @@ color
   padding: 25px;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   border-radius: 5px;
+  margin-top: 100px;
 }
 .form-control {
   display: block;
