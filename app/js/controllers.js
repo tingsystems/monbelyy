@@ -183,9 +183,14 @@
             });
     }
 
-    function ContactCtrl(MessageSrv, NotificationSrv, $rootScope) {
+    function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
-        $rootScope.pageTitle = 'Viajes Coral - Contacto';
+        if ($state.current.name == 'home') {
+            $rootScope.pageTitle = 'Viajes Coral - Inicio';
+        } else {
+            $rootScope.pageTitle = 'Viajes Coral - Contacto';
+        }
+
 
         self.contactInitialState = function () {
             self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
@@ -226,7 +231,7 @@
 
     }
 
-    function SearchCtrl(PostSrv, $rootScope, $scope) {
+    function SearchCtrl(PostSrv, $rootScope, $scope, $filter) {
         var self = this;
 
         self.listSearch = [];
@@ -246,12 +251,13 @@
                 PostSrv.get({
                     kind: 'post',
                     isActive: 'True',
-                    fields: 'urlImages,title,link,slug',
+                    fields: 'urlImages,title,link,slug,excerpt',
                     sizePage: 10,
                     ordering: '-createdAt',
                     search: self.searchTerm,
                     page: self.page
                 }).$promise.then(function (results) {
+                        //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
                         self.listSearch = results.results;
                     });
             }
@@ -274,11 +280,12 @@
                 kind: 'post',
                 isActive: 'True',
                 sizePage: 10,
-                fields: 'urlImages,title,link,slug',
+                fields: 'urlImages,title,link,slug,excerpt',
                 ordering: '-createdAt',
                 search: self.searchTerm,
                 page: self.page
             }).$promise.then(function (results) {
+                    //self.responseResults = $filter('filter')(results.results, {'slug': '!slider'});
                     self.listSearch = self.listSearch.concat(results.results);
                     self.busy = false;
                     self.next = results.next;
@@ -360,9 +367,9 @@
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv', '$filter'];
-    ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope'];
+    ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
     BlogCtrl.$inject = ['PostSrv', '$rootScope'];
-    GetQuerySearchCtrl.$inject = ['$rootScope', '$state'];
+    GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
     TabsCtrl.$inject = ['PostSrv'];

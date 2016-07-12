@@ -112,7 +112,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig(blockUIConfig) {
@@ -136,17 +136,17 @@
             $('#header-mainMenu').collapse('hide');
         });
         // initialise google analytics
-        //$window.ga('create', 'UA-53555832-27', '');
+        $window.ga('create', 'UA-53555832-33', '');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
-            //$window.ga('send', 'pageview', $location.path());
-            //$window.ga('require', 'displayfeatures');
+            $window.ga('send', 'pageview', $location.path());
+            $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Viajes Coral',
-                'excerpt': 'Somos una una solución efectiva de gestión de cobro concebida por profesionales del derecho y del recobro con experiencia en el sector de recuperación de deudas.',
+                'excerpt': 'Agencia de viajes en Sahuayo Mich.',
                 'urlImages': {
-                    'original': 'http://www.viveenarmonia.com.mx/img/img-default.jpg'
+                    'original': 'http://www.viajescoral.com/img/img-default.jpg'
                 }
             };
             $anchorScroll();

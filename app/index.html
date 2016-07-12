@@ -35,7 +35,7 @@
           content="{{ post.urlImages.original }}"
           ng-if="post"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://www.viveenarmonia.com.mx{{ $state.href($state.current.name) }}"/>
+    <meta property="og:url" content="http://www.viajescoral.com{{ $state.href($state.current.name) }}"/>
     <link href='https://fonts.googleapis.com/css?family=Poppins:400,300,500' rel='stylesheet' type='text/css'>
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
@@ -99,9 +99,9 @@
                         <a ui-sref="contact({kind: 'contact'})">Contacto</a>
                     </li>
                     <li>
-                        <div id="wrap">
-                            <form action="" autocomplete="on">
-                                <input id="search" name="search" class="input-search" type="text" placeholder="Buscar">
+                        <div id="wrap" ng-controller="GetQuerySearchCtrl as search">
+                            <form autocomplete="on" role="search" ng-submit="search.globalSearch()">
+                                <input id="search" name="search" class="input-search" type="text" placeholder="Buscar" ng-model="search.searchTerm" required>
                                 <button id="search_submit" class="btn btn-white" value="Rechercher" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
