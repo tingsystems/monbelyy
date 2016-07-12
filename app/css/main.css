@@ -189,7 +189,7 @@ header .logo {
   padding: 0;
   position: relative;
 }
-.input-search {
+#wrap .input-search {
   height: 55px;
   border: 1px solid #eee;
   font-size: 18px;
@@ -209,11 +209,11 @@ header .logo {
   cursor: pointer;
   padding-left: 15px;
 }
-input[type="text"]:focus:hover {
+#wrap input[type="text"]:focus:hover {
   border: none;
   border-bottom: 1px solid #bbb !important;
 }
-input[type="text"]:focus {
+#wrap input[type="text"]:focus {
   width: 750px;
   background: #fff;
   z-index: 1;
@@ -221,7 +221,7 @@ input[type="text"]:focus {
   border-bottom: 1px solid #bbb !important;
   cursor: text;
 }
-input[type="submit"] {
+#wrap input[type="submit"] {
   height: 45px;
   width: 45px;
   display: inline-block;
@@ -239,7 +239,7 @@ colorred
   cursor: pointer;
   transition: opacity 0.4s ease;
 }
-input[type="submit"]:hover {
+#wrap input[type="submit"]:hover {
   opacity: 0.8;
 }
 .btn-white {
@@ -788,6 +788,10 @@ color
   font-size: 20px;
   padding-right: 30px;
 }
+.social h2 {
+  font-size: 24px;
+  color: #79afa0;
+}
 .recommendations-detail {
   padding-top: 60px;
 }
@@ -1045,7 +1049,7 @@ color
 .form-section {
   background: transparent;
   padding: 0;
-  margin: 160px 0px 25px;
+  padding: 160px 0px 25px;
 }
 .form-section .title,
 .form-section .text-form {

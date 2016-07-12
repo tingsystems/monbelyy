@@ -5,6 +5,7 @@
                 <div class="col-md-8 col-md-offset-2 contact-section">
                     <div class="col-md-12 title-post">
                         <h2 class="title">Contacto</h2>
+                        <hr/>
                     </div>
                     <br/><br/>
 
@@ -67,46 +68,47 @@
                     </div>
                     <br/>
                     <br/>
-                    <form class="padding form-horizontal" ng-submit="Contact.createNotification('CONTACT_FORM')"
-                          ng-init="Contact.notification.subject = 'Formulario de contacto'">
-                        <div class="form-group">
-                            <label class="col-md-2" for="name">Nombre *</label>
 
-                            <div class="col-md-10">
+                    <div class="col-md-12 title-post" style="padding-top: 20px;">
+                        <h3 class="title">Envíanos un mensaje</h3>
+                        <hr/>
+                    </div>
+                    <div class="col-md-12">
+                        <form class="padding form-horizontal" ng-submit="Contact.createNotification('CONTACT_FORM')"
+                              ng-init="Contact.notification.subject = 'Formulario de contacto'">
+                            <div class="col-md-6">
+
+                                <label for="name">Nombre *</label>
+
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
                                        required ng-model="Contact.notification.name">
-                            </div>
 
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3" for="email">Correo electrónico *</label>
+                                <label for="email">Correo electrónico *</label>
 
-                            <div class="col-md-9">
                                 <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="Correo electrónico" required ng-model="Contact.notification.email">
-                            </div>
+                                       placeholder="Correo electrónico" required
+                                       ng-model="Contact.notification.email">
 
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2" for="phone">Teléfono *</label>
 
-                            <div class="col-md-10">
+                                <label for="phone">Teléfono *</label>
                                 <input type="text" class="form-control" id="phone" name="phone"
                                        placeholder="Teléfono" required ng-model="Contact.notification.phone">
                             </div>
-                        </div>
-                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="email">Escribe tu mensaje *</label>
                                 <textarea class="form-control" id="message" name="message" rows="7"
                                           placeholder="Comentarios *" required
                                           ng-model="Contact.notification.message"></textarea>
-                        </div>
-                        <div class="pull-right">
-                            <button type="submit" class="btn-orange" ng-disabled="Contact.busy">
-                                Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
-                            </button>
 
-                        </div>
-                    </form>
+                                <div style="text-align: right;padding-top:15px;">
+                                    <button type="submit" class="btn-orange" ng-disabled="Contact.busy">
+                                        Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
