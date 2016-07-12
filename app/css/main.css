@@ -1118,6 +1118,22 @@ color
   background-size: cover;
   background-position: center center;
 }
+.height-title {
+  height: 60px;
+}
+.height-summary {
+  height: 70px;
+}
+.height-summary-categories {
+  height: 40px;
+  margin-top: 10px;
+}
+.height-title-home {
+  height: 90px;
+}
+.height-summary-home {
+  height: 50px;
+}
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .single_blog .comment-area {
     margin-top: -5px;

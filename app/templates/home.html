@@ -24,10 +24,13 @@
                             <div class="box-default">
                                 <a ui-sref="post_detail({slug: item.slug})">
                                     <div class="box-header"
-                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
+                                         style="background-image: url('{{ item.urlImages.medium ? item.urlImages.thumbnails : 'http://www.viajescoral.com/img/img-default.jpg' }}')"></div>
 
                                     <div class="description">
-                                        <h3>{{ item.title }}</h3>
+                                        <div class="height-title-home"><h3>
+                                            {{ item.title | characters:45 }}</h3></div>
+                                        <div class="height-summary-home"><h5>
+                                            {{ item.excerpt | characters:70 }}</h5></div>
                                     </div>
                                 </a>
                             </div>
@@ -41,10 +44,13 @@
                             <div class="box-default">
                                 <a ui-sref="post_detail({slug: item.slug})">
                                     <div class="box-header"
-                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
+                                         style="background-image: url('{{ item.urlImages.medium ? item.urlImages.thumbnails : 'http://www.viajescoral.com/img/img-default.jpg' }}')"></div>
 
                                     <div class="description">
-                                        <h3>{{ item.title }}</h3>
+                                        <div class="height-title-home"><h3>
+                                            {{ item.title | characters:45 }}</h3></div>
+                                        <div class="height-summary-home"><h5>
+                                            {{ item.excerpt | characters:70 }}</h5></div>
                                     </div>
                                 </a>
                             </div>
@@ -57,10 +63,13 @@
                             <div class="box-default">
                                 <a ui-sref="post_detail({slug: item.slug})">
                                     <div class="box-header"
-                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
+                                         style="background-image: url('{{ item.urlImages.medium ? item.urlImages.thumbnails : 'http://www.viajescoral.com/img/img-default.jpg' }}')"></div>
 
                                     <div class="description">
-                                        <h3>{{ item.title }}</h3>
+                                        <div class="height-title-home"><h3>
+                                            {{ item.title | characters:45 }}</h3></div>
+                                        <div class="height-summary-home"><h5>
+                                            {{ item.excerpt | characters:70 }}</h5></div>
                                     </div>
                                 </a>
                             </div>

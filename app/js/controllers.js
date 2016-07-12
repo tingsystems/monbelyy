@@ -315,11 +315,11 @@
         self.Tab1 = function () {
             self.list1 = [];
             PostSrv.get({
-                category: '&&,' + self.category_1 + '',
+                category: self.category_1,
                 isActive: 'True',
                 sizePage: 10,
                 ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories'
+                fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
                     self.list1 = results.results;
                 });
@@ -332,7 +332,7 @@
                 isActive: 'True',
                 sizePage: 10,
                 ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories'
+                fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
                     self.list2 = results.results;
                 });
@@ -344,7 +344,7 @@
                 isActive: 'True',
                 sizePage: 10,
                 ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories'
+                fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
                     self.list3 = results.results;
                 });
