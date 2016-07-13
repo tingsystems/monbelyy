@@ -187,7 +187,7 @@
         var self = this;
         if ($state.current.name == 'home') {
             $rootScope.pageTitle = 'Viajes Coral - Inicio';
-        } else {
+        } else if ($state.current.name == 'contact') {
             $rootScope.pageTitle = 'Viajes Coral - Contacto';
         }
 
