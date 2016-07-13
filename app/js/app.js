@@ -13,7 +13,6 @@
             })
             .state('home', {
                 url: '/',
-                data: {pageTitle: 'Viajes Coral - Inicio'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -24,7 +23,6 @@
             })
             .state('contact', {
                 url: '/contact',
-                data: {pageTitle: 'Viajes Coral - Contacto'},
                 views: {
                     'content': {
                         templateUrl: '/templates/contact.html',
@@ -35,7 +33,6 @@
             })
             .state('blog', {
                 url: '/blog',
-                data: {pageTitle: 'Viajes Coral - Blog'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -66,7 +63,6 @@
                     }
                 }
             })
-
             .state('category', {
                 url: '/category/:slug',
                 data: {pageTitle: 'Viajes Coral'},
@@ -109,19 +105,30 @@
                         controller: 'SearchCtrl'
                     }
                 }
+            })
+            .state('404', {
+                url: '/404',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/404.html'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(false);
     }
 
-    function AppConfig(blockUIConfig) {
+    function AppConfig($httpProvider, blockUIConfig) {
         blockUIConfig.templateUrl = '/templates/partials/block-ui.html';
         // Change the default overlay message
         blockUIConfig.message = 'Cargando...';
 
         // Change the default delay to 100ms before the blocking is visible
         blockUIConfig.delay = 90;
+
+        // Set interceptor
+        $httpProvider.interceptors.push('HttpInterceptor');
 
     }
 
@@ -131,6 +138,10 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv, $anchorScroll) {
         $rootScope.$state = $state;
+        $rootScope.host = 'https://www.tingsystems.com';
+        //$rootScope.host = 'http://192.168.1.149';
+        $rootScope.apiV = 'v1';
+        $rootScope.siteId = '209b4457-32d3-4a16-b54e-fc03641a2396';
         $http.defaults.headers.common['TS-TOKEN'] = 'F66sYYc2lNqdtSCivobmsL3SAoiDwv8bSXXbxV0t';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -172,6 +183,10 @@
 
         $rootScope.showResponsive = showResponsive($window);
 
+        $rootScope.$on('HTTP_ERROR', function (event, args) {
+            $state.go(args.error);
+        });
+
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
@@ -183,5 +198,5 @@
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', 'PostSrv', '$anchorScroll'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    AppConfig.$inject = ['blockUIConfig'];
+    AppConfig.$inject = ['$httpProvider','blockUIConfig'];
 })();

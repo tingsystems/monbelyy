@@ -4,7 +4,7 @@
     function HomeCtrl(PostSrv, PostDetailSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Viajes Coral - Inicio';
+        $rootScope.pageTitle = 'Agencia de Viajes Coral - Inicio';
 
         PostSrv.get({
             category: 'slider',
@@ -64,6 +64,11 @@
                 self.presence = results;
             });
 
+        self.Close = function (){
+            console.log("Hola");
+            $('#header-mainMenu').collapse('hide');
+        }
+
 
     }
 
@@ -84,7 +89,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - Viajes Coral';
+                        $rootScope.pageTitle = self.categoryName + ' - Agencia de Viajes Coral';
                     }
                 });
         }
@@ -149,12 +154,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Viajes Coral';
+        $rootScope.pageTitle = 'Blog - Agencia de Viajes Coral';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Viajes Coral';
+        $rootScope.pageTitle = 'Agencia de Viajes Coral';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -165,10 +170,10 @@
                 self.detail = results;
                 $rootScope.post = self.detail;
                 if (!self.detail.urlImages.original) {
-                    self.detail.urlImages.original = 'http://www.viveenarmonia.com.mx/img/img-default.jpg';
+                    self.detail.urlImages.original = 'http://www.viajescoral.com/img/img-default.jpg';
                 }
                 self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
-                $rootScope.pageTitle = results.title + ' - Viajes Coral';
+                $rootScope.pageTitle = results.title + ' - Agencia de Viajes Coral';
                 self.busy = false;
             });
         // Controller for slider
@@ -186,7 +191,7 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Viajes Coral - Inicio';
+            $rootScope.pageTitle = 'Agencia de Viajes Coral - Inicio';
         } else if ($state.current.name == 'contact') {
             $rootScope.pageTitle = 'Viajes Coral - Contacto';
         }
