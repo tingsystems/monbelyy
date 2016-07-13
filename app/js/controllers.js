@@ -84,7 +84,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = 'Viajes Coral - ' + self.categoryName;
+                        $rootScope.pageTitle = self.categoryName + ' - Viajes Coral';
                     }
                 });
         }
@@ -149,12 +149,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Viajes Coral - Blog';
+        $rootScope.pageTitle = 'Blog - Viajes Coral';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Viajes Coral - ';
+        $rootScope.pageTitle = 'Viajes Coral';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -168,7 +168,7 @@
                     self.detail.urlImages.original = 'http://www.viveenarmonia.com.mx/img/img-default.jpg';
                 }
                 self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
-                $rootScope.pageTitle = 'Viajes Coral- ' + results.title;
+                $rootScope.pageTitle = results.title + ' - Viajes Coral';
                 self.busy = false;
             });
         // Controller for slider
