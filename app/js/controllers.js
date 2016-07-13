@@ -55,15 +55,15 @@
         }).$promise.then(function (results) {
                 self.news = results.results;
             });
-        /*
-         PostDetailSrv.get({
-         slug: 'presencia',
-         isActive: 'True',
-         fields: 'title,excerpt,slug,urlImages'
-         }).$promise.then(function (results) {
-         self.presence = results;
-         });
-         */
+
+        PostDetailSrv.get({
+            slug: 'viajes-coral',
+            isActive: 'True',
+            fields: 'title,excerpt,content'
+        }).$promise.then(function (results) {
+                self.presence = results;
+            });
+
 
     }
 

@@ -19,7 +19,7 @@
         <div class="col-md-9 col-sm-9" ng-controller="TabsCtrl as Tab">
             <uib-tabset active="active" template-url="/templates/partials/tabset.html" class="tab-animation">
                 <uib-tab index="0" heading="Paquetes" select="Tab.Tab1()" template-url="/templates/partials/tab.html">
-                    <div class="col-md-12 no-padding">
+                    <div class="col-md-12 no-padding" ng-if="Tab.list1.length">
                         <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list1">
                             <div class="box-default">
                                 <a ui-sref="post_detail({slug: item.slug})">
@@ -36,10 +36,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 no-padding" ng-if="!Tab.list1.length">
+                        <h3 class="text-center no-content">No hay contendio en esta sección</h3>
+                    </div>
                 </uib-tab>
                 <uib-tab index="0" heading="Excursiones" select="Tab.Tab2()"
                          template-url="/templates/partials/tab.html">
-                    <div class="col-md-12 no-padding">
+                    <div class="col-md-12 no-padding" ng-if="Tab.list2.length">
                         <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list2">
                             <div class="box-default">
                                 <a ui-sref="post_detail({slug: item.slug})">
@@ -56,9 +59,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 no-padding" ng-if="!Tab.list2.length">
+                        <h3 class="text-center no-content">No hay contendio en esta sección</h3>
+                    </div>
                 </uib-tab>
                 <uib-tab index="0" heading="Destinos" select="Tab.Tab3()" template-url="/templates/partials/tab.html">
-                    <div class="col-md-12 no-padding">
+                    <div class="col-md-12 no-padding" ng-if="Tab.list3.length">
                         <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list3">
                             <div class="box-default">
                                 <a ui-sref="post_detail({slug: item.slug})">
@@ -75,6 +81,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 no-padding" ng-if="!Tab.list3.length">
+                        <h3 class="text-center no-content">No hay contendio en esta sección</h3>
+                    </div>
                 </uib-tab>
             </uib-tabset>
         </div>
@@ -88,16 +97,11 @@
 <section id="contract" class="section_padding">
     <div class="container">
         <div class="col-md-12 description">
-            <h2> Viajes Coral</h2>
+            <h2>{{ Home.presence.title }}</h2>
 
-            <p class="text-center">
-                Es una agencia que se esmera por atender con eficacia y
-                profesionalismo a quienes solicitan trasladarse por placer o por negocios.
-                Cuenta con un personal amable, así como de sistemas computarizados
-                para reservar los servicios turísticos.
-            </p>
+            <div ng-bind-html="Home.presence.content | trustHtml"></div>
 
-            <h3>¿Quieres vacaciones? ¡Contáctanos!</h3>
+            <h3>{{ Home.presence.excerpt }}</h3>
         </div>
     </div>
 </section>
