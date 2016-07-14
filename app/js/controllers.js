@@ -64,11 +64,6 @@
                 self.presence = results;
             });
 
-        self.Close = function (){
-            console.log("Hola");
-            $('#header-mainMenu').collapse('hide');
-        }
-
 
     }
 
@@ -308,6 +303,9 @@
     function NavBarCtrl() {
         var self = this;
         self.isCollapsed = false;
+        self.close = function () {
+            $('#header-mainMenu').collapse('hide');
+        }
 
     }
 

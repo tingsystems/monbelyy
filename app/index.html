@@ -82,22 +82,22 @@
             <div class="collapse navbar-collapse" id="header-mainMenu">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a ui-sref="home" ng-click="Home.Close">Inicio</a>
+                        <a ui-sref="home" ng-click="nav.close()">Inicio</a>
                     </li>
                     <li>
-                        <a ui-sref="category({slug:'paquetes'})">Paquetes</a>
+                        <a ui-sref="category({slug:'paquetes'})" ng-click="nav.close()">Paquetes</a>
                     </li>
                     <li>
-                        <a ui-sref="category({slug:'excursiones'})">Excursiones</a>
+                        <a ui-sref="category({slug:'excursiones'})" ng-click="nav.close()">Excursiones</a>
                     </li>
                     <li>
-                        <a ui-sref="category({slug:'destinos'})">Destinos</a>
+                        <a ui-sref="category({slug:'destinos'})" ng-click="nav.close()">Destinos</a>
                     </li>
                     <li>
-                        <a ui-sref="blog({kind: 'post'})">Blog</a>
+                        <a ui-sref="blog({kind: 'post'})" ng-click="nav.close()">Blog</a>
                     </li>
                     <li>
-                        <a ui-sref="contact({kind: 'contact'})">Contacto</a>
+                        <a ui-sref="contact({kind: 'contact'})" ng-click="nav.close()">Contacto</a>
                     </li>
                     <li>
                         <div id="wrap" ng-controller="GetQuerySearchCtrl as search">
