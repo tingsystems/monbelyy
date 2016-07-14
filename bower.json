@@ -21,7 +21,8 @@
     "angular-block-ui": "^0.2.2",
     "angular-toasty": "^1.0.5",
     "angular-scroll": "^1.0.0",
-    "angular-truncate": "*"
+    "angular-truncate": "*",
+    "angular-touch": "^1.5.7"
   },
   "overrides": {
     "bootstrap": {

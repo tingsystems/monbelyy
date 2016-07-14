@@ -154,7 +154,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Viajes Coral',
+                'title': 'Agencia de Viajes Coral',
                 'excerpt': 'Agencia de viajes en Sahuayo Mich.',
                 'urlImages': {
                     'original': 'http://www.viajescoral.com/img/img-default.jpg'
@@ -191,12 +191,12 @@
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate'])
+        'duScroll', 'truncate', 'ngTouch'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', 'PostSrv', '$anchorScroll'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    AppConfig.$inject = ['$httpProvider','blockUIConfig'];
+    AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
 })();
