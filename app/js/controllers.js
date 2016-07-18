@@ -4,7 +4,7 @@
     function HomeCtrl(PostSrv, PostDetailSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Agencia de Viajes Coral - Inicio';
+        $rootScope.pageTitle = 'Mercado Móvil - Pagos al instante';
 
         PostSrv.get({
             category: 'slider',
@@ -16,53 +16,15 @@
                 self.mainSlider = results.results;
             });
 
-        PostSrv.get({
-            category: 'paquetes',
-            isActive: 'True',
-            sizePage: 10,
-            ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug'
-        }).$promise.then(function (results) {
-                self.packages = results.results;
-            });
-
-        PostSrv.get({
-            category: 'excursiones',
-            isActive: 'True',
-            sizePage: 10,
-            ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug'
-        }).$promise.then(function (results) {
-                self.excursion = results.results;
-            });
-
-        PostSrv.get({
-            category: 'destinos',
-            isActive: 'True',
-            sizePage: 10,
-            ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug'
-        }).$promise.then(function (results) {
-                self.destinations = results.results;
-            });
-
-        PostSrv.get({
-            category: 'blog',
-            isActive: 'True',
-            sizePage: 4,
-            ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,createdAt,excerpt'
-        }).$promise.then(function (results) {
-                self.news = results.results;
-            });
-
-        PostDetailSrv.get({
-            slug: 'viajes-coral',
-            isActive: 'True',
-            fields: 'title,excerpt,content'
-        }).$promise.then(function (results) {
-                self.presence = results;
-            });
+        /*
+         PostDetailSrv.get({
+         slug: 'viajes-coral',
+         isActive: 'True',
+         fields: 'title,excerpt,content'
+         }).$promise.then(function (results) {
+         self.presence = results;
+         });
+         */
 
 
     }
@@ -84,7 +46,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - Agencia de Viajes Coral';
+                        $rootScope.pageTitle = self.categoryName + ' - Mercado Móvil';
                     }
                 });
         }
@@ -149,12 +111,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Agencia de Viajes Coral';
+        $rootScope.pageTitle = 'Blog - Mercado Móvil';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Agencia de Viajes Coral';
+        $rootScope.pageTitle = 'Mercado Móvil';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -168,7 +130,7 @@
                     self.detail.urlImages.original = 'http://www.viajescoral.com/img/img-default.jpg';
                 }
                 self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
-                $rootScope.pageTitle = results.title + ' - Agencia de Viajes Coral';
+                $rootScope.pageTitle = results.title + ' - Mercado Móvil';
                 self.busy = false;
             });
         // Controller for slider
@@ -186,9 +148,9 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Agencia de Viajes Coral - Inicio';
+            $rootScope.pageTitle = 'Mercado Móvil - Pagos al instante';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Viajes Coral - Contacto';
+            $rootScope.pageTitle = 'Mercado Móvil - Contacto';
         }
 
 
@@ -202,7 +164,7 @@
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
-            self.notification.send_from = 'info@viajescoral.com';
+            self.notification.send_from = 'info@mercadomovil.com.mx';
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {

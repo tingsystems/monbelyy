@@ -141,29 +141,29 @@
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
         $rootScope.apiV = 'v1';
-        $rootScope.siteId = '209b4457-32d3-4a16-b54e-fc03641a2396';
-        $http.defaults.headers.common['TS-TOKEN'] = 'F66sYYc2lNqdtSCivobmsL3SAoiDwv8bSXXbxV0t';
+        $rootScope.siteId = 'e1ea14e5-785c-49a7-89da-4a1f822b9a35';
+        $http.defaults.headers.common['TS-TOKEN'] = 'fJftxWD2732B6vgd538zvxfCrQVJTEmqO8wdRKou';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
         });
         // initialise google analytics
-        $window.ga('create', 'UA-53555832-33', '');
+        $window.ga('create', 'UA-53555832-7', '');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Agencia de Viajes Coral',
-                'excerpt': 'Agencia de viajes en Sahuayo Mich.',
+                'title': 'Mercado Móvil',
+                'excerpt': 'Tu aliado estratégico en comercio móvil y procesamiento de pagos electrónicos',
                 'urlImages': {
-                    'original': 'http://www.viajescoral.com/img/img-default.jpg'
+                    'original': ''
                 }
             };
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Viajes Coral';
+        $rootScope.pageTitle = 'Mercado Móvil';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
                 parent: '5bb6cb73-1a97-4c97-b4f6-0c9cb3a687af',
