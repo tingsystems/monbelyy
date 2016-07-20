@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Viajes Coral'},
+                data: {pageTitle: 'Mercado Móvil'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category_project', {
                 url: '/project/category/:slug',
-                data: {pageTitle: 'Viajes Coral'},
+                data: {pageTitle: 'Mercado Móvil'},
                 views: {
                     'content': {
                         templateUrl: '/templates/project.html',
