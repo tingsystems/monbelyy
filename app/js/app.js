@@ -113,6 +113,22 @@
                         templateUrl: '/templates/404.html'
                     }
                 }
+            })
+            .state('login', {
+                url: '/login',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/login.html'
+                    }
+                }
+            })
+            .state('register', {
+                url: '/register',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/register.html'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');
