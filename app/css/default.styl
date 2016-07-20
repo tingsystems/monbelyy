@@ -281,9 +281,8 @@ header
     text-align center
 
 .main-bg-pages
-  background-size cover
-  background-position center center
-  height 220px
+  background-color #cb6c18
+  height 110px
   background-repeat no-repeat
 .slider-img
   background-position center center
@@ -354,11 +353,11 @@ header
 #content-area
   margin 60px 0px 60px
   .title-post
-    color #bf9e4f
-    border-bottom 1px solid #bf9e4f
+    text-align center
+    color #555
     clear both
     .title
-      color #bf9e4f
+      color #555
   .title-single
     color #787777
     line-height 40px
@@ -484,10 +483,7 @@ header
     background rgba(224, 143, 23, 0.6)
     text-shadow 0 0 10px #000
 #content-contact
-  background-image url("../img/imagee.jpg")
-  background-position center center
-  background-size cover
-  background-repeat no-repeat
+  background-color #f5f5f5
 #news
   .title
     color #555555
@@ -624,15 +620,15 @@ header
   border-bottom 1px solid #ccc
 
 .box-widget
-  padding 5px 20px
-  border-left 1px solid #ccc
+  padding 5px 0px
+  border 1px solid #f5f5f5
   .box-widget-header
-    padding 10px 0
+    padding 20px
     border-bottom 1px solid #ccc
     font-size 20px
     color #777777
   .box-widget-container
-    padding 20px 0
+    padding 20px
     h3>a, h2>a
       font-size 14px
       color #777777
@@ -769,7 +765,7 @@ header
       font-weight bold
       color #999
 #breadcrumb
-  background #f5f5f5
+  border-bottom 1px solid #f5f5f5
   .breadcrumb
     padding 15px 15px
     list-style none
@@ -1025,8 +1021,7 @@ header
 
 .form-section
   background transparent
-  padding 0
-  padding 160px 0px 25px
+  padding-bottom  100px
   .title, .text-form
     color #565656
 .contact-section
@@ -1111,3 +1106,49 @@ header
 
 .height-summary-home
   height 50px
+
+/* spinner sytl*/
+.block-ui-overlay
+  width 100%
+  height 100%
+  opacity 1
+  background-color #cb6c18
+
+.block-ui-message
+  background-color transparent
+.spinner
+  margin 15px auto 0
+  width 70px
+  text-align center
+  & > div
+    width 18px
+    height 18px
+    background-color #fff
+    border-radius 100%
+    display inline-block
+    -webkit-animation sk-bouncedelay 1.4s infinite ease-in-out both
+    animation sk-bouncedelay 1.4s infinite ease-in-out both
+  .bounce1
+    -webkit-animation-delay -0.32s
+    animation-delay -0.32s
+  .bounce2
+    -webkit-animation-delay -0.16s
+    animation-delay -0.16s
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay
+  0%, 80%, 100%
+    -webkit-transform: scale(0);
+    transform: scale(0);
+   40%
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+
+
+
+
+
