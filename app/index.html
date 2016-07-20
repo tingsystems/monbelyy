@@ -62,8 +62,8 @@
 </p>
 <![endif]-->
 <header class="header">
-    <nav class="navbar navbar-default container" ng-controller="NavBarCtrl as nav">
-        <div class="container-fluid fluid-res">
+    <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
+        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
 
             <div class="navbar-header">
@@ -74,39 +74,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="home"><img src="img/logo.jpg"
+                <a class="navbar-brand" ui-sref="home"><img src="img/logo.png"
                                                             class="logo" alt="Viajes Coral"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <div class="collapse navbar-collapse" id="header-mainMenu">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right nav-log">
+                    <li>
+                        <a ui-sref="category({slug:'paquetes'})" ng-click="nav.close()">Iniciar sesión</a>
+                    </li>
+                    <li>
+                        <button class="btn btn-white-clear" ui-sref="contact({kind: 'contact'})" ng-click="nav.close()">Registrarme</button>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right nav-main">
                     <li>
                         <a ui-sref="home" ng-click="nav.close()">Inicio</a>
                     </li>
                     <li>
-                        <a ui-sref="category({slug:'paquetes'})" ng-click="nav.close()">Paquetes</a>
-                    </li>
-                    <li>
-                        <a ui-sref="category({slug:'excursiones'})" ng-click="nav.close()">Excursiones</a>
-                    </li>
-                    <li>
-                        <a ui-sref="category({slug:'destinos'})" ng-click="nav.close()">Destinos</a>
-                    </li>
-                    <li>
-                        <a ui-sref="blog({kind: 'post'})" ng-click="nav.close()">Blog</a>
+                        <a ui-sref="category({slug:'paquetes'})" ng-click="nav.close()">Ayuda</a>
                     </li>
                     <li>
                         <a ui-sref="contact({kind: 'contact'})" ng-click="nav.close()">Contacto</a>
                     </li>
-                    <li>
-                        <div id="wrap" ng-controller="GetQuerySearchCtrl as search">
-                            <form autocomplete="on" role="search" ng-submit="search.globalSearch()">
-                                <input id="search" name="search" class="input-search" type="text" placeholder="Buscar" ng-model="search.searchTerm" required>
-                                <button id="search_submit" class="btn btn-white" value="Rechercher" type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-                    </li> 
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -112,20 +112,17 @@ header
     position absolute
     left 0
     right 0
-    top 50px
-    background white
+    top 0px
+    background transparent
     height 110px
     border none
     border-radius 0
-    -webkit-box-shadow 0 0 15px rgba(0, 0, 0, 0.23)
-    -moz-box-shadow 0 0 15px rgba(0, 0, 0, 0.23)
-    box-shadow 0 0 15px rgba(0, 0, 0, 0.23)
     margin-bottom 0
     z-index 9999
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color #79afa0
+      color #f5f5f5
       padding 45px 10px 15px
       font-size 18px
       font-family 'Poppins', sans-serif
@@ -135,8 +132,19 @@ header
       transition all ease-in-out .35s
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
-      color #b99a50
-      border-bottom 3px solid #b99a50
+      color #f5f5f5
+      border-bottom 1px solid #f5f5f5
+    .nav-main
+      margin-right 25px
+    .nav-log
+      margin-top 30px
+      border-left 1px solid #fff
+      text-indent 20px
+      li > a
+        padding 15px 15px
+        border none
+        &:hover
+          border none
     .navbar-nav
       .dropdown:hover .dropdown-toggle
         background-color transparent
@@ -160,8 +168,8 @@ header
           color white
 
   .logo
-    width auto
-    margin-top 0
+    width 300px
+    margin-top 32px
 
 .navbar-header
   color #d2b770 !important
@@ -241,6 +249,37 @@ header
   color #555
 
 /********************************/
+.more-info
+  text-align center
+  font-size 16px
+  padding 30px 0
+  border-bottom 1px solid #eee
+  .info-links
+    color #555
+    a
+      color #555555
+      &:hover
+        color #cb6c18
+#why-us
+  padding 100px 0
+  text-align center
+  .title
+    color #555555
+  p
+    color #555555
+    font-size 18px
+#for-what
+  background #18559d
+  padding 100px 0
+  color #f5f5f5
+  h3
+    color white
+#use
+  padding 100px 0
+  h2
+    color #555555
+    text-align center
+
 .main-bg-pages
   background-size cover
   background-position center center
@@ -249,29 +288,38 @@ header
 .slider-img
   background-position center center
   background-size cover
-  height 650px
+  height 720px
   background-repeat no-repeat
 .bg-inner
   width 100%
   position absolute
-  background rgba(0, 0, 0, 0.2)
+  background rgba(0, 0, 0, 0.5)
   height 100%
 .carousel-caption
-  top 40%
-  width 60%
-  text-align left
-  left 6%
-  right 10%
+  top 35%
+  text-align center
   opacity 1
+  width 100%
+  left 0
+  .download-app
+    padding 20px 0
+    a
+      padding-right 15px
+  .log-process
+    padding 25px 10px
+    border-top 1px solid rgba(255, 255, 255, 0.4)
+    h4
+      font-size 24px
+      font-weight 100
   .btn
+    margin-right 15px
     font-size 18px
     box-shadow 0 0 5px #000
-    text-shadow 0 0 5px #000
+    text-shadow 0 0 0px #000
   a
     color white
   h3
     text-shadow 0 0 10px #000
-    font-size 46px
   .text
     margin-top 40px
   p
@@ -287,11 +335,9 @@ header
   .scrollme
     color #555555
     font-size 28px
+
 .header-margin
   margin-top 150px
-
-.logo
-  margin-top 0
 
 .slider-area-text
   text-align center
@@ -303,8 +349,8 @@ header
     font-size 45px
     color #555
 
-
 /************** content area default ****************/
+
 #content-area
   margin 60px 0px 60px
   .title-post
@@ -338,14 +384,21 @@ header
   color orange
 /************** Home area css ******************/
 #contact
-  background #79afa0
+  background #e9e8e7
   text-align center
-  .divider
-    border-color #f2dec7
-  h3
-    color white
+  padding 100px 0
+  .list-contact
+    a
+      color #5d5d5d
+      &:hover
+        color #cb6c18
+  h2
+    color #5d5d5d
+  p
+    color #5d5d5d
+    padding-bottom 40px
   a
-    color white
+    color #5d5d5d
     font-size 18px
   .contact-us
     padding 15px 0
@@ -735,11 +788,31 @@ header
 /************** footer area css ******************/
 
 #footer_area
-  background white
+  background #051e2d
   padding 30px 0
-  color #55504e
+  color white
   line-height 30px
   border-top 1px solid #ccc
+  .first-foo
+    border-bottom 1px solid rgba(255,255,255,0.5)
+    padding 15px 0
+  .second-foo
+    padding 15px 0
+  .social-media-footer
+    font-size 16px
+    color white
+    a
+      color white
+      padding-right 8px
+      font-weight 100
+      i
+        font-size 18px
+      &:hover
+        color #cb6c18
+  .info
+    text-align right
+    a
+      padding-right 15px
   .contact-footer
     a
       color #bf9e4f
@@ -767,7 +840,6 @@ header
   padding 10px 15px
   color #fff
   font-weight 700
-  border-radius 5px
   border none
   border-radius 0
   &:hover, &:focus
@@ -785,7 +857,6 @@ header
   text-transform uppercase
   color #fff
   font-weight 700
-  border-radius 5px
   border none
   border-radius 0
   &:hover, &:focus
@@ -797,23 +868,26 @@ header
     font-weight 700
     border-radius 0px
 .btn-orange
-  background #E08F17
+  background #cb6c18
   display inline-block
   padding 10px 15px
-  text-transform uppercase
   color #fff
-  font-weight 700
-  border-radius 5px
-  border none
-  border-radius 0
+  font-weight 300
+  border 1px solid #cb6c18
+  -webkit-transition all ease 0.1s
+  -moz-transition all ease 0.1s
+  -ms-transition all ease 0.1s
+  -o-transition all ease 0.1s
+  transition all ease 0.1s
+  border-radius 3px
   &:hover, &:focus
-    background #945c21
-    display: inline-block
+    border 1px solid #a65516
+    background #a65516
+    display inline-block
     padding 10px 15px
-    text-transform uppercase
     color #fff
-    font-weight 700
-    border-radius 0px
+    font-weight 300
+    border-radius 3px
 
 .btn-green
   background #4ECB8C;
@@ -836,21 +910,47 @@ header
 .btn-white-clear
   background transparent
   display inline-block
-  padding 10px 15px
+  padding 10px 15px !important
   color #fff
-  font-weight 700
-  border 3px solid #fff
-  border-radius 5px
+  font-weight 300
+  border 1px solid #fff
+  border-radius 3px
+  -webkit-transition all ease 0.1s
+  -moz-transition all ease 0.1s
+  -ms-transition all ease 0.1s
+  -o-transition all ease 0.1s
+  transition all ease 0.1s
 
   &:hover, &:focus
     background #fff
     display: inline-block
     padding 10px 15px
-    color #33261e
-    font-weight 700
-    border-radius 5px
-    border 3px solid #fff
+    color #555
+    font-weight 300
+    border-radius 3px
+    border 1px solid #fff
+.btn-gray-clear
+  background transparent
+  display inline-block
+  padding 10px 15px !important
+  color #555
+  font-weight 300
+  border 1px solid #555
+  border-radius 3px
+  -webkit-transition all ease 0.1s
+  -moz-transition all ease 0.1s
+  -ms-transition all ease 0.1s
+  -o-transition all ease 0.1s
+  transition all ease 0.1s
 
+  &:hover, &:focus
+    background #555
+    display: inline-block
+    padding 10px 15px
+    color #fff
+    font-weight 300
+    border-radius 3px
+    border 1px solid #555
 .btn-green-clear
   background transparent
   display inline-block
