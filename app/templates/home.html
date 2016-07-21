@@ -28,46 +28,33 @@
 <section class="more-info">
     <div class="container info-links">
         <div class="col-sm-2"><strong>Más información:</strong></div>
-        <div class="col-sm-3"><a href="#">Preguntas frecuentes</a></div>
-        <div class="col-sm-3"><a href="#">¿Como usar Mercado Móvil?</a></div>
-        <div class="col-sm-3"><a href="#">Más acerca de Mercado Móvil</a></div>
+        <div class="col-sm-3"><a ui-sref="category({slug: 'preguntas-mas-frecuentes' })">Preguntas frecuentes</a></div>
+        <div class="col-sm-3"><a ui-sref="category({slug: 'tutoriales' })">¿Como usar Mercado Móvil?</a></div>
+        <div class="col-sm-3"><a ui-sref="category({slug: 'mas-de-mercado-movil'})">Más acerca de Mercado Móvil</a></div>
     </div>
 </section>
 <section id="why-us" class="section_padding">
     <div class="container">
-        <h3 class="title">La forma más simple de cobrar a tus clientes en la palma de tus manos</h3>
+        <h3 class="title">{{ Home.simple.title }}</h3>
 
-        <p>Eficiencia, dinamismo Y sencillez, procesa cobros al instante y en todo momento, la forma más simple de
-            cobrar
-            a tus clientes desde cualquier dispositivo móvil. No requiere contrato forzoso, no se necesita terminal TPV
-            ni cualquier otro dispositivo
-            adicional, no exigimos tickets promedio ni ventas mensuales, no hay cargos adicionales ni cuotas mensuales,
-            ni cargos o intereses ocultos.</p>
-        <button class="btn btn-orange">Más información</button>
+        <p>{{ Home.simple.excerpt }}</p>
+        <a ui-sref="post_detail({slug: Home.simple.slug})" class="btn btn-orange">Más información</a>
     </div>
 </section>
 
 <section id="for-what">
     <div class="container">
         <div class="col-sm-5">
-            <img src="img/computer.png" alt="Mercado Móvil"/>
+            <img post-image="{{ Home.mmovil.urlImages.original }}" alt="Mercado Móvil"/>
         </div>
         <div class="col-sm-7 des-for-what">
-            <h3>"Mercado Móvil es para todo tipo de negocios,
-                Convéncete y comienza a vender más"</h3>
+            <h3>"{{ Home.mmovil.title }}"</h3>
 
-            <p>Práctico, sin contratos, sin rentas mensuales, sin mínimos
-                de tickets promedio. En el Mercado Móvil queremos apoyar
-                el proceso de cobros electrónicos sin hacer tedioso el
-                proceso de inscripción.</p>
-
-            <p>Comercios y tiendas, Servicios profesionales, Alimentos y
-                bebidas, salud y belleza, deportes y entretenimiento,
-                inmobiliaria y construcción, alojamiento, etc.</p>
+            <div ng-bind-html="Home.mmovil.content | trustHtml"></div>
             <br/>
 
             <div class="text-center">
-                <a href="#" class="btn btn-white-clear">Abrir cuenta en Mercado Móvil</a>
+                <a ui-sref="register" class="btn btn-white-clear">Abrir cuenta en Mercado Móvil</a>
             </div>
         </div>
     </div>
@@ -76,48 +63,19 @@
     <div class="container">
         <h2>¿Por qué usar Mercado Móvil?</h2>
 
-        <div class="col-sm-4">
+        <div class="col-sm-4" ng-repeat="item in Home.why">
             <div class="box-default">
                 <div class="box-description">
-                    <h3>Práctico sin contratos</h3>
+                    <h3>{{ item.title }}</h3>
 
-                    <p>Sin rentas mensuales, sin mínimos de
-                        tickets promedio. En Mercado Móvil
-                        queremos apoyar el proceso de cobros
-                        electrónicos sin hacer tedioso el proceso
-                        de inscripción ...</p>
-                    <a href="#" class="btn btn-gray-clear">Más información</a>
+                    <p>{{ item.excerpt | characters:40 }} </p>
+                    <a ui-sref="post_detail({slug: item.slug})" class="btn btn-gray-clear">Más información</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="box-default">
-                <div class="box-description">
-                    <h3>Práctico sin contratos</h3>
-
-                    <p>Sin rentas mensuales, sin mínimos de
-                        tickets promedio. En Mercado Móvil
-                        queremos apoyar el proceso de cobros
-                        electrónicos sin hacer tedioso el proceso
-                        de inscripción ...</p>
-                    <a href="#" class="btn btn-gray-clear">Más información</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="box-default">
-                <div class="box-description">
-                    <h3>Práctico sin contratos</h3>
-
-                    <p>Sin rentas mensuales, sin mínimos de
-                        tickets promedio. En Mercado Móvil
-                        queremos apoyar el proceso de cobros
-                        electrónicos sin hacer tedioso el proceso
-                        de inscripción ...</p>
-                    <a href="#" class="btn btn-gray-clear">Más información</a>
-                </div>
-            </div>
-        </div>
+        <h2 class="text-center no-content" ng-show="!Home.why.length">Lo sentimos no contamos con
+                            contenido
+                            disponible</h2>
     </div>
 </section>
 <section id="contact" class="section_padding">

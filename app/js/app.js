@@ -32,7 +32,7 @@
                 }
             })
             .state('blog', {
-                url: '/blog',
+                url: '/doc',
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -42,7 +42,7 @@
                 }
             })
             .state('post_detail', {
-                url: '/:slug\.html',
+                url: '/doc/:slug\.html',
                 views: {
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
@@ -64,35 +64,13 @@
                 }
             })
             .state('category', {
-                url: '/category/:slug',
+                url: '/doc/category/:slug',
                 data: {pageTitle: 'Mercado Móvil'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
                         controllerAs: 'Post',
                         controller: 'PostCtrl'
-                    }
-                }
-            })
-            .state('category_project', {
-                url: '/project/category/:slug',
-                data: {pageTitle: 'Mercado Móvil'},
-                views: {
-                    'content': {
-                        templateUrl: '/templates/project.html',
-                        controllerAs: 'Post',
-                        controller: 'PostCtrl'
-                    }
-                }
-            })
-            .state('project_detail', {
-                url: '/project/:slug',
-                views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
-                    'content': {
-                        templateUrl: '/templates/project_detail.html',
-                        controllerAs: 'Item',
-                        controller: 'PostDetailCtrl'
                     }
                 }
             })
