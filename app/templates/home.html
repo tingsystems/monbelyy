@@ -28,9 +28,9 @@
 <section class="more-info">
     <div class="container info-links">
         <div class="col-sm-2"><strong>Más información:</strong></div>
-        <div class="col-sm-3"><a ui-sref="category({slug: 'preguntas-mas-frecuentes' })">Preguntas frecuentes</a></div>
-        <div class="col-sm-3"><a ui-sref="category({slug: 'tutoriales' })">¿Como usar Mercado Móvil?</a></div>
-        <div class="col-sm-3"><a ui-sref="category({slug: 'mas-de-mercado-movil'})">Más acerca de Mercado Móvil</a></div>
+        <div class="col-sm-3"><a ui-sref="category_doc({slug: 'preguntas-mas-frecuentes' })">Preguntas frecuentes</a></div>
+        <div class="col-sm-3"><a ui-sref="category_doc({slug: 'tutoriales' })">¿Como usar Mercado Móvil?</a></div>
+        <div class="col-sm-3"><a ui-sref="category_doc({slug: 'mas-de-mercado-movil'})">Más acerca de Mercado Móvil</a></div>
     </div>
 </section>
 <section id="why-us" class="section_padding">
@@ -38,7 +38,7 @@
         <h3 class="title">{{ Home.simple.title }}</h3>
 
         <p>{{ Home.simple.excerpt }}</p>
-        <a ui-sref="post_detail({slug: Home.simple.slug})" class="btn btn-orange">Más información</a>
+        <a ui-sref="page({slug: Home.simple.slug})" class="btn btn-orange">Más información</a>
     </div>
 </section>
 
@@ -68,8 +68,8 @@
                 <div class="box-description">
                     <h3>{{ item.title }}</h3>
 
-                    <p>{{ item.excerpt | characters:40 }} </p>
-                    <a ui-sref="post_detail({slug: item.slug})" class="btn btn-gray-clear">Más información</a>
+                    <p>{{ item.excerpt | characters:80 }} </p>
+                    <a ui-sref="doc_detail({slug: item.slug})" class="btn btn-gray-clear">Más información</a>
                 </div>
             </div>
         </div>

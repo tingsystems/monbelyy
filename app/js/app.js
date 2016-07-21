@@ -32,7 +32,7 @@
                 }
             })
             .state('blog', {
-                url: '/doc',
+                url: '/blog',
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -42,7 +42,7 @@
                 }
             })
             .state('post_detail', {
-                url: '/doc/:slug\.html',
+                url: '/:slug\.html',
                 views: {
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
@@ -53,7 +53,7 @@
                 }
             })
             .state('page', {
-                url: '/page/:slug',
+                url: '/doc/page/:slug',
                 views: {
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
@@ -64,7 +64,7 @@
                 }
             })
             .state('category', {
-                url: '/doc/category/:slug',
+                url: '/category/:slug',
                 data: {pageTitle: 'Mercado Móvil'},
                 views: {
                     'content': {
@@ -105,6 +105,38 @@
                 views: {
                     'content': {
                         templateUrl: '/templates/register.html'
+                    }
+                }
+            })
+            .state('docs', {
+                url: '/doc',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/docs.html',
+                        controllerAs: 'Post',
+                        controller: 'DocsCtrl'
+                    }
+                }
+            })
+            .state('doc_detail', {
+                url: '/doc/:slug\.html',
+                views: {
+                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'content': {
+                        templateUrl: '/templates/single.html',
+                        controllerAs: 'Post',
+                        controller: 'PostDetailCtrl'
+                    }
+                }
+            })
+            .state('category_doc', {
+                url: '/doc/category/:slug',
+                data: {pageTitle: 'Mercado Móvil'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/categories.html',
+                        controllerAs: 'Post',
+                        controller: 'PostCtrl'
                     }
                 }
             });

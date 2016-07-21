@@ -334,6 +334,33 @@
 
     }
 
+    function DocsCtrl(TaxonomySrv, PostSrv) {
+        var self = this;
+        self.categories = [];
+        TaxonomySrv.get({
+            parent: '8153e621-5892-4128-9b17-2f76ef3ee57a',
+            isActive: 'True',
+            fields: 'name,slug,urlImages',
+            ordering: 'order',
+            sizePage: 4
+        }).$promise.then(function (response) {
+                self.categories = response.results;
+            }, function (error) {
+            });
+
+        PostSrv.get({
+            category: 'preguntas-mas-frecuentes',
+            isActive: 'True',
+            sizePage: 10,
+            ordering: '-createdAt',
+            fields: 'urlImages,title,link,slug,excerpt'
+        }).$promise.then(function (results) {
+                self.faqs = results.results;
+            });
+
+
+    }
+
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
@@ -344,7 +371,8 @@
         .controller('SearchCtrl', SearchCtrl)
         .controller('BlogCtrl', BlogCtrl)
         .controller('NavBarCtrl', NavBarCtrl)
-        .controller('TabsCtrl', TabsCtrl);
+        .controller('TabsCtrl', TabsCtrl)
+        .controller('DocsCtrl', DocsCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
@@ -355,4 +383,5 @@
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
     TabsCtrl.$inject = ['PostSrv'];
+    DocsCtrl.$inject = ['TaxonomySrv', 'PostSrv'];
 })();
