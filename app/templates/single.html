@@ -1,4 +1,4 @@
-<section class="main-bg-pages" style="background-image: url('../img/imagee.jpg')"></section>
+<section class="main-bg-pages"></section>
 <div id="breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <div class="col-md-12 title-post">
+                <div class="col-md-12 title-post" style="text-align:left;">
                     <h2 class="title">{{ Post.detail.title }}</h2>
                 </div>
                 <div class="content-post" ng-if="Post.isBlog">
@@ -46,34 +46,6 @@
             </div>
             <div class="col-md-3 widgets">
                 <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
-            </div>
-            <!-- Viajes coral te recomienda -->
-            <div class="col-md-12" ng-if="Post.blog.length">
-                <div class="col-md-12 title">
-                    <h2 class="title-single">Viajes Coral te recomienda</h2>
-                    <hr class="divider"/>
-                </div>
-                <div class="col-md-3" ng-repeat="entry in Post.blog">
-                    <a post-link="{ link: {url: entry.link, target: '_blank'} }"
-                       ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
-                        <div class="box-default">
-                            <div class="box-header"
-                                 style="background-image: url('{{ entry.urlImages.medium ?  entry.urlImages.medium : 'http://localhost:8080/img/img-default.jpg'}}')">
-                            </div>
-
-                            <div class="box-container">
-                                <h3>{{ entry.title | characters:35 }}</h3>
-
-                                <p>{{ entry.excerpt | characters:70 }}</p>
-                            </div>
-                            <div class="box-footer">
-                                <p><span><i class="fa fa-calendar-"></i></span>
-                                    {{ entry.createdAt | date : shortDate }} </p>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
             </div>
         </div>
     </div>

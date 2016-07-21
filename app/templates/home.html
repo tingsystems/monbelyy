@@ -1,117 +1,141 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
-            <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                <div class="bg-inner"></div>
-                <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
-                <div class="carousel-caption">
-
-                    <h3>{{ slide.title }}</h3>
-
-                    <p>{{ slide.excerpt }}</p>
-                </div>
-            </a>
+            <div class="bg-inner"></div>
+            <div class="slider-img" style="background-image:url('../img/slider.jpg');"></div>
         </uib-slide>
+        <div class="carousel-caption">
+            <h2>Procesa cobros al instante y en todo momento</h2>
+
+            <div class="container log-process">
+                <div class="col-sm-4">
+                    <h4><i class="fa fa-user"></i> Crea una cuenta</h4>
+                </div>
+                <div class="col-sm-4"><h4><i class="fa fa-pencil-square-o"></i> Ingresa los datos de tu empresa</h4>
+                </div>
+                <div class="col-sm-4"><h4><i class="fa fa-credit-card"></i> Procesar cobros</h4></div>
+            </div>
+            <a href="#" class="btn btn-white-clear">Más información</a>
+            <a href="#" class="btn btn-orange">Abrir una cuenta</a>
+
+            <div class="download-app">
+                <a href="https://appsto.re/mx/QrI68.i"><img src="img/download-app.png" alt="App Store"/></a>
+                <a href="https://play.google.com/store/apps/details?id=com.desarrollapps.mercadomovil&hl=es"><img src="img/download-play.png" alt="Google play"/></a>
+            </div>
+        </div>
     </uib-carousel>
 </div>
-<section class="section_padding">
-    <div class="container">
-        <div class="col-md-9 col-sm-9" ng-controller="TabsCtrl as Tab">
-            <uib-tabset active="active" template-url="/templates/partials/tabset.html" class="tab-animation">
-                <uib-tab index="0" heading="Paquetes" select="Tab.Tab1()" template-url="/templates/partials/tab.html">
-                    <div class="col-md-12 no-padding" ng-if="Tab.list1.length">
-                        <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list1">
-                            <div class="box-default">
-                                <a ui-sref="post_detail({slug: item.slug})">
-                                    <div class="box-header"
-                                         style="background-image: url('{{ item.urlImages.medium ? item.urlImages.thumbnails : 'http://www.viajescoral.com/img/img-default.jpg' }}')"></div>
-
-                                    <div class="description">
-                                        <div class="height-title-home"><h3>
-                                            {{ item.title | characters:45 }}</h3></div>
-                                        <div class="height-summary-home"><h5>
-                                            {{ item.excerpt | characters:70 }}</h5></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 no-padding" ng-if="!Tab.list1.length">
-                        <h3 class="text-center no-content">No hay contendio en esta sección</h3>
-                    </div>
-                </uib-tab>
-                <uib-tab index="0" heading="Excursiones" select="Tab.Tab2()"
-                         template-url="/templates/partials/tab.html">
-                    <div class="col-md-12 no-padding" ng-if="Tab.list2.length">
-                        <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list2">
-                            <div class="box-default">
-                                <a ui-sref="post_detail({slug: item.slug})">
-                                    <div class="box-header"
-                                         style="background-image: url('{{ item.urlImages.medium ? item.urlImages.thumbnails : 'http://www.viajescoral.com/img/img-default.jpg' }}')"></div>
-
-                                    <div class="description">
-                                        <div class="height-title-home"><h3>
-                                            {{ item.title | characters:45 }}</h3></div>
-                                        <div class="height-summary-home"><h5>
-                                            {{ item.excerpt | characters:70 }}</h5></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 no-padding" ng-if="!Tab.list2.length">
-                        <h3 class="text-center no-content">No hay contendio en esta sección</h3>
-                    </div>
-                </uib-tab>
-                <uib-tab index="0" heading="Destinos" select="Tab.Tab3()" template-url="/templates/partials/tab.html">
-                    <div class="col-md-12 no-padding" ng-if="Tab.list3.length">
-                        <div class="col-md-4 col-sm-6 no-padding" ng-repeat="item in Tab.list3">
-                            <div class="box-default">
-                                <a ui-sref="post_detail({slug: item.slug})">
-                                    <div class="box-header"
-                                         style="background-image: url('{{ item.urlImages.medium ? item.urlImages.thumbnails : 'http://www.viajescoral.com/img/img-default.jpg' }}')"></div>
-
-                                    <div class="description">
-                                        <div class="height-title-home"><h3>
-                                            {{ item.title | characters:45 }}</h3></div>
-                                        <div class="height-summary-home"><h5>
-                                            {{ item.excerpt | characters:70 }}</h5></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 no-padding" ng-if="!Tab.list3.length">
-                        <h3 class="text-center no-content">No hay contendio en esta sección</h3>
-                    </div>
-                </uib-tab>
-            </uib-tabset>
-        </div>
-        <!-- Sidebar -->
-        <div class="col-md-3 col-sm-3">
-            <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
-        </div>
+<section class="more-info">
+    <div class="container info-links">
+        <div class="col-sm-2"><strong>Más información:</strong></div>
+        <div class="col-sm-3"><a href="#">Preguntas frecuentes</a></div>
+        <div class="col-sm-3"><a href="#">¿Como usar Mercado Móvil?</a></div>
+        <div class="col-sm-3"><a href="#">Más acerca de Mercado Móvil</a></div>
+    </div>
 </section>
-
-
-<section id="contract" class="section_padding">
+<section id="why-us" class="section_padding">
     <div class="container">
-        <div class="col-md-12 description">
-            <h2>{{ Home.presence.title }}</h2>
+        <h3 class="title">La forma más simple de cobrar a tus clientes en la palma de tus manos</h3>
 
-            <div ng-bind-html="Home.presence.content | trustHtml"></div>
-
-            <h3>{{ Home.presence.excerpt }}</h3>
-        </div>
+        <p>Eficiencia, dinamismo Y sencillez, procesa cobros al instante y en todo momento, la forma más simple de
+            cobrar
+            a tus clientes desde cualquier dispositivo móvil. No requiere contrato forzoso, no se necesita terminal TPV
+            ni cualquier otro dispositivo
+            adicional, no exigimos tickets promedio ni ventas mensuales, no hay cargos adicionales ni cuotas mensuales,
+            ni cargos o intereses ocultos.</p>
+        <button class="btn btn-orange">Más información</button>
     </div>
 </section>
 
+<section id="for-what">
+    <div class="container">
+        <div class="col-sm-5">
+            <img src="img/computer.png" alt="Mercado Móvil"/>
+        </div>
+        <div class="col-sm-7 des-for-what">
+            <h3>"Mercado Móvil es para todo tipo de negocios,
+                Convéncete y comienza a vender más"</h3>
+
+            <p>Práctico, sin contratos, sin rentas mensuales, sin mínimos
+                de tickets promedio. En el Mercado Móvil queremos apoyar
+                el proceso de cobros electrónicos sin hacer tedioso el
+                proceso de inscripción.</p>
+
+            <p>Comercios y tiendas, Servicios profesionales, Alimentos y
+                bebidas, salud y belleza, deportes y entretenimiento,
+                inmobiliaria y construcción, alojamiento, etc.</p>
+            <br/>
+
+            <div class="text-center">
+                <a href="#" class="btn btn-white-clear">Abrir cuenta en Mercado Móvil</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="use">
+    <div class="container">
+        <h2>¿Por qué usar Mercado Móvil?</h2>
+
+        <div class="col-sm-4">
+            <div class="box-default">
+                <div class="box-description">
+                    <h3>Práctico sin contratos</h3>
+
+                    <p>Sin rentas mensuales, sin mínimos de
+                        tickets promedio. En Mercado Móvil
+                        queremos apoyar el proceso de cobros
+                        electrónicos sin hacer tedioso el proceso
+                        de inscripción ...</p>
+                    <a href="#" class="btn btn-gray-clear">Más información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="box-default">
+                <div class="box-description">
+                    <h3>Práctico sin contratos</h3>
+
+                    <p>Sin rentas mensuales, sin mínimos de
+                        tickets promedio. En Mercado Móvil
+                        queremos apoyar el proceso de cobros
+                        electrónicos sin hacer tedioso el proceso
+                        de inscripción ...</p>
+                    <a href="#" class="btn btn-gray-clear">Más información</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="box-default">
+                <div class="box-description">
+                    <h3>Práctico sin contratos</h3>
+
+                    <p>Sin rentas mensuales, sin mínimos de
+                        tickets promedio. En Mercado Móvil
+                        queremos apoyar el proceso de cobros
+                        electrónicos sin hacer tedioso el proceso
+                        de inscripción ...</p>
+                    <a href="#" class="btn btn-gray-clear">Más información</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <section id="contact" class="section_padding">
     <div class="container">
-        <a href="tel:013535317300"><i class="fa fa-phone"></i> 01 353 531 7300 |</a>
-        <a href="tel:013535318200"><i class="fa fa-phone"></i> 01 353 531 8200 |</a>
-        <a href="tel:3531117379"><i class="fa fa-whatsapp"></i> 353 111 73 79 |</a>
-        <a href="mailto:info@viajescoral.com"><i class="fa fa-envelope"></i> info@viajescoral.com</a>
+        <h2>¿Necesitas ayuda o más información?</h2>
+
+        <p>Contáctanos, estamos para servirte. </p>
+        <div class="col-md-12 list-contact">
+            <div class="col-sm-4">
+                <a href="tel:3318959338"><i class="fa fa-mobile"></i> (33) 18 95 93 38</a>
+            </div>
+            <div class="col-sm-4">
+                <a href="tel:3535334925"><i class="fa fa-phone"></i> 01(353) 533 49 25</a>
+            </div>
+            <div class="col-sm-4">
+                <a href="tel:info@mercadomovil.com.mx"><i class="fa fa-envelope"></i> info@mercadomovil.com.mx</a>
+            </div>
+        </div>
     </div>
 </section>
 
