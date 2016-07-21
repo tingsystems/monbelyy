@@ -55,14 +55,14 @@
         }).$promise.then(function (results) {
                 self.news = results.results;
             });
-
+        /*
         PostDetailSrv.get({
             slug: 'viajes-coral',
             isActive: 'True',
             fields: 'title,excerpt,content'
         }).$promise.then(function (results) {
                 self.presence = results;
-            });
+            });*/
 
 
     }
