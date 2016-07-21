@@ -3,7 +3,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
-            <li><a ui-sref="category({slug: Post.detail.categories[0].slug })">{{ Post.detail.categories[0].name }}</a></li>
+            <li ng-if="Post.detail.categories.length"><a ui-sref="category({slug: Post.detail.categories[0].slug })">{{ Post.detail.categories[0].name }}</a></li>
             <li class="active">{{ Post.detail.title }}</li>
         </ol>
     </div>
