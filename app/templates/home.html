@@ -2,7 +2,7 @@
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
             <div class="bg-inner"></div>
-            <div class="slider-img" style="background-image:url('../img/slider.jpg');"></div>
+            <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
         </uib-slide>
         <div class="carousel-caption">
             <h2>Procesa cobros al instante y en todo momento</h2>
@@ -16,11 +16,11 @@
                 <div class="col-sm-4"><h4><i class="fa fa-credit-card"></i> Procesar cobros</h4></div>
             </div>
             <a href="#" class="btn btn-white-clear">Más información</a>
-            <a href="#" class="btn btn-orange">Abrir una cuenta</a>
+            <a ui-sref="register" class="btn btn-orange">Abrir una cuenta</a>
 
             <div class="download-app">
-                <a href="https://appsto.re/mx/QrI68.i"><img src="img/download-app.png" alt="App Store"/></a>
-                <a href="https://play.google.com/store/apps/details?id=com.desarrollapps.mercadomovil&hl=es"><img src="img/download-play.png" alt="Google play"/></a>
+                <a target="_blank" href="https://appsto.re/mx/QrI68.i"><img src="img/download-app.png" alt="App Store"/></a>
+                <a target="_blank" href="https://play.google.com/store/apps/details?id=com.desarrollapps.mercadomovil&hl=es"><img src="img/download-play.png" alt="Google play"/></a>
             </div>
         </div>
     </uib-carousel>
