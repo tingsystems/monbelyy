@@ -183,7 +183,7 @@
                 'title': 'Mercado Móvil',
                 'excerpt': 'Tu aliado estratégico en comercio móvil y procesamiento de pagos electrónicos',
                 'urlImages': {
-                    'original': ''
+                    'original': 'https://mercadomovil.com.mx/img/img-default.jpg'
                 }
             };
             $anchorScroll();
