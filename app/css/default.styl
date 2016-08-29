@@ -24,6 +24,9 @@
 .padding
   padding 20px 0
 
+.alert-warning
+  text-shadow 0 0 0 transparent
+
 a:focus
   outline 0 solid
 
@@ -106,6 +109,8 @@ body
     content '1 .column.size-1-1'
 
 /************** main css ******************/
+.log-section-mobile
+  display none
 header
   margin-top 0px
   .navbar-default
@@ -300,13 +305,15 @@ header
   opacity 1
   width 100%
   left 0
+  h2
+    border-bottom 1px solid rgba(255, 255, 255, 0.4)
+    padding-bottom 20px
   .download-app
     padding 20px 0
     a
       padding-right 15px
   .log-process
     padding 25px 10px
-    border-top 1px solid rgba(255, 255, 255, 0.4)
     h4
       font-size 24px
       font-weight 100
@@ -836,6 +843,11 @@ header
 /**************** Buttons ***************/
 
 /* buttons sizes */
+.btn-login
+  color white
+  padding-top 20px
+  &:hover, &:focus
+    color rgba(255, 255, 255, 0.6)
 .btn-sm
   padding: 5px 10px !important
 .btn-search

@@ -77,15 +77,31 @@
                 <a class="navbar-brand" ui-sref="home"><img src="img/logo.png"
                                                             class="logo" alt="Mercado Móvil"></a>
             </div>
+            <div class="log-section-mobile">
+                <div class="loging-mob row">
+                    <div class="col-xs-6">
+                        <a class="btn-login" href="http://dashboard.mercadomovil.com.mx/hq/access/signin"
+                           target="_blank"
+                           ng-click="nav.close()"><i class="fa fa-user"></i> Iniciar sesión</a>
+                    </div>
+                    <div class="col-xs-6">
+                        <a class="btn-login" href="http://dashboard.mercadomovil.com.mx/hq/access/register"
+                           target="_blank"
+                           ng-click="nav.close()"><i class="fa fa-pencil-square-o"></i> Registrarme</a>
+                    </div>
+                </div>
+            </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <div class="collapse navbar-collapse" id="header-mainMenu">
                 <ul class="nav navbar-nav navbar-right nav-log">
                     <li>
-                        <a href="http://dashboard.mercadomovil.com.mx/hq/access/signin" target="_blank" ng-click="nav.close()">Iniciar sesión</a>
+                        <a href="http://dashboard.mercadomovil.com.mx/hq/access/signin" target="_blank"
+                           ng-click="nav.close()">Iniciar sesión</a>
                     </li>
                     <li>
-                        <a href="http://dashboard.mercadomovil.com.mx/hq/access/register" target="_blank"  ng-click="nav.close()">Registrarme</a>
+                        <a href="http://dashboard.mercadomovil.com.mx/hq/access/register" target="_blank"
+                           ng-click="nav.close()">Registrarme</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right nav-main">
@@ -162,7 +178,22 @@
     m.parentNode.insertBefore(a, m)
 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');</script>
 <!--Start of Zopim Live Chat Script-->
-<script type="text/javascript">window.$zopim || (function (d, s) {var z = $zopim = function (c) {z._.push(c)}, $ = z.s = d.createElement(s), e = d.getElementsByTagName(s)[0];z.set = function (o) {z.set._.push(o)};z._ = [];z.set._ = [];$.async = !0;$.setAttribute("charset", "utf-8");$.src = "//v2.zopim.com/?3DQuekMPJBa1SYYMojABAs1Qn3sg4S6P";z.t = +new Date;$.type = "text/javascript";e.parentNode.insertBefore($, e)})(document, "script");</script>
+<script type="text/javascript">window.$zopim || (function (d, s) {
+    var z = $zopim = function (c) {
+        z._.push(c)
+    }, $ = z.s = d.createElement(s), e = d.getElementsByTagName(s)[0];
+    z.set = function (o) {
+        z.set._.push(o)
+    };
+    z._ = [];
+    z.set._ = [];
+    $.async = !0;
+    $.setAttribute("charset", "utf-8");
+    $.src = "//v2.zopim.com/?3DQuekMPJBa1SYYMojABAs1Qn3sg4S6P";
+    z.t = +new Date;
+    $.type = "text/javascript";
+    e.parentNode.insertBefore($, e)
+})(document, "script");</script>
 <!--End of Zopim Live Chat Script-->
 <toasty></toasty>
 </body>
