@@ -17,33 +17,6 @@
             });
 
 
-        PostDetailSrv.get({
-            slug: 'la-forma-mas-simple-de-cobrar-a-tus-clientes-en-la-palma-de-tus-manos',
-            isActive: 'True',
-            fields: 'title,excerpt,slug'
-        }).$promise.then(function (results) {
-                self.simple = results;
-            });
-
-        PostDetailSrv.get({
-            slug: 'mercado-movil-es-para-todo-tipo-de-negocios-convencete-y-comienza-a-vender-mas',
-            isActive: 'True',
-            fields: 'title,content,urlImages'
-        }).$promise.then(function (results) {
-                self.mmovil = results;
-            });
-
-        PostSrv.get({
-            category: 'mas-de-mercado-movil',
-            isActive: 'True',
-            sizePage: 3,
-            ordering: '-createdAt',
-            fields: 'title,slug,excerpt'
-        }).$promise.then(function (results) {
-                self.why = results.results;
-            });
-
-
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {

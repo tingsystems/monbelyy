@@ -151,13 +151,13 @@
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
         $rootScope.apiV = 'v1';
-        $rootScope.siteId = 'e1ea14e5-785c-49a7-89da-4a1f822b9a35';
-        $http.defaults.headers.common['TS-TOKEN'] = 'fJftxWD2732B6vgd538zvxfCrQVJTEmqO8wdRKou';
+        $rootScope.siteId = '18bf793b-a123-4206-81a6-3a8ab41449b1';
+        $http.defaults.headers.common['TS-TOKEN'] = 'HtsIGmOt0ZXz9EYH0bkI1xJzI8ijBaHyAFh2ClUj';
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
         });
         // initialise google analytics
-        $window.ga('create', 'UA-53555832-7', '');
+        //si$window.ga('create', 'UA-53555832-7', '');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
