@@ -37,7 +37,7 @@
           ng-if="post"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://mercadomovil.com.mx{{ $state.href($state.current.name) }}"/>
-    <link href='https://fonts.googleapis.com/css?family=Poppins:400,300,500' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/animate.css/animate.css" />
@@ -62,6 +62,18 @@
 </p>
 <![endif]-->
 <header class="header">
+    <div class="nav-top">
+        <div class="container">
+            <p class="pull-left">Llámanos al: <a href="tel:3531238860">353 123 8860</a> y <a href="tel:3535363150">353
+                536 3150</a></p>
+
+            <p class="pull-right">
+                <a href="#"><i class="fa fa-facebook-square"></i></a>
+                <a href="#"><i class="fa fa-twitter-square"></i></a>
+                <a href="#"><i class="fa fa-google-plus-square"></i></a>
+            </p>
+        </div>
+    </div>
     <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -77,39 +89,24 @@
                 <a class="navbar-brand" ui-sref="home"><img src="img/logo.png"
                                                             class="logo" alt="Mercado Móvil"></a>
             </div>
-            <div class="log-section-mobile">
-                <div class="loging-mob row">
-                    <div class="col-xs-6">
-                        <a class="btn-login" href="http://dashboard.mercadomovil.com.mx/hq/access/signin"
-                           target="_blank"
-                           ng-click="nav.close()"><i class="fa fa-user"></i> Iniciar sesión</a>
-                    </div>
-                    <div class="col-xs-6">
-                        <a class="btn-login" href="http://dashboard.mercadomovil.com.mx/hq/access/register"
-                           target="_blank"
-                           ng-click="nav.close()"><i class="fa fa-pencil-square-o"></i> Registrarme</a>
-                    </div>
-                </div>
-            </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <div class="collapse navbar-collapse" id="header-mainMenu">
-                <ul class="nav navbar-nav navbar-right nav-log">
-                    <li>
-                        <a href="http://dashboard.mercadomovil.com.mx/hq/access/signin" target="_blank"
-                           ng-click="nav.close()">Iniciar sesión</a>
-                    </li>
-                    <li>
-                        <a href="http://dashboard.mercadomovil.com.mx/hq/access/register" target="_blank"
-                           ng-click="nav.close()">Registrarme</a>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right nav-main">
                     <li>
                         <a ui-sref="home" ng-click="nav.close()">Inicio</a>
                     </li>
                     <li>
-                        <a ui-sref="docs" ng-click="nav.close()">Ayuda</a>
+                        <a ui-sref="docs" ng-click="nav.close()">Productos</a>
+                    </li>
+                    <li>
+                        <a ui-sref="docs" ng-click="nav.close()">Accesorios</a>
+                    </li>
+                    <li>
+                        <a ui-sref="docs" ng-click="nav.close()">Distribución</a>
+                    </li>
+                    <li>
+                        <a ui-sref="docs" ng-click="nav.close()">Nosotros</a>
                     </li>
                     <li>
                         <a ui-sref="contact({kind: 'contact'})" ng-click="nav.close()">Contacto</a>

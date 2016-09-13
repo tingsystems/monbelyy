@@ -1,111 +1,146 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
-        <uib-slide ng-repeat="slide in Home.mainSlider">
-            <div class="bg-inner"></div>
-            <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
+        <!--<uib-slide ng-repeat="slide in Home.mainSlider">-->
+        <!--<div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>-->
+        <img class="img-responsive" src="img/banner-ain.jpg" alt=""/>
         </uib-slide>
-        <div class="carousel-caption">
-            <h2>Procesa cobros al instante y en todo momento</h2>
-
-            <div class="container log-process">
-                <div class="col-sm-4">
-                    <h4><i class="fa fa-user"></i> Crea una cuenta</h4>
-                </div>
-                <div class="col-sm-4"><h4><i class="fa fa-pencil-square-o"></i> Ingresa los datos de tu empresa</h4>
-                </div>
-                <div class="col-sm-4"><h4><i class="fa fa-credit-card"></i> Procesar cobros</h4></div>
-            </div>
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Si procesas tus cobros con iOS, utiliza la
-                            <a href="https://mercadomovil.com.mx/login/" target="_blank" style="text-decoration: none; color: #cb6c18">versión antigua de Mercado Móvil.</a></div>
-                    </div>
-                </div>
-            <a ui-sref="docs" class="btn btn-white-clear">Más información</a>
-            <a href="http://dashboard.mercadomovil.com.mx/hq/access/register" target="_self" class="btn btn-orange">Abrir una cuenta</a>
-
-            <div class="download-app">
-                <a target="_blank" href="https://appsto.re/mx/QrI68.i"><img src="img/download-app.png" alt="App Store"/></a>
-                <a target="_blank"
-                   href="https://play.google.com/store/apps/details?id=com.desarrollapps.mercadomovil&hl=es"><img
-                        src="img/download-play.png" alt="Google play"/></a>
-            </div>
-        </div>
     </uib-carousel>
 </div>
-<section class="more-info">
-    <div class="container info-links">
-        <div class="col-sm-2"><strong>Más información:</strong></div>
-        <div class="col-sm-3"><a ui-sref="category_doc({slug: 'preguntas-mas-frecuentes' })">Preguntas frecuentes</a>
-        </div>
-        <div class="col-sm-3"><a ui-sref="category_doc({slug: 'tutoriales' })">¿Como usar Mercado Móvil?</a></div>
-        <div class="col-sm-3"><a ui-sref="category_doc({slug: 'mas-de-mercado-movil'})">Más acerca de Mercado Móvil</a>
-        </div>
-    </div>
-</section>
-<section id="why-us" class="section_padding">
+<section id="our-services" class="section_padding">
     <div class="container">
-        <h3 class="title">{{ Home.simple.title }}</h3>
-
-        <p>{{ Home.simple.excerpt }}</p>
-        <a ui-sref="page({slug: Home.simple.slug})" class="btn btn-orange">Más información</a>
-    </div>
-</section>
-
-<section id="for-what">
-    <div class="container">
-        <div class="col-sm-5">
-            <img post-image="{{ Home.mmovil.urlImages.original }}" alt="Mercado Móvil"/>
+        <div class="text-center">
+            <h1 class="title-section">Nuestros servicios</h1>
         </div>
-        <div class="col-sm-7 des-for-what">
-            <h3>"{{ Home.mmovil.title }}"</h3>
-
-            <div ng-bind-html="Home.mmovil.content | trustHtml"></div>
-            <br/>
-
-            <div class="text-center">
-                <a href="http://dashboard.mercadomovil.com.mx/hq/access/register" target="_self" class="btn btn-white-clear">Abrir cuenta en
-                    Mercado Móvil</a>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="use">
-    <div class="container">
-        <h2>¿Por qué usar Mercado Móvil?</h2>
-
-        <div class="col-sm-4" ng-repeat="item in Home.why">
-            <div class="box-default">
-                <div class="box-description">
-                    <h3>{{ item.title }}</h3>
-
-                    <p>{{ item.excerpt | characters:80 }} </p>
-                    <a ui-sref="doc_detail({slug: item.slug})" class="btn btn-gray-clear">Más información</a>
+        <div class="col-sm-4">
+            <div class="box-white">
+                <div class="title-box">
+                    <p>Instalaciones sanitarias para la producción de alimentos de alta calidad.</p>
+                </div>
+                <div class="icon-box-bg" style="background-image: url('../img/icons/watter.png')"></div>
+                <div class="box-footer">
+                    <a href="#">Más información <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
-        <h2 class="text-center no-content" ng-show="!Home.why.length">Lo sentimos no contamos con
-            contenido
-            disponible</h2>
+
+        <div class="col-sm-4">
+            <div class="box-white">
+                <div class="title-box">
+                    <p>Fabricación de equipo a la medida en acero inoxidable.</p>
+                </div>
+                <div class="icon-box-bg" style="background-image: url('../img/icons/engrane.png')"></div>
+                <div class="box-footer">
+                    <a href="#">Más información <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="box-white">
+                <div class="title-box">
+                    <p>Ingeniería capacitada en automatización.</p>
+                </div>
+                <div class="icon-box-bg" style="background-image: url('../img/icons/engennier.png')"></div>
+                <div class="box-footer">
+                    <a href="#">Más información <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="box-white">
+                <div class="title-box">
+                    <p>Maquinaria para proceso de lacteos (queso oaxaca, cuajado y modelado de queso).</p>
+                </div>
+                <div class="icon-box-bg" style="background-image: url('../img/icons/factory.png')"></div>
+                <div class="box-footer">
+                    <a href="#">Más información <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="box-white">
+                <div class="title-box">
+                    <p>Asesoría, capacitación, mantenimiento de los diversos equipos.</p>
+                </div>
+                <div class="icon-box-bg" style="background-image: url('../img/icons/keys.png')"></div>
+                <div class="box-footer">
+                    <a href="#">Más información <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="box-white">
+                <div class="title-box">
+                    <p>Distribución de diferentes productos.</p>
+                </div>
+                <div class="icon-box-bg" style="background-image: url('../img/icons/boxes.png')"></div>
+                <div class="box-footer">
+                    <a href="#">Más información <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
-<section id="contact" class="section_padding">
+
+<section id="parallax" class="section_padding">
     <div class="container">
-        <h2>¿Necesitas ayuda o más información?</h2>
+        <h1 class="title-section">Contáctanos</h1>
 
-        <p>Contáctanos, estamos para servirte. </p>
+        <div class="col-md-12 ">
+            <div class="col-sm-6 description">
+                <h3><a href="tel:3531238860"><i class="fa fa-phone"></i> 353 123 8860</a></h3>
 
-        <div class="col-md-12 list-contact">
-            <div class="col-sm-4">
-                <a href="tel:3318959338"><i class="fa fa-mobile"></i> (33) 18 95 93 38</a>
+                <h3><a href="tel:3535334925"><i class="fa fa-phone"></i> 01(353) 533 49 25</a></h3>
+
+                <h3><a href="mailto:ainoxher@gmail.com"><i class="fa fa-envelope"></i> ainoxher@gmail.com</a></h3>
+
+                <h3><a href="mailto:contacto@ainoxher.com"><i class="fa fa-envelope"></i> contacto@ainoxher.com</a></h3>
+
+                <h3>
+                    <a href="https://www.google.com.co/maps/place/Nacional+34,+Centro,+59500+San+Jos%C3%A9+de+Gracia,+Mich.,+M%C3%A9xico/@19.9926981,-103.0255348,17z/data=!3m1!4b1!4m5!3m4!1s0x842f0fa63340d54b:0xdf0ef271432c0d23!8m2!3d19.9926931!4d-103.0233461"><i
+                            class="fa fa-map-marker"></i> Carretera Nacional km 34.5
+                        Centro
+                        Marcos Castellano, Michoacán, México.</a></h3>
             </div>
-            <div class="col-sm-4">
-                <a href="tel:3535334925"><i class="fa fa-phone"></i> 01(353) 533 49 25</a>
+            <div class="col-sm-6">
+                <form class="padding form-horizontal" ng-submit="Contact.createNotification('CONTACT_FORM')"
+                      ng-init="Contact.notification.subject = 'Formulario de contacto'">
+
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
+                           required ng-model="Contact.notification.name">
+
+                    <input type="email" class="form-control" id="email" name="email"
+                           placeholder="Correo electrónico" required
+                           ng-model="Contact.notification.email">
+                                <textarea class="form-control" id="message" name="message" rows="7"
+                                          placeholder="Comentarios *" required
+                                          ng-model="Contact.notification.message"></textarea>
+
+                    <div style="text-align: right;padding-top:15px;">
+                        <button type="submit" class="btn-red" ng-disabled="Contact.busy">
+                            Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
+                        </button>
+
+                    </div>
+                </form>
             </div>
-            <div class="col-sm-4">
-                <a href="tel:info@mercadomovil.com.mx"><i class="fa fa-envelope"></i> info@mercadomovil.com.mx</a>
-            </div>
+        </div>
+    </div>
+</section>
+<section id="info">
+    <div class="container">
+        <div class="col-sm-8">
+            <h3>Políticas del medio ambiente</h3>
+
+            <p>Conscientes de la importancia que existe entre el desarrollo de nuestras actividades industriales y
+                el respeto al medio ambiente, en AINOXHER, establecemos nuestro compromiso con el medio ambiente.</p>
+        </div>
+        <div class="col-sm-4">
+            <img class="img-responsive" src="img/ainoxher-green.png" alt="ainoxher"/>
         </div>
     </div>
 </section>
