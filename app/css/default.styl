@@ -156,7 +156,7 @@ header
       color #f5f5f5
       border-bottom 1px solid #f5f5f5
     .nav-main
-      margin-right 25px
+      margin-top 5px
     .nav-log
       margin-top 30px
       border-left 1px solid #fff
@@ -211,9 +211,10 @@ header
   color #555
 
 .main-bg-pages
-  background-color #cb6c18
+  background #bdc3c7 /* fallback for old browsers */
+  background -webkit-linear-gradient(to left, #bdc3c7 , #2c3e50) /* Chrome 10-25, Safari 5.1-6 */
+  background linear-gradient(to left, #bdc3c7 , #2c3e50)
   height 110px
-  background-repeat no-repeat
 .slider-img
   background-position center center
   background-size cover
