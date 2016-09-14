@@ -386,7 +386,10 @@ header
     background rgba(224, 143, 23, 0.6)
     text-shadow 0 0 10px #000
 #content-contact
-  background-color #f5f5f5
+  background #bdc3c7 /* fallback for old browsers */
+  background -webkit-linear-gradient(to left, #bdc3c7, #2c3e50) /* Chrome 10-25, Safari 5.1-6 */;
+  background linear-gradient(to left, #bdc3c7, #2c3e50)
+  border-top 1px solid rgba(255,255,255, 0.2)
 #news
   .title
     color #555555
@@ -526,10 +529,11 @@ header
   padding 5px 0px
   border 1px solid #f5f5f5
   .box-widget-header
-    padding 20px
+    padding 10px
     border-bottom 1px solid #ccc
     font-size 20px
-    color #777777
+    background-color #999
+    color white
   .box-widget-container
     padding 20px
     h3>a, h2>a
@@ -1003,8 +1007,7 @@ header
   color #555
   background-color #fff
   background-image none
-  border 1px solid #fff
-  border-bottom 1px solid #eaeaea !important
+  border 1px solid #eaeaea !important
   border-radius 0px
   -webkit-box-shadow inset 0 1px 1px rgba(0, 0, 0, 0)
   box-shadow inset 0 1px 1px rgba(0, 0, 0, 0)
