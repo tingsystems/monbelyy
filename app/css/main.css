@@ -682,8 +682,8 @@ color
 }
 .box-default {
   margin: 10px;
-  padding: 10px;
   transition: all 0.5s ease;
+  border-bottom: 3px solid #5d5d5d;
 }
 .box-default .description h4 {
   color: #767676;
@@ -699,8 +699,9 @@ color
   padding: 5px 0;
 }
 .box-default h3 {
-  color: #5d5d5d;
-  padding: 10px 0 0;
+  background-color: #5d5d5d;
+  padding: 10px;
+  color: #fff;
   font-size: 22px;
 }
 .box-default .comment-area {
@@ -730,6 +731,9 @@ color
 .box-default .box-container p {
   color: #5d5d5d;
   text-align: justify;
+}
+.box-default .box-container .height-summary {
+  padding: 0 10px;
 }
 .box-default:hover,
 .box-default:focus {
