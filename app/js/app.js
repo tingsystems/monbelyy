@@ -53,7 +53,7 @@
                 }
             })
             .state('page', {
-                url: '/doc/page/:slug',
+                url: '/page/:slug',
                 views: {
                     'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
@@ -89,38 +89,6 @@
                 views: {
                     'content': {
                         templateUrl: '/templates/404.html'
-                    }
-                }
-            })
-            .state('docs', {
-                url: '/doc',
-                views: {
-                    'content': {
-                        templateUrl: '/templates/docs.html',
-                        controllerAs: 'Post',
-                        controller: 'DocsCtrl'
-                    }
-                }
-            })
-            .state('doc_detail', {
-                url: '/doc/:slug\.html',
-                views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
-                    'content': {
-                        templateUrl: '/templates/single.html',
-                        controllerAs: 'Post',
-                        controller: 'PostDetailCtrl'
-                    }
-                }
-            })
-            .state('category_doc', {
-                url: '/doc/category/:slug',
-                data: {pageTitle: 'Mercado Móvil'},
-                views: {
-                    'content': {
-                        templateUrl: '/templates/categories.html',
-                        controllerAs: 'Post',
-                        controller: 'PostCtrl'
                     }
                 }
             });

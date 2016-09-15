@@ -12,7 +12,7 @@
                      infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
                     <div class="row">
                         <!--<div class="col-sm-4" ng-repeat="entry in Post.list">-->
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" ng-repeat="entry in Post.list">
 
                             <a post-link="{ link: {url: entry.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
@@ -21,8 +21,8 @@
                                     </div>
 
                                     <div class="box-container">
-                                        <div class="height-title"><h3>Acero inoxidable</h3></div>
-                                        <div class="height-summary"><p>Lorem impsum</p></div>
+                                        <div class="height-title"><h3>{{ entry.title }}</h3></div>
+                                        <div class="height-summary"><p></p></div>
                                     </div>
                                     <div class="box-footer">
                                         <p><span><i class="fa fa-calendar-"></i></span>

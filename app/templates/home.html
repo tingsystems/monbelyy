@@ -1,8 +1,8 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
-        <!--<uib-slide ng-repeat="slide in Home.mainSlider">-->
+        <uib-slide ng-repeat="slide in Home.mainSlider">
         <!--<div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>-->
-        <img class="img-responsive" src="img/banner-ain.jpg" alt=""/>
+        <img class="img-responsive" src={{ slide.urlImages.original }} alt=""/>
         </uib-slide>
     </uib-carousel>
 </div>
