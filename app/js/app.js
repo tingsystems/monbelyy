@@ -132,8 +132,8 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Mercado Móvil',
-                'excerpt': 'Tu aliado estratégico en comercio móvil y procesamiento de pagos electrónicos',
+                'title': 'Ainoxher - Tendencias y satisfacción',
+                'excerpt': 'Ainoxher - Tendencias y satisfacción, maquinaria industrial de alta calidad',
                 'urlImages': {
                     'original': 'https://mercadomovil.com.mx/img/img-default.jpg'
                 }
@@ -141,7 +141,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Mercado Móvil';
+        $rootScope.pageTitle = 'Ainoxher';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
                 parent: '5bb6cb73-1a97-4c97-b4f6-0c9cb3a687af',

@@ -4,7 +4,7 @@
     function HomeCtrl(PostSrv, PostDetailSrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Mercado Móvil - Pagos al instante';
+        $rootScope.pageTitle = 'Ainoxher - Tendencias y satisfacción';
 
         PostSrv.get({
             category: 'slider',
@@ -14,6 +14,16 @@
             fields: 'urlImages,title,link,slug,excerpt'
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
+            });
+
+        PostSrv.get({
+            category: 'servicios',
+            isActive: 'True',
+            sizePage: 10,
+            ordering: '-createdAt',
+            fields: 'urlImages,slug,excerpt'
+        }).$promise.then(function (results) {
+                self.services = results.results;
             });
 
 
@@ -36,7 +46,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - Mercado Móvil';
+                        $rootScope.pageTitle = self.categoryName + ' - Ainoxher';
                     }
                 });
         }
@@ -101,12 +111,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Mercado Móvil';
+        $rootScope.pageTitle = 'Blog - Ainoxher';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Mercado Móvil';
+        $rootScope.pageTitle = 'Ainoxher';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -120,27 +130,17 @@
                     self.detail.urlImages.original = 'http://www.viajescoral.com/img/img-default.jpg';
                 }
                 self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
-                $rootScope.pageTitle = results.title + ' - Mercado Móvil';
+                $rootScope.pageTitle = results.title + ' - Ainoxher';
                 self.busy = false;
-            });
-        // Controller for slider
-        PostSrv.get({
-            category: 'blog',
-            isActive: 'True',
-            sizePage: 4,
-            ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,excerpt,createdAt'
-        }).$promise.then(function (results) {
-                self.blog = results.results;
             });
     }
 
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Mercado Móvil - Pagos al instante';
+            $rootScope.pageTitle = 'Ainoxher - Tendencias y satisfacción';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Mercado Móvil - Contacto';
+            $rootScope.pageTitle = 'Contacto - Ainoxher';
         }
 
 
@@ -154,7 +154,7 @@
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
-            self.notification.send_from = 'info@mercadomovil.com.mx';
+            self.notification.send_from = 'info@ainoxher.com.mx';
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {
@@ -261,78 +261,6 @@
 
     }
 
-    function TabsCtrl(PostSrv) {
-        var self = this;
-        self.category_1 = 'paquetes';
-        self.category_2 = 'excursiones';
-        self.category_3 = 'destinos';
-
-        self.Tab1 = function () {
-            self.list1 = [];
-            PostSrv.get({
-                category: self.category_1,
-                isActive: 'True',
-                sizePage: 10,
-                ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories,excerpt'
-            }).$promise.then(function (results) {
-                    self.list1 = results.results;
-                });
-
-        };
-        self.Tab2 = function () {
-            self.list2 = [];
-            PostSrv.get({
-                category: self.category_2,
-                isActive: 'True',
-                sizePage: 10,
-                ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories,excerpt'
-            }).$promise.then(function (results) {
-                    self.list2 = results.results;
-                });
-        };
-        self.Tab3 = function () {
-            self.list3 = [];
-            PostSrv.get({
-                category: self.category_3,
-                isActive: 'True',
-                sizePage: 10,
-                ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories,excerpt'
-            }).$promise.then(function (results) {
-                    self.list3 = results.results;
-                });
-        };
-
-    }
-
-    function DocsCtrl(TaxonomySrv, PostSrv) {
-        var self = this;
-        self.categories = [];
-        TaxonomySrv.get({
-            parent: '8153e621-5892-4128-9b17-2f76ef3ee57a',
-            isActive: 'True',
-            fields: 'name,slug,urlImages',
-            ordering: 'order',
-            sizePage: 4
-        }).$promise.then(function (response) {
-                self.categories = response.results;
-            }, function (error) {
-            });
-
-        PostSrv.get({
-            category: 'preguntas-mas-frecuentes',
-            isActive: 'True',
-            sizePage: 10,
-            ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,excerpt'
-        }).$promise.then(function (results) {
-                self.faqs = results.results;
-            });
-
-
-    }
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -343,9 +271,7 @@
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
         .controller('BlogCtrl', BlogCtrl)
-        .controller('NavBarCtrl', NavBarCtrl)
-        .controller('TabsCtrl', TabsCtrl)
-        .controller('DocsCtrl', DocsCtrl);
+        .controller('NavBarCtrl', NavBarCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
@@ -355,6 +281,4 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    TabsCtrl.$inject = ['PostSrv'];
-    DocsCtrl.$inject = ['TaxonomySrv', 'PostSrv'];
 })();
