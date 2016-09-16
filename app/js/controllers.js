@@ -60,6 +60,7 @@
                 category: $stateParams.slug,
                 isActive: 'True',
                 sizePage: 10,
+                fields: 'title,slug,excerpt,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -130,6 +131,8 @@
                     self.detail.urlImages.original = 'http://www.viajescoral.com/img/img-default.jpg';
                 }
                 self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
+                self.isService = $filter('filter')(self.detail.categories, {'slug': 'servicios'})[0];
+                console.log(self.isService);
                 $rootScope.pageTitle = results.title + ' - Ainoxher';
                 self.busy = false;
             });

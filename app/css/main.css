@@ -71,7 +71,7 @@ body {
   color: #fff !important;
 }
 .content {
-  margin-top: 0px;
+  margin-top: 0;
 }
 .content-post {
   margin: 80px 0;
@@ -689,7 +689,7 @@ color
   color: #767676;
 }
 .box-default a {
-  color: #5d5d5d;
+  color: #fff;
 }
 .box-default .box-footer {
   text-align: center;

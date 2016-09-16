@@ -1,8 +1,7 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
-        <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
-        <!--<img class="img-responsive" ng-src="{{ slide.urlImages.original  }}" alt=""/>-->
+            <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
         </uib-slide>
     </uib-carousel>
 </div>
@@ -22,8 +21,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </section>
 
@@ -75,13 +72,17 @@
 <section id="info">
     <div class="container">
         <div class="col-sm-8">
-            <h3>Políticas del medio ambiente</h3>
+            <a ui-sref="page({slug: 'politicas-del-medio-ambiente'})">
+                <h3>Políticas del medio ambiente</h3>
 
-            <p>Conscientes de la importancia que existe entre el desarrollo de nuestras actividades industriales y
-                el respeto al medio ambiente, en AINOXHER, establecemos nuestro compromiso con el medio ambiente.</p>
+                <p>Conscientes de la importancia que existe entre el desarrollo de nuestras actividades industriales y
+                    el respeto al medio ambiente, en AINOXHER, establecemos nuestro compromiso con el medio
+                    ambiente.</p>
+            </a>
         </div>
         <div class="col-sm-4">
-            <img class="img-responsive" src="img/ainoxher-green.png" alt="ainoxher"/>
+            <a ui-sref="page({slug: 'politicas-del-medio-ambiente'})"><img class="img-responsive"
+                                                                           src="img/ainoxher-green.png" alt="ainoxher"/></a>
         </div>
     </div>
 </section>

@@ -11,12 +11,12 @@
                 <div class="container">
                     <div class="col-md-4" ng-repeat="entry in Post.list">
                         <div class="box-default">
-                            <a ui-sref="doc_detail({slug: entry.slug})">
+                            <a ui-sref="post_detail({slug: entry.slug})">
                                 <div class="box-header"
                                      style="background-image: url('{{ entry.urlImages.medium ? entry.urlImages.medium : 'https://mercadomovil.com.mx/img/img-default.jpg' }}"></div>
 
                                 <div class="description">
-                                    <div class="height-title"><h3><a ui-sref="doc_detail({slug: entry.slug})" title="{{ entry.title }}">{{ entry.title | characters:50 }} </a></h3></div>
+                                    <div class="height-title"><h3><a class="withe" ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">{{ entry.title | characters:50 }} </a></h3></div>
                                     <div class="height-summary-categories"><h5>{{ entry.excerpt | characters:90 }}</h5></div>
                                 </div>
                             </a>

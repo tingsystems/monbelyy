@@ -3,7 +3,9 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
-            <li ng-if="Post.detail.categories.length"><a ui-sref="category({slug: Post.detail.categories[0].slug })">{{ Post.detail.categories[0].name }}</a></li>
+            <li ng-if="Post.detail.categories.length"><a
+                    ui-sref="category({slug: Post.detail.categories[0].slug })">{{ Post.detail.categories[0].name }}</a>
+            </li>
             <li class="active">{{ Post.detail.title }}</li>
         </ol>
     </div>
@@ -15,9 +17,11 @@
                 <div class="col-md-12 title-post" style="text-align:left;">
                     <h2 class="title">{{ Post.detail.title }}</h2>
                 </div>
-                <div class="content-post" ng-if="Post.isBlog">
-                    <img post-image="{{ Post.detail.urlImages.medium }}"
-                         class="pull-left img-responsive img-thumbnail margin10"/>
+                <div class="content-post">
+                    <div ng-if="!Post.isService">
+                        <img ng-if="Post.detail.urlImages.medium" ng-src="{{ Post.detail.urlImages.medium }}"
+                             class="pull-left img-responsive img-thumbnail margin10"/>
+                    </div>
                     <article ng-bind-html="Post.detail.content | trustHtml"></article>
                     <!--gallery here-->
                     <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
@@ -30,18 +34,6 @@
                             </a>
                         </div>
                     </div>
-                </div>
-                <div class="content-post" ng-if="!Post.isBlog">
-                    <div class="pull-left">
-                        <uib-carousel interval="5000" template-url="/templates/partials/carousel-single.html">
-                            <uib-slide ng-repeat="slide in Post.detail.galleryImages">
-                                <div class="img-gallery-single"
-                                     style="background-image:url('{{ slide.urlImages.original }}');"></div>
-                            </uib-slide>
-                        </uib-carousel>
-                    </div>
-
-                    <article ng-bind-html="Post.detail.content | trustHtml"></article>
                 </div>
             </div>
             <div class="col-md-3 col-sm-4 widgets">
