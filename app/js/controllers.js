@@ -128,7 +128,7 @@
                 self.detail = results;
                 $rootScope.post = self.detail;
                 if (!self.detail.urlImages.original) {
-                    self.detail.urlImages.original = 'http://www.viajescoral.com/img/img-default.jpg';
+                    self.detail.urlImages.original = 'http://www.ainoxher.com.mx/img/img-default.jpg';
                 }
                 self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
                 self.isService = $filter('filter')(self.detail.categories, {'slug': 'servicios'})[0];
