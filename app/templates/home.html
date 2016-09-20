@@ -2,6 +2,11 @@
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
             <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
+            <div class="carousel-caption">
+                <h1>{{ slide.title }}</h1>
+
+                <p>{{ slide.excerpt }}</p>
+            </div>
         </uib-slide>
     </uib-carousel>
 </div>
