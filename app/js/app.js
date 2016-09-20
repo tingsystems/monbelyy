@@ -125,7 +125,7 @@
             $('#header-mainMenu').collapse('hide');
         });
         // initialise google analytics
-        //$window.ga('create', 'UA-53555832-7', '');
+        $window.ga('create', 'UA-53555832-36', '');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
@@ -135,7 +135,7 @@
                 'title': 'Ainoxher - Tendencias y satisfacción',
                 'excerpt': 'Ainoxher - Tendencias y satisfacción, maquinaria industrial de alta calidad',
                 'urlImages': {
-                    'original': 'https://mercadomovil.com.mx/img/img-default.jpg'
+                    'original': 'http://www.ainoxher.com.mx/img/img-default.jpg'
                 }
             };
             $anchorScroll();
