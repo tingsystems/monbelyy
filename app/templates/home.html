@@ -49,7 +49,7 @@
                         Centro
                         Marcos Castellano, Michoacán, México.</a></h3>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6" ng-controller="ContactCtrl as Contact">
                 <form class="padding form-horizontal" ng-submit="Contact.createNotification('CONTACT_FORM')"
                       ng-init="Contact.notification.subject = 'Formulario de contacto'">
 
