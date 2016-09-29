@@ -125,7 +125,7 @@
             $('#header-mainMenu').collapse('hide');
         });
         // initialise google analytics
-        $window.ga('create', 'UA-53555832-36', '');
+        //$window.ga('create', 'UA-53555832-36', '');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
