@@ -1771,16 +1771,8 @@ color
     height: 760px;
   }
   header {
-    position: fixed;
     width: 100%;
     z-index: 9999;
-  }
-  header .navbar-default {
-    top: 40px;
-    height: 80px;
-    background: #bdc3c7 /* fallback for old browsers */;
-    background: -webkit-linear-gradient(to left, #bdc3c7, #2c3e50) /* Chrome 10-25, Safari 5.1-6 */;
-    background: linear-gradient(to left, #bdc3c7, #2c3e50);
   }
   .nav-main {
     border: none !important;
@@ -1928,6 +1920,10 @@ color
   #contact-section .contact {
     border-left: 1px solid transparent;
   }
+  header .navbar-default .container-fluid {
+    display: block;
+    margin: 0;
+  }
   header .navbar-default .navbar-nav > li > a {
     color: #fff;
     padding: 15px 15px;
@@ -2069,7 +2065,7 @@ color
     margin-top: 5px;
   }
   .text-right {
-    text-align: left;
+    text-align: right;
   }
   p {
     font-size: 12px;

@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Mercado Móvil'},
+                data: {pageTitle: 'NOVA VET LABS'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
