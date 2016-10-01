@@ -12,83 +12,79 @@
         </uib-slide>
     </uib-carousel>
 </div>
+<section id="security">
+    <div class="container">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <p><img width="50" src="img/icons/garantia.png" alt="Garantía"/> Garantía</p>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <p><img width="50" src="img/icons/security.png" alt="Seguridad"/> Seguridad</p>
+
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <p><img width="50" src="img/icons/save.png" alt="Validación"/> Validación</p>
+
+        </div>
+    </div>
+</section>
+<section id="us">
+    <div class="container">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <p><strong>NOVA VET LABS</strong> es una compañía farmacéutica dedica a la producción de hormonales
+                sintéticos especializados para el desempeño físico, bajo estrictas normas y controles
+                de calidad para satisfacer las necesidades de nuestros consumidores, partiendo de
+                la más alta y novedosa tecnología de estándares alemanes para cumplir con las
+                expectativas más altas en pureza, potencia y calidad.</p>
+
+            <p>
+                Nos comprometemos en el desarrollo, investigación y producción de sustancias de
+                calidad mundial cuidando siempre el bienestar de nuestros consumidores,
+                consolidándonos como una empresa de total confianza en
+                producción hormonal.
+            </p>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <p><img width="100%" src="img/laboratory.jpg" alt="Nova Vet Labs"/></p>
+
+        </div>
+    </div>
+</section>
 <section id="our-services" class="section_padding">
     <div class="container">
         <div class="text-center">
-            <h1 class="title-section">Nuestros servicios</h1>
+            <h1 class="title-section">Productos</h1>
         </div>
-        <div class="col-sm-4" ng-repeat="service in Home.services">
-            <div class="box-white">
-                <div class="title-box">
-                    <p>{{ service.excerpt }}</p>
-                </div>
-                <div class="icon-box-bg" style="background-image: url('{{ service.urlImages.original }}')"></div>
-                <div class="box-footer">
-                    <a ui-sref="post_detail({slug: service.slug})">Más información <i class="fa fa-angle-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        <div class="col-sm-6 text-center">
+            <a href="#">
+                <img src="img/inyeccion.png" alt="Nova Vet Inyecciones"/>
 
-<section id="parallax" class="section_padding">
-    <div class="container">
-        <h1 class="title-section">Contáctanos</h1>
-
-        <div class="col-md-12 ">
-            <div class="col-sm-6 description">
-                <h3><a href="tel:3531238860"><i class="fa fa-phone"></i> 353 123 8860</a></h3>
-
-                <h3><a href="tel:3535363150"><i class="fa fa-phone"></i> 353 536 3150</a></h3>
-
-                <h3><a href="mailto:info@ainoxher.com.mx"><i class="fa fa-envelope"></i> info@ainoxher.com.mx</a></h3>
-
-                <h3>
-                    <a href="https://www.google.com.co/maps/place/Nacional+34,+Centro,+59500+San+Jos%C3%A9+de+Gracia,+Mich.,+M%C3%A9xico/@19.9926981,-103.0255348,17z/data=!3m1!4b1!4m5!3m4!1s0x842f0fa63340d54b:0xdf0ef271432c0d23!8m2!3d19.9926931!4d-103.0233461"
-                       target="_blank"><i
-                            class="fa fa-map-marker"></i> Carretera Nacional km 34.5
-                        Centro
-                        Marcos Castellano, Michoacán, México.</a></h3>
-            </div>
-            <div class="col-sm-6" ng-controller="ContactCtrl as Contact">
-                <form class="padding form-horizontal" ng-submit="Contact.createNotification('CONTACT_FORM')"
-                      ng-init="Contact.notification.subject = 'Formulario de contacto'">
-
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
-                           required ng-model="Contact.notification.name">
-
-                    <input type="email" class="form-control" id="email" name="email"
-                           placeholder="Correo electrónico" required
-                           ng-model="Contact.notification.email">
-                                <textarea class="form-control" id="message" name="message" rows="7"
-                                          placeholder="Comentarios *" required
-                                          ng-model="Contact.notification.message"></textarea>
-
-                    <div style="text-align: right;padding-top:15px;">
-                        <button type="submit" class="btn-red" ng-disabled="Contact.busy">
-                            Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
-                        </button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="info">
-    <div class="container">
-        <div class="col-sm-8">
-            <a ui-sref="page({slug: 'politicas-del-medio-ambiente'})">
-                <h3>Políticas del medio ambiente</h3>
-
-                <p>Conscientes de la importancia que existe entre el desarrollo de nuestras actividades industriales y
-                    el respeto al medio ambiente, en AINOXHER, establecemos nuestro compromiso con el medio
-                    ambiente.</p>
+                <h3>Inyectables</h3>
             </a>
         </div>
-        <div class="col-sm-4">
-            <a ui-sref="page({slug: 'politicas-del-medio-ambiente'})"><img class="img-responsive"
-                                                                           src="img/ainoxher-green.png" alt="ainoxher"/></a>
+        <div class="col-sm-6 text-center">
+            <a href="#">
+                <img src="img/orales.png" alt="Nova Vet Inyecciones"/>
+
+                <h3>Orales</h3>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="info">
+    <div class="container">
+        <h1>Noticias recientes</h1>
+        <div class="col-sm-3">
+            <div class="box-default">
+                <a href="#">
+                    <div class="img-box" style="background-image: url('../img/img-default.jpg')"></div>
+
+                    <div class="box-container">
+                        <h3>Lorem impsum</h3>
+                    </div>
+                </a>
+            </div>
+
         </div>
     </div>
 </section>

@@ -37,7 +37,7 @@
           ng-if="post"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.ainoxher.com.mx{{ $state.href($state.current.name) }}"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet"
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/animate.css/animate.css" />
@@ -64,13 +64,17 @@
 <header class="header">
     <div class="nav-top">
         <div class="container">
-            <p class="pull-left">Llámanos al: <a href="tel:3531238860">353 123 8860</a> y <a href="tel:3535363150">353
-                536 3150</a></p>
-
-            <p class="pull-right">
-                <a href="https://www.facebook.com/ainoxher.tendenciasysatisfaccion?fref=ts" target="_blank"><i class="fa fa-facebook-square"></i></a>
-                <a href="#" target="_blank"><i class="fa fa-twitter-square"></i></a>
-                <a href="#" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+            <div class="col-md-4 col-sm-4">
+                <p class="pull-left"><i class="fa fa-envelope"></i> <a href="mailto:info@novavetlabs.com">info@novavetlabs.com</a></p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <a class="navbar-brand" ui-sref="home"><img src="img/logo.png"
+                                                            class="logo" alt="Ainoxher - Tendencias y satisfacción"></a>
+            </div>
+            <p class="col-md-4 col-sm-4 text-right">
+                <a href="#"><img width="30" src="img/english.png" alt="English"/></a>
+                <a href="#"><img width="30" src="img/aleman.png" alt="Alemán"/></a>
+                <a href="#"><img width="30" src="img/espanol.png" alt="Español"/></a>
             </p>
         </div>
     </div>
@@ -86,38 +90,39 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="home"><img src="img/logo.png"
-                                                            class="logo" alt="Ainoxher - Tendencias y satisfacción"></a>
+
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
-            <div class="collapse navbar-collapse" id="header-mainMenu">
-                <ul class="nav navbar-nav navbar-right nav-main">
-                    <li>
-                        <a ui-sref="home" ng-click="nav.close()">Inicio</a>
-                    </li>
-                    <li>
-                        <a ui-sref="category({slug: 'fabricacion'})" ng-click="nav.close()">Fabricación</a>
-                    </li>
-                    <li>
-                        <a ui-sref="category({slug: 'instalacion'})" ng-click="nav.close()">Instalación</a>
-                    </li>
-                    <li>
-                        <a ui-sref="category({slug: 'automatizacion'})" ng-click="nav.close()">Automatización</a>
-                    </li>
-                    <li>
-                        <a ui-sref="category({slug: 'distribucion'})" ng-click="nav.close()">Distribución</a>
-                    </li>
-                    <li>
-                        <a ui-sref="page({slug: 'nosotros1473883051'})" ng-click="nav.close()">Nosotros</a>
-                    </li>
-                    <li>
-                        <a ui-sref="blog({kind: 'post'})" ng-click="nav.close()">Blog</a>
-                    </li>
-                    <li>
-                        <a ui-sref="contact({kind: 'contact'})" ng-click="nav.close()">Contacto</a>
-                    </li>
-                </ul>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="header-mainMenu">
+                    <ul class="nav navbar-nav nav-main">
+                        <li>
+                            <a ui-sref="home" ng-click="nav.close()">Inicio</a>
+                        </li>
+                        <li>
+                            <a ui-sref="category({slug: 'fabricacion'})" ng-click="nav.close()">Fabricación</a>
+                        </li>
+                        <li>
+                            <a ui-sref="category({slug: 'instalacion'})" ng-click="nav.close()">Instalación</a>
+                        </li>
+                        <li>
+                            <a ui-sref="category({slug: 'automatizacion'})" ng-click="nav.close()">Automatización</a>
+                        </li>
+                        <li>
+                            <a ui-sref="category({slug: 'distribucion'})" ng-click="nav.close()">Distribución</a>
+                        </li>
+                        <li>
+                            <a ui-sref="page({slug: 'nosotros1473883051'})" ng-click="nav.close()">Nosotros</a>
+                        </li>
+                        <li>
+                            <a ui-sref="blog({kind: 'post'})" ng-click="nav.close()">Blog</a>
+                        </li>
+                        <li>
+                            <a ui-sref="contact({kind: 'contact'})" ng-click="nav.close()">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!-- /.navbar-collapse -->
         </div>

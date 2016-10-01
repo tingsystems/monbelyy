@@ -39,7 +39,8 @@ img
 
 .fix
   overflow hidden
-
+text-right
+  text-align right
 h1,
 h2,
 h3,
@@ -48,25 +49,18 @@ h5,
 h6
   margin 0 0 15px
   font-weight 500
-  font-family 'Roboto', sans-serif
+  font-family 'Poppins', sans-serif
 
 .section_padding
   padding: 80px 0
-  .title-section
-    color white
-    border-bottom 1px solid rgba(255, 255, 255, 0.5)
-    width 50%
-    margin 0 auto
-    margin-bottom 50px
-    text-align center
 
 p
-  font-family 'Roboto', sans-serif
+  font-family 'Poppins', sans-serif
   font-weight 300
   font-size 16px
 
 body
-  font-family 'Roboto', sans-serif
+  font-family 'Poppins', sans-serif
 
 .white
   color white !important
@@ -121,7 +115,7 @@ body
 header
   margin-top 0px
   .nav-top
-    padding-top 10px
+    padding 10px 0 80px 0
     background-color white
     p, p > a
       color #555
@@ -129,12 +123,17 @@ header
       font-size 22px
       padding-left 10px
   .navbar-default
-    position absolute
+    position relative
     left 0
     right 0
-    top 35px
-    background transparent
-    height 110px
+    background rgba(105,24,27,1)
+    background -moz-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
+    background -webkit-gradient(left top, right top, color-stop(0%, rgba(105,24,27,1)), color-stop(100%, rgba(58,3,10,1)))
+    background -webkit-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
+    background -o-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
+    background -ms-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
+    background linear-gradient(to right, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
+    height 70px
     border none
     border-radius 0
     margin-bottom 0
@@ -143,10 +142,10 @@ header
       padding 5px 15px
     .navbar-nav > li > a
       color #f5f5f5
-      padding 50px 10px 15px
-      font-size 22px
-      font-family 'Roboto', sans-serif
-      font-weight 500
+      padding 25px 15px
+      font-size 18px
+      font-family 'Poppins', sans-serif
+      font-weight 300
       text-shadow 0 2px 5px rgba(0,0,0, 1)
       -webkit-transition all ease-in-out .35s
       -o-transition all ease-in-out .35s
@@ -156,7 +155,11 @@ header
       color #f5f5f5
       border-bottom 1px solid #f5f5f5
     .nav-main
-      margin-top 5px
+      display table
+      margin 0 auto
+    .container-fluid
+      display table
+      margin 0 auto
     .nav-log
       margin-top 30px
       border-left 1px solid #fff
@@ -190,18 +193,41 @@ header
 
   .logo
     width auto
-    margin-top 30px
+    margin-top 0
 
 .navbar-header
   color #d2b770 !important
   text-align left
 /* home */
+
+#security
+  text-align center
+  background #f5f5f5
+  padding 15px 0px 5px
+  p
+    font-size 22px
+    font-weight bold
+    color #aaaaaa
+#us
+  padding 100px 0
+  p
+    color #5d5d5d
+    font-size 18px
+    text-align justify
 #our-services
   background-color #c00
   background-image url('../img/bg-space.jpg')
   background-position center center
   background-size cover
   background-repeat no-repeat
+  .title-section
+    color white
+    margin 0 auto
+    margin-bottom 50px
+    text-align center
+  h3
+    color white
+    padding 15px 0
 
 .btn-white
   background white
@@ -389,10 +415,7 @@ header
     background rgba(224, 143, 23, 0.6)
     text-shadow 0 0 10px #000
 #content-contact
-  background #bdc3c7 /* fallback for old browsers */
-  background -webkit-linear-gradient(to left, #bdc3c7, #2c3e50) /* Chrome 10-25, Safari 5.1-6 */;
-  background linear-gradient(to left, #bdc3c7, #2c3e50)
-  border-top 1px solid rgba(255,255,255, 0.2)
+  background #fff
 #news
   .title
     color #555555
@@ -590,8 +613,12 @@ header
 
 .box-default
   margin 10px
-  transition all 0.5s ease
-  border-bottom 3px solid #5d5d5d
+  .img-box
+    background-size cover
+    height 200px
+    background-repeat no-repeat
+    background-position center center
+    opacity 0.6
   .description
     h4
       color #767676
@@ -604,10 +631,16 @@ header
     color #c7c7c7
     padding 5px 0
   h3
-    background-color #5d5d5d
+    background-color transparent
     padding 10px
-    color white
+    color #555
     font-size 22px
+    border-bottom 3px solid #5d5d5d
+    -webkit-transition all ease 0.1s
+    -moz-transition all ease 0.1s
+    -ms-transition all ease 0.1s
+    -o-transition all ease 0.1s
+    transition all ease 0.1s
   .comment-area
     padding-bottom 10px
     .comment, .date
@@ -632,9 +665,11 @@ header
       padding 0 10px
   &:hover, &:focus
     background transparent
-    box-shadow 0 0 3px rgba(0,0,0,0.4)
-    h1,h2
-      color #e08f17
+    .img-box
+      opacity 1
+    h1,h2,h3
+      color #66161a
+      border-bottom 3px solid #66161a
     p
       color #555
     .comment-area
@@ -744,16 +779,22 @@ header
 
 /************** footer area css ******************/
 #info
-  background-color #5d5d5d
-  padding 20px 0
-  p, h3
-    color white
+  background-color #ebeaea
+  padding 60px 0
+  h1
+    color #555
+    text-align center
+    padding-bottom 25px
+
 #footer_area
-  background #fff
+  background #444444
   padding 30px 0
-  color #555
+  color rgba(255, 255, 255, 0.6)
   line-height 30px
   border-top 1px solid #ccc
+  .text-center
+    a
+      color white
   .first-foo
     border-bottom 1px solid rgba(255,255,255,0.5)
     padding 15px 0
@@ -1119,10 +1160,7 @@ header
   width 100%
   height 100%
   opacity 1
-  background #bdc3c7 /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #bdc3c7 , #2c3e50); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #bdc3c7 , #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background #fff
 
 .block-ui-message
   background-color transparent
@@ -1143,7 +1181,7 @@ header
       margin 0 auto
       width 20%
       height 20%
-      background-color #fff
+      background-color red
       border-radius 100%
       -webkit-animation sk-circleBounceDelay 1.2s infinite ease-in-out both
       animation sk-circleBounceDelay 1.2s infinite ease-in-out both
