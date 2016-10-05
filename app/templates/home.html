@@ -30,21 +30,10 @@
 <section id="us">
     <div class="container">
         <div class="col-md-8 col-sm-8 col-xs-12">
-            <p><strong>NOVA VET LABS</strong> es una compañía farmacéutica dedica a la producción de hormonales
-                sintéticos especializados para el desempeño físico, bajo estrictas normas y controles
-                de calidad para satisfacer las necesidades de nuestros consumidores, partiendo de
-                la más alta y novedosa tecnología de estándares alemanes para cumplir con las
-                expectativas más altas en pureza, potencia y calidad.</p>
-
-            <p>
-                Nos comprometemos en el desarrollo, investigación y producción de sustancias de
-                calidad mundial cuidando siempre el bienestar de nuestros consumidores,
-                consolidándonos como una empresa de total confianza en
-                producción hormonal.
-            </p>
+            <article ng-bind-html="Home.presentation.content | trustHtml"></article>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img width="100%" src="img/laboratory.jpg" alt="Nova Vet Labs"/></p>
+            <p><img width="100%" ng-src="{{ Home.presentation.urlImages.original }}" alt="Nova Vet Labs"/></p>
 
         </div>
     </div>
@@ -54,18 +43,11 @@
         <div class="text-center">
             <h1 class="title-section">Productos</h1>
         </div>
-        <div class="col-sm-6 text-center">
-            <a href="#">
-                <img src="img/inyeccion.png" alt="Nova Vet Inyecciones"/>
+        <div class="col-sm-6 text-center" ng-repeat="category in Home.homeProducts">
+            <a ui-sref="category({slug: category.slug})">
+                <img ng-src="{{ category.urlImages.original }}" alt="{{ category.name }}"/>
 
-                <h3>Inyectables</h3>
-            </a>
-        </div>
-        <div class="col-sm-6 text-center">
-            <a href="#">
-                <img src="img/orales.png" alt="Nova Vet Inyecciones"/>
-
-                <h3>Orales</h3>
+                <h3>{{ category.name }}</h3>
             </a>
         </div>
     </div>
@@ -74,18 +56,26 @@
 <section id="info">
     <div class="container">
         <h1>Noticias recientes</h1>
-        <div class="col-sm-3">
-            <div class="box-default">
-                <a href="#">
-                    <div class="img-box" style="background-image: url('../img/img-default.jpg')"></div>
 
+        <div class="col-sm-3" ng-repeat="new in Home.news">
+            <div class="box-default">
+                <a ui-sref="post_detail({slug: new.slug})">
+                    <div class="img-box"
+                         style="background-image: url('{{ new.urlImages.medium ? new.urlImages.medium : 'http://localhost:8080/#/img/img-default.jpg'}}')">
+
+                    </div>
                     <div class="box-container">
-                        <h3>Lorem impsum</h3>
+                        <h3>{{ new.title }}</h3>
                     </div>
                 </a>
             </div>
-
         </div>
+        <div class="col-sm-12" ng-show="!Home.news.length">
+            <h2 class="text-center no-content" ng-show="!Home.news.length">Lo sentimos no contamos con
+                contenido
+                disponible</h2>
+        </div>
+
     </div>
 </section>
 

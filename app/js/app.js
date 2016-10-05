@@ -132,8 +132,8 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Ainoxher - Tendencias y satisfacción',
-                'excerpt': 'Ainoxher - Tendencias y satisfacción, maquinaria industrial de alta calidad',
+                'title': 'Novavet Labs',
+                'excerpt': 'Somos una compañía farmacéutica dedica a la producción de hormonales sintéticos para el desempeño físico, bajo estrictas normas y controles de calidad.',
                 'urlImages': {
                     'original': 'http://www.ainoxher.com.mx/img/img-default.jpg'
                 }
@@ -141,10 +141,10 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Ainoxher';
+        $rootScope.pageTitle = 'Novavet Labs';
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: '5bb6cb73-1a97-4c97-b4f6-0c9cb3a687af',
+                parent: 'ae4f23b4-2e3f-44c8-a5d3-5ec5594d06e3',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {

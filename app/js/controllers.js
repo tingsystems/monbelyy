@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, PostDetailSrv, $rootScope) {
+    function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Ainoxher - Tendencias y satisfacción';
+        $rootScope.pageTitle = 'Novavet Labs';
 
         PostSrv.get({
             category: 'slider',
@@ -16,14 +16,30 @@
                 self.mainSlider = results.results;
             });
 
-        PostSrv.get({
-            category: 'servicios',
+        PostDetailSrv.get({
+            slug: 'presentacion',
+            fields: 'content,urlImages'
+        }).$promise.then(function (response) {
+                self.presentation = response;
+            });
+
+        TaxonomySrv.query({
+            parent: '9af40914-fc27-41d3-a882-06481996b176',
             isActive: 'True',
-            sizePage: 10,
+            ordering: 'order'
+        }).$promise.then(function (response) {
+                self.homeProducts = response;
+            }, function (error) {
+            });
+
+        PostSrv.get({
+            category: 'noticias',
+            isActive: 'True',
+            sizePage: 4,
             ordering: '-createdAt',
-            fields: 'urlImages,slug,excerpt'
+            fields: 'title,urlImages,slug,excerpt'
         }).$promise.then(function (results) {
-                self.services = results.results;
+                self.news = results.results;
             });
 
 
@@ -46,7 +62,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - Ainoxher';
+                        $rootScope.pageTitle = self.categoryName + ' - Novavet Labs';
                     }
                 });
         }
@@ -98,7 +114,7 @@
 
             PostSrv.get({
                 kind: 'post',
-                category: 'blog',
+                category: 'noticias',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 9,
@@ -112,12 +128,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Ainoxher';
+        $rootScope.pageTitle = 'Blog - Novavet Labs';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Ainoxher';
+        $rootScope.pageTitle = 'Novavet Labs';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -133,7 +149,7 @@
                 self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
                 self.isService = $filter('filter')(self.detail.categories, {'slug': 'servicios'})[0];
                 console.log(self.isService);
-                $rootScope.pageTitle = results.title + ' - Ainoxher';
+                $rootScope.pageTitle = results.title + ' - Novavet Labs';
                 self.busy = false;
             });
     }
@@ -141,9 +157,9 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Ainoxher - Tendencias y satisfacción';
+            $rootScope.pageTitle = 'Novavet Labs';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Contacto - Ainoxher';
+            $rootScope.pageTitle = 'Contacto - Novavet Labs';
         }
 
 
@@ -157,7 +173,7 @@
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
-            self.notification.send_from = 'info@ainoxher.com.mx';
+            self.notification.send_from = 'info@novavetlabs.com';
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {
@@ -276,7 +292,7 @@
         .controller('BlogCtrl', BlogCtrl)
         .controller('NavBarCtrl', NavBarCtrl);
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', '$rootScope'];
+    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv', '$filter'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
