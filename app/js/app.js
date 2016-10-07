@@ -103,7 +103,7 @@
         blockUIConfig.message = 'Cargando...';
 
         // Change the default delay to 100ms before the blocking is visible
-        blockUIConfig.delay = 90;
+        blockUIConfig.delay = 110;
 
         // Set interceptor
         $httpProvider.interceptors.push('HttpInterceptor');
@@ -114,13 +114,14 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, PostSrv, $anchorScroll) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, translate, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
         $rootScope.apiV = 'v1';
         $rootScope.siteId = '7d6c7854-386e-4506-a1f8-31855081efde';
         $http.defaults.headers.common['TS-TOKEN'] = 'thGQqd7ymgRIq1pJ6DQtjV97DJOx1J9cERDwygAd';
+
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
         });
@@ -160,21 +161,50 @@
         }
 
         $rootScope.showResponsive = showResponsive($window);
-
         $rootScope.$on('HTTP_ERROR', function (event, args) {
             $state.go(args.error);
         });
+
+        //config translate's
+        $rootScope.words = translate.words;
+        // init language
+        $rootScope.app = {
+            name: 'Novavetlabs',
+            version: '1.0.0',
+            data: {
+                lang: 'espanol'
+            }
+        };
+        // function to change language
+        $rootScope.changeLang = function (lang) {
+            if ($rootScope.lang != lang) {
+                $rootScope.lang = lang;
+                $localStorage.appData.lang = lang;
+                $window.location.href = '/';
+            }
+        };
+        // save data app including language in local storage
+        if (angular.isDefined($localStorage.appData)) {
+            $rootScope.app.data = $localStorage.appData;
+            // retrieve language from local storage
+            if ($rootScope.app.data.lang) {
+                $rootScope.lang = $rootScope.app.data.lang;
+            }
+        } else {
+            $localStorage.appData = $rootScope.app.data;
+        }
 
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
 
-    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', 'PostSrv', '$anchorScroll'];
+    Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
+        'translate', '$localStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
 })();
