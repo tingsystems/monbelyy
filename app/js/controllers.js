@@ -73,7 +73,7 @@
         // get post by category
         if ($stateParams.slug) {
             TaxonomySrv.get({
-                slug: $stateParams.slug,
+                slug: '&&,' + $stateParams.slug + ',' + $rootScope.lang,
                 isActive: 'True',
                 sizePage: 1
             }).$promise.then(function (results) {
@@ -90,7 +90,7 @@
             self.busy = true;
 
             PostSrv.get({
-                category: $stateParams.slug,
+                category: '&&,' + $stateParams.slug + ',' + $rootScope.lang,
                 isActive: 'True',
                 sizePage: 10,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
@@ -131,7 +131,7 @@
 
             PostSrv.get({
                 kind: 'post',
-                category: 'noticias',
+                category: '&&,noticias,'+$rootScope.lang,
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 9,
