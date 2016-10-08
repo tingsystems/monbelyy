@@ -74,6 +74,41 @@ angular.module('annalise').constant('translate', {
             'espanol': 'Lo sentimos no contamos con contenido disponible',
             'ingles': 'Sorry we do not have content available',
             'aleman': 'Leider haben wir keine Inhalte verfügbar'
+        },
+        'mensaje': {
+            'espanol': 'Envíanos un mensaje',
+            'ingles': 'Send a message',
+            'aleman': 'Senden sie eine nachricht'
+        },
+        'nombre': {
+            'espanol': 'Nombre',
+            'ingles': 'Name',
+            'aleman': 'Vorname'
+        },
+        'email': {
+            'espanol': 'Correo electrónico',
+            'ingles': 'E-mail',
+            'aleman': 'E-mail'
+        },
+        'telefono': {
+            'espanol': 'Teléfono',
+            'ingles': 'Phone',
+            'aleman': 'Telefon'
+        },
+        'escribe': {
+            'espanol': 'Escribe tu mensaje',
+            'ingles': 'Write your message',
+            'aleman': 'Senden sie eine nachricht'
+        },
+        'enviar': {
+            'espanol': 'Enviar',
+            'ingles': 'Submit',
+            'aleman': 'Senden'
+        },
+        'Cargando': {
+            'espanol': 'Cargando',
+            'ingles': 'Loading',
+            'aleman': 'Laden'
         }
     }
 });

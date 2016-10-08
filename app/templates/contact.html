@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="col-md-8 col-md-offset-2 contact-section">
                     <div class="col-md-12 title-post">
-                        <h2 class="title">Contacto</h2>
+                        <h2 class="title">{{ 'Contacto'|translate }}</h2>
                         <hr/>
                     </div>
                     <br/><br/>
@@ -21,7 +21,7 @@
                     <br/>
 
                     <div class="col-md-12 title-post" style="padding-top: 20px;">
-                        <h3 class="title">Envíanos un mensaje</h3>
+                        <h3 class="title">{{ 'mensaje'|translate }}</h3>
                         <hr/>
                     </div>
                     <div class="col-md-12">
@@ -29,31 +29,31 @@
                               ng-init="Contact.notification.subject = 'Formulario de contacto'">
                             <div class="col-md-6">
 
-                                <label for="name">Nombre *</label>
+                                <label for="name">{{ 'nombre'|translate }} *</label>
 
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre"
+                                <input type="text" class="form-control" id="name" name="name" placeholder="{{ 'nombre'|translate }}"
                                        required ng-model="Contact.notification.name">
 
-                                <label for="email">Correo electrónico *</label>
+                                <label for="email">{{ 'email'|translate }} *</label>
 
                                 <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="Correo electrónico" required
+                                       placeholder="{{ 'email'|translate }}" required
                                        ng-model="Contact.notification.email">
 
 
-                                <label for="phone">Teléfono *</label>
+                                <label for="phone">{{ 'telefono'|translate }} *</label>
                                 <input type="text" class="form-control" id="phone" name="phone"
-                                       placeholder="Teléfono" required ng-model="Contact.notification.phone">
+                                       placeholder="{{ 'telefono'|translate }}" required ng-model="Contact.notification.phone">
                             </div>
                             <div class="col-md-6">
-                                <label for="email">Escribe tu mensaje *</label>
+                                <label for="email">{{ 'escribe'|translate }} *</label>
                                 <textarea class="form-control" id="message" name="message" rows="7"
-                                          placeholder="Comentarios *" required
+                                          placeholder="{{ 'escribe'|translate }} *" required
                                           ng-model="Contact.notification.message"></textarea>
 
                                 <div style="text-align: right;padding-top:15px;">
                                     <button type="submit" class="btn-red" ng-disabled="Contact.busy">
-                                        Enviar <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
+                                        {{ 'enviar'|translate }} <span ng-if="Contact.busy"><i class="fa fa-spinner fa-spin"></i></span>
                                     </button>
 
                                 </div>

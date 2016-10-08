@@ -64,9 +64,7 @@
             <div class="box-default">
                 <a ui-sref="post_detail({slug: new.slug})">
                     <div class="img-box"
-                         style="background-image: url('
-                                 {{ new.urlImages.medium ? new.urlImages.medium : 'http://localhost:8080/#/img/img-default.jpg'}}')">
-
+                         style="background-image: url('{{ new.urlImages.medium ? new.urlImages.medium : 'http://localhost:8080/#/img/img-default.jpg'}}')">
                     </div>
                     <div class="box-container">
                         <h3>{{ new.title }}</h3>
