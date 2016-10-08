@@ -22,7 +22,8 @@
     "angular-toasty": "^1.0.5",
     "angular-scroll": "^1.0.0",
     "angular-truncate": "*",
-    "angular-touch": "^1.5.7"
+    "angular-touch": "^1.5.7",
+    "ngstorage": "^0.3.11"
   },
   "overrides": {
     "bootstrap": {

@@ -7,7 +7,7 @@
         $rootScope.pageTitle = 'Novavet Labs';
 
         PostSrv.get({
-            category: 'slider',
+            category: '&&,slider,' + $rootScope.lang,
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
@@ -15,13 +15,30 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
+        if ($rootScope.lang == 'espanol') {
+            PostDetailSrv.get({
+                slug: 'presentacion',
+                fields: 'content,urlImages'
+            }).$promise.then(function (response) {
+                    self.presentation = response;
+                });
+        } else if ($rootScope.lang == 'ingles') {
+            PostDetailSrv.get({
+                slug: 'presentation',
+                fields: 'content,urlImages'
+            }).$promise.then(function (response) {
+                    self.presentation = response;
+                });
 
-        PostDetailSrv.get({
-            slug: 'presentacion',
-            fields: 'content,urlImages'
-        }).$promise.then(function (response) {
-                self.presentation = response;
-            });
+        } else {
+            PostDetailSrv.get({
+                slug: 'prasentation',
+                fields: 'content,urlImages'
+            }).$promise.then(function (response) {
+                    self.presentation = response;
+                });
+        }
+
 
         TaxonomySrv.query({
             parent: '9af40914-fc27-41d3-a882-06481996b176',
@@ -33,7 +50,7 @@
             });
 
         PostSrv.get({
-            category: 'noticias',
+            category: '&&,noticias,' + $rootScope.lang,
             isActive: 'True',
             sizePage: 4,
             ordering: '-createdAt',
@@ -56,7 +73,7 @@
         // get post by category
         if ($stateParams.slug) {
             TaxonomySrv.get({
-                slug: $stateParams.slug,
+                slug: '&&,' + $stateParams.slug + ',' + $rootScope.lang,
                 isActive: 'True',
                 sizePage: 1
             }).$promise.then(function (results) {
@@ -73,7 +90,7 @@
             self.busy = true;
 
             PostSrv.get({
-                category: $stateParams.slug,
+                category: '&&,' + $stateParams.slug + ',' + $rootScope.lang,
                 isActive: 'True',
                 sizePage: 10,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
@@ -114,7 +131,7 @@
 
             PostSrv.get({
                 kind: 'post',
-                category: 'noticias',
+                category: '&&,noticias,'+$rootScope.lang,
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 9,
