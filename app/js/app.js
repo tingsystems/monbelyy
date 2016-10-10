@@ -94,7 +94,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -136,7 +136,7 @@
                 'title': 'Novavet Labs',
                 'excerpt': 'Somos una compañía farmacéutica dedica a la producción de hormonales sintéticos para el desempeño físico, bajo estrictas normas y controles de calidad.',
                 'urlImages': {
-                    'original': 'http://www.ainoxher.com.mx/img/img-default.jpg'
+                    'original': 'http://www.novavetlabs.com/img/img-default.jpg'
                 }
             };
             $anchorScroll();
