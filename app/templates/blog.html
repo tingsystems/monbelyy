@@ -20,7 +20,7 @@
 
                                     <div class="box-container">
                                         <div class="height-title"><h3>{{ entry.title }}</h3></div>
-                                        <div class="height-summary"><p>{{ entry.excerpt }}</p></div>
+                                        <div class="height-summary"><p>{{ entry.excerpt| characters:90 }}</p></div>
                                     </div>
                                     <div class="box-footer">
                                         <p><span><i class="fa fa-calendar-"></i></span>
