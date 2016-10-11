@@ -192,39 +192,37 @@
                 $rootScope.lang = $rootScope.app.data.lang;
             }
         } else {
+            $rootScope.lang = 'espanol';
             $localStorage.appData = $rootScope.app.data;
         }
-        if (!$rootScope.mainNavMenu) {
-            if ($rootScope.lang == 'espanol') {
-                TaxonomySrv.query({
-                    parent: 'ae4f23b4-2e3f-44c8-a5d3-5ec5594d06e3',
-                    isActive: 'True',
-                    ordering: 'order'
-                }).$promise.then(function (response) {
-                        $rootScope.mainNavMenu = response;
-                    }, function (error) {
-                    });
-            } else if ($rootScope.lang == 'ingles') {
-                TaxonomySrv.query({
-                    parent: '918a6587-083f-430f-94b3-bb2cdb7e2b1a',
-                    isActive: 'True',
-                    ordering: 'order'
-                }).$promise.then(function (response) {
-                        $rootScope.mainNavMenu = response;
-                    }, function (error) {
-                    });
-            } else {
-                TaxonomySrv.query({
-                    parent: '6fc54e64-2f20-4962-a8ec-9973d1fc15e4',
-                    isActive: 'True',
-                    ordering: 'order'
-                }).$promise.then(function (response) {
-                        $rootScope.mainNavMenu = response;
-                    }, function (error) {
-                    });
-            }
 
-
+        if ($rootScope.lang == 'espanol') {
+            TaxonomySrv.query({
+                parent: 'ae4f23b4-2e3f-44c8-a5d3-5ec5594d06e3',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                    $rootScope.mainNavMenu = response;
+                }, function (error) {
+                });
+        } else if ($rootScope.lang == 'ingles') {
+            TaxonomySrv.query({
+                parent: '918a6587-083f-430f-94b3-bb2cdb7e2b1a',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                    $rootScope.mainNavMenu = response;
+                }, function (error) {
+                });
+        } else {
+            TaxonomySrv.query({
+                parent: '6fc54e64-2f20-4962-a8ec-9973d1fc15e4',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                    $rootScope.mainNavMenu = response;
+                }, function (error) {
+                });
         }
 
     }

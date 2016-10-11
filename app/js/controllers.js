@@ -1,13 +1,14 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope) {
+    function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope, $localStorage) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Novavet Labs';
+        self.lenguage = $localStorage.appData.lang ? $localStorage.appData.lang : 'espanol';
 
         PostSrv.get({
-            category: '&&,slider,' + $rootScope.lang,
+            category: '&&,slider,' + self.lenguage,
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
@@ -15,14 +16,14 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
-        if ($rootScope.lang == 'espanol') {
+        if (self.lenguage == 'espanol') {
             PostDetailSrv.get({
                 slug: 'presentacion',
                 fields: 'content,urlImages'
             }).$promise.then(function (response) {
                     self.presentation = response;
                 });
-        } else if ($rootScope.lang == 'ingles') {
+        } else if (self.lenguage == 'ingles') {
             PostDetailSrv.get({
                 slug: 'presentation',
                 fields: 'content,urlImages'
@@ -50,7 +51,7 @@
             });
 
         PostSrv.get({
-            category: '&&,noticias,' + $rootScope.lang,
+            category: '&&,noticias,' + self.lenguage,
             isActive: 'True',
             sizePage: 4,
             ordering: '-createdAt',
@@ -62,18 +63,19 @@
 
     }
 
-    function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
+    function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope, $localStorage) {
         var self = this;
 
         self.list = [];
         self.page = 0;
         self.next = true;
         self.busy = false;
+        self.lenguage = $localStorage.appData.lang ? $localStorage.appData.lang : 'espanol';
 
         // get post by category
         if ($stateParams.slug) {
             TaxonomySrv.get({
-                slug: '&&,' + $stateParams.slug + ',' + $rootScope.lang,
+                slug: '&&,' + $stateParams.slug + ',' + self.lenguage,
                 isActive: 'True',
                 sizePage: 1
             }).$promise.then(function (results) {
@@ -90,7 +92,7 @@
             self.busy = true;
 
             PostSrv.get({
-                category: '&&,' + $stateParams.slug + ',' + $rootScope.lang,
+                category: '&&,' + $stateParams.slug + ',' + self.lenguage,
                 isActive: 'True',
                 sizePage: 9,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
@@ -107,13 +109,14 @@
 
     }
 
-    function BlogCtrl(PostSrv, $rootScope) {
+    function BlogCtrl(PostSrv, $rootScope, $localStorage) {
         var self = this;
 
         self.list = [];
         self.page = 0;
         self.next = true;
         self.busy = false;
+        self.lenguage = $localStorage.appData.lang ? $localStorage.appData.lang : 'espanol';
 
         self.errorRecovery = function () {
             self.page -= 1;
@@ -131,7 +134,7 @@
 
             PostSrv.get({
                 kind: 'post',
-                category: '&&,noticias,' + $rootScope.lang,
+                category: '&&,noticias,' + self.lenguage,
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 9,
@@ -148,7 +151,7 @@
         $rootScope.pageTitle = 'Blog - Novavet Labs';
     }
 
-    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope, PostSrv, $filter) {
+    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
         var self = this;
         $rootScope.pageTitle = 'Novavet Labs';
 
@@ -163,9 +166,6 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = 'http://www.novavetlabs.com/img/img-default.jpg';
                 }
-                self.isBlog = $filter('filter')(self.detail.categories, {'slug': 'blog'})[0];
-                self.isService = $filter('filter')(self.detail.categories, {'slug': 'servicios'})[0];
-                console.log(self.isService);
                 $rootScope.pageTitle = results.title + ' - Novavet Labs';
                 self.busy = false;
             });
@@ -314,19 +314,19 @@
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
         .controller('PostCtrl', PostCtrl)
+        .controller('BlogCtrl', BlogCtrl)
         .controller('PostDetailCtrl', PostDetailCtrl)
         .controller('ContactCtrl', ContactCtrl)
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
-        .controller('BlogCtrl', BlogCtrl)
         .controller('NavBarCtrl', NavBarCtrl)
         .controller('ProductsCtrl', ProductsCtrl);
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
-    PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
-    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope', 'PostSrv', '$filter'];
+    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope', '$localStorage'];
+    PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$localStorage'];
+    BlogCtrl.$inject = ['PostSrv', '$rootScope', '$localStorage'];
+    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
-    BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
