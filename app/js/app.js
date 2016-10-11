@@ -91,6 +91,17 @@
                         templateUrl: '/templates/404.html'
                     }
                 }
+            })
+            .state('products', {
+                url: '/products',
+                data: {pageTitle: 'NOVA VET LABS'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/products.html',
+                        controllerAs: 'Product',
+                        controller: 'ProductsCtrl'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');

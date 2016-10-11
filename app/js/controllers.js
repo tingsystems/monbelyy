@@ -131,7 +131,7 @@
 
             PostSrv.get({
                 kind: 'post',
-                category: '&&,noticias,'+$rootScope.lang,
+                category: '&&,noticias,' + $rootScope.lang,
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 9,
@@ -297,6 +297,18 @@
 
     }
 
+    function ProductsCtrl(TaxonomySrv) {
+        var self = this;
+        TaxonomySrv.query({
+            parent: '9af40914-fc27-41d3-a882-06481996b176',
+            isActive: 'True',
+            ordering: 'order'
+        }).$promise.then(function (response) {
+                self.list = response;
+            }, function (error) {
+            });
+    }
+
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -307,7 +319,8 @@
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
         .controller('BlogCtrl', BlogCtrl)
-        .controller('NavBarCtrl', NavBarCtrl);
+        .controller('NavBarCtrl', NavBarCtrl)
+        .controller('ProductsCtrl', ProductsCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
@@ -317,4 +330,5 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
+    ProductsCtrl.$inject = ['TaxonomySrv'];
 })();
