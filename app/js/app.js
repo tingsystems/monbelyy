@@ -114,7 +114,7 @@
         blockUIConfig.message = 'Cargando...';
 
         // Change the default delay to 100ms before the blocking is visible
-        blockUIConfig.delay = 110;
+        blockUIConfig.delay = 100;
 
         // Set interceptor
         $httpProvider.interceptors.push('HttpInterceptor');
@@ -136,8 +136,16 @@
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
         });
+        //various config
+        $rootScope.initConfig = {
+            googleKey: 'UA-53555832-37',
+            meta_color: '#611518',
+            img_default: 'http://www.novavetlabs.com/img/img-default.jpg',
+            email: 'info@novavetlabs.com'
+
+        };
         // initialise google analytics
-        $window.ga('create', 'UA-53555832-37', '');
+        $window.ga('create', $rootScope.initConfig.googleKey, '');
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
@@ -147,7 +155,7 @@
                 'title': 'Novavet Labs',
                 'excerpt': 'Somos una compañía farmacéutica dedica a la producción de hormonales sintéticos para el desempeño físico, bajo estrictas normas y controles de calidad.',
                 'urlImages': {
-                    'original': 'http://www.novavetlabs.com/img/img-default.jpg'
+                    'original': $rootScope.initConfig.img_default
                 }
             };
             $anchorScroll();
@@ -196,34 +204,38 @@
             $localStorage.appData = $rootScope.app.data;
         }
 
-        if ($rootScope.lang == 'espanol') {
-            TaxonomySrv.query({
-                parent: 'ae4f23b4-2e3f-44c8-a5d3-5ec5594d06e3',
-                isActive: 'True',
-                ordering: 'order'
-            }).$promise.then(function (response) {
-                    $rootScope.mainNavMenu = response;
-                }, function (error) {
-                });
-        } else if ($rootScope.lang == 'ingles') {
-            TaxonomySrv.query({
-                parent: '918a6587-083f-430f-94b3-bb2cdb7e2b1a',
-                isActive: 'True',
-                ordering: 'order'
-            }).$promise.then(function (response) {
-                    $rootScope.mainNavMenu = response;
-                }, function (error) {
-                });
-        } else {
-            TaxonomySrv.query({
-                parent: '6fc54e64-2f20-4962-a8ec-9973d1fc15e4',
-                isActive: 'True',
-                ordering: 'order'
-            }).$promise.then(function (response) {
-                    $rootScope.mainNavMenu = response;
-                }, function (error) {
-                });
+        if (!$rootScope.mainNavMenu) {
+            if ($rootScope.lang == 'espanol') {
+                TaxonomySrv.query({
+                    parent: 'ae4f23b4-2e3f-44c8-a5d3-5ec5594d06e3',
+                    isActive: 'True',
+                    ordering: 'order'
+                }).$promise.then(function (response) {
+                        $rootScope.mainNavMenu = response;
+                    }, function (error) {
+                    });
+            } else if ($rootScope.lang == 'ingles') {
+                TaxonomySrv.query({
+                    parent: '918a6587-083f-430f-94b3-bb2cdb7e2b1a',
+                    isActive: 'True',
+                    ordering: 'order'
+                }).$promise.then(function (response) {
+                        $rootScope.mainNavMenu = response;
+                    }, function (error) {
+                    });
+            } else {
+                TaxonomySrv.query({
+                    parent: '6fc54e64-2f20-4962-a8ec-9973d1fc15e4',
+                    isActive: 'True',
+                    ordering: 'order'
+                }).$promise.then(function (response) {
+                        $rootScope.mainNavMenu = response;
+                    }, function (error) {
+                    });
+            }
+
         }
+
 
     }
 

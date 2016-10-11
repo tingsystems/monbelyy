@@ -164,7 +164,7 @@
                 self.detail = results;
                 $rootScope.post = self.detail;
                 if (!self.detail.urlImages.original) {
-                    self.detail.urlImages.original = 'http://www.novavetlabs.com/img/img-default.jpg';
+                    self.detail.urlImages.original = $rootScope.initConfig.img_default;
                 }
                 $rootScope.pageTitle = results.title + ' - Novavet Labs';
                 self.busy = false;
@@ -190,7 +190,7 @@
         self.createNotification = function (kind) {
             // ajax request to send the formData
             self.notification.kind = kind;
-            self.notification.send_from = 'info@novavetlabs.com';
+            self.notification.send_from = $rootScope.initConfig.email;
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {

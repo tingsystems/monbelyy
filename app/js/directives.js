@@ -20,12 +20,12 @@
         };
     }
 
-    function postImage() {
+    function postImage($rootScope) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
                 // Listen for errors on the element and if there are any replace the source with the fallback source
-                var defaultImage = 'http://www.ainoxher.com.mx/img/img-default.jpg';
+                var defaultImage = $rootScope.initConfig.img_default;
                 // if image error put default
                 element.bind('error', function () {
                     attrs.$set('src', defaultImage);
@@ -55,5 +55,5 @@
 
     // inject dependencies to controllers
     postLink.$inject = [];
-    postImage.$inject = [];
+    postImage.$inject = ['$rootScope'];
 })();
