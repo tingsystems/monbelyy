@@ -1488,6 +1488,11 @@ color
 .margin-flags {
   margin-right: 10px;
 }
+.box-header-blog {
+  height: 250px;
+  background-size: cover;
+  background-position: center center;
+}
 @-moz-keyframes sk-circleBounceDelay {
   0%, 80%, 100% {
     -webkit-transform: scale(0);
