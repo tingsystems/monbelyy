@@ -8,7 +8,7 @@ angular.module('annalise').constant('translate', {
         'Empresa': {
             'espanol': 'Empresa',
             'ingles': 'About us',
-            'aleman': 'Deutsch'
+            'aleman': 'Unternehmen'
         },
         'Productos': {
             'espanol': 'Productos',
