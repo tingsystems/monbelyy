@@ -92,7 +92,7 @@
             PostSrv.get({
                 category: '&&,' + $stateParams.slug + ',' + $rootScope.lang,
                 isActive: 'True',
-                sizePage: 10,
+                sizePage: 9,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page

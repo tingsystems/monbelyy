@@ -727,7 +727,7 @@ color
   color: #767676;
 }
 .box-default a {
-  color: #fff;
+  color: #555;
 }
 .box-default .box-footer {
   text-align: center;
@@ -758,6 +758,11 @@ color
 .box-default .box-header {
   height: 250px;
   width: 200px;
+  background-size: cover;
+  background-position: center center;
+}
+.box-default .box-header-blog {
+  height: 250px;
   background-size: cover;
   background-position: center center;
 }
