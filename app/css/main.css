@@ -1485,6 +1485,9 @@ color
     -webkit-transform: scale(1);
   }
 }
+.margin-flags {
+  margin-right: 10px;
+}
 @-moz-keyframes sk-circleBounceDelay {
   0%, 80%, 100% {
     -webkit-transform: scale(0);
