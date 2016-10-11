@@ -288,12 +288,12 @@ header .logo {
   height: 100%;
 }
 .carousel-caption {
-  top: 42%;
-  opacity: 0.8;
+  top: 25%;
+  opacity: 0.9;
   width: 100%;
   left: 0;
   padding: 5px 70px 0;
-  text-align: left;
+  text-align: center;
 }
 .carousel-caption h2 {
   border-bottom: 1px solid rgba(255,255,255,0.4);
@@ -331,7 +331,6 @@ header .logo {
 .carousel-caption p {
   font-size: 34px;
   text-shadow: 0 0 10px #000;
-  width: 60%;
 }
 #slider-area {
   background: url("../img/bg.jpg");
@@ -727,7 +726,7 @@ color
   color: #767676;
 }
 .box-default a {
-  color: #555;
+  color: #fff;
 }
 .box-default .box-footer {
   text-align: center;
@@ -756,12 +755,6 @@ color
   color: #5d5d5d;
 }
 .box-default .box-header {
-  height: 250px;
-  width: 200px;
-  background-size: cover;
-  background-position: center center;
-}
-.box-default .box-header-blog {
   height: 250px;
   background-size: cover;
   background-position: center center;
@@ -1751,6 +1744,14 @@ color
   }
 }
 @media only screen and (max-width: 767px) {
+  .mail-top {
+    margin-left: -15px;
+    margin-top: 5px;
+  }
+  header .nav-top i {
+    font-size: 12px;
+    padding-left: 10px;
+  }
   header .navbar-default .navbar-nav > li > a {
     font-size: 18px;
     font-weight: 300;
@@ -1759,7 +1760,7 @@ color
     line-height: 35px;
   }
   .carousel {
-    margin-top: 50px;
+    margin-top: 0;
   }
   #footer_area .info {
     text-align: center;
@@ -2101,9 +2102,6 @@ color
   }
   .content-post .pull-left {
     float: none !important;
-  }
-  .hide-sm {
-    display: none;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
