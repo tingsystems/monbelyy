@@ -112,48 +112,50 @@ body
 /************** main css ******************/
 .log-section-mobile
   display none
+.header
+  text-align center
 header
-  margin-top 0px
+  margin-top 0
   .nav-top
-    padding 10px 0 80px 0
-    background-color white
+    height 135px
+    background-color #eee7de
+    z-index 9999
     p, p > a
       color #555
     i
       font-size 22px
       padding-left 10px
+
+    .logo
+      margin 15px 0
+      text-align center
+      position relative
+      z-index 9999
   .navbar-default
     position relative
     left 0
     right 0
-    background rgba(105,24,27,1)
-    background -moz-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
-    background -webkit-gradient(left top, right top, color-stop(0%, rgba(105,24,27,1)), color-stop(100%, rgba(58,3,10,1)))
-    background -webkit-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
-    background -o-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
-    background -ms-linear-gradient(left, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
-    background linear-gradient(to right, rgba(105,24,27,1) 0%, rgba(58,3,10,1) 100%)
-    height 70px
-    border none
+    background white
+    height 80px
+    border-top 3px dashed #372611
+    border-bottom 3px dashed #372611
     border-radius 0
     margin-bottom 0
-    z-index 9999
+    z-index 0
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color #f5f5f5
-      padding 25px 15px
+      color #38270f
+      padding 30px 15px
       font-size 18px
       font-family 'Poppins', sans-serif
-      font-weight 300
-      text-shadow 0 2px 5px rgba(0,0,0, 1)
+      font-weight 500
       -webkit-transition all ease-in-out .35s
       -o-transition all ease-in-out .35s
       transition all ease-in-out .35s
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
-      color #f5f5f5
-      border-bottom 1px solid #f5f5f5
+      color #b54991
     .nav-main
       display table
       margin 0 auto
@@ -244,20 +246,23 @@ header
 .slider-img
   background-position center center
   background-size cover
-  height 720px
+  height 520px
   background-repeat no-repeat
 .bg-inner
   width 100%
   position absolute
   background rgba(0, 0, 0, 0.5)
   height 100%
+.carousel-inner
+  background-color rgba(238, 231, 222, 0.07)
+  border-bottom 3px dashed #372611
 .carousel-caption
   top 25%
   opacity 0.9
   width 100%
   left 0
-  padding 5px 70px 0
-  text-align center
+  padding 30px
+  text-align left
   h2
     border-bottom 1px solid rgba(255, 255, 255, 0.4)
     padding-bottom 20px
@@ -273,18 +278,18 @@ header
   .btn
     margin-right 15px
     font-size 18px
-    box-shadow 0 0 5px #000
-    text-shadow 0 0 0px #000
+    margin-top 30px
   a
-    color white
+    color #38270f
+    text-shadow none
   h1
-    text-shadow 0 0 10px #000
-    font-size 46px
+    font-size 26px
+    text-shadow none
   .text
     margin-top 40px
   p
-    font-size 34px
-    text-shadow 0 0 10px #000
+    font-size 20px
+    text-shadow none
 
 #slider-area
   background url(../img/bg.jpg)
@@ -535,23 +540,25 @@ header
   background-color transparent
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li > a:hover
-  color #79afa0
+  color #cb6133
   background-color transparent
-  font-size 22px
-  border-bottom 4px solid #79afa0 !important
+  font-size 20px
   border 0 solid transparent
+  padding 10px 0
 
 
 .nav-tabs > li > a
+  padding 10px 0
   border-radius 0
-  font-size 22px
-  color #888
+  font-size 20px
+  color #38270f
+  margin-left 0
 
 .nav-tabs
   border-bottom 1px solid #ccc
 
 .box-widget
-  padding 5px 0px
+  padding 5px 0
   border 1px solid #f5f5f5
   .box-widget-header
     padding 10px
@@ -632,9 +639,8 @@ header
   h3
     background-color transparent
     padding 10px
-    color #555
+    color white
     font-size 22px
-    border-bottom 3px solid #5d5d5d
     -webkit-transition all ease 0.1s
     -moz-transition all ease 0.1s
     -ms-transition all ease 0.1s
@@ -649,11 +655,15 @@ header
     background-size cover
     background-position center center
   .box-container
+    background-color #cb6133
     text-align left
+    border-bottom-right-radius 3px
+    border-bottom-left-radius 3px
     a
       text-decoration none
+      color white
     h1
-      color #5d5d5d
+      color white
       font-weight 300
       font-size 22px
       margin 10px 0
@@ -668,7 +678,6 @@ header
       opacity 1
     h1,h2,h3
       color #66161a
-      border-bottom 3px solid #66161a
     p
       color #555
     .comment-area
@@ -874,26 +883,25 @@ header
     font-weight 700
     border-radius 0px
 .btn-orange
-  background #cb6c18
+  background #cb6133
   display inline-block
   padding 10px 15px
-  color #fff
+  color white !important
   font-weight 300
-  border 1px solid #cb6c18
+  border 1px solid #cb6133
   -webkit-transition all ease 0.1s
   -moz-transition all ease 0.1s
   -ms-transition all ease 0.1s
   -o-transition all ease 0.1s
   transition all ease 0.1s
-  border-radius 3px
+  border-radius 30px
   &:hover, &:focus
-    border 1px solid #a65516
-    background #a65516
+    border 1px solid #9b4a27
+    background #9b4a27
     display inline-block
     padding 10px 15px
     color #fff
     font-weight 300
-    border-radius 3px
 
 .btn-green
   background #4ECB8C;
@@ -1110,7 +1118,16 @@ header
   display none
 
 /*transition tabs*/
-
+#products
+  padding 60px 0
+  h2
+    color #38270f
+.tabs-left
+  border-bottom none
+  border-top 1px solid #ccc
+.tabs-left > li
+  float none
+  text-align left
 .tab-animation
   & > .tab-content
     position relative

@@ -1,3 +1,4 @@
+<!--
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
@@ -12,35 +13,80 @@
         </uib-slide>
     </uib-carousel>
 </div>
-<section id="security">
+-->
+
+<div class="carousel slide" id="carousel-home">
+    <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
+        <uib-slide>
+            <div class="row">
+                <div class="col-md-8 no-padding">
+                    <a href="#">
+                        <div class="slider-img" style="background-image:url('../img/slider.jpg');"></div>
+                    </a>
+                </div>
+                <div class="col-md-4 no-padding">
+                    <div class="carousel-caption">
+
+                        <a href="#">
+                            <h1>Calzado casual dama</h1>
+
+                            <h1>Modelo a219</h1>
+
+                            <p class="hide-sm">
+                                Contamos con una gran variedad
+                                decolores, camina con estilo,
+                                camina con Luissa shoes.
+                            </p>
+                        </a>
+                        <a href="#" class="btn btn-orange"> Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </uib-slide>
+    </uib-carousel>
+</div>
+
+<section id="products">
     <div class="container">
-        <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img width="50" src="img/icons/garantia.png" alt="{{ 'Garantía'|translate }}"/>{{ 'Garantía'|translate }}
-            </p>
+        <div class="col-xs-3"> <!-- required for floating -->
+            <h3>Nuestro catálogo</h3>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs tabs-left">
+                <li class="active"><a href="#home" data-toggle="tab">Calzado artesanal</a></li>
+                <li><a href="#profile" data-toggle="tab">Calzado Dama</a></li>
+                <li><a href="#messages" data-toggle="tab">Calzado Caballero</a></li>
+                <li><a href="#settings" data-toggle="tab">Calzado infantil</a></li>
+            </ul>
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img width="50" src="img/icons/security.png"
-                    alt="{{ 'Seguridad'|translate }}"/>{{ 'Seguridad'|translate }}</p>
 
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img width="50" src="img/icons/save.png" alt="{{ 'Validación'|translate }}"/>{{ 'Validación'|translate }}
-            </p>
-
+        <div class="col-xs-9">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <div class="container-fluid">
+                        <div class="col-md-4">
+                            <a href="#">
+                                <div class="box-default">
+                                    <div class="box-header">
+                                        <img src="img/example.jpg" alt=""/>
+                                    </div>
+                                    <div class="box-container">
+                                        <h3>Modelo a234</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="profile">Profile Tab.</div>
+                <div class="tab-pane" id="messages">Messages Tab.</div>
+                <div class="tab-pane" id="settings">Settings Tab.</div>
+            </div>
         </div>
     </div>
 </section>
-<section id="us">
-    <div class="container">
-        <div class="col-md-8 col-sm-8 col-xs-12">
-            <article ng-bind-html="Home.presentation.content | trustHtml"></article>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-            <p><img width="100%" ng-src="{{ Home.presentation.urlImages.original }}" alt="Nova Vet Labs"/></p>
 
-        </div>
-    </div>
-</section>
+
 <section id="our-services" class="section_padding">
     <div class="container">
         <div class="text-center">
@@ -64,7 +110,8 @@
             <div class="box-default">
                 <a ui-sref="post_detail({slug: new.slug})">
                     <div class="img-box"
-                         style="background-image: url('{{ new.urlImages.medium ? new.urlImages.medium : initConfig.img_default }}')">
+                         style="background-image: url('
+                                 {{ new.urlImages.medium ? new.urlImages.medium : initConfig.img_default }}')">
                     </div>
                     <div class="box-container">
                         <h3>{{ new.title }}</h3>
