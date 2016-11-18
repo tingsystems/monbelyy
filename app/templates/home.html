@@ -250,7 +250,7 @@
             <div class="box-simple" ng-repeat="product in Home.featureds" ng-repeat-owl-carousel
                  carousel-init="Home.carouselInitializer" ng-if="product">
                 <div class="box-header item">
-                    <a ui-sref="product_detail({slug: product.slug})">
+                    <a ui-sref="post_detail({slug: product.slug})">
                         <div class="img-box" style="background-image: url('{{ product.urlImages.original }}')"></div>
                     </a>
                 </div>
