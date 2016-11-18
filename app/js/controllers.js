@@ -4,7 +4,7 @@
     function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope, $localStorage) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Novavet Labs';
+        $rootScope.pageTitle = 'Luissa Shoes';
         self.lenguage = $localStorage.appData.lang ? $localStorage.appData.lang : 'espanol';
 
         PostSrv.get({
@@ -60,7 +60,49 @@
                 self.news = results.results;
             });
 
+        self.products = [{
+            "title": "Modelo a124",
+            "urlImages": {
+                "original": "http://media.tingsystems.com/media/calzado-ramses/jose/2016/1510/14725411_1188067711231612_1087592932_o-medium.jpeg"
+            }
 
+        },
+        {
+            "title": "Modelo 222",
+            "urlImages": {
+                "original": "http://media.tingsystems.com/media/calzado-ramses/jose/2016/1510/14725411_1188067711231612_1087592932_o-medium.jpeg"
+            }
+
+        }];
+
+        self.carouselInitializer = function () {
+            $(".owl-carousel").owlCarousel({
+                //get items to proportionate num of items
+                //items: 4,
+                //navigation: true,
+                //pagination: false,
+                autoplay: true,
+                items: 2,
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 4,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            });
+        }
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope, $localStorage) {

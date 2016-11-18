@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'NOVA VET LABS'},
+                data: {pageTitle: 'Luissa Shoes'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -94,7 +94,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'NOVA VET LABS'},
+                data: {pageTitle: 'Luissa Shoes'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',

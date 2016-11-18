@@ -177,7 +177,7 @@ header .navbar-default .navbar-nav > li > a {
 header .navbar-default .navbar-nav > li > a:hover,
 header .navbar-default .navbar-nav > li > a:focus {
   background-color: transparent;
-  color: #b54991;
+  color: #d14094;
 }
 header .navbar-default .nav-main {
   display: table;
@@ -247,23 +247,21 @@ header .logo {
   color: #5d5d5d;
   font-size: 18px;
   text-align: justify;
-}
-#our-services {
-  background-color: #c00;
-  background-image: url("../img/bg-space.jpg");
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-#our-services .title-section {
-  color: #fff;
-  margin: 0 auto;
-  margin-bottom: 50px;
-  text-align: center;
-}
-#our-services h3 {
-  color: #fff;
   padding: 15px 0;
+}
+#shoes-top {
+  padding: 30px 0;
+  background-color: #eee7de;
+  border-top: 3px dashed #372611;
+}
+#shoes-top .title-section {
+  color: #38270f;
+  padding: 15px 0;
+  margin: 0 0 25px;
+}
+#shoes-top:hover,
+#shoes-top:focus {
+  cursor: pointer;
 }
 .btn-white {
   background: #fff;
@@ -364,7 +362,7 @@ header .logo {
   color: #555;
 }
 #content-area {
-  margin: 60px 0px 60px;
+  margin: 60px 0 60px;
 }
 #content-area .title-post {
   text-align: center;
@@ -639,9 +637,13 @@ color
   font-size: 20px;
   color: #38270f;
   margin-left: 0;
+  border: none !important;
 }
 .nav-tabs {
   border-bottom: 1px solid #ccc;
+}
+.see-more {
+  padding: 25px;
 }
 .box-widget {
   padding: 5px 0;
@@ -721,15 +723,61 @@ color
   background-repeat: no-repeat;
   background-position: right;
 }
+.data-contact {
+  padding: 10px 0;
+}
+.data-contact a {
+  color: #352810;
+}
+.data-contact a > i {
+  font-size: 14px;
+}
+.box-simple {
+  margin: 25px;
+}
+.box-simple .box-header .img-box {
+  background-size: cover;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0.6;
+}
+.box-simple .box-container {
+  background-color: transparent;
+  padding: 10px 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  text-align: center;
+}
+.box-simple .box-container a {
+  text-decoration: none;
+  color: #38270f;
+}
+.box-simple .box-container h1 {
+  color: #38270f;
+  font-weight: 300;
+  font-size: 22px;
+  margin: 0;
+}
 .box-default {
   margin: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid transparent;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  -webkit-transition: all ease 0.1s;
+  -moz-transition: all ease 0.1s;
+  -ms-transition: all ease 0.1s;
+  -o-transition: all ease 0.1s;
+  transition: all ease 0.1s;
 }
 .box-default .img-box {
   background-size: cover;
   height: 200px;
   background-repeat: no-repeat;
   background-position: center center;
-  opacity: 0.6;
+  opacity: 1;
 }
 .box-default .description h4 {
   color: #767676;
@@ -763,7 +811,7 @@ color
   color: #5d5d5d;
 }
 .box-default .box-header {
-  height: 250px;
+  height: 200px;
   background-size: cover;
   background-position: center center;
 }
@@ -781,7 +829,7 @@ color
   color: #fff;
   font-weight: 300;
   font-size: 22px;
-  margin: 10px 0;
+  margin: 0;
 }
 .box-default .box-container p {
   color: #5d5d5d;
@@ -793,6 +841,9 @@ color
 .box-default:hover,
 .box-default:focus {
   background: transparent;
+  border-left: 5px solid #d14094;
+  border-right: 5px solid #d14094;
+  border-top: 5px solid #d14094;
 }
 .box-default:hover .img-box,
 .box-default:focus .img-box {
@@ -804,7 +855,8 @@ color
 .box-default:focus h2,
 .box-default:hover h3,
 .box-default:focus h3 {
-  color: #66161a;
+  color: #fff;
+  background-color: #d14094;
 }
 .box-default:hover p,
 .box-default:focus p {
@@ -945,7 +997,7 @@ color
   padding-bottom: 25px;
 }
 #footer_area {
-  background: #444;
+  background: #352810;
   padding: 30px 0;
   color: rgba(255,255,255,0.6);
   line-height: 30px;
@@ -1373,10 +1425,14 @@ color
   width: 100%;
   height: 100%;
   opacity: 1;
-  background: #fff;
+  background-image: url("../img/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+/*background -webkit-linear-gradient(to left, #DE6262 , #FFB88C)
+  background linear-gradient(to left, #DE6262 , #FFB88C)*/
 }
 .block-ui-message {
-  background-color: transparent;
+  background: transparent;
 }
 .sk-circle {
   margin: 20px auto;
@@ -1397,7 +1453,7 @@ color
   margin: 0 auto;
   width: 20%;
   height: 20%;
-  background-color: #f00;
+  background-color: #fff;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
   animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;

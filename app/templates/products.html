@@ -9,12 +9,17 @@
             <div class="col-md-12 content-pages" infinite-scroll='Product.getMoreProducts()'
                  infinite-scroll-disabled='Product.busy || !Product.next || Product.loadProducts'>
                 <div class="container">
-                    <div class="col-sm-6 text-center" ng-repeat="category in Product.list">
-                        <a ui-sref="category({slug: category.slug})">
-                            <img ng-src="{{ category.urlImages.original }}" alt="{{ category.name }}"/>
-
-                            <h3>{{ category.name|translate }}</h3>
-                        </a>
+                    <div class="col-sm-3 text-center" ng-repeat="category in Product.list">
+                        <div class="box-default">
+                            <div class="box-header">
+                                <a ui-sref="category({slug: category.slug})">
+                                    <div class="img-box" style="background-image: url('{{ category.urlImages.original }}')"></div>
+                                </a>
+                            </div>
+                            <div class="box-container">
+                                <h3>{{ category.name|translate }}</h3>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-12" ng-show="Product.busy">
                         <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
