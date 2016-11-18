@@ -299,6 +299,61 @@
             });
     }
 
+    function TabsCtrl(PostSrv, TaxonomySrv) {
+        var self = this;
+        self.all = '';
+        self.category_1 = 'caballero';
+        self.category_2 = 'dama';
+        self.category_3 = 'infantil';
+        self.Tab1 = function () {
+            self.list1 = [];
+            PostSrv.get({
+                isActive: 'True',
+                sizePage: 9,
+                ordering: '-createdAt',
+                fields: 'urlImages,title,link,slug,categories,excerpt'
+            }).$promise.then(function (results) {
+                    self.list1 = results.results;
+                });
+        };
+        self.Tab2 = function () {
+            self.list2 = [];
+            PostSrv.get({
+                category: self.category_2,
+                isActive: 'True',
+                sizePage: 9,
+                ordering: '-createdAt',
+                fields: 'urlImages,title,link,slug,categories,excerpt'
+            }).$promise.then(function (results) {
+                    self.list2 = results.results;
+                });
+        };
+        self.Tab3 = function () {
+            self.list3 = [];
+            PostSrv.get({
+                category: self.category_3,
+                isActive: 'True',
+                sizePage: 9,
+                ordering: '-createdAt',
+                fields: 'urlImages,title,link,slug,categories,excerpt'
+            }).$promise.then(function (results) {
+                    self.list3 = results.results;
+                });
+        };
+        self.Tab4 = function () {
+            self.list4 = [];
+            PostSrv.get({
+                category: self.category_3,
+                isActive: 'True',
+                sizePage: 9,
+                ordering: '-createdAt',
+                fields: 'urlImages,title,link,slug,categories,excerpt'
+            }).$promise.then(function (results) {
+                    self.list4 = results.results;
+                });
+        };
+    }
+
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -310,7 +365,8 @@
         .controller('GetQuerySearchCtrl', GetQuerySearchCtrl)
         .controller('SearchCtrl', SearchCtrl)
         .controller('NavBarCtrl', NavBarCtrl)
-        .controller('ProductsCtrl', ProductsCtrl);
+        .controller('ProductsCtrl', ProductsCtrl)
+        .controller('TabsCtrl', TabsCtrl);
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
@@ -321,4 +377,5 @@
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['TaxonomySrv'];
+    TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
 })();
