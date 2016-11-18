@@ -152,7 +152,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Novavet Labs',
+                'title': 'Luissa Shoes',
                 'excerpt': 'Somos una compañía farmacéutica dedica a la producción de hormonales sintéticos para el desempeño físico, bajo estrictas normas y controles de calidad.',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default

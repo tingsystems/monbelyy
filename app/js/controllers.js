@@ -88,7 +88,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - Novavet Labs';
+                        $rootScope.pageTitle = self.categoryName + ' - Luissa Shoes';
                     }
                 });
         }
@@ -99,7 +99,7 @@
             self.busy = true;
 
             PostSrv.get({
-                category: '&&,' + $stateParams.slug + ',' + self.lenguage,
+                category: $stateParams.slug,
                 isActive: 'True',
                 sizePage: 9,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
@@ -155,12 +155,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Novavet Labs';
+        $rootScope.pageTitle = 'Blog - Luissa Shoes';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Novavet Labs';
+        $rootScope.pageTitle = 'Luissa Shoes';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -173,7 +173,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = $rootScope.initConfig.img_default;
                 }
-                $rootScope.pageTitle = results.title + ' - Novavet Labs';
+                $rootScope.pageTitle = results.title + ' - Luissa Shoes';
                 self.busy = false;
             });
     }
@@ -181,9 +181,9 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Novavet Labs';
+            $rootScope.pageTitle = 'Luissa Shoes';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Contacto - Novavet Labs';
+            $rootScope.pageTitle = 'Contacto - Luissa Shoes';
         }
 
 
