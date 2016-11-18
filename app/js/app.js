@@ -141,7 +141,7 @@
             googleKey: 'UA-53555832-37',
             meta_color: '#611518',
             img_default: 'http://www.novavetlabs.com/img/img-default.jpg',
-            email: 'info@novavetlabs.com'
+            email: 'info@luissashoes.com'
 
         };
         // initialise google analytics
@@ -153,7 +153,7 @@
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'Luissa Shoes',
-                'excerpt': 'Somos una compañía farmacéutica dedica a la producción de hormonales sintéticos para el desempeño físico, bajo estrictas normas y controles de calidad.',
+                'excerpt': 'Fabricante de huaraches artesanales de Sahuayo.',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
                 }
@@ -161,7 +161,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Novavet Labs';
+        $rootScope.pageTitle = 'Luissa Shoes';
         function showResponsive($window) {
             if ($window.innerWidth <= 768) {
                 return true
@@ -174,35 +174,6 @@
             $state.go(args.error);
         });
 
-        //config translate's
-        $rootScope.words = translate.words;
-        // init language
-        $rootScope.app = {
-            name: 'Novavetlabs',
-            version: '1.0.0',
-            data: {
-                lang: 'espanol'
-            }
-        };
-        // function to change language
-        $rootScope.changeLang = function (lang) {
-            if ($rootScope.lang != lang) {
-                $rootScope.lang = lang;
-                $localStorage.appData.lang = lang;
-                $window.location.href = '/';
-            }
-        };
-        // save data app including language in local storage
-        if (angular.isDefined($localStorage.appData)) {
-            $rootScope.app.data = $localStorage.appData;
-            // retrieve language from local storage
-            if ($rootScope.app.data.lang) {
-                $rootScope.lang = $rootScope.app.data.lang;
-            }
-        } else {
-            $rootScope.lang = 'espanol';
-            $localStorage.appData = $rootScope.app.data;
-        }
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({

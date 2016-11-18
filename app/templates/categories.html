@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 title-post">
-                <h2 class="title">{{ Post.categoryName}}</h2>
+                <h2 class="title">{{ Post.categoryName }}</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 content-pages" infinite-scroll='Post.getMorePosts()'
-                     infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
+                 infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
                 <div class="container">
                     <div class="col-md-3" ng-repeat="entry in Post.list">
                         <div class="box-default">
@@ -17,7 +17,7 @@
                                 </div>
 
                                 <div class="box-container">
-                                    <h3>{{ category.name }}</h3>
+                                    <h3>{{ entry.title }}</h3>
                                 </div>
                             </a>
                         </div>
@@ -27,7 +27,8 @@
                     </div>
 
                     <div class="col-sm-12" ng-show="!Post.busy">
-                        <h2 class="text-center no-content" ng-show="!Post.list.length">{{ 'no-contenido'|translate }}</h2>
+                        <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos con
+                            contenido disponible</h2>
                     </div>
                 </div>
             </div>

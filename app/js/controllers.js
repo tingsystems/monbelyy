@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope, $localStorage) {
+    function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Luissa Shoes';
@@ -24,21 +24,6 @@
         }).$promise.then(function (results) {
                 self.featureds = results.results;
             });
-
-        self.products = [{
-            "title": "Modelo a124",
-            "urlImages": {
-                "original": "http://media.tingsystems.com/media/calzado-ramses/jose/2016/1510/14725411_1188067711231612_1087592932_o-medium.jpeg"
-            }
-
-        },
-        {
-            "title": "Modelo 222",
-            "urlImages": {
-                "original": "http://media.tingsystems.com/media/calzado-ramses/jose/2016/1510/14725411_1188067711231612_1087592932_o-medium.jpeg"
-            }
-
-        }];
 
         self.carouselInitializer = function () {
             $(".owl-carousel").owlCarousel({
@@ -70,19 +55,18 @@
         }
     }
 
-    function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope, $localStorage) {
+    function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
         var self = this;
 
         self.list = [];
         self.page = 0;
         self.next = true;
         self.busy = false;
-        self.lenguage = $localStorage.appData.lang ? $localStorage.appData.lang : 'espanol';
 
         // get post by category
         if ($stateParams.slug) {
             TaxonomySrv.get({
-                slug: '&&,' + $stateParams.slug + ',' + self.lenguage,
+                slug: $stateParams.slug,
                 isActive: 'True',
                 sizePage: 1
             }).$promise.then(function (results) {
@@ -116,14 +100,13 @@
 
     }
 
-    function BlogCtrl(PostSrv, $rootScope, $localStorage) {
+    function BlogCtrl(PostSrv, $rootScope) {
         var self = this;
 
         self.list = [];
         self.page = 0;
         self.next = true;
         self.busy = false;
-        self.lenguage = $localStorage.appData.lang ? $localStorage.appData.lang : 'espanol';
 
         self.errorRecovery = function () {
             self.page -= 1;
@@ -141,7 +124,7 @@
 
             PostSrv.get({
                 kind: 'post',
-                category: '&&,noticias,' + self.lenguage,
+                category: 'noticias',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 9,
@@ -329,9 +312,9 @@
         .controller('NavBarCtrl', NavBarCtrl)
         .controller('ProductsCtrl', ProductsCtrl);
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope', '$localStorage'];
-    PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$localStorage'];
-    BlogCtrl.$inject = ['PostSrv', '$rootScope', '$localStorage'];
+    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
+    PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
+    BlogCtrl.$inject = ['PostSrv', '$rootScope'];
     PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
