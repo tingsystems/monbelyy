@@ -130,8 +130,8 @@
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
         $rootScope.apiV = 'v1';
-        $rootScope.siteId = '7d6c7854-386e-4506-a1f8-31855081efde';
-        $http.defaults.headers.common['TS-TOKEN'] = 'thGQqd7ymgRIq1pJ6DQtjV97DJOx1J9cERDwygAd';
+        $rootScope.siteId = 'fa5e2dd0-06a4-4d1a-b2c0-5b3c3a87432d';
+        $http.defaults.headers.common['TS-TOKEN'] = 'uRRkxcx0rp7Pjpc3zjRFNRwi6ndPtP7MzVv0V3LC';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');

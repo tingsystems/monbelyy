@@ -5,10 +5,9 @@
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Luissa Shoes';
-        self.lenguage = $localStorage.appData.lang ? $localStorage.appData.lang : 'espanol';
 
         PostSrv.get({
-            category: '&&,slider,' + self.lenguage,
+            category: 'slider',
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
@@ -16,48 +15,14 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
-        if (self.lenguage == 'espanol') {
-            PostDetailSrv.get({
-                slug: 'presentacion',
-                fields: 'content,urlImages'
-            }).$promise.then(function (response) {
-                    self.presentation = response;
-                });
-        } else if (self.lenguage == 'ingles') {
-            PostDetailSrv.get({
-                slug: 'presentation',
-                fields: 'content,urlImages'
-            }).$promise.then(function (response) {
-                    self.presentation = response;
-                });
-
-        } else {
-            PostDetailSrv.get({
-                slug: 'prasentation',
-                fields: 'content,urlImages'
-            }).$promise.then(function (response) {
-                    self.presentation = response;
-                });
-        }
-
-
-        TaxonomySrv.query({
-            parent: '9af40914-fc27-41d3-a882-06481996b176',
-            isActive: 'True',
-            ordering: 'order'
-        }).$promise.then(function (response) {
-                self.homeProducts = response;
-            }, function (error) {
-            });
-
         PostSrv.get({
-            category: '&&,noticias,' + self.lenguage,
+            category: 'destacados',
             isActive: 'True',
-            sizePage: 4,
+            sizePage: 10,
             ordering: '-createdAt',
             fields: 'title,urlImages,slug,excerpt'
         }).$promise.then(function (results) {
-                self.news = results.results;
+                self.featured = results.results;
             });
 
         self.products = [{
