@@ -17,18 +17,20 @@
 
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
-        <uib-slide>
+        <uib-slide ng-repeat="slide in Home.mainSlider">
             <div class="row">
                 <div class="col-md-8 no-padding">
-                    <a href="#">
-                        <div class="slider-img" style="background-image:url('../img/slider.jpg');"></div>
+                    <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                        <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
                     </a>
                 </div>
                 <div class="col-md-4 no-padding">
                     <div class="carousel-caption">
 
                         <a href="#">
-                            <h1>Calzado casual dama</h1>
+                            <h1>{{ slide.title }}</h1>
+                            <p class="hide-sm">{{ slide.excerpt }}</p>
+                            <!--<h1>Calzado casual dama</h1>
 
                             <h1>Modelo a219</h1>
 
@@ -36,9 +38,9 @@
                                 Contamos con una gran variedad
                                 decolores, camina con estilo,
                                 camina con Luissa shoes.
-                            </p>
+                            </p>-->
                         </a>
-                        <a ui-sref="products" class="btn btn-orange"> Ver más</a>
+                        <a post-link="{ link: {url: slide.link, target: '_self'} }" class="btn btn-orange"> Ver más</a>
                     </div>
                 </div>
             </div>
