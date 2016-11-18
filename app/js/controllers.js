@@ -22,7 +22,7 @@
             ordering: '-createdAt',
             fields: 'title,urlImages,slug,excerpt'
         }).$promise.then(function (results) {
-                self.featured = results.results;
+                self.featureds = results.results;
             });
 
         self.products = [{
