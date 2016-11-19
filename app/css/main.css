@@ -288,6 +288,10 @@ header .logo {
   background: rgba(0,0,0,0.5);
   height: 100%;
 }
+.carousel-control.right,
+.carousel-control.left {
+  background-image: none;
+}
 .carousel-inner {
   background-color: rgba(238,231,222,0.07);
   border-bottom: 3px dashed #372611;
@@ -365,8 +369,8 @@ header .logo {
   margin: 60px 0 60px;
 }
 #content-area .title-post {
-  text-align: center;
-  color: #555;
+  text-align: left;
+  color: #3a2103;
   clear: both;
 }
 #content-area .title-post .title {
@@ -487,7 +491,10 @@ header .logo {
   text-shadow: 0 0 10px #000;
 }
 #content-contact {
-  background: #fff;
+  background-image: url("../img/bg-contact.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 #news .title {
   color: #555;
@@ -647,14 +654,15 @@ color
 }
 .box-widget {
   padding: 5px 0;
-  border: 1px solid #f5f5f5;
+  border: 3px dashed #fff;
+  background-color: #eee7de;
 }
 .box-widget .box-widget-header {
   padding: 10px;
   border-bottom: 1px solid #ccc;
-  font-size: 20px;
-  background-color: #999;
-  color: #fff;
+  font-size: 22px;
+  background-color: transparent;
+  color: #3a2103;
 }
 .box-widget .box-widget-container {
   padding: 20px;
@@ -662,7 +670,7 @@ color
 .box-widget .box-widget-container h3>a,
 .box-widget .box-widget-container h2>a {
   font-size: 14px;
-  color: #777;
+  color: #6a5c5d;
   font-weight: 300;
 }
 .box-widget .box-widget-container h3>a:hover,
@@ -671,7 +679,7 @@ color
 }
 .box-widget .box-widget-container h2 {
   font-size: 18px;
-  color: #555;
+  color: #6a5c5d;
 }
 .box-doc {
   margin: 5px 60px !important;
@@ -760,12 +768,9 @@ color
   margin: 0;
 }
 .box-default {
+  background-color: #cb6133;
   margin: 10px;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid transparent;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border: 5px solid #fff;
   -webkit-transition: all ease 0.1s;
   -moz-transition: all ease 0.1s;
   -ms-transition: all ease 0.1s;
@@ -818,17 +823,16 @@ color
 .box-default .box-container {
   background-color: #cb6133;
   text-align: left;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  height: 60px;
 }
 .box-default .box-container a {
   text-decoration: none;
   color: #fff;
 }
-.box-default .box-container h1 {
+.box-default .box-container h3 {
   color: #fff;
   font-weight: 300;
-  font-size: 22px;
+  font-size: 18px;
   margin: 0;
 }
 .box-default .box-container p {
@@ -841,9 +845,7 @@ color
 .box-default:hover,
 .box-default:focus {
   background: transparent;
-  border-left: 5px solid #d14094;
-  border-right: 5px solid #d14094;
-  border-top: 5px solid #d14094;
+  border: 5px solid #cb6133;
 }
 .box-default:hover .img-box,
 .box-default:focus .img-box {
@@ -856,7 +858,7 @@ color
 .box-default:hover h3,
 .box-default:focus h3 {
   color: #fff;
-  background-color: #d14094;
+  background-color: #cb6133;
 }
 .box-default:hover p,
 .box-default:focus p {
@@ -970,6 +972,7 @@ color
   color: #999;
 }
 #breadcrumb {
+  background-color: #eee7de;
   border-bottom: 1px solid #f5f5f5;
 }
 #breadcrumb .breadcrumb {
@@ -979,10 +982,14 @@ color
   border-radius: 0;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
-  margin-bottom: 0px;
+  margin-bottom: 0;
+}
+#breadcrumb .breadcrumb .breadcrumb > .active {
+  color: rgba(111,79,60,0.52);
+  font-weight: bold;
 }
 #breadcrumb .breadcrumb li>a {
-  color: #ccc;
+  color: rgba(111,79,60,0.52);
 }
 .img-size a>img {
   width: 100%;
@@ -1247,11 +1254,11 @@ color
   color: #0177b5;
 }
 .social-media {
-  color: #666;
+  color: #3a2103;
   padding: 30px 0;
 }
 .social-media .social a {
-  color: #666;
+  color: #3a2103;
   font-size: 18px;
   line-height: 40px;
 }
@@ -1279,7 +1286,7 @@ color
 }
 .form-section .title,
 .form-section .text-form {
-  color: #565656;
+  color: #3a2103;
 }
 .contact-section {
   background: rgba(255,255,255,0.95);
@@ -1316,7 +1323,7 @@ color
 }
 .form-control:focus {
   padding: 6px 12px;
-  border: 1px solid #f00 !important;
+  border: 1px solid #cb6133 !important;
   outline: 0;
   -webkit-box-shadow: 0 0 0 9px rgba(0,0,0,0);
   box-shadow: 0 0 0 9px rgba(0,0,0,0);

@@ -27,7 +27,7 @@
                 <div class="col-md-4 no-padding">
                     <div class="carousel-caption">
 
-                        <a href="#">
+                        <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }">
                             <h1>{{ slide.title }}</h1>
                             <p class="hide-sm">{{ slide.excerpt }}</p>
                             <!--<h1>Calzado casual dama</h1>
@@ -40,7 +40,7 @@
                                 camina con Luissa shoes.
                             </p>-->
                         </a>
-                        <a post-link="{ link: {url: slide.link, target: '_self'} }" class="btn btn-orange"> Ver más</a>
+                        <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }" class="btn btn-orange"> Ver más</a>
                     </div>
                 </div>
             </div>
