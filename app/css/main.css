@@ -628,6 +628,18 @@ color
 .nav > li > a:focus {
   background-color: transparent;
 }
+.nav-tabs {
+  width: 29%;
+  border-top: 1px solid #ddd;
+  border-bottom: none !important;
+  float: left;
+  clear: both;
+}
+.tab-pane {
+  width: 70%;
+  float: right;
+  margin-top: -50px;
+}
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus,

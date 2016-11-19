@@ -41,7 +41,8 @@
                                 camina con Luissa shoes.
                             </p>-->
                         </a>
-                        <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }" class="btn btn-orange"> Ver más</a>
+                        <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }"
+                           class="btn btn-orange"> Ver más</a>
                     </div>
                 </div>
             </div>
@@ -51,275 +52,277 @@
 
 <section id="products">
     <div class="container" ng-controller="TabsCtrl as Tab">
-        <div class="col-xs-3"> <!-- required for floating -->
+        <div class="col-md-3 no-padding"> <!-- required for floating -->
             <h3>Nuestro catálogo</h3>
-            <!-- Nav tabs -->
-            <uib-tabset active="active" template-url="/templates/partials/tabset.html" class="tab-animation">
-                <uib-tab index="active" heading="Calzado artesanal" select="Tab.Tab1()"
-                         template-url="/templates/partials/tab.html">
-                    <div class="container-fluid">
-                        <div class="col-md-4" ng-repeat="item in Tab.list1">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box"
-                                             style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>{{ item.title }}</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
-                    </div>
-                </uib-tab>
-                <uib-tab index="active" heading="Calzado Dama" select="Tab.Tab2()"
-                         template-url="/templates/partials/tab.html">
-                    <div class="container-fluid">
-                        <div class="col-md-4" ng-repeat="item in Tab.list2">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box"
-                                             style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>{{ item.title }}</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
-                    </div>
-                </uib-tab>
-                <uib-tab index="active" heading="Calzado Caballero" select="Tab.Tab3()"
-                         template-url="/templates/partials/tab.html">
-                    <div class="container-fluid">
-                        <div class="col-md-4" ng-repeat="item in Tab.list3">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box"
-                                             style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>{{ item.title }}</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
-                    </div>
-                </uib-tab>
-                <uib-tab index="active" heading="Calzado infantil" select="Tab.Tab4()"
-                         template-url="/templates/partials/tab.html">
-                    <div class="container-fluid">
-                        <div class="col-md-4" ng-repeat="item in Tab.list4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box"
-                                             style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>{{ item.title }}</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
-                    </div>
-                </uib-tab>
-            </uib-tabset>
-
         </div>
+        <!-- Nav tabs -->
+        <uib-tabset active="active" template-url="/templates/partials/tabset.html" class="tab-animation">
+            <uib-tab index="active" heading="Calzado artesanal" select="Tab.Tab1()"
+                     template-url="/templates/partials/tab.html">
+                <div class="container-fluid">
+                    <div class="col-md-4" ng-repeat="item in Tab.list1">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box"
+                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>{{ item.title }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="see-more pull-right">
+                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="active" heading="Calzado Dama" select="Tab.Tab2()"
+                     template-url="/templates/partials/tab.html">
+                <div class="container-fluid">
+                    <div class="col-md-4" ng-repeat="item in Tab.list2">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box"
+                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>{{ item.title }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="see-more pull-right">
+                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="active" heading="Calzado Caballero" select="Tab.Tab3()"
+                     template-url="/templates/partials/tab.html">
+                <div class="container-fluid">
+                    <div class="col-md-4" ng-repeat="item in Tab.list3">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box"
+                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>{{ item.title }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="see-more pull-right">
+                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="active" heading="Calzado infantil" select="Tab.Tab4()"
+                     template-url="/templates/partials/tab.html">
+                <div class="container-fluid">
+                    <div class="col-md-4" ng-repeat="item in Tab.list4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box"
+                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>{{ item.title }}</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="see-more pull-right">
+                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
 
-        <!--<div class="col-xs-9">
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    <div class="container-fluid">
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
+    </div>
+
+    <!--<div class="col-xs-9">
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <div class="container-fluid">
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="tab-pane" id="profile">
-                    <div class="container-fluid">
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="tab-pane" id="messages">
-                    <div class="container-fluid">
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="tab-pane" id="settings">
-                    <div class="container-fluid">
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#">
-                                <div class="box-default">
-                                    <div class="box-header">
-                                        <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                    </div>
-                                    <div class="box-container">
-                                        <h3>Modelo a234</h3>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
+                    <div class="see-more pull-right">
+                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
                     </div>
                 </div>
             </div>
-        </div>-->
-    </div>
+            <div class="tab-pane" id="profile">
+                <div class="container-fluid">
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="see-more pull-right">
+                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="messages">
+                <div class="container-fluid">
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="see-more pull-right">
+                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="settings">
+                <div class="container-fluid">
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="box-default">
+                                <div class="box-header">
+                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <h3>Modelo a234</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="see-more pull-right">
+                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
 </section>
 
 
