@@ -1,30 +1,15 @@
-<!--
-<div class="carousel slide" id="carousel-home">
-    <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
-        <uib-slide ng-repeat="slide in Home.mainSlider">
-            <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
-                <div class="carousel-caption">
-                    <h1>{{ slide.title }}</h1>
 
-                    <p class="hide-sm">{{ slide.excerpt }}</p>
-                </div>
-            </a>
-        </uib-slide>
-    </uib-carousel>
-</div>
--->
 
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
             <div class="row">
-                <div class="col-md-8 no-padding">
+                <div class="col-md-8 col-sm-8 no-padding">
                     <a post-link="{ link: {url: slide.link, target: '_self'} }">
                         <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
                     </a>
                 </div>
-                <div class="col-md-4 no-padding">
+                <div class="col-md-4 col-sm-4 no-padding">
                     <div class="carousel-caption">
 
                         <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }">
@@ -60,7 +45,7 @@
             <uib-tab index="active" heading="Calzado artesanal" select="Tab.Tab1()"
                      template-url="/templates/partials/tab.html">
                 <div class="container-fluid">
-                    <div class="col-md-4" ng-repeat="item in Tab.list1">
+                    <div class="col-md-4 col-sm-6" ng-repeat="item in Tab.list1">
                         <a href="#">
                             <div class="box-default">
                                 <div class="box-header">

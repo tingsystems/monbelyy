@@ -1723,7 +1723,7 @@ color
     margin-top: 45px;
   }
   .carousel-caption {
-    padding: 0 25px;
+    padding: 25px;
   }
   .carousel-caption h2 {
     font-size: 24px;
@@ -1732,7 +1732,7 @@ color
     font-size: 18px;
   }
   .slider-img {
-    height: 640px;
+    height: 450px;
   }
   header .navbar-default .nav-log li > a {
     padding: 15px 0;
