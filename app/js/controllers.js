@@ -301,13 +301,14 @@
 
     function TabsCtrl(PostSrv, TaxonomySrv) {
         var self = this;
-        self.all = '';
-        self.category_1 = 'caballero';
+        self.category_1 = 'artesanal';
         self.category_2 = 'dama';
-        self.category_3 = 'infantil';
+        self.category_3 = 'caballero';
+        self.category_4 = 'infantil';
         self.Tab1 = function () {
             self.list1 = [];
             PostSrv.get({
+                category: self.category_1,
                 isActive: 'True',
                 sizePage: 9,
                 ordering: '-createdAt',
@@ -343,7 +344,7 @@
         self.Tab4 = function () {
             self.list4 = [];
             PostSrv.get({
-                category: self.category_3,
+                category: self.category_4,
                 isActive: 'True',
                 sizePage: 9,
                 ordering: '-createdAt',

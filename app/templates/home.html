@@ -1,20 +1,3 @@
-<!--
-<div class="carousel slide" id="carousel-home">
-    <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
-        <uib-slide ng-repeat="slide in Home.mainSlider">
-            <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
-                <div class="carousel-caption">
-                    <h1>{{ slide.title }}</h1>
-
-                    <p class="hide-sm">{{ slide.excerpt }}</p>
-                </div>
-            </a>
-        </uib-slide>
-    </uib-carousel>
-</div>
--->
-
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
@@ -31,15 +14,6 @@
                             <h1>{{ slide.title }}</h1>
 
                             <p class="hide-sm">{{ slide.excerpt }}</p>
-                            <!--<h1>Calzado casual dama</h1>
-
-                            <h1>Modelo a219</h1>
-
-                            <p class="hide-sm">
-                                Contamos con una gran variedad
-                                decolores, camina con estilo,
-                                camina con Luissa shoes.
-                            </p>-->
                         </a>
                         <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }"
                            class="btn btn-orange"> Ver más</a>
@@ -61,7 +35,7 @@
                      template-url="/templates/partials/tab.html">
                 <div class="container-fluid">
                     <div class="col-md-4" ng-repeat="item in Tab.list1">
-                        <a href="#">
+                        <a ui-sref="post_detail({slug: item.slug})">
                             <div class="box-default">
                                 <div class="box-header">
                                     <div class="img-box"
@@ -75,8 +49,12 @@
                     </div>
                     <div class="col-md-12">
                         <div class="see-more pull-right">
-                            <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                            <a ui-sref="category({slug:Tab.category_1})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
                         </div>
+                    </div>
+                    <div class="col-sm-12" ng-if="!Tab.list1.length">
+                        <h2 class="text-center no-content" ng-if="!Tab.list1.length">Lo sentimos no contamos con
+                            contenido disponible</h2>
                     </div>
                 </div>
             </uib-tab>
@@ -84,7 +62,7 @@
                      template-url="/templates/partials/tab.html">
                 <div class="container-fluid">
                     <div class="col-md-4" ng-repeat="item in Tab.list2">
-                        <a href="#">
+                        <a ui-sref="post_detail({slug: item.slug})">
                             <div class="box-default">
                                 <div class="box-header">
                                     <div class="img-box"
@@ -97,7 +75,11 @@
                         </a>
                     </div>
                     <div class="see-more pull-right">
-                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                        <a ui-sref="category({slug:Tab.category_2})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                    <div class="col-sm-12" ng-if="!Tab.list2.length">
+                        <h2 class="text-center no-content" ng-if="!Tab.list2.length">Lo sentimos no contamos con
+                            contenido disponible</h2>
                     </div>
                 </div>
             </uib-tab>
@@ -105,7 +87,7 @@
                      template-url="/templates/partials/tab.html">
                 <div class="container-fluid">
                     <div class="col-md-4" ng-repeat="item in Tab.list3">
-                        <a href="#">
+                        <a ui-sref="post_detail({slug: item.slug})">
                             <div class="box-default">
                                 <div class="box-header">
                                     <div class="img-box"
@@ -118,7 +100,11 @@
                         </a>
                     </div>
                     <div class="see-more pull-right">
-                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                        <a ui-sref="category({slug:Tab.category_3})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                    <div class="col-sm-12" ng-if="!Tab.list3.length">
+                        <h2 class="text-center no-content" ng-if="!Tab.list3.length">Lo sentimos no contamos con
+                            contenido disponible</h2>
                     </div>
                 </div>
             </uib-tab>
@@ -126,7 +112,7 @@
                      template-url="/templates/partials/tab.html">
                 <div class="container-fluid">
                     <div class="col-md-4" ng-repeat="item in Tab.list4">
-                        <a href="#">
+                        <a ui-sref="post_detail({slug: item.slug})">
                             <div class="box-default">
                                 <div class="box-header">
                                     <div class="img-box"
@@ -138,191 +124,17 @@
                             </div>
                         </a>
                     </div>
-                    <div class="see-more pull-right">
-                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    <div class="see-more pull-right" ng-if="!Tab.list4.length">
+                        <a ui-sref="category({slug:Tab.category_4})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
+                    </div>
+                    <div class="col-sm-12" ng-if="!Tab.list4.length">
+                        <h2 class="text-center no-content" ng-if="!Tab.list4.length">Lo sentimos no contamos con
+                            contenido disponible</h2>
                     </div>
                 </div>
             </uib-tab>
         </uib-tabset>
-
     </div>
-
-    <!--<div class="col-xs-9">
-        <div class="tab-content">
-            <div class="tab-pane active" id="home">
-                <div class="container-fluid">
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="see-more pull-right">
-                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="profile">
-                <div class="container-fluid">
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="see-more pull-right">
-                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="messages">
-                <div class="container-fluid">
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="see-more pull-right">
-                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="settings">
-                <div class="container-fluid">
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box" style="background-image: url('../img/example.jpg')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>Modelo a234</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="see-more pull-right">
-                        <a href="#" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
 </section>
 
 
