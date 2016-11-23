@@ -138,10 +138,10 @@
         });
         //various config
         $rootScope.initConfig = {
-            googleKey: 'UA-53555832-37',
+            googleKey: 'UA-53555832-38',
             meta_color: '#eee7de',
             img_default: 'http://www.luissashoes.com/img/img-default.jpg',
-            email: 'info@luissashoes.com'
+            email: 'contacto@luissashoes.com'
 
         };
         // initialise google analytics
