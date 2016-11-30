@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title ng-bind="pageTitle">Luissa Shoes</title>
+    <title ng-bind="pageTitle">Servicio Prados Verdes</title>
     <meta name="description" content="{{ post.excerpt }}">
     <meta name="keywords"
           content="produccion,hormonas,sinteticos,desempeño,fisico,calidad,hormonal">
@@ -38,6 +38,8 @@
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.luissashoes.com{{ $state.href($state.current.name) }}"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet"/>
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
+
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/animate.css/animate.css" />
@@ -62,24 +64,9 @@
 </p>
 <![endif]-->
 <header class="header">
-    <div class="nav-top">
-        <div class="container">
-            <div class="data-contact pull-left">
-                <a href="tel:013531062495"><i class="fa fa-phone"></i> 01 353 106 2495</a> /
-                <a href="https://www.facebook.com/joseluisgtzf" target="_blank"><i class="fa fa-facebook-square"></i> Facebook</a>
-            </div>
-            <a ui-sref="home"><img src="img/logo.png" class="logo" alt="Luissa Shoes"></a>
-
-            <div class="data-contact pull-right">
-                <a target="_blank" href="https://www.google.com.mx/maps/place/San+Daniel+Comboni+284,+Centro+Tres,+Sahuayo+de+Morelos,+Mich./@20.0642639,-102.7300404,17z/data=!3m1!4b1!4m5!3m4!1s0x842ee34e7d91b5b1:0x5d3896efd8723777!8m2!3d20.0642589!4d-102.7278464"><i
-                        class="fa fa-map-marker"></i> San Daniel Comboni #284, 59000 Sahuayo.</a>
-            </div>
-        </div>
-    </div>
     <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
         <div class="container container-tab">
             <!-- Brand and toggle get grouped for better mobile display -->
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
                         data-target="#header-mainMenu" aria-expanded="false">
@@ -88,23 +75,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <div class="navbar-brand">
+                    <a ui-sref="home"><img src="img/logo.png" class="logo" alt="Luissa Shoes"></a>
 
+                </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
-            <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="header-mainMenu">
-                    <ul class="nav navbar-nav nav-main">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--<li ng-repeat="item in mainNavMenu">-->
+                        <li>
+                            <a href="#"><i class="ion-social-facebook-outline" data-pack="social"></i></a>
+                        </li>
+                        <li><a href="#"><i class="ion-social-twitter-outline" data-pack="social"></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav nav-main navbar-right">
                         <!--<li ng-repeat="item in mainNavMenu">-->
                         <li ng-repeat="item in mainNavMenu">
                             <a href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
                         </li>
                     </ul>
                 </div>
+
             </div>
             <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
+        
     </nav>
 </header>
 <!-- end header top area -->
@@ -112,7 +108,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div ui-view="content"></div>
+            <div class="container-pages" ui-view="content"></div>
         </div>
     </div>
 </div>

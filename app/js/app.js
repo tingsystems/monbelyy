@@ -161,7 +161,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Luissa Shoes';
+        $rootScope.pageTitle = 'Servicio Prados Verdes';
         function showResponsive($window) {
             if ($window.innerWidth <= 768) {
                 return true

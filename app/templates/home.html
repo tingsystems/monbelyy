@@ -1,162 +1,119 @@
 <div class="carousel slide" id="carousel-home">
     <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
         <uib-slide ng-repeat="slide in Home.mainSlider">
-            <div class="row">
-                <div class="col-md-8 col-sm-8 no-padding">
-                    <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                        <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-4 no-padding">
-                    <div class="carousel-caption">
-
-                        <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }">
-                            <h1>{{ slide.title }}</h1>
-
-                            <p class="hide-sm">{{ slide.excerpt }}</p>
-                        </a>
-                        <a ui-sref="slide.slug" post-link="{ link: {url: slide.link, target: '_self'} }"
-                           class="btn btn-orange"> Ver más</a>
-                    </div>
-                </div>
-            </div>
+            <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
+            </a>
         </uib-slide>
     </uib-carousel>
 </div>
 
 <section id="products">
-    <div class="container" ng-controller="TabsCtrl as Tab">
-        <div class="col-md-3 no-padding"> <!-- required for floating -->
-            <h3>Nuestro catálogo</h3>
+    <div class="container-fluid no-padding">
+        <div class="col-sm-3 no-padding">
+            <div class="box-default icons">
+                <a href="#">
+                    <img width="100px" src="img/icons/oil.png" alt="Productos"/>
+
+                    <h3>Productos</h3>
+                </a>
+            </div>
         </div>
-        <!-- Nav tabs -->
-        <uib-tabset active="active" template-url="/templates/partials/tabset.html" class="tab-animation">
-            <uib-tab index="active" heading="Calzado artesanal" select="Tab.Tab1()"
-                     template-url="/templates/partials/tab.html">
-                <div class="container-fluid">
-                    <div class="col-md-4 col-sm-6" ng-repeat="item in Tab.list1">
-                        <a ui-sref="post_detail({slug: item.slug})">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box"
-                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>{{ item.title }}</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="see-more pull-right">
-                            <a ui-sref="category({slug:Tab.category_1})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                        </div>
-                    </div>
-                    <div class="col-sm-12" ng-if="!Tab.list1.length">
-                        <h2 class="text-center no-content" ng-if="!Tab.list1.length">Lo sentimos no contamos con
-                            contenido disponible</h2>
-                    </div>
-                </div>
-            </uib-tab>
-            <uib-tab index="active" heading="Calzado Dama" select="Tab.Tab2()"
-                     template-url="/templates/partials/tab.html">
-                <div class="container-fluid">
-                    <div class="col-md-4" ng-repeat="item in Tab.list2">
-                        <a ui-sref="post_detail({slug: item.slug})">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box"
-                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>{{ item.title }}</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="see-more pull-right">
-                        <a ui-sref="category({slug:Tab.category_2})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                    </div>
-                    <div class="col-sm-12" ng-if="!Tab.list2.length">
-                        <h2 class="text-center no-content" ng-if="!Tab.list2.length">Lo sentimos no contamos con
-                            contenido disponible</h2>
-                    </div>
-                </div>
-            </uib-tab>
-            <uib-tab index="active" heading="Calzado Caballero" select="Tab.Tab3()"
-                     template-url="/templates/partials/tab.html">
-                <div class="container-fluid">
-                    <div class="col-md-4" ng-repeat="item in Tab.list3">
-                        <a ui-sref="post_detail({slug: item.slug})">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box"
-                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>{{ item.title }}</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="see-more pull-right">
-                        <a ui-sref="category({slug:Tab.category_3})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                    </div>
-                    <div class="col-sm-12" ng-if="!Tab.list3.length">
-                        <h2 class="text-center no-content" ng-if="!Tab.list3.length">Lo sentimos no contamos con
-                            contenido disponible</h2>
-                    </div>
-                </div>
-            </uib-tab>
-            <uib-tab index="active" heading="Calzado infantil" select="Tab.Tab4()"
-                     template-url="/templates/partials/tab.html">
-                <div class="container-fluid">
-                    <div class="col-md-4" ng-repeat="item in Tab.list4">
-                        <a ui-sref="post_detail({slug: item.slug})">
-                            <div class="box-default">
-                                <div class="box-header">
-                                    <div class="img-box"
-                                         style="background-image: url('{{ item.urlImages.medium }}')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <h3>{{ item.title }}</h3>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="see-more pull-right" ng-if="!Tab.list4.length">
-                        <a ui-sref="category({slug:Tab.category_4})" class="btn btn-orange"><i class="fa fa-plus"></i> Mostrar más</a>
-                    </div>
-                    <div class="col-sm-12" ng-if="!Tab.list4.length">
-                        <h2 class="text-center no-content" ng-if="!Tab.list4.length">Lo sentimos no contamos con
-                            contenido disponible</h2>
-                    </div>
-                </div>
-            </uib-tab>
-        </uib-tabset>
+        <div class="col-sm-3 no-padding">
+            <div class="box-default">
+                <a href="#">
+                    <img width="100px" src="img/icons/gas.png" alt="Servicios"/>
+
+                    <h3>Servicios</h3>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 no-padding">
+            <div class="box-default">
+                <a href="#">
+                    <img width="100px" src="img/icons/invoice.png" alt="Facturación"/>
+
+                    <h3>Facturación</h3>
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-3 no-padding">
+            <div class="box-default icons">
+                <a href="#">
+                    <img width="100px" src="img/icons/tarjets.png" alt="Clientes frecuentes"/>
+
+                    <h3>Clientes frecuentes</h3>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 
 
-<section id="shoes-top" class="section_padding">
+<section id="us" class="section_padding">
     <div class="container">
-        <div class="text-left">
-            <h1 class="title-section">Los más destacados</h1>
-        </div>
+        <div class="col-md-8 col-sm-8 who-us">
+            <h1 class="title-section">Servicios Prados Verdes</h1>
 
-        <div class="owl-carousel owl-theme">
-            <div class="box-simple" ng-repeat="product in Home.featureds" ng-repeat-owl-carousel
-                 carousel-init="Home.carouselInitializer" ng-if="product">
-                <div class="box-header item">
-                    <a ui-sref="post_detail({slug: product.slug})">
-                        <div class="img-box" style="background-image: url('{{ product.urlImages.original }}')"></div>
-                    </a>
+            <p>
+                <strong>
+                    Somos el grupo gasolinero que enfoca su servicio en
+                    la honestidad, rapidez, atención y servicio a clientes.
+                </strong>
+                <br/> <br/>
+                Servicios Prados Verdes es un grupo 100% Mexicano de proyección nacional, con más de 25 años
+                de experiencia dedicados a la Venta y Distribución de Combustibles.
+            </p>
+        </div>
+        <div class="co-md-4 col-sm-4">
+            <div class="box-gas">
+                <div class="box-gas-header">
+                    <img class="img-responsive logo-p" src="img/pemex.png" alt="PEMEX"/>
                 </div>
-                <div class="box-container">
-                    <h1>{{ product.title }}</h1>
+                <div class="box-body">
+                    <h3 class="gas-premium">$14.81 Premium</h3>
+
+                    <h3 class="gas-magna">$13.98 Magna</h3>
+
+                    <h3 class="gas-diesel">$14.63 Diesel</h3>
                 </div>
             </div>
+
         </div>
+    </div>
+</section>
+<section id="contact-sec">
+    <div class="container">
+        <div class="col-md-3 section-cont">
+            <a href="tel:3535320911">
+                <i class="ion-ios-telephone-outline"></i> <br/>
+                <span>(353) 532 0911</span>
+            </a>
+        </div>
+        <div class="col-md-3 section-cont">
+             <a href="mailto:info@serviciosahuayo.com">
+                <i class="ion-ios-email-outline"></i> <br/>
+                 <span>info@serviciosahuayo.com</span>
+            </a>
+        </div>
+        <div class="col-md-3 section-cont">
+            <a href="#">
+                <i class="ion-ios-people-outline"></i> <br/>
+                <span>Bolsa de trabajo</span>
+            </a>
+        </div>
+        <div class="col-md-3 section-cont">
+            <a href="#">
+                <i class="ion-ios-location-outline"></i> <br/>
+                <span>Estaciones</span>
+            </a>
+        </div>
+    </div>
+</section>
+<section id="maps">
+    <div class="container">
+        <h3>Localiza tu <strong>estación </strong> <br/>más cercana</h3>
+        <a href="#" class="btn btn-white-clear btn-big">Ver más</a>
     </div>
 </section>
 

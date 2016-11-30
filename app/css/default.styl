@@ -82,6 +82,9 @@ body
   font-size 0
   visibility hidden
 
+.container-pages
+  margin-top 100px
+
 .deckgrid
   margin 0 auto
   .column
@@ -114,39 +117,23 @@ body
   display none
 .header
   text-align center
-header
-  margin-top 0
-  .nav-top
-    height 135px
-    background-color #eee7de
-    z-index 9999
-    p, p > a
-      color #555
-    i
-      font-size 22px
-      padding-left 10px
-
-    .logo
-      margin 15px 0
-      text-align center
-      position relative
-      z-index 9999
   .navbar-default
-    position relative
+    position fixed
     left 0
     right 0
     background white
-    height 80px
-    border-top 3px dashed #372611
-    border-bottom 3px dashed #372611
+    height 100px
+    border-top 3px dashed #fff
+    border-bottom 3px dashed #fff
     border-radius 0
     margin-bottom 0
     z-index 9999
+    box-shadow 0 0 10px rgba(0,0,0,0.4)
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color #38270f
-      padding 30px 15px
+      color #5d5d5d
+      padding 37px 15px
       font-size 18px
       font-family 'Poppins', sans-serif
       font-weight 500
@@ -155,10 +142,7 @@ header
       transition all ease-in-out .35s
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
-      color #d14094
-    .nav-main
-      display table
-      margin 0 auto
+      color #e11518
     .container-fluid
       display table
       margin 0 auto
@@ -194,8 +178,8 @@ header
           color white
 
   .logo
-    width auto
-    margin-top 0
+    height 95px
+    margin-top -3px
 
 .navbar-header
   color #d2b770 !important
@@ -211,27 +195,53 @@ header
     font-weight bold
     color #aaaaaa
 #us
-  padding 100px 0
-  p
-    color #5d5d5d
-    font-size 18px
-    text-align justify
-    padding 15px 0
+  padding 60px 0
+  .who-us
+    h1
+      color #555
+    p
+      color #5d5d5d
+      font-size 18px
+      text-align justify
+      padding 15px 0
 
-#shoes-top
-  padding 30px 0
-  background-color #eee7de
-  border-top 3px dashed #372611
-  .title-section
-    color #38270f
-    padding 15px 0
-    margin 0 0 25px
-  &:hover, &:focus
-    cursor pointer
-
+.box-gas
+  padding 0 30px 20px
+  border-left 1px solid #eee
+  margin-bottom 5px
+  .box-gas-header
+    border-bottom 1px solid #eee
+    .logo-p
+      width 300px
+      padding-bottom 20px
+  .box-body
+    padding-top 20px
+    .gas-premium
+      color red
+    .gas-magna
+      color #145c32
 .btn-white
   background white
-
+#maps
+  background-image url('../img/map.jpg')
+  height 350px
+  background-size cover
+  background-position center center
+  background-repeat no-repeat
+  text-align center
+  h3
+    font-size 28px
+    padding-top 100px
+    color white
+#contact-sec
+  padding 20px 0
+  background #292a29
+  .section-cont
+    text-align center
+    a
+      color white
+    a > i
+      font-size 60px
 #search_submit
   margin-top 20px
   color #555
@@ -255,7 +265,6 @@ header
   background-image none
 .carousel-inner
   background-color rgba(238, 231, 222, 0.07)
-  border-bottom 3px dashed #372611
 .carousel-caption
   top 25%
   opacity 0.9
@@ -663,80 +672,49 @@ header
       margin 0
 
 .box-default
-  background-color #cb6133
-  margin 10px
-  border 5px solid white
-  -webkit-transition all ease 0.1s
-  -moz-transition all ease 0.1s
-  -ms-transition all ease 0.1s
-  -o-transition all ease 0.1s
-  transition all ease 0.1s
+  background-color green
+  -webkit-transition all ease 0.05s
+  -moz-transition all ease 0.05s
+  -ms-transition all ease 0.05s
+  -o-transition all ease 0.05s
+  transition all ease 0.05s
+  text-align center
+  color white
+  padding 20px
+  a
+    -webkit-transition all ease 0.05s
+    -moz-transition all ease 0.05s
+    -ms-transition all ease 0.05s
+    -o-transition all ease 0.05s
+    transition all ease 0.05s
+    text-align center
+    color white
+  a>img, h3
+    -webkit-transition all 1.9s ease
+    -moz-transition all 1.9s ease
+    -o-transition all 1.9s ease
+    -ms-transition all 1.9s ease
+  a
+    color white
   .img-box
     background-size cover
     height 200px
     background-repeat no-repeat
     background-position center center
     opacity 1
-  .description
-    h4
-      color #767676
-  a
-    color #555
-  .box-footer
-    text-align center
-    border-top 1px solid #f4f4f4
-    border-bottom 1px solid #f4f4f4
-    color #c7c7c7
-    padding 5px 0
-  h3
-    background-color transparent
-    padding 10px
-    color white
-    font-size 22px
-    -webkit-transition all ease 0.1s
-    -moz-transition all ease 0.1s
-    -ms-transition all ease 0.1s
-    -o-transition all ease 0.1s
-    transition all ease 0.1s
-  .comment-area
-    padding-bottom 10px
-    .comment, .date
-      color #5d5d5d
-  .box-header
-    height 200px
-    background-size cover
-    background-position center center
-  .box-container
-    background-color #cb6133
-    text-align left
-    height 60px
 
-    a
-      text-decoration none
-      color white
-    h3
-      color white
-      font-weight 300
-      font-size 18px
-      margin 0
-    p
-      color #5d5d5d
-      text-align justify
-    .height-summary
-      padding 0 10px
   &:hover, &:focus
-    background transparent
-    border 5px solid #cb6133
+    background #ac0000
+    a>img, h3
+      -webkit-transform scale(1.08)
+      -moz-transform scale(1.08)
+      -ms-transform scale(1.08)
+      -o-transform scale(1.08)
+      transform scale(1.08)
     .img-box
       opacity 1
-    h1,h2,h3
-      color #fff
-      background-color #cb6133
-    p
-      color #555
-    .comment-area
-      .date, .comment
-        color #555
+
+
 .widgets
   margin-top 0px
 .box-sidebar
@@ -852,9 +830,9 @@ header
     padding-bottom 25px
 
 #footer_area
-  background #352810
+  background transparent
   padding 30px 0
-  color rgba(255, 255, 255, 0.6)
+  color #777
   line-height 30px
   border-top 1px solid #ccc
   .text-center
@@ -892,6 +870,10 @@ header
 /**************** Buttons ***************/
 
 /* buttons sizes */
+.btn-big
+  padding 25px 30px
+  font-size 20px
+
 .btn-login
   color white
   padding-top 20px
@@ -1176,7 +1158,8 @@ header
 
 /*transition tabs*/
 #products
-  padding 60px 0
+  padding 0
+  text-aling center
   h2
     color #38270f
 .tabs-left
