@@ -130,8 +130,8 @@
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
         $rootScope.apiV = 'v1';
-        $rootScope.siteId = 'fa5e2dd0-06a4-4d1a-b2c0-5b3c3a87432d';
-        $http.defaults.headers.common['TS-TOKEN'] = 'uRRkxcx0rp7Pjpc3zjRFNRwi6ndPtP7MzVv0V3LC';
+        $rootScope.siteId = '15b23eab-1a8d-4bfa-ae33-1b395c05fcb5';
+        $http.defaults.headers.common['TS-TOKEN'] = '1UyI2U4SMkDiqCDnWjVUQev4zO2zh89PPSwOR7ha';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -177,7 +177,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: '32ed1724-4b27-42db-9c68-dee9a012b9e9',
+                parent: 'a5407ba1-e5ca-41fd-b7a6-cfbcb9959224',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
