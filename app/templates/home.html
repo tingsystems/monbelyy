@@ -55,6 +55,8 @@
         <div class="col-md-8 col-sm-8 who-us">
             <h1 class="title-section">{{ Home.about.title}}</h1>
             <article ng-bind-html="Home.about.content"></article>
+            <p class="pull-right"><a post-link="{ link: {url: Home.about.link, target: '_blank'} }"
+                               ui-sref="post_detail({slug: Home.about.slug})" title="{{ Home.about.title }}">Leer más...</a></p>
         </div>
         <div class="co-md-4 col-sm-4">
             <div class="box-gas">

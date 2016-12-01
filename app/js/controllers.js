@@ -31,39 +31,10 @@
             isActive: 'True',
             sizePage: 1,
             ordering: 'createdAt',
-            fields: 'title,content'
+            fields: 'title,content,slug'
         }).$promise.then(function (results) {
                 self.about = results.results[0];
             });
-
-        self.carouselInitializer = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                //items: 4,
-                //navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                loop: true,
-                margin: 10,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 3,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: true,
-                        loop: false
-                    }
-                }
-            });
-        }
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
@@ -298,16 +269,34 @@
 
     }
 
-    function ProductsCtrl(TaxonomySrv) {
+    function ProductsCtrl(PostSrv) {
         var self = this;
-        TaxonomySrv.query({
-            parent: '9af40914-fc27-41d3-a882-06481996b176',
-            isActive: 'True',
-            ordering: 'order'
-        }).$promise.then(function (response) {
-                self.list = response;
-            }, function (error) {
-            });
+
+        self.list = [];
+        self.page = 0;
+        self.next = true;
+        self.busy = false;
+
+        self.getMorePosts = function () {
+            if (self.busy || !self.next)return;
+            self.page += 1;
+            self.busy = true;
+
+            PostSrv.get({
+                category: 'productos',
+                isActive: 'True',
+                sizePage: 20,
+                fields: 'title,slug,excerpt,urlImages,createdAt',
+                ordering: '-createdAt',
+                page: self.page
+            }).$promise.then(function (results) {
+                    self.list = self.list.concat(results.results);
+                    self.busy = false;
+                    self.next = results.next;
+                });
+        };
+
+        self.getMorePosts();
     }
 
     function TabsCtrl(PostSrv, TaxonomySrv) {
@@ -389,6 +378,6 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    ProductsCtrl.$inject = ['TaxonomySrv'];
+    ProductsCtrl.$inject = ['PostSrv'];
     TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
 })();
