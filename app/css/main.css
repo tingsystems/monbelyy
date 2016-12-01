@@ -292,7 +292,7 @@ body {
 }
 .slider-img {
   background-position: center center;
-  background-size: cover;
+  background-size: 100%;
   height: 520px;
   background-repeat: no-repeat;
 }
@@ -378,8 +378,18 @@ body {
   font-size: 45px;
   color: #555;
 }
+.header-title-page .img-title {
+  background-position: top center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 130px;
+}
+.header-title-page .img-title .title {
+  color: #fff;
+  padding: 50px 60px 0;
+}
 #content-area {
-  margin: 60px 0 60px;
+  margin: 30px 0 60px;
 }
 #content-area .title-post {
   text-align: left;
@@ -504,7 +514,7 @@ body {
   text-shadow: 0 0 10px #000;
 }
 #content-contact {
-  background-image: url("../img/bg-contact.png");
+  background-image: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -679,12 +689,12 @@ color
 }
 .box-widget {
   padding: 5px 0;
-  border: 3px dashed #fff;
-  background-color: #eee7de;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
 }
 .box-widget .box-widget-header {
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
   font-size: 22px;
   background-color: transparent;
   color: #3a2103;
@@ -695,7 +705,7 @@ color
 .box-widget .box-widget-container h3>a,
 .box-widget .box-widget-container h2>a {
   font-size: 14px;
-  color: #6a5c5d;
+  color: #777;
   font-weight: 300;
 }
 .box-widget .box-widget-container h3>a:hover,
@@ -730,24 +740,44 @@ color
   margin: 20px;
   padding: 0;
   transition: all 0.5s ease;
-  position: relative;
   color: #555;
+  border-bottom: 1px solid #eee;
+}
+.box-white img {
+  width: 100%;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 1;
+}
+.box-white h4 {
+  padding: 10px 0;
+  font-size: 16px;
+  height: 40px;
+}
+.box-white .simple-header .img-box {
+  background-size: cover;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 1;
 }
 .box-white .title-box {
   height: 50px;
   padding: 15px;
 }
-.box-white .box-footer {
-  position: absolute;
+.box-white .simple-container {
   bottom: 10px;
-  padding: 0 15px;
   font-size: 18px;
 }
-.box-white .box-footer a {
+.box-white .simple-container text-center,
+.box-white .simple-container h3 {
+  padding: 5px 0;
   color: #555;
   font-weight: bold;
 }
-.box-white .box-footer a:hover {
+.box-white .simple-container text-center:hover,
+.box-white .simple-container h3:hover {
   color: #7e0000;
 }
 .box-white .icon-box-bg {
@@ -872,7 +902,7 @@ color
   border-top-right-radius: 0px;
 }
 #parallax {
-  background-image: url("../img/parallax.jpg");
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1270,11 +1300,8 @@ color
   color: #3a2103;
 }
 .contact-section {
-  background: rgba(255,255,255,0.95);
-  padding: 25px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  border-radius: 5px;
-  margin-top: 100px;
+  background: transparent;
+  margin-top: 10px;
 }
 .form-item {
   padding-top: 20px;
@@ -1414,11 +1441,9 @@ color
   width: 100%;
   height: 100%;
   opacity: 1;
-  background-image: url("../img/bg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-/*background -webkit-linear-gradient(to left, #DE6262 , #FFB88C)
-  background linear-gradient(to left, #DE6262 , #FFB88C)*/
+  background: #1d976c /* fallback for old browsers */;
+  background: -webkit-linear-gradient(to left, #1d976c, #93f9b9) /* Chrome 10-25, Safari 5.1-6 */;
+  background: linear-gradient(to left, #1d976c, #93f9b9) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
 }
 .block-ui-message {
   background: transparent;
