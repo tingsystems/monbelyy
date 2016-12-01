@@ -21,7 +21,7 @@
         </div>
         <div class="col-sm-3 no-padding">
             <div class="box-default">
-                <a href="#">
+                <a href="http://serviciosahuayo.com/category/servicios">
                     <img width="100px" src="img/icons/gas.png" alt="Servicios"/>
 
                     <h3>Servicios</h3>
@@ -53,17 +53,8 @@
 <section id="us" class="section_padding">
     <div class="container">
         <div class="col-md-8 col-sm-8 who-us">
-            <h1 class="title-section">Servicios Prados Verdes</h1>
-
-            <p>
-                <strong>
-                    Somos el grupo gasolinero que enfoca su servicio en
-                    la honestidad, rapidez, atención y servicio a clientes.
-                </strong>
-                <br/> <br/>
-                Servicios Prados Verdes es un grupo 100% Mexicano de proyección nacional, con más de 25 años
-                de experiencia dedicados a la Venta y Distribución de Combustibles.
-            </p>
+            <h1 class="title-section">{{ Home.about.title}}</h1>
+            <article ng-bind-html="Home.about.content"></article>
         </div>
         <div class="co-md-4 col-sm-4">
             <div class="box-gas">
@@ -71,17 +62,14 @@
                     <img class="img-responsive logo-p" src="img/pemex.png" alt="PEMEX"/>
                 </div>
                 <div class="box-body">
-                    <h3 class="gas-premium">$14.81 Premium</h3>
-
-                    <h3 class="gas-magna">$13.98 Magna</h3>
-
-                    <h3 class="gas-diesel">$14.63 Diesel</h3>
+                    <h3 class="{{ kpi.keywords}}" ng-repeat="kpi in Home.kpis">${{ kpi.excerpt }} {{ kpi.title }}</h3>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
+
 <section id="contact-sec">
     <div class="container">
         <div class="col-md-3 section-cont">

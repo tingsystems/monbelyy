@@ -4,7 +4,7 @@
     function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Luissa Shoes';
+        $rootScope.pageTitle = 'Servicio Prados Verdes';
 
         PostSrv.get({
             category: 'slider',
@@ -15,14 +15,25 @@
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
+            
         PostSrv.get({
-            category: 'destacados',
+            category: 'costos-gasolina',
             isActive: 'True',
-            sizePage: 10,
-            ordering: '-createdAt',
-            fields: 'title,urlImages,slug,excerpt'
+            sizePage: 3,
+            ordering: 'createdAt',
+            fields: 'title,excerpt,keywords'
         }).$promise.then(function (results) {
-                self.featureds = results.results;
+                self.kpis = results.results;
+            });
+
+        PostSrv.get({
+            category: 'inicio-nosotros',
+            isActive: 'True',
+            sizePage: 1,
+            ordering: 'createdAt',
+            fields: 'title,content'
+        }).$promise.then(function (results) {
+                self.about = results.results[0];
             });
 
         self.carouselInitializer = function () {
@@ -72,7 +83,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - Luissa Shoes';
+                        $rootScope.pageTitle = self.categoryName + ' - Servicio Prados Verdes';
                     }
                 });
         }
@@ -138,12 +149,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Luissa Shoes';
+        $rootScope.pageTitle = 'Blog - Servicio Prados Verdes';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Luissa Shoes';
+        $rootScope.pageTitle = 'Servicio Prados Verdes';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -156,7 +167,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = $rootScope.initConfig.img_default;
                 }
-                $rootScope.pageTitle = results.title + ' - Luissa Shoes';
+                $rootScope.pageTitle = results.title + ' - Servicio Prados Verdes';
                 self.busy = false;
             });
     }
@@ -164,9 +175,9 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Luissa Shoes';
+            $rootScope.pageTitle = 'Servicio Prados Verdes';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Contacto - Luissa Shoes';
+            $rootScope.pageTitle = 'Contacto - Servicio Prados Verdes';
         }
 
 
@@ -368,6 +379,7 @@
         .controller('NavBarCtrl', NavBarCtrl)
         .controller('ProductsCtrl', ProductsCtrl)
         .controller('TabsCtrl', TabsCtrl);
+
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
     PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];

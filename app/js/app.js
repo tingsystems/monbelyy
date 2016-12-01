@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Luissa Shoes'},
+                data: {pageTitle: 'Servicio Prados Verdes'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -94,7 +94,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'Luissa Shoes'},
+                data: {pageTitle: 'Servicio Prados Verdes'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -138,10 +138,10 @@
         });
         //various config
         $rootScope.initConfig = {
-            googleKey: 'UA-53555832-38',
+            googleKey: 'UA-53555832-39',
             meta_color: '#eee7de',
             img_default: 'http://www.luissashoes.com/img/img-default.jpg',
-            email: 'contacto@luissashoes.com'
+            email: 'contacto@serviciosahuayo.com'
 
         };
         // initialise google analytics
@@ -152,8 +152,8 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Luissa Shoes',
-                'excerpt': 'Fabricante de huaraches artesanales de Sahuayo.',
+                'title': 'Servicio Prados Verdes',
+                'excerpt': 'Servicios Prados Verdes es un grupo 100% Mexicano de proyección nacional',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
                 }
