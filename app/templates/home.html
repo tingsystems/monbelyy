@@ -20,7 +20,7 @@
     <div class="container-fluid no-padding">
         <div class="col-sm-3 no-padding">
             <div class="box-default icons">
-                <a href="http://localhost:8080/#/products">
+                <a href="http://serviciosahuayo.com/products">
                     <img width="100px" src="img/icons/oil.png" alt="Productos"/>
 
                     <h3>Productos</h3>
@@ -90,13 +90,13 @@
             </a>
         </div>
         <div class="col-md-3 section-cont">
-            <a href="mailto:info@serviciosahuayo.com">
+            <a href="mailto:contacto@serviciosahuayo.com">
                 <i class="ion-ios-email-outline"></i> <br/>
                 <span>info@serviciosahuayo.com</span>
             </a>
         </div>
         <div class="col-md-3 section-cont">
-            <a href="#">
+            <a href="http://serviciosahuayo.com/contact">
                 <i class="ion-ios-people-outline"></i> <br/>
                 <span>Bolsa de trabajo</span>
             </a>
@@ -104,16 +104,24 @@
         <div class="col-md-3 section-cont">
             <a href="#">
                 <i class="ion-ios-location-outline"></i> <br/>
-                <span>Estaciones</span>
+                <span>Promociones</span>
             </a>
         </div>
     </div>
 </section>
 <section id="maps">
-    <div class="container">
-        <h3>Localiza tu <strong>estación </strong> <br/>más cercana</h3>
-        <a href="#" class="btn btn-white-clear btn-big">Ver más</a>
-    </div>
+    <ui-gmap-google-map center='Home.map.center' zoom='Home.map.zoom'>
+        <ui-gmap-marker coords="Home.marker0.coords" options="Home.marker0.options"
+                        events="Home.marker0.events"
+                        idkey="Home.marker0.id">
+            <ui-gmap-window option="Home.windowOptions" closeClick="Home.closeClick()"></ui-gmap-window>
+        </ui-gmap-marker>
+        <ui-gmap-marker coords="Home.marker1.coords" options="Home.marker1.options"
+                        events="Home.marker1.events"
+                        idkey="Home.marker1.id">
+            <ui-gmap-window option="Home.windowOptions" closeClick="Home.closeClick()"></ui-gmap-window>
+        </ui-gmap-marker>
+    </ui-gmap-google-map>
 </section>
 
 
