@@ -11,7 +11,7 @@
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,excerpt'
+            fields: 'content'
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });

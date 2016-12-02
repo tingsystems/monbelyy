@@ -140,7 +140,7 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-39',
             meta_color: '#eee7de',
-            img_default: 'http://www.luissashoes.com/img/img-default.jpg',
+            img_default: ' http://serviciosahuayo.com/img/img-default.jpg',
             email: 'contacto@serviciosahuayo.com'
 
         };
