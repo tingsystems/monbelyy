@@ -255,17 +255,10 @@ body {
   background: #fff;
 }
 #maps {
-  background-image: url("../img/map.jpg");
   height: 350px;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  text-align: center;
 }
-#maps h3 {
-  font-size: 28px;
-  padding-top: 100px;
-  color: #fff;
+.angular-google-map-container {
+  height: 350px;
 }
 #contact-sec {
   padding: 20px 0;

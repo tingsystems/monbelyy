@@ -23,7 +23,8 @@
     "angular-scroll": "^1.0.0",
     "angular-truncate": "*",
     "angular-touch": "^1.5.7",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "angular-google-maps": "^2.4.0"
   },
   "overrides": {
     "bootstrap": {

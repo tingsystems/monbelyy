@@ -20,10 +20,11 @@
     <div class="container-fluid no-padding">
         <div class="col-sm-3 no-padding">
             <div class="box-default icons">
-                <a href="http://localhost:8080/#/products">
+                <a href="http://serviciosahuayo.com/products">
                     <img width="100px" src="img/icons/oil.png" alt="Productos"/>
 
                     <h3>Productos</h3>
+                    <br>
                 </a>
             </div>
         </div>
@@ -33,24 +34,27 @@
                     <img width="100px" src="img/icons/gas.png" alt="Servicios"/>
 
                     <h3>Servicios</h3>
+                    <br>
                 </a>
             </div>
         </div>
         <div class="col-sm-3 no-padding">
             <div class="box-default">
-                <a href="#">
+                <a href="">
                     <img width="100px" src="img/icons/invoice.png" alt="Facturación"/>
 
                     <h3>Facturación</h3>
+                    <span>Próximamente</span>
                 </a>
             </div>
         </div>
         <div class="col-sm-3 no-padding">
             <div class="box-default icons">
-                <a href="#">
+                <a href="">
                     <img width="100px" src="img/icons/tarjets.png" alt="Clientes frecuentes"/>
 
                     <h3>Clientes frecuentes</h3>
+                    <span>Próximamente</span>
                 </a>
             </div>
         </div>
@@ -84,36 +88,66 @@
 <section id="contact-sec">
     <div class="container">
         <div class="col-md-3 section-cont">
-            <a href="tel:3535320911">
+            <a href="tel:3535326816">
                 <i class="ion-ios-telephone-outline"></i> <br/>
-                <span>(353) 532 0911</span>
+                <span>(353) 532 6816</span>
             </a>
         </div>
         <div class="col-md-3 section-cont">
-            <a href="mailto:info@serviciosahuayo.com">
+            <a href="mailto:contacto@serviciosahuayo.com">
                 <i class="ion-ios-email-outline"></i> <br/>
                 <span>info@serviciosahuayo.com</span>
             </a>
         </div>
         <div class="col-md-3 section-cont">
-            <a href="#">
+            <a href="http://serviciosahuayo.com/contact">
                 <i class="ion-ios-people-outline"></i> <br/>
                 <span>Bolsa de trabajo</span>
             </a>
         </div>
         <div class="col-md-3 section-cont">
-            <a href="#">
-                <i class="ion-ios-location-outline"></i> <br/>
-                <span>Estaciones</span>
+            <a href="http://serviciosahuayo.com/category/promociones">
+                <i class="ion-bag"></i> <br/>
+                <span>Promociones</span>
             </a>
         </div>
     </div>
 </section>
 <section id="maps">
-    <div class="container">
-        <h3>Localiza tu <strong>estación </strong> <br/>más cercana</h3>
-        <a href="#" class="btn btn-white-clear btn-big">Ver más</a>
-    </div>
+    <ui-gmap-google-map center='Home.map.center' zoom='Home.map.zoom'>
+        <ui-gmap-marker coords="Home.marker0.coords" options="Home.marker0.options"
+                        events="Home.marker0.events"
+                        idkey="Home.marker0.id">
+            <ui-gmap-window option="Home.windowOptions" closeClick="Home.closeClick()">
+                <div id="commerce-info-window">
+                    <div style="width: 100%;">
+                        <h5>Servicio Sahuayo S.A de C.V</h5>
+                        <h6>EST1085</h6>
+                        <h6>Blvd. Lázaro Cárdenas Norte #396</h6>
+                        <h6>Col. San Isidro</h6>
+                        <h6>C.P. 59000</h6>
+                        <h6>TEL: (353) 532 0911</h6>
+                        <h6><a href="http://www.google.com/maps/place/{{Home.marker0.coords.latitude}},{{Home.marker0.coords.longitude}}" target="_blank">¿Cómo llegar?</a></h6>
+                    </div>
+                </div>
+            </ui-gmap-window>
+        </ui-gmap-marker>
+        <ui-gmap-marker coords="Home.marker1.coords" options="Home.marker1.options"
+                        events="Home.marker1.events"
+                        idkey="Home.marker1.id">
+            <ui-gmap-window option="Home.windowOptions" closeClick="Home.closeClick()">
+                <div style="width: 100%;">
+                    <h5>Servicio Prados Verdes S.A de C.V</h5>
+                    <h6>EST1085</h6>
+                    <h6>Blvd. Lázaro Cárdenas #1252</h6>
+                    <h6>Col. Prados Verdes</h6>
+                    <h6>C.P. 59000</h6>
+                    <h6>TEL: (353) 532 6816</h6>
+                    <h6><a href="http://www.google.com/maps/place/{{Home.marker1.coords.latitude}},{{Home.marker1.coords.longitude}}" target="_blank">¿Cómo llegar?</a></h6>
+                </div>
+            </ui-gmap-window>
+        </ui-gmap-marker>
+    </ui-gmap-google-map>
 </section>
 
 

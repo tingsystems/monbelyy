@@ -35,6 +35,43 @@
         }).$promise.then(function (results) {
                 self.about = results.results[0];
             });
+
+        self.map = {center: {latitude:20.0573362, longitude: -102.7263114}, zoom: 13};
+
+        self.closeClick = function () {
+            self.windowOptions.visible = true;
+        };
+        self.windowOptions = {
+            visible: true
+        };
+
+        self.marker0 = {
+            id: 1,
+            coords: {
+                latitude: 20.064054000000024,
+                longitude: -102.71605299999999
+            },
+            options: {},
+            events: {
+                click: function (marker, eventName, args) {
+                    self.windowOptions.visible = !self.windowOptions.visible;
+                }
+            }
+        };
+
+        self.marker1 = {
+            id: 1,
+            coords: {
+                latitude: 20.041982,
+                longitude: -102.71684600000003
+            },
+            options: {},
+            events: {
+                click: function (marker, eventName, args) {
+                    self.windowOptions.visible = !self.windowOptions.visible;
+                }
+            }
+        };
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
