@@ -39,10 +39,10 @@
         self.map = {center: {latitude:20.0573362, longitude: -102.7263114}, zoom: 13};
 
         self.closeClick = function () {
-            self.windowOptions.visible = false;
+            self.windowOptions.visible = true;
         };
         self.windowOptions = {
-            visible: false
+            visible: true
         };
 
         self.marker0 = {
