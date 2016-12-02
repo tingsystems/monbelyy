@@ -307,7 +307,13 @@ body {
   background-image: none;
 }
 .carousel-inner {
-  background-color: rgba(238,231,222,0.07);
+  background-color: transparent;
+}
+.carousel-control {
+  display: none;
+}
+.carousel-indicators {
+  display: none;
 }
 .carousel-caption {
   top: 25%;
@@ -1313,15 +1319,19 @@ color
 }
 #slider-area .text-on-video .text a {
   margin-right: 15px;
+  font-size: 42px;
+  color: #fff;
 }
 #slider-area .text-on-video .text h1 {
-  color: #fff;
   text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: 42px;
+  color: #fff;
 }
 #slider-area .text-on-video .text h3 {
   color: #fff;
   font-weight: 300;
   text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: 30px;
 }
 .phone {
   color: #666;
