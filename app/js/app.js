@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Servicio Prados Verdes'},
+                data: {pageTitle: 'iHelp'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -94,7 +94,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'Servicio Prados Verdes'},
+                data: {pageTitle: 'iHelp'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',

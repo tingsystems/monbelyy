@@ -1,153 +1,122 @@
 <!-- slider -->
-<div id="slider-area">
-    <div class="text-on-video">
-        <div class="text container">
-            <uib-carousel interval="6000" template-url="/templates/partials/carousel.html">
-                <uib-slide ng-repeat="slide in Home.mainSlider">
-                    <div ng-bind-html="slide.content"></div>
-                </uib-slide>
-            </uib-carousel>
-        </div>
+<div id="carouse-principal" class="carousel slide">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <uib-carousel interval="5000">
+            <!--<uib-slide ng-repeat="slide in Home.mainSlider">
+                <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                    <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
+                </a>
+            </uib-slide>-->
+            <uib-slide>
+                <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                    <div class="slider-img" style="background-image:url('../img/slider.jpg');"></div>
+                </a>
+            </uib-slide>
+            <div class="carousel-caption">
+                <div class="box-slide">
+                    <h1>Bienvenido a tu nuevo grupo familiar</h1>
+                    <h4>Mantente a salvo en manos de quienes te aman</h4>
+
+                    <p>
+                        Configura alertas de Ayuda, fallas mecánicas, batería
+                        baja en el móvil y más; ya que te permite generar tus “Alertas”
+                        de acuerdo a tus necesidades y agregando los contactos
+                        que quieras que reciban el mensaje y posición donde te
+                        encuentras.
+                    </p>
+                    <a href="#" class="btn btn-gray"> iHelp Tour</a>
+                    <a href="http://hotel-california.mx/category/habitaciones" class="btn btn-red"> ¡Descargar app!</a>
+
+                </div>
+            </div>
+        </uib-carousel>
     </div>
-    <video autoplay width="100%" loop>
-        <source src="video/servicio-prados-verdes.mp4" type="video/mp4">
-        <source src="video/servicio-prados-verdes.ogv" type="video/ogg">
-        Your browser does not support HTML5 video.
-    </video>
 </div>
 
-<section id="products">
-    <div class="container-fluid no-padding">
-        <div class="col-sm-3 no-padding">
-            <div class="box-default icons">
-                <a href="http://serviciosahuayo.com/products">
-                    <img width="100px" src="img/icons/oil.png" alt="Productos"/>
-
-                    <h3>Productos</h3>
-                    <br>
-                </a>
-            </div>
-        </div>
-        <div class="col-sm-3 no-padding">
-            <div class="box-default">
-                <a href="http://serviciosahuayo.com/category/servicios">
-                    <img width="100px" src="img/icons/gas.png" alt="Servicios"/>
-
-                    <h3>Servicios</h3>
-                    <br>
-                </a>
-            </div>
-        </div>
-        <div class="col-sm-3 no-padding">
-            <div class="box-default">
-                <a href="">
-                    <img width="100px" src="img/icons/invoice.png" alt="Facturación"/>
-
-                    <h3>Facturación</h3>
-                    <span>Próximamente</span>
-                </a>
-            </div>
-        </div>
-        <div class="col-sm-3 no-padding">
-            <div class="box-default icons">
-                <a href="">
-                    <img width="100px" src="img/icons/tarjets.png" alt="Clientes frecuentes"/>
-
-                    <h3>Clientes frecuentes</h3>
-                    <span>Próximamente</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section id="us" class="section_padding">
+<section id="us" class="section_padding" style="background-image: url('../img/bg-ihelp.jpg')">
     <div class="container">
-        <div class="col-md-8 col-sm-8 who-us">
-            <h1 class="title-section">{{ Home.about.title}}</h1>
+        <div class="col-md-7 col-sm-7 who-us">
+            <h1 class="title-section">{{ Home.about.title }}</h1>
             <article ng-bind-html="Home.about.content"></article>
-            <p class="pull-right"><a post-link="{ link: {url: Home.about.link, target: '_blank'} }"
+            <img src="img/iconss.png" alt="Descarga la app en iOS y Android"/>
+
+            <p class="pull-right"><a class="clr-link" post-link="{ link: {url: Home.about.link, target: '_blank'} }"
                                      ui-sref="post_detail({slug: Home.about.slug})" title="{{ Home.about.title }}">Leer
                 más...</a></p>
         </div>
-        <div class="co-md-4 col-sm-4">
-            <div class="box-gas">
-                <div class="box-gas-header">
-                    <img class="img-responsive logo-p" src="img/pemex.png" alt="PEMEX"/>
-                </div>
-                <div class="box-body">
-                    <h3 class="{{ kpi.keywords}}" ng-repeat="kpi in Home.kpis">${{ kpi.excerpt }} {{ kpi.title }}</h3>
-                </div>
-            </div>
 
-        </div>
     </div>
 </section>
 
 <section id="contact-sec">
     <div class="container">
-        <div class="col-md-3 section-cont">
-            <a href="tel:3535326816">
-                <i class="ion-ios-telephone-outline"></i> <br/>
-                <span>(353) 532 6816</span>
-            </a>
+        <div class="col-md-4 section-cont">
+            <i class="ion-ios-people"></i> <br/>
+            <span>Organización por grupos</span>
+
+            <p>Crea grupos de alertas, ya
+                sea para tú familia, amigos,
+                trabajo, etc.</p>
         </div>
-        <div class="col-md-3 section-cont">
-            <a href="mailto:contacto@serviciosahuayo.com">
-                <i class="ion-ios-email-outline"></i> <br/>
-                <span>info@serviciosahuayo.com</span>
-            </a>
+        <div class="col-md-4 section-cont">
+            <i class="ion-ios-shuffle-strong"></i> <br/>
+            <span>Comparte tu localización</span>
+
+            <p>Sólo tú decides con quién
+                compartes tu localización.</p>
         </div>
-        <div class="col-md-3 section-cont">
-            <a href="http://serviciosahuayo.com/contact">
-                <i class="ion-ios-people-outline"></i> <br/>
-                <span>Bolsa de trabajo</span>
-            </a>
+        <div class="col-md-4 section-cont">
+            <i class="ion-ios-email"></i> <br/>
+            <span>Sólo invitados</span>
+
+            <p>Sólo los miembrios de tus circulos
+                pueden ver tu localización
+                y mensajes de alerta.</p>
         </div>
-        <div class="col-md-3 section-cont">
-            <a href="http://serviciosahuayo.com/category/promociones">
-                <i class="ion-bag"></i> <br/>
-                <span>Promociones</span>
-            </a>
+        <div class="col-md-4 section-cont">
+            <i class="ion-social-usd"></i> <br/>
+            <span>Gratis</span>
+
+            <p>Tenemos los mejores
+                planes que se ajustan a tus
+                necesidades y a tu bolsillo.</p>
+
+        </div>
+        <div class="col-md-4 section-cont">
+            <i class="ion-ios-gear"></i> <br/>
+            <span>Configuración</span>
+
+            <p>Configura las alertas de
+                los miembros de tu circulo
+                de sus sitios favoritos.</p>
+
+        </div>
+        <div class="col-md-4 section-cont">
+            <i class="ion-ios-location"></i> <br/>
+            <span>Check in</span>
+
+            <p>Tus familiares ya pueden saber
+                donde te encuentras sin
+                preocupaciones.</p>
         </div>
     </div>
 </section>
-<section id="maps">
-    <ui-gmap-google-map center='Home.map.center' zoom='Home.map.zoom'>
-        <ui-gmap-marker coords="Home.marker0.coords" options="Home.marker0.options"
-                        events="Home.marker0.events"
-                        idkey="Home.marker0.id">
-            <ui-gmap-window option="Home.windowOptions" closeClick="Home.closeClick()">
-                <div id="commerce-info-window">
-                    <div style="width: 100%;">
-                        <h5>Servicio Sahuayo S.A de C.V</h5>
-                        <h6>EST1085</h6>
-                        <h6>Blvd. Lázaro Cárdenas Norte #396</h6>
-                        <h6>Col. San Isidro</h6>
-                        <h6>C.P. 59000</h6>
-                        <h6>TEL: (353) 532 0911</h6>
-                        <h6><a href="http://www.google.com/maps/place/{{Home.marker0.coords.latitude}},{{Home.marker0.coords.longitude}}" target="_blank">¿Cómo llegar?</a></h6>
+<section id="newsletter">
+    <div class="container">
+        <h3><i class="ion-ios-email"></i> Suscríbete a nuestro newsletter para más información</h3>
+
+        <form class="form-inline col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                <div class="col-md-10">
+                    <input type="email" class="form-control" id="email" placeholder="pablo@example.com">
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="text-left">
+                        <button type="submit" class="btn btn-white-clear">Enviar</button>
                     </div>
                 </div>
-            </ui-gmap-window>
-        </ui-gmap-marker>
-        <ui-gmap-marker coords="Home.marker1.coords" options="Home.marker1.options"
-                        events="Home.marker1.events"
-                        idkey="Home.marker1.id">
-            <ui-gmap-window option="Home.windowOptions" closeClick="Home.closeClick()">
-                <div style="width: 100%;">
-                    <h5>Servicio Prados Verdes S.A de C.V</h5>
-                    <h6>EST1085</h6>
-                    <h6>Blvd. Lázaro Cárdenas #1252</h6>
-                    <h6>Col. Prados Verdes</h6>
-                    <h6>C.P. 59000</h6>
-                    <h6>TEL: (353) 532 6816</h6>
-                    <h6><a href="http://www.google.com/maps/place/{{Home.marker1.coords.latitude}},{{Home.marker1.coords.longitude}}" target="_blank">¿Cómo llegar?</a></h6>
-                </div>
-            </ui-gmap-window>
-        </ui-gmap-marker>
-    </ui-gmap-google-map>
+        </form>
+    </div>
 </section>
 
 

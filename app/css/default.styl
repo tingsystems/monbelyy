@@ -83,7 +83,7 @@ body
   visibility hidden
 
 .container-pages
-  margin-top 100px
+  margin-top 0
 
 .deckgrid
   margin 0 auto
@@ -118,7 +118,6 @@ body
 .header
   text-align center
   .navbar-default
-    position fixed
     left 0
     right 0
     background white
@@ -128,7 +127,6 @@ body
     border-radius 0
     margin-bottom 0
     z-index 9999
-    box-shadow 0 0 10px rgba(0,0,0,0.4)
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
@@ -142,7 +140,7 @@ body
       transition all ease-in-out .35s
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
-      color #e11518
+      color #d96263
     .container-fluid
       display table
       margin 0 auto
@@ -178,8 +176,8 @@ body
           color white
 
   .logo
-    height 95px
-    margin-top -3px
+    width 180px
+    margin-top 5px
 
 .navbar-header
   color #d2b770 !important
@@ -198,12 +196,15 @@ body
   padding 60px 0
   .who-us
     h1
-      color #555
+      color #fff
     p
-      color #5d5d5d
+      color #fff
       font-size 18px
       text-align justify
       padding 15px 0
+      font-weight 300
+    .clr-link
+      color white
 
 .box-gas
   padding 0 30px 20px
@@ -231,13 +232,24 @@ body
 
 #contact-sec
   padding 20px 0
-  background #292a29
+  background #f5f5f5
   .section-cont
     text-align center
-    a
-      color white
-    a > i
+    padding 20px 30px
+    span, p, i
+      color #746857
+      font-size 16px
+    i
       font-size 60px
+#newsletter
+  padding 30px 0
+  text-align center
+  background-color #d96263
+  color white
+  input
+    width 100%
+  .btn
+    text-align left !important
 #search_submit
   margin-top 20px
   color #555
@@ -248,9 +260,9 @@ body
   background linear-gradient(to left, #bdc3c7 , #2c3e50)
   height 110px
 .slider-img
-  background-position center center
+  background-position top center
   background-size 100%
-  height 420px
+  height 620px
   background-repeat no-repeat
 .bg-inner
   width 100%
@@ -266,43 +278,28 @@ body
 .carousel-indicators
   display none
 .carousel-caption
-  top 25%
-  opacity 0.9
+  top 20%
+  padding 30px 60px
+  text-align right
+  float right
   width 100%
   left 0
-  padding 30px
-  text-align left
-  h2
-    border-bottom 1px solid rgba(255, 255, 255, 0.4)
-    padding-bottom 20px
-  .download-app
-    padding 20px 0
-    a
-      padding-right 15px
-  .log-process
-    padding 25px 10px
+  .box-slide
+    width 50%
+    float right
+    text-align left
+    padding 10px
+    h1
+      color #746857
+      padding 5px 0
+      text-shadow none
     h4
-      font-size 24px
-      font-weight 100
-  .btn
-    margin-right 15px
-    font-size 18px
-    margin-top 30px
-  a
-    color #38270f
-    text-shadow none
-  h1
-    font-size 26px
-    text-shadow none
-  .text
-    margin-top 40px
-  p
-    font-size 20px
-    text-shadow none
-
-  .scrollme
-    color #555555
-    font-size 28px
+      color #989083
+      padding 5px 0
+      text-shadow none
+    p
+      color #7c7c7c
+      text-shadow none
 
 .header-margin
   margin-top 150px
@@ -859,54 +856,24 @@ body
     width 100%
 
 /************** footer area css ******************/
-#info
-  background-color #ebeaea
-  padding 60px 0
-  h1
-    color #555
-    text-align center
-    padding-bottom 25px
-
-#footer_area
-  background transparent
+footer
+  background-color #726c64
   padding 30px 0
-  color #777
-  line-height 30px
-  border-top 1px solid #ccc
-  .text-center
-    a
+  .contact-sty
+    h3, a
       color white
-  .first-foo
-    border-bottom 1px solid rgba(255,255,255,0.5)
-    padding 15px 0
-  .second-foo
-    padding 15px 0
-  .social-media-footer
-    font-size 16px
-    color white
-    a
-      color white
-      padding-right 8px
-      font-weight 100
-      i
-        font-size 18px
+      font-size 18
       &:hover
-        color #cb6c18
-  .info
-    text-align right
-    a
-      padding-right 15px
-  .contact-footer
-    a
-      color #bf9e4f
-      font-weight 300
+        color #d96263
+    .download-app > i
+      font-size 48px
+      padding-right 20px
       &:hover
-        color #E08F17
-  .text
-    color #E08F17
+        color #d96263
 
 /**************** Buttons ***************/
-
+.btn
+  font-size 18px
 /* buttons sizes */
 .btn-big
   padding 25px 30px
@@ -926,21 +893,39 @@ body
   border-top 1px solid #eee
   border-bottom 1px solid #eee
 
+.btn-gray
+  background #f5f5f5
+  display inline-block
+  border 1px solid #ccc
+  padding 10px 15px
+  color #999
+  font-weight 300
+  border-radius 30px
+
+  &:hover, &:focus
+    background #eee
+    display inline-block
+    padding 10px 15px
+    color #555
+    font-weight 300
+    border-radius 30px
+    border 1px solid #ccc
+
 .btn-red
-  background #9c161d
+  background #d96263
   display inline-block
   padding 10px 15px
   color #fff
-  font-weight 700
+  font-weight 300
   border none
-  border-radius 0
+  border-radius 30px
   &:hover, &:focus
-    background #6b0f14
-    display: inline-block
+    background #c24139
+    display inline-block
     padding 10px 15px
     color #fff
-    font-weight 700
-    border-radius 0px
+    font-weight 300
+    border-radius 30px
 
 .btn-yellow
   background #cbae00
@@ -1005,7 +990,7 @@ body
   color #fff
   font-weight 300
   border 1px solid #fff
-  border-radius 3px
+  border-radius 30px
   -webkit-transition all ease 0.1s
   -moz-transition all ease 0.1s
   -ms-transition all ease 0.1s
@@ -1018,7 +1003,7 @@ body
     padding 10px 15px
     color #555
     font-weight 300
-    border-radius 3px
+    border-radius 30px
     border 1px solid #fff
 .btn-gray-clear
   background transparent

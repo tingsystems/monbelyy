@@ -4,14 +4,14 @@
     function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Servicio Prados Verdes';
+        $rootScope.pageTitle = 'iHelp';
 
         PostSrv.get({
             category: 'slider',
             isActive: 'True',
             sizePage: 10,
             ordering: '-createdAt',
-            fields: 'content'
+            fields: 'urlImages,title,link,slug,excerpt'
         }).$promise.then(function (results) {
                 self.mainSlider = results.results;
             });
@@ -91,7 +91,7 @@
             }).$promise.then(function (results) {
                     if (results.results.length) {
                         self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - Servicio Prados Verdes';
+                        $rootScope.pageTitle = self.categoryName + ' - iHelp';
                     }
                 });
         }
@@ -157,12 +157,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Servicio Prados Verdes';
+        $rootScope.pageTitle = 'Blog - iHelp';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'Servicio Prados Verdes';
+        $rootScope.pageTitle = 'iHelp';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -175,7 +175,7 @@
                 if (!self.detail.urlImages.original) {
                     self.detail.urlImages.original = $rootScope.initConfig.img_default;
                 }
-                $rootScope.pageTitle = results.title + ' - Servicio Prados Verdes';
+                $rootScope.pageTitle = results.title + ' - iHelp';
                 self.busy = false;
             });
     }
@@ -183,9 +183,9 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Servicio Prados Verdes';
+            $rootScope.pageTitle = 'iHelp';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Contacto - Servicio Prados Verdes';
+            $rootScope.pageTitle = 'Contacto - iHelp';
         }
 
 
