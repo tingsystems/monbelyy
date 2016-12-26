@@ -11,9 +11,9 @@
         <h3>
             Acerca de iHelp
         </h3>
-        <a href="#">Políticas de privacidad</a> <br/>
-        <a href="#">Blog</a> <br/>
-        <a href="#">Contacto</a>
+        <ul>
+            <li ng-repeat="option in footerNavMenuConact"><a href="{{option.link}}" >{{option.name}}</a></li>
+        </ul>
     </div>
     <div class="col-sm-4 contact-sty">
         <h3>

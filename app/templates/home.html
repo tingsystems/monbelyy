@@ -3,46 +3,30 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <uib-carousel interval="5000">
-            <!--<uib-slide ng-repeat="slide in Home.mainSlider">
+            <uib-slide ng-repeat="slide in Home.mainSlider">
                 <a post-link="{ link: {url: slide.link, target: '_self'} }">
                     <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
                 </a>
-            </uib-slide>-->
-            <uib-slide>
-                <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                    <div class="slider-img" style="background-image:url('../img/slider.jpg');"></div>
-                </a>
-            </uib-slide>
-            <div class="carousel-caption">
-                <div class="box-slide">
-                    <h1>Bienvenido a tu nuevo grupo familiar</h1>
-                    <h4>Mantente a salvo en manos de quienes te aman</h4>
-
-                    <p>
-                        Configura alertas de Ayuda, fallas mecánicas, batería
-                        baja en el móvil y más; ya que te permite generar tus “Alertas”
-                        de acuerdo a tus necesidades y agregando los contactos
-                        que quieras que reciban el mensaje y posición donde te
-                        encuentras.
-                    </p>
-                    <a href="#" class="btn btn-gray"> iHelp Tour</a>
-                    <a href="http://hotel-california.mx/category/habitaciones" class="btn btn-red"> ¡Descargar app!</a>
-
+                <div class="carousel-caption">
+                    <div class="box-slide">
+                        <h1>{{slide.title}}</h1>
+                        <article ng-bind-html="slide.content | trustHtml"></article>
+                    </div>
                 </div>
-            </div>
+            </uib-slide>
         </uib-carousel>
     </div>
 </div>
 
-<section id="us" class="section_padding" style="background-image: url('../img/bg-ihelp.jpg')">
+<section id="us" class="section_padding" style="background-image: url('{{Home.postAbout.urlImages.original}}')">
     <div class="container">
         <div class="col-md-7 col-sm-7 who-us">
-            <h1 class="title-section">{{ Home.about.title }}</h1>
-            <article ng-bind-html="Home.about.content"></article>
+            <h1 class="title-section">{{ Home.postAbout.title }}</h1>
+            <article ng-bind-html="Home.postAbout.content"></article>
             <img src="img/iconss.png" alt="Descarga la app en iOS y Android"/>
 
-            <p class="pull-right"><a class="clr-link" post-link="{ link: {url: Home.about.link, target: '_blank'} }"
-                                     ui-sref="post_detail({slug: Home.about.slug})" title="{{ Home.about.title }}">Leer
+            <p class="pull-right"><a class="clr-link" post-link="{ link: {url: Home.postAbout.link, target: '_blank'} }"
+                                     ui-sref="post_detail({slug: Home.postAbout.slug})" title="{{ Home.postAbout.title }}">Leer
                 más...</a></p>
         </div>
 
@@ -51,54 +35,10 @@
 
 <section id="contact-sec">
     <div class="container">
-        <div class="col-md-4 section-cont">
-            <i class="ion-ios-people"></i> <br/>
-            <span>Organización por grupos</span>
-
-            <p>Crea grupos de alertas, ya
-                sea para tú familia, amigos,
-                trabajo, etc.</p>
-        </div>
-        <div class="col-md-4 section-cont">
-            <i class="ion-ios-shuffle-strong"></i> <br/>
-            <span>Comparte tu localización</span>
-
-            <p>Sólo tú decides con quién
-                compartes tu localización.</p>
-        </div>
-        <div class="col-md-4 section-cont">
-            <i class="ion-ios-email"></i> <br/>
-            <span>Sólo invitados</span>
-
-            <p>Sólo los miembrios de tus circulos
-                pueden ver tu localización
-                y mensajes de alerta.</p>
-        </div>
-        <div class="col-md-4 section-cont">
-            <i class="ion-social-usd"></i> <br/>
-            <span>Gratis</span>
-
-            <p>Tenemos los mejores
-                planes que se ajustan a tus
-                necesidades y a tu bolsillo.</p>
-
-        </div>
-        <div class="col-md-4 section-cont">
-            <i class="ion-ios-gear"></i> <br/>
-            <span>Configuración</span>
-
-            <p>Configura las alertas de
-                los miembros de tu circulo
-                de sus sitios favoritos.</p>
-
-        </div>
-        <div class="col-md-4 section-cont">
-            <i class="ion-ios-location"></i> <br/>
-            <span>Check in</span>
-
-            <p>Tus familiares ya pueden saber
-                donde te encuentras sin
-                preocupaciones.</p>
+        <div class="col-md-4 section-cont" ng-repeat="post in Home.postFeauterd">
+            <i class="{{ post.excerpt }}"></i> <br/>
+            <span>{{ post.title }}</span>
+            <article ng-bind-html="post.content | trustHtml"></article>
         </div>
     </div>
 </section>

@@ -44,7 +44,7 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'title': { template: '<title>{{pageTitle}}</title>' },
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'Post',
@@ -55,7 +55,7 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'title': { template: '<title>{{pageTitle}}</title>' },
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'Page',
@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'iHelp'},
+                data: { pageTitle: 'iHelp' },
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -94,7 +94,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'iHelp'},
+                data: { pageTitle: 'iHelp' },
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -130,8 +130,8 @@
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
         $rootScope.apiV = 'v1';
-        $rootScope.siteId = '15b23eab-1a8d-4bfa-ae33-1b395c05fcb5';
-        $http.defaults.headers.common['TS-TOKEN'] = '1UyI2U4SMkDiqCDnWjVUQev4zO2zh89PPSwOR7ha';
+        $rootScope.siteId = 'c04f2ec3-0384-41bd-bb9e-488f87e90be3';
+        $http.defaults.headers.common['TS-TOKEN'] = 'LB8zd8MI9zWoydlEw3ZZy7Z5b3jqGfHGIUhkm44i';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -141,7 +141,7 @@
             googleKey: 'UA-53555832-39',
             meta_color: '#eee7de',
             img_default: ' http://serviciosahuayo.com/img/img-default.jpg',
-            email: 'contacto@serviciosahuayo.com'
+            email: 'soporte@ihelp.com.mx'
 
         };
         // initialise google analytics
@@ -152,8 +152,8 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Servicio Prados Verdes',
-                'excerpt': 'Servicios Prados Verdes es un grupo 100% Mexicano de proyección nacional',
+                'title': 'iHelp',
+                'excerpt': 'iHelp',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
                 }
@@ -161,7 +161,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Servicio Prados Verdes';
+        $rootScope.pageTitle = 'iHelp';
         function showResponsive($window) {
             if ($window.innerWidth <= 768) {
                 return true
@@ -177,16 +177,25 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'a5407ba1-e5ca-41fd-b7a6-cfbcb9959224',
+                parent: 'a2e789e8-d53a-4391-b401-a2d279a137e9',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                    $rootScope.mainNavMenu = response;
-                }, function (error) {
-                });
+                $rootScope.mainNavMenu = response;
+            }, function (error) {
+            });
         }
 
-
+        if (!$rootScope.footerNavMenuConact) {
+            TaxonomySrv.query({
+                parent: 'a3f38323-d1cc-4a9c-b5db-869ba7b310f9',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                $rootScope.footerNavMenuConact = response;
+            }, function (error) {
+            });
+        }
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',

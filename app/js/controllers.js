@@ -9,69 +9,30 @@
         PostSrv.get({
             category: 'slider',
             isActive: 'True',
-            sizePage: 10,
+            sizePage: 5,
             ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,excerpt'
+            fields: 'urlImages,title,link,slug,excerpt,content'
         }).$promise.then(function (results) {
-                self.mainSlider = results.results;
-            });
-            
-        PostSrv.get({
-            category: 'costos-gasolina',
+            self.mainSlider = results.results;
+        });
+
+        PostDetailSrv.get({
+            slug: 'inicio-nosotros',
             isActive: 'True',
-            sizePage: 3,
-            ordering: 'createdAt',
-            fields: 'title,excerpt,keywords'
-        }).$promise.then(function (results) {
-                self.kpis = results.results;
-            });
+            fields: 'slug,urlImages,title,excerpt,content'
+        }).$promise.then(function (result) {
+            self.postAbout = result;
+        });
 
         PostSrv.get({
-            category: 'inicio-nosotros',
+            category: 'home-feutered',
             isActive: 'True',
-            sizePage: 1,
-            ordering: 'createdAt',
-            fields: 'title,content,slug'
+            sizePage: 20,
+            ordering: '-createdAt',
+            fields: 'title,content,slug,excerpt'
         }).$promise.then(function (results) {
-                self.about = results.results[0];
-            });
-
-        self.map = {center: {latitude:20.0573362, longitude: -102.7263114}, zoom: 13};
-
-        self.closeClick = function () {
-            self.windowOptions.visible = true;
-        };
-        self.windowOptions = {
-            visible: true
-        };
-
-        self.marker0 = {
-            id: 1,
-            coords: {
-                latitude: 20.064054000000024,
-                longitude: -102.71605299999999
-            },
-            options: {},
-            events: {
-                click: function (marker, eventName, args) {
-                    self.windowOptions.visible = !self.windowOptions.visible;
-                }
-            }
-        };
-
-        self.marker1 = {
-            id: 1,
-            coords: {
-                latitude: 20.041982,
-                longitude: -102.71684600000003
-            },
-            options: {},
-            events: {
-                click: function (marker, eventName, args) {
-                    self.windowOptions.visible = !self.windowOptions.visible;
-                }
-            }
-        };
+            self.postFeauterd = results.results;
+        });
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
@@ -89,15 +50,15 @@
                 isActive: 'True',
                 sizePage: 1
             }).$promise.then(function (results) {
-                    if (results.results.length) {
-                        self.categoryName = results.results[0].name;
-                        $rootScope.pageTitle = self.categoryName + ' - iHelp';
-                    }
-                });
+                if (results.results.length) {
+                    self.categoryName = results.results[0].name;
+                    $rootScope.pageTitle = self.categoryName + ' - iHelp';
+                }
+            });
         }
 
         self.getMorePosts = function () {
-            if (self.busy || !self.next)return;
+            if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
 
@@ -109,10 +70,10 @@
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
-                    self.list = self.list.concat(results.results);
-                    self.busy = false;
-                    self.next = results.next;
-                });
+                self.list = self.list.concat(results.results);
+                self.busy = false;
+                self.next = results.next;
+            });
         };
 
         self.getMorePosts();
@@ -136,7 +97,7 @@
         };
 
         self.getMorePosts = function () {
-            if (self.busy || !self.next)return;
+            if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
             self.loadPosts = self.page % 3 == 0;
@@ -150,10 +111,10 @@
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
-                    self.list = self.list.concat(results.results);
-                    self.busy = false;
-                    self.next = results.next;
-                });
+                self.list = self.list.concat(results.results);
+                self.busy = false;
+                self.next = results.next;
+            });
         };
 
         self.getMorePosts();
@@ -170,14 +131,14 @@
             isActive: 'True',
             fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
         }).$promise.then(function (results) {
-                self.detail = results;
-                $rootScope.post = self.detail;
-                if (!self.detail.urlImages.original) {
-                    self.detail.urlImages.original = $rootScope.initConfig.img_default;
-                }
-                $rootScope.pageTitle = results.title + ' - iHelp';
-                self.busy = false;
-            });
+            self.detail = results;
+            $rootScope.post = self.detail;
+            if (!self.detail.urlImages.original) {
+                self.detail.urlImages.original = $rootScope.initConfig.img_default;
+            }
+            $rootScope.pageTitle = results.title + ' - iHelp';
+            self.busy = false;
+        });
     }
 
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
@@ -190,7 +151,7 @@
 
 
         self.contactInitialState = function () {
-            self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
+            self.notification = { name: '', email: '', message: '', phone: '', kind: '' };
             self.context = {};
 
         };
@@ -203,10 +164,10 @@
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {
-                    self.contactInitialState();
-                    NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
-                    self.busy = false;
-                },
+                self.contactInitialState();
+                NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                self.busy = false;
+            },
                 function (data) {
                     //error
                     NotificationSrv.error('Hubo ' + ' un error al procesar el formulario, intenta más tarde por favor');
@@ -254,9 +215,9 @@
                     search: self.searchTerm,
                     page: self.page
                 }).$promise.then(function (results) {
-                        //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
-                        self.listSearch = results.results;
-                    });
+                    //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
+                    self.listSearch = results.results;
+                });
             }
         });
 
@@ -269,7 +230,7 @@
         };
 
         self.getMorePosts = function () {
-            if (self.busy || !self.next)return;
+            if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
 
@@ -282,14 +243,14 @@
                 search: self.searchTerm,
                 page: self.page
             }).$promise.then(function (results) {
-                    //self.responseResults = $filter('filter')(results.results, {'slug': '!slider'});
-                    self.listSearch = self.listSearch.concat(results.results);
-                    self.busy = false;
-                    self.next = results.next;
-                    self.loadPostError = false;
-                }, function (error) {
-                    self.loadPostError = false;
-                });
+                //self.responseResults = $filter('filter')(results.results, {'slug': '!slider'});
+                self.listSearch = self.listSearch.concat(results.results);
+                self.busy = false;
+                self.next = results.next;
+                self.loadPostError = false;
+            }, function (error) {
+                self.loadPostError = false;
+            });
         };
 
         self.getMorePosts();
@@ -315,7 +276,7 @@
         self.busy = false;
 
         self.getMorePosts = function () {
-            if (self.busy || !self.next)return;
+            if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
 
@@ -327,10 +288,10 @@
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
-                    self.list = self.list.concat(results.results);
-                    self.busy = false;
-                    self.next = results.next;
-                });
+                self.list = self.list.concat(results.results);
+                self.busy = false;
+                self.next = results.next;
+            });
         };
 
         self.getMorePosts();
@@ -351,8 +312,8 @@
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
-                    self.list1 = results.results;
-                });
+                self.list1 = results.results;
+            });
         };
         self.Tab2 = function () {
             self.list2 = [];
@@ -363,8 +324,8 @@
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
-                    self.list2 = results.results;
-                });
+                self.list2 = results.results;
+            });
         };
         self.Tab3 = function () {
             self.list3 = [];
@@ -375,8 +336,8 @@
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
-                    self.list3 = results.results;
-                });
+                self.list3 = results.results;
+            });
         };
         self.Tab4 = function () {
             self.list4 = [];
@@ -387,8 +348,8 @@
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
-                    self.list4 = results.results;
-                });
+                self.list4 = results.results;
+            });
         };
     }
 
