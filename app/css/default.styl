@@ -130,7 +130,7 @@ body
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color #5d5d5d
+      color #746857
       padding 37px 15px
       font-size 18px
       font-family 'Poppins', sans-serif
@@ -199,7 +199,7 @@ body
       color #fff
     p
       color #fff
-      font-size 18px
+      font-size 24px
       text-align justify
       padding 15px 0
       font-weight 300
@@ -317,18 +317,21 @@ body
 /************** content area default ****************/
 .header-title-page
   .img-title
-    background-position top center
+    background-position center
     background-size cover
     background-repeat no-repeat
     height 130px
     .title
+      background-color rgba(0,0,0,0.5)
       color white
-      padding 50px 60px 0
+      padding 50px 75px
 #content-area
-  margin 30px 0 60px
-  .title-post
+  margin 0
+  padding 30px 60px
+  background-color #fff
+  .title-category
     text-align left
-    color #3a2103
+    color #746857
     clear both
     .title
       color #555
@@ -582,22 +585,23 @@ body
   padding 25px
 .box-widget
   padding 5px 0
-  background-color white
-  border-left 1px solid #ddd
+  background-color #f5f5f5
+  border-radius 5px
+  border 1px solid #eee
   .box-widget-header
     padding 10px
     border-bottom 1px solid #ddd
     font-size 22px
     background-color transparent
-    color #3a2103
+    color #746857
   .box-widget-container
     padding 20px
     h3>a, h2>a
       font-size 14px
-      color #777
+      color #746857
       font-weight 300
       &:hover
-        color #bf9e4f
+        color #d96263
     h2
       font-size 18px
       color #6a5c5d
@@ -615,6 +619,16 @@ body
     box-shadow 0 0 0 transparent !important
     h3
       color #cb6c18
+.list-sidebar
+  margin-left -35px
+  li
+    list-style-type none
+    display inline-block
+    padding-right 10px
+  li > a
+    color #746857
+    &:hover
+      color #d96263
 .box-blog
   padding-bottom 30px !important
   .btn-red
@@ -624,20 +638,20 @@ body
     height auto
     text-transform normal
     p
-      color #777
-    h3
+      color #7c7c7c
       font-size 16px
+    h3
+      font-size 24px
       padding 5px 0
-      color #555
+      color #746857
       font-weight bold
-      margin 0
+      margin-bottom 10px
       &:hover
         color #7e0000
 
 .box-white
   background-color white
-  margin 20px
-  padding 0
+  padding 20px 0
   transition all 0.5s ease
   color #555
   border-bottom 1px solid #eee
@@ -647,7 +661,7 @@ body
     height 40px
   .simple-header
     .img-box
-      background-size cover
+      background-size contain
       height 250px
       background-repeat no-repeat
       background-position center center
@@ -769,7 +783,13 @@ body
       .list-group-item:first-child
         border-top-left-radius 0px
         border-top-right-radius 0px
-
+.list
+  margin-left -20px
+  li
+    color white
+.bg-main
+  height 1px
+  background-color #ccc
 #parallax
   background-image none
   background-repeat no-repeat

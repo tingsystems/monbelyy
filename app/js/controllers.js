@@ -104,7 +104,7 @@
 
             PostSrv.get({
                 kind: 'post',
-                category: 'noticias',
+                category: 'blog',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 sizePage: 9,

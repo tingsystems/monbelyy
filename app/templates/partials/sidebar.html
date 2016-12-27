@@ -1,16 +1,24 @@
 <div class="box-widget">
     <div class="box-widget-header">
-        Contacto
+        ¿Necesitas ayuda?
     </div>
     <div class="box-widget-container">
 
-        <h3><a href="tel:3535320911"><i class="ion-ios-telephone-outline"></i> (353) 532 0911</a></h3>
-        <h3><a href="tel:3535326816"><i class="ion-ios-telephone-outline"></i> (353) 532 6816</a></h3>
+        <h3><a href="tel:3535320911"><i class="ion-ios-telephone"></i> (333) 333 2222</a></h3>
+
+        <h3><a href="tel:3535326816"><i class="ion-ios-telephone"></i> (333) 333 2222</a></h3>
+
         <h3><a href="mailto:{{ initConfig.email }}"><i class="ion-ios-email-outline"></i>
             {{ initConfig.email }}</a>
         </h3>
+
         <h3>
-            <a href="https://www.facebook.com/prados6386" target="_blank"><i class="ion-social-facebook"></i></a>
+            <ul class="list-sidebar">
+                <!--<li ng-repeat="item in mainNavMenu">-->
+                <li ng-repeat="item in NavMenuSocial">
+                    <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
+                </li>
+            </ul>
         </h3>
 
         <br/>
