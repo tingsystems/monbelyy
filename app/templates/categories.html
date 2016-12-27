@@ -6,7 +6,7 @@
 <section id="content-area" class="content-blog">
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-sm-9">
+            <div class="col-md-12 col-sm-12">
                 <div class="content-pages" infinite-scroll='Post.getMorePosts()'
                      infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
                     <div class="row">
@@ -18,8 +18,9 @@
                                     <div class="img-box" style="background-image: url('{{ entry.urlImages.thumbnails ? entry.urlImages.thumbnails : initConfig.img_default }}')"></div>
                                 </div>
                                 <div class="blog-container col-md-8 col-sm-8">
-                                    <div class="height-title"><h3>{{ entry.title }}</h3></div>
-                                    <div class="height-summary"><p>{{ entry.excerpt| characters:250 }}</p></div>
+                                    <h3>{{ entry.title }}</h3>
+                                    <p>{{ entry.excerpt| characters:250 }}</p>
+                                    <br/><br/>
                                     <button class="btn btn-red">Leer más <i class="fa fa-angle-right"></i></button>
                                 </div>
                             </a>
@@ -35,9 +36,9 @@
                     <!--post list -->
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3 widgets">
+            <!--<div class="col-md-3 col-sm-3 widgets">
                 <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
-            </div>
+            </div>-->
         </div>
     </div>
 </section>

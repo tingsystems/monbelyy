@@ -186,6 +186,17 @@
             });
         }
 
+        if (!$rootScope.NavMenuSocial) {
+            TaxonomySrv.query({
+                parent: '13378ba1-7bc9-4ac9-8401-fee227b4a84a',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                $rootScope.NavMenuSocial = response;
+            }, function (error) {
+            });
+        }
+
         if (!$rootScope.footerNavMenuConact) {
             TaxonomySrv.query({
                 parent: 'a3f38323-d1cc-4a9c-b5db-869ba7b310f9',
@@ -196,6 +207,18 @@
             }, function (error) {
             });
         }
+
+        if (!$rootScope.footerNavMenuConactOne) {
+            TaxonomySrv.query({
+                parent: '208571ff-dcc4-469d-a231-081723544731',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                $rootScope.footerNavMenuConactOne = response;
+            }, function (error) {
+            });
+        }
+
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',

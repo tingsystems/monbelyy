@@ -1,17 +1,18 @@
 <div class="container">
     <div class="col-sm-4 contact-sty">
         <h3>Contáctanos</h3>
-        <a href="tel:333333333"><i class="ion-ios-telephone"></i> 333 333 33 33</a> <br/>
-        <a href="tel:info@ihelp.com"><i class="ion-ios-telephone"></i> info@ihelp.com</a> <br/>
-        <a href="#"> <i class="fa fa-facebook"></i></a>
-        <a href="#"> <i class="fa fa-twitter"></i></a>
-        <a href="#"> <i class="fa fa-youtube"></i></a>
+        <ul class="list">
+            <li ng-repeat="option in footerNavMenuConactOne">
+                <a href="{{option.name}}" ><img width="15" src="{{ option.urlImages.original}}" style="padding-right: 5px;" alt="Contacto"/>{{option.name}}</a>
+            </li>
+        </ul>
+
     </div>
     <div class="col-sm-4 contact-sty">
         <h3>
             Acerca de iHelp
         </h3>
-        <ul>
+        <ul class="list">
             <li ng-repeat="option in footerNavMenuConact"><a href="{{option.link}}" >{{option.name}}</a></li>
         </ul>
     </div>
