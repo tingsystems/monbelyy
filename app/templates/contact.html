@@ -1,6 +1,9 @@
 <div class="header-title-page">
     <div class="img-title" style="background-image: url('../img/bg-header.jpg')">
-        <h2 class="title">Contáctanos</h2>
+        <div class="title">
+            <h2>Contáctanos</h2>
+            <small>Tú opinión es importante</small>
+        </div>
     </div>
 </div>
 <section id="content-area">
@@ -11,18 +14,25 @@
                     <div class="social-media">
                         <div class="col-md-6">
                             <div class="col-md-12 title-post">
-                                <h3 class="title">Tu opinión es importante</h3>
+                                <h3 class="title">Llámanos</h3>
                                 <hr/>
                             </div>
                             <div class="social">
-                                <h3><a href="tel:3535320911"><i class="fa fa-phone"></i>(353) 532 0911</a></h3>
+                                <ul class="list">
+                                    <li ng-repeat="post in contactMenuData">
+                                        <a class="contact-foo-side" href="{{ post.excerpt }}"><i
+                                                class="{{ post.title }}"></i> <span
+                                                ng-bind-html="post.content | trustHtml"></span></a>
+                                    </li>
+                                </ul>
 
-                                <h3><a href="tel:3535326816"><i class="fa fa-phone"></i>(353) 532 6816</a></h3>
-
-                                <h3><a href="mailto:{{ initConfig.email }}"><i class="fa fa-envelope"></i>
-                                    {{ initConfig.email }}</a></h3>
-
-                                <h3><a href="#" target="_blank"><i class="fa fa-facebook-square"></i> Facebook</a></h3>
+                                <ul class="list list-sidebar">
+                                    <!--<li ng-repeat="item in mainNavMenu">-->
+                                    <li ng-repeat="item in NavMenuSocial">
+                                        <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}"
+                                                                                     data-pack="social"></i></a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="col-md-6">

@@ -115,15 +115,50 @@ body
 /************** main css ******************/
 .log-section-mobile
   display none
+.header.smaller
+  height 85px
+  position fixed
+  .navbar-default
+    background #d96263 /* fallback for old browsers */
+    background -webkit-linear-gradient(to left, #d96263 , #F45C43) /* Chrome 10-25, Safari 5.1-6 */
+    background linear-gradient(to left, #d96263 , #F45C43) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    .navbar-nav > li > a
+      color #fff
+      padding 33px 15px
+     .navbar-nav > li > a:hover
+        color rgba(255,255,255,0.8)
+    .logo-white
+      display inline
+      width 150px
+      margin 5px 0
+    .logo
+      display none
+  .sub-main
+    display none
+header
+  width 100%
+  height 150px
+  overflow hidden
+  top 0
+  left 0
+  z-index 999
+  background-color transparent
+  -webkit-transition height 0.3s
+  -moz-transition height 0.3s
+  -ms-transition height 0.3s
+  -o-transition height 0.3s
+  transition height 0.3s
+
 .header
   text-align center
+
   .navbar-default
+    position absolute
+    background-color white
     left 0
     right 0
-    background white
     height 100px
-    border-top 3px dashed #fff
-    border-bottom 3px dashed #fff
+    border none
     border-radius 0
     margin-bottom 0
     z-index 9999
@@ -178,6 +213,9 @@ body
   .logo
     width 180px
     margin-top 5px
+
+  .logo-white
+      display none
 
 .navbar-header
   color #d2b770 !important
@@ -781,12 +819,17 @@ body
       a
         color #777
       .list-group-item:first-child
-        border-top-left-radius 0px
-        border-top-right-radius 0px
+        border-top-left-radius 0
+        border-top-right-radius 0
 .list
-  margin-left -20px
+  margin-left -35px
   li
+    list-style-type none
     color white
+    .contact-foo-side
+      display flex
+      i
+        padding-right 5px
 .bg-main
   height 1px
   background-color #ccc
@@ -824,10 +867,20 @@ body
     a
       font-size 20px
       padding-right 30px
+.form-horizontal
+  label
+    color #746857
+.title-post
+  h3
+    color #746857 !important
 .social
-  h2
-    font-size 24px
-    color #79afa0
+  clear both
+  .social-icons, .page-contact > i
+      font-size 20px
+      color #746857
+  .list > li > a, .list > li > a > span > p
+    color #746857
+    font-size 28px
 
 /* Projects detail */
 .recommendations-detail
@@ -1096,15 +1149,6 @@ footer
   i
     color #0177B5
 
-.social-media
-  color #555
-  padding 10px 0
-  .social
-    a
-      color #555
-      font-size 18px
-      line-height 40px
-
 #slider-area
   background-color #444
   height auto
@@ -1287,10 +1331,9 @@ footer
   width 100%
   height 100%
   opacity 1
-  background #1D976C /* fallback for old browsers */
-  background -webkit-linear-gradient(to left, #1D976C , #93F9B9) /* Chrome 10-25, Safari 5.1-6 */
-  background linear-gradient(to left, #1D976C , #93F9B9) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background #EB3349 /* fallback for old browsers */
+  background -webkit-linear-gradient(to left, #EB3349 , #F45C43) /* Chrome 10-25, Safari 5.1-6 */
+  background linear-gradient(to left, #EB3349 , #F45C43) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
 .block-ui-message

@@ -69,6 +69,7 @@
         toggle: toggleClass
     };
 
+
 // transport
     if (typeof define === 'function' && define.amd) {
         // AMD
@@ -95,4 +96,18 @@ $(document).ready(function () {
 
 });
 
-
+function init() {
+    window.addEventListener('scroll', function (e) {
+        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+            shrinkOn = 10,
+            header = document.querySelector("header");
+        if (distanceY > shrinkOn) {
+            classie.add(header, 'smaller');
+        } else {
+            if (classie.has(header, 'smaller')) {
+                classie.remove(header, 'smaller');
+            }
+        }
+    });
+}
+window.onload = init();

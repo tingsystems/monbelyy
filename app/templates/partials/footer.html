@@ -2,8 +2,8 @@
     <div class="col-sm-4 contact-sty">
         <h3>Contáctanos</h3>
         <ul class="list">
-            <li ng-repeat="option in footerNavMenuConactOne">
-                <a href="{{option.name}}" ><img width="15" src="{{ option.urlImages.original}}" style="padding-right: 5px;" alt="Contacto"/>{{option.name}}</a>
+            <li ng-repeat="post in contactMenuData">
+                 <a class="contact-foo-side" href="{{ post.excerpt }}" ><i class="{{ post.title }}"></i> <span ng-bind-html="post.content | trustHtml"></span></a>
             </li>
         </ul>
 

@@ -127,16 +127,57 @@ body {
 .log-section-mobile {
   display: none;
 }
+.header.smaller {
+  height: 85px;
+  position: fixed;
+}
+.header.smaller .navbar-default {
+  background: #d96263 /* fallback for old browsers */;
+  background: -webkit-linear-gradient(to left, #d96263, #f45c43) /* Chrome 10-25, Safari 5.1-6 */;
+  background: linear-gradient(to left, #d96263, #f45c43) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+}
+.header.smaller .navbar-default .navbar-nav > li > a {
+  color: #fff;
+  padding: 33px 15px;
+}
+.header.smaller .navbar-default .navbar-nav > li > a:hover {
+  color: rgba(255,255,255,0.8);
+}
+.header.smaller .navbar-default .logo-white {
+  display: inline;
+  width: 150px;
+  margin: 5px 0;
+}
+.header.smaller .navbar-default .logo {
+  display: none;
+}
+.header.smaller .sub-main {
+  display: none;
+}
+header {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: transparent;
+  -webkit-transition: height 0.3s;
+  -moz-transition: height 0.3s;
+  -ms-transition: height 0.3s;
+  -o-transition: height 0.3s;
+  transition: height 0.3s;
+}
 .header {
   text-align: center;
 }
 .header .navbar-default {
+  position: absolute;
+  background-color: #fff;
   left: 0;
   right: 0;
-  background: #fff;
   height: 100px;
-  border-top: 3px dashed #fff;
-  border-bottom: 3px dashed #fff;
+  border: none;
   border-radius: 0;
   margin-bottom: 0;
   z-index: 9999;
@@ -201,6 +242,9 @@ body {
 .header .logo {
   width: 180px;
   margin-top: 5px;
+}
+.header .logo-white {
+  display: none;
 }
 .navbar-header {
   color: #d2b770 !important;
@@ -929,14 +973,21 @@ color
   color: #777;
 }
 .box-sidebar .box-body .list-group .list-group-item:first-child {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 .list {
-  margin-left: -20px;
+  margin-left: -35px;
 }
 .list li {
+  list-style-type: none;
   color: #fff;
+}
+.list li .contact-foo-side {
+  display: flex;
+}
+.list li .contact-foo-side i {
+  padding-right: 5px;
 }
 .bg-main {
   height: 1px;
@@ -988,9 +1039,24 @@ color
   font-size: 20px;
   padding-right: 30px;
 }
-.social h2 {
-  font-size: 24px;
-  color: #79afa0;
+.form-horizontal label {
+  color: #746857;
+}
+.title-post h3 {
+  color: #746857 !important;
+}
+.social {
+  clear: both;
+}
+.social .social-icons,
+.social .page-contact > i {
+  font-size: 20px;
+  color: #746857;
+}
+.social .list > li > a,
+.social .list > li > a > span > p {
+  color: #746857;
+  font-size: 28px;
 }
 .recommendations-detail {
   padding-top: 60px;
@@ -1290,15 +1356,6 @@ footer .contact-sty .download-app > i:hover {
 .linkedin i {
   color: #0177b5;
 }
-.social-media {
-  color: #555;
-  padding: 10px 0;
-}
-.social-media .social a {
-  color: #555;
-  font-size: 18px;
-  line-height: 40px;
-}
 #slider-area {
   background-color: #444;
   height: auto;
@@ -1504,9 +1561,9 @@ footer .contact-sty .download-app > i:hover {
   width: 100%;
   height: 100%;
   opacity: 1;
-  background: #1d976c /* fallback for old browsers */;
-  background: -webkit-linear-gradient(to left, #1d976c, #93f9b9) /* Chrome 10-25, Safari 5.1-6 */;
-  background: linear-gradient(to left, #1d976c, #93f9b9) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+  background: #eb3349 /* fallback for old browsers */;
+  background: -webkit-linear-gradient(to left, #eb3349, #f45c43) /* Chrome 10-25, Safari 5.1-6 */;
+  background: linear-gradient(to left, #eb3349, #f45c43) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
 }
 .block-ui-message {
   background: transparent;

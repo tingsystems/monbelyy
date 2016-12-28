@@ -44,7 +44,7 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
-                    'title': { template: '<title>{{pageTitle}}</title>' },
+                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'Post',
@@ -55,7 +55,7 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
-                    'title': { template: '<title>{{pageTitle}}</title>' },
+                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'Page',
@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: { pageTitle: 'iHelp' },
+                data: {pageTitle: 'iHelp'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -94,7 +94,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: { pageTitle: 'iHelp' },
+                data: {pageTitle: 'iHelp'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -125,7 +125,7 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, translate, $localStorage) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, translate, $localStorage, PostSrv) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
@@ -181,9 +181,9 @@
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                $rootScope.mainNavMenu = response;
-            }, function (error) {
-            });
+                    $rootScope.mainNavMenu = response;
+                }, function (error) {
+                });
         }
 
         if (!$rootScope.NavMenuSocial) {
@@ -192,9 +192,9 @@
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                $rootScope.NavMenuSocial = response;
-            }, function (error) {
-            });
+                    $rootScope.NavMenuSocial = response;
+                }, function (error) {
+                });
         }
 
         if (!$rootScope.footerNavMenuConact) {
@@ -203,20 +203,21 @@
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                $rootScope.footerNavMenuConact = response;
-            }, function (error) {
-            });
+                    $rootScope.footerNavMenuConact = response;
+                }, function (error) {
+                });
         }
 
-        if (!$rootScope.footerNavMenuConactOne) {
-            TaxonomySrv.query({
-                parent: '208571ff-dcc4-469d-a231-081723544731',
+        if (!$rootScope.contactMenuData) {
+            PostSrv.get({
+                category: 'datos-de-contacto',
                 isActive: 'True',
-                ordering: 'order'
-            }).$promise.then(function (response) {
-                $rootScope.footerNavMenuConactOne = response;
-            }, function (error) {
-            });
+                sizePage: 5,
+                ordering: '-createdAt',
+                fields: 'title,link,excerpt,content'
+            }).$promise.then(function (results) {
+                    $rootScope.contactMenuData = results.results;
+                });
         }
 
     }
@@ -229,7 +230,7 @@
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'translate', '$localStorage'];
+        'translate', '$localStorage', 'PostSrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
 })();

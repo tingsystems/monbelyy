@@ -3,23 +3,18 @@
         ¿Necesitas ayuda?
     </div>
     <div class="box-widget-container">
+        <ul class="list list-sidebar">
+            <li ng-repeat="post in contactMenuData">
+                 <a class="contact-foo-side" href="{{ post.excerpt }}" ><i class="{{ post.title }}"></i> <span ng-bind-html="post.content | trustHtml"></span></a>
+            </li>
+        </ul>
 
-        <h3><a href="tel:3535320911"><i class="ion-ios-telephone"></i> (333) 333 2222</a></h3>
-
-        <h3><a href="tel:3535326816"><i class="ion-ios-telephone"></i> (333) 333 2222</a></h3>
-
-        <h3><a href="mailto:{{ initConfig.email }}"><i class="ion-ios-email-outline"></i>
-            {{ initConfig.email }}</a>
-        </h3>
-
-        <h3>
-            <ul class="list-sidebar">
-                <!--<li ng-repeat="item in mainNavMenu">-->
-                <li ng-repeat="item in NavMenuSocial">
-                    <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
-                </li>
-            </ul>
-        </h3>
+        <ul class="list-sidebar">
+            <!--<li ng-repeat="item in mainNavMenu">-->
+            <li ng-repeat="item in NavMenuSocial">
+                <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
+            </li>
+        </ul>
 
         <br/>
 

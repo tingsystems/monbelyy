@@ -33,6 +33,7 @@
         }).$promise.then(function (results) {
             self.postFeauterd = results.results;
         });
+
     }
 
     function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
