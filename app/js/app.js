@@ -138,7 +138,7 @@
         });
         //various config
         $rootScope.initConfig = {
-            googleKey: 'UA-53555832-39',
+            googleKey: 'UA-53555832-42',
             meta_color: '#eee7de',
             img_default: ' http://serviciosahuayo.com/img/img-default.jpg',
             email: 'soporte@ihelp.com.mx'
