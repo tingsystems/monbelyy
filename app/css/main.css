@@ -156,7 +156,7 @@ body {
 }
 header {
   width: 100%;
-  height: 150px;
+  height: 100px;
   overflow: hidden;
   top: 0;
   left: 0;
@@ -262,6 +262,8 @@ header {
 }
 #us {
   padding: 60px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 #us .who-us h1 {
   color: #fff;
@@ -425,7 +427,7 @@ header {
 }
 #content-area {
   margin: 0;
-  padding: 30px 60px;
+  padding: 30px 25px;
   background-color: #fff;
 }
 #content-area .title-category {
@@ -1811,6 +1813,10 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .header.smaller {
+    height: 100px;
+    position: fixed;
+  }
   .container-tab {
     width: 100%;
     padding-left: 0;
@@ -1880,6 +1886,7 @@ footer .contact-sty .download-app > i:hover {
     height: 40px;
   }
   .slider-img {
+    height: 600px;
     background-size: cover;
     background-position: left;
   }
@@ -1971,6 +1978,17 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .header.smaller {
+    height: 85px;
+    position: inherit;
+  }
+  .header.smaller .navbar-default .navbar-nav > li > a {
+    color: #746857;
+    padding: 33px 15px;
+  }
+  .header.smaller .navbar-default .navbar-nav > li > a:hover {
+    color: rgba(255,255,255,0.8);
+  }
   #slider-area {
     background-color: #444;
     height: auto;
@@ -2068,7 +2086,7 @@ footer .contact-sty .download-app > i:hover {
     width: 40%;
   }
   .slider-img {
-    height: 380px;
+    height: 650px;
     background-size: cover;
     background-position: left;
   }
@@ -2097,11 +2115,27 @@ footer .contact-sty .download-app > i:hover {
     border-left: none;
     border-top: 1px solid #ddd;
   }
-  .carousel-caption h3 {
-    font-size: 36px;
+  .carousel-caption {
+    top: 0;
+    padding-top: 40px !important;
+    background-color: rgba(255,255,255,0.8);
+    width: 100%;
+    height: 100%;
+  }
+  .carousel-caption .box-slide {
+    width: 100%;
+  }
+  .carousel-caption .box-slide h1 {
+    font-size: 28px;
+  }
+  .carousel-caption .box-slide p {
+    font-size: 20px;
+  }
+  .carousel-caption h1 {
+    font-size: 22px;
   }
   .carousel-caption p {
-    font-size: 28px;
+    font-size: 16px;
   }
   .boxes-project {
     margin-bottom: 15px;
@@ -2162,9 +2196,6 @@ footer .contact-sty .download-app > i:hover {
     background: transparent;
     padding: 0;
     margin: 30px 0 25px;
-  }
-  .carousel-caption {
-    top: 30%;
   }
   .navbar-default .navbar-toggle {
     border-color: transparent;
@@ -2239,17 +2270,23 @@ footer .contact-sty .download-app > i:hover {
     word-wrap: break-word;
   }
   #content-area {
-    margin: 30px 0 60px;
+    margin: 30px 0 25px;
   }
   .content-blog {
     margin: 30px 0 60px !important;
   }
   .carousel-caption {
-    top: 20%;
+    top: 0;
     padding: 0 15px;
   }
   .carousel-caption .btn {
     margin-bottom: 20px;
+  }
+  .header .navbar-default {
+    position: fixed;
+  }
+  .header .navbar-default .navbar-nav li > a {
+    color: #746857;
   }
   .main-nav {
     background: #ddd;
