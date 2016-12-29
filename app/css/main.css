@@ -418,7 +418,7 @@ header {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 130px;
+  height: auto;
 }
 .header-title-page .img-title .title {
   background-color: rgba(0,0,0,0.5);
@@ -1544,7 +1544,7 @@ footer .contact-sty .download-app > i:hover {
   background-position: center center;
 }
 .height-title {
-  height: 60px;
+  height: auto;
 }
 .height-summary {
   height: 70px;
@@ -2270,10 +2270,14 @@ footer .contact-sty .download-app > i:hover {
     word-wrap: break-word;
   }
   #content-area {
-    margin: 30px 0 25px;
+    margin: 15px 0 25px;
   }
   .content-blog {
-    margin: 30px 0 60px !important;
+    margin: 0 0 60px !important;
+  }
+  .social .list > li > a,
+  .social .list > li > a > span > p {
+    font-size: 18px;
   }
   .carousel-caption {
     top: 0;
@@ -2281,6 +2285,9 @@ footer .contact-sty .download-app > i:hover {
   }
   .carousel-caption .btn {
     margin-bottom: 20px;
+  }
+  .height-summary {
+    height: auto;
   }
   .header .navbar-default {
     position: fixed;
