@@ -153,7 +153,7 @@
             // Init var post for meta tags index
             $rootScope.post = {
                 'title': 'iHelp',
-                'excerpt': 'iHelp',
+                'excerpt': 'Mantente a salvo en manos de quienes te aman',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
                 }
