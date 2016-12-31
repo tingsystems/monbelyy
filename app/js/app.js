@@ -140,7 +140,7 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-42',
             meta_color: '#eee7de',
-            img_default: ' http://ihelp.com.mx/img/img-default.jpg',
+            img_default: ' https://ihelp.com.mx/img/img-default.jpg',
             email: 'soporte@ihelp.com.mx'
 
         };
