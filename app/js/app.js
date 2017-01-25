@@ -65,7 +65,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'iHelp'},
+                data: {pageTitle: 'Corriente Alterna'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -94,7 +94,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'iHelp'},
+                data: {pageTitle: 'Corriente Alterna'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -130,8 +130,8 @@
         $rootScope.host = 'https://www.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
         $rootScope.apiV = 'v1';
-        $rootScope.siteId = 'c04f2ec3-0384-41bd-bb9e-488f87e90be3';
-        $http.defaults.headers.common['TS-TOKEN'] = 'LB8zd8MI9zWoydlEw3ZZy7Z5b3jqGfHGIUhkm44i';
+        $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
+        $http.defaults.headers.common['TS-TOKEN'] = 'qg4AkRlXmMV3viERPyYFkiVrpfWd8ZymK7KosHiY';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -140,8 +140,8 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-42',
             meta_color: '#eee7de',
-            img_default: ' https://ihelp.com.mx/img/img-default.jpg',
-            email: 'soporte@ihelp.com.mx'
+            img_default: ' https://corrientealterna.com.mx/img/img-default.jpg',
+            email: 'info@corrientealterna.com.mx'
 
         };
         // initialise google analytics
@@ -152,8 +152,8 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'iHelp',
-                'excerpt': 'Mantente a salvo en manos de quienes te aman',
+                'title': 'Corriente Alterna',
+                'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
                 }
@@ -161,7 +161,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'iHelp';
+        $rootScope.pageTitle = 'Corriente Alterna';
         function showResponsive($window) {
             if ($window.innerWidth <= 768) {
                 return true
@@ -177,7 +177,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'a2e789e8-d53a-4391-b401-a2d279a137e9',
+                parent: 'b27b4218-8285-4b44-b9a7-f04a96108dd1',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {

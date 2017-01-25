@@ -4,7 +4,7 @@
     function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'iHelp';
+        $rootScope.pageTitle = 'Corriente Alterna';
 
         PostSrv.get({
             category: 'slider',
@@ -16,13 +16,13 @@
             self.mainSlider = results.results;
         });
 
-        PostDetailSrv.get({
+        /*PostDetailSrv.get({
             slug: 'inicio-nosotros',
             isActive: 'True',
             fields: 'slug,urlImages,title,excerpt,content'
         }).$promise.then(function (result) {
             self.postAbout = result;
-        });
+        });*/
 
         PostSrv.get({
             category: 'home-feutered',
@@ -53,7 +53,7 @@
             }).$promise.then(function (results) {
                 if (results.results.length) {
                     self.categoryName = results.results[0].name;
-                    $rootScope.pageTitle = self.categoryName + ' - iHelp';
+                    $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
                 }
             });
         }
@@ -119,12 +119,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - iHelp';
+        $rootScope.pageTitle = 'Blog - Corriente Alterna';
     }
 
     function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
         var self = this;
-        $rootScope.pageTitle = 'iHelp';
+        $rootScope.pageTitle = 'Corriente Alterna';
 
         self.busy = true;
         PostDetailSrv.get({
@@ -137,7 +137,7 @@
             if (!self.detail.urlImages.original) {
                 self.detail.urlImages.original = $rootScope.initConfig.img_default;
             }
-            $rootScope.pageTitle = results.title + ' - iHelp';
+            $rootScope.pageTitle = results.title + ' - Corriente Alterna';
             self.busy = false;
         });
     }
@@ -145,11 +145,10 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'iHelp';
+            $rootScope.pageTitle = 'Corriente Alterna';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Contacto - iHelp';
+            $rootScope.pageTitle = 'Contacto - Corriente Alterna';
         }
-
 
         self.contactInitialState = function () {
             self.notification = { name: '', email: '', message: '', phone: '', kind: '' };
@@ -353,7 +352,6 @@
             });
         };
     }
-
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])

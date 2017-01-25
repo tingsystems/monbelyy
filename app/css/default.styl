@@ -1,5 +1,7 @@
-/************** deafault css******************/
+cablack = #2F3130
+cagreen = #009F7B
 
+/************** deafault css******************/
 .no-padding
   padding 0 !important
 
@@ -116,12 +118,10 @@ body
 .log-section-mobile
   display none
 .header.smaller
-  height 85px
+  height 160px
   position fixed
   .navbar-default
-    background #d96263 /* fallback for old browsers */
-    background -webkit-linear-gradient(to left, #d96263 , #F45C43) /* Chrome 10-25, Safari 5.1-6 */
-    background linear-gradient(to left, #d96263 , #F45C43) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background cablack /* fallback for old browsers */
     .navbar-nav > li > a
       color #fff
       padding 33px 15px
@@ -154,7 +154,7 @@ header
 
   .navbar-default
     position absolute
-    background-color white
+    background-color cablack
     left 0
     right 0
     height 100px
@@ -165,7 +165,7 @@ header
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
-      color #746857
+      color #fff
       padding 37px 15px
       font-size 18px
       font-family 'Poppins', sans-serif
@@ -354,6 +354,11 @@ header
     font-size 45px
     color #555
 
+/*header info*/
+.navbar-info
+  padding 1.5em 0
+  background-color #fff
+
 /************** content area default ****************/
 .header-title-page
   .img-title
@@ -401,6 +406,10 @@ header
   padding 20px 0
   color orange
 /************** Home area css ******************/
+.services
+  background cagreen
+  .box-service
+    padding 15px 0 10px
 #contact
   background #e9e8e7
   text-align center
