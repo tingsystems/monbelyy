@@ -269,13 +269,29 @@
 
     }
 
-    function ProductsCtrl(PostSrv) {
+    function ProductsCtrl(TaxonomySrv, PostSrv, $stateParams, $rootScope) {
         var self = this;
 
         self.list = [];
         self.page = 0;
         self.next = true;
         self.busy = false;
+
+        // get post by category
+        if ($stateParams.slug) {
+            TaxonomySrv.get({
+                slug: $stateParams.slug,
+
+                isActive: 'True',
+                sizePage: 1
+            }).$promise.then(function (results) {
+                if (results.results.length) {
+                    self.categoryName = results.results[0].name;
+                    $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
+                }
+            });
+        }
+        console.log($stateParams.slug, 'Hola');
 
         self.getMorePosts = function () {
             if (self.busy || !self.next) return;
@@ -285,7 +301,7 @@
             PostSrv.get({
                 category: 'productos',
                 isActive: 'True',
-                sizePage: 20,
+                sizePage: 9,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
@@ -358,6 +374,72 @@
     function LoginCtrl(){
 
     }
+    function ProductDetailCtrl(PostDetailSrv, $stateParams, $rootScope){
+        var self = this;
+        $rootScope.pageTitle = 'Corriente Alterna';
+
+        self.busy = true;
+        PostDetailSrv.get({
+            slug: $stateParams.slug,
+            isActive: 'True',
+            fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
+        }).$promise.then(function (results) {
+            self.detail = results;
+            $rootScope.post = self.detail;
+            if (!self.detail.urlImages.original) {
+                self.detail.urlImages.original = $rootScope.initConfig.img_default;
+            }
+            $rootScope.pageTitle = results.title + ' - Corriente Alterna';
+            self.busy = false;
+        });
+
+    }
+    function ProductsByCategory(){
+        var self = this;
+
+        self.list = [];
+        self.page = 0;
+        self.next = true;
+        self.busy = false;
+
+        // get post by category
+        if ($stateParams.slug) {
+            TaxonomySrv.get({
+                slug: $stateParams.slug,
+
+                isActive: 'True',
+                sizePage: 1
+            }).$promise.then(function (results) {
+                if (results.results.length) {
+                    self.categoryName = results.results[0].name;
+                    $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
+                }
+            });
+        }
+        console.log($stateParams.slug, 'Hola');
+
+        self.getMorePosts = function () {
+            if (self.busy || !self.next) return;
+            self.page += 1;
+            self.busy = true;
+
+            PostSrv.get({
+                category: 'productos',
+                isActive: 'True',
+                sizePage: 9,
+                fields: 'title,slug,excerpt,urlImages,createdAt',
+                ordering: '-createdAt',
+                page: self.page
+            }).$promise.then(function (results) {
+                self.list = self.list.concat(results.results);
+                self.busy = false;
+                self.next = results.next;
+            });
+        };
+
+        self.getMorePosts();
+    }
+
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -372,6 +454,8 @@
         .controller('ProductsCtrl', ProductsCtrl)
         .controller('TabsCtrl', TabsCtrl)
         .controller('LoginCtrl', LoginCtrl)
+        .controller('ProductDetailCtrl', ProductDetailCtrl)
+        .controller('ProductsByCategory', ProductsByCategory);
 
 
     // inject dependencies to controllers
@@ -383,8 +467,10 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    ProductsCtrl.$inject = ['PostSrv'];
+    ProductsCtrl.$inject = ['TaxonomySrv', 'PostSrv', '$stateParams', '$rootScope'];
     TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
+    ProductDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
+    ProductsByCategory.$inject = [];
 
 })();

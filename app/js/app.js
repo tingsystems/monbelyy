@@ -112,6 +112,17 @@
                         controller: 'ProductsCtrl'
                     }
                 }
+            })
+            .state('product-detail', {
+                url: '/product/:slug',
+                data: {pageTitle: 'Corriente Alterna'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/product-detail.html',
+                        controllerAs: 'Product',
+                        controller: 'ProductDetailCtrl'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');

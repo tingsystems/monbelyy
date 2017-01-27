@@ -1,8 +1,5 @@
-
-<div class="header-title-page">
-    <div class="img-title" style="background-image: url('../img/bg-header.jpg')">
-        <h2 class="title">{{ Product.categoryName }}</h2>
-    </div>
+<div class="header-title">
+    <h2 class="title text-center">Productos</h2>
 </div>
 <section id="content-area">
     <div class="container">
@@ -10,17 +7,17 @@
             <div class="col-md-12 content-pages" infinite-scroll='Product.getMoreProducts()'
                  infinite-scroll-disabled='Product.busy || !Product.next || Product.loadProducts'>
                 <div class="container">
-                    <div class="col-md-3" ng-repeat="entry in Product.list">
-                        <div class="box-white">
-                            <a ui-sref="post_detail({slug: entry.slug})">
-                                <div class="simple-header">
-                                    <div class="img-box" style="background-image: url('{{ entry.urlImages.medium ? entry.urlImages.medium : initConfig.img_default }}"></div>
-                                </div>
-                                <div class="simple-container">
-                                    <h3>{{ entry.title }}</h3>
-                                    <p>{{ entry.excerpt| characters:50 }}</p>
-                                </div>
-                            </a>
+                    <div class="row text-center">
+                        <div class="col-md-4" ng-repeat="entry in Product.list">
+                            <div class="box-prod">
+                                <a ui-sref="product-detail({slug:entry.slug})">
+                                <div class="bg-prod"
+                                     style="background-image: url('{{entry.urlImages.original }}')"></div>
+                                <h3 class="prod-descrip">{{entry.title}}</h3>
+                                <h4 class="prod-price"><strong>{{entry.excerpt}}</strong></h4>
+                                </a>
+                                <button class="btn btn-success btn-cart">Agregar al carrito</button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-12" ng-show="Product.busy">
