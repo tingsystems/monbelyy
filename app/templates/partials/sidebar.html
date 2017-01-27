@@ -1,46 +1,21 @@
 <div class="box-widget">
-    <div class="box-widget-header">
-        ¿Necesitas ayuda?
-    </div>
+    <h4 class="widget-title">Contáctanos</h4>
+    <hr class="dividerw">
     <div class="box-widget-container">
         <ul class="list list-sidebar">
             <li ng-repeat="post in contactMenuData">
                  <a class="contact-foo-side" href="{{ post.excerpt }}" ><i class="{{ post.title }}"></i> <span ng-bind-html="post.content | trustHtml"></span></a>
             </li>
         </ul>
-
-        <ul class="list-sidebar">
+    </div>
+    <hr class="dividerw">
+    <h4 class="widget-title">Síguenos en</h4>
+    <div class="box-widget-container" style="padding-bottom: 50px;">
+        <ul class="list list-sidebar">
             <!--<li ng-repeat="item in mainNavMenu">-->
             <li ng-repeat="item in NavMenuSocial">
                 <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
             </li>
         </ul>
-
-        <br/>
-
-        <h2><i class="ion-ios-chatboxes-outline"></i> Envíanos un mensaje</h2>
-
-        <div class="box-widget-container ng-scope" ng-controller="ContactCtrl as Contact">
-            <form ng-submit="Contact.createNotification('CONTACT_FORM')"
-                  class="ng-pristine ng-invalid ng-invalid-required ng-valid-email">
-                <div class="form-group">
-                    <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched"
-                           id="InputName" placeholder="Nombre" required="" ng-model="Contact.notification.name"
-                           style="">
-                </div>
-                <div class="form-group">
-                    <input type="email"
-                           class="form-control ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required"
-                           id="InputEmail1" placeholder="Email" required="" ng-model="Contact.notification.email">
-                </div>
-                <div class="form-group">
-                    <textarea name="text" id="" cols="100%" rows="4"
-                              class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" required=""
-                              ng-model="Contact.notification.message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-block btn-red" ng-disabled="Contact.busy">Enviar
-                    <!-- ngIf: Contact.busy --></button>
-            </form>
-        </div>
     </div>
 </div>

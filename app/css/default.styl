@@ -1,5 +1,9 @@
-cablack = #2F3130
-cagreen = #009F7B
+catext = #565656
+catext2 = #676767
+catext3 = #717171
+cablack = #323232
+cagreen = #439E7B
+cagreenh = #174F36
 
 /************** deafault css******************/
 .no-padding
@@ -51,18 +55,18 @@ h5,
 h6
   margin 0 0 15px
   font-weight 500
-  font-family 'Poppins', sans-serif
+  font-family 'Roboto Slab', sans-serif
 
 .section_padding
   padding: 80px 0
 
 p
-  font-family 'Poppins', sans-serif
+  font-family 'Roboto', sans-serif
   font-weight 300
   font-size 16px
 
 body
-  font-family 'Poppins', sans-serif
+  font-family 'Roboto', sans-serif
 
 .white
   color white !important
@@ -126,7 +130,7 @@ body
       color #fff
       padding 33px 15px
      .navbar-nav > li > a:hover
-        color rgba(255,255,255,0.8)
+        color cagreen
     .logo-white
       display inline
       width 150px
@@ -168,14 +172,14 @@ header
       color #fff
       padding 37px 15px
       font-size 18px
-      font-family 'Poppins', sans-serif
+      font-family 'Roboto Slab', sans-serif
       font-weight 500
       -webkit-transition all ease-in-out .35s
       -o-transition all ease-in-out .35s
       transition all ease-in-out .35s
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
-      color #d96263
+      color cagreen
     .container-fluid
       display table
       margin 0 auto
@@ -302,7 +306,7 @@ header
 .slider-img
   background-position top center
   background-size 100%
-  height 620px
+  height 500px
   background-repeat no-repeat
 .bg-inner
   width 100%
@@ -313,6 +317,7 @@ header
   background-image none
 .carousel-inner
   background-color transparent
+  margin-top 32px
 .carousel-control
   display none
 .carousel-indicators
@@ -356,10 +361,18 @@ header
 
 /*header info*/
 .navbar-info
-  padding 1.5em 0
+  padding 1.3em 0
   background-color #fff
+  a
+    color catext
+    font-size 16px
+  i
+    font-size 22px
 
 /************** content area default ****************/
+.dividerw
+  border 1px solid #ccc
+  margin-top 0
 .header-title-page
   .img-title
     background-position center
@@ -406,10 +419,73 @@ header
   padding 20px 0
   color orange
 /************** Home area css ******************/
+.bg-prod
+  height 215px
+  background-position center center
+  background-size contain !important
+  background-repeat no-repeat !important
+
 .services
   background cagreen
   .box-service
-    padding 15px 0 10px
+    padding 0 50px
+    i
+      color #fff
+      font-size 7em
+    h3
+      padding 35px 20px
+      text-align left
+      color #fff
+
+.products
+  padding 70px 0
+  .box-products
+    .prod-title
+      h3
+        font-weight 600
+        color catext
+    .prod-entry
+      padding 15px 19% 10px
+      margin-bottom 50px
+      p
+        color catext2
+        font-size 20px
+
+.box-prod
+  background rgba(254,254,254,1);
+  background -moz-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
+  background -webkit-gradient(left top, left bottom, color-stop(0%, rgba(254,254,254,1)), color-stop(51%, rgba(254,254,254,1)), color-stop(100%, rgba(223,223,223,1)));
+  background -webkit-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
+  background -o-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
+  background -ms-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
+  background linear-gradient(to bottom, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
+  padding 20px 0
+  border-bottom 3px solid #C1C1C0
+  .img-prod
+    padding-bottom 15px
+  .prod-descrip
+    color #717171
+    height 65px
+    font-family Roboto
+    padding 15px 10% 0
+    margin-bottom 20px
+    font-weight 100
+  .prod-price
+    color cablack
+.register
+  background-image url('../img/bg-section.jpg')
+  background-repeat no-repeat
+  background-size cover
+  height 373px
+  .reg-content
+    padding 70px 0 50px
+    .reg-descrip
+      color catext3
+      font-weight 100
+      font-family Roboto
+    .reg-q
+      color cagreen
+      margin 1.5em 0
 #contact
   background #e9e8e7
   text-align center
@@ -634,9 +710,10 @@ header
   padding 25px
 .box-widget
   padding 5px 0
-  background-color #f5f5f5
-  border-radius 5px
-  border 1px solid #eee
+  border 1px solid #ccc
+  .widget-title
+    padding-left 10px
+    font-weight bold
   .box-widget-header
     padding 10px
     border-bottom 1px solid #ddd
@@ -644,13 +721,13 @@ header
     background-color transparent
     color #746857
   .box-widget-container
-    padding 20px
+    padding 5px
     h3>a, h2>a
       font-size 14px
-      color #746857
+      color catext
       font-weight 300
       &:hover
-        color #d96263
+        color cagreen
     h2
       font-size 18px
       color #6a5c5d
@@ -675,9 +752,12 @@ header
     display inline-block
     padding-right 10px
   li > a
-    color #746857
+    color catext
+    font-size 17px
     &:hover
-      color #d96263
+      color cagreen
+    p
+      font-weight 500
 .box-blog
   padding-bottom 30px !important
   .btn-red
@@ -941,14 +1021,21 @@ header
 
 /************** footer area css ******************/
 footer
-  background-color #726c64
+  background-color cablack
   padding 30px 0
   .contact-sty
-    h3, a
+    h3
       color white
+      padding-bottom 5px
       font-size 18
-      &:hover
-        color #d96263
+      border-bottom 2px solid #ccc
+    .list
+      a
+        color #ccc
+        &:hover
+          color cagreen
+          transition all .25s ease-in-out
+
     .download-app > i
       font-size 48px
       padding-right 20px
@@ -956,6 +1043,22 @@ footer
         color #d96263
 
 /**************** Buttons ***************/
+.btn-cart
+  border-radius 0 !important
+  background cagreen
+  border-color cagreen
+  .btn-cart&:hover, .btn-cart&:focus
+    background cagreenh !important
+.btn-reg
+  background #fff
+  color cagreen
+  border 2px solid cagreen
+  border-radius 0
+  .btn-reg&:hover, .btn-reg&:focus
+    border-color cagreen
+    background-color transparent
+    color cagreen
+
 .btn
   font-size 18px
 /* buttons sizes */

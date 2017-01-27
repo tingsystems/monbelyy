@@ -16,22 +16,24 @@
             self.mainSlider = results.results;
         });
 
-        /*PostDetailSrv.get({
-            slug: 'inicio-nosotros',
-            isActive: 'True',
-            fields: 'slug,urlImages,title,excerpt,content'
-        }).$promise.then(function (result) {
-            self.postAbout = result;
-        });*/
-
         PostSrv.get({
-            category: 'home-feutered',
+            category: 'productos',
             isActive: 'True',
             sizePage: 20,
             ordering: '-createdAt',
-            fields: 'title,content,slug,excerpt'
+            fields: 'title,content,urlImages,slug,excerpt'
         }).$promise.then(function (results) {
-            self.postFeauterd = results.results;
+            self.products = results.results;
+        });
+
+        PostSrv.get({
+            category: 'servicios',
+            isActive: 'True',
+            sizePage: 20,
+            ordering: '-createdAt',
+            fields: 'title,content,urlImages,slug,excerpt'
+        }).$promise.then(function (results) {
+            self.services = results.results;
         });
 
     }

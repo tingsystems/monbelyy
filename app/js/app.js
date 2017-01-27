@@ -188,7 +188,7 @@
 
         if (!$rootScope.NavMenuSocial) {
             TaxonomySrv.query({
-                parent: '13378ba1-7bc9-4ac9-8401-fee227b4a84a',
+                parent: '924838a3-4f24-40e5-8d4f-f9aaf406ab9a',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -199,13 +199,23 @@
 
         if (!$rootScope.footerNavMenuConact) {
             TaxonomySrv.query({
-                parent: 'a3f38323-d1cc-4a9c-b5db-869ba7b310f9',
+                parent: 'ee529e2b-1315-4e57-a269-981ee999c0a5',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
                     $rootScope.footerNavMenuConact = response;
                 }, function (error) {
                 });
+        }
+        if (!$rootScope.contactHelp) {
+            TaxonomySrv.query({
+                parent: 'b41db416-2beb-42ae-83d8-af19be924097',
+                isActive: 'True',
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                $rootScope.contactHelp = response;
+            }, function (error) {
+            });
         }
 
         if (!$rootScope.contactMenuData) {

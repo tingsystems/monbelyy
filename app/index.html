@@ -37,7 +37,8 @@
           ng-if="post"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.corrientealterna.com.mx{{ $state.href($state.current.name) }}"/>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
 
     <!-- build:css css/style.min.css -->
@@ -68,13 +69,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-4 col-md-4 text-left">
-                    <span><a href=""><i class="fa fa-phone"></i> 333 222 22 22</a></span>
+                    <span><i class="icon ion-ios-telephone-outline"></i><a href=""> 333 222 22 22</a></span>
                 </div>
                 <div class="col-sm-4 col-md-4">
-                    <span><a href=""><i class="fa fa-envelope"></i> info@corrientealterna.com.mx</a></span>
+                    <span><i class="icon ion-ios-email-outline"></i><a href=""> {{initConfig.email}}</a></span>
                 </div>
                 <div class="col-sm-4 col-md-4 text-right">
-                    <span><a href=""><i class="fa fa-shopping-cart"></i> Carrito</a></span>
+                    <span><i class="icon ion-ios-cart-outline"></i><a href=""> Carrito</a></span>
                 </div>
             </div>
         </div>
@@ -91,20 +92,20 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand">
-                    <a ui-sref="home"><img src="img/logo.png" class="logo" alt="Corriente Alterna"></a>
-                    <a ui-sref="home"><img src="img/logo-white.png" class="logo-white" alt="Corriente Alterna"></a>
+                    <a ui-sref="home"><img src="img/logo-ca.png" class="logo" alt="Corriente Alterna"></a>
+                    <a ui-sref="home"><img src="img/logo-ca.png" class="logo-white" alt="Corriente Alterna"></a>
 
                 </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <div class="collapse navbar-collapse" id="header-mainMenu">
-                <ul class="nav navbar-nav navbar-right mobile">
-                    <!--<li ng-repeat="item in mainNavMenu">-->
+                <!--<ul class="nav navbar-nav navbar-right mobile">
+                    <!--<li ng-repeat="item in mainNavMenu">
                     <li ng-repeat="item in NavMenuSocial">
                         <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
                     </li>
-                </ul>
+                </ul>-->
                 <ul class="nav navbar-nav nav-main navbar-right">
                     <!--<li ng-repeat="item in mainNavMenu">-->
                     <li ng-repeat="item in mainNavMenu">
@@ -171,6 +172,7 @@
 <script src="/js/directives.js"></script>
 <script src="/js/filters.js"></script>
 <script src="/js/services.js"></script>
+<script src="/js/templates.js"></script>
 <script src="/js/translate.js"></script>
 <!-- endinject -->
 <!-- endbuild -->

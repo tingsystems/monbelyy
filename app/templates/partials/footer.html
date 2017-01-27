@@ -10,7 +10,7 @@
     </div>
     <div class="col-sm-4 contact-sty">
         <h3>
-            Acerca de iHelp
+            Acerca de Corriente Alterna
         </h3>
         <ul class="list">
             <li ng-repeat="option in footerNavMenuConact"><a href="{{option.link}}" >{{option.name}}</a></li>
@@ -18,9 +18,10 @@
     </div>
     <div class="col-sm-4 contact-sty">
         <h3>
-            Descargar app
+            Ayuda
         </h3>
-        <!--<a href="#" class="download-app"><i class="fa fa-apple"></i></a>-->
-        <a href="https://goo.gl/bnxVLE" target="_blank" class="download-app"><i class="fa fa-android"></i></a>
+        <ul class="list">
+            <li ng-repeat="option in contactHelp"><a href="{{option.link}}" >{{option.name}}</a></li>
+        </ul>
     </div>
 </div>
