@@ -355,6 +355,10 @@
         };
     }
 
+    function LoginCtrl(){
+
+    }
+
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
@@ -366,7 +370,9 @@
         .controller('SearchCtrl', SearchCtrl)
         .controller('NavBarCtrl', NavBarCtrl)
         .controller('ProductsCtrl', ProductsCtrl)
-        .controller('TabsCtrl', TabsCtrl);
+        .controller('TabsCtrl', TabsCtrl)
+        .controller('LoginCtrl', LoginCtrl)
+
 
     // inject dependencies to controllers
     HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
@@ -379,4 +385,6 @@
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['PostSrv'];
     TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
+    LoginCtrl.$inject = [];
+
 })();

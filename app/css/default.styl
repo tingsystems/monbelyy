@@ -139,6 +139,17 @@ body
       display none
   .sub-main
     display none
+
+.navbar-info
+  .shopping-cart
+    a
+      font-size 24px
+      font-weight 100
+      &:hover
+        text-decoration none
+    i
+      font-size 30px
+
 header
   width 100%
   height 100px
@@ -365,7 +376,8 @@ header
   background-color #fff
   a
     color catext
-    font-size 16px
+    font-size 18px
+    font-family "Roboto Slab, sans-serif"
   i
     font-size 22px
 
@@ -373,16 +385,13 @@ header
 .dividerw
   border 1px solid #ccc
   margin-top 0
-.header-title-page
-  .img-title
-    background-position center
-    background-size cover
-    background-repeat no-repeat
-    height auto
-    .title
-      background-color rgba(0,0,0,0.5)
-      color white
-      padding 50px 75px
+.header-title
+  background cagreen
+  height 165px
+  .title
+    color white
+    font-size 2.5em
+    padding 100px 0
 #content-area
   margin 0
   padding 30px 25px
@@ -460,7 +469,7 @@ header
   background -ms-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
   background linear-gradient(to bottom, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
   padding 20px 0
-  border-bottom 3px solid #C1C1C0
+  border-bottom 1px solid #C1C1C0
   .img-prod
     padding-bottom 15px
   .prod-descrip
@@ -958,12 +967,17 @@ header
     a
       font-size 20px
       padding-right 30px
+.forgot-pass
+  a
+    color catext2
+    &:hover, &:focus
+      color cagreen
 .form-horizontal
   label
     color #746857
 .title-post
-  h3
-    color #746857 !important
+  .title
+    color catext3 !important
 .social
   clear both
   .social-icons, .page-contact > i
@@ -1043,10 +1057,20 @@ footer
         color #d96263
 
 /**************** Buttons ***************/
+.btn-login-ca
+  padding 10px 0
+  border-radius 0 !important
+  background cagreen
+  font-family "Roboto Slab"
+  font-weight 600 !important
+  color #fff
+  font-size 24px !important
+  .btn-login-ca&:hover, .btn-cart&:focus
+    background cagreenh !important
+    color #fff
 .btn-cart
   border-radius 0 !important
   background cagreen
-  border-color cagreen
   .btn-cart&:hover, .btn-cart&:focus
     background cagreenh !important
 .btn-reg
@@ -1315,7 +1339,7 @@ footer
     color #3a2103
 .contact-section
   background transparent
-  margin-top 10px
+  margin-top 100px
 .form-item
   padding-top 20px
 .form-control
@@ -1343,7 +1367,7 @@ footer
 
   &:focus
     padding 6px 12px
-    border 1px solid #cb6133 !important
+    border 1px solid cagreen !important
     outline 0
     -webkit-box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
     box-shadow 0 0 0 9px rgba(0, 0, 0, 0)

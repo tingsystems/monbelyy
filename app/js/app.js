@@ -41,6 +41,16 @@
                     }
                 }
             })
+            .state('login', {
+                url: '/login',
+                views: {
+                    'content': {
+                        templateUrl: '/templates/login.html',
+                        controllerAs: 'Login',
+                        controller: 'LoginCtrl'
+                    }
+                }
+            })
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
