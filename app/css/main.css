@@ -1570,6 +1570,7 @@ footer .contact-sty .download-app > i:hover {
 .form-section {
   background: transparent;
   padding-bottom: 100px;
+  padding-top: 40px;
 }
 .form-section .title,
 .form-section .text-form {
