@@ -573,6 +573,9 @@ header {
   color: #439e7b;
   margin: 1.5em 0;
 }
+.register .reg-content .reg-q a {
+  color: #439e7b;
+}
 #contact {
   background: #e9e8e7;
   text-align: center;
