@@ -123,7 +123,30 @@
                         controller: 'ProductDetailCtrl'
                     }
                 }
+            })
+            .state('shopcart', {
+                url: '/shopcart',
+                data: {pageTitle: 'Carrito de compras'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shopcart.html',
+                        controllerAs: 'Shopcart',
+                        controller: 'ShopCartCtrl'
+                    }
+                }
+            })
+            .state('payment', {
+                url: '/payment',
+                data: {pageTitle: 'Proceso de pago'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/payment.html',
+                        controllerAs: 'Payment',
+                        controller: 'PaymentCtrl'
+                    }
+                }
             });
+
 
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(false);

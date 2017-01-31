@@ -61,6 +61,7 @@ p {
 }
 body {
   font-family: 'Roboto', sans-serif;
+  background: #f5f5f5;
 }
 .white {
   color: #fff !important;
@@ -124,6 +125,16 @@ body {
     content: '1 .column.size-1-1';
   }
 }
+.caret-up {
+  width: 1000px;
+  height: 0;
+  border-left: 4px solid rgba(0,0,0,0);
+  border-right: 4px solid rgba(0,0,0,0);
+  border-bottom: 4px solid;
+  display: inline-block;
+  margin-left: 2px;
+  vertical-align: middle;
+}
 .log-section-mobile {
   display: none;
 }
@@ -132,14 +143,14 @@ body {
   position: fixed;
 }
 .header.smaller .navbar-default {
-  background: #323232 /* fallback for old browsers */;
+  background: #fff /* fallback for old browsers */;
 }
 .header.smaller .navbar-default .navbar-nav > li > a {
-  color: #fff;
+  color: #565656;
   padding: 33px 15px;
 }
 .header.smaller .navbar-default .navbar-nav > li > a:hover {
-  color: #439e7b;
+  color: #aa261d;
 }
 .header.smaller .navbar-default .logo-white {
   display: inline;
@@ -181,11 +192,10 @@ header {
 }
 .header .navbar-default {
   position: absolute;
-  background-color: #323232;
+  background-color: #fff;
   left: 0;
   right: 0;
   height: 100px;
-  border: none;
   border-radius: 0;
   margin-bottom: 0;
   z-index: 9999;
@@ -194,7 +204,7 @@ header {
   padding: 5px 15px;
 }
 .header .navbar-default .navbar-nav > li > a {
-  color: #fff;
+  color: #565656;
   padding: 37px 15px;
   font-size: 18px;
   font-family: 'Roboto Slab', sans-serif;
@@ -206,7 +216,7 @@ header {
 .header .navbar-default .navbar-nav > li > a:hover,
 .header .navbar-default .navbar-nav > li > a:focus {
   background-color: transparent;
-  color: #439e7b;
+  color: #aa261d;
 }
 .header .navbar-default .container-fluid {
   display: table;
@@ -440,7 +450,7 @@ header {
   margin-top: 0;
 }
 .header-title {
-  background: #439e7b;
+  background: #aa261d;
   height: 145px;
 }
 .header-title .title {
@@ -501,7 +511,7 @@ header {
   background-repeat: no-repeat !important;
 }
 .services {
-  background: #439e7b;
+  background: #aa261d;
 }
 .services .box-service {
   padding: 0 50px;
@@ -570,11 +580,11 @@ header {
   font-family: Roboto;
 }
 .register .reg-content .reg-q {
-  color: #439e7b;
+  color: #aa261d;
   margin: 1.5em 0;
 }
 .register .reg-content .reg-q a {
-  color: #439e7b;
+  color: #aa261d;
 }
 #contact {
   background: #e9e8e7;
@@ -633,14 +643,15 @@ header {
   color: #717171;
 }
 .product-info {
-  background: #f5bb06;
+  background: #aa261d;
   height: 105px;
 }
 .product-info .info-descrip {
+  color: #f5f5f5;
   padding: 10px 6% 0;
 }
 .product-info .info-descrip a {
-  color: #333;
+  color: #f5f5f5;
 }
 #product-detail {
   margin: 100px 0;
@@ -872,7 +883,7 @@ color
 }
 .box-widget .box-widget-container h3>a:hover,
 .box-widget .box-widget-container h2>a:hover {
-  color: #439e7b;
+  color: #aa261d;
 }
 .box-widget .box-widget-container h2 {
   font-size: 18px;
@@ -910,7 +921,7 @@ color
   font-size: 17px;
 }
 .list-sidebar li > a:hover {
-  color: #439e7b;
+  color: #aa261d;
 }
 .list-sidebar li > a p {
   font-weight: 500;
@@ -1172,7 +1183,7 @@ color
 }
 .forgot-pass a:hover,
 .forgot-pass a:focus {
-  color: #439e7b;
+  color: #aa261d;
 }
 .form-horizontal label {
   color: #746857;
@@ -1257,7 +1268,7 @@ footer .contact-sty .list a {
   color: #ccc;
 }
 footer .contact-sty .list a:hover {
-  color: #439e7b;
+  color: #aa261d;
   transition: all 0.25s ease-in-out;
 }
 footer .contact-sty .download-app > i {
@@ -1270,7 +1281,7 @@ footer .contact-sty .download-app > i:hover {
 .btn-login-ca {
   padding: 10px 0;
   border-radius: 0 !important;
-  background: #439e7b;
+  background: #aa261d;
   font-family: "Roboto Slab";
   font-weight: 600 !important;
   color: #fff;
@@ -1278,29 +1289,32 @@ footer .contact-sty .download-app > i:hover {
 }
 .btn-login-ca.btn-login-ca:hover,
 .btn-cart.btn-login-ca:focus {
-  background: #174f36 !important;
+  background: #7e1a1d !important;
   color: #fff;
 }
 .btn-cart {
   border-radius: 0 !important;
-  border-color: #439e7b;
-  background: #439e7b;
+  color: #fff;
+  border-color: #aa261d;
+  background: #aa261d;
 }
 .btn-cart.btn-cart:hover,
 .btn-cart.btn-cart:focus {
-  background: #174f36 !important;
+  border-color: #aa261d;
+  background: #7e1a1d !important;
+  color: #fff;
 }
 .btn-reg {
   background: #fff;
-  color: #439e7b;
-  border: 2px solid #439e7b;
+  color: #aa261d;
+  border: 2px solid #aa261d;
   border-radius: 0;
 }
 .btn-reg.btn-reg:hover,
 .btn-reg.btn-reg:focus {
-  border-color: #439e7b;
+  border-color: #aa261d;
   background-color: transparent;
-  color: #439e7b;
+  color: #aa261d;
 }
 .btn {
   font-size: 18px;
@@ -1632,7 +1646,7 @@ footer .contact-sty .download-app > i:hover {
 }
 .form-control:focus {
   padding: 6px 12px;
-  border: 1px solid #439e7b !important;
+  border: 1px solid #aa261d !important;
   outline: 0;
   -webkit-box-shadow: 0 0 0 9px rgba(0,0,0,0);
   box-shadow: 0 0 0 9px rgba(0,0,0,0);
