@@ -7,12 +7,6 @@
                 <a post-link="{ link: {url: slide.link, target: '_self'} }">
                     <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
                 </a>
-                <!--<div class="carousel-caption">
-                    <div class="box-slide">
-                        <h1>{{slide.title}}</h1>
-                        <article ng-bind-html="slide.content | trustHtml"></article>
-                    </div>
-                </div>-->
             </uib-slide>
         </uib-carousel>
     </div>
@@ -20,7 +14,7 @@
 <section class="services">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 box-service text-center" ng-repeat="service in Home.services">
+            <div class="col-sm-4 box-service text-center" ng-repeat="service in Home.services">
                 <a ui-sref="post_detail({slug: service.slug})">
                     <div class="col-md-3">
                         <span><i class="{{service.excerpt}}"></i></span>
@@ -46,7 +40,7 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4" ng-repeat="product in Home.products">
+                <div class="col-sm-4" ng-repeat="product in Home.products">
                     <div class="box-prod">
                         <div class="bg-prod" style="background-image: url('{{product.urlImages.original }}')"></div>
                         <h3 class="prod-descrip">{{product.title}}</h3>

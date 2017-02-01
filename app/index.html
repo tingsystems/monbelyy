@@ -67,16 +67,15 @@
 <header class="header">
     <div class="navbar-info">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-4 col-md-4 text-left">
-                    <a href=""><i class="icon ion-ios-telephone-outline"></i> 333 222 22 22</a>
-                </div>
-                <div class="col-sm-4 col-md-4">
-                  <a href=""> <i class="icon ion-ios-email-outline"></i> {{initConfig.email}}</a>
-                </div>
-                <div class="col-sm-4 col-md-4 text-right shopping-cart">
-                   <a href=""><i class="icon ion-ios-cart-outline"></i> Carrito</a>
-                </div>
+            <div class="col-sm-4 col-md-4 text-left">
+                <a href=""><i class="icon ion-ios-telephone-outline"></i> 333 222 22 22</a>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <a href=""> <i class="icon ion-ios-email-outline"></i> {{initConfig.email}}</a>
+            </div>
+            <div class="col-sm-4 col-md-4 text-right shopping-cart">
+                <span class="qty-cart">12</span>
+                <a href=""><i class="icon ion-ios-cart-outline"></i> Carrito</a>
             </div>
         </div>
     </div>
@@ -92,24 +91,27 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand">
-                    <a ui-sref="home"><img src="img/logo-ca.png" class="logo" alt="Corriente Alterna"></a>
-                    <a ui-sref="home"><img src="img/logo-ca.png" class="logo-white" alt="Corriente Alterna"></a>
+                    <a ui-sref="home"><img src="img/logo.jpg" class="logo" alt="Corriente Alterna"></a>
+                    <a ui-sref="home"><img src="img/logo.jpg" class="logo-white" alt="Corriente Alterna"></a>
 
                 </div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <div class="collapse navbar-collapse" id="header-mainMenu">
-                <!--<ul class="nav navbar-nav navbar-right mobile">
-                    <!--<li ng-repeat="item in mainNavMenu">
-                    <li ng-repeat="item in NavMenuSocial">
-                        <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
-                    </li>
-                </ul>-->
                 <ul class="nav navbar-nav nav-main navbar-right">
                     <!--<li ng-repeat="item in mainNavMenu">-->
                     <li ng-repeat="item in mainNavMenu">
                         <a href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">P <b class="caret"></b></a>
+                        <ul class="dropdown-menu container">
+                            <li class="col-md-3"><a href="#">Action</a></li>
+                            <li class="col-md-3"><a href="#">Another action</a></li>
+                            <li class="col-md-3"><a href="#">Something else here</a></li>
+                            <li class="col-md-3"><a href="#">Something else here</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
