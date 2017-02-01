@@ -80,11 +80,7 @@
     }
 
 })(window);
-$('ul.nav li.dropdown').hover(function () {
-    $(this).find('.dropdown-menu').first().stop(true, true).delay(150).slideDown();
-}, function () {
-    $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideUp();
-});
+
 /* owl */
 $(document).ready(function () {
     // config for lightbox2
@@ -96,33 +92,8 @@ $(document).ready(function () {
 
 });
 
-/*$(function(){
-    $(".dropdown").hover(
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
-            $(this).toggleClass('open');
-            $('b', this).toggleClass("caret caret-up");
-        },
-        function() {
-            $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
-            $(this).toggleClass('open');
-            $('b', this).toggleClass("caret caret-up");
-        });
-});*/
-
-
-/*function init() {
-    window.addEventListener('scroll', function (e) {
-        var distanceY = window.pageYOffset || document.documentElement.scrollTop,
-            shrinkOn = 10,
-            header = document.querySelector("header");
-        if (distanceY > shrinkOn) {
-            classie.add(header, 'smaller');
-        } else {
-            if (classie.has(header, 'smaller')) {
-                classie.remove(header, 'smaller');
-            }
-        }
-    });
-}
-window.onload = init();*/
+$('ul.nav li.dropdown').hover(function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+}, function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+});

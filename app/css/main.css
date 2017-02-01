@@ -67,7 +67,7 @@ body {
   color: #fff !important;
 }
 .content {
-  margin-top: 0;
+  margin-top: 100px;
 }
 .content-post {
   margin: 20px 0;
@@ -135,6 +135,11 @@ body {
   margin-left: 2px;
   vertical-align: middle;
 }
+.dropdown-menu {
+  width: 100vw;
+  min-width: 90vw;
+  top: 100px;
+}
 .log-section-mobile {
   display: none;
 }
@@ -173,9 +178,26 @@ body {
 .navbar-info .shopping-cart i {
   font-size: 30px;
 }
+.shopping-cart a > i {
+  font-size: 32px !important;
+}
+​,
+.shopping-cart a {
+  font-size: 28px !important;
+}
+.qty-cart {
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  border-radius: 30px;
+  background-color: #aa261d;
+  top: 0px;
+  right: 95px;
+  width: 20px;
+  height: 20px;
+}
 header {
   width: 100%;
-  height: 100px;
   overflow: hidden;
   top: 0;
   left: 0;
@@ -199,6 +221,8 @@ header {
   border-radius: 0;
   margin-bottom: 0;
   z-index: 9999;
+  box-shadow: 0 7px 10px rgba(0,0,0,0.3);
+  border-top: 1px solid #eee;
 }
 .header .navbar-default .navbar-brand {
   padding: 5px 15px;
@@ -236,13 +260,13 @@ header {
 }
 .header .navbar-default .navbar-nav .dropdown:hover .dropdown-toggle {
   background-color: transparent;
-  color: #f2dec7;
+  color: #aa261d;
 }
 .header .navbar-default .navbar-nav .dropdown .dropdown-menu {
   width: 100%;
   background-color: #fff;
   border: none;
-  border-top: 2px solid #389c80 !important;
+  border-top: 2px solid #aa261d !important;
   -webkit-box-shadow: 0px 5px 5px rgba(0,0,0,0.33);
   -moz-box-shadow: 0px 5px 5px rgba(0,0,0,0.33);
   box-shadow: 0px 5px 5px rgba(0,0,0,0.33);
@@ -254,8 +278,8 @@ header {
   padding: 10px 15px;
 }
 .header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a:hover {
-  background: rgba(56,156,128,0.4);
-  color: #fff;
+  background: transparent;
+  color: #aa261d;
 }
 .header .logo {
   width: 180px;
@@ -383,7 +407,6 @@ header {
 }
 .carousel-inner {
   background-color: transparent;
-  margin-top: 32px;
 }
 .carousel-control {
   display: none;
@@ -451,12 +474,12 @@ header {
 }
 .header-title {
   background: #aa261d;
-  height: 145px;
+  height: 80px;
 }
 .header-title .title {
   color: #fff;
   font-size: 2.5em;
-  padding: 90px 0;
+  padding: 20px 0;
 }
 #content-area {
   margin: 0;
@@ -864,6 +887,8 @@ color
 .box-widget .widget-title {
   padding-left: 10px;
   font-weight: bold;
+  padding: 20px 10px;
+  margin: 0;
 }
 .box-widget .box-widget-header {
   padding: 10px;
@@ -2006,9 +2031,25 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  .header.smaller {
-    height: 100px;
-    position: fixed;
+  .header-title {
+    height: auto;
+  }
+  .header-title .title {
+    padding: 20px 0;
+  }
+  .content {
+    margin-top: 100px;
+  }
+  .navbar-default {
+    margin-top: 90px;
+  }
+  .services .box-service h3 {
+    padding: 12px 20px 0;
+    text-align: center;
+  }
+  .services .box-service {
+    padding: 0;
+    text-align: center;
   }
   .container-tab {
     width: 100%;
@@ -2061,6 +2102,7 @@ footer .contact-sty .download-app > i:hover {
     border-left: 0 solid transparent;
     border-top: 1px solid #ccc;
     padding: 0;
+    border: none;
   }
   .fluid-res {
     padding: 0;
@@ -2079,8 +2121,8 @@ footer .contact-sty .download-app > i:hover {
     height: 40px;
   }
   .slider-img {
-    height: 600px;
-    background-size: cover;
+    height: 350px;
+    background-size: 100%;
     background-position: left;
   }
   header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a {
@@ -2171,16 +2213,38 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
-  .header.smaller {
-    height: 85px;
-    position: inherit;
+  .header-title {
+    height: 80px;
   }
-  .header.smaller .navbar-default .navbar-nav > li > a {
-    color: #746857;
-    padding: 33px 15px;
+  .header-title .title {
+    color: #fff;
+    font-size: 2em;
+    padding: 20px 4px 2px;
   }
-  .header.smaller .navbar-default .navbar-nav > li > a:hover {
-    color: rgba(255,255,255,0.8);
+  .services .box-service h3 {
+    text-align: center;
+  }
+  .register .reg-content .reg-descrip {
+    font-size: 18px;
+  }
+  .shopping-cart {
+    margin-top: 15px;
+  }
+  .navbar-info a,
+  .navbar-info a > i {
+    font-size: 16px;
+  }
+  .qty-cart {
+    right: 170px;
+  }
+  .navbar-info .col-sm-4 {
+    text-align: center;
+  }
+  .header .navbar-default {
+    height: auto;
+  }
+  .navbar-header {
+    padding: 0 0 25px;
   }
   #slider-area {
     background-color: #444;
@@ -2279,8 +2343,8 @@ footer .contact-sty .download-app > i:hover {
     width: 40%;
   }
   .slider-img {
-    height: 650px;
-    background-size: cover;
+    height: 150px;
+    background-size: 100%;
     background-position: left;
   }
   .box-gas {
@@ -2306,7 +2370,7 @@ footer .contact-sty .download-app > i:hover {
   .box-widget {
     padding: 0;
     border-left: none;
-    border-top: 1px solid #ddd;
+    border: none;
   }
   .carousel-caption {
     top: 0;
@@ -2404,6 +2468,7 @@ footer .contact-sty .download-app > i:hover {
   .widgets {
     margin-top: -35px;
     clear: both;
+    padding: 0;
   }
   .box-sidebar {
     padding-top: 20px;
@@ -2483,7 +2548,7 @@ footer .contact-sty .download-app > i:hover {
     height: auto;
   }
   .header .navbar-default {
-    position: fixed;
+    position: inherit;
   }
   .header .navbar-default .navbar-nav li > a {
     color: #746857;

@@ -66,9 +66,20 @@
 
 
 @media only screen and (min-width: 768px) and (max-width: 1024px)
-  .header.smaller
-    height 100px
-    position fixed
+  .header-title
+    height auto
+  .header-title .title
+    padding 20px 0
+  .content
+    margin-top 100px
+  .navbar-default 
+    margin-top 90px
+  .services .box-service h3 
+    padding 12px 20px 0
+    text-align center
+  .services .box-service
+    padding 0
+    text-align center  
   .container-tab
     width 100%
     padding-left 0
@@ -110,6 +121,7 @@
     border-left 0 solid transparent
     border-top 1px solid #ccc
     padding 0
+    border none
   .fluid-res
     padding 0
   #wrap
@@ -122,8 +134,8 @@
     font-size 16px
     height 40px
   .slider-img
-    height 600px
-    background-size cover
+    height 350px
+    background-size 100%
     background-position left
   header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a
     color #555
@@ -192,7 +204,6 @@
   .recent-work-wrap
     margin 5px
 
-
   .recent-work-wrap > .titles
     padding 35px 20px 10px
 
@@ -213,16 +224,31 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  .header-title
+    height 80px
 
-  .header.smaller
-    height 85px
-    position inherit
-    .navbar-default
-      .navbar-nav > li > a
-        color #746857
-        padding 33px 15px
-       .navbar-nav > li > a:hover
-          color rgba(255,255,255,0.8)
+  .header-title .title 
+    color #fff
+    font-size 2em
+    padding 20px 4px 2px
+  
+  .services .box-service h3
+    text-align center
+  .register .reg-content .reg-descrip
+    font-size 18px
+  .shopping-cart
+    margin-top 15px
+  .navbar-info a, .navbar-info a > i
+    font-size 16px
+  .qty-cart
+    right 170px
+  .navbar-info
+    .col-sm-4 
+      text-align center
+  .header .navbar-default
+    height auto
+  .navbar-header
+    padding 0 0 25px  
   #slider-area
     background-color #444
     height auto
@@ -299,8 +325,8 @@
   .download-app a > img
     width 40%
   .slider-img
-    height 650px
-    background-size cover
+    height 150px
+    background-size 100%
     background-position left
   .box-gas
     border-left none
@@ -319,7 +345,7 @@
   .box-widget
     padding 0
     border-left none
-    border-top 1px solid #ddd
+    border none
   .carousel-caption
     top 0
     padding-top 40px !important
@@ -389,6 +415,7 @@
   .widgets
     margin-top -35px
     clear both
+    padding 0
   .box-sidebar
     padding-top 20px
     clear both
@@ -444,7 +471,7 @@
     height auto
   .header
     .navbar-default
-      position fixed
+      position inherit
       .navbar-nav li > a
         color #746857
 

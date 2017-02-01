@@ -74,7 +74,7 @@ body
 
 /************** Grid css******************/
 .content
-  margin-top 0
+  margin-top 100px
 .content-post
   margin 20px 0
   article
@@ -131,6 +131,11 @@ body
   vertical-align middle
 
 /************** main css ******************/
+.dropdown-menu 
+  width 100vw
+  min-width 90vw
+  top 100px
+
 .log-section-mobile
   display none
 .header.smaller
@@ -161,10 +166,23 @@ body
         text-decoration none
     i
       font-size 30px
-
+.shopping-cart a > i
+  font-size 32px  !important
+​
+.shopping-cart a 
+  font-size 28px !important  
+.qty-cart
+  position absolute
+  color white
+  text-align center
+  border-radius 30px
+  background-color cagreen
+  top 0px
+  right 95px
+  width 20px
+  height 20px
 header
   width 100%
-  height 100px
   overflow hidden
   top 0
   left 0
@@ -181,13 +199,15 @@ header
 
   .navbar-default
     position absolute
-    background-color #fff
+    background-color white
     left 0
     right 0
     height 100px
     border-radius 0
     margin-bottom 0
     z-index 9999
+    box-shadow 0 7px 10px rgba(0,0,0,0.3)
+    border-top 1px solid #eee
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
@@ -217,13 +237,13 @@ header
     .navbar-nav
       .dropdown:hover .dropdown-toggle
         background-color transparent
-        color #f2dec7
+        color cagreen
       .dropdown
         .dropdown-menu
           width 100%
           background-color white
           border none
-          border-top 2px solid #389c80 !important
+          border-top 2px solid cagreen !important
           -webkit-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
           -moz-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
           box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
@@ -233,8 +253,8 @@ header
           font-size 16px
           padding 10px 15px
         .dropdown-menu >  li > a:hover
-          background rgba(56,156,128,0.4)
-          color white
+          background transparent
+          color cagreen
 
   .logo
     width 180px
@@ -339,7 +359,6 @@ header
   background-image none
 .carousel-inner
   background-color transparent
-  margin-top 32px
 .carousel-control
   display none
 .carousel-indicators
@@ -398,11 +417,11 @@ header
   margin-top 0
 .header-title
   background cagreen
-  height 145px
+  height 80px
   .title
     color white
     font-size 2.5em
-    padding 90px 0
+    padding 20px 0
 #content-area
   margin 0
   padding 70px 25px
@@ -749,6 +768,8 @@ header
   .widget-title
     padding-left 10px
     font-weight bold
+    padding 20px 10px
+    margin 0
   .box-widget-header
     padding 10px
     border-bottom 1px solid #ddd
