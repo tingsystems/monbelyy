@@ -1,0 +1,60 @@
+<div class="header-title">
+    <h2 class="title text-center">Carrito de compras</h2>
+</div>
+
+<section id="content-area" class="shop-cart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 text-center">
+                <div class="col-md-3">
+                    <div class="shopcart-img">
+                        <img src="../img/Servo-Motor.gif" alt="" width="200">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="shopcart-descrip">
+                        <h4>Servo Drive 750 Watts</h4>
+                        <h3>$290.00</h3>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <p>Cantidad</p>
+                </div>
+                <div class="col-md-2">
+                    <div class="shopcart-qty">
+                        <input type="number" min="0" class="form-control cart-qty">
+                    </div>
+                </div>
+
+                <div class="shopcart-delete">
+                    <a class="ion-ios-close-outline" style="font-size: 25px;"></a>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="details-prod">
+                    <h4 class="text-center">Resumen de pedido</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <td>Subtotal(2)</td>
+                                <td>$490.00</td>
+                            </tr>
+                            <tr>
+                                <td>Envío</td>
+                                <td>$0</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>$490</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <a ui-sref="payment" class="btn btn-success btn-cart btn-block">Procesar compra</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

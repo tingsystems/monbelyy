@@ -67,6 +67,7 @@ p
 
 body
   font-family 'Roboto', sans-serif
+  background #f5f5f5
 
 .white
   color white !important
@@ -118,6 +119,17 @@ body
   .deckgrid[deckgrid]::before
     content '1 .column.size-1-1'
 
+.caret-up
+  width 1000px
+  height 0
+  border-left 4px solid rgba(0, 0, 0, 0)
+  border-right 4px solid rgba(0, 0, 0, 0)
+  border-bottom 4px solid
+
+  display inline-block
+  margin-left 2px
+  vertical-align middle
+
 /************** main css ******************/
 .dropdown-menu 
   width 100vw
@@ -130,9 +142,9 @@ body
   height 160px
   position fixed
   .navbar-default
-    background cablack /* fallback for old browsers */
+    background #fff /* fallback for old browsers */
     .navbar-nav > li > a
-      color #fff
+      color catext
       padding 33px 15px
      .navbar-nav > li > a:hover
         color cagreen
@@ -191,7 +203,6 @@ header
     left 0
     right 0
     height 100px
-    border none
     border-radius 0
     margin-bottom 0
     z-index 9999
@@ -563,12 +574,13 @@ header
       padding-top 20px
       color catext3
 .product-info
-  background rgb(245, 187, 6)
+  background cagreen
   height 105px
   .info-descrip
+    color #f5f5f5
     padding 10px 6% 0
     a
-      color #333
+      color #f5f5f5
 #product-detail
   margin 100px 0
   .title-detail
@@ -1105,10 +1117,13 @@ footer
     color #fff
 .btn-cart
   border-radius 0 !important
+  color #fff
   border-color cagreen
   background cagreen
   .btn-cart&:hover, .btn-cart&:focus
+    border-color cagreen
     background cagreenh !important
+    color #fff
 .btn-reg
   background #fff
   color cagreen

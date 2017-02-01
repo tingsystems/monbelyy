@@ -439,7 +439,13 @@
 
         self.getMorePosts();
     }
+    
+    function ShopCartCtrl() {
+        
+    }
+    function PaymentCtrl() {
 
+    }
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -455,7 +461,9 @@
         .controller('TabsCtrl', TabsCtrl)
         .controller('LoginCtrl', LoginCtrl)
         .controller('ProductDetailCtrl', ProductDetailCtrl)
-        .controller('ProductsByCategory', ProductsByCategory);
+        .controller('ProductsByCategory', ProductsByCategory)
+        .controller('ShopCartCtrl', ShopCartCtrl)
+        .controller('PaymentCtrl', PaymentCtrl);
 
 
     // inject dependencies to controllers
@@ -472,5 +480,7 @@
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
     ProductsByCategory.$inject = [];
+    ShopCartCtrl.$inject = [];
+    PaymentCtrl.$inject = [];
 
 })();
