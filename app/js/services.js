@@ -31,6 +31,14 @@
         })
     }
 
+    function ProductSrv($resource, BaseUrl) {
+        return $resource(BaseUrl.shop() + 'products', null);
+    }
+
+    function ProductDetailSrv($resource, BaseUrl) {
+        return $resource(BaseUrl.shop() + 'products/detail/:slug');
+    }
+
     // service for show notifications with toasty
     function NotificationSrv(toasty) {
         return {
@@ -122,6 +130,8 @@
         .factory('PostDetailSrv', PostDetailSrv)
         .factory('TaxonomySrv', TaxonomySrv)
         .factory('MessageSrv', MessageSrv)
+        .factory('ProductSrv', ProductSrv)
+        .factory('ProductDetailSrv', ProductDetailSrv)
         .factory('NotificationSrv', NotificationSrv)
         .factory('HttpInterceptor', HttpInterceptor);
 
@@ -130,6 +140,8 @@
     PostDetailSrv.$inject = ['$resource', 'BaseUrl'];
     TaxonomySrv.$inject = ['$resource', 'BaseUrl'];
     MessageSrv.$inject = ['$resource', 'BaseUrl'];
+    ProductSrv.$inject = ['$resource', 'BaseUrl'];
+    ProductDetailSrv.$inject = ['$resource', 'BaseUrl'];
     NotificationSrv.$inject = ['toasty'];
     HttpInterceptor.$inject = ['$q', 'NotificationSrv', '$rootScope'];
 })();

@@ -269,7 +269,7 @@
 
     }
 
-    function ProductsCtrl(TaxonomySrv, PostSrv, $stateParams, $rootScope) {
+    function ProductsCtrl(ProductSrv, TaxonomySrv, PostSrv, $stateParams, $rootScope) {
         var self = this;
 
         self.list = [];
@@ -298,8 +298,8 @@
             self.page += 1;
             self.busy = true;
 
-            PostSrv.get({
-                category: 'productos',
+            ProductSrv.get({
+                //category: 'productos',
                 isActive: 'True',
                 sizePage: 9,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
@@ -374,6 +374,7 @@
     function LoginCtrl(){
 
     }
+
     function ProductDetailCtrl(PostDetailSrv, $stateParams, $rootScope){
         var self = this;
         $rootScope.pageTitle = 'Corriente Alterna';
@@ -475,7 +476,7 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    ProductsCtrl.$inject = ['TaxonomySrv', 'PostSrv', '$stateParams', '$rootScope'];
+    ProductsCtrl.$inject = ['ProductSrv','TaxonomySrv', 'PostSrv', '$stateParams', '$rootScope'];
     TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
