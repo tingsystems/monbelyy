@@ -271,7 +271,7 @@
 
     function ProductsCtrl(ProductSrv, TaxonomySrv, PostSrv, $stateParams, $rootScope) {
         var self = this;
-
+        self.children = [];
         self.list = [];
         self.page = 0;
         self.next = true;
@@ -291,18 +291,18 @@
                 }
             });
         }
-        console.log($stateParams.slug, 'Hola');
 
         self.getMorePosts = function () {
             if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
 
-            ProductSrv.get({
+            TaxonomySrv.get({
                 //category: 'productos',
+                parent: '2dc2757c-3c63-4097-878f-9d539e315cee',
                 isActive: 'True',
                 sizePage: 9,
-                fields: 'title,slug,excerpt,urlImages,createdAt',
+                fields: 'name,slug,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -395,7 +395,8 @@
         });
 
     }
-    function ProductsByCategory(){
+
+    function ProductsByCategoryCtrl(ProductSrv, $stateParams, TaxonomySrv, $rootScope){
         var self = this;
 
         self.list = [];
@@ -417,18 +418,17 @@
                 }
             });
         }
-        console.log($stateParams.slug, 'Hola');
 
         self.getMorePosts = function () {
             if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
 
-            PostSrv.get({
-                category: 'productos',
+            ProductSrv.get({
+                category: $stateParams.slug,
                 isActive: 'True',
-                sizePage: 9,
-                fields: 'title,slug,excerpt,urlImages,createdAt',
+                sizePage: 3,
+                fields: 'title,slug,excerpt,price,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -462,7 +462,7 @@
         .controller('TabsCtrl', TabsCtrl)
         .controller('LoginCtrl', LoginCtrl)
         .controller('ProductDetailCtrl', ProductDetailCtrl)
-        .controller('ProductsByCategory', ProductsByCategory)
+        .controller('ProductsByCategoryCtrl', ProductsByCategoryCtrl)
         .controller('ShopCartCtrl', ShopCartCtrl)
         .controller('PaymentCtrl', PaymentCtrl);
 
@@ -480,7 +480,7 @@
     TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
-    ProductsByCategory.$inject = [];
+    ProductsByCategoryCtrl.$inject = ['ProductSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     ShopCartCtrl.$inject = [];
     PaymentCtrl.$inject = [];
 

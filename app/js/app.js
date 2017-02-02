@@ -79,8 +79,8 @@
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
-                        controllerAs: 'Post',
-                        controller: 'PostCtrl'
+                        controllerAs: 'Product',
+                        controller: 'ProductsByCategoryCtrl'
                     }
                 }
             })

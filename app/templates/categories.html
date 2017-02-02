@@ -7,10 +7,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <div class="content-pages" infinite-scroll='Post.getMorePosts()'
-                     infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
-                    <div class="row">
-                        <div class="box-white col-sm-12 box-blog" ng-repeat="entry in Post.list">
+                <div class="content-pages" infinite-scroll='Product.getMorePosts()'
+                     infinite-scroll-disabled='Product.busy || !Product.next || Product.loadPosts'>
+                    <div class="row text-center">
+                        <div class="col-sm-4" ng-repeat="entry in Product.list">
+                            <div class="box-prod">
+                                <a ui-sref="category({slug:entry.slug})">
+                                    <div class="bg-prod"
+                                         style="background-image: url('{{entry.urlImages.original }}')"></div>
+                                    <h3 class="prod-descrip">{{entry.title}}</h3>
+
+                                    <h4 class="prod-price"><strong>{{entry.price | currency}}</strong></h4>
+                                </a>
+                                <a ui-sref="category({slug:entry.slug})" class="btn btn-success btn-cart">Agregar al Carrito</a>
+                            </div>
+                        </div>
+                        <!--<div class="box-white col-sm-12 box-blog" ng-repeat="entry in Product.list">
                             <a post-link="{ link: {url: entry.link, target: '_blank'} }"
                                ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
 
@@ -24,12 +36,12 @@
                                     <button class="btn btn-red">Leer más <i class="fa fa-angle-right"></i></button>
                                 </div>
                             </a>
-                        </div>
-                        <div class="col-sm-12" ng-show="Post.busy">
+                        </div>-->
+                        <div class="col-sm-12" ng-show="Product.busy">
                             <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
                         </div>
-                        <div class="col-sm-12" ng-show="!Post.busy">
-                            <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos con
+                        <div class="col-sm-12" ng-show="!Product.busy">
+                            <h2 class="text-center no-content" ng-show="!Product.list.length">Lo sentimos no contamos con
                                 contenido disponible</h2>
                         </div>
                     </div>
