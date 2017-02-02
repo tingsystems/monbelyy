@@ -408,12 +408,6 @@ header {
 .carousel-inner {
   background-color: transparent;
 }
-.carousel-control {
-  display: none;
-}
-.carousel-indicators {
-  display: none;
-}
 .carousel-caption {
   top: 20%;
   padding: 30px 60px;
@@ -526,6 +520,12 @@ header {
   opacity: 0.3;
   padding: 20px 0;
   color: #ffa500;
+}
+.detail-img {
+  height: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .bg-prod {
   height: 215px;
@@ -659,6 +659,24 @@ header {
   font-size: 20px;
   text-align: center;
   text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.product-detail .carousel-indicators {
+  padding-top: 20px;
+}
+.product-detail .carousel-indicators li {
+  border-color: #565656;
+}
+.product-detail .carousel-indicators .active {
+  background-color: #000 !important;
+}
+.product-detail .detail-title {
+  color: #565656;
+}
+.product-detail .detail-title .detail-slide {
+  margin-bottom: 25px;
+}
+.product-detail .detail-price {
+  text-align: right;
 }
 .product-detail .prod-detail-descrip p {
   font-size: 18px;
@@ -2030,6 +2048,15 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .detail-qty {
+    margin-left: 42%;
+  }
+  .detail-price {
+    text-align: center !important;
+  }
+  .product-info {
+    height: 142px;
+  }
   .header-title {
     height: auto;
   }
@@ -2212,6 +2239,18 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .detail-qty {
+    margin-left: 31%;
+  }
+  .detail-price {
+    text-align: center !important;
+  }
+  .product-info {
+    height: 235px;
+  }
+  .content {
+    margin-top: 0;
+  }
   .header-title {
     height: 80px;
   }

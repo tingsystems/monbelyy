@@ -375,12 +375,12 @@
 
     }
 
-    function ProductDetailCtrl(PostDetailSrv, $stateParams, $rootScope){
+    function ProductDetailCtrl(ProductDetailSrv, $stateParams, $rootScope){
         var self = this;
         $rootScope.pageTitle = 'Corriente Alterna';
 
         self.busy = true;
-        PostDetailSrv.get({
+        ProductDetailSrv.get({
             slug: $stateParams.slug,
             isActive: 'True',
             fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
@@ -427,7 +427,7 @@
             ProductSrv.get({
                 category: $stateParams.slug,
                 isActive: 'True',
-                sizePage: 3,
+                sizePage: 9,
                 fields: 'title,slug,excerpt,price,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
@@ -479,7 +479,7 @@
     ProductsCtrl.$inject = ['ProductSrv','TaxonomySrv', 'PostSrv', '$stateParams', '$rootScope'];
     TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
-    ProductDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
+    ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     ShopCartCtrl.$inject = [];
     PaymentCtrl.$inject = [];

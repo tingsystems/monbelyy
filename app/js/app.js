@@ -114,7 +114,7 @@
                 }
             })
             .state('product-detail', {
-                url: '/product/:slug',
+                url: '/product/detail/:slug\.html',
                 data: {pageTitle: 'Corriente Alterna'},
                 views: {
                     'content': {

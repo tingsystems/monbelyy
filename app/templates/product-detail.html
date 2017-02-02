@@ -1,24 +1,35 @@
-<div id="breadcrumb" style="margin-top: 75px;">
+<div id="breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
             <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
-            <li ng-if="Post.detail.categories.length"><a
-                    ui-sref="category({slug: Post.detail.categories[0].slug })">{{ Post.detail.categories[0].name }}</a>
+            <li ng-if="Product.detail.categories.length"><a
+                    ui-sref="category({slug: Product.detail.categories[0].slug })">{{ Product.detail.categories[0].name }}</a>
             </li>
             <li class="active">{{ Product.detail.title }}</li>
         </ol>
     </div>
 </div>
 <section id="content-area" class="content-blog product-detail">
-    <h1 class="text-center">{{Product.detail.title}}</h1>
+    <h1 class="text-center detail-title">{{Product.detail.title}}</h1>
     <div class="row text-center">
         <div class="col-md-6 col-md-offset-3">
-
-            <img src="../img/delta.jpg" alt="">
-            <div class="col-md-6 text-right">
-                <h3>$222.00</h3>
+            <!-- slider -->
+            <div id="carouse-principal" class="carousel slide" style="margin-bottom: 25px">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
+                        <uib-slide ng-repeat="slide in Product.detail.galleryImages">
+                            <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                                <div class="detail-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
+                            </a>
+                        </uib-slide>
+                    </uib-carousel>
+                </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
+                <h3 class="detail-price">$222.00</h3>
+            </div>
+            <div class="col-md-4 detail-qty">
                 <input type="number" class="form-control cart-qty" min="0">
             </div>
         </div>
@@ -33,10 +44,10 @@
 <section class="product-info">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-6">
                 <h1 class="info-descrip">¿Tienes dudas acerca de este producto?</h1>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-6">
                 <h1 class="info-descrip">¡Llámanos!<br>
                 <a href=""><i class="ion-ios-telephone-outline"></i> 333 333 33 33</a>
                 </h1>

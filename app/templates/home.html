@@ -2,7 +2,7 @@
 <div id="carouse-principal" class="carousel slide">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-        <uib-carousel interval="5000">
+        <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
             <uib-slide ng-repeat="slide in Home.mainSlider">
                 <a post-link="{ link: {url: slide.link, target: '_self'} }">
                     <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
