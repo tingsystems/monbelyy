@@ -3,17 +3,22 @@
         <h3>Contáctanos</h3>
         <ul class="list">
             <li ng-repeat="post in contactMenuData">
-                 <a class="contact-foo-side" href="{{ post.excerpt }}" ><i class="{{ post.title }}"></i> <span ng-bind-html="post.content | trustHtml"></span></a>
+                <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
+                        ng-bind-html="post.content | trustHtml"></span></a>
             </li>
         </ul>
-
+        <!--<ul class="list list-sidebar">
+            <li ng-repeat="item in NavMenuSocial">
+                <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
+            </li>
+        </ul>-->
     </div>
     <div class="col-sm-4 contact-sty">
         <h3>
             Acerca de Corriente Alterna
         </h3>
         <ul class="list">
-            <li ng-repeat="option in footerNavMenuConact"><a href="{{option.link}}" >{{option.name}}</a></li>
+            <li ng-repeat="option in footerNavMenuConact"><a href="{{option.link}}">{{option.name}}</a></li>
         </ul>
     </div>
     <div class="col-sm-4 contact-sty">
@@ -21,7 +26,8 @@
             Ayuda
         </h3>
         <ul class="list">
-            <li ng-repeat="option in contactHelp"><a href="{{option.link}}" >{{option.name}}</a></li>
+            <li ng-repeat="option in contactHelp"><a href="{{option.link}}">{{option.name}}</a></li>
         </ul>
     </div>
 </div>
+
