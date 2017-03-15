@@ -45,6 +45,7 @@
         self.page = 0;
         self.next = true;
         self.busy = false;
+        self.isPost = true;
 
         // get post by category
         if ($stateParams.slug) {

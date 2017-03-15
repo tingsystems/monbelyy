@@ -36,7 +36,7 @@
           content="{{ post.urlImages.original }}"
           ng-if="post"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://www.corrientealterna.com.mx{{ $state.href($state.current.name) }}"/>
+    <meta property="og:url" content="http://www.corriente-alterna.com{{ $state.href($state.current.name) }}"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
@@ -68,12 +68,12 @@
     <div class="navbar-info">
         <div class="container">
             <div class="col-sm-4 col-md-4 text-left">
-                <a href=""><i class="icon ion-ios-telephone-outline"></i> 333 222 22 22</a>
+                <a href="tel:{{initConfig.phone}}"><i class="icon ion-ios-telephone-outline"></i> {{initConfig.phone}}</a>
             </div>
             <div class="col-sm-4 col-md-4">
                 <a href="mailto:{{initConfig.email}}"><i class="icon ion-ios-email-outline"></i> {{initConfig.email}}</a>
             </div>
-            <div class="col-sm-4 col-md-4 text-right shopping-cart">
+            <div class="col-sm-4 col-md-4 text-right shopping-cart" ng-if="ecommerce">
                 <span class="qty-cart">12</span>
                 <a ui-sref="shopcart"><i class="icon ion-ios-cart-outline"></i> Carrito</a>
             </div>
@@ -104,6 +104,7 @@
                         <a href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
 
                     </li>
+                    <!--
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">P <b class="caret"></b></a>
                         <ul class="dropdown-menu container">
@@ -113,6 +114,7 @@
                             <li class="col-md-3"><a href="#">Something else here</a></li>
                         </ul>
                     </li>
+                    -->
                 </ul>
             </div>
 

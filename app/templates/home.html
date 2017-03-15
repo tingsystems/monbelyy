@@ -44,8 +44,9 @@
                     <div class="box-prod">
                         <div class="bg-prod" style="background-image: url('{{product.urlImages.original }}')"></div>
                         <h3 class="prod-descrip">{{product.title}}</h3>
-                        <h4 class="prod-price"><strong>{{product.excerpt}}</strong></h4>
-                        <button class="btn btn-success btn-cart">Agregar al carrito</button>
+                        <h4 class="prod-price" ng-if="ecommerce"><strong>{{product.excerpt}}</strong></h4>
+                        <h4 class="prod-price" ng-if="!ecommerce"><strong>Proximamente</strong></h4>
+                        <button class="btn btn-success btn-cart" ng-disabled="!ecommerce">Agregar al carrito</button>
                     </div>
                 </div>
             </div>

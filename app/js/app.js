@@ -54,7 +54,7 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'title': { template: '<title>{{pageTitle}}</title>' },
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'Post',
@@ -65,7 +65,7 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
-                    'title': {template: '<title>{{pageTitle}}</title>'},
+                    'title': { template: '<title>{{pageTitle}}</title>' },
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'Page',
@@ -73,9 +73,20 @@
                     }
                 }
             })
+            .state('category-content', {
+                url: '/content/category/:slug',
+                data: { pageTitle: 'Corriente Alterna' },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/categories.html',
+                        controllerAs: 'Product',
+                        controller: 'PostCtrl'
+                    }
+                }
+            })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Corriente Alterna'},
+                data: { pageTitle: 'Corriente Alterna' },
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -104,7 +115,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'Corriente Alterna'},
+                data: { pageTitle: 'Corriente Alterna' },
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -115,7 +126,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Corriente Alterna'},
+                data: { pageTitle: 'Corriente Alterna' },
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -126,7 +137,7 @@
             })
             .state('shopcart', {
                 url: '/shopcart',
-                data: {pageTitle: 'Carrito de compras'},
+                data: { pageTitle: 'Carrito de compras' },
                 views: {
                     'content': {
                         templateUrl: '/templates/shopcart.html',
@@ -137,7 +148,7 @@
             })
             .state('payment', {
                 url: '/payment',
-                data: {pageTitle: 'Proceso de pago'},
+                data: { pageTitle: 'Proceso de pago' },
                 views: {
                     'content': {
                         templateUrl: '/templates/payment.html',
@@ -149,7 +160,7 @@
 
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -182,10 +193,11 @@
         });
         //various config
         $rootScope.initConfig = {
-            googleKey: 'UA-53555832-42',
+            googleKey: 'UA-53555832-43',
             meta_color: '#eee7de',
-            img_default: ' https://corrientealterna.com.mx/img/img-default.jpg',
-            email: 'info@corrientealterna.com.mx'
+            img_default: ' https://www.corriente-alterna.com/img/img-default.jpg',
+            email: 'info@corriente-alterna.com',
+            phone: '353 110 1895'
 
         };
         // initialise google analytics
@@ -225,9 +237,9 @@
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                    $rootScope.mainNavMenu = response;
-                }, function (error) {
-                });
+                $rootScope.mainNavMenu = response;
+            }, function (error) {
+            });
         }
 
         if (!$rootScope.NavMenuSocial) {
@@ -236,9 +248,9 @@
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                    $rootScope.NavMenuSocial = response;
-                }, function (error) {
-                });
+                $rootScope.NavMenuSocial = response;
+            }, function (error) {
+            });
         }
 
         if (!$rootScope.footerNavMenuConact) {
@@ -247,9 +259,9 @@
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                    $rootScope.footerNavMenuConact = response;
-                }, function (error) {
-                });
+                $rootScope.footerNavMenuConact = response;
+            }, function (error) {
+            });
         }
         if (!$rootScope.contactHelp) {
             TaxonomySrv.query({
@@ -270,9 +282,11 @@
                 ordering: '-createdAt',
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
-                    $rootScope.contactMenuData = results.results;
-                });
+                $rootScope.contactMenuData = results.results;
+            });
         }
+
+        $rootScope.ecommerce = false;
 
     }
 
