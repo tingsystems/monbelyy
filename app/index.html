@@ -9,7 +9,7 @@
           content="">
     <meta name="theme-color" content="{{ initConfig.meta_color }}">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-    <!--<base href="/">-->
+    <base href="/">
     <!--Favicon-->
     <link href="img/ico/favicon.ico" rel="shortcut icon" type="favicon">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">
@@ -104,17 +104,6 @@
                         <a href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
 
                     </li>
-                    <!--
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">P <b class="caret"></b></a>
-                        <ul class="dropdown-menu container">
-                            <li class="col-md-3"><a href="#">Action</a></li>
-                            <li class="col-md-3"><a href="#">Another action</a></li>
-                            <li class="col-md-3"><a href="#">Something else here</a></li>
-                            <li class="col-md-3"><a href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    -->
                 </ul>
             </div>
 
@@ -190,27 +179,6 @@
     a.src = g;
     m.parentNode.insertBefore(a, m)
 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');</script>
-<!--Start of Zendesk Chat Script-->
-<script type="text/javascript">
-    window.$zopim || (function (d, s) {
-        var z = $zopim = function (c) {
-            z._.push(c)
-        }, $ = z.s =
-            d.createElement(s), e = d.getElementsByTagName(s)[0];
-        z.set = function (o) {
-            z.set._.push(o)
-        };
-        z._ = [];
-        z.set._ = [];
-        $.async = !0;
-        $.setAttribute("charset", "utf-8");
-        $.src = "https://v2.zopim.com/?4VYoZsaZsR5lwzgejDqRq4F7YOgjj8JN";
-        z.t = +new Date;
-        $.type = "text/javascript";
-        e.parentNode.insertBefore($, e)
-    })(document, "script");
-</script>
-<!--End of Zendesk Chat Script-->
 <toasty></toasty>
 </body>
 </html>

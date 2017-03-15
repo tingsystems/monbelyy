@@ -1,42 +1,25 @@
 (function () {
     'use strict';
 
-    // service for build the base url taking the host and siteId
+    // service for build the base url taking the host
     function BaseUrl() {
         return {
             get: function () {
-                return '#host#/api/{{apiV}}/site/{{siteId}}/';
-            },
-            shop: function () {
-                return '#host#/api/{{apiV}}/shop/{{siteId}}/';
+                return '#host#/api/{{apiV}}/';
             }
         }
     }
 
-    function PostSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.get() + 'posts');
-    }
-
-    function PostDetailSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.get() + 'posts/detail/:slug');
+    function EntrySrv($resource, BaseUrl) {
+        return $resource(BaseUrl.get() + 'posts/:slug', null, {})
     }
 
     function TaxonomySrv($resource, BaseUrl) {
-        return $resource(BaseUrl.get() + 'taxonomies');
+        return $resource(BaseUrl.get() + 'taxonomies/:slug');
     }
 
     function MessageSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.get() + 'notifications', null, {
-            'create': {method: 'POST', url: BaseUrl.get() + 'notifications/create'}
-        })
-    }
-
-    function ProductSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.shop() + 'products', null);
-    }
-
-    function ProductDetailSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.shop() + 'products/detail/:slug');
+        return $resource(BaseUrl.get() + 'notifications/:id', null, {})
     }
 
     // service for show notifications with toasty
@@ -114,7 +97,7 @@
 
                 // 404, 500 error
                 if (rejection.status == 404) {
-                    $rootScope.$emit('HTTP_ERROR', {error: '404'});
+                    $rootScope.$emit('HTTP_ERROR', { error: '404' });
                 }
 
                 // Return the promise rejection.
@@ -123,25 +106,44 @@
         };
     }
 
+    // get all the states
+    function StateSrv($resource) {
+        var BaseUrl = 'http://geo.tingsystems.com/api/v1/';
+        return $resource(BaseUrl + 'states', null, {
+            // get cities, if state param get city by state id, returns an Array
+            'getCities': { method: 'GET', url: BaseUrl + 'cities', isArray: true },
+            // get cities, if state param get city by state id, returns an object
+            'getCitiesObj': { method: 'GET', url: BaseUrl + 'cities' },
+            'getState': { method: 'GET', url: BaseUrl + 'states/:id' },
+            'getCity': { method: 'GET', url: BaseUrl + 'cities/:id' }
+        });
+    }
+    // access control
+    function AccessSrv($resource) {
+        return $resource('#host#/api/{{apiV}}/auth/login', null, {
+            'logout': { method: 'POST', url: '#host#/api/{{apiV}}/auth/logout' }
+        });
+    }
+
+
     // Assign factory to module
     angular.module('ts.services', ['ngResource'])
         .factory('BaseUrl', BaseUrl)
-        .factory('PostSrv', PostSrv)
-        .factory('PostDetailSrv', PostDetailSrv)
+        .factory('EntrySrv', EntrySrv)
         .factory('TaxonomySrv', TaxonomySrv)
         .factory('MessageSrv', MessageSrv)
-        .factory('ProductSrv', ProductSrv)
-        .factory('ProductDetailSrv', ProductDetailSrv)
         .factory('NotificationSrv', NotificationSrv)
-        .factory('HttpInterceptor', HttpInterceptor);
+        .factory('HttpInterceptor', HttpInterceptor)
+        .factory('StateSrv', StateSrv)
+        .factory('AccessSrv', AccessSrv);
 
     // Inject factory the dependencies
-    PostSrv.$inject = ['$resource', 'BaseUrl'];
-    PostDetailSrv.$inject = ['$resource', 'BaseUrl'];
+    BaseUrl.$inject = [];
+    EntrySrv.$inject = ['$resource', 'BaseUrl'];
     TaxonomySrv.$inject = ['$resource', 'BaseUrl'];
     MessageSrv.$inject = ['$resource', 'BaseUrl'];
-    ProductSrv.$inject = ['$resource', 'BaseUrl'];
-    ProductDetailSrv.$inject = ['$resource', 'BaseUrl'];
     NotificationSrv.$inject = ['toasty'];
-    HttpInterceptor.$inject = ['$q', 'NotificationSrv', '$rootScope'];
+    HttpInterceptor.$inject = ['$q', 'NotificationSrv', '$rootScope']
+    StateSrv.$inject = ['$resource'];
+    AccessSrv.$inject = ['$resource'];
 })();

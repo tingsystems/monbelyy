@@ -1,35 +1,39 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(PostSrv, PostDetailSrv, TaxonomySrv, $rootScope) {
+    function HomeCtrl(EntrySrv, TaxonomySrv, $rootScope) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Corriente Alterna';
 
-        PostSrv.get({
-            category: 'slider',
+        EntrySrv.get({
+            taxonomies: 'slider',
             isActive: 'True',
-            sizePage: 5,
+            pageSize: 5,
             ordering: '-createdAt',
             fields: 'urlImages,title,link,slug,excerpt,content'
         }).$promise.then(function (results) {
             self.mainSlider = results.results;
         });
 
-        PostSrv.get({
-            category: 'productos',
+        EntrySrv.get({
+            taxonomies: 'productos',
             isActive: 'True',
-            sizePage: 20,
+            pageSize: 20,
             ordering: '-createdAt',
             fields: 'title,content,urlImages,slug,excerpt'
         }).$promise.then(function (results) {
             self.products = results.results;
+            //get featureImage
+            angular.forEach(self.products, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+            });
         });
 
-        PostSrv.get({
-            category: 'servicios',
+        EntrySrv.get({
+            taxonomies: 'servicios',
             isActive: 'True',
-            sizePage: 20,
+            pageSize: 20,
             ordering: '-createdAt',
             fields: 'title,content,urlImages,slug,excerpt'
         }).$promise.then(function (results) {
@@ -38,7 +42,7 @@
 
     }
 
-    function PostCtrl(PostSrv, $stateParams, TaxonomySrv, $rootScope) {
+    function PostCtrl(EntrySrv, $stateParams, TaxonomySrv, $rootScope) {
         var self = this;
 
         self.list = [];
@@ -52,7 +56,7 @@
             TaxonomySrv.get({
                 slug: $stateParams.slug,
                 isActive: 'True',
-                sizePage: 1
+                pageSize: 1
             }).$promise.then(function (results) {
                 if (results.results.length) {
                     self.categoryName = results.results[0].name;
@@ -66,10 +70,10 @@
             self.page += 1;
             self.busy = true;
 
-            PostSrv.get({
-                category: $stateParams.slug,
+            EntrySrv.get({
+                taxonomies: $stateParams.slug,
                 isActive: 'True',
-                sizePage: 9,
+                pageSize: 9,
                 fields: 'title,slug,excerpt,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
@@ -84,7 +88,7 @@
 
     }
 
-    function BlogCtrl(PostSrv, $rootScope) {
+    function BlogCtrl(EntrySrv, $rootScope) {
         var self = this;
 
         self.list = [];
@@ -106,12 +110,12 @@
             self.busy = true;
             self.loadPosts = self.page % 3 == 0;
 
-            PostSrv.get({
+            EntrySrv.get({
                 kind: 'post',
-                category: 'blog',
+                taxonomies: 'blog',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,urlImages,createdAt',
-                sizePage: 9,
+                pageSize: 9,
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -125,21 +129,28 @@
         $rootScope.pageTitle = 'Blog - Corriente Alterna';
     }
 
-    function PostDetailCtrl(PostDetailSrv, $stateParams, $rootScope) {
+    function PostDetailCtrl(EntrySrv, $stateParams, $rootScope) {
         var self = this;
         $rootScope.pageTitle = 'Corriente Alterna';
 
         self.busy = true;
-        PostDetailSrv.get({
+        EntrySrv.get({
             slug: $stateParams.slug,
             isActive: 'True',
             fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
         }).$promise.then(function (results) {
             self.detail = results;
-            $rootScope.post = self.detail;
-            if (!self.detail.urlImages.original) {
-                self.detail.urlImages.original = $rootScope.initConfig.img_default;
+            // get featureImage
+            self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
+            //get galeries
+            self.detail.galleryImages = $filter('filter')(self.detail.attachments, {kind: 'gallery_image'});
+
+            if (!self.detail.featuredImage) {
+
+                self.detail.featuredImage = {};
+                self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
+            $rootScope.post = self.detail;
             $rootScope.pageTitle = results.title + ' - Corriente Alterna';
             self.busy = false;
         });
@@ -192,7 +203,7 @@
 
     }
 
-    function SearchCtrl(PostSrv, $rootScope, $scope, $filter) {
+    function SearchCtrl(EntrySrv, $rootScope, $scope, $filter) {
         var self = this;
 
         self.listSearch = [];
@@ -209,11 +220,11 @@
             if (value != '') {
                 self.searchTerm = angular.copy($rootScope.searchTerm);
                 $rootScope.searchTerm = '';
-                PostSrv.get({
+                EntrySrv.get({
                     kind: 'post',
                     isActive: 'True',
                     fields: 'urlImages,title,link,slug,excerpt',
-                    sizePage: 10,
+                    pageSize: 10,
                     ordering: '-createdAt',
                     search: self.searchTerm,
                     page: self.page
@@ -237,10 +248,10 @@
             self.page += 1;
             self.busy = true;
 
-            PostSrv.get({
+            EntrySrv.get({
                 kind: 'post',
                 isActive: 'True',
-                sizePage: 10,
+                pageSize: 10,
                 fields: 'urlImages,title,link,slug,excerpt',
                 ordering: '-createdAt',
                 search: self.searchTerm,
@@ -270,7 +281,7 @@
 
     }
 
-    function ProductsCtrl(ProductSrv, TaxonomySrv, PostSrv, $stateParams, $rootScope) {
+    function ProductsCtrl(ProductSrv, TaxonomySrv, EntrySrv, $stateParams, $rootScope) {
         var self = this;
         self.children = [];
         self.list = [];
@@ -284,7 +295,7 @@
                 slug: $stateParams.slug,
 
                 isActive: 'True',
-                sizePage: 1
+                pageSize: 1
             }).$promise.then(function (results) {
                 if (results.results.length) {
                     self.categoryName = results.results[0].name;
@@ -302,7 +313,7 @@
                 //category: 'productos',
                 parent: '2dc2757c-3c63-4097-878f-9d539e315cee',
                 isActive: 'True',
-                sizePage: 9,
+                pageSize: 9,
                 fields: 'name,slug,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
@@ -316,7 +327,7 @@
         self.getMorePosts();
     }
 
-    function TabsCtrl(PostSrv, TaxonomySrv) {
+    function TabsCtrl(EntrySrv, TaxonomySrv) {
         var self = this;
         self.category_1 = 'artesanal';
         self.category_2 = 'dama';
@@ -324,10 +335,10 @@
         self.category_4 = 'infantil';
         self.Tab1 = function () {
             self.list1 = [];
-            PostSrv.get({
-                category: self.category_1,
+            EntrySrv.get({
+                taxonomies: self.category_1,
                 isActive: 'True',
-                sizePage: 9,
+                pageSize: 9,
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
@@ -336,10 +347,10 @@
         };
         self.Tab2 = function () {
             self.list2 = [];
-            PostSrv.get({
-                category: self.category_2,
+            EntrySrv.get({
+                taxonomies: self.category_2,
                 isActive: 'True',
-                sizePage: 9,
+                pageSize: 9,
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
@@ -348,10 +359,10 @@
         };
         self.Tab3 = function () {
             self.list3 = [];
-            PostSrv.get({
-                category: self.category_3,
+            EntrySrv.get({
+                taxonomies: self.category_3,
                 isActive: 'True',
-                sizePage: 9,
+                pageSize: 9,
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
@@ -360,10 +371,10 @@
         };
         self.Tab4 = function () {
             self.list4 = [];
-            PostSrv.get({
-                category: self.category_4,
+            EntrySrv.get({
+                taxonomies: self.category_4,
                 isActive: 'True',
-                sizePage: 9,
+                pageSize: 9,
                 ordering: '-createdAt',
                 fields: 'urlImages,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
@@ -411,7 +422,7 @@
                 slug: $stateParams.slug,
 
                 isActive: 'True',
-                sizePage: 1
+                pageSize: 1
             }).$promise.then(function (results) {
                 if (results.results.length) {
                     self.categoryName = results.results[0].name;
@@ -426,9 +437,9 @@
             self.busy = true;
 
             ProductSrv.get({
-                category: $stateParams.slug,
+                taxonomies: $stateParams.slug,
                 isActive: 'True',
-                sizePage: 9,
+                pageSize: 9,
                 fields: 'title,slug,excerpt,price,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
@@ -445,6 +456,7 @@
     function ShopCartCtrl() {
         
     }
+
     function PaymentCtrl() {
 
     }
@@ -469,16 +481,16 @@
 
 
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['PostSrv', 'PostDetailSrv', 'TaxonomySrv', '$rootScope'];
-    PostCtrl.$inject = ['PostSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
-    BlogCtrl.$inject = ['PostSrv', '$rootScope'];
-    PostDetailCtrl.$inject = ['PostDetailSrv', '$stateParams', '$rootScope'];
+    HomeCtrl.$inject = ['EntrySrv', 'TaxonomySrv', '$rootScope'];
+    PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
+    BlogCtrl.$inject = ['EntrySrv', '$rootScope'];
+    PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
-    SearchCtrl.$inject = ['PostSrv', '$rootScope', '$scope'];
+    SearchCtrl.$inject = ['EntrySrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    ProductsCtrl.$inject = ['ProductSrv','TaxonomySrv', 'PostSrv', '$stateParams', '$rootScope'];
-    TabsCtrl.$inject = ['PostSrv', 'TaxonomySrv'];
+    ProductsCtrl.$inject = ['ProductSrv','TaxonomySrv', 'EntrySrv', '$stateParams', '$rootScope'];
+    TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];

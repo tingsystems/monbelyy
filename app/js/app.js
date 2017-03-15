@@ -180,13 +180,13 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, translate, $localStorage, PostSrv) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, translate, $localStorage, EntrySrv) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://www.tingsystems.com';
+        $rootScope.host = 'http://api.taki.tingsystems.com';
         //$rootScope.host = 'http://192.168.1.149';
-        $rootScope.apiV = 'v1';
+        $rootScope.apiV = 'v2';
         $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
-        $http.defaults.headers.common['TS-TOKEN'] = 'qg4AkRlXmMV3viERPyYFkiVrpfWd8ZymK7KosHiY';
+        $http.defaults.headers.common['PROJECT-ID'] = 'e7d3007e-4702-4da4-88df-d57c3f80d524';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -275,10 +275,10 @@
         }
 
         if (!$rootScope.contactMenuData) {
-            PostSrv.get({
-                category: 'datos-de-contacto',
+            EntrySrv.get({
+                taxonomies: 'datos-de-contacto',
                 isActive: 'True',
-                sizePage: 5,
+                pageSize: 5,
                 ordering: '-createdAt',
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
@@ -298,7 +298,7 @@
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'translate', '$localStorage', 'PostSrv'];
+        'translate', '$localStorage', 'EntrySrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
 })();
