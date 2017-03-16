@@ -285,7 +285,7 @@
 
     }
 
-    function ProductsCtrl(ProductSrv, TaxonomySrv, EntrySrv, $stateParams, $rootScope) {
+    function ProductsCtrl(ProductSrv, ProductTaxonomySrv, EntrySrv, $stateParams, $rootScope) {
         var self = this;
         self.children = [];
         self.list = [];
@@ -293,32 +293,17 @@
         self.next = true;
         self.busy = false;
 
-        // get post by category
-        if ($stateParams.slug) {
-            TaxonomySrv.get({
-                slug: $stateParams.slug,
 
-                isActive: 'True',
-                pageSize: 1
-            }).$promise.then(function (results) {
-                if (results.results.length) {
-                    self.categoryName = results.results[0].name;
-                    $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
-                }
-            });
-        }
+
 
         self.getMorePosts = function () {
             if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
-
-            TaxonomySrv.get({
-                //category: 'productos',
-                parent: '2dc2757c-3c63-4097-878f-9d539e315cee',
+            ProductTaxonomySrv.get({
                 isActive: 'True',
-                pageSize: 9,
-                fields: 'name,slug,urlImages,createdAt',
+                pageSize: 3,
+                fields: 'name,slug,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -412,7 +397,7 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, $stateParams, TaxonomySrv, $rootScope){
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, $stateParams, $rootScope){
         var self = this;
 
         self.list = [];
@@ -422,9 +407,8 @@
 
         // get post by category
         if ($stateParams.slug) {
-            TaxonomySrv.get({
+            ProductTaxonomySrv.get({
                 slug: $stateParams.slug,
-
                 isActive: 'True',
                 pageSize: 1
             }).$promise.then(function (results) {
@@ -441,10 +425,9 @@
             self.busy = true;
 
             ProductSrv.get({
-                taxonomies: $stateParams.slug,
+                taxonomy: $stateParams.slug,
                 isActive: 'True',
                 pageSize: 9,
-                fields: 'title,slug,excerpt,price,urlImages,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -493,11 +476,11 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['EntrySrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    ProductsCtrl.$inject = ['ProductSrv','TaxonomySrv', 'EntrySrv', '$stateParams', '$rootScope'];
+    ProductsCtrl.$inject = ['ProductSrv','ProductTaxonomySrv', 'EntrySrv', '$stateParams', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
-    ProductsByCategoryCtrl.$inject = ['ProductSrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
+    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', '$stateParams', '$rootScope'];
     ShopCartCtrl.$inject = [];
     PaymentCtrl.$inject = [];
 

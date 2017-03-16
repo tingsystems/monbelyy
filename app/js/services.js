@@ -6,12 +6,24 @@
         return {
             get: function () {
                 return '#host#/api/{{apiV}}/';
+            },
+            shop: function(){
+                return '#host#/api/{{apiShop}}/public/'
             }
+
         }
     }
 
     function EntrySrv($resource, BaseUrl) {
         return $resource(BaseUrl.get() + 'posts/:slug', null, {})
+    }
+
+    function ProductSrv($resource, BaseUrl) {
+        return $resource(BaseUrl.shop() + 'items/:id', null, {})
+    }
+
+    function ProductTaxonomySrv($resource, BaseUrl) {
+        return $resource(BaseUrl.shop() + 'taxonomies/:slug', null, {})
     }
 
     function TaxonomySrv($resource, BaseUrl) {
@@ -50,7 +62,6 @@
         }
     }
 
-
     // Add interceptor
     function HttpInterceptor($q, NotificationSrv, $rootScope) {
         return {
@@ -62,6 +73,7 @@
                 }
                 config.url = config.url.replace('{{siteId}}', $rootScope.siteId);
                 config.url = config.url.replace('{{apiV}}', $rootScope.apiV);
+                config.url = config.url.replace('{{apiShop}}', $rootScope.apiShop);
                 config.url = config.url.replace('#host#', $rootScope.host);
                 // Return the config or wrap it in a promise if blank.
                 return config || $q.when(config);
@@ -130,6 +142,8 @@
     angular.module('ts.services', ['ngResource'])
         .factory('BaseUrl', BaseUrl)
         .factory('EntrySrv', EntrySrv)
+        .factory('ProductSrv', ProductSrv)
+        .factory('ProductTaxonomySrv', ProductTaxonomySrv)
         .factory('TaxonomySrv', TaxonomySrv)
         .factory('MessageSrv', MessageSrv)
         .factory('NotificationSrv', NotificationSrv)
@@ -140,6 +154,8 @@
     // Inject factory the dependencies
     BaseUrl.$inject = [];
     EntrySrv.$inject = ['$resource', 'BaseUrl'];
+    ProductSrv.$inject = ['$resource', 'BaseUrl'];
+    ProductTaxonomySrv.$inject = ['$resource', 'BaseUrl'];
     TaxonomySrv.$inject = ['$resource', 'BaseUrl'];
     MessageSrv.$inject = ['$resource', 'BaseUrl'];
     NotificationSrv.$inject = ['toasty'];
