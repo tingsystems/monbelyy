@@ -233,7 +233,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'b27b4218-8285-4b44-b9a7-f04a96108dd1',
+                parent: 'ae7e1afc-0f16-4172-a7c7-1698f2ebb460',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -244,7 +244,7 @@
 
         if (!$rootScope.NavMenuSocial) {
             TaxonomySrv.query({
-                parent: '924838a3-4f24-40e5-8d4f-f9aaf406ab9a',
+                parent: '61265a3d-c57f-41a1-9a92-7db5458a3cde',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -255,7 +255,7 @@
 
         if (!$rootScope.footerNavMenuConact) {
             TaxonomySrv.query({
-                parent: 'ee529e2b-1315-4e57-a269-981ee999c0a5',
+                parent: 'f84e9c4c-9ce8-4948-a46d-cbc1cf2230ea',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -265,7 +265,7 @@
         }
         if (!$rootScope.contactHelp) {
             TaxonomySrv.query({
-                parent: 'b41db416-2beb-42ae-83d8-af19be924097',
+                parent: 'f84f6cde-0cd5-47b2-b215-3a91e9190052',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -276,7 +276,7 @@
 
         if (!$rootScope.contactMenuData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto',
+                taxonomies: 'datos-de-contacto1489620879',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: '-createdAt',

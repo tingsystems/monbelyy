@@ -1,23 +1,27 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(EntrySrv, TaxonomySrv, $rootScope) {
+    function HomeCtrl(EntrySrv, TaxonomySrv, $rootScope, $filter) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Corriente Alterna';
 
         EntrySrv.get({
-            taxonomies: 'slider',
+            taxonomies: 'slider1489619194',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
             fields: 'urlImages,title,link,slug,excerpt,content'
         }).$promise.then(function (results) {
             self.mainSlider = results.results;
+            //get featureImage
+            angular.forEach(self.mainSlider, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+            });
         });
 
         EntrySrv.get({
-            taxonomies: 'productos',
+            taxonomies: 'productos1489618746',
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
@@ -31,7 +35,7 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'servicios',
+            taxonomies: 'servicios1489618796',
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
@@ -481,7 +485,7 @@
 
 
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['EntrySrv', 'TaxonomySrv', '$rootScope'];
+    HomeCtrl.$inject = ['EntrySrv', 'TaxonomySrv', '$rootScope', '$filter'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope'];
