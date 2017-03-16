@@ -293,9 +293,6 @@
         self.next = true;
         self.busy = false;
 
-
-
-
         self.getMorePosts = function () {
             if (self.busy || !self.next) return;
             self.page += 1;
@@ -397,13 +394,17 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, $stateParams, $rootScope){
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, $stateParams, $rootScope, $localStorage, $filter){
         var self = this;
 
         self.list = [];
         self.page = 0;
         self.next = true;
         self.busy = false;
+        self.items = $localStorage.items ? $localStorage.items : [];
+        self.total = $localStorage.total;
+        $localStorage.items = self.items;
+        $localStorage.total = self.total;
 
         // get post by category
         if ($stateParams.slug) {
@@ -439,6 +440,28 @@
             });
         };
 
+        self.itemInCart = function (item) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            return !!find_item;
+        };
+
+        self.setItem = function (item, qty) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            if (find_item) {
+                if (qty < 1) {
+                    // Remove item from cart
+                    self.items.splice([self.items.indexOf(find_item)], 1)
+                } else {
+                    if (qty) {
+                        self.items[self.items.indexOf(find_item)].qty = qty;
+                    }
+                }
+            }
+            else {
+                self.items.push(item);
+                $localStorage.items = self.items;
+            }
+        };
 
     }
     
@@ -482,7 +505,7 @@
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
-    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', '$stateParams', '$rootScope'];
+    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
     ShopCartCtrl.$inject = [];
     PaymentCtrl.$inject = [];
 

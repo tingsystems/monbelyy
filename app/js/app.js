@@ -293,7 +293,7 @@
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
