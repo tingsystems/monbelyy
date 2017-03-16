@@ -409,11 +409,13 @@
         if ($stateParams.slug) {
             ProductTaxonomySrv.get({
                 slug: $stateParams.slug,
-                isActive: 'True',
-                pageSize: 1
+                isActive: 'True'
             }).$promise.then(function (results) {
-                if (results.results.length) {
-                    self.categoryName = results.results[0].name;
+                console.log(results);
+                if (results) {
+                    self.categoryName = results.name;
+                    self.categoryId = results.id;
+                    self.getMorePosts();
                     $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
                 }
             });
@@ -425,7 +427,7 @@
             self.busy = true;
 
             ProductSrv.get({
-                taxonomy: $stateParams.slug,
+                taxonomy: self.categoryId,
                 isActive: 'True',
                 pageSize: 9,
                 ordering: '-createdAt',
@@ -437,7 +439,7 @@
             });
         };
 
-        self.getMorePosts();
+
     }
     
     function ShopCartCtrl() {
