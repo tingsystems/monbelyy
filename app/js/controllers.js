@@ -405,6 +405,7 @@
         self.total = $localStorage.total;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
+        $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
 
         // get post by category
@@ -461,6 +462,7 @@
                 self.items.push(item);
                 $localStorage.items = self.items;
             }
+            //getTotal();
         };
 
     }
@@ -472,12 +474,38 @@
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
-        console.log("Productos" , self.items);
 
         self.itemInCart = function (item) {
             var find_item = $filter('filter')(self.items, { id: item.id })[0];
             return !!find_item;
         };
+
+        self.clearCart = function () {
+            self.items = [];
+            self.total = 0;
+            $localStorage.items = [];
+            /*$localStorage.total = 0;
+            $localStorage.promoTotal = 0;*/
+        };
+
+        self.removeItem = function (item) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            if (find_item) {
+                self.items.splice([self.items.indexOf(find_item)], 1)
+            }
+            //getTotal();
+        };
+
+        var getTotal = function () {
+            self.total = 0;
+            angular.forEach(self.items, function (value, key) {
+                //first Time calcule
+                value.import = parseFloat(value.price) * value.qty;
+                self.total += parseFloat(value.price) * value.qty;
+            });
+            $localStorage.total = self.total;
+        };
+        getTotal();
         
     }
 

@@ -10,37 +10,42 @@
         <div class="row">
             <div class="col-md-3 pull-right">
                 <div class="clear-cart" style="margin-bottom: 10px">
-                    <button class="btn btn-default">Vaciar Carrito</button>
+                    <button class="btn btn-default" ng-click="ShopCart.clearCart()">Vaciar Carrito</button>
+                </div>
+            </div>
+            <div class="col-md-2 pull-right">
+                <div class="clear-cart" style="margin-bottom: 10px">
+                    <button class="btn btn-default" ui-sref="products">Seguir comprando</button>
                 </div>
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-9 text-center" ng-repeat="product in ShopCart.items">
-                <div class="col-md-3">
-                    <div class="shopcart-img">
-                        <img src="../img/Servo-Motor.gif" alt="" width="200">
+            <div class="col-md-9 text-center">
+                <div class="product-cart col-md-12" ng-repeat="product in ShopCart.items">
+                    <div class="col-md-3">
+                        <div class="shopcart-img">
+                            <img src="../img/Servo-Motor.gif" alt="" width="200">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="shopcart-descrip">
+                            <h4>{{ product.name }}</h4>
+                            <h3>{{ product.price | currency }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <p>Cantidad</p>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="shopcart-qty">
+                            <input type="number" min="0" class="form-control cart-qty">
+                        </div>
+                    </div>
+                    <div class="shopcart-delete">
+                        <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)" style="font-size: 25px;" title="Eliminar producto"></a>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="shopcart-descrip">
-                        <h4>{{ product.name }}</h4>
-                        <h3>{{ product.price | currency }}</h3>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <p>Cantidad</p>
-                </div>
-                <div class="col-md-2">
-                    <div class="shopcart-qty">
-                        <input type="number" min="0" class="form-control cart-qty">
-                    </div>
-                </div>
-
-                <div class="shopcart-delete">
-                    <a class="ion-ios-close-outline" style="font-size: 25px;"></a>
-                </div>
-
             </div>
             <div class="col-md-3">
                 <div class="details-prod">
@@ -50,7 +55,7 @@
                             <tbody>
                             <tr>
                                 <td>Subtotal({{ items.length }})</td>
-                                <td>$490.00</td>
+                                <td>{{ ShopCart.total | currency}}</td>
                             </tr>
                             <tr>
                                 <td>Envío</td>
@@ -58,7 +63,7 @@
                             </tr>
                             <tr>
                                 <td>Total</td>
-                                <td>$490</td>
+                                <td>{{ ShopCart.total | currency}}</td>
                             </tr>
                             </tbody>
                         </table>
