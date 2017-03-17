@@ -74,7 +74,7 @@
                 <a href="mailto:{{initConfig.email}}"><i class="icon ion-ios-email-outline"></i> {{initConfig.email}}</a>
             </div>
             <div class="col-sm-4 col-md-4 text-right shopping-cart" ng-if="ecommerce">
-                <span class="qty-cart">12</span>
+                <span class="qty-cart">{{ items.length }}</span>
                 <a ui-sref="shopcart"><i class="icon ion-ios-cart-outline"></i> Carrito</a>
             </div>
         </div>

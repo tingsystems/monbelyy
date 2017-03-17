@@ -19,7 +19,7 @@
     }
 
     function ProductSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.shop() + 'items/:id', null, {})
+        return $resource(BaseUrl.shop() + 'items/:slug', null, {})
     }
 
     function ProductTaxonomySrv($resource, BaseUrl) {

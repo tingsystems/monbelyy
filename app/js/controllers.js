@@ -405,6 +405,7 @@
         self.total = $localStorage.total;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
+        $rootScope.items = $localStorage.items;
 
         // get post by category
         if ($stateParams.slug) {
@@ -412,7 +413,6 @@
                 slug: $stateParams.slug,
                 isActive: 'True'
             }).$promise.then(function (results) {
-                console.log(results);
                 if (results) {
                     self.categoryName = results.name;
                     self.categoryId = results.id;
@@ -465,7 +465,19 @@
 
     }
     
-    function ShopCartCtrl() {
+    function ShopCartCtrl($rootScope, $localStorage, $filter) {
+        var self = this;
+        self.items = $localStorage.items ? $localStorage.items : [];
+        self.total = $localStorage.total;
+        $localStorage.items = self.items;
+        $localStorage.total = self.total;
+        $rootScope.items = $localStorage.items;
+        console.log("Productos" , self.items);
+
+        self.itemInCart = function (item) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            return !!find_item;
+        };
         
     }
 
@@ -506,7 +518,7 @@
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
-    ShopCartCtrl.$inject = [];
+    ShopCartCtrl.$inject = ['$rootScope', '$localStorage', '$filter'];
     PaymentCtrl.$inject = [];
 
 })();

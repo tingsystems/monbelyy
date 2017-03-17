@@ -1,11 +1,22 @@
 <div class="header-title">
     <h2 class="title text-center">Carrito de compras</h2>
 </div>
-
 <section id="content-area" class="shop-cart">
-    <div class="container">
+    <div ng-if="ShopCart.items.length==0" class="text-center">
+        <h1>NO se han agregado productos al carrito</h1>
+        <a ui-sref="products">Ver productos</a>
+    </div>
+    <div class="container" ng-if="ShopCart.items.length>0">
         <div class="row">
-            <div class="col-md-9 text-center">
+            <div class="col-md-3 pull-right">
+                <div class="clear-cart" style="margin-bottom: 10px">
+                    <button class="btn btn-default">Vaciar Carrito</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-9 text-center" ng-repeat="product in ShopCart.items">
                 <div class="col-md-3">
                     <div class="shopcart-img">
                         <img src="../img/Servo-Motor.gif" alt="" width="200">
@@ -13,8 +24,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="shopcart-descrip">
-                        <h4>Servo Drive 750 Watts</h4>
-                        <h3>$290.00</h3>
+                        <h4>{{ product.name }}</h4>
+                        <h3>{{ product.price | currency }}</h3>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -38,7 +49,7 @@
                         <table class="table table-striped">
                             <tbody>
                             <tr>
-                                <td>Subtotal(2)</td>
+                                <td>Subtotal({{ items.length }})</td>
                                 <td>$490.00</td>
                             </tr>
                             <tr>

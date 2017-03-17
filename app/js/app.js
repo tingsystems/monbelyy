@@ -141,7 +141,7 @@
                 views: {
                     'content': {
                         templateUrl: '/templates/shopcart.html',
-                        controllerAs: 'Shopcart',
+                        controllerAs: 'ShopCart',
                         controller: 'ShopCartCtrl'
                     }
                 }
