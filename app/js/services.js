@@ -41,7 +41,9 @@
                 SweetAlert.swal({
                     title: !title ? 'Mensaje' : title,
                     text: msg,
-                    type: "success"
+                    type: "success",
+                    timer: 1500,
+                    confirmButton: false
                 });
             },
             error: function (msg, title) {
