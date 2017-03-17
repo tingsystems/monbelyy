@@ -35,28 +35,20 @@
     }
 
     // service for show notifications with toasty
-    function NotificationSrv(toasty) {
+    function NotificationSrv(SweetAlert) {
         return {
-            success: function (msg, title) {
-                toasty.success({
+            success: function (title, msg) {
+                SweetAlert.swal({
                     title: !title ? 'Mensaje' : title,
-                    msg: msg,
-                    showClose: true,
-                    clickToClose: true,
-                    timeout: 5000,
-                    sound: false,
-                    theme: 'material'
+                    text: msg,
+                    type: "success"
                 });
             },
             error: function (msg, title) {
-                toasty.error({
-                    title: !title ? 'Error' : title,
-                    msg: msg,
-                    showClose: true,
-                    clickToClose: true,
-                    timeout: 5000,
-                    sound: false,
-                    theme: 'material'
+                SweetAlert.swal({
+                    title: !title ? 'Mensaje' : title,
+                    text: msg,
+                    type: "error"
                 });
             }
         }
@@ -158,7 +150,7 @@
     ProductTaxonomySrv.$inject = ['$resource', 'BaseUrl'];
     TaxonomySrv.$inject = ['$resource', 'BaseUrl'];
     MessageSrv.$inject = ['$resource', 'BaseUrl'];
-    NotificationSrv.$inject = ['toasty'];
+    NotificationSrv.$inject = ['SweetAlert'];
     HttpInterceptor.$inject = ['$q', 'NotificationSrv', '$rootScope']
     StateSrv.$inject = ['$resource'];
     AccessSrv.$inject = ['$resource'];

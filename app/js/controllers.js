@@ -394,7 +394,7 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, $stateParams, $rootScope, $localStorage, $filter){
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, $stateParams, $rootScope, $localStorage, $filter){
         var self = this;
 
         self.list = [];
@@ -460,6 +460,7 @@
             }
             else {
                 self.items.push(item);
+                NotificationSrv.success('Producto agregado al carrito', item.name);
                 $localStorage.items = self.items;
             }
             //getTotal();
@@ -545,7 +546,7 @@
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
-    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
+    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
     ShopCartCtrl.$inject = ['$rootScope', '$localStorage', '$filter'];
     PaymentCtrl.$inject = [];
 
