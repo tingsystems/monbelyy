@@ -468,7 +468,7 @@
 
     }
     
-    function ShopCartCtrl($rootScope, $localStorage, $filter) {
+    function ShopCartCtrl($rootScope, $localStorage, $filter, NotificationSrv, SweetAlert) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -490,11 +490,32 @@
         };
 
         self.removeItem = function (item) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
-            if (find_item) {
-                self.items.splice([self.items.indexOf(find_item)], 1)
-            }
-            //getTotal();
+            SweetAlert.swal({
+                    title: 'Confirmar',
+                    text: 'Se eliminará del carrito.',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Si',
+                    cancelButtonText: 'Cancelar',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        var find_item = $filter('filter')(self.items, {id: item.id})[0];
+                        console.log(find_item);
+                        if (find_item) {
+                            self.items.splice([self.items.indexOf(find_item)], 1)
+                        }
+                        //getTotal();
+                        NotificationSrv.success('Hola', 'Perro');
+                        console.log("Eliminado");
+                    } else {
+                        NotificationSrv.error('Hola', 'Perro');
+                        console.log("Pelas Inge");
+                    }
+                });
         };
 
         var getTotal = function () {
@@ -547,7 +568,7 @@
     LoginCtrl.$inject = [];
     ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
-    ShopCartCtrl.$inject = ['$rootScope', '$localStorage', '$filter'];
+    ShopCartCtrl.$inject = ['$rootScope', '$localStorage', '$filter', 'NotificationSrv', 'SweetAlert'];
     PaymentCtrl.$inject = [];
 
 })();
