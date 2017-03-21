@@ -25,7 +25,8 @@
     "angular-touch": "1.5.9",
     "ngstorage": "^0.3.11",
     "angular-google-maps": "^2.4.0",
-    "ngSweetAlert": "angular-sweetalert#^1.1.2"
+    "ngSweetAlert": "angular-sweetalert#^1.1.2",
+    "satellizer": "^0.15.5"
   },
   "overrides": {
     "bootstrap": {

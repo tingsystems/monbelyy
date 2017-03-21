@@ -369,7 +369,65 @@
         };
     }
 
-    function LoginCtrl(){
+    function LoginCtrl(AccessSrv, $auth, $state, $localStorage, $scope, $rootScope, NotificationSrv) {
+        var self = this;
+        self.shop = {};
+        self.busy = false;
+        self.terms = false;
+        self.processing = false;
+
+        // Logic for save the session
+        self.saveSession = function (response) {
+            // save user info to local storage
+            $localStorage.appData = { user: angular.copy(response.data.user) };
+            $scope.app.data = $localStorage.appData;
+            // Redirect user here after a successful log in.
+        };
+
+        // Application for oauth authorization
+        self.client_id = '6JxWPajUJCd4GW7o3oTfuysw8HJfnl6V6AGWWdLR';
+        // Login with username and password
+        self.login = function () {
+            // ajax request to send the formData
+            self.processing = true;
+            self.formData.grant_type = 'password';
+            self.formData.client_id = self.client_id;
+            $auth.login(self.formData)
+                .then(function (response) {
+                    self.saveSession(response);
+                })
+                .catch(function (response) {
+                    // Handle errors here, such as displaying a notification
+                    // for invalid email and/or password.
+                    self.processing = false;
+                    NotificationSrv.error('Usuario o contraseña incorrectos');
+                });
+        };
+
+        self.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
+
+        self.logout = function () {
+            AccessSrv.logout({ token: $auth.getToken(), client_id: self.client_id }).$promise.then(function (data) {
+                $auth.logout()
+                    .then(function () {
+                        // delete appData
+                        delete $localStorage.appData;
+                        $rootScope.myApps = {};
+                        // Desconectamos al usuario y lo redirijimos
+                        if ($state.current.name != 'access.signin') {
+                            $state.go('access.signin');
+                        }
+                    })
+                    .catch(function (response) {
+                        // Handle errors here, such as displaying a notification
+                        console.log(response);
+                    });
+            });
+        };
+
+        //REGISTER ACCOUNT
 
     }
 
@@ -468,13 +526,28 @@
 
     }
     
-    function ShopCartCtrl($rootScope, $localStorage, $filter, NotificationSrv, SweetAlert) {
+    function ShopCartCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
+
+        self.setItem = function (item, qty) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            if (find_item) {
+                if (qty < 1) {
+                    // Remove item from cart
+                    self.items.splice([self.items.indexOf(find_item)], 1)
+                } else {
+                    if (qty) {
+                        self.items[self.items.indexOf(find_item)].qty = qty;
+                    }
+                }
+            }
+            getTotal();
+        };
 
         self.itemInCart = function (item) {
             var find_item = $filter('filter')(self.items, { id: item.id })[0];
@@ -490,44 +563,35 @@
         };
 
         self.removeItem = function (item) {
-            SweetAlert.swal({
-                    title: 'Confirmar',
-                    text: 'Se eliminará del carrito.',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'Cancelar',
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    if (isConfirm) {
-                        var find_item = $filter('filter')(self.items, {id: item.id})[0];
-                        console.log(find_item);
-                        if (find_item) {
-                            self.items.splice([self.items.indexOf(find_item)], 1)
-                        }
-                        //getTotal();
-                        NotificationSrv.success('Hola', 'Perro');
-                        console.log("Eliminado");
-                    } else {
-                        NotificationSrv.error('Hola', 'Perro');
-                        console.log("Pelas Inge");
-                    }
-                });
+            var find_item = $filter('filter')(self.items, {id: item.id})[0];
+            if (find_item) {
+                self.items.splice([self.items.indexOf(find_item)], 1);
+                NotificationSrv.error('Eliminado del carrito', item.name);
+                getTotal();
+
+            }
         };
 
         var getTotal = function () {
             self.total = 0;
             angular.forEach(self.items, function (value, key) {
                 //first Time calcule
-                value.import = parseFloat(value.price) * value.qty;
+                //value.import = parseFloat(value.price) * value.qty;
                 self.total += parseFloat(value.price) * value.qty;
             });
             $localStorage.total = self.total;
         };
         getTotal();
+
+        self.isAuthenticated = function () {
+            return $auth.isAuthenticated();
+        };
+
+        self.processPurchase = function() {
+             if(!$auth.isAuthenticated()){
+                 $state.go('login');
+             }
+        }
         
     }
 
@@ -565,10 +629,10 @@
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv','ProductTaxonomySrv', 'EntrySrv', '$stateParams', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
-    LoginCtrl.$inject = [];
+    LoginCtrl.$inject = ['AccessSrv', '$auth', '$state', '$localStorage', '$scope', '$rootScope', 'NotificationSrv'];
     ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
-    ShopCartCtrl.$inject = ['$rootScope', '$localStorage', '$filter', 'NotificationSrv', 'SweetAlert'];
+    ShopCartCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     PaymentCtrl.$inject = [];
 
 })();

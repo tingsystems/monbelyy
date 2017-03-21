@@ -39,7 +39,10 @@
                     </div>
                     <div class="col-md-2">
                         <div class="shopcart-qty">
-                            <input type="number" min="0" class="form-control cart-qty">
+                            <input type="number" min="0"
+                                   ng-model="product.qty"
+                                   ng-click="ShopCart.setItem({id: product.id, name: product.name, price: product.price, qty: product.qty}, product.qty)"
+                                   class="form-control cart-qty"  placeholder="{{ product.qty }}">
                         </div>
                     </div>
                     <div class="shopcart-delete">
@@ -67,7 +70,8 @@
                             </tr>
                             </tbody>
                         </table>
-                        <a ui-sref="payment" class="btn btn-success btn-cart btn-block">Procesar compra</a>
+                        <a class="btn btn-success btn-cart btn-block"
+                           ng-click="ShopCart.processPurchase()" >Procesar compra</a>
                     </div>
                 </div>
             </div>
