@@ -431,21 +431,27 @@
 
     }
 
-    function ProductDetailCtrl(ProductDetailSrv, $stateParams, $rootScope){
+    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter){
         var self = this;
         $rootScope.pageTitle = 'Corriente Alterna';
 
         self.busy = true;
-        ProductDetailSrv.get({
+        ProductSrv.get({
             slug: $stateParams.slug,
             isActive: 'True',
-            fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
+            fields: 'name,slug,description,attachments,taxonomies,price'
         }).$promise.then(function (results) {
             self.detail = results;
-            $rootScope.post = self.detail;
-            if (!self.detail.urlImages.original) {
-                self.detail.urlImages.original = $rootScope.initConfig.img_default;
+            // get featureImage
+            self.detail.featureImage = $filter('filter')(self.detail.attachments, { kind: 'featuredImage' })[0];
+            //get galeries
+            self.detail.galleryImages = $filter('filter')(self.detail.attachments, { kind: 'gallery_image' });
+
+            if (!self.detail.featureImage) {
+                self.detail.featureImage = {};
+                self.detail.featureImage.url = $rootScope.initConfig.img_default;
             }
+            $rootScope.post = self.detail;
             $rootScope.pageTitle = results.title + ' - Corriente Alterna';
             self.busy = false;
         });
@@ -490,6 +496,7 @@
                 taxonomy: self.categoryId,
                 isActive: 'True',
                 pageSize: 9,
+                fields: 'name,price,id,slug',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -630,7 +637,7 @@
     ProductsCtrl.$inject = ['ProductSrv','ProductTaxonomySrv', 'EntrySrv', '$stateParams', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     LoginCtrl.$inject = ['AccessSrv', '$auth', '$state', '$localStorage', '$scope', '$rootScope', 'NotificationSrv'];
-    ProductDetailCtrl.$inject = ['ProductDetailSrv', '$stateParams', '$rootScope'];
+    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
     ShopCartCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     PaymentCtrl.$inject = [];
