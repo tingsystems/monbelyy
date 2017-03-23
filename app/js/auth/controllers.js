@@ -96,68 +96,21 @@
 
     function RegisterCtrl(RegisterSrv, StateSrv, NotificationSrv, $state) {
         var self = this;
-        self.shop = {};
         self.busy = false;
-        self.terms = false;
+        self.formData = {};
 
-        // get all the states
-        self.busyState = true;
-        StateSrv.query({ country: '573fda4d5b0d6863743020d1', ordering: 'name' }).$promise.then(function (data) {
-            self.states = data;
-            self.busyState = false;
-        }, function (error) {
-            self.busyState = false;
-        });
-        // get the cities by state
-        self.getCitiesByState = function (state, state_id) {
-            if (!state_id) {
-                self.formData.city = null;
-                self.cities = [];
-                return
-            }
-            self.busyCity = true;
-            StateSrv.getCities({ state: state_id, ordering: 'name' }).$promise.then(function (response) {
-                self.shop.city = null;
-                self.cities = response;
-                self.busyCity = false;
-            }, function (error) {
-                self.busyCity = false;
-            });
-        };
-
-        self.formValid = function () {
-            if (self.shop.password != self.shop.password2) {
-                NotificationSrv.error('Las contraseñas no coinciden!');
-                return false
-            }
-            if (self.register.states.$invalid) {
-                NotificationSrv.error('Selecciona un estado!');
-                return false;
-            }
-            if (self.register.cities.$invalid) {
-                NotificationSrv.error('Selecciona una ciudad!');
-                return false;
-            }
-            if (!self.terms) {
-                NotificationSrv.error('Debes aceptar los terminos y condiciones!');
-                return false;
-            }
-            return true
-        };
-
-        self.createShop = function () {
-            if (!self.formValid()) return;
-            var shop = angular.copy(self.shop);
-            self.busy = true;
-            RegisterSrv.save(shop).$promise.then(function (data) {
-                self.busy = false;
-                $state.go('access.success');
-            }, function (data) {
-                self.busy = false;
-                NotificationSrv.error('Tenemos problemas creando tu cuenta, intenta de nuevo por favor... :(')
-            });
-
-        };
+        self.createAccount = function() {
+            var account = angular.copy(self.formData);
+            RegisterSrv.save(account).$promise.then(function(data){
+                NotificationSrv.success('Cuenta creada correctamente', 'Ya falto poco para pertenecer a Corrinte Alterna');
+                self.formData = {};
+                $state.go('success');
+            }, function(error){
+                angular.forEach(error.data, function(key, value){
+                    NotificationSrv.error(key,value);
+                })
+            })
+        }
     }
 
     function RecoveryPasswordCtrl(RegisterSrv, NotificationSrv, $state, $stateParams) {
@@ -210,8 +163,8 @@
 
     function ValidAccountCtrl(UserSrv, NotificationSrv, $state, $stateParams) {
         UserSrv.active({ token: $stateParams.token }, { 'is_active': true }).$promise.then(function (data) {
+            console.log(data);
             NotificationSrv.success('Cuenta activada correctamente!');
-            $state.go('access.signin');
         }, function (error) {
         });
     }

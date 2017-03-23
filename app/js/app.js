@@ -41,16 +41,6 @@
                     }
                 }
             })
-            .state('login', {
-                url: '/login',
-                views: {
-                    'content': {
-                        templateUrl: '/templates/auth/login.html',
-                        controllerAs: 'Login',
-                        controller: 'LoginCtrl'
-                    }
-                }
-            })
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
@@ -293,7 +283,7 @@
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app','ngMessages'])
         .config(Routes)
         .config(AppConfig)
         .run(Run);
