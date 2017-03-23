@@ -521,6 +521,28 @@ header {
   padding: 20px 0;
   color: #ffa500;
 }
+.data-contact a {
+  color: #555;
+}
+.data-contact a > i {
+  font-size: 14px;
+}
+.data-contact .person {
+  font-size: 2.8em;
+}
+.data-contact .my-account {
+  position: absolute;
+  padding-top: 20px;
+  padding-right: 5px;
+}
+.data-contact .my-logout {
+  position: absolute;
+  padding-top: 10px;
+}
+.data-contact .logout-ac {
+  font-size: 1.5em;
+  padding-left: 5px;
+}
 .detail-img {
   height: 300px;
   background-size: contain;
@@ -1042,15 +1064,6 @@ color
   background-size: 180px;
   background-repeat: no-repeat;
   background-position: right;
-}
-.data-contact {
-  padding: 10px 0;
-}
-.data-contact a {
-  color: #555;
-}
-.data-contact a > i {
-  font-size: 14px;
 }
 .box-simple {
   margin: 25px;

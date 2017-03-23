@@ -1,42 +1,28 @@
 (function () {
     'use strict';
 
-    function AccessCtrl(AccessSrv, $auth, $state, $localStorage, $scope, $rootScope, $filter, NotificationSrv, $http, AuthorizationGroupSrv) {
+    function AccessCtrl(AccessSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv) {
         var self = this;
+        self.busy = false;
+        self.formData = {};
+        self.formDataLogin = {};
+        self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
+        $rootScope.user = $localStorage.appData.user;
         self.processing = false;
 
         // Logic for save the session
         self.saveSession = function (response) {
             // save user info to local storage
             $localStorage.appData = { user: angular.copy(response.data.user) };
-            $scope.app.data = $localStorage.appData;
+            $rootScope.user = $localStorage.appData.user;
+            delete $localStorage.appData.user.groups;
+            delete $localStorage.appData.user.permissions;
+            delete $localStorage.appData.user.branchOffices;
+            delete $localStorage.appData.user.projects;
+            delete $localStorage.appData.user.is_superuser;
+            //$scope.app.data = $localStorage.appData;
             // Redirect user here after a successful log in.
-            // save the site list and the current site in the localStorage and the scope
-            var group = AuthorizationGroupSrv.authorize([{ list: ['admin'], kind: 'OR' }]);
-            var editor = AuthorizationGroupSrv.authorize([{ list: ['editor'], kind: 'OR' }]);
-            // logic for save project see 635 controller annalise
-            var projects = $localStorage.appData.user.projects;
-            $rootScope.projects = projects;
-            var project = $filter('filter')(projects, { 'default': true });
-            if (projects.length > 1) {
-                $rootScope.projectAccess = project[0].level;
-                $rootScope.projectId = project[0].id;
-                $http.defaults.headers.common['PROJECT-ID'] = $rootScope.projectId;
-                $localStorage.appData.curentProject = project[0];
-                $state.go('app.projects.list');
-            } else {
-                // if there are not default site redirect to sites list
-                $rootScope.projectAccess = project[0].level;
-                $rootScope.projectId = project[0].id;
-                $http.defaults.headers.common['PROJECT-ID'] = $rootScope.projectId;
-                $localStorage.appData.curentProject = project[0];
-                if (editor) {
-                    $state.go('app.content.list');
-                }
-                else {
-                    $state.go('app.pos.pos');
-                }
-            }
+            $state.go('home');
         };
 
         // Social auth
@@ -51,21 +37,23 @@
 
         };
         // Application for oauth authorization
-        self.client_id = '6JxWPajUJCd4GW7o3oTfuysw8HJfnl6V6AGWWdLR';
+        self.client_id = 'ppUsGThJxz4Oip9nfG1hfmg6dzOQ8f5SH3NDEjkU';
         // Login with username and password
         self.login = function () {
             // ajax request to send the formData
             self.processing = true;
-            self.formData.grant_type = 'password';
-            self.formData.client_id = self.client_id;
-            $auth.login(self.formData)
+            self.formDataLogin.grant_type = 'password';
+            self.formDataLogin.client_id = self.client_id;
+            $auth.login(self.formDataLogin)
                 .then(function (response) {
                     self.saveSession(response);
+                    console.log(response);
                 })
                 .catch(function (response) {
                     // Handle errors here, such as displaying a notification
                     // for invalid email and/or password.
                     self.processing = false;
+                    console.log(response);
                     NotificationSrv.error('Usuario o contraseña incorrectos');
                 });
         };
@@ -79,11 +67,10 @@
                 $auth.logout()
                     .then(function () {
                         // delete appData
-                        delete $localStorage.appData;
-                        $rootScope.myApps = {};
+                        delete $localStorage.appData.user;
                         // Desconectamos al usuario y lo redirijimos
-                        if ($state.current.name != 'access.signin') {
-                            $state.go('access.signin');
+                        if ($state.current.name != 'register') {
+                            $state.go('home');
                         }
                     })
                     .catch(function (response) {
@@ -92,22 +79,19 @@
                     });
             });
         };
-    }
-
-    function RegisterCtrl(RegisterSrv, StateSrv, NotificationSrv, $state) {
-        var self = this;
-        self.busy = false;
-        self.formData = {};
 
         self.createAccount = function() {
             var account = angular.copy(self.formData);
+            self.busy = true;
             RegisterSrv.save(account).$promise.then(function(data){
-                NotificationSrv.success('Cuenta creada correctamente', 'Ya falto poco para pertenecer a Corrinte Alterna');
+                NotificationSrv.success('Cuenta creada correctamente', 'Ya falto poco para pertenecer a Corriente Alterna');
+                self.busy = false;
                 self.formData = {};
                 $state.go('success');
             }, function(error){
                 angular.forEach(error.data, function(key, value){
                     NotificationSrv.error(key,value);
+                    self.busy = false;
                 })
             })
         }
@@ -172,13 +156,11 @@
     // create the module and assign controllers
     angular.module('auth.controllers', ['auth.services'])
         .controller('AccessCtrl', AccessCtrl)
-        .controller('RegisterCtrl', RegisterCtrl)
         .controller('RecoveryPasswordCtrl', RecoveryPasswordCtrl)
         .controller('ValidAccountCtrl', ValidAccountCtrl);
 
     // inject dependencies to controllers
-    AccessCtrl.$inject = ['AccessSrv', '$auth', '$state', '$localStorage', '$scope', '$rootScope', '$filter', 'NotificationSrv', '$http', 'AuthorizationGroupSrv'];
-    RegisterCtrl.$inject = ['RegisterSrv', 'StateSrv', 'NotificationSrv', '$state'];
+    AccessCtrl.$inject = ['AccessSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
 })();

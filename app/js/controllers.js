@@ -565,8 +565,8 @@
             self.items = [];
             self.total = 0;
             $localStorage.items = [];
-            /*$localStorage.total = 0;
-            $localStorage.promoTotal = 0;*/
+            $localStorage.total = 0;
+            //$localStorage.promoTotal = 0;
         };
 
         self.removeItem = function (item) {

@@ -8,8 +8,8 @@
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
-                        controllerAs: 'Register',
-                        controller: 'RegisterCtrl'
+                        controllerAs: 'Access',
+                        controller: 'AccessCtrl'
                     }
                 }
             })

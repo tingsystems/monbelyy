@@ -166,6 +166,13 @@
 
     }
 
+    function AuthProvider($authProvider) {
+        // config params
+        $authProvider.loginUrl = '#host#/api/{{apiShop}}/auth/token';
+        $authProvider.tokenName = 'access_token';
+        $authProvider.tokenPrefix = 'ca';
+    }
+
     /**
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
@@ -286,10 +293,12 @@
         'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app','ngMessages'])
         .config(Routes)
         .config(AppConfig)
+        .config(AuthProvider)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
         'translate', '$localStorage', 'EntrySrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
+    AuthProvider.$inject = ['$authProvider'];
 })();
