@@ -124,30 +124,7 @@
                         controller: 'ProductDetailCtrl'
                     }
                 }
-            })
-            .state('shopcart', {
-                url: '/shopcart',
-                data: { pageTitle: 'Carrito de compras' },
-                views: {
-                    'content': {
-                        templateUrl: '/templates/shopcart.html',
-                        controllerAs: 'ShopCart',
-                        controller: 'ShopCartCtrl'
-                    }
-                }
-            })
-            .state('payment', {
-                url: '/payment',
-                data: { pageTitle: 'Proceso de pago' },
-                views: {
-                    'content': {
-                        templateUrl: '/templates/payment.html',
-                        controllerAs: 'Payment',
-                        controller: 'PaymentCtrl'
-                    }
-                }
             });
-
 
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(false);
@@ -177,7 +154,7 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, translate, $localStorage, EntrySrv) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth) {
         $rootScope.$state = $state;
         //$rootScope.host = 'http://api.taki.tingsystems.com';
         $rootScope.host = 'http://192.168.1.71';
@@ -286,18 +263,32 @@
 
         $rootScope.ecommerce = true;
 
+        $rootScope.$on('$stateChangeStart', function (event, toState) {
+            var requiredLogin = false;
+            // check if this state need login
+            if (toState.data && toState.data.requiredLogin)
+                requiredLogin = true;
+
+            // if yes and if this user is not logged in, redirect him to login page
+            if (requiredLogin && !$auth.isAuthenticated()) {
+                event.preventDefault();
+                if ($state.current.name != '500' && $state.current.name != '400') {
+                    $state.go('register');
+                }
+            }
+        });
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app','ngMessages'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app','ngMessages'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'translate', '$localStorage', 'EntrySrv'];
+         'EntrySrv', '$auth'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
     AuthProvider.$inject = ['$authProvider'];

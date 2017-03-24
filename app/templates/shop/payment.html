@@ -4,39 +4,41 @@
 <section id="content-area">
     <div class="container">
         <div class="cart-form">
-            <form action="">
+            <form name="paymentForm" novalidate>
                 <div class="row">
                     <div class="col-sm-9 col-md-9 detail-payment-shop" style="background: #eee;">
                         <div class="col-xs-12"><p>Elige una dirección de envío a domicilio</p></div>
-                        <div class="col-xs-12 col-sm-6 col-md-11">
+                        <div class="col-xs-12 col-sm-6 col-md-12">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">Nombre(*)</label>
-                                    <input type="text" class="form-control" id="name">
+                                <div class="form-group" ng-class="{ 'has-error': paymentForm.fullName.$touched && paymentForm.fullName.$invalid }">
+                                    <label for="fullName">Nombre(*)</label>
+                                    <input type="text" ng-model="Payment.formData.fullName" class="form-control" id="fullName" name="fullName" required>
+                                    <div class="help-block" ng-messages="paymentForm.fullName.$error" ng-if="paymentForm.fullName.$touched">
+                                        <div ng-message="required">Ingrese el nombre</div>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="name">Teléfono celular(*)</label>
+                                    <input type="text" class="form-control" id="mobile" name="mobile">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Apellidos(*)</label>
                                     <input type="text" class="form-control" id="">
 
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">Teléfono celular(*)</label>
-                                    <input type="text" class="form-control" id="name">
-
-                                </div>
                                 <div class="form-group">
                                     <label for="">Teléfono fijo (opcional)</label>
-                                    <input type="text" class="form-control" id="">
+                                    <input type="text" class="form-control" id="phone" name="phone">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Dirección</label>
-                                    <input type="text" class="form-control" id="name">
-
+                                    <label for="address">Dirección</label>
+                                    <input type="text" class="form-control" id="address" name="address">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -48,15 +50,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="name">N° Interior (opcional)</label>
-                                    <input type="text" class="form-control" id="name">
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">Código postal</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <label for="zip">N° Interior (opcional)</label>
+                                    <input type="text" class="form-control" id="">
 
                                 </div>
                             </div>
@@ -69,22 +64,29 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Ciudad</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <label for="city">Ciudad</label>
+                                    <input type="text" class="form-control" id="city">
 
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Colonia</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <label for="zip">Código postal</label>
+                                    <input type="text" class="form-control" id="zip" name="zip">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="neighborhood">Colonia</label>
+                                    <input type="text" class="form-control" id="neighborhood" name="neighborhood">
 
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12"><p>Método de pago</p></div>
 
-                        <div class="col-xs-12 col-sm-6 col-md-11" style="background: #eee;">
+                        <div class="col-xs-12 col-sm-6 col-md-12" style="background: #eee;">
 
                             <div class="col-md-12">
                                 <label class="radio-inline"><input type="radio" name="payment" value="">Depósito
@@ -125,6 +127,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="pull-right save-info">
+                            <button type="submit" class="btn btn-cart"
+                                    ng-click="Payment.processPurchase()"
+                                    ng-disabled="paymentForm.$invalid">Guardar información</button>
+                        </div>
                     </div>
                     <div class="col-md-3">
                         <div class="details-prod">
@@ -134,15 +141,15 @@
                                     <tbody>
                                     <tr>
                                         <td>Subtotal(1)</td>
-                                        <td>$490.00</td>
+                                        <td>{{ Payment.total | currency }}</td>
                                     </tr>
                                     <tr>
                                         <td>Envío</td>
-                                        <td>$99.00</td>
+                                        <td>{{ 120 | currency}}</td>
                                     </tr>
                                     <tr>
                                         <td>Total</td>
-                                        <td>$589</td>
+                                        <td>{{ Payment.total | currency }}</td>
                                     </tr>
                                     </tbody>
                                 </table>

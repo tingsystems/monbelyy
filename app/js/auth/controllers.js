@@ -70,6 +70,7 @@
                         delete $localStorage.appData.user;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name != 'register') {
+                            NotificationSrv.success("Te esperamos pronto", "Corriente Alterna");
                             $state.go('home');
                         }
                     })

@@ -30,6 +30,15 @@
                         controller: 'ValidAccountCtrl'
                     }
                 }
+            })
+            .state('dashboard', {
+                url: '/dashboard',
+                data: {requiredLogin : true},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/dashboard.html'
+                    }
+                }
             });
 
     }
