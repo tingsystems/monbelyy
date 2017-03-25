@@ -25,7 +25,7 @@
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
-            fields: 'title,content,urlImages,slug,excerpt'
+            fields: 'title,content,attachments,slug,excerpt'
         }).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
@@ -300,7 +300,7 @@
             ProductTaxonomySrv.get({
                 isActive: 'True',
                 pageSize: 3,
-                fields: 'name,slug,createdAt',
+                fields: 'attachments,name,slug,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -419,6 +419,7 @@
                 if (results) {
                     self.categoryName = results.name;
                     self.categoryId = results.id;
+                    self.category = results;
                     self.getMorePosts();
                     $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
                 }
@@ -426,21 +427,25 @@
         }
 
         self.getMorePosts = function () {
-            if (self.busy || !self.next) return;
+            if (self.busy || !self.next || !self.category) return;
             self.page += 1;
             self.busy = true;
 
             ProductSrv.get({
-                taxonomy: self.categoryId,
+                taxonomies: self.category.slug,
                 isActive: 'True',
                 pageSize: 9,
-                fields: 'name,price,id,slug',
+                fields: 'attachments,description,name,price,id,slug',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
                 self.list = self.list.concat(results.results);
                 self.busy = false;
                 self.next = results.next;
+                //get featureImage
+                angular.forEach(self.list, function (obj, ind) {
+                    obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                });
             });
         };
 

@@ -2,10 +2,10 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
-            <li ng-if="Product.detail.categories.length"><a
-                    ui-sref="category({slug: Product.detail.categories[0].slug })">{{ Product.detail.categories[0].name }}</a>
+            <li ng-if="Product.detail.taxonomies.length"><a
+                    ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{ Product.detail.taxonomies[0].name }}</a>
             </li>
-            <li class="active">{{ Product.detail.title }}</li>
+            <li class="active">{{ Product.detail.name }}</li>
         </ol>
     </div>
 </div>
@@ -18,9 +18,9 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-                        <uib-slide ng-repeat="slide in Product.detail.galleryImages">
+                        <uib-slide ng-repeat="slide in Product.detail.attachments">
                             <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                                <div class="detail-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
+                                <div class="detail-img" style="background-image:url('{{ slide.url }}');"></div>
                             </a>
                         </uib-slide>
                     </uib-carousel>
@@ -30,15 +30,15 @@
                 <h3 class="detail-price">$222.00</h3>
             </div>
             <div class="col-md-4 detail-qty">
-                <input type="number" class="form-control cart-qty" min="0">
+                <input type="number" class="form-control cart-qty" min="1">
             </div>
         </div>
     </div>
     <div class="row text-center">
         <button href="" class="btn btn-success btn-cart">Agregar a carrito</button>
 
-        <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.content | trustHtml">
-            {{Product.detail.content}}</h4>
+        <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
+            {{Product.detail.description}}</h4>
     </div>
 </section>
 <section class="product-info">

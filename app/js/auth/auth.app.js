@@ -39,6 +39,15 @@
                         templateUrl: '/templates/auth/dashboard.html'
                     }
                 }
+            })
+            .state('sales', {
+                url: '/sales',
+                data: {requiredLogin : true},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/history-sales.html'
+                    }
+                }
             });
 
     }

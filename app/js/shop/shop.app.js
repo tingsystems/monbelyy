@@ -14,12 +14,12 @@
                     }
                 }
             })
-            .state('payment', {
+            .state('confirm-payment', {
                 url: '/payment',
                 data: { pageTitle: 'Proceso de pago' },
                 views: {
                     'content': {
-                        templateUrl: '/templates/shop/payment.html',
+                        templateUrl: '/templates/shop/payment-method.html',
                         controllerAs: 'Payment',
                         controller: 'PaymentCtrl'
                     }

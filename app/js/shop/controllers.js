@@ -69,7 +69,7 @@
             if(!$auth.isAuthenticated()){
                 $state.go('register');
             }else{
-                $state.go('payment');
+                $state.go('confirm-payment');
 
             }
         }
@@ -99,7 +99,7 @@
 
         self.getCustomer = function () {
             console.log('Usuario', self.user);
-            CustomerSrv.get({user : self.user.id }).$promise.then(function (data) {
+            CustomerSrv.customerByUser({ id: self.user.id }).$promise.then(function (data) {
                 console.log(data);
             }, function (error) {
 

@@ -1,0 +1,48 @@
+<div id="content-area">
+    <div class="container">
+        <div class="card-heading">
+            <h4>Historial de compras</h4>
+        </div>
+        <div class="card-body card-list-items">
+            <div class="row row-sm m-b">
+                <div class="col-xs-12 col-sm-4 col-md-4 pull-right">
+                    <form name="Order.searchForm" ng-submit="Order.globalSearch()">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar" name="searchTerm"
+                                   ng-model="Order.globalSearchTerm" ng-change="Order.globalSearch()"
+                            />
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row row-sm">
+                <div class="table-responsive" loading-container="Order.tableParams.settings().$loading">
+                    <table class="table table-bordered bg-white table-striped" ng-table="Order.tableParams"
+                           show-filter="false">
+                        <tbody>
+                        <tr>
+                            <td data-title="'Id'" sortable="'id'">#</td>
+                            <td data-title="'Fecha'" sortable="'createdAt'">Fecha</td>
+                            <td data-title="'Cliente'" sortable="'customerName'">Producto</td>
+                            <td data-title="'Tipo'" sortable="'paymentType'">
+                            <td data-title="'Total'" sortable="'total'"><strong class="text-success">{{ order.total |
+                                currency }}</strong></td>
+                        </tr>
+                        </tbody>
+                        <!--<tfooter>
+                            <tr ng-hide="$data.length">
+                                <td colspan="7" class="text-center">Ningún dato disponible</td>
+                            </tr>
+                        </tfooter>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -79,7 +79,7 @@
                                         <input type="password" ng-model="Access.formData.password2" class="form-control" id="password2" name="password2"
                                                placeholder="Confirmar contraseña"
                                                compare-to="Access.formData.password" ng-required="Access.formData.password">
-                                        <div class="help-block" ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched">
+                                        <div class="help-block" ng-messages="registerForm.password2.$error" ng-if="registerForm.password2.$touched">
                                             <div ng-message="required">Confirmar contraseña.</div>
                                             <div ng-message="compareTo">Las contraseñas no coinciden.</div>
                                         </div>

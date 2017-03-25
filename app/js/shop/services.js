@@ -23,6 +23,10 @@
                 'patch': {
                     method: 'PATCH',
                     url: BaseUrlShop.get() + 'customers/:id'
+                },
+                'customerByUser': {
+                    method: 'GET',
+                    url: BaseUrlShop.get() + 'customer/user/:id'
                 }
             });
     }
