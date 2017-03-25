@@ -156,8 +156,8 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth) {
         $rootScope.$state = $state;
-        //$rootScope.host = 'http://api.taki.tingsystems.com';
-        $rootScope.host = 'http://192.168.1.71';
+        $rootScope.host = 'http://api.taki.tingsystems.com';
+        //$rootScope.host = 'http://192.168.1.71';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
         $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
