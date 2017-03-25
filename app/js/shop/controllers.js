@@ -81,6 +81,7 @@
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
         self.formData = {};
+        self.user = $localStorage.appData.user;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
@@ -95,6 +96,16 @@
             $localStorage.total = self.total;
         };
         getTotal();
+
+        self.getCustomer = function () {
+            console.log('Usuario', self.user);
+            CustomerSrv.get({user : self.user.id }).$promise.then(function (data) {
+                console.log(data);
+            }, function (error) {
+
+            })
+        };
+        self.getCustomer();
 
         self.processPurchase = function(){
             var purchase = angular.copy(self.formData);

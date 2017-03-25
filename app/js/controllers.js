@@ -11,7 +11,7 @@
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
-            fields: 'urlImages,title,link,slug,excerpt,content'
+            fields: 'attachments,title,link,slug,excerpt,content'
         }).$promise.then(function (results) {
             self.mainSlider = results.results;
             //get featureImage
@@ -39,7 +39,7 @@
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
-            fields: 'title,content,urlImages,slug,excerpt'
+            fields: 'title,content,attachments,slug,excerpt'
         }).$promise.then(function (results) {
             self.services = results.results;
         });
@@ -78,7 +78,7 @@
                 taxonomies: $stateParams.slug,
                 isActive: 'True',
                 pageSize: 9,
-                fields: 'title,slug,excerpt,urlImages,createdAt',
+                fields: 'title,slug,excerpt,attachments,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -118,7 +118,7 @@
                 kind: 'post',
                 taxonomies: 'blog',
                 isActive: 'True',
-                fields: 'title,slug,excerpt,urlImages,createdAt',
+                fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,
                 ordering: '-createdAt',
                 page: self.page
@@ -141,7 +141,7 @@
         EntrySrv.get({
             slug: $stateParams.slug,
             isActive: 'True',
-            fields: 'title,slug,content,urlImages,categories,tags,galleryImages'
+            fields: 'title,slug,content,attachments,categories,tags,galleryImages'
         }).$promise.then(function (results) {
             self.detail = results;
             // get featureImage
@@ -227,7 +227,7 @@
                 EntrySrv.get({
                     kind: 'post',
                     isActive: 'True',
-                    fields: 'urlImages,title,link,slug,excerpt',
+                    fields: 'attachments,title,link,slug,excerpt',
                     pageSize: 10,
                     ordering: '-createdAt',
                     search: self.searchTerm,
@@ -256,7 +256,7 @@
                 kind: 'post',
                 isActive: 'True',
                 pageSize: 10,
-                fields: 'urlImages,title,link,slug,excerpt',
+                fields: 'attachments,title,link,slug,excerpt',
                 ordering: '-createdAt',
                 search: self.searchTerm,
                 page: self.page
@@ -326,7 +326,7 @@
                 isActive: 'True',
                 pageSize: 9,
                 ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories,excerpt'
+                fields: 'attachments,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
                 self.list1 = results.results;
             });
@@ -338,7 +338,7 @@
                 isActive: 'True',
                 pageSize: 9,
                 ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories,excerpt'
+                fields: 'attachments,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
                 self.list2 = results.results;
             });
@@ -350,7 +350,7 @@
                 isActive: 'True',
                 pageSize: 9,
                 ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories,excerpt'
+                fields: 'attachments,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
                 self.list3 = results.results;
             });
@@ -362,7 +362,7 @@
                 isActive: 'True',
                 pageSize: 9,
                 ordering: '-createdAt',
-                fields: 'urlImages,title,link,slug,categories,excerpt'
+                fields: 'attachments,title,link,slug,categories,excerpt'
             }).$promise.then(function (results) {
                 self.list4 = results.results;
             });

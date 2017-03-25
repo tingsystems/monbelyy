@@ -1317,6 +1317,21 @@ color
 .img-size a>img {
   width: 100%;
 }
+.title-section {
+  padding: 10px 0 15px 0;
+  position: relative;
+  z-index: 1;
+}
+.title-section .title {
+  background: #fafbfb;
+  font-size: 22px;
+  padding: 0 10px;
+  z-index: 7;
+}
+.title-section .line-divider {
+  position: relative;
+  color: #f00;
+}
 .menu {
   padding: 5px;
   position: relative;
@@ -1383,6 +1398,14 @@ color
 .menu .menu-item .heading h5 {
   font-size: 16px;
   color: #fff;
+}
+.alert-payment {
+  color: #f5f5f5;
+  background-color: #565656;
+}
+.alert-pdanger {
+  color: #f5f5f5;
+  background-color: #aa261d;
 }
 footer {
   background-color: #323232;
