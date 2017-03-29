@@ -46,7 +46,7 @@
 
     }
 
-    function PostCtrl(EntrySrv, $stateParams, TaxonomySrv, $rootScope) {
+    function PostCtrl(EntrySrv, $stateParams, TaxonomySrv, $rootScope, $filter) {
         var self = this;
 
         self.list = [];
@@ -62,7 +62,7 @@
                 isActive: 'True',
                 pageSize: 1
             }).$promise.then(function (results) {
-                if (results.results.length) {
+                if (results.results) {
                     self.categoryName = results.results[0].name;
                     $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
                 }
@@ -78,13 +78,17 @@
                 taxonomies: $stateParams.slug,
                 isActive: 'True',
                 pageSize: 9,
-                fields: 'title,slug,excerpt,attachments,createdAt',
+                fields: 'attachments,title,slug,excerpt,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
                 self.list = self.list.concat(results.results);
                 self.busy = false;
                 self.next = results.next;
+                //get featureImage
+                angular.forEach(self.list, function (obj, ind) {
+                    obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                });
             });
         };
 
@@ -493,7 +497,7 @@
 
     // inject dependencies to controllers
     HomeCtrl.$inject = ['EntrySrv', 'TaxonomySrv', '$rootScope', '$filter'];
-    PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope'];
+    PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope','$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];

@@ -2386,6 +2386,12 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .prod-entry {
+    padding: 15px 6% 10px !important;
+  }
+  .perfil {
+    border-top: 1px solid rgba(0,0,0,0.075);
+  }
   .detail-qty {
     margin-left: 31%;
   }
