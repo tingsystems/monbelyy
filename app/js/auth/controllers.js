@@ -22,7 +22,7 @@
             delete $localStorage.appData.user.is_superuser;
             //$scope.app.data = $localStorage.appData;
             // Redirect user here after a successful log in.
-            $state.go('home');
+            $state.go('dashboard');
         };
 
         // Social auth

@@ -74,12 +74,12 @@
             <div class="col-sm-4 col-md-3">
                 <a href="mailto:{{initConfig.email}}"><i class="icon ion-ios-email-outline"></i> {{initConfig.email}}</a>
             </div>
-            <div class="col-md-6" ng-controller="AccessCtrl as Access">
-                <div class="col-sm-4 col-md-6 text-right shopping-cart" ng-if="ecommerce">
+            <div class="col-sm-4 col-md-6" ng-controller="AccessCtrl as Access">
+                <div class="col-xs-9 col-sm-12 col-md-6 text-right shopping-cart" ng-if="ecommerce">
                     <span class="qty-cart">{{ items.length }}</span>
                     <a ui-sref="shopcart"><i class="icon ion-ios-cart-outline"></i> Carrito</a>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 data-contact perfil text-right">
+                <div class="col-xs-12 col-sm-6 col-md-6 data-contact perfil text-right hidden-sm">
                     <!--<div class="col-xs-1 col-sm-3"></div>-->
                     <div class="col-xs-5">
                         <i ng-if="Access.isAuthenticated()" data-toggle="tooltip" ui-sref="dashboard" title="Ver mi cuenta" class="ion-ios-person-outline person"></i>

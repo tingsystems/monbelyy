@@ -196,6 +196,15 @@ body {
   width: 20px;
   height: 20px;
 }
+.shopcart-img {
+  background-position: top center;
+  background-size: contain;
+  height: 135px;
+  background-repeat: no-repeat;
+}
+.excerpt-shopping {
+  padding-top: 50px;
+}
 header {
   width: 100%;
   overflow: hidden;
@@ -462,6 +471,19 @@ header {
 .navbar-info i {
   font-size: 22px;
 }
+.send-email {
+  padding-bottom: 10px;
+}
+.info {
+  color: rgba(0,0,0,0.2);
+  font-size: 1.7em;
+}
+.info2 {
+  font-family: 'Roboto';
+  text-transform: uppercase;
+  font-weight: 100;
+  color: #565656;
+}
 .dividerw {
   border: 1px solid #ccc;
   margin-top: 0;
@@ -548,7 +570,7 @@ header {
   padding-left: 5px;
 }
 .detail-img {
-  height: 300px;
+  height: 280px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -1317,6 +1339,10 @@ color
 .img-size a>img {
   width: 100%;
 }
+.content-dashboard {
+  padding: 70px 60px;
+  background-color: #fff;
+}
 .title-section {
   padding: 10px 0 15px 0;
   position: relative;
@@ -1332,11 +1358,11 @@ color
   position: relative;
   color: #f00;
 }
-.menu {
+.menu-dash {
   padding: 5px;
   position: relative;
 }
-.menu .menu-item {
+.menu-dash .menu-item {
   border-radius: 5px;
   width: 100%;
   height: 200px;
@@ -1345,7 +1371,7 @@ color
   position: relative;
   cursor: pointer;
 }
-.menu .menu-item img {
+.menu-dash .menu-item img {
   width: 100%;
   height: auto;
   position: absolute;
@@ -1354,7 +1380,7 @@ color
   -webkit-transition: -webkit-transform 1s linear;
   transition: -webkit-transform 1s linear;
 }
-.menu .menu-item .mask {
+.menu-dash .menu-item .mask {
   width: 100%;
   height: 100%;
   opacity: 0.8;
@@ -1363,7 +1389,7 @@ color
   left: 0;
   background: rgba(0,0,0,0.48);
 }
-.menu .menu-item .heading {
+.menu-dash .menu-item .heading {
   position: relative;
   text-align: center;
   top: 50%;
@@ -1371,7 +1397,7 @@ color
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-.menu .menu-item .heading i {
+.menu-dash .menu-item .heading i {
   background: transparent;
   border-radius: 50%;
   border: 1px solid #fff;
@@ -1387,7 +1413,7 @@ color
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-.menu .menu-item .heading h2 {
+.menu-dash .menu-item .heading h2 {
   color: #fff;
   font-size: 25px;
   text-align: center;
@@ -1395,7 +1421,7 @@ color
   letter-spacing: 1px;
   font-weight: 500;
 }
-.menu .menu-item .heading h5 {
+.menu-dash .menu-item .heading h5 {
   font-size: 16px;
   color: #fff;
 }
@@ -1432,7 +1458,7 @@ color
   transition: all 0.5s;
 }
 .paymentWrap .paymentBtnGroup .paymentMethod .method.paypal {
-  background-image: url("http://www.marc.com.mx/mcweb/wp-content/uploads/2015/12/paypal.png");
+  background-image: url("http://www.ayudapayoneer.com/wp-content/uploads/2015/10/payoneer-paypal-01.png");
 }
 .paymentWrap .paymentBtnGroup .paymentMethod .method.bank-deposit {
   background-image: url("https://elsoldemexico.com.mx/wp-content/uploads/2016/03/bancos.jpg");
@@ -1508,6 +1534,15 @@ footer .contact-sty .download-app > i:hover {
 }
 .btn {
   font-size: 18px;
+}
+.btn-outline-red {
+  color: #d9534f;
+  background-image: none;
+  background-color: transparent;
+  border-color: #d9534f;
+}
+.btn-outline-red:hover {
+  color: #d9534f;
 }
 .btn-big {
   padding: 25px 30px;
@@ -2384,8 +2419,18 @@ footer .contact-sty .download-app > i:hover {
     background-size: cover;
     padding: 30px 0;
   }
+  .menu-dash .menu-item {
+    margin-bottom: 10px;
+  }
 }
 @media only screen and (max-width: 767px) {
+  .shopcart-qty {
+    position: re;
+    margin: auto 29.5%;
+  }
+  .shopcart-delete {
+    padding-bottom: 15px;
+  }
   .prod-entry {
     padding: 15px 6% 10px !important;
   }
@@ -2426,7 +2471,7 @@ footer .contact-sty .download-app > i:hover {
     font-size: 16px;
   }
   .qty-cart {
-    right: 170px;
+    right: 45%;
   }
   .navbar-info .col-sm-4 {
     text-align: center;
@@ -2802,6 +2847,9 @@ footer .contact-sty .download-app > i:hover {
   }
   .content-post .pull-left {
     float: none !important;
+  }
+  .menu-dash .menu-item {
+    margin-bottom: 10px;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {

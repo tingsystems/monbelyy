@@ -9,7 +9,7 @@
         </ol>
     </div>
 </div>
-<section id="content-area" class="content-blog product-detail">
+<section id="content-area" class="content-blog product-detail" ng-controller="ShoppingCtrl as Shop">
     <h1 class="text-center detail-title">{{Product.detail.name}}</h1>
     <div class="row text-center">
         <div class="col-md-6 col-md-offset-3">
@@ -27,15 +27,18 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <h3 class="detail-price">$222.00</h3>
+                <h3 class="detail-price">{{ Product.detail.price | currency}}</h3>
             </div>
             <div class="col-md-4 detail-qty">
-                <input type="number" class="form-control cart-qty" min="1">
+                <input type="number" ng-model="Product.detail.qty" class="form-control cart-qty" min="1">
             </div>
         </div>
     </div>
     <div class="row text-center">
-        <button href="" class="btn btn-success btn-cart">Agregar a carrito</button>
+        <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                                        price: Product.detail.price, image: Product.detail.featuredImage.url, qty: Product.detail.qty}, Product.detail.qty)"
+                ng-disabled="Shop.itemInCart(Product)"
+                class="btn btn-success btn-cart">Agregar a carrito</button>
 
         <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
             {{Product.detail.description}}</h4>

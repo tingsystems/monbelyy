@@ -1,73 +1,72 @@
 <!--content-->
-<div id="content-area" class="page_content">
-    <section class="container">
-        <div class="row">
-            <div class="title-section">
-                <h2 class="title">Mi cuenta: usuario</h2>
-                <hr>
-            </div>
+<section class="content-dashboard">
+    <div class="row">
+        <div class="title-section">
+            <h2 class="title"><i class="ion-home"></i> Mi cuenta: {{user.username}}</h2>
+            <hr>
         </div>
-        <div class="row">
-            <div class="col-md-3 menu" ui-sref="sales">
-                <div data-url_target="about_us" class="profile-btn menu_button menu-item">
-                    <img alt="" src="../../img/about.jpg">
-                    <div class="mask">
-                    </div>
-                    <div class="heading">
-                        <i class="ion-bag hidden-xs"></i>
-                        <h2>Historial</h2>
-                        <h5>de compras</h5>
-                    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 menu-dash" ui-sref="sales">
+            <div data-url_target="about_us" class="profile-btn menu_button menu-item">
+                <img alt="" src="../../img/about.jpg">
+                <div class="mask">
                 </div>
-            </div>
-            <div class="col-md-3 menu">
-                <div data-url_target="about_us" class="profile-btn menu_button menu-item">
-                    <img alt="" src="../../img/about.jpg">
-                    <div class="mask">
-                    </div>
-                    <div class="heading">
-                        <i class="ion-location hidden-xs"></i>
-                        <h2>Mis</h2>
-                        <h5>direcciones</h5>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 menu">
-                <div data-url_target="about_us" class="profile-btn menu_button menu-item">
-                    <img alt="" src="../../img/about.jpg">
-                    <div class="mask">
-                    </div>
-                    <div class="heading">
-                        <i class="ion-compose hidden-xs"></i>
-                        <h2>Agregar</h2>
-                        <h5>dirección</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 menu">
-                <div data-url_target="about_us" class="profile-btn menu_button menu-item">
-                    <img alt="" src="../../img/about.jpg" style="width: 100%; height: auto;">
-                    <div class="mask">
-                    </div>
-                    <div class="heading">
-                        <i class="ion-ios-person hidden-xs"></i>
-                        <h2>Información</h2>
-                        <h5>personal</h5>
-                    </div>
+                <div class="heading">
+                    <i class="ion-bag hidden-xs"></i>
+                    <h2>Historial</h2>
+                    <h5>de compras</h5>
                 </div>
             </div>
         </div>
+        <div class="col-md-3 menu-dash">
+            <div data-url_target="about_us" class="profile-btn menu_button menu-item">
+                <img alt="" src="../../img/about.jpg">
+                <div class="mask">
+                </div>
+                <div class="heading">
+                    <i class="ion-location hidden-xs"></i>
+                    <h2>Mis</h2>
+                    <h5>direcciones</h5>
 
-        <!--<div class="col-md-12">
-            <div class="pull-right">
-                <a href="/"
-                   class="button_type_4 bg-btn-grey d_inline_middle r_corners tr_all_hover pull-right">
-                    <i class="fa fa-angle-left"></i>
-                    Regresar a inicio
-                </a>
+                </div>
             </div>
-        </div>-->
+        </div>
+        <div class="col-md-3 menu-dash">
+            <div data-url_target="about_us" class="profile-btn menu_button menu-item">
+                <img alt="" src="../../img/about.jpg">
+                <div class="mask">
+                </div>
+                <div class="heading">
+                    <i class="ion-compose hidden-xs"></i>
+                    <h2>Agregar</h2>
+                    <h5>dirección</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 menu-dash">
+            <div data-url_target="about_us" class="profile-btn menu_button menu-item">
+                <img alt="" src="../../img/about.jpg" style="width: 100%; height: auto;">
+                <div class="mask">
+                </div>
+                <div class="heading">
+                    <i class="ion-ios-person hidden-xs"></i>
+                    <h2>Información</h2>
+                    <h5>personal</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    </section>
-</div>
+
+<!--<div class="col-md-12">
+        <div class="pull-right">
+            <a href="/"
+               class="button_type_4 bg-btn-grey d_inline_middle r_corners tr_all_hover pull-right">
+                <i class="fa fa-angle-left"></i>
+                Regresar a inicio
+            </a>
+        </div>
+    </div>-->
+

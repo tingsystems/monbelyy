@@ -2,35 +2,33 @@
     <h2 class="title text-center">Productos</h2>
 </div>
 <section id="content-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 content-pages" infinite-scroll='Product.getMorePosts()'
-                 infinite-scroll-disabled='Product.busy || !Product.next || Product.loadProducts'>
-                <div class="container">
-                    <div class="row text-center" ng-if="ecommerce">
-                        <div class="col-sm-4" ng-repeat="entry in Product.list">
-                            <div class="box-prod">
-                                <a ui-sref="category({slug:entry.slug})">
+    <div class="row">
+        <div class="col-md-12 content-pages" infinite-scroll='Product.getMorePosts()'
+             infinite-scroll-disabled='Product.busy || !Product.next || Product.loadProducts'>
+            <div class="container">
+                <div class="row text-center" ng-if="ecommerce">
+                    <div class="col-sm-4" ng-repeat="entry in Product.list">
+                        <div class="box-prod">
+                            <a ui-sref="category({slug:entry.slug})">
                                 <div class="bg-prod"
                                      style="background-image: url('{{entry.featuredImage.url }}')"></div>
                                 <h3 class="prod-descrip">{{entry.name}}</h3>
 
                                 <h4 class="prod-price"><strong>{{entry.excerpt}}</strong></h4>
-                                </a>
-                                <a ui-sref="category({slug:entry.slug})" class="btn btn-success btn-cart">Ver Productos</a>
-                            </div>
+                            </a>
+                            <a ui-sref="category({slug:entry.slug})" class="btn btn-success btn-cart">Ver Productos</a>
                         </div>
                     </div>
-                    <!--<div class="row text-center">
-                        <h2 class="text-center no-content">Proximamente</h2>
-                    </div>-->
-                    <div class="col-sm-12" ng-show="Product.busy">
-                        <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
-                    </div>
-                    <div class="col-sm-12" ng-show="!Product.busy">
-                        <h2 class="text-center no-content" ng-show="!Product.list.length">Lo sentimos no contamos con
-                            contenido disponible</h2>
-                    </div>
+                </div>
+                <!--<div class="row text-center">
+                    <h2 class="text-center no-content">Proximamente</h2>
+                </div>-->
+                <div class="col-sm-12" ng-show="Product.busy">
+                    <h3 class="text-center">Cargando <i class="fa fa-spinner fa-spin"></i></h3>
+                </div>
+                <div class="col-sm-12" ng-show="!Product.busy">
+                    <h2 class="text-center no-content" ng-show="!Product.list.length">Lo sentimos no contamos con
+                        contenido disponible</h2>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(EntrySrv, TaxonomySrv, $rootScope, $filter) {
+    function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Corriente Alterna';
@@ -20,12 +20,12 @@
             });
         });
 
-        EntrySrv.get({
-            taxonomies: 'productos1489618746',
+        ProductSrv.get({
+            taxonomies: 'lo-mas-buscado1490803659',
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
+            fields: 'name,description,attachments,slug,code,taxonomy,price,id'
         }).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
@@ -381,17 +381,17 @@
         ProductSrv.get({
             slug: $stateParams.slug,
             isActive: 'True',
-            fields: 'name,slug,description,attachments,taxonomies,price'
+            fields: 'attachments,id,name,price,slug,description,code,taxonomies'
         }).$promise.then(function (results) {
             self.detail = results;
             // get featureImage
-            self.detail.featureImage = $filter('filter')(self.detail.attachments, { kind: 'featuredImage' })[0];
+            self.detail.featuredImage = $filter('filter')(self.detail.attachments, { kind: 'featuredImage' })[0];
             //get galeries
             self.detail.galleryImages = $filter('filter')(self.detail.attachments, { kind: 'gallery_image' });
 
-            if (!self.detail.featureImage) {
-                self.detail.featureImage = {};
-                self.detail.featureImage.url = $rootScope.initConfig.img_default;
+            if (!self.detail.featuredImage) {
+                self.detail.featuredImage = {};
+                self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
             $rootScope.pageTitle = results.title + ' - Corriente Alterna';
@@ -480,6 +480,66 @@
 
     }
 
+    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
+        var self = this;
+        self.items = $localStorage.items ? $localStorage.items : [];
+        self.total = $localStorage.total;
+        $localStorage.items = self.items;
+        $localStorage.total = self.total;
+        $rootScope.items = $localStorage.items;
+        // items in localStorage
+        self.clearCart = function () {
+            self.items = [];
+            self.total = 0;
+            $localStorage.items = [];
+            $localStorage.total = 0;
+        };
+        self.itemInCart = function (item) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            return !!find_item;
+        };
+        // we calculate the total from items on the cart
+        var getTotal = function () {
+            self.total = 0;
+            self.promoTotal = 0;
+            angular.forEach(self.items, function (value, key) {
+                // add two new attr in item, import and discount
+                // first Time calcule
+                value.import = parseFloat(value.price) * value.qty;
+                self.total += parseFloat(value.price) * value.qty;
+                // afected discount global in self.total
+            });
+            $localStorage.total = self.total;
+        };
+        self.setItem = function (item, qty) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            if (find_item) {
+                if (qty < 1) {
+                    // Remove item from cart
+                    self.items.splice([self.items.indexOf(find_item)], 1)
+                } else {
+                    if (qty) {
+                        self.items[self.items.indexOf(find_item)].qty = qty;
+                    }
+                }
+            } else {
+                self.items.push(item)
+                NotificationSrv.success('Producto agregado al carrito', item.name);
+                $localStorage.items = self.items;
+            }
+            getTotal();
+        };
+        // remove item from cart
+        self.removeItem = function (item) {
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            if (find_item) {
+                self.items.splice([self.items.indexOf(find_item)], 1)
+            }
+            getTotal();
+        };
+    }
+
+
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
         .controller('HomeCtrl', HomeCtrl)
@@ -493,10 +553,11 @@
         .controller('ProductsCtrl', ProductsCtrl)
         .controller('TabsCtrl', TabsCtrl)
         .controller('ProductDetailCtrl', ProductDetailCtrl)
-        .controller('ProductsByCategoryCtrl', ProductsByCategoryCtrl);
+        .controller('ProductsByCategoryCtrl', ProductsByCategoryCtrl)
+        .controller('ShoppingCtrl', ShoppingCtrl);
 
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['EntrySrv', 'TaxonomySrv', '$rootScope', '$filter'];
+    HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope','$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope'];
@@ -508,4 +569,5 @@
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
+    ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
 })();

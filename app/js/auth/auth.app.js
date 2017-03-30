@@ -17,7 +17,7 @@
                 url: '/account/success',
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/validate_account.html'
+                        templateUrl: '/templates/auth/partials/validate_account.html'
                     }
                 }
             })
@@ -25,7 +25,7 @@
                 url: '/validate/:token',
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/account_activated.html',
+                        templateUrl: '/templates/auth/partials/account_activated.html',
                         controllerAs: 'Validate',
                         controller: 'ValidAccountCtrl'
                     }
