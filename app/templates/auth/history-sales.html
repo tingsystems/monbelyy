@@ -1,48 +1,42 @@
-<div id="content-area">
-    <div class="container-fluid">
-        <div class="card-heading">
-            <h4>Historial de compras</h4>
-        </div>
-        <div class="card-body card-list-items">
-            <div class="row row-sm m-b">
-                <div class="col-xs-12 col-sm-4 col-md-4 pull-right">
-                    <form name="Order.searchForm" ng-submit="Order.globalSearch()">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Buscar" name="searchTerm"
-                                   ng-model="Order.globalSearchTerm" ng-change="Order.globalSearch()"
-                            />
-                            <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row row-sm">
-                <div class="table-responsive" loading-container="Order.tableParams.settings().$loading">
-                    <table class="table table-bordered bg-white table-striped" ng-table="Order.tableParams"
-                           show-filter="false">
-                        <tbody>
-                        <tr>
-                            <td data-title="'Id'" sortable="'id'">#</td>
-                            <td data-title="'Fecha'" sortable="'createdAt'">Fecha</td>
-                            <td data-title="'Cliente'" sortable="'customerName'">Producto</td>
-                            <td data-title="'Tipo'" sortable="'paymentType'">
-                            <td data-title="'Total'" sortable="'total'"><strong class="text-success">{{ order.total |
-                                currency }}</strong></td>
-                        </tr>
-                        </tbody>
-                        <!--<tfooter>
-                            <tr ng-hide="$data.length">
-                                <td colspan="7" class="text-center">Ningún dato disponible</td>
-                            </tr>
-                        </tfooter>-->
-                    </table>
-                </div>
+<div class="content-dashboard">
+    <div class="container">
+        <div class="col-md-12">
+            <h3 class="info2"><i class="ion-bag"></i> Historial de compras</h3>
+            <hr>
+            <div class="table-responsive">
+                <table id="mytable" class="table table-striped">
+                    <thead>
+                    <th>Estado</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Edit <i class="fa fa-cog"></i></th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>MohsinMohsinMohsin</td>
+                        <td>Irshad Mohsin Mohsin</td>
+                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
+                        <td>isometric.mohsin@gmail.com</td>
+                        <td>+923335586757</td>
+                        <td>
+                            <button class="btn btn-primary btn-xs"><i class="ion-eye"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="clearfix"></div>
+                <ul class="pagination pull-right">
+                    <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
-
