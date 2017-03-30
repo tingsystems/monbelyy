@@ -5,6 +5,7 @@
         $stateProvider
             .state('register', {
                 url: '/login',
+                data: { pageTitle: 'Corriente Alterna' },
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
@@ -15,6 +16,7 @@
             })
             .state('success', {
                 url: '/account/success',
+                data: { pageTitle: 'Corriente Alterna' },
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/validate_account.html'
@@ -23,6 +25,7 @@
             })
             .state('validate', {
                 url: '/validate/:token',
+                data: { pageTitle: 'Corriente Alterna' },
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/account_activated.html',
@@ -33,7 +36,10 @@
             })
             .state('dashboard', {
                 url: '/dashboard',
-                data: {requiredLogin : true},
+                data: {
+                    requiredLogin : true,
+                    pageTitle: 'Corriente Alterna'
+                },
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/dashboard.html'
@@ -48,7 +54,19 @@
                         templateUrl: '/templates/auth/history-sales.html'
                     }
                 }
-            });
+            })
+            .state('profile', {
+                url: '/account/profile',
+                data: {
+                    requiredLogin : true,
+                    pageTitle: 'Perfil - Corriente Alterna'
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/account-profile.html'
+                    }
+                }
+            })
 
     }
 

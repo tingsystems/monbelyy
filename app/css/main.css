@@ -1339,6 +1339,9 @@ color
 .img-size a>img {
   width: 100%;
 }
+.container-dash {
+  width: 680px;
+}
 .content-dashboard {
   padding: 70px 60px;
   background-color: #fff;
