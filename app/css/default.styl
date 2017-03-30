@@ -186,8 +186,14 @@ body
   background-size contain
   height 135px
   background-repeat no-repeat
-.excerpt-shopping
-  padding-top 50px
+.shopcart-delete-lg
+  padding 22px
+  a
+    color #3c3c3c
+    font-size 2em
+.product-cart
+  padding 5px 0
+  border-bottom 1px solid #eee
 header
   width 100%
   overflow hidden
@@ -1244,6 +1250,16 @@ header
         &:hover
           border-color rgba(0,0,0,.4)
           outline none !important
+/*PROFILE*/
+.content-profile
+  padding 30px 0
+  background-color #fff
+  label
+    color #565656
+  .form-control
+    border-color none !important
+    &form-control:focus
+      border-color none !important
 /************** footer area css ******************/
 footer
   background-color cablack
@@ -1303,6 +1319,7 @@ footer
 /* buttons sizes */
 .btn-outline-red
   color #d9534f
+  border-radius 0
   background-image none
   background-color transparent
   border-color #d9534f
@@ -1595,7 +1612,7 @@ footer
 
   &:focus
     padding 6px 12px
-    border 1px solid cagreen !important
+    border 1px solid rgba(0,0,0,.20)
     outline 0
     -webkit-box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
     box-shadow 0 0 0 9px rgba(0, 0, 0, 0)

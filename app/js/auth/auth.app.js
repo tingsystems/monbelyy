@@ -67,6 +67,42 @@
                     }
                 }
             })
+            .state('address', {
+                url: '/account/addresses',
+                data: {
+                    requiredLogin : true,
+                    pageTitle: 'Direcciones - Corriente Alterna'
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/addresses.html'
+                    }
+                }
+            })
+            .state('address-add', {
+                url: '/account/address',
+                data: {
+                    requiredLogin : true,
+                    pageTitle: 'Direcciones - Corriente Alterna'
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/address-new.html'
+                    }
+                }
+            })
+            .state('address-update', {
+                url: '/account/address/update/:id',
+                data: {
+                    requiredLogin : true,
+                    pageTitle: 'Direcciones - Corriente Alterna'
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/address-new.html'
+                    }
+                }
+            })
 
     }
 

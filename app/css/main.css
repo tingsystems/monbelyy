@@ -202,8 +202,16 @@ body {
   height: 135px;
   background-repeat: no-repeat;
 }
-.excerpt-shopping {
-  padding-top: 50px;
+.shopcart-delete-lg {
+  padding: 22px;
+}
+.shopcart-delete-lg a {
+  color: #3c3c3c;
+  font-size: 2em;
+}
+.product-cart {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
 }
 header {
   width: 100%;
@@ -1473,6 +1481,19 @@ color
   border-color: rgba(0,0,0,0.4);
   outline: none !important;
 }
+.content-profile {
+  padding: 30px 0;
+  background-color: #fff;
+}
+.content-profile label {
+  color: #565656;
+}
+.content-profile .form-control {
+  border-color: none !important;
+}
+.content-profile .form-controlform-control:focus {
+  border-color: none !important;
+}
 footer {
   background-color: #323232;
   padding: 30px 0;
@@ -1540,6 +1561,7 @@ footer .contact-sty .download-app > i:hover {
 }
 .btn-outline-red {
   color: #d9534f;
+  border-radius: 0;
   background-image: none;
   background-color: transparent;
   border-color: #d9534f;
@@ -1873,7 +1895,7 @@ footer .contact-sty .download-app > i:hover {
 }
 .form-control:focus {
   padding: 6px 12px;
-  border: 1px solid #aa261d !important;
+  border: 1px solid rgba(0,0,0,0.2);
   outline: 0;
   -webkit-box-shadow: 0 0 0 9px rgba(0,0,0,0);
   box-shadow: 0 0 0 9px rgba(0,0,0,0);
@@ -2233,6 +2255,9 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .excerpt-shopping {
+    padding-top: 50px;
+  }
   .detail-qty {
     margin-left: 42%;
   }
@@ -2427,6 +2452,9 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .excerpt-shopping {
+    padding-top: 50px;
+  }
   .shopcart-qty {
     position: re;
     margin: auto 29.5%;

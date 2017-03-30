@@ -4,22 +4,22 @@
 <section id="content-area" class="shop-cart">
     <div ng-if="ShopCart.items.length==0" class="text-center">
         <h3 class="info"><i class="fa fa-warning"></i> No se han agregado productos al carrito</h3>
-        <a ui-sref="products">Ver productos</a>
+        <a class="btn btn-outline-red" ui-sref="products">Ver productos</a>
     </div>
     <div class="row" ng-if="ShopCart.items.length>0">
-        <div class="col-md-3 pull-right">
-            <div class="clear-cart" style="margin-bottom: 10px">
-                <button class="btn btn-default" ng-click="ShopCart.clearCart()">Vaciar Carrito</button>
+        <div class="col-sm-3 col-md-3 pull-right">
+            <div class="clear-cart">
+                <button class="btn btn-outline-red" ng-click="ShopCart.clearCart()">Vaciar Carrito</button>
             </div>
         </div>
-        <div class="col-md-2 pull-right">
-            <div class="clear-cart" style="margin-bottom: 10px">
-                <button class="btn btn-default" ui-sref="products">Seguir comprando</button>
+        <div class="col-sm-3 col-md-2 pull-right">
+            <div class="clear-cart">
+                <button class="btn btn-outline-red" ui-sref="products">Seguir comprando</button>
             </div>
         </div>
     </div>
     <hr>
-    <div class="row">
+    <div class="container-fluid" ng-if="ShopCart.items.length>0">
         <div class="col-md-9 text-center">
             <div class="product-cart col-sm-6 col-md-12" ng-repeat="product in ShopCart.items">
                 <div class="col-md-3">
@@ -34,28 +34,29 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <p>Cantidad</p>
-                </div>
-                <div class="col-md-2">
                     <div class="col-sm-offset-3 col-sm-4">
                         <div class="shopcart-qty">
-                            <input type="number" min="0"
+                            <label for="qty">Cantidad</label>
+                            <input type="number" min="0" id="qty"
                                    ng-model="product.qty"
                                    ng-click="ShopCart.setItem({id: product.id, name: product.name, price: product.price, qty: product.qty}, product.qty)"
                                    class="form-control cart-qty" placeholder="{{ product.qty }}">
                         </div>
                     </div>
                     <div class="col-sm-4 hidden-lg">
-                        <div class="shopcart-delete">
-                            <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)" style="font-size: 25px;"
+                        <div class="shopcart-delete-sm">
+                            <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)"
                                title="Eliminar producto"></a>
                         </div>
                     </div>
                 </div>
-                <div class="shopcart-delete visible-lg">
-                        <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)" style="font-size: 25px;"
+                <div class="col-md-1 visible-lg">
+                    <div class="shopcart-delete-lg">
+                        <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)"
                            title="Eliminar producto"></a>
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="col-sm-12 col-md-3 excerpt-shopping">
