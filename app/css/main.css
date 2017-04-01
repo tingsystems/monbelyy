@@ -213,6 +213,15 @@ body {
   padding: 5px 0;
   border-bottom: 1px solid #eee;
 }
+.ca-form {
+  padding-right: 13px;
+}
+.search-ca {
+  padding: 15px 0;
+}
+.search-ca .btn-search-ca {
+  padding: 8.2px 12px !important;
+}
 header {
   width: 100%;
   overflow: hidden;

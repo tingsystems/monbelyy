@@ -175,6 +175,7 @@
         $rootScope.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
 
+
         // get all the states
         self.busyState = true;
         StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
@@ -236,18 +237,63 @@
 
         self.submitForm = function(){
 
-        }
+        };
+
     }
 
-    function AddressListCtrl(AddressSrv, NotificationSrv, StateSrv, $localStorage, $rootScope, $state) {
+    function AddressListCtrl(AddressSrv, NotificationSrv, NgTableParams, StateSrv, $localStorage, $rootScope, $timeout) {
 
         var self = this;
+        var timeout = $timeout;
         self.formData = {};
+        self.searchTerm = '';
+        self.params = {};
+        self.addresses = [];
+        self.searchTermAddress = '';
         self.busy = false;
+        self.initialState = function () {};
         self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
         $rootScope.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
 
+        self.globalSearch = function () {
+            // Cancels a task associated with the promise
+            $timeout.cancel(timeout);
+            // Get the products after half second
+            timeout = $timeout(function () {
+                self.tableParams.page(1);
+                self.tableParams.reload();
+            }, 500);
+        };
+
+        self.getData = function (params) {
+            var sorting = '-createdAt';
+            // parser for ordering params
+            angular.forEach(params.sorting(), function (value, key) {
+                sorting = value === 'desc' ? '-' + key : key;
+            });
+
+            self.params.page = params.page();
+            self.params.pageSize = params.count();
+            self.params.ordering = sorting;
+            self.params.search = self.searchTerm;
+
+            self.getAddresses();
+        };
+
+        self.tableParams = new NgTableParams({
+            // default params
+            page: 1, // The page number to show
+            count: 10 // The number of items to show per page
+        }, {
+            // default settings
+            // page size buttons (right set of buttons in demo)
+            //counts: [],
+            // determines the pager buttons (left set of buttons in demo)
+            paginationMaxBlocks: 13,
+            paginationMinBlocks: 2,
+            getData: self.getData
+        });
 
         self.getAddresses = function(){
             AddressSrv.query().$promise.then(function (data) {
@@ -260,7 +306,6 @@
                 })
             })
         };
-        self.getAddresses();
 
         self.getStateName = function(id, ind){
             StateSrv.getState({ id : id}).$promise.then(function (data) {
@@ -272,6 +317,19 @@
             StateSrv.getCity({ id : id }).$promise.then(function (data) {
                 self.addresses[ind]["cityName"] = data;
             })
+        };
+
+        self.deleteAddress = function (id) {
+            console.log("Cabecita Dura");
+            AddressSrv.delete({ id: id }).$promise.then(function (data) {
+                NotificationSrv.success('Acción realizada correctamente');
+                self.tableParams.page(1);
+                self.tableParams.reload();
+            }, function (error) {
+                angular.forEach(error.data, function (value, key) {
+                    NotificationSrv.error(key + ' ' + value);
+                });
+            });
         };
 
 
@@ -294,5 +352,5 @@
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state'];
-    AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state'];
+    AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout'];
 })();

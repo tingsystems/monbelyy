@@ -28,8 +28,8 @@
     "ngSweetAlert": "angular-sweetalert#^1.1.2",
     "satellizer": "^0.15.5",
     "angular-messages": "1.4.14",
-    "ng-table": "^4.0.0",
-    "angular-ui-select": "0.17.0"
+    "angular-ui-select": "0.17.0",
+    "ng-table": "^1.0.0"
   },
   "overrides": {
     "bootstrap": {

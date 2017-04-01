@@ -35,20 +35,22 @@
                 }
             })
             .state('dashboard', {
-                url: '/dashboard',
+                url: '/account/dashboard',
                 data: {
                     requiredLogin : true,
                     pageTitle: 'Corriente Alterna'
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/dashboard.html',
+                        templateUrl: '/templates/auth/dashboard.html'
                     }
                 }
             })
             .state('sales', {
-                url: '/sales',
-                data: {requiredLogin : true},
+                url: '/account/sales',
+                data: {
+                    requiredLogin : true
+                },
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/history-sales.html'
