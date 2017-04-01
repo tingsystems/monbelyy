@@ -42,7 +42,7 @@
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/dashboard.html'
+                        templateUrl: '/templates/auth/dashboard.html',
                     }
                 }
             })
@@ -75,7 +75,9 @@
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/addresses.html'
+                        templateUrl: '/templates/auth/addresses.html',
+                        controllerAs: 'Address',
+                        controller: 'AddressListCtrl'
                     }
                 }
             })
@@ -87,7 +89,9 @@
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/address-new.html'
+                        templateUrl: '/templates/auth/address-new.html',
+                        controllerAs: 'Address',
+                        controller: 'AddressCtrl'
                     }
                 }
             })

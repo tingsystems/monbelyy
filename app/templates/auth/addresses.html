@@ -6,7 +6,8 @@
                     <h3 class="info2"><i class="ion-ios-list"></i> Lista de direcciones</h3>
                 </div>
                 <div class="col col-xs-6 text-right">
-                    <button class="btn btn-primary btn-xs"><i class="ion-plus-circled"></i></button>
+                    <button ui-sref="address-add" class="btn btn-primary btn-xs"><i class="ion-plus-circled"></i>
+                    </button>
                 </div>
             </div>
             <hr>
@@ -16,34 +17,22 @@
                     <th>Estado</th>
                     <th>Ciudad</th>
                     <th>Dirección</th>
-                    <th>Email</th>
-                    <th>Contact</th>
+                    <th>Colonia</th>
+                    <th>Código Postal</th>
+                    <th>Teléfono</th>
                     <th>Edit <i class="fa fa-cog"></i></th>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>MohsinMohsinMohsin</td>
-                        <td>Irshad Mohsin Mohsin</td>
-                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                        <td>isometric.mohsin@gmail.com</td>
-                        <td>+923335586757</td>
+                    <tr ng-repeat="address in Address.addresses">
+                        <td>{{ address.stateName.name }}</td>
+                        <td>{{ address.cityName.name }}</td>
+                        <td>{{ address.address }}</td>
+                        <td>{{ address.neighborhood }}</td>
+                        <td>{{ address.zip }}</td>
+                        <td>{{ address.phone }}</td>
                         <td>
-                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                    data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
-                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
-                                    data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Mohsin MohsinMohsin</td>
-                        <td>Irshad</td>
-                        <td>CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan</td>
-                        <td>isometric.mohsin@gmail.com</td>
-                        <td>+923335586757</td>
-                        <td>
-                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"
-                                    data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button class="btn btn-primary btn-xs" ui-sref="address-update({ id: Address.idUser })" data-title="Edit">
+                                <span class="glyphicon glyphicon-pencil"></span></button>
                             <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal"
                                     data-target="#delete"><span class="glyphicon glyphicon-trash"></span></button>
                         </td>

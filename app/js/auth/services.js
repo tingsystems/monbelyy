@@ -102,6 +102,9 @@
         return {
             get: function () {
                 return '#host#/api/{{apiShop}}/auth/';
+            },
+            shop: function () {
+                return '#host#/api/{{apiShop}}/'
             }
         }
     }
@@ -122,6 +125,20 @@
         });
     }
 
+    function AddressSrv($resource, BaseUrlAuth) {
+        return $resource(BaseUrlAuth.shop() + 'address/:id',
+            null, {
+                'update': {
+                    method: 'PUT',
+                    url: BaseUrlAuth.shop() + 'address/:id'
+                },
+                'patch': {
+                    method: 'PATCH',
+                    url: BaseUrlAuth.shop() + 'address/:id'
+                }
+            });
+    }
+
 
 
     // Assign factory to module
@@ -131,7 +148,8 @@
         .factory('RegisterSrv', RegisterSrv)
         .factory('UserSrv', UserSrv)
         .factory('AuthorizationSrv', AuthorizationSrv)
-        .factory('AuthorizationGroupSrv', AuthorizationGroupSrv);
+        .factory('AuthorizationGroupSrv', AuthorizationGroupSrv)
+        .factory('AddressSrv', AddressSrv);
 
     // Inject factory the dependencies
     BaseUrlAuth.$inject = [];
@@ -140,4 +158,5 @@
     RegisterSrv.$inject = ['$resource', 'BaseUrlAuth'];
     AuthorizationSrv.$inject = ['$localStorage', '$filter'];
     AuthorizationGroupSrv.$inject = ['$localStorage', '$filter'];
+    AddressSrv.$inject = ['$resource', 'BaseUrlAuth'];
 })();

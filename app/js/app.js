@@ -281,7 +281,7 @@
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app','ngMessages'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app','ngMessages', 'ui.select'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
