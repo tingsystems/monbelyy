@@ -8,7 +8,6 @@
     "angular-resource": "1.4.14",
     "angular-ui-router": "0.2.18",
     "animate.css": "~3.4.0",
-    "font-awesome": "fontawesome#~4.5.0",
     "angular-sanitize": "1.4.14",
     "bootstrap": "~3.3.6",
     "ngInfiniteScroll": "~1.2.2",
@@ -29,7 +28,8 @@
     "satellizer": "^0.15.5",
     "angular-messages": "1.4.14",
     "angular-ui-select": "0.17.0",
-    "ng-table": "^1.0.0"
+    "ng-table": "^1.0.0",
+    "font-awesome": "^4.7.0"
   },
   "overrides": {
     "bootstrap": {

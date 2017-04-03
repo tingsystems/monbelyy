@@ -168,6 +168,22 @@ body {
 .header.smaller .sub-main {
   display: none;
 }
+.navbar-info .nav-info {
+  margin-top: 12px;
+}
+.navbar-info .my-account {
+  font-size: 24px;
+  padding-right: 15px;
+}
+.navbar-info .my-account .ion-ios-person-outline {
+  vertical-align: middle;
+  font-size: 36px !important;
+}
+.navbar-info .shopping-cart {
+  font-size: 24px;
+  padding-left: 20px;
+  border-left: 1px solid #ccc;
+}
 .navbar-info .shopping-cart a {
   font-size: 24px;
   font-weight: 100;
@@ -175,8 +191,9 @@ body {
 .navbar-info .shopping-cart a:hover {
   text-decoration: none;
 }
-.navbar-info .shopping-cart i {
-  font-size: 30px;
+.navbar-info .shopping-cart .ion-ios-cart-outline {
+  font-size: 36px;
+  vertical-align: middle;
 }
 .shopping-cart a > i {
   font-size: 32px !important;
@@ -191,8 +208,9 @@ body {
   text-align: center;
   border-radius: 30px;
   background-color: #aa261d;
+  font-size: 16px;
   top: 0px;
-  right: 95px;
+  right: 85px;
   width: 20px;
   height: 20px;
 }
@@ -484,9 +502,6 @@ header {
   color: #565656;
   font-size: 18px;
   font-family: "Roboto Slab, sans-serif";
-}
-.navbar-info i {
-  font-size: 22px;
 }
 .send-email {
   padding-bottom: 10px;
