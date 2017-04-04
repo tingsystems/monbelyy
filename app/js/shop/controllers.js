@@ -69,19 +69,21 @@
             if(!$auth.isAuthenticated()){
                 $state.go('register');
             }else{
-                $state.go('confirm-payment');
+                $state.go('payment-method');
 
             }
         }
 
     }
 
-    function PaymentCtrl(CustomerSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
+    function PaymentCtrl(CustomerSrv, AddressSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, StateSrv) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
         self.formData = {};
+        self.customer = [];
         self.user = $localStorage.appData.user;
+        self.idUser = $localStorage.appData.user.customer;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
@@ -98,14 +100,22 @@
         getTotal();
 
         self.getCustomer = function () {
-            console.log('Usuario', self.user);
             CustomerSrv.customerByUser({ id: self.user.id }).$promise.then(function (data) {
-                console.log(data);
-            }, function (error) {
+                console.log('Cliente', data);
+                self.customer = data;
+            });
 
-            })
         };
         self.getCustomer();
+
+        self.getAddress = function () {
+            AddressSrv.query().$promise.then(function (data) {
+                self.address = data;
+            }, function (error) {
+                NotificationSrv.error("Error");
+            })
+        };
+        self.getAddress();
 
         self.processPurchase = function(){
             var purchase = angular.copy(self.formData);
@@ -128,6 +138,6 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
-    PaymentCtrl.$inject = ['CustomerSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
 
 })();

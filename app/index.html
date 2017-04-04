@@ -83,7 +83,7 @@
                 </a>
                 
                 <a class="my-account" ng-if="Access.isAuthenticated()">
-                    <i class="ion-ios-person-outline fa-2x"></i>
+                    <i class="ion-ios-person-outline fa-2x" ui-sref="dashboard" title="Mi cuenta"></i>
                     {{user.username}}
                     <i ng-click="Access.logout()" data-toggle="tooltip" title="Cerrar sesión" class="fa fa-sign-out logout-ac"></i>
                 </a>

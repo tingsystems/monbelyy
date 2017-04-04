@@ -166,11 +166,12 @@
         });
     }
 
-    function AddressCtrl(AddressSrv, NotificationSrv, StateSrv, $localStorage, $rootScope, $state) {
+    function AddressCtrl(AddressSrv, NotificationSrv, StateSrv, $localStorage, $rootScope, $state, $stateParams) {
 
         var self = this;
         self.formData = {};
         self.busy = false;
+        self.create = true;
         self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
         $rootScope.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
@@ -201,7 +202,8 @@
             });
         };
 
-        self.createAddress = function () {
+        var createAddress = function () {
+            console.log("Crear");
             var address = angular.copy(self.formData);
             address.customer = self.idUser;
             self.busy = true;
@@ -218,30 +220,45 @@
             })
         };
 
-        self.updateAddress = function () {
+        var updateAddress = function () {
             console.log("Actualizar");
             var formData = angular.copy(self.formData);
-            //var id = formData.id ? formData.id : $stateParams.id;
+            var id = formData.id ? formData.id : $stateParams.id;
             self.busy = true;
             AddressSrv.update({ id: id }, formData).$promise.then(function (response) {
                 self.busy = false;
                 NotificationSrv.success('Dirección actualizada correctamente');
                 $state.go('address');
             }, function (error) {
-                angular.forEach(error.data, function (value, key) {
+                angular.forEach(error, function (value, key) {
                     NotificationSrv.error(key + ' ' + value);
                 });
                 self.busy = false;
             });
         };
 
-        self.submitForm = function(){
-
+        self.submitForm = function () {
+            self.create ? createAddress() : updateAddress();
         };
+
+        self.getAddresses = function(){
+            AddressSrv.get({ id: $stateParams.id}).$promise.then(function (data) {
+                self.formData = data;
+                self.create = false;
+                if(self.formData.state)
+                    StateSrv.getCities({ state: self.formData.state, ordering: 'name' }).$promise.then(function (response) {
+                            self.cities = response;
+                            self.busyCity = false;
+                    }, function (error) {
+                        self.busyCity = false;
+                });
+            });
+        };
+        self.getAddresses();
 
     }
 
-    function AddressListCtrl(AddressSrv, NotificationSrv, NgTableParams, StateSrv, $localStorage, $rootScope, $timeout) {
+    function AddressListCtrl(AddressSrv, NotificationSrv, NgTableParams, StateSrv, $localStorage, $rootScope, $timeout, SweetAlert) {
 
         var self = this;
         var timeout = $timeout;
@@ -249,7 +266,7 @@
         self.searchTerm = '';
         self.params = {};
         self.addresses = [];
-        self.searchTermAddress = '';
+        self.create = false;
         self.busy = false;
         self.initialState = function () {};
         self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
@@ -304,7 +321,8 @@
                         self.getCityName(value.city, key);
                     }
                 })
-            })
+            });
+            //return self.addresses;
         };
 
         self.getStateName = function(id, ind){
@@ -320,22 +338,36 @@
         };
 
         self.deleteAddress = function (id) {
-            console.log("Cabecita Dura");
-            AddressSrv.delete({ id: id }).$promise.then(function (data) {
-                NotificationSrv.success('Acción realizada correctamente');
-                self.tableParams.page(1);
-                self.tableParams.reload();
-            }, function (error) {
-                angular.forEach(error.data, function (value, key) {
-                    NotificationSrv.error(key + ' ' + value);
-                });
-            });
+            SweetAlert.swal({
+                    title: 'Confirmar',
+                    text: 'Se eliminará esta dirección. ¿Está seguro que desea continuar?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+
+                    confirmButtonText: 'Si',
+                    cancelButtonText: 'Cancelar',
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        AddressSrv.delete({ id: id }).$promise.then(function (data) {
+                            self.tableParams.page(1);
+                            self.tableParams.reload();
+                            NotificationSrv.success("Acción realizada correctamente");
+                        });
+                    } else {
+                        NotificationSrv.error("Cancelado");
+                    }
+                })
         };
 
-
-
-
-
+        self.cancelEdit = function () {
+            self.showCustomerForm = false;
+            self.create = true;
+            self.clearCustomerForm();
+        };
     }
 
     // create the module and assign controllers
@@ -351,6 +383,6 @@
     AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
-    AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state'];
-    AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout'];
+    AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
+    AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
 })();

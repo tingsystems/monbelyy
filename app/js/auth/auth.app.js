@@ -105,7 +105,9 @@
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/address-new.html'
+                        templateUrl: '/templates/auth/address-new.html',
+                        controllerAs: 'Address',
+                        controller: 'AddressCtrl'
                     }
                 }
             })

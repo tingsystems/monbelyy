@@ -37,7 +37,7 @@
                         <td data-title="'Código Postal'">{{ address.zip }}</td>
                         <td data-title="'Teléfono'">{{ address.phone }}</td>
                         <td data-title="'Acciones'">
-                            <button title="Editar dirección" class="btn btn-primary btn-xs" ui-sref="address-update({ id: Address.idUser })" data-title="Edit">
+                            <button title="Editar dirección" class="btn btn-primary btn-xs" ui-sref="address-update({id: address.id})" data-title="Edit">
                                 <span class="glyphicon glyphicon-pencil"></span></button>
                             <button title="Eliminar dirección" class="btn btn-danger btn-xs" ng-click="Address.deleteAddress(address.id)">
                                 <span class="glyphicon glyphicon-trash"></span></button></td>

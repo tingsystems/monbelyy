@@ -13,7 +13,7 @@
                                 <div class="form-group"
                                      ng-class="{ 'has-error': paymentForm.firstName.$touched && paymentForm.firstName.$invalid }">
                                     <label for="firstName">Nombre(*)</label>
-                                    <input type="text" ng-model="Payment.formData.firstName" class="form-control"
+                                    <input type="text" ng-model="Payment.customer.bussinessName" class="form-control"
                                            id="firstName" name="firstName" required>
                                     <div class="help-block" ng-messages="paymentForm.firstName.$error"
                                          ng-if="paymentForm.firstName.$touched">

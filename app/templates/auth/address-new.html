@@ -7,12 +7,13 @@
                         <div class="container">
                             <div class="col-md-8 col-md-offset-2 contact-section">
                                 <div class="col-md-12 title-post">
-                                    <h3 class="info2"><i class="ion-clipboard"></i> Agregar dirección</h3>
+                                    <h3 class="info2" ng-if="Address.create"><i class="ion-clipboard"></i> Agregar dirección</h3>
+                                    <h3 class="info2" ng-if="!Address.create"><i class="ion-compose"></i> Actualizar dirección</h3>
                                     <hr/>
                                 </div>
                                 <div class="col-md-12">
                                     <form class="padding form-horizontal" name="Form"
-                                          ng-submit="Address.createAddress()" novalidate>
+                                          ng-submit="Address.submitForm()" novalidate>
                                         <div class="col-xs-12 col-md-6">
                                             <div class="form-item">
                                                 <label for="state">Estado</label>
@@ -77,9 +78,9 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-md-6">
-                                            <div ng-model="Address.formData.phone" class="form-item" ng-class="{ 'has-error': Form.phone.$touched && Form.phone.$invalid }">
+                                            <div class="form-item" ng-class="{ 'has-error': Form.phone.$touched && Form.phone.$invalid }">
                                                 <label for="phone">Teléfono</label>
-                                                <input type="text" maxlength="25"  class="form-control" id="phone"
+                                                <input ng-model="Address.formData.phone" type="text" maxlength="20"  class="form-control" id="phone"
                                                        name="phone"
                                                        placeholder="Teléfono" required>
                                             </div>
@@ -88,7 +89,7 @@
                                         <div class="col-xs-12 col-md-6">
                                             <div class="form-item">
                                                 <label for="mobile" ng-class="{ 'has-error': Form.mobile.$touched && Form.mobile.$invalid }">Celular</label>
-                                                <input ng-model="Address.formData.mobile" type="text" ng-maxlength="25" class="form-control" id="mobile"
+                                                <input ng-model="Address.formData.mobile" type="text" ng-maxlength="20" class="form-control" id="mobile"
                                                        name="mobile"
                                                        placeholder="Celular" required>
                                             </div>
@@ -97,9 +98,10 @@
                                         <div class="col-md-12 text-center" style="padding-top: 30px;">
                                             <button type="submit" class="btn btn-outline-red"
                                                     ng-disabled="Address.$invalid || Address.busy">
-                                                <i class="ion-android-done"></i> Guardar <span ng-if="Contact.busy"><i
+                                                <i class="ion-android-done"></i> Guardar <span ng-if="Address.busy"><i
                                                     class="fa fa-spinner fa-spin"></i></span>
                                             </button>
+                                            <button class="btn btn-outline-red" ui-sref="address">Cancelar</button>
                                         </div>
                                     </form>
                                 </div>
