@@ -20,9 +20,9 @@
             $rootScope.user = $localStorage.appData.user;
             delete $localStorage.appData.user.groups;
             delete $localStorage.appData.user.permissions;
-            delete $localStorage.appData.user.branchOffices;
             delete $localStorage.appData.user.projects;
             delete $localStorage.appData.user.is_superuser;
+            delete $localStorage.appData.user.branchOffices;
             self.idUser = $localStorage.appData.user.id;
             //$scope.app.data = $localStorage.appData;
             // Redirect user here after a successful log in.
@@ -52,7 +52,6 @@
             $auth.login(self.formDataLogin)
                 .then(function (response) {
                     self.saveSession(response);
-                    console.log(response);
                 })
                 .catch(function (response) {
                     // Handle errors here, such as displaying a notification
@@ -73,6 +72,8 @@
                     .then(function () {
                         // delete appData
                         delete $localStorage.appData.user;
+                        $localStorage.items = [];
+                        $localStorage.total = 0;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name != 'register') {
                             NotificationSrv.success("Te esperamos pronto", "Corriente Alterna");
@@ -105,6 +106,8 @@
         self.getCustomer = function(){
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
+                $localStorage.appData.user.branchOffices = data.branchOffices;
+                $localStorage.appData.user.firstName = data.firstName;
             });
         };
 

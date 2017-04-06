@@ -1422,7 +1422,7 @@ color
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,0.48);
+  background: #ccc;
 }
 .menu-dash .menu-item .heading {
   position: relative;
@@ -1434,22 +1434,18 @@ color
 }
 .menu-dash .menu-item .heading i {
   background: transparent;
-  border-radius: 50%;
-  border: 1px solid #fff;
-  color: #fff;
+  color: #323232;
   display: block;
-  font-size: 2.2em;
-  height: 60px;
+  font-size: 6em;
   line-height: 60px;
   margin: auto auto 10px;
   text-align: center;
-  width: 60px;
   -webkir-transition: all 0.3s;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
 .menu-dash .menu-item .heading h2 {
-  color: #fff;
+  color: #323232;
   font-size: 25px;
   text-align: center;
   margin: 0;
@@ -1458,7 +1454,7 @@ color
 }
 .menu-dash .menu-item .heading h5 {
   font-size: 16px;
-  color: #fff;
+  color: #323232;
 }
 .alert-payment {
   color: #f5f5f5;

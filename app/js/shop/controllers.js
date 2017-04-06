@@ -4,16 +4,19 @@
 (function () {
     'use strict';
 
-    function ShopCartCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
+    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
+        self.store = $localStorage.appData.user.branchOffices;
+        self.customer = $localStorage.appData.user.customer;
         self.total = $localStorage.total;
         $localStorage.items = self.items;
+        self.itemCount = self.items.length;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
 
         self.setItem = function (item, qty) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            var find_item = $filter('filter')(self.items, {id: item.id})[0];
             if (find_item) {
                 if (qty < 1) {
                     // Remove item from cart
@@ -28,7 +31,7 @@
         };
 
         self.itemInCart = function (item) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            var find_item = $filter('filter')(self.items, {id: item.id})[0];
             return !!find_item;
         };
 
@@ -65,12 +68,18 @@
             return $auth.isAuthenticated();
         };
 
-        self.processPurchase = function() {
-            if(!$auth.isAuthenticated()){
+        self.processPurchase = function () {
+            if (!$auth.isAuthenticated()) {
                 $state.go('register');
-            }else{
+            } else {
+                CartsSrv.get({ items: self.items, store: self.store, customer : self.customer,
+                        customerName: self.firstName,
+                        customerEmail: self.email,
+                        itemCount: self.itemCount }).$promise.then(function (data) {
+                    self.cart = data;
+                    console.log(data);
+                });
                 $state.go('payment-method');
-
             }
         }
 
@@ -100,7 +109,7 @@
         getTotal();
 
         self.getCustomer = function () {
-            CustomerSrv.customerByUser({ id: self.user.id }).$promise.then(function (data) {
+            CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
                 console.log('Cliente', data);
                 self.customer = data;
             });
@@ -117,11 +126,11 @@
         };
         self.getAddress();
 
-        self.processPurchase = function(){
+        self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
-            CustomerSrv.save(purchase).$promise.then(function(data){
+            CustomerSrv.save(purchase).$promise.then(function (data) {
                 console.log('Cliente creado', data);
-            }, function(error){
+            }, function (error) {
                 angular.forEach(error, function (value, key) {
                     NotificationSrv.error(key);
                     console.log('Error', error);
@@ -137,7 +146,7 @@
         .controller('PaymentCtrl', PaymentCtrl);
 
     // inject dependencies to controllers
-    ShopCartCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     PaymentCtrl.$inject = ['CustomerSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
 
 })();
