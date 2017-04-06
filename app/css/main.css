@@ -1067,7 +1067,7 @@ color
 .box-blog .blog-container h3 {
   font-size: 24px;
   padding: 5px 0;
-  color: #746857;
+  color: #555;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -1504,6 +1504,12 @@ color
 .paymentWrap .paymentBtnGroup .paymentMethod .method:hover {
   border-color: rgba(0,0,0,0.4);
   outline: none !important;
+}
+.ca-phone {
+  text-align: left;
+}
+.ca-auth {
+  text-align: right;
 }
 .content-profile {
   padding: 30px 0;
@@ -2526,7 +2532,7 @@ footer .contact-sty .download-app > i:hover {
     font-size: 16px;
   }
   .qty-cart {
-    right: 45%;
+    right: 17%;
   }
   .navbar-info .col-sm-4 {
     text-align: center;
@@ -2905,6 +2911,10 @@ footer .contact-sty .download-app > i:hover {
   }
   .menu-dash .menu-item {
     margin-bottom: 10px;
+  }
+  .ca-phone,
+  .ca-auth {
+    text-align: center;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {

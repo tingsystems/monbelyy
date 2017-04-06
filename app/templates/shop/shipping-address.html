@@ -12,9 +12,9 @@
                             <div class="col-md-6">
                                 <div class="form-group"
                                      ng-class="{ 'has-error': paymentForm.firstName.$touched && paymentForm.firstName.$invalid }">
-                                    <label for="firstName">Nombre(*)</label>
-                                    <input type="text" ng-model="Payment.customer.bussinessName" class="form-control"
-                                           id="firstName" name="firstName" required>
+                                    <label for="bussinessName">Nombre(*)</label>
+                                    <input type="text" ng-model="Address.customer.bussinessName" class="form-control"
+                                           id="bussinessName" name="bussinessName" required>
                                     <div class="help-block" ng-messages="paymentForm.firstName.$error"
                                          ng-if="paymentForm.firstName.$touched">
                                         <div ng-message="required">El campo nombre es requerido</div>

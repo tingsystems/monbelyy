@@ -96,7 +96,7 @@
 
     }
 
-    function BlogCtrl(EntrySrv, $rootScope) {
+    function BlogCtrl(EntrySrv, $rootScope, $filter) {
         var self = this;
 
         self.list = [];
@@ -120,7 +120,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'blog',
+                taxonomies: 'blog1489621339',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,
@@ -130,6 +130,10 @@
                 self.list = self.list.concat(results.results);
                 self.busy = false;
                 self.next = results.next;
+                //get featureImage
+                angular.forEach(self.list, function (obj, ind) {
+                    obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                });
             });
         };
 
@@ -559,7 +563,7 @@
     // inject dependencies to controllers
     HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope','$filter'];
-    BlogCtrl.$inject = ['EntrySrv', '$rootScope'];
+    BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
