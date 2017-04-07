@@ -154,10 +154,10 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'http://api.taki.tingsystems.com';
-        //$rootScope.host = 'http://192.168.1.67';
+        //$rootScope.host = 'http://api.taki.tingsystems.com';
+        $rootScope.host = 'http://192.168.1.71';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
         $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
@@ -277,6 +277,11 @@
                 }
             }
         });
+
+        //init $localStorage.appData
+        if (!angular.isDefined($localStorage.appData)) {
+            $localStorage.appData = {};
+        }
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
@@ -288,7 +293,7 @@
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-         'EntrySrv', '$auth'];
+         'EntrySrv', '$auth', '$localStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
     AuthProvider.$inject = ['$authProvider'];

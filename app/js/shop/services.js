@@ -44,15 +44,30 @@
         })
     }
 
+    function OrderSrv($resource, BaseUrlShop) {
+        return $resource(BaseUrlShop.get() + 'orders/:id', null, {
+            'update': {
+                method: 'PUT',
+                url: BaseUrlShop.get() + 'orders/:id'
+            },
+            'patch': {
+                method: 'PATCH',
+                url: BaseUrlShop.get() + 'orders/:id'
+            }
+        })
+    }
+
     // Assign factory to module
     angular.module('shop.services', ['ngResource'])
         .factory('BaseUrlShop', BaseUrlShop)
         .factory('CustomerSrv', CustomerSrv)
-        .factory('CartsSrv', CartsSrv);
+        .factory('CartsSrv', CartsSrv)
+        .factory('OrderSrv', OrderSrv);
 
     // Inject factory the dependencies
     BaseUrlShop.$inject = [];
     CustomerSrv.$inject = ['$resource', 'BaseUrlShop'];
     CartsSrv.$inject = ['$resource', 'BaseUrlShop'];
+    OrderSrv.$inject = ['$resource', 'BaseUrlShop'];
 
 })();

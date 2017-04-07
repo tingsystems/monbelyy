@@ -7,9 +7,12 @@
     function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
-        self.store = $localStorage.appData.user.branchOffices;
+        self.store = $localStorage.appData.user.branchOffices[0];
         self.customer = $localStorage.appData.user.customer;
+        self.email = $localStorage.appData.user.email;
+        self.customerName = $localStorage.appData.user.firstName;
         self.total = $localStorage.total;
+        var items = [];
         $localStorage.items = self.items;
         self.itemCount = self.items.length;
         $localStorage.total = self.total;
@@ -72,12 +75,23 @@
             if (!$auth.isAuthenticated()) {
                 $state.go('register');
             } else {
-                CartsSrv.get({ items: self.items, store: self.store, customer : self.customer,
-                        customerName: self.firstName,
+                angular.forEach(self.items, function (obj, ind) {
+                    items[ind] = {
+                        id: obj.id,
+                        qty: obj.qty,
+                        promotion: parseFloat(obj.discount.discount),
+                        price: parseFloat(obj.price)
+                    };
+
+                });
+                CartsSrv.save({ items: items, store: self.store, customer : self.customer,
+                        customerName: self.customerName,
                         customerEmail: self.email,
                         itemCount: self.itemCount }).$promise.then(function (data) {
-                    self.cart = data;
-                    console.log(data);
+                        self.cart = data;
+                        $localStorage.cart = self.cart;
+                        NotificationSrv.success("Pedido realizado correctamente");
+                        //self.clearCart();
                 });
                 $state.go('payment-method');
             }
@@ -85,7 +99,7 @@
 
     }
 
-    function PaymentCtrl(CustomerSrv, AddressSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, StateSrv) {
+    function PaymentCtrl(CustomerSrv, CartsSrv, OrderSrv, AddressSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, StateSrv) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -93,6 +107,7 @@
         self.customer = [];
         self.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
+        self.order = $localStorage.cart.id;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
@@ -110,7 +125,6 @@
 
         self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
-                console.log('Cliente', data);
                 self.customer = data;
             });
 
@@ -129,7 +143,6 @@
         self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
             CustomerSrv.save(purchase).$promise.then(function (data) {
-                console.log('Cliente creado', data);
             }, function (error) {
                 angular.forEach(error, function (value, key) {
                     NotificationSrv.error(key);
@@ -137,6 +150,12 @@
 
                 });
             })
+        };
+
+        self.createOrder = function(){
+            OrderSrv.save({ cartId: self.order}).$promise.then(function(data){
+                console.log(data);
+            });
         }
     }
 
@@ -147,6 +166,6 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'CartsSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
 
 })();

@@ -415,7 +415,6 @@
         self.total = $localStorage.total;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
-        $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
 
         // get post by category
@@ -475,11 +474,15 @@
                 }
             }
             else {
+                item.discount = {
+                    value: 0,
+                    isPercentage: "0",
+                    discount: "0"
+                };
                 self.items.push(item);
                 NotificationSrv.success('Producto agregado al carrito', item.name);
                 $localStorage.items = self.items;
             }
-            //getTotal();
         };
 
     }
@@ -499,7 +502,7 @@
             $localStorage.total = 0;
         };
         self.itemInCart = function (item) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            var find_item = $filter('filter')(self.items, { id: item })[0];
             return !!find_item;
         };
         // we calculate the total from items on the cart
@@ -527,9 +530,18 @@
                     }
                 }
             } else {
-                self.items.push(item)
-                NotificationSrv.success('Producto agregado al carrito', item.name);
-                $localStorage.items = self.items;
+                item.discount = {
+                    value: 0,
+                    isPercentage: "0",
+                    discount: "0"
+                };
+                if(item.qty && item.qty>0){
+                    self.items.push(item);
+                    NotificationSrv.success('Producto agregado al carrito', item.name);
+                    $localStorage.items = self.items;
+                }else{
+                    NotificationSrv.error("Ingresa la cantidad, para poder  agregar", item.name)
+                }
             }
             getTotal();
         };

@@ -65,7 +65,9 @@
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/account-profile.html'
+                        templateUrl: '/templates/auth/account-profile.html',
+                        controllerAs: 'Profile',
+                        controller: 'ProfileCtrl'
                     }
                 }
             })

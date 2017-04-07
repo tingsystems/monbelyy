@@ -30,16 +30,15 @@
                 <h3 class="detail-price">{{ Product.detail.price | currency}}</h3>
             </div>
             <div class="col-md-4 detail-qty">
-                <input type="number" ng-model="Product.detail.qty" class="form-control cart-qty" min="1">
+                <input type="number" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
             </div>
         </div>
     </div>
     <div class="row text-center">
         <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url, qty: Product.detail.qty}, Product.detail.qty)"
-                ng-disabled="Shop.itemInCart(Product)"
+                ng-disabled="Shop.itemInCart(Product.detail.id)"
                 class="btn btn-success btn-cart">Agregar a carrito</button>
-
         <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
             {{Product.detail.description}}</h4>
     </div>

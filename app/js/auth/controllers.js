@@ -103,7 +103,7 @@
             })
         };
 
-        self.getCustomer = function(){
+        self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.branchOffices = data.branchOffices;
@@ -228,7 +228,7 @@
             var formData = angular.copy(self.formData);
             var id = formData.id ? formData.id : $stateParams.id;
             self.busy = true;
-            AddressSrv.update({ id: id }, formData).$promise.then(function (response) {
+            AddressSrv.update({id: id}, formData).$promise.then(function (response) {
                 self.busy = false;
                 NotificationSrv.success('Dirección actualizada correctamente');
                 $state.go('address');
@@ -244,17 +244,20 @@
             self.create ? createAddress() : updateAddress();
         };
 
-        self.getAddresses = function(){
-            AddressSrv.get({ id: $stateParams.id}).$promise.then(function (data) {
+        self.getAddresses = function () {
+            AddressSrv.get({id: $stateParams.id}).$promise.then(function (data) {
                 self.formData = data;
                 self.create = false;
-                if(self.formData.state)
-                    StateSrv.getCities({ state: self.formData.state, ordering: 'name' }).$promise.then(function (response) {
-                            self.cities = response;
-                            self.busyCity = false;
+                if (self.formData.state)
+                    StateSrv.getCities({
+                        state: self.formData.state,
+                        ordering: 'name'
+                    }).$promise.then(function (response) {
+                        self.cities = response;
+                        self.busyCity = false;
                     }, function (error) {
                         self.busyCity = false;
-                });
+                    });
             });
         };
         self.getAddresses();
@@ -271,7 +274,8 @@
         self.addresses = [];
         self.create = false;
         self.busy = false;
-        self.initialState = function () {};
+        self.initialState = function () {
+        };
         self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
         $rootScope.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
@@ -315,11 +319,11 @@
             getData: self.getData
         });
 
-        self.getAddresses = function(){
+        self.getAddresses = function () {
             AddressSrv.query().$promise.then(function (data) {
                 self.addresses = data;
                 angular.forEach(self.addresses, function (value, key) {
-                    if(value.state && value.city){
+                    if (value.state && value.city) {
                         self.getStateName(value.state, key);
                         self.getCityName(value.city, key);
                     }
@@ -328,14 +332,14 @@
             //return self.addresses;
         };
 
-        self.getStateName = function(id, ind){
-            StateSrv.getState({ id : id}).$promise.then(function (data) {
+        self.getStateName = function (id, ind) {
+            StateSrv.getState({id: id}).$promise.then(function (data) {
                 self.addresses[ind]["stateName"] = data;
             })
         };
 
-        self.getCityName = function(id, ind){
-            StateSrv.getCity({ id : id }).$promise.then(function (data) {
+        self.getCityName = function (id, ind) {
+            StateSrv.getCity({id: id}).$promise.then(function (data) {
                 self.addresses[ind]["cityName"] = data;
             })
         };
@@ -355,7 +359,7 @@
                 },
                 function (isConfirm) {
                     if (isConfirm) {
-                        AddressSrv.delete({ id: id }).$promise.then(function (data) {
+                        AddressSrv.delete({id: id}).$promise.then(function (data) {
                             self.tableParams.page(1);
                             self.tableParams.reload();
                             NotificationSrv.success("Acción realizada correctamente");
@@ -373,13 +377,47 @@
         };
     }
 
+    function ProfileCtrl(CustomerSrv, StateSrv, $localStorage, $rootScope, $stateParams) {
+        self.formData = {};
+        self.busy = false;
+        self.create = true;
+        self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
+        self.idUser = $localStorage.appData.user.customer;
+
+        CustomerSrv.get({id : idUser}).$promise.then(function (data) {
+            self.customer = data;
+        },function (error) {
+
+        });
+
+        self.getCustomer = function () {
+            CustomerSrv.get({id: idUser}).$promise.then(function (data) {
+                self.formData = data;
+                self.create = false;
+                if (self.formData.state)
+                    StateSrv.getCities({
+                        state: self.formData.state,
+                        ordering: 'name'
+                    }).$promise.then(function (response) {
+                        self.cities = response;
+                        self.busyCity = false;
+                    }, function (error) {
+                        self.busyCity = false;
+                    });
+            });
+        };
+        self.getCustomer();
+
+    }
+
     // create the module and assign controllers
     angular.module('auth.controllers', ['auth.services'])
         .controller('AccessCtrl', AccessCtrl)
         .controller('RecoveryPasswordCtrl', RecoveryPasswordCtrl)
         .controller('ValidAccountCtrl', ValidAccountCtrl)
         .controller('AddressCtrl', AddressCtrl)
-        .controller('AddressListCtrl', AddressListCtrl);
+        .controller('AddressListCtrl', AddressListCtrl)
+        .controller('ProfileCtrl', ProfileCtrl);
 
 
     // inject dependencies to controllers
@@ -388,4 +426,5 @@
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
+    ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', '$localStorage', '$rootScope', '$stateParams'];
 })();
