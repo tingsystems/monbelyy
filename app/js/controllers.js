@@ -521,6 +521,7 @@
         self.setItem = function (item, qty) {
             var find_item = $filter('filter')(self.items, { id: item.id })[0];
             if (find_item) {
+                NotificationSrv.error("Este producto ya esta en el carrito.", item.name);
                 if (qty < 1) {
                     // Remove item from cart
                     self.items.splice([self.items.indexOf(find_item)], 1)
