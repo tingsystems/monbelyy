@@ -27,7 +27,7 @@
             })
             .state('shipping', {
                 url: '/shipping/address',
-                data: { pageTitle: 'Proceso de pago' },
+                data: { pageTitle: 'Proceso de envio' },
                 views: {
                     'content': {
                         templateUrl: '/templates/shop/shipping-address.html',

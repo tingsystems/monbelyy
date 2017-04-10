@@ -84,14 +84,16 @@
                     };
 
                 });
-                CartsSrv.save({ items: items, store: self.store, customer : self.customer,
-                        customerName: self.customerName,
-                        customerEmail: self.email,
-                        itemCount: self.itemCount }).$promise.then(function (data) {
-                        self.cart = data;
-                        $localStorage.cart = self.cart;
-                        NotificationSrv.success("Pedido realizado correctamente");
-                        //self.clearCart();
+                CartsSrv.save({
+                    items: items, store: self.store, customer: self.customer,
+                    customerName: self.customerName,
+                    customerEmail: self.email,
+                    itemCount: self.itemCount
+                }).$promise.then(function (data) {
+                    self.cart = data;
+                    $localStorage.cart = self.cart;
+                    NotificationSrv.success("Pedido realizado correctamente");
+                    //self.clearCart();
                 });
                 $state.go('payment-method');
             }
@@ -103,8 +105,9 @@
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
-        self.formData = {};
+        self.formDataPay = {};
         self.customer = [];
+        self.addresses = [];
         self.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
         self.order = $localStorage.cart.id;
@@ -131,14 +134,18 @@
         };
         self.getCustomer();
 
-        self.getAddress = function () {
-            AddressSrv.query().$promise.then(function (data) {
-                self.address = data;
-            }, function (error) {
-                NotificationSrv.error("Error");
-            })
+        AddressSrv.query().$promise.then(function (data) {
+            self.addresses = data;
+
+        }, function (error) {
+            NotificationSrv.error("Error");
+        });
+
+        self.selectedAddress = function(){
+            console.log('Adios perro!');
+            console.log(self.formDataPay);
+            console.log(self.addresses);
         };
-        self.getAddress();
 
         self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
@@ -152,8 +159,8 @@
             })
         };
 
-        self.createOrder = function(){
-            OrderSrv.save({ cartId: self.order}).$promise.then(function(data){
+        self.createOrder = function () {
+            OrderSrv.save({cartId: self.order}).$promise.then(function (data) {
                 console.log(data);
             });
         }
@@ -166,6 +173,6 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'CartsSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'CartsSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'StateSrv'];
 
 })();

@@ -7,17 +7,34 @@
             <form name="paymentForm" novalidate>
                 <div class="row">
                     <div class="col-sm-9 col-md-9 detail-payment-shop" style="background: #eee;">
-                        <div class="col-xs-12"><p>Elige una dirección de envío a domicilio</p></div>
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="col-md-offset-3 col-md-6">
+                                <div class="form-item">
+                                    <label for="address1">Elije una direccion de envio</label>
+                                    <ui-select on-select="Payment.selectedAddress($model)"
+                                    ng-model="Payment.formDataPay.address" id="address1" name="address1"
+                                               title="Direccion" required>
+                                        <ui-select-match placeholder="Selecciona una dirección de envio *..." allow-clear="true">
+                                            {{$select.selected.address}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="address.id as address in Payment.addresses | filter: {address: $select.search}">
+                                            <div ng-bind-html="address.address | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xs-12 col-sm-6 col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group"
                                      ng-class="{ 'has-error': paymentForm.firstName.$touched && paymentForm.firstName.$invalid }">
-                                    <label for="bussinessName">Nombre(*)</label>
-                                    <input type="text" ng-model="Address.customer.bussinessName" class="form-control"
-                                           id="bussinessName" name="bussinessName" required>
+                                    <label for="address">Dirección</label>
+                                    <input type="text" ng-model="Payment.formDataPay.address" class="form-control"
+                                           id="address" name="address" required>
                                     <div class="help-block" ng-messages="paymentForm.firstName.$error"
                                          ng-if="paymentForm.firstName.$touched">
-                                        <div ng-message="required">El campo nombre es requerido</div>
+                                        <div ng-message="required">El campo dirección es requerido</div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -42,7 +59,7 @@
                                 <div class="form-group"
                                      ng-class="{ 'has-error': paymentForm.address.$touched && paymentForm.address.$invalid }">
                                     <label for="address">Dirección</label>
-                                    <input type="text" ng-model="Payment.formData.address" class="form-control"
+                                    <input type="text" ng-model="Payment.formData.phone" class="form-control"
                                            id="address" name="address" required>
                                     <div class="help-block" ng-messages="paymentForm.address.$error"
                                          ng-if="paymentForm.address.$touched">
