@@ -4,8 +4,11 @@
 (function () {
     'use strict';
 
-    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
+    function ShopCartCtrl(CartsSrv, OrderSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
         var self = this;
+        var user = $localStorage.appData.user;
+        var params = {};
+        self.branchOffice = '';
         self.items = $localStorage.items ? $localStorage.items : [];
         self.store = $localStorage.appData.user.branchOffices[0];
         self.customer = $localStorage.appData.user.customer;
@@ -18,6 +21,8 @@
         self.itemCount = self.items.length;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
+        self.tax = false;
+        self.taxInverse = false;
 
         self.setItem = function (item, qty) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
@@ -32,6 +37,42 @@
                 }
             }
             getTotal();
+            calculeTax();
+        };
+
+        var calculeTax = function () {
+            self.subTotal = self.total;
+            self.subTotal = (Math.round(self.subTotal * 100) / 100);
+            //for tax
+            self.subTotal2 = parseFloat(self.total);
+            //for tax inverse
+            self.subTotal2 = (Math.round(self.subTotal2 * 100) / 100);
+            self.subTotal3 = parseFloat(self.total);
+            self.subTotal3 = (Math.round(self.subTotal2 * 100) / 100);
+            if (self.tax) {
+                self.taxTotal = (parseFloat(self.subTotal) * 0.16);
+                //round taxTotal
+                self.taxTotal = (Math.round(self.taxTotal * 100) / 100);
+                self.total = (parseFloat(self.subTotal) + parseFloat(self.taxTotal));
+                //round total
+                self.total = (Math.round(self.total * 100) / 100);
+            }
+            else if (self.taxInverse) {
+                self.taxTotal2 = (parseFloat(self.subTotal) * 0.16);
+                //round taxTotal
+                self.taxTotal2 = (Math.round(self.taxTotal2 * 100) / 100);
+                self.subTotal3 = (parseFloat(self.subTotal) - parseFloat(self.taxTotal2));
+                //round total
+                self.total2 = self.subTotal;
+                self.total2 = (Math.round(self.total * 100) / 100);
+                self.subTotal3 = (Math.round(self.subTotal3 * 100) / 100);
+            }
+            else {
+                self.taxTotal = 0;
+                self.total = (parseFloat(self.subTotal) + parseFloat(self.taxTotal));
+                self.total = (Math.round(self.total * 100) / 100);
+            }
+
         };
 
         self.itemInCart = function (item) {
@@ -91,13 +132,50 @@
                     customerEmail: self.email,
                     itemCount: self.itemCount
                 }).$promise.then(function (data) {
+                    console.log("Carrito", data.id)
                     self.cart = data;
                     $localStorage.cart = self.cart;
+                    createOrder(data);
                     NotificationSrv.success("Pedido realizado correctamente");
-                    //self.clearCart();
+                    self.clearCart();
+                    $rootScope.items = 0;
                 });
                 $state.go('payment-method');
             }
+        };
+
+        var createOrder = function (cart) {
+            var params = { metadata: { taxInverse: true } };
+            params.kind = 'invoice';
+            params.orderStatus = 4;
+            params.paymentType = 0;
+            params.isPaid = 0;
+            params.cartId = cart.id;
+            //params.warehouse = self.defaultWarehouse.id;
+            params.employee = user.id;
+            params.comments = self.comments;
+            if (self.taxInverse) {
+                params.taxTotal = self.taxTotal2;
+            }
+            else {
+                params.taxTotal = self.taxTotal;
+            }
+            if (self.taxInverse) {
+                params.subTotal = self.subTotal3;
+            }
+            else {
+                params.subTotal = self.subTotal2;
+                params.metadata.taxInverse = false;
+            }
+            if (self.taxInverse) {
+                params.total = self.total2;
+            }
+            else {
+                params.total = self.total;
+            }
+            OrderSrv.save(params).$promise.then(function (data) {
+                console.log(data);
+            });
         }
 
     }
@@ -160,11 +238,6 @@
             })
         };
 
-        self.createOrder = function () {
-            OrderSrv.save({cartId: self.order}).$promise.then(function (data) {
-                console.log(data);
-            });
-        }
     }
 
 // create the module and assign controllers
@@ -173,7 +246,7 @@
         .controller('PaymentCtrl', PaymentCtrl);
 
     // inject dependencies to controllers
-    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    ShopCartCtrl.$inject = ['CartsSrv', 'OrderSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     PaymentCtrl.$inject = ['CustomerSrv', 'CartsSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'StateSrv'];
 
 })();

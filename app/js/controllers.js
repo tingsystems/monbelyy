@@ -293,7 +293,7 @@
 
     }
 
-    function ProductsCtrl(ProductSrv, ProductTaxonomySrv, EntrySrv, $stateParams, $rootScope) {
+    function ProductsCtrl(ProductSrv, ProductTaxonomySrv, AttachmentCmsSrv, $filter, $rootScope) {
         var self = this;
         self.children = [];
         self.list = [];
@@ -308,13 +308,32 @@
             ProductTaxonomySrv.get({
                 isActive: 'True',
                 pageSize: 3,
-                fields: 'attachments,name,slug,createdAt',
+                fields: 'id,attachments,name,slug,createdAt',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
                 self.list = self.list.concat(results.results);
                 self.busy = false;
                 self.next = results.next;
+
+                getAttachmentByTaxonomy(self.list);
+            });
+        };
+
+        var getAttachmentByTaxonomy = function(array){
+            angular.forEach(array, function (obj, ind) {
+                AttachmentCmsSrv.get({
+                    pageSize: 1,
+                    page: 1,
+                    project : $rootScope.projectId,
+                    reference: obj.id,
+                    kind: 'featuredImage'
+                }).$promise.then(function (results) {
+                    obj.featuredImage = $filter('filter')(results.results, { kind: 'featuredImage' })[0];
+
+                }, function (error) {
+                    console.log(error)
+                })
             });
         };
 
@@ -582,7 +601,7 @@
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['EntrySrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    ProductsCtrl.$inject = ['ProductSrv','ProductTaxonomySrv', 'EntrySrv', '$stateParams', '$rootScope'];
+    ProductsCtrl.$inject = ['ProductSrv','ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];

@@ -14,6 +14,14 @@
         }
     }
 
+    function urlAttachment() {
+        return {
+            get: function () {
+                return  '#host#/api/v1/';
+            }
+        }
+    }
+
     function EntrySrv($resource, BaseUrl) {
         return $resource(BaseUrl.get() + 'posts/:slug', null, {})
     }
@@ -115,6 +123,13 @@
         };
     }
 
+    function AttachmentCmsSrv($resource, urlAttachment) {
+        return $resource(urlAttachment.get() + 'attachments/:id', null, {
+            'update': { method: 'PUT', url: urlAttachment.get() + 'attachments/:id' },
+            'patch': { method: 'PATCH', url: urlAttachment.get() + 'attachments/:id' }
+        });
+    }
+
     // get all the states
     function StateSrv($resource) {
         var BaseUrl = 'http://geo.tingsystems.com/api/v1/';
@@ -146,7 +161,9 @@
         .factory('NotificationSrv', NotificationSrv)
         .factory('HttpInterceptor', HttpInterceptor)
         .factory('StateSrv', StateSrv)
-        .factory('AccessSrv', AccessSrv);
+        .factory('AccessSrv', AccessSrv)
+        .factory('AttachmentCmsSrv', AttachmentCmsSrv)
+        .factory('urlAttachment', urlAttachment);
 
     // Inject factory the dependencies
     BaseUrl.$inject = [];
@@ -156,7 +173,9 @@
     TaxonomySrv.$inject = ['$resource', 'BaseUrl'];
     MessageSrv.$inject = ['$resource', 'BaseUrl'];
     NotificationSrv.$inject = ['SweetAlert', '$filter'];
-    HttpInterceptor.$inject = ['$q', 'NotificationSrv', '$rootScope']
+    HttpInterceptor.$inject = ['$q', 'NotificationSrv', '$rootScope'];
     StateSrv.$inject = ['$resource'];
     AccessSrv.$inject = ['$resource'];
+    AttachmentCmsSrv.$inject = ['$resource', 'urlAttachment'];
+    urlAttachment.$inject = [];
 })();
