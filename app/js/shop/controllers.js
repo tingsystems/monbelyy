@@ -14,6 +14,7 @@
         self.total = $localStorage.total;
         var items = [];
         $localStorage.items = self.items;
+        self.items = $localStorage.items;
         self.itemCount = self.items.length;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
