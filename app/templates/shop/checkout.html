@@ -2,9 +2,10 @@
     <div class="container">
         <div class="col-md-6">
             <div class="col-md-12">
+                <h4>Seleccione el método de pago</h4>
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading panel-white">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" href=""
                                    ng-click="Payment.creditCard=!Payment.creditCard"><span
@@ -46,6 +47,17 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group">
+                                                                <label for="couponCode">TITULAR</label>
+                                                                <input type="text" class="form-control"
+                                                                       name="couponCode"
+                                                                       placeholder="Nombre del titular"
+                                                                       id="couponCode"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
                                                         <div class="col-xs-7 col-md-7">
                                                             <div class="form-group">
                                                                 <label for="cardExpiry"><span class="hidden-xs">FECHA DE EXPIRACIÓN</span>
@@ -62,16 +74,6 @@
                                                                 <input type="tel" class="form-control" name="cardCVC"
                                                                        id="cardCVC" placeholder="CVC"
                                                                        autocomplete="cc-csc" required/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group">
-                                                                <label for="couponCode">COUPON CODE</label>
-                                                                <input type="text" class="form-control"
-                                                                       name="couponCode"
-                                                                       id="couponCode"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -96,7 +98,7 @@
                             </div>
                         </div>
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading panel-white">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" href="" ng-click="Payment.paypal=!Payment.paypal"><span
                                             class="fa fa-paypal">
@@ -116,6 +118,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center" style="margin-top: 20px">
+                <div class="col-md-6"><a href="">Volver a forma de envío</a></div>
+                <div class="col-md-6">
+                    <button ng-if="Payment.paypal" class="btn btn-cart" ui-sref="checkout">Finalizar el pedido</button>
                 </div>
             </div>
         </div>
