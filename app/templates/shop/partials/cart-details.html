@@ -1,0 +1,35 @@
+
+    <div class="col-md-12 text-center" ng-repeat="item in Payment.items">
+        <div class="col-md-6" >
+            <img ng-src="{{item.image}}" alt="" width="100">
+        </div>
+        <div class="col-md-6 pull-rigth" >
+            <span>{{item.price | currency}}</span>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12">
+        <div class="details-prod">
+            <h4 class="text-center">Resumen de pedido</h4>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>Subtotal({{ items.length }})</td>
+                        <td>{{ ShopCart.total | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Envío</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <!--<td>{{ ShopCart.total | currency}}</td>-->
+                        <td><h3>$1400</h3></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--<a class="btn btn-success btn-cart btn-block" ng-click="ShopCart.processPurchase()">Procesar compra</a>-->
+            </div>
+        </div>
+    </div>
+

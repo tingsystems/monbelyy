@@ -137,7 +137,7 @@
                     $localStorage.cart = self.cart;
                     createOrder(data);
                     NotificationSrv.success("Pedido realizado correctamente");
-                    self.clearCart();
+                    //self.clearCart();
                     $rootScope.items = 0;
                 });
                 $state.go('payment-method');

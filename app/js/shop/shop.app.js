@@ -35,6 +35,17 @@
                         controller: 'PaymentCtrl'
                     }
                 }
+            })
+            .state('checkout', {
+                url: '/shipping/checkout',
+                data: { pageTitle: 'Proceso de envio' },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/checkout.html',
+                        controllerAs: 'Payment',
+                        controller: 'PaymentCtrl'
+                    }
+                }
             });
 
     }
