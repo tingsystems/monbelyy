@@ -3,18 +3,19 @@
         <div class="col-md-6" >
             <img ng-src="{{item.image}}" alt="" width="100">
         </div>
-        <div class="col-md-6 pull-rigth" >
-            <span>{{item.price | currency}}</span>
+        <div class="col-md-6 pull-rigth list-inline items-incart">
+            <div class="col-md-6"><span>{{ item.name | characters: 30 }}</span></div>
+            <div class="col-md-6"><span class="pull-right">{{item.price | currency}}</span></div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-12">
-        <div class="details-prod">
-            <h4 class="text-center">Resumen de pedido</h4>
+    <div class="col-sm-12 col-md-12" ng-controller="ShopCartCtrl as ShopCart">
+        <div class="details-prodpay">
+            <!--<h4 class="text-center">Resumen de pedido</h4>-->
             <div class="table-responsive">
                 <table class="table table-striped">
                     <tbody>
                     <tr>
-                        <td>Subtotal({{ items.length }})</td>
+                        <td>Subtotal</td>
                         <td>{{ ShopCart.total | currency}}</td>
                     </tr>
                     <tr>
@@ -23,8 +24,7 @@
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <!--<td>{{ ShopCart.total | currency}}</td>-->
-                        <td><h3>$1400</h3></td>
+                        <td><h3><span class="mxn">MXN</span>{{ ShopCart.total | currency }}</h3></td>
                     </tr>
                     </tbody>
                 </table>

@@ -503,6 +503,20 @@ header {
   font-size: 18px;
   font-family: "Roboto Slab, sans-serif";
 }
+.address-form {
+  border-right: 1px solid #ddd;
+}
+.items-incart {
+  padding: 15px 0;
+}
+.details-prodpay {
+  padding-top: 20px;
+}
+.mxn {
+  font-size: 10px;
+  color: #565656;
+  padding-right: 5px;
+}
 .send-email {
   padding-bottom: 10px;
 }

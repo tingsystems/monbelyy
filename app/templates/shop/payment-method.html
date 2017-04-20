@@ -1,11 +1,9 @@
 <div id="content-area">
-    <div class="container">
-        <div class="col-md-6">
-            <div class="col-md-6">Informa</div>
-            <div class="col-md-6"></div>
+    <div class="container" ng-controller="AddressCtrl as Address">
+        <div class="col-md-6 address-form">
             <div class="col-md-12">
                 <h3>Direccíon de envío</h3>
-                <form action="" class="form-horizontal">
+                <form action="" class="form-horizontal" name="Form" novalidate>
                     <div class="col-md-6">
                         <div class="form-item">
                             <label for="state">Estado</label>
@@ -50,7 +48,7 @@
                                    placeholder="Dirección"
                                    required>
                             <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
-                                                    <a ng-message="required" data-toggle="tooltip" title="Holiis"></a>
+                                <a ng-message="required" data-toggle="tooltip" title="Holiis"></a>
                             </span>
                         </div>
                     </div>
