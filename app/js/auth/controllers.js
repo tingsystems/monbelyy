@@ -6,7 +6,8 @@
         self.busy = false;
         self.formData = {};
         self.formDataLogin = {};
-        self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
+        self.branchDefault = { branchOffices: ["b69d0047-3502-47fe-9d88-33fac4ee188e"] };
+        self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault ;
         $rootScope.user = $localStorage.appData.user;
 
 
@@ -74,6 +75,8 @@
                         delete $localStorage.appData.user;
                         $localStorage.items = [];
                         $localStorage.total = 0;
+                        $localStorage.cart = {};
+                        $localStorage.appData.user = self.branchDefault;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name != 'register') {
                             NotificationSrv.success("Te esperamos pronto", "Corriente Alterna");

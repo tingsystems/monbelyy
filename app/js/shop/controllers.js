@@ -176,7 +176,7 @@
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
             });
-        }
+        };
 
     }
 
@@ -193,6 +193,127 @@
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
+        self.busyCard = false;
+        self.payment = {
+            'card': {
+                'number': null,
+                'name': '',
+                'exp_year': '',
+                'exp_month': '',
+                'cvc': null
+            }
+        };
+
+        var publishKey = $rootScope.currentKey;
+        var setPublishableKey = function () {
+            Conekta.setLanguage('es');
+            Conekta.setPublishableKey(publishKey);
+        };
+
+        var initialGateway = function () {
+            var deferred = $q.defer();
+            $.getScript("https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js")
+                .done(function (script, textStatus) {
+                    deferred.promise.then(function (response) {
+                        // Conekta Public Key
+                        setPublishableKey();
+                    });
+                    deferred.resolve(textStatus);
+                })
+                .fail(function (jqxhr, settings, exception) {
+                    console.log("Triggered ajaxError handler.");
+                });
+        };
+
+        initialGateway();
+        var successResponseHandler = function (token) {
+            var params = {
+                brand: Conekta.card.getBrand(self.payment.card.number),
+                cardholder: self.payment.card.name,
+                authCode: token.id,
+                phone: self.payment.phone,
+                email: self.payment.email,
+                items: $localStorage.items,
+                amount: $localStorage.total,
+                shop: $localStorage.appData.currentShop.id,
+                kind: 'card_payment',
+                production: self.charge.production,
+                installments: self.charge.production.installments ? self.charge.production.installments : 0
+            };
+            ChargeSrv.save(params).$promise.then(function (response) {
+                NotificationSrv.success('Cargo creado correctamente!');
+                $localStorage.items = [];
+                $localStorage.total = 0;
+                $localStorage.shipmentPrice = 0;
+                $state.go('app.dashboard');
+            }, function (data) {
+                self.busyCard = false;
+                angular.forEach(data.data, function (value, key) {
+                    NotificationSrv.error(value);
+                });
+            });
+        };
+
+        if ($stateParams.id) {
+            self.busy = true;
+            var params = {
+                id: $stateParams.id,
+                fields: 'id,createdAt,kind,status,message,amount,items,client,shop'
+            };
+            ChargeSrv.checkoutGet(params).$promise.then(function (data) {
+                self.charge = data;
+                self.busy = false;
+            }, function (error) {
+                self.busy = false;
+            });
+        }
+
+        var successResponseHandlerSharePay = function (token) {
+            var charge = angular.copy(self.charge);
+            // update charge
+            charge.brand = Conekta.card.getBrand(self.payment.card.number);
+            charge.cardholder = self.payment.card.name;
+            charge.authCode = token.id;
+            charge.phone = self.payment.phone;
+            charge.email = self.payment.email;
+            charge.shop = self.charge.shop.id;
+
+            ChargeSrv.checkout({ id: $stateParams.id }, charge).$promise.then(function (response) {
+                NotificationSrv.success('Pago realizado correctamente!');
+                $state.go('checkout.success');
+            }, function (data) {
+                self.busyCard = false;
+                angular.forEach(data.data, function (value, key) {
+                    NotificationSrv.error(value);
+                });
+            });
+        };
+
+        var errorResponseHandler = function (error) {
+            var deferred = $q.defer();
+            deferred.promise.then(function (error) {
+                self.busyCard = false;
+                NotificationSrv.error(error.message_to_purchaser);
+            });
+            deferred.resolve(error);
+        };
+
+        self.processPayment = function () {
+            self.busyCard = true;
+            Conekta.token.create(self.payment, successResponseHandler, errorResponseHandler);
+        };
+
+        self.processSharePayPayment = function () {
+            self.busyCard = true;
+            Conekta.token.create(self.payment, successResponseHandlerSharePay, errorResponseHandler);
+        };
+
+        self.cancelPayment = function () {
+            $localStorage.items = [];
+            $localStorage.total = 0;
+            $localStorage.shipmentPrice = 0;
+            $state.go('app.dashboard');
+        };
 
         var getTotal = function () {
             self.total = 0;
