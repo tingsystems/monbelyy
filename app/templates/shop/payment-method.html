@@ -1,8 +1,12 @@
 <div id="content-area">
     <div class="container" ng-controller="AddressCtrl as Address">
         <div class="col-md-6 address-form">
+            <div class="col-md-12 select-address" style="margin-bottom: 20px" ng-if="idUser">
+                <h3><a href="" ng-click="Payment.showAddress=!Payment.showAddress"><i class="fa fa-address-card"></i></a> Seleccionar dirección existente</h3>
+                <ng-include ng-if="Payment.showAddress" src="'/templates/shop/shipping-address.html'"></ng-include>
+            </div>
             <div class="col-md-12">
-                <h3>Direccíon de envío</h3>
+                <h3><i class="fa fa-paper-plane"></i> Nueva direccíon de envío</h3>
                 <form action="" class="form-horizontal" name="Form" novalidate>
                     <div class="col-md-6">
                         <div class="form-item">
@@ -92,16 +96,16 @@
                         </div>
 
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" ng-if="idUser">
                         <input type="checkbox"> <span>Guardar mi información para la aproxima ocasión</span>
                     </div>
-                    <div class="col-md-12 text-center" style="margin-top: 20px">
-                        <div class="col-md-6"><a href="">Regresar al carrito</a></div>
-                        <div class="col-md-6">
-                            <button class="btn btn-cart" ui-sref="checkout">Continuar</button>
-                        </div>
-                    </div>
                 </form>
+            </div>
+            <div class="col-md-12 text-center" style="margin-top: 20px">
+                <div class="col-md-6"><a href="" ui-sref="shopcart">Regresar al carrito</a></div>
+                <div class="col-md-6">
+                    <button class="btn btn-cart" ui-sref="checkout">Continuar</button>
+                </div>
             </div>
         </div>
         <div class="col-md-6">

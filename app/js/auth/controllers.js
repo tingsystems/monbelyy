@@ -58,7 +58,6 @@
                     // Handle errors here, such as displaying a notification
                     // for invalid email and/or password.
                     self.processing = false;
-                    console.log(response);
                     NotificationSrv.error('Usuario o contraseña incorrectos');
                 });
         };
@@ -85,7 +84,6 @@
                     })
                     .catch(function (response) {
                         // Handle errors here, such as displaying a notification
-                        console.log(response);
                     });
             });
         };
@@ -166,7 +164,6 @@
 
     function ValidAccountCtrl(UserSrv, NotificationSrv, $state, $stateParams) {
         UserSrv.active({token: $stateParams.token}, {'is_active': true}).$promise.then(function (data) {
-            console.log(data);
             NotificationSrv.success('Cuenta activada correctamente!');
         }, function (error) {
         });
@@ -194,7 +191,6 @@
 
         self.getCitiesByState = function (state_id) {
             if (!state_id) {
-                console.log(state_id);
                 self.city = null;
                 self.cities = [];
                 return
@@ -209,7 +205,6 @@
         };
 
         var createAddress = function () {
-            console.log("Crear");
             var address = angular.copy(self.formData);
             address.customer = self.idUser;
             self.busy = true;
@@ -227,7 +222,6 @@
         };
 
         var updateAddress = function () {
-            console.log("Actualizar");
             var formData = angular.copy(self.formData);
             var id = formData.id ? formData.id : $stateParams.id;
             self.busy = true;
@@ -248,20 +242,22 @@
         };
 
         self.getAddresses = function () {
-            AddressSrv.get({id: $stateParams.id}).$promise.then(function (data) {
-                self.formData = data;
-                self.create = false;
-                if (self.formData.state)
-                    StateSrv.getCities({
-                        state: self.formData.state,
-                        ordering: 'name'
-                    }).$promise.then(function (response) {
-                        self.cities = response;
-                        self.busyCity = false;
-                    }, function (error) {
-                        self.busyCity = false;
-                    });
-            });
+            if ($stateParams.id) {
+                AddressSrv.get({id: $stateParams.id}).$promise.then(function (data) {
+                    self.formData = data;
+                    self.create = false;
+                    if (self.formData.state)
+                        StateSrv.getCities({
+                            state: self.formData.state,
+                            ordering: 'name'
+                        }).$promise.then(function (response) {
+                            self.cities = response;
+                            self.busyCity = false;
+                        }, function (error) {
+                            self.busyCity = false;
+                        });
+                });
+            }
         };
         self.getAddresses();
 

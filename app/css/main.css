@@ -1566,6 +1566,18 @@ footer .contact-sty .download-app > i {
 footer .contact-sty .download-app > i:hover {
   color: #d96263;
 }
+.btn-paypal {
+  border-radius: 0 !important;
+  color: #fff;
+  border-color: #4682b4;
+  background: #4682b4;
+}
+.btn-paypal.btn-paypal:hover,
+.btn-paypal.btn-paypal:focus {
+  border-color: #4682b4;
+  background: #4682b4 !important;
+  color: #fff;
+}
 .btn-login-ca {
   padding: 10px 0;
   border-radius: 0 !important;

@@ -146,7 +146,7 @@
 
         var createOrder = function (cart) {
             var params = { metadata: { taxInverse: true } };
-            params.kind = 'invoice';
+            params.kind = 'order';
             params.orderStatus = 4;
             params.paymentType = 0;
             params.isPaid = 0;
@@ -180,7 +180,10 @@
 
     }
 
-    function PaymentCtrl(CustomerSrv, CartsSrv, OrderSrv, AddressSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, StateSrv) {
+    function OrderCtrl(){
+
+    }
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $stateParams) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -190,9 +193,12 @@
         self.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
         self.order = $localStorage.cart.id;
+        self.store = $localStorage.appData.user.branchOffices[0];
+        self.email = $localStorage.appData.user.email;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
+        $rootScope.idUser = self.idUser;
         self.busyCard = false;
         self.payment = {
             'card': {
@@ -231,11 +237,11 @@
                 brand: Conekta.card.getBrand(self.payment.card.number),
                 cardholder: self.payment.card.name,
                 authCode: token.id,
-                phone: self.payment.phone,
-                email: self.payment.email,
+                //phone: self.payment.phone,
+                email: self.email,
                 items: $localStorage.items,
                 amount: $localStorage.total,
-                shop: $localStorage.appData.currentShop.id,
+                shop: self.store,
                 kind: 'card_payment',
                 production: self.charge.production,
                 installments: self.charge.production.installments ? self.charge.production.installments : 0
@@ -311,7 +317,6 @@
         self.cancelPayment = function () {
             $localStorage.items = [];
             $localStorage.total = 0;
-            $localStorage.shipmentPrice = 0;
             $state.go('app.dashboard');
         };
 
@@ -329,6 +334,7 @@
         self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
                 self.customer = data;
+                console.log(self.customer);
             });
 
         };
@@ -342,7 +348,6 @@
         });
 
         self.selectedAddress = function(){
-            console.log('Adios perro!');
             console.log(self.formDataPay);
             console.log(self.addresses);
         };
@@ -368,6 +373,6 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', 'OrderSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'CartsSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'StateSrv'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$stateParams'];
 
 })();

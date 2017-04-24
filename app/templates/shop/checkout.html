@@ -27,18 +27,19 @@
                                                 </div>
                                             </div>
                                             <div class="panel-body">
-                                                <form role="form" id="payment-form" method="POST"
-                                                      action="javascript:void(0);">
+                                                <form role="form" id="payment-form"
+                                                      ng-submit="Payment.processPayment()">
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <div class="form-group">
                                                                 <label for="cardNumber">NÚMERO DE TARJETA</label>
                                                                 <div class="input-group">
                                                                     <input type="tel" class="form-control"
+                                                                           ng-model="Payment.payment.number"
                                                                            name="cardNumber"
                                                                            id="cardNumber"
                                                                            placeholder="Número de tarjeta"
-                                                                           autocomplete="cc-number" required
+                                                                           required
                                                                            autofocus/>
                                                                     <span class="input-group-addon"><i
                                                                             class="fa fa-credit-card"></i></span>
@@ -51,6 +52,7 @@
                                                             <div class="form-group">
                                                                 <label for="couponCode">TITULAR</label>
                                                                 <input type="text" class="form-control"
+                                                                       ng-model="Payment.payment.name"
                                                                        name="couponCode"
                                                                        placeholder="Nombre del titular"
                                                                        id="couponCode"/>
@@ -60,20 +62,33 @@
                                                     <div class="row">
                                                         <div class="col-xs-7 col-md-7">
                                                             <div class="form-group">
-                                                                <label for="cardExpiry"><span class="hidden-xs">FECHA DE EXPIRACIÓN</span>
+                                                                <label><span
+                                                                        class="hidden-xs">FECHA DE EXPIRACIÓN</span>
                                                                     <span class="visible-xs-inline">EXP</span></label>
-                                                                <input type="tel" class="form-control" name="cardExpiry"
-                                                                       id="cardExpiry" placeholder="MM / AA"
-                                                                       autocomplete="cc-exp" required
-                                                                />
+                                                                <div class="col-xs-6">
+                                                                    <input type="tel" class="form-control"
+                                                                           ng-model="Payment.payment.exp_month"
+                                                                           name="cardExpiry"
+                                                                           id="monthExpiry" placeholder="MM"
+                                                                           autocomplete="cc-exp" required>
+                                                                </div>
+                                                                <div class="col-xs-6">
+                                                                    <input type="tel" class="form-control"
+                                                                           ng-model="Payment.payment.exp_year"
+                                                                           name="cardExpiry"
+                                                                           id="yearExpiry" placeholder="AAAA"
+                                                                           autocomplete="cc-exp" required>
+                                                                </div>
+
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-5 col-md-5 pull-right">
                                                             <div class="form-group">
                                                                 <label for="cardCVC">CÓDIGO CV</label>
                                                                 <input type="tel" class="form-control" name="cardCVC"
+                                                                       ng-model="Payment.payment.cvc"
                                                                        id="cardCVC" placeholder="CVC"
-                                                                       autocomplete="cc-csc" required/>
+                                                                       autocomplete="cc-csc" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -81,7 +96,7 @@
                                                         <div class="col-xs-12">
                                                             <button ng-click="Payment.createOrder()"
                                                                     class="subscribe btn btn-cart btn-lg btn-block"
-                                                                    ui-sref="shipping" type="button">Procesar Pago
+                                                                    type="submit">Procesar Pago
                                                             </button>
                                                         </div>
                                                     </div>
