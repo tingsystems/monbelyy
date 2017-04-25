@@ -154,6 +154,7 @@
             //params.warehouse = self.defaultWarehouse.id;
             params.employee = user.id;
             params.comments = self.comments;
+
             if (self.taxInverse) {
                 params.taxTotal = self.taxTotal2;
             }
