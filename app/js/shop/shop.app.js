@@ -15,17 +15,17 @@
                 }
             })
             .state('payment-method', {
-                url: '/payment',
-                data: { pageTitle: 'Proceso de pago' },
+                url: '/shipping/address',
+                data: { pageTitle: 'Datos de envío' },
                 views: {
                     'content': {
                         templateUrl: '/templates/shop/payment-method.html',
                         controllerAs: 'Payment',
-                        controller: 'PaymentCtrl'
+                        controller: 'OrderCtrl'
                     }
                 }
             })
-            .state('shipping', {
+            /*.state('shipping', {
                 url: '/shipping/address',
                 data: { pageTitle: 'Proceso de envio' },
                 views: {
@@ -35,7 +35,7 @@
                         controller: 'PaymentCtrl'
                     }
                 }
-            })
+            })*/
             .state('checkout', {
                 url: '/shipping/checkout',
                 data: { pageTitle: 'Proceso de envio' },

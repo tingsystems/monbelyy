@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-12">
                 <h3><i class="fa fa-paper-plane"></i> Nueva direccíon de envío</h3>
-                <form action="" class="form-horizontal" name="Form" novalidate>
+                <form action="" class="form-horizontal" name="Form" novalidate ng-submit="Payment.shippingProccess()">
                     <div class="col-md-6">
                         <div class="form-item">
                             <label for="state">Estado</label>
@@ -97,14 +97,15 @@
 
                     </div>
                     <div class="col-md-12" ng-if="idUser">
-                        <input type="checkbox"> <span>Guardar mi información para la aproxima ocasión</span>
+                        <input type="checkbox"><span>Guardar mi información para la aproxima ocasión</span>
+                        {{Payment.saveAddressNew}}
                     </div>
                 </form>
             </div>
             <div class="col-md-12 text-center" style="margin-top: 20px">
                 <div class="col-md-6"><a href="" ui-sref="shopcart">Regresar al carrito</a></div>
-                <div class="col-md-6" ng-controller="ShopCartCtrl as Shop">
-                    <button class="btn btn-cart" ng-click="Shop.createOrder()">Continuar</button>
+                <div class="col-md-6" ng-controller="OrderCtrl as Payment">
+                    <button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Payment.shippingProcess()">Continuar</button>
                 </div>
             </div>
         </div>

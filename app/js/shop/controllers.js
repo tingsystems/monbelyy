@@ -26,17 +26,17 @@
 
         // get default branch office
         /*self.getDefaulBranchOffice = function () {
-            if (!user.branchOffices)
-                return
-            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
-            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
-            self.branchOffices = user.branchOffices;
-            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
-            cnsole.log(self.defaultbranchOffice.name);
-            return self.defaultbranchOffice;
+         if (!user.branchOffices)
+         return
+         self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+         self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+         self.branchOffices = user.branchOffices;
+         $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+         cnsole.log(self.defaultbranchOffice.name);
+         return self.defaultbranchOffice;
 
-        };
-        self.getDefaulBranchOffice();*/
+         };
+         self.getDefaulBranchOffice();*/
 
         self.setItem = function (item, qty) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
@@ -160,7 +160,7 @@
         self.createOrder = function () {
             //self.promoTotal = $localStorage.promoTotal;
             //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
-            var params = { metadata: { taxInverse: false } };
+            var params = {metadata: {taxInverse: false}};
             params.kind = 'order';
             params.orderStatus = 0;
             params.paymentType = 0;
@@ -178,6 +178,87 @@
             });
             $state.go('checkout');
         };
+
+    }
+
+    function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope) {
+        var self = this;
+        var user = $localStorage.appData.user;
+        self.params = {};
+        self.branchOffice = '';
+        self.formData = {};
+        self.idUser = $localStorage.appData.user.customer;
+        self.items = $localStorage.items ? $localStorage.items : [];
+        self.store = $localStorage.appData.user.branchOffices[0];
+        self.customer = $localStorage.appData.user.customer;
+        self.email = $localStorage.appData.user.email;
+        self.customerName = $localStorage.appData.user.firstName;
+        self.total = $localStorage.total;
+        $localStorage.items = self.items;
+        self.items = $localStorage.items;
+        self.itemCount = self.items.length;
+        $localStorage.total = self.total;
+        $rootScope.items = $localStorage.items;
+        $rootScope.idUser = self.idUser;
+        self.tax = false;
+        self.taxInverse = false;
+        self.saveAddressNew = false;
+
+
+        self.createOrder = function () {
+            //self.promoTotal = $localStorage.promoTotal;
+            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
+            var params = {metadata: {taxInverse: false}};
+            params.kind = 'order';
+            params.orderStatus = 0;
+            params.paymentType = 0;
+            params.isPaid = 2;
+            params.warehouse = 11;
+            params.itemCount = self.itemCount;
+            params.store = self.store;
+            params.customer = self.customer;
+            params.cartId = $localStorage.cart.id;
+            //params.warehouse = self.defaultWarehouse.id;
+
+            OrderSrv.save(params).$promise.then(function (data) {
+                console.log(data);
+                console.log(params);
+            });
+            $state.go('checkout');
+        };
+
+        var createAddress = function () {
+            var address = angular.copy(self.formData);
+            address.customer = self.idUser;
+            self.busy = true;
+            AddressSrv.save(address).$promise.then(function (data) {
+                self.busy = false;
+                self.formData = {};
+            }, function (error) {
+                angular.forEach(error.data, function (key, value) {
+                    NotificationSrv.error(key, value);
+                    self.busy = false;
+                })
+            })
+        };
+
+        self.shippingProcess = function () {
+            console.log("Proceso de envio iniciado");
+            if(self.saveAddressNew){
+                createAddress();
+            }
+            console.log(self.saveAddressNew);
+
+        };
+
+
+
+        AddressSrv.query().$promise.then(function (data) {
+            self.addresses = data;
+
+        }, function (error) {
+            NotificationSrv.error("Error");
+        });
 
     }
 
@@ -282,7 +363,7 @@
             charge.email = self.payment.email;
             charge.shop = self.charge.shop.id;
 
-            ChargeSrv.checkout({ id: $stateParams.id }, charge).$promise.then(function (response) {
+            ChargeSrv.checkout({id: $stateParams.id}, charge).$promise.then(function (response) {
                 NotificationSrv.success('Pago realizado correctamente!');
                 $state.go('checkout.success');
             }, function (data) {
@@ -345,7 +426,7 @@
             NotificationSrv.error("Error");
         });
 
-        self.selectedAddress = function(){
+        self.selectedAddress = function () {
             console.log(self.formDataPay);
             console.log(self.addresses);
         };
@@ -367,10 +448,13 @@
 // create the module and assign controllers
     angular.module('shop.controllers', ['shop.services'])
         .controller('ShopCartCtrl', ShopCartCtrl)
-        .controller('PaymentCtrl', PaymentCtrl);
+        .controller('PaymentCtrl', PaymentCtrl)
+        .controller('OrderCtrl', OrderCtrl);
+
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', 'OrderSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$stateParams'];
+    OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope'];
 
 })();

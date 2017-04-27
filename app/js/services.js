@@ -144,8 +144,8 @@
     }
     // access control
     function AccessSrv($resource) {
-        return $resource('#host#/api/{{apiV}}/auth/login', null, {
-            'logout': { method: 'POST', url: '#host#/api/{{apiV}}/auth/logout' }
+        return $resource('http://192.168.1.71:9000/api/{{apiV}}/auth/login', null, {
+            'logout': { method: 'POST', url: 'http://192.168.1.71:9000/api/{{apiV}}/auth/logout' }
         });
     }
 
