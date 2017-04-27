@@ -19,11 +19,11 @@
             // save user info to local storage
             $localStorage.appData = {user: angular.copy(response.data.user)};
             $rootScope.user = $localStorage.appData.user;
-            delete $localStorage.appData.user.groups;
+            /*delete $localStorage.appData.user.groups;
             delete $localStorage.appData.user.permissions;
             delete $localStorage.appData.user.projects;
             delete $localStorage.appData.user.is_superuser;
-            delete $localStorage.appData.user.branchOffices;
+            delete $localStorage.appData.user.branchOffices;*/
             self.idUser = $localStorage.appData.user.id;
             //$scope.app.data = $localStorage.appData;
             // Redirect user here after a successful log in.

@@ -7,7 +7,7 @@
     function ShopCartCtrl(CartsSrv, OrderSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
         var self = this;
         var user = $localStorage.appData.user;
-        var params = {};
+        self.params = {};
         self.branchOffice = '';
         self.items = $localStorage.items ? $localStorage.items : [];
         self.store = $localStorage.appData.user.branchOffices[0];
@@ -23,6 +23,20 @@
         $rootScope.items = $localStorage.items;
         self.tax = false;
         self.taxInverse = false;
+
+        // get default branch office
+        /*self.getDefaulBranchOffice = function () {
+            if (!user.branchOffices)
+                return
+            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+            self.branchOffices = user.branchOffices;
+            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+            cnsole.log(self.defaultbranchOffice.name);
+            return self.defaultbranchOffice;
+
+        };
+        self.getDefaulBranchOffice();*/
 
         self.setItem = function (item, qty) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
@@ -135,7 +149,6 @@
                     console.log("Carrito", data.id)
                     self.cart = data;
                     $localStorage.cart = self.cart;
-                    createOrder(data);
                     NotificationSrv.success("Pedido realizado correctamente");
                     //self.clearCart();
                     $rootScope.items = 0;
@@ -144,46 +157,30 @@
             }
         };
 
-        var createOrder = function (cart) {
-            var params = { metadata: { taxInverse: true } };
+        self.createOrder = function () {
+            //self.promoTotal = $localStorage.promoTotal;
+            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
+            var params = { metadata: { taxInverse: false } };
             params.kind = 'order';
-            params.orderStatus = 4;
+            params.orderStatus = 0;
             params.paymentType = 0;
-            params.isPaid = 0;
-            params.cartId = cart.id;
+            params.isPaid = 2;
+            params.warehouse = 11;
+            params.itemCount = self.itemCount;
+            params.store = self.store;
+            params.customer = self.customer;
+            params.cartId = $localStorage.cart.id;
             //params.warehouse = self.defaultWarehouse.id;
-            params.employee = user.id;
-            params.comments = self.comments;
 
-            if (self.taxInverse) {
-                params.taxTotal = self.taxTotal2;
-            }
-            else {
-                params.taxTotal = self.taxTotal;
-            }
-            if (self.taxInverse) {
-                params.subTotal = self.subTotal3;
-            }
-            else {
-                params.subTotal = self.subTotal2;
-                params.metadata.taxInverse = false;
-            }
-            if (self.taxInverse) {
-                params.total = self.total2;
-            }
-            else {
-                params.total = self.total;
-            }
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
+                console.log(params);
             });
+            $state.go('checkout');
         };
 
     }
 
-    function OrderCtrl(){
-
-    }
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $stateParams) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];

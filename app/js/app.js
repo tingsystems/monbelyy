@@ -170,7 +170,7 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-43',
             meta_color: '#eee7de',
-            img_default: ' https://www.corriente-alterna.com/img/img-default.jpg',
+            img_default: ' https://www.corriente-alterna.com/img/img-default-ca.png',
             email: 'info@corriente-alterna.com',
             phone: '353 110 1895'
 

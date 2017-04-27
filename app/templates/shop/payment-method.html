@@ -103,8 +103,8 @@
             </div>
             <div class="col-md-12 text-center" style="margin-top: 20px">
                 <div class="col-md-6"><a href="" ui-sref="shopcart">Regresar al carrito</a></div>
-                <div class="col-md-6">
-                    <button class="btn btn-cart" ui-sref="checkout">Continuar</button>
+                <div class="col-md-6" ng-controller="ShopCartCtrl as Shop">
+                    <button class="btn btn-cart" ng-click="Shop.createOrder()">Continuar</button>
                 </div>
             </div>
         </div>
