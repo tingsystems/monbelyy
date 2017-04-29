@@ -10,7 +10,7 @@
         self.params = {};
         self.branchOffice = '';
         self.items = $localStorage.items ? $localStorage.items : [];
-        self.store = $localStorage.appData.user.branchOffices[0];
+        self.defaultbranchOffice = '';
         self.customer = $localStorage.appData.user.customer;
         self.email = $localStorage.appData.user.email;
         self.customerName = $localStorage.appData.user.firstName;
@@ -24,19 +24,22 @@
         self.tax = false;
         self.taxInverse = false;
 
-        // get default branch office
-        /*self.getDefaulBranchOffice = function () {
-         if (!user.branchOffices)
-         return
-         self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
-         self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
-         self.branchOffices = user.branchOffices;
-         $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
-         cnsole.log(self.defaultbranchOffice.name);
-         return self.defaultbranchOffice;
-
-         };
-         self.getDefaulBranchOffice();*/
+        if ($auth.isAuthenticated()) {
+            // get default branch office
+            self.getDefaulBranchOffice = function () {
+                console.log(user.branchOffices);
+                if (!user.branchOffices)
+                    return;
+                self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+                self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+                console.log(self.defaultWarehouse);
+                self.branchOffices = user.branchOffices;
+                $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+                console.log(self.defaultbranchOffice.name);
+                return self.defaultbranchOffice;
+            };
+            self.getDefaulBranchOffice();
+        }
 
         self.setItem = function (item, qty) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
@@ -141,7 +144,7 @@
 
                 });
                 CartsSrv.save({
-                    items: items, store: self.store, customer: self.customer,
+                    items: items, store: self.defaultbranchOffice.id, customer: self.customer,
                     customerName: self.customerName,
                     customerEmail: self.email,
                     itemCount: self.itemCount
@@ -157,31 +160,9 @@
             }
         };
 
-        self.createOrder = function () {
-            //self.promoTotal = $localStorage.promoTotal;
-            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
-            var params = {metadata: {taxInverse: false}};
-            params.kind = 'order';
-            params.orderStatus = 0;
-            params.paymentType = 0;
-            params.isPaid = 2;
-            params.warehouse = 11;
-            params.itemCount = self.itemCount;
-            params.store = self.store;
-            params.customer = self.customer;
-            params.cartId = $localStorage.cart.id;
-            //params.warehouse = self.defaultWarehouse.id;
-
-            OrderSrv.save(params).$promise.then(function (data) {
-                console.log(data);
-                console.log(params);
-            });
-            $state.go('checkout');
-        };
-
     }
 
-    function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope) {
+    function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
         var self = this;
         var user = $localStorage.appData.user;
         self.params = {};
@@ -189,7 +170,7 @@
         self.formData = {};
         self.idUser = $localStorage.appData.user.customer;
         self.items = $localStorage.items ? $localStorage.items : [];
-        self.store = $localStorage.appData.user.branchOffices[0];
+        //self.store = $localStorage.appData.user.branchOffices[0];
         self.customer = $localStorage.appData.user.customer;
         self.email = $localStorage.appData.user.email;
         self.customerName = $localStorage.appData.user.firstName;
@@ -200,9 +181,27 @@
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
         $rootScope.idUser = self.idUser;
+        $rootScope.defaultbranchOffice = '';
         self.tax = false;
         self.taxInverse = false;
         self.saveAddressNew = false;
+
+        // get default branch office
+        self.getDefaulBranchOffice = function () {
+            console.log(user.branchOffices);
+            if (!user.branchOffices)
+                return;
+            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+            console.log("brnc", self.defaultbranchOffice);
+            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+            console.log(self.defaultWarehouse);
+            self.branchOffices = user.branchOffices;
+            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+            console.log(self.defaultbranchOffice.name);
+            return self.defaultbranchOffice;
+
+        };
+        self.getDefaulBranchOffice();
 
 
         self.createOrder = function () {
@@ -213,12 +212,35 @@
             params.orderStatus = 0;
             params.paymentType = 0;
             params.isPaid = 2;
-            params.warehouse = 11;
             params.itemCount = self.itemCount;
-            params.store = self.store;
+            params.store = self.defaultbranchOffice.id;
             params.customer = self.customer;
             params.cartId = $localStorage.cart.id;
-            //params.warehouse = self.defaultWarehouse.id;
+            params.warehouse = self.defaultWarehouse.id;
+            params.employee = $localStorage.appData.user.id;
+
+            console.log('Wareho', self.defaultWarehouse.id);
+
+
+            if (self.taxInverse) {
+                params.taxTotal = self.taxTotal2;
+            }
+            else {
+                params.taxTotal = self.taxTotal;
+            }
+            if (self.taxInverse) {
+                params.subTotal = self.subTotal3;
+            }
+            else {
+                params.subTotal = self.subTotal2;
+                params.metadata.taxInverse = false;
+            }
+            if (self.taxInverse) {
+                params.total = self.total2;
+            }
+            else {
+                params.total = self.total;
+            }
 
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
@@ -454,7 +476,7 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', 'OrderSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$stateParams'];
-    OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope'];
 
 })();

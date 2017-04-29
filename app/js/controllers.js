@@ -461,7 +461,7 @@
                 taxonomies: self.category.slug,
                 isActive: 'True',
                 pageSize: 9,
-                fields: 'attachments,description,name,price,id,slug',
+                fields: 'id,attachments,description,name,price,slug',
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
