@@ -471,12 +471,10 @@
     angular.module('shop.controllers', ['shop.services'])
         .controller('ShopCartCtrl', ShopCartCtrl)
         .controller('PaymentCtrl', PaymentCtrl)
-        .controller('OrderCtrl', OrderCtrl);
-
+        .controller('OrderCtrl', OrderCtrl)
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', 'OrderSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$stateParams'];
-
 })();

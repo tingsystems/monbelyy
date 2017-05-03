@@ -46,6 +46,18 @@
                         controller: 'PaymentCtrl'
                     }
                 }
+            })
+            .state('sale', {
+                url: '/history/sales',
+                data: {
+                    requiredLogin : true,
+                    pageTitle: 'Compras - Corriente Alterna'
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/history-sales.html'
+                    }
+                }
             });
 
     }

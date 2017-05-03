@@ -10,9 +10,7 @@
         self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault ;
         $rootScope.user = $localStorage.appData.user;
 
-
         self.processing = false;
-
 
         // Logic for save the session
         self.saveSession = function (response) {
@@ -377,26 +375,68 @@
         };
     }
 
-    function ProfileCtrl(CustomerSrv, StateSrv, $localStorage, $rootScope, $stateParams) {
+    function ProfileCtrl(CustomerSrv, StateSrv, NotificationSrv, $localStorage, $rootScope, $stateParams, $state) {
+        var self = this;
+
         self.formData = {};
+        self.profileData = {};
         self.busy = false;
         self.create = true;
         self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
+        $rootScope.user = $localStorage.appData.user;
         self.idUser = $localStorage.appData.user.customer;
 
-        CustomerSrv.get({id : idUser}).$promise.then(function (data) {
-            self.customer = data;
-        },function (error) {
-
+        // get all the states
+        self.busyState = true;
+        StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+            self.states = data;
+            self.busyState = false;
+        }, function (error) {
+            self.busyState = false;
         });
 
+        self.getCitiesByState = function (state_id) {
+            if (!state_id) {
+                self.city = null;
+                self.cities = [];
+                return
+            }
+            self.busyCity = true;
+            StateSrv.getCities({state: state_id, ordering: 'name'}).$promise.then(function (response) {
+                self.cities = response;
+                self.busyCity = false;
+            }, function (error) {
+                self.busyCity = false;
+            });
+        };
+
+        var updateCustomer = function () {
+            var profileData = angular.copy(self.profileData);
+            self.busy = true;
+            CustomerSrv.update({id: self.idUser}, profileData).$promise.then(function (response) {
+                self.busy = false;
+                NotificationSrv.success('Información personal actualizada correctamente');
+                $state.go('dashboard');
+            }, function (error) {
+                angular.forEach(error, function (value, key) {
+                    NotificationSrv.error(key + ' ' + value);
+                });
+                self.busy = false;
+            });
+        };
+
+        self.submitForm = function () {
+           updateCustomer();
+        };
+
         self.getCustomer = function () {
-            CustomerSrv.get({id: idUser}).$promise.then(function (data) {
-                self.formData = data;
+            CustomerSrv.get({id: self.idUser}).$promise.then(function (data) {
+                self.profileData = data;
+                console.log(self.profileData);
                 self.create = false;
-                if (self.formData.state)
+                if (self.profileData.state)
                     StateSrv.getCities({
-                        state: self.formData.state,
+                        state: self.profileData.state,
                         ordering: 'name'
                     }).$promise.then(function (response) {
                         self.cities = response;
@@ -410,6 +450,72 @@
 
     }
 
+    function SalesListCtrl(OrderSrv, NotificationSrv, NgTableParams, $timeout, $rootScope, $localStorage) {
+
+        var self = this;
+        var timeout = $timeout;
+        self.formData = {};
+        self.searchTerm = '';
+        self.params = {};
+        self.sales = [];
+        self.create = false;
+        self.busy = false;
+        self.initialState = function () {
+        };
+
+        self.user = $localStorage.appData.user ? $localStorage.appData.user : {};
+        $rootScope.user = $localStorage.appData.user;
+        self.idUser = $localStorage.appData.user.customer;
+
+        self.globalSearch = function () {
+            // Cancels a task associated with the promise
+            $timeout.cancel(timeout);
+            // Get the products after half second
+            timeout = $timeout(function () {
+                self.tableParams.page(1);
+                self.tableParams.reload();
+            }, 500);
+        };
+
+        self.getData = function (params) {
+            console.log("HOla");
+            var sorting = '-createdAt';
+            // parser for ordering params
+            angular.forEach(params.sorting(), function (value, key) {
+                sorting = value === 'desc' ? '-' + key : key;
+            });
+
+            self.params.page = params.page();
+            self.params.pageSize = params.count();
+            self.params.ordering = sorting;
+            self.params.search = self.searchTerm;
+
+            OrderSrv.get(self.params).$promise.then(function(data){
+                self.sales = data.results;
+            }, function(error) {
+                angular.forEach(error, function (value, key) {
+                    NotificationSrv.error(value + '' + key);
+                })
+            });
+        };
+
+        self.tableParams = new NgTableParams({
+            // default params
+            page: 1, // The page number to show
+            count: 10 // The number of items to show per page
+        }, {
+            // default settings
+            // page size buttons (right set of buttons in demo)
+            //counts: [],
+            // determines the pager buttons (left set of buttons in demo)
+            paginationMaxBlocks: 13,
+            paginationMinBlocks: 2,
+            getData: self.getData
+        });
+
+    }
+
+
     // create the module and assign controllers
     angular.module('auth.controllers', ['auth.services'])
         .controller('AccessCtrl', AccessCtrl)
@@ -417,7 +523,8 @@
         .controller('ValidAccountCtrl', ValidAccountCtrl)
         .controller('AddressCtrl', AddressCtrl)
         .controller('AddressListCtrl', AddressListCtrl)
-        .controller('ProfileCtrl', ProfileCtrl);
+        .controller('ProfileCtrl', ProfileCtrl)
+        .controller('SalesListCtrl', SalesListCtrl);
 
 
     // inject dependencies to controllers
@@ -426,5 +533,6 @@
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
-    ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', '$localStorage', '$rootScope', '$stateParams'];
+    ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state'];
+    SalesListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
 })();

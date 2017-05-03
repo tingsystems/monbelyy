@@ -5,7 +5,7 @@
         $stateProvider
             .state('register', {
                 url: '/login',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: {pageTitle: 'Corriente Alterna'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
@@ -16,7 +16,7 @@
             })
             .state('success', {
                 url: '/account/success',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: {pageTitle: 'Corriente Alterna'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/validate_account.html'
@@ -25,7 +25,7 @@
             })
             .state('validate', {
                 url: '/validate/:token',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: {pageTitle: 'Corriente Alterna'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/account_activated.html',
@@ -37,7 +37,7 @@
             .state('dashboard', {
                 url: '/account/dashboard',
                 data: {
-                    requiredLogin : true,
+                    requiredLogin: true,
                     pageTitle: 'Corriente Alterna'
                 },
                 views: {
@@ -47,20 +47,22 @@
                 }
             })
             .state('sales', {
-                url: '/account/sales',
+                url: '/account/history-sales',
                 data: {
-                    requiredLogin : true
+                    requiredLogin: true
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/history-sales.html'
+                        templateUrl: '/templates/auth/history-sales.html',
+                        controllerAs: 'Sale',
+                        controller: 'SalesListCtrl'
                     }
                 }
             })
             .state('profile', {
                 url: '/account/profile',
                 data: {
-                    requiredLogin : true,
+                    requiredLogin: true,
                     pageTitle: 'Perfil - Corriente Alterna'
                 },
                 views: {
@@ -74,7 +76,7 @@
             .state('address', {
                 url: '/account/addresses',
                 data: {
-                    requiredLogin : true,
+                    requiredLogin: true,
                     pageTitle: 'Direcciones - Corriente Alterna'
                 },
                 views: {
@@ -88,7 +90,7 @@
             .state('address-add', {
                 url: '/account/address',
                 data: {
-                    requiredLogin : true,
+                    requiredLogin: true,
                     pageTitle: 'Direcciones - Corriente Alterna'
                 },
                 views: {
@@ -102,7 +104,7 @@
             .state('address-update', {
                 url: '/account/address/update/:id',
                 data: {
-                    requiredLogin : true,
+                    requiredLogin: true,
                     pageTitle: 'Direcciones - Corriente Alterna'
                 },
                 views: {
@@ -113,7 +115,6 @@
                     }
                 }
             })
-
     }
 
     angular.module('auth.app', ['ui.router', 'auth.controllers','ngMessages'])
