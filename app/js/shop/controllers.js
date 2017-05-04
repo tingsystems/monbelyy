@@ -308,10 +308,13 @@
                 exp_year: '',
                 exp_month: '',
                 cvc: null
-            }
+            },
+            email: self.email,
+            amount: $localStorage.total,
+            items: $localStorage.items
         };
 
-        var publishKey = $rootScope.currentKey;
+        var publishKey = 'key_B34Yd1rcLM2Pyxpg';
         var setPublishableKey = function () {
             Conekta.setLanguage('es');
             Conekta.setPublishableKey(publishKey);
@@ -342,11 +345,12 @@
                 email: self.email,
                 items: $localStorage.items,
                 amount: $localStorage.total,
-                shop: self.store,
-                kind: 'card_payment'
+                shop: self.store
+                //kind: 'card_payment'
                 /*production: self.charge.production,
                 installments: self.charge.production.installments ? self.charge.production.installments : 0*/
             };
+            console.log(params);
            /* ChargeSrv.save(params).$promise.then(function (response) {
                 NotificationSrv.success('Cargo creado correctamente!');
                 $localStorage.items = [];
@@ -359,7 +363,7 @@
                     NotificationSrv.error(value);
                 });
             });*/
-           console.log(params);
+
         };
 
         /*if ($stateParams.id) {
