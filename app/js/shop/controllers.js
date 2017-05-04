@@ -303,11 +303,11 @@
         self.busyCard = false;
         self.payment = {
             'card': {
-                'number': null,
-                'name': '',
-                'exp_year': '',
-                'exp_month': '',
-                'cvc': null
+                number: null,
+                name: '',
+                exp_year: '',
+                exp_month: '',
+                cvc: null
             }
         };
 
@@ -343,11 +343,11 @@
                 items: $localStorage.items,
                 amount: $localStorage.total,
                 shop: self.store,
-                kind: 'card_payment',
-                production: self.charge.production,
-                installments: self.charge.production.installments ? self.charge.production.installments : 0
+                kind: 'card_payment'
+                /*production: self.charge.production,
+                installments: self.charge.production.installments ? self.charge.production.installments : 0*/
             };
-            ChargeSrv.save(params).$promise.then(function (response) {
+           /* ChargeSrv.save(params).$promise.then(function (response) {
                 NotificationSrv.success('Cargo creado correctamente!');
                 $localStorage.items = [];
                 $localStorage.total = 0;
@@ -358,10 +358,11 @@
                 angular.forEach(data.data, function (value, key) {
                     NotificationSrv.error(value);
                 });
-            });
+            });*/
+           console.log(params);
         };
 
-        if ($stateParams.id) {
+        /*if ($stateParams.id) {
             self.busy = true;
             var params = {
                 id: $stateParams.id,
@@ -373,28 +374,7 @@
             }, function (error) {
                 self.busy = false;
             });
-        }
-
-        var successResponseHandlerSharePay = function (token) {
-            var charge = angular.copy(self.charge);
-            // update charge
-            charge.brand = Conekta.card.getBrand(self.payment.card.number);
-            charge.cardholder = self.payment.card.name;
-            charge.authCode = token.id;
-            charge.phone = self.payment.phone;
-            charge.email = self.payment.email;
-            charge.shop = self.charge.shop.id;
-
-            ChargeSrv.checkout({id: $stateParams.id}, charge).$promise.then(function (response) {
-                NotificationSrv.success('Pago realizado correctamente!');
-                $state.go('checkout.success');
-            }, function (data) {
-                self.busyCard = false;
-                angular.forEach(data.data, function (value, key) {
-                    NotificationSrv.error(value);
-                });
-            });
-        };
+        }*/
 
         var errorResponseHandler = function (error) {
             var deferred = $q.defer();
@@ -408,11 +388,6 @@
         self.processPayment = function () {
             self.busyCard = true;
             Conekta.token.create(self.payment, successResponseHandler, errorResponseHandler);
-        };
-
-        self.processSharePayPayment = function () {
-            self.busyCard = true;
-            Conekta.token.create(self.payment, successResponseHandlerSharePay, errorResponseHandler);
         };
 
         self.cancelPayment = function () {
@@ -471,7 +446,7 @@
     angular.module('shop.controllers', ['shop.services'])
         .controller('ShopCartCtrl', ShopCartCtrl)
         .controller('PaymentCtrl', PaymentCtrl)
-        .controller('OrderCtrl', OrderCtrl)
+        .controller('OrderCtrl', OrderCtrl);
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', 'OrderSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
