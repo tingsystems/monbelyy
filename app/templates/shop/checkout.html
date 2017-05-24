@@ -120,6 +120,7 @@
                                         <p>Luego de hacer clic en "Finalizar el pedido", serás
                                             redirigido a PayPal para completar tu compra de forma segura.</p>
                                     </div>
+                                    <button ng-if="Payment.paypal" class="btn btn-cart" ui-sref="checkout">Finalizar el pedido</button>
                                 </div>
                             </div>
                         </div>
@@ -137,10 +138,11 @@
                             <div class="panel-body">
                                 <div class="row text-center">
                                     <div class="col-md-12">
-                                        <p>No. Cuenta: 874767446763746776 | Bancomer</p>
-                                        <span>Despues de relizar el deposito, porfavor ponte en contacto
-                                        con Corriente Alterna para finalizar su compra y realizar el envío.</span>
+                                        <p>Haz click en el boton "Finalizar compra", para obtener el número de cuenta.
+                                            Después de realizar el depósito, por favor ponte en contacto
+                                            con Corriente Alterna para finalizar su compra y realizar el envío.</p>
                                     </div>
+                                    <button ng-if="Payment.depositBank" class="btn btn-cart" >Finalizar compra</button>
                                 </div>
                             </div>
                         </div>
@@ -148,9 +150,8 @@
                 </div>
             </div>
             <div class="col-md-12 text-center" style="margin-top: 20px">
-                <div class="col-md-6"><a href="">Volver a forma de envío</a></div>
+                <div class="col-md-6"><a href="">Volver a dirección de envío</a></div>
                 <div class="col-md-6">
-                    <button ng-if="Payment.paypal" class="btn btn-cart" ui-sref="checkout">Finalizar el pedido</button>
                     <!--<button ng-if="Payment.depositBank" class="btn btn-cart" ui-sref="checkout">Finalizar compra</button>-->
                 </div>
             </div>

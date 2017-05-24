@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    function ShopCartCtrl(CartsSrv, OrderSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
+    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
         var self = this;
         var user = $localStorage.appData.user;
         self.params = {};
@@ -27,15 +27,12 @@
         if ($auth.isAuthenticated()) {
             // get default branch office
             self.getDefaulBranchOffice = function () {
-                console.log(user.branchOffices);
                 if (!user.branchOffices)
                     return;
                 self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
                 self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
-                console.log(self.defaultWarehouse);
                 self.branchOffices = user.branchOffices;
                 $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
-                console.log(self.defaultbranchOffice.name);
                 return self.defaultbranchOffice;
             };
             self.getDefaulBranchOffice();
@@ -149,138 +146,44 @@
                     customerEmail: self.email,
                     itemCount: self.itemCount
                 }).$promise.then(function (data) {
-                    console.log("Carrito", data.id)
+                    console.log("Carrito", data.id);
                     self.cart = data;
                     $localStorage.cart = self.cart;
                     NotificationSrv.success("Pedido realizado correctamente");
                     //self.clearCart();
                     $rootScope.items = 0;
                 });
-                $state.go('payment-method');
+                $state.go('shipping-address');
             }
         };
 
     }
 
-    function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
+    function ShippingAddressCtrl(AddressSrv, $localStorage, $rootScope, NotificationSrv) {
         var self = this;
         var user = $localStorage.appData.user;
-        self.params = {};
         self.branchOffice = '';
-        self.formData = {};
-        self.idUser = $localStorage.appData.user.customer;
+        self.params = [];
+        self.formDataShip = {};
         self.items = $localStorage.items ? $localStorage.items : [];
-        //self.store = $localStorage.appData.user.branchOffices[0];
+        self.defaultbranchOffice = '';
         self.customer = $localStorage.appData.user.customer;
-        self.email = $localStorage.appData.user.email;
-        self.customerName = $localStorage.appData.user.firstName;
         self.total = $localStorage.total;
         $localStorage.items = self.items;
         self.items = $localStorage.items;
-        self.itemCount = self.items.length;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
-        $rootScope.idUser = self.idUser;
-        $rootScope.defaultbranchOffice = '';
-        self.tax = false;
-        self.taxInverse = false;
-        self.saveAddressNew = false;
 
-        // get default branch office
-        self.getDefaulBranchOffice = function () {
-            console.log(user.branchOffices);
-            if (!user.branchOffices)
-                return;
-            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
-            console.log("brnc", self.defaultbranchOffice);
-            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
-            console.log(self.defaultWarehouse);
-            self.branchOffices = user.branchOffices;
-            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
-            console.log(self.defaultbranchOffice.name);
-            return self.defaultbranchOffice;
+        self.params.customer = self.customer;
 
-        };
-        self.getDefaulBranchOffice();
-
-
-        self.createOrder = function () {
-            //self.promoTotal = $localStorage.promoTotal;
-            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
-            var params = {metadata: {taxInverse: false}};
-            params.kind = 'order';
-            params.orderStatus = 0;
-            params.paymentType = 0;
-            params.isPaid = 2;
-            params.itemCount = self.itemCount;
-            params.store = self.defaultbranchOffice.id;
-            params.customer = self.customer;
-            params.cartId = $localStorage.cart.id;
-            params.warehouse = self.defaultWarehouse.id;
-            params.employee = $localStorage.appData.user.id;
-
-            console.log('Wareho', self.defaultWarehouse.id);
-
-
-            if (self.taxInverse) {
-                params.taxTotal = self.taxTotal2;
-            }
-            else {
-                params.taxTotal = self.taxTotal;
-            }
-            if (self.taxInverse) {
-                params.subTotal = self.subTotal3;
-            }
-            else {
-                params.subTotal = self.subTotal2;
-                params.metadata.taxInverse = false;
-            }
-            if (self.taxInverse) {
-                params.total = self.total2;
-            }
-            else {
-                params.total = self.total;
-            }
-
-            OrderSrv.save(params).$promise.then(function (data) {
-                console.log(data);
-                console.log(params);
-            });
-            $state.go('checkout');
-        };
-
-        var createAddress = function () {
-            var address = angular.copy(self.formData);
-            address.customer = self.idUser;
-            self.busy = true;
-            AddressSrv.save(address).$promise.then(function (data) {
-                self.busy = false;
-                self.formData = {};
-            }, function (error) {
-                angular.forEach(error.data, function (key, value) {
-                    NotificationSrv.error(key, value);
-                    self.busy = false;
-                })
-            })
-        };
-
-        self.shippingProcess = function () {
-            console.log("Proceso de envio iniciado");
-            if(self.saveAddressNew){
-                createAddress();
-            }
-            console.log(self.saveAddressNew);
-
-        };
-
-
-
-        AddressSrv.query().$promise.then(function (data) {
+        AddressSrv.get(self.params).$promise.then(function (data) {
             self.addresses = data;
-
         }, function (error) {
-            NotificationSrv.error("Error");
+            angular.forEach(error, function(key, value){
+                NotificationSrv.error("Error", value);
+            });
         });
+
 
     }
 
@@ -446,14 +349,132 @@
 
     }
 
+    function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
+        var self = this;
+        var user = $localStorage.appData.user;
+        self.params = {};
+        self.branchOffice = '';
+        self.formData = {};
+        self.idUser = $localStorage.appData.user.customer;
+        self.items = $localStorage.items ? $localStorage.items : [];
+        //self.store = $localStorage.appData.user.branchOffices[0];
+        self.customer = $localStorage.appData.user.customer;
+        self.email = $localStorage.appData.user.email;
+        self.customerName = $localStorage.appData.user.firstName;
+        self.total = $localStorage.total;
+        $localStorage.items = self.items;
+        self.items = $localStorage.items;
+        self.itemCount = self.items.length;
+        $localStorage.total = self.total;
+        $rootScope.items = $localStorage.items;
+        $rootScope.idUser = self.idUser;
+        $rootScope.defaultbranchOffice = '';
+        self.tax = false;
+        self.taxInverse = false;
+        self.saveAddressNew = false;
+
+        // get default branch office
+        self.getDefaulBranchOffice = function () {
+            if (!user.branchOffices)
+                return;
+            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+            self.branchOffices = user.branchOffices;
+            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+            return self.defaultbranchOffice;
+
+        };
+        self.getDefaulBranchOffice();
+
+
+        self.createOrder = function () {
+            //self.promoTotal = $localStorage.promoTotal;
+            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
+            var params = {metadata: {taxInverse: false}};
+            params.kind = 'order';
+            params.orderStatus = 0;
+            params.paymentType = 0;
+            params.isPaid = 2;
+            params.itemCount = self.itemCount;
+            params.store = self.defaultbranchOffice.id;
+            params.customer = self.customer;
+            params.cartId = $localStorage.cart.id;
+            params.warehouse = self.defaultWarehouse.id;
+            params.employee = $localStorage.appData.user.id;
+
+            console.log('Wareho', self.defaultWarehouse.id);
+
+
+            if (self.taxInverse) {
+                params.taxTotal = self.taxTotal2;
+            }
+            else {
+                params.taxTotal = self.taxTotal;
+            }
+            if (self.taxInverse) {
+                params.subTotal = self.subTotal3;
+            }
+            else {
+                params.subTotal = self.subTotal2;
+                params.metadata.taxInverse = false;
+            }
+            if (self.taxInverse) {
+                params.total = self.total2;
+            }
+            else {
+                params.total = self.total;
+            }
+
+            OrderSrv.save(params).$promise.then(function (data) {
+                console.log(data);
+                console.log(params);
+            });
+            $state.go('checkout');
+        };
+
+        var createAddress = function () {
+            var address = angular.copy(self.formData);
+            address.customer = self.idUser;
+            self.busy = true;
+            AddressSrv.save(address).$promise.then(function (data) {
+                self.busy = false;
+                self.formData = {};
+            }, function (error) {
+                angular.forEach(error.data, function (key, value) {
+                    NotificationSrv.error(key, value);
+                    self.busy = false;
+                })
+            })
+        };
+
+        self.shippingProcess = function () {
+            console.log("Proceso de envio iniciado");
+            if(self.saveAddressNew){
+                createAddress();
+            }
+            console.log(self.saveAddressNew);
+
+        };
+
+        AddressSrv.query().$promise.then(function (data) {
+            self.addresses = data;
+
+        }, function (error) {
+            NotificationSrv.error("Error");
+        });
+
+    }
+
 // create the module and assign controllers
     angular.module('shop.controllers', ['shop.services'])
         .controller('ShopCartCtrl', ShopCartCtrl)
+        .controller('ShippingAddressCtrl', ShippingAddressCtrl)
         .controller('PaymentCtrl', PaymentCtrl)
         .controller('OrderCtrl', OrderCtrl);
 
     // inject dependencies to controllers
-    ShopCartCtrl.$inject = ['CartsSrv', 'OrderSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    ShippingAddressCtrl.$inject = ['AddressSrv', '$localStorage', '$rootScope', 'NotificationSrv'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$stateParams'];
 })();

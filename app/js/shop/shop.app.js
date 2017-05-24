@@ -14,36 +14,25 @@
                     }
                 }
             })
-            .state('payment-method', {
+            .state('shipping-address', {
                 url: '/shipping/address',
                 data: { pageTitle: 'Datos de envío' },
                 views: {
                     'content': {
-                        templateUrl: '/templates/shop/payment-method.html',
-                        controllerAs: 'Payment',
-                        controller: 'OrderCtrl'
+                        templateUrl: '/templates/shop/shipping.html',
+                        controllerAs: 'Shipping',
+                        controller: 'ShippingAddressCtrl'
                     }
                 }
             })
-            /*.state('shipping', {
-                url: '/shipping/address',
-                data: { pageTitle: 'Proceso de envio' },
-                views: {
-                    'content': {
-                        templateUrl: '/templates/shop/shipping-address.html',
-                        controllerAs: 'Payment',
-                        controller: 'PaymentCtrl'
-                    }
-                }
-            })*/
             .state('checkout', {
                 url: '/shipping/checkout',
-                data: { pageTitle: 'Proceso de envio' },
+                data: { pageTitle: 'Método de pago' },
                 views: {
                     'content': {
                         templateUrl: '/templates/shop/checkout.html',
                         controllerAs: 'Payment',
-                        controller: 'PaymentCtrl'
+                        controller: 'OrderCtrl'
                     }
                 }
             })
