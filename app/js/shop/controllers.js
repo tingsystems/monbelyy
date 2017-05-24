@@ -159,12 +159,16 @@
 
     }
 
-    function ShippingAddressCtrl(AddressSrv, $localStorage, $rootScope, NotificationSrv) {
+    function ShippingAddressCtrl(AddressSrv, NotificationSrv, StateSrv, $localStorage, $rootScope, $state) {
         var self = this;
         var user = $localStorage.appData.user;
         self.branchOffice = '';
         self.params = [];
         self.formDataShip = {};
+        self.formData = {};
+        self.address = '';
+        self.busy = false;
+        self.addAddress = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.defaultbranchOffice = '';
         self.customer = $localStorage.appData.user.customer;
@@ -176,15 +180,75 @@
 
         self.params.customer = self.customer;
 
-        AddressSrv.get(self.params).$promise.then(function (data) {
+        console.log(self.formDataShip);
+
+        self.selectedAddress = function () {
+            console.log(self.address);
+        };
+
+        AddressSrv.query().$promise.then(function (data) {
             self.addresses = data;
         }, function (error) {
-            angular.forEach(error, function(key, value){
+            angular.forEach(error, function (key, value) {
                 NotificationSrv.error("Error", value);
             });
         });
 
+        self.saveShippingAddress = function () {
+            console.log(self.address);
+            if (!self.address) {
+                console.log("nueva");
+                newShippingAddress();
+            } else {
+                console.log(self.address);
+                console.log("Exxistente");
+                $localStorage.appData.user.address = self.address;
+                $state.go('checkout');
+            }
+        };
 
+        var newShippingAddress = function () {
+            console.log("Nueva direccion, agregada");
+            var address = angular.copy(self.formData);
+            address.customer = self.customer;
+            self.busy = true;
+            AddressSrv.save(address).$promise.then(function (data) {
+                console.log(data);
+                NotificationSrv.success('Domicilio agregado correctamente');
+                self.busy = false;
+                self.formData = {};
+                //$state.go('address');
+            }, function (error) {
+                angular.forEach(error.data, function (key, value) {
+                    NotificationSrv.error(key, value);
+                    self.busy = false;
+                })
+            })
+        };
+
+        // get all the states
+        self.busyState = true;
+        StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+            self.states = data;
+            self.busyState = false;
+        }, function (error) {
+            self.busyState = false;
+        });
+
+        self.getCitiesByState = function (state_id) {
+            if (!state_id) {
+                self.city = null;
+                self.cities = [];
+                return
+            }
+            self.busyCity = true;
+            StateSrv.getCities({state: state_id, ordering: 'name'}).$promise.then(function (response) {
+                self.cities = response;
+                self.busyCity = false;
+            }, function (error) {
+                self.busyCity = false;
+            });
+        };
     }
 
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $stateParams) {
@@ -251,37 +315,37 @@
                 shop: self.store
                 //kind: 'card_payment'
                 /*production: self.charge.production,
-                installments: self.charge.production.installments ? self.charge.production.installments : 0*/
+                 installments: self.charge.production.installments ? self.charge.production.installments : 0*/
             };
             console.log(params);
-           /* ChargeSrv.save(params).$promise.then(function (response) {
-                NotificationSrv.success('Cargo creado correctamente!');
-                $localStorage.items = [];
-                $localStorage.total = 0;
-                $localStorage.shipmentPrice = 0;
-                $state.go('app.dashboard');
-            }, function (data) {
-                self.busyCard = false;
-                angular.forEach(data.data, function (value, key) {
-                    NotificationSrv.error(value);
-                });
-            });*/
+            /* ChargeSrv.save(params).$promise.then(function (response) {
+             NotificationSrv.success('Cargo creado correctamente!');
+             $localStorage.items = [];
+             $localStorage.total = 0;
+             $localStorage.shipmentPrice = 0;
+             $state.go('app.dashboard');
+             }, function (data) {
+             self.busyCard = false;
+             angular.forEach(data.data, function (value, key) {
+             NotificationSrv.error(value);
+             });
+             });*/
 
         };
 
         /*if ($stateParams.id) {
-            self.busy = true;
-            var params = {
-                id: $stateParams.id,
-                fields: 'id,createdAt,kind,status,message,amount,items,client,shop'
-            };
-            ChargeSrv.checkoutGet(params).$promise.then(function (data) {
-                self.charge = data;
-                self.busy = false;
-            }, function (error) {
-                self.busy = false;
-            });
-        }*/
+         self.busy = true;
+         var params = {
+         id: $stateParams.id,
+         fields: 'id,createdAt,kind,status,message,amount,items,client,shop'
+         };
+         ChargeSrv.checkoutGet(params).$promise.then(function (data) {
+         self.charge = data;
+         self.busy = false;
+         }, function (error) {
+         self.busy = false;
+         });
+         }*/
 
         var errorResponseHandler = function (error) {
             var deferred = $q.defer();
@@ -449,7 +513,7 @@
 
         self.shippingProcess = function () {
             console.log("Proceso de envio iniciado");
-            if(self.saveAddressNew){
+            if (self.saveAddressNew) {
                 createAddress();
             }
             console.log(self.saveAddressNew);
@@ -474,7 +538,7 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
-    ShippingAddressCtrl.$inject = ['AddressSrv', '$localStorage', '$rootScope', 'NotificationSrv'];
+    ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$stateParams'];
 })();

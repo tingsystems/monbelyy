@@ -1,18 +1,18 @@
 <div id="content-area">
     <div class="container">
         <div class="col-md-6 address-form">
-            <div class="col-md-12 select-address" style="margin-bottom: 20px" ng-if="idUser">
-                <h3><a href="" ng-click="Shipping.showAddress=!Shipping.showAddress"><i class="fa fa-address-card"></i></a> Seleccionar dirección existente</h3>
-                <ng-include ng-if="Shipping.showAddress" src="'/templates/shop/shipping-address.html'"></ng-include>
+            <div class="col-md-12 select-address" style="margin-bottom: 20px">
+                <h3><a href="" ng-click="Payment.showAddress=!Payment.showAddress"><i class="fa fa-address-card"></i></a> Seleccionar dirección existente</h3>
+                <ng-include ng-if="Payment.showAddress" src="'/templates/shop/shipping-address.html'"></ng-include>
             </div>
             <div class="col-md-12">
                 <h3><i class="fa fa-paper-plane"></i> Nueva direccíon de envío</h3>
-                <form action="" class="form-horizontal" name="Form" novalidate ng-submit="Shipping.shippingProccess()">
+                <form class="form-horizontal" name="Form" novalidate>
                     <div class="col-md-6">
                         <div class="form-item">
                             <label for="state">Estado</label>
-                            <ui-select on-select="Address.getCitiesByState($model)"
-                                       title="Estado" ng-model="Address.formData.state"
+                            <ui-select on-select="Payment.getCitiesByState($model)"
+                                       title="Estado" ng-model="Payment.formData.state"
                                        name="states"
                                        id="state" required>
                                 <ui-select-match placeholder="Selecciona un Estado *..."
@@ -20,7 +20,7 @@
                                     {{$select.selected.name}}
                                 </ui-select-match>
                                 <ui-select-choices
-                                        repeat="state.id as state in Address.states | filter: {name: $select.search}">
+                                        repeat="state.id as state in Payment.states | filter: {name: $select.search}">
                                     <div ng-bind-html="state.name | highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
@@ -29,14 +29,14 @@
                     <div class="col-md-6">
                         <div class="form-item">
                             <label for="city">Ciudad</label>
-                            <ui-select ng-model="Address.formData.city" id="city" name="cities"
-                                       ng-required="Address.formData.state" ng-disabled="Address.busyCity"
+                            <ui-select ng-model="Payment.formData.city" id="city" name="cities"
+                                       ng-required="Payment.formData.state" ng-disabled="Payment.busyCity"
                                        title="Ciudad" required>
                                 <ui-select-match placeholder="Selecciona una Ciudad *..." allow-clear="true">
                                     {{$select.selected.name}}
                                 </ui-select-match>
                                 <ui-select-choices
-                                        repeat="city.id as city in Address.cities | filter: {name: $select.search}">
+                                        repeat="city.id as city in Payment.cities | filter: {name: $select.search}">
                                     <div ng-bind-html="city.name | highlight: $select.search"></div>
                                 </ui-select-choices>
                             </ui-select>
@@ -47,7 +47,7 @@
                         <div class="form-item"
                              ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
                             <label for="address">Dirección</label>
-                            <input ng-model="Address.formData.address" type="text"
+                            <input ng-model="Payment.formData.address" type="text"
                                    class="form-control" id="address" name="address"
                                    placeholder="Dirección"
                                    required>
@@ -60,7 +60,7 @@
                         <div class="form-item"
                              ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
                             <label for="neighborhood">Colonia</label>
-                            <input ng-model="Address.formData.neighborhood" type="text" class="form-control"
+                            <input ng-model="Payment.formData.neighborhood" type="text" class="form-control"
                                    id="neighborhood"
                                    name="neighborhood"
                                    placeholder="Colonia"
@@ -70,7 +70,7 @@
                     <div class="col-xs-12 col-md-4">
                         <div class="form-item" ng-class="{ 'has-error': Form.zip.$touched && Form.zip.$invalid }">
                             <label for="zip">Código Postal</label>
-                            <input ng-model="Address.formData.zip" type="text" ng-pattern="/^[0-9]{5}$/" maxlength="5"
+                            <input ng-model="Payment.formData.zip" type="text" ng-pattern="/^[0-9]{5}$/" maxlength="5"
                                    class="form-control" id="zip" name="zip"
                                    placeholder="Código Postal"
                                    required>
@@ -79,7 +79,7 @@
                     <div class="col-xs-12 col-md-6">
                         <div class="form-item" ng-class="{ 'has-error': Form.phone.$touched && Form.phone.$invalid }">
                             <label for="phone">Teléfono</label>
-                            <input ng-model="Address.formData.phone" type="text" maxlength="20" class="form-control"
+                            <input ng-model="Payment.formData.phone" type="text" maxlength="20" class="form-control"
                                    id="phone"
                                    name="phone"
                                    placeholder="Teléfono" required>
@@ -89,7 +89,7 @@
                     <div class="col-xs-12 col-md-6">
                         <div class="form-item" ng-class="{ 'has-error': Form.mobile.$touched && Form.mobile.$invalid }">
                             <label for="mobile">Celular</label>
-                            <input ng-model="Address.formData.mobile" type="text" ng-maxlength="20" class="form-control"
+                            <input ng-model="Payment.formData.mobile" type="text" ng-maxlength="20" class="form-control"
                                    id="mobile"
                                    name="mobile"
                                    placeholder="Celular" required>
@@ -105,7 +105,9 @@
             <div class="col-md-12 text-center" style="margin-top: 20px">
                 <div class="col-md-6"><a href="" ui-sref="shopcart">Regresar al carrito</a></div>
                 <div class="col-md-6">
-                    <button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>
+                    <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
+                    <button ng-if="Payment.address" class="btn btn-cart" type="submit" ng-disabled="!Payment.address" ng-click="Payment.saveShippingAddress()">Continuar</button>
+                    <button ng-if="!Form.$invalid" class="btn btn-cart" type="submit" ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar</button>
                 </div>
             </div>
         </div>

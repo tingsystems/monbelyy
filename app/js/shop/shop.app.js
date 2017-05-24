@@ -20,7 +20,7 @@
                 views: {
                     'content': {
                         templateUrl: '/templates/shop/shipping.html',
-                        controllerAs: 'Shipping',
+                        controllerAs: 'Payment',
                         controller: 'ShippingAddressCtrl'
                     }
                 }
