@@ -32,7 +32,7 @@
                     'content': {
                         templateUrl: '/templates/shop/checkout.html',
                         controllerAs: 'Payment',
-                        controller: 'OrderCtrl'
+                        controller: 'PaymentCtrl'
                     }
                 }
             })

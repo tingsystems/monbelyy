@@ -7,6 +7,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
+                                <input type="radio" value="3" name="paymentType"
+                                       ng-change="Payment.orderPaymentType"
+                                       ng-model="Payment.orderPaymentType">
                                 <a data-toggle="collapse" href=""
                                    ng-click="Payment.creditCard=!Payment.creditCard"><span
                                         class="fa fa-credit-card-alt">
@@ -107,6 +110,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
+                                <input type="radio" value="4" name="paymentType" ng-model="Payment.orderPaymentType">
                                 <a data-toggle="collapse" href="" ng-click="Payment.paypal=!Payment.paypal"><span
                                         class="fa fa-paypal">
                                                     </span> Pago con Paypal</a>
@@ -128,6 +132,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
+                                <input type="radio" value="6" name="paymentType" ng-model="Payment.orderPaymentType">
                                 <a data-toggle="collapse" href=""
                                    ng-click="Payment.depositBank=!Payment.depositBank"><span
                                         class="fa fa-university">
@@ -142,7 +147,7 @@
                                             Después de realizar el depósito, por favor ponte en contacto
                                             con Corriente Alterna para finalizar su compra y realizar el envío.</p>
                                     </div>
-                                    <button ng-if="Payment.depositBank" class="btn btn-cart" >Finalizar compra</button>
+                                    <button ng-if="Payment.depositBank" class="btn btn-cart" ng-click="Payment.createOrder()">Finalizar compra</button>
                                 </div>
                             </div>
                         </div>

@@ -182,10 +182,6 @@
 
         console.log(self.formDataShip);
 
-        self.selectedAddress = function () {
-            console.log(self.address);
-        };
-
         AddressSrv.query().$promise.then(function (data) {
             self.addresses = data;
         }, function (error) {
@@ -207,7 +203,7 @@
             }
         };
 
-        var newShippingAddress = function () {
+        self.newShippingAddress = function () {
             console.log("Nueva direccion, agregada");
             var address = angular.copy(self.formData);
             address.customer = self.customer;
@@ -217,7 +213,7 @@
                 NotificationSrv.success('Domicilio agregado correctamente');
                 self.busy = false;
                 self.formData = {};
-                //$state.go('address');
+                $state.go('checkout');
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
                     NotificationSrv.error(key, value);
@@ -251,8 +247,9 @@
         };
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $stateParams) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter) {
         var self = this;
+        var user = $localStorage.appData.user;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
         self.formDataPay = {};
@@ -263,8 +260,11 @@
         self.order = $localStorage.cart.id;
         self.store = $localStorage.appData.user.branchOffices[0];
         self.email = $localStorage.appData.user.email;
+        self.address = $localStorage.appData.user.address;
+        self.orderPaymentType = 0;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
+
         $rootScope.items = $localStorage.items;
         $rootScope.idUser = self.idUser;
         self.busyCard = false;
@@ -280,6 +280,19 @@
             amount: $localStorage.total,
             items: $localStorage.items
         };
+
+        // get default branch office
+        self.getDefaulBranchOffice = function () {
+            if (!user.branchOffices)
+                return;
+            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+            self.branchOffices = user.branchOffices;
+            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+            return self.defaultbranchOffice;
+
+        };
+        self.getDefaulBranchOffice();
 
         var publishKey = 'key_B34Yd1rcLM2Pyxpg';
         var setPublishableKey = function () {
@@ -411,6 +424,54 @@
             })
         };
 
+        console.log(self.orderPaymentType);
+
+        self.createOrder = function () {
+            //self.promoTotal = $localStorage.promoTotal;
+            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
+            var params = {metadata: {taxInverse: false}};
+            params.kind = 'order';
+            params.orderStatus = 1;
+            params.paymentType = parseInt(self.orderPaymentType);
+            params.isPaid = 2;
+            params.itemCount = self.itemCount;
+            params.store = self.defaultbranchOffice.id;
+            params.customer = self.customer;
+            params.cartId = $localStorage.cart.id;
+            params.warehouse = self.defaultWarehouse.id;
+            params.employee = $localStorage.appData.user.id;
+            params.destination = self.address;
+
+            console.log('Wareho', self.defaultWarehouse.id);
+
+
+            if (self.taxInverse) {
+                params.taxTotal = self.taxTotal2;
+            }
+            else {
+                params.taxTotal = self.taxTotal;
+            }
+            if (self.taxInverse) {
+                params.subTotal = self.subTotal3;
+            }
+            else {
+                params.subTotal = self.subTotal2;
+                params.metadata.taxInverse = false;
+            }
+            if (self.taxInverse) {
+                params.total = self.total2;
+            }
+            else {
+                params.total = self.total;
+            }
+
+            OrderSrv.save(params).$promise.then(function (data) {
+                console.log(data);
+                console.log(params);
+            });
+        };
+
+
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
@@ -540,5 +601,5 @@
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$stateParams'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter'];
 })();
