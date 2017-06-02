@@ -47,6 +47,17 @@
                         templateUrl: '/templates/auth/history-sales.html'
                     }
                 }
+            })
+            .state('purchase-completed', {
+                url: '/purchase/completed',
+                data: { pageTitle: 'Compra completada' },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/purchase-completed.html',
+                        controllerAs: 'Purchase',
+                        controller: 'PaymentCtrl'
+                    }
+                }
             });
 
     }

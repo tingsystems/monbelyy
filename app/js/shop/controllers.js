@@ -261,7 +261,7 @@
         self.store = $localStorage.appData.user.branchOffices[0];
         self.email = $localStorage.appData.user.email;
         self.address = $localStorage.appData.user.address;
-        self.orderPaymentType = 0;
+        self.orderPaymentType = '';
         $localStorage.items = self.items;
         $localStorage.total = self.total;
 
@@ -295,6 +295,7 @@
         self.getDefaulBranchOffice();
 
         var publishKey = 'key_B34Yd1rcLM2Pyxpg';
+        //var publishKey = $rootScope.currentKey;
         var setPublishableKey = function () {
             Conekta.setLanguage('es');
             Conekta.setPublishableKey(publishKey);
@@ -320,7 +321,7 @@
             var params = {
                 brand: Conekta.card.getBrand(self.payment.card.number),
                 cardholder: self.payment.card.name,
-                authCode: token.id,
+                token: token.id,
                 //phone: self.payment.phone,
                 email: self.email,
                 items: $localStorage.items,
@@ -330,7 +331,26 @@
                 /*production: self.charge.production,
                  installments: self.charge.production.installments ? self.charge.production.installments : 0*/
             };
+            console.log(token.id);
             console.log(params);
+
+            params.kind = 'order';
+            params.paymentType = parseInt(self.orderPaymentType);
+            params.itemCount = self.itemCount;
+            params.customer = self.customer;
+            params.cartId = $localStorage.cart.id;
+            params.warehouse = self.defaultWarehouse.id;
+            params.employee = $localStorage.appData.user.id;
+            params.destination = self.address;
+
+            params.orderStatus = 1;
+            params.isPaid = 0;
+            params.token = token.id;
+
+            OrderSrv.save(params).$promise.then(function (data) {
+                console.log(data);
+                $state.go('purchase-completed');
+            });
             /* ChargeSrv.save(params).$promise.then(function (response) {
              NotificationSrv.success('Cargo creado correctamente!');
              $localStorage.items = [];
@@ -407,11 +427,6 @@
             NotificationSrv.error("Error");
         });
 
-        self.selectedAddress = function () {
-            console.log(self.formDataPay);
-            console.log(self.addresses);
-        };
-
         self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
             CustomerSrv.save(purchase).$promise.then(function (data) {
@@ -423,8 +438,6 @@
                 });
             })
         };
-
-        console.log(self.orderPaymentType);
 
         self.createOrder = function () {
             //self.promoTotal = $localStorage.promoTotal;
@@ -442,8 +455,17 @@
             params.employee = $localStorage.appData.user.id;
             params.destination = self.address;
 
-            console.log('Wareho', self.defaultWarehouse.id);
 
+            if(params.paymentType===8){
+                params.orderStatus = 1;
+                params.isPaid = 0;
+                params.token = token.id;
+            };
+
+            if(params.paymentType===6){
+                params.orderStatus = 1;
+                params.isPaid = 2;
+            };
 
             if (self.taxInverse) {
                 params.taxTotal = self.taxTotal2;
@@ -467,7 +489,7 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
-                console.log(params);
+                $state.go('purchase-completed');
             });
         };
 

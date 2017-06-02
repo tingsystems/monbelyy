@@ -7,8 +7,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
-                                <input type="radio" value="3" name="paymentType"
-                                       ng-change="Payment.orderPaymentType"
+                                <input type="radio" value="8" name="paymentType"
+                                       ng-change="Payment.creditCard=!Payment.creditCard"
                                        ng-model="Payment.orderPaymentType">
                                 <a data-toggle="collapse" href=""
                                    ng-click="Payment.creditCard=!Payment.creditCard"><span
@@ -47,15 +47,19 @@
                                                         <div class="col-xs-12">
                                                             <div class="form-group">
                                                                 <label for="cardNumber">NÚMERO DE TARJETA</label>
-                                                                <div class="input-group">
+                                                                <div class="input-group" ng-init="Payment.card=1">
                                                                     <input type="text" class="form-control"
                                                                            ng-model="Payment.payment.card.number"
                                                                            name="cardNumber"
                                                                            id="cardNumber"
                                                                            placeholder="Número de tarjeta"
                                                                            required data-conekta="card[number]"/>
-                                                                    <span class="input-group-addon"><i
+                                                                    <span  class="input-group-addon"><i
                                                                             class="fa fa-credit-card"></i></span>
+                                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='4'" class="input-group-addon"><i
+                                                                            class="fa fa-cc-visa"></i></span>
+                                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='5'" class="input-group-addon"><i
+                                                                            class="fa fa-cc-mastercard"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -110,7 +114,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
-                                <input type="radio" value="4" name="paymentType" ng-model="Payment.orderPaymentType">
+                                <input type="radio" value="3" name="paymentType" ng-model="Payment.orderPaymentType">
                                 <a data-toggle="collapse" href="" ng-click="Payment.paypal=!Payment.paypal"><span
                                         class="fa fa-paypal">
                                                     </span> Pago con Paypal</a>
@@ -132,7 +136,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
-                                <input type="radio" value="6" name="paymentType" ng-model="Payment.orderPaymentType">
+                                <input type="radio" ng-change="Payment.depositBank=!Payment.bankDeposit" value="6" name="paymentType" ng-model="Payment.orderPaymentType">
                                 <a data-toggle="collapse" href=""
                                    ng-click="Payment.depositBank=!Payment.depositBank"><span
                                         class="fa fa-university">
