@@ -209,7 +209,7 @@
             address.customer = self.customer;
             self.busy = true;
             AddressSrv.save(address).$promise.then(function (data) {
-                console.log(data);
+                $localStorage.appData.user.address = data.id;
                 NotificationSrv.success('Domicilio agregado correctamente');
                 self.busy = false;
                 self.formData = {};

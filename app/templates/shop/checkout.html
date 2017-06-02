@@ -47,14 +47,14 @@
                                                         <div class="col-xs-12">
                                                             <div class="form-group">
                                                                 <label for="cardNumber">NÚMERO DE TARJETA</label>
-                                                                <div class="input-group" ng-init="Payment.card=1">
+                                                                <div class="input-group">
                                                                     <input type="text" class="form-control"
                                                                            ng-model="Payment.payment.card.number"
                                                                            name="cardNumber"
                                                                            id="cardNumber"
                                                                            placeholder="Número de tarjeta"
                                                                            required data-conekta="card[number]"/>
-                                                                    <span  class="input-group-addon"><i
+                                                                    <span  ng-if="Payment.payment.card.number == undefined" class="input-group-addon"><i
                                                                             class="fa fa-credit-card"></i></span>
                                                                     <span ng-if="Payment.payment.card.number.substr(0,1)=='4'" class="input-group-addon"><i
                                                                             class="fa fa-cc-visa"></i></span>
