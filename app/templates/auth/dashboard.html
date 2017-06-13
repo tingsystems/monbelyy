@@ -1,11 +1,48 @@
 <!--content-->
 <section class="content-dashboard">
     <div class="container">
-        <div class="title-section">
-            <h3 class="info2"><i class="ion-home"></i> Mi cuenta: {{user.username}}</h3>
-            <hr>
+        <div class="col-md-3">
+            <ng-include src="'templates/auth/partials/my-account-items.html'"></ng-include>
         </div>
-        <div class="col-sm-6 col-md-3 menu-dash" ui-sref="sales">
+        <div class="col-md-9">
+            <div class="title-section">
+                <h3 class="info2"><i class="ion-home"></i> Mi cuenta: {{user.username}}</h3>
+                <hr>
+                <div class="row dash">
+                    <div class="col-md-5">
+                        <div class="col-md-3">
+                            <div class="img-profile" style="width: 100px">
+                                <p><i class="ion-ios-person-outline"></i></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Vozdemando</h4>
+                            <p><i class="ion-ios-gear"></i> Configuración</p>
+                            <p><i class="ion-ios-location-outline"></i> Mis direcciones</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center dash-footer">
+                    <div class="col-md-3 item">
+                        <p class="item-number">4</p>
+                        <p class="item-name">Mis compras</p>
+                    </div>
+                    <div class="col-md-3 item">
+                        <p class="item-number">0</p>
+                        <p class="item-name">Pagos pendientes</p>
+                    </div>
+                    <div class="col-md-3 item">
+                        <p class="item-number">0</p>
+                        <p class="item-name">En proceso</p>
+                    </div>
+                    <div class="col-md-3 item">
+                        <p class="item-number">4</p>
+                        <p class="item-name">Enviados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-sm-6 col-md-3 menu-dash" ui-sref="sales">
             <div data-url_target="about_us" class="profile-btn menu_button menu-item">
                 <div class="mask">
                 </div>
@@ -49,7 +86,7 @@
                     <h5>personal</h5>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </section>
 

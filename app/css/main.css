@@ -135,6 +135,17 @@ body {
   margin-left: 2px;
   vertical-align: middle;
 }
+.bg-gray {
+  font-weight: 700;
+  background-color: #a7abaf;
+}
+.bg-info2 {
+  font-weight: 700;
+  background-color: #4ecdd6;
+}
+.bg-war {
+  background-color: #daa400;
+}
 .bg-success {
   background-color: #528a3b !important;
 }
@@ -180,6 +191,7 @@ body {
 .navbar-info .my-account {
   font-size: 24px;
   padding-right: 15px;
+  text-decoration: none;
 }
 .navbar-info .my-account .ion-ios-person-outline {
   vertical-align: middle;
@@ -599,6 +611,33 @@ header {
   opacity: 0.3;
   padding: 20px 0;
   color: #ffa500;
+}
+.dash {
+  border: 1px solid #eee;
+  padding: 5px;
+}
+.dash-footer {
+  border: 1px solid #eee;
+  padding: 10px 0;
+}
+.dash-footer .item {
+  border-right: 1px solid #ccc;
+}
+.dash-footer .item:nth-last-child(1) {
+  border-right: none;
+}
+.dash-footer .item .item-number {
+  color: #aa261d;
+  font-size: 18px;
+  font-weight: 600;
+}
+.list-dash .list-group-item.active {
+  background: #aa261d;
+  border-color: #aa261d;
+}
+.list-dash .list-group-item {
+  border-radius: 0;
+  padding: 15px 20px;
 }
 .data-contact a {
   color: #555;

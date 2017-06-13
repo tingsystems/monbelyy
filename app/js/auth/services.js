@@ -136,6 +136,7 @@
                     method: 'PATCH',
                     url: BaseUrlAuth.shop() + 'address/:id'
                 }
+
             });
     }
 

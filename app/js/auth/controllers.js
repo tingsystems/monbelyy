@@ -318,8 +318,9 @@
             getData: self.getData
         });
 
+        console.log(self.idUser);
         self.getAddresses = function () {
-            AddressSrv.query().$promise.then(function (data) {
+            AddressSrv.query({customer: self.idUser}).$promise.then(function (data) {
                 self.addresses = data;
                 angular.forEach(self.addresses, function (value, key) {
                     if (value.state && value.city) {

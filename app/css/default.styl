@@ -131,6 +131,14 @@ body
   vertical-align middle
 
 /************** main css ******************/
+.bg-gray
+  font-weight 700
+  background-color #a7abaf
+.bg-info2
+  font-weight 700
+  background-color #4ecdd6
+.bg-war
+  background-color #daa400
 .bg-success
   background-color #528a3b !important
 .bg-danger
@@ -167,6 +175,7 @@ body
   .my-account 
     font-size 24px 
     padding-right 15px
+    text-decoration none
     .ion-ios-person-outline
       vertical-align middle
       font-size 36px !important
@@ -516,6 +525,29 @@ header
   opacity 0.3
   padding 20px 0
   color orange
+/*Dashborard*/
+.dash
+  border 1px solid #eee
+  padding 5px
+.dash-footer
+  border 1px solid #eee
+  padding 10px 0
+  .item
+    border-right 1px solid #ccc
+    &:nth-last-child(1)
+      border-right none
+    .item-number
+      color cagreen
+      font-size 18px
+      font-weight 600
+.list-dash
+  .list-group-item.active
+    background cagreen
+    border-color cagreen
+  .list-group-item
+    border-radius 0
+    padding 15px 20px
+
 /************** Home area css ******************/
 .data-contact
   a

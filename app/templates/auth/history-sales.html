@@ -1,14 +1,14 @@
 <div class="content-dashboard">
     <div class="container">
-        <div class="col-xs-12 col-md-12">
+        <div class="col-md-3">
+            <ng-include src="'templates/auth/partials/my-account-items.html'"></ng-include>
+        </div>
+        <div class="col-xs-9 col-md-9">
             <div class="row">
-                <div class="col col-xs-6">
+                <div class="col-md-6 col-xs-6">
                     <h3 class="info2"><i class="ion-bag"></i> Historial de compras</h3>
                 </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-10 col-sm-6 col-md-4 pull-right search-ca">
+                <div class="col-md-6 col-xs-6">
                     <form name="Sale.searchForm" ng-submit="Sale.globalSearch()" class="ca-form">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Buscar" name="searchTerm"
@@ -21,6 +21,7 @@
                     </form>
                 </div>
             </div>
+            <hr>
             <div class="table-responsive" loading-container="Sale.tableParams.settings().$loading">
                 <table class="table table-bsaleed bg-white table-striped" ng-table="Sale.tableParams"
                        show-filter="false">
@@ -36,7 +37,7 @@
                             <span ng-if="sale.paymentType == 1" class="label label-sm bg-info">
                                         {{ sale.paymentTypeName }}
                                 </span>
-                            <span ng-if="sale.paymentType == 2" class="label label-sm bg-warning">
+                            <span ng-if="sale.paymentType == 2" class="label label-sm bg-war">
                                         {{ sale.paymentTypeName }}
                                 </span>
                             <span ng-if="sale.paymentType == 3" class="label label-sm bg-success">
@@ -45,12 +46,24 @@
                             <span ng-if="sale.paymentType == 4" class="label label-sm bg-success">
                                         {{ sale.paymentTypeName }}
                                 </span>
+                            <span ng-if="sale.paymentType == 5" class="label label-sm bg-success">
+                                        {{ sale.paymentTypeName }}
+                                </span>
+                            <span ng-if="sale.paymentType == 6" class="label label-sm bg-success">
+                                        {{ sale.paymentTypeName }}
+                                </span>
+                            <span ng-if="sale.paymentType == 7" class="label label-sm bg-success">
+                                        {{ sale.paymentTypeName }}
+                                </span>
+                            <span ng-if="sale.paymentType == 8" class="label label-sm bg-success">
+                                        {{ sale.paymentTypeName }}
+                                </span>
                         </td>
                         <td data-title="'Pago'">
                             <span ng-if="sale.isPaid == 0" class="label label-sm bg-success">
                                         {{ sale.isPaidName }}
                                 </span>
-                            <span ng-if="sale.isPaid == 1" class="label label-sm bg-warning">
+                            <span ng-if="sale.isPaid == 1" class="label label-sm bg-war">
                                         {{ sale.isPaidName }}
                                 </span>
                             <span ng-if="sale.isPaid == 2" class="label label-sm bg-danger">
@@ -61,19 +74,19 @@
                             <span ng-if="sale.orderStatus == 0" class="label label-sm bg-primary">
                                         {{ sale.orderStatusName }}
                                 </span>
-                            <span ng-if="sale.orderStatus == 1" class="label label-sm bg-info">
+                            <span ng-if="sale.orderStatus == 1" class="label label-sm bg-info2">
                                         {{ sale.orderStatusName }}
                                 </span>
-                            <span ng-if="sale.orderStatus == 2" class="label label-sm bg-default">
+                            <span ng-if="sale.orderStatus == 2" class="label label-sm bg-gray">
                                         {{ sale.orderStatusName}}
                                 </span>
-                            <span ng-if="sale.orderStatus == 3" class="label label-sm bg-default">
+                            <span ng-if="sale.orderStatus == 3" class="label label-sm bg-gray">
                                         {{ sale.orderStatusName}}
                                 </span>
                             <span ng-if="sale.orderStatus == 4" class="label label-sm bg-success">
                                         {{ sale.orderStatusName}}
                                 </span>
-                            <span ng-if="sale.orderStatus == 5" class="label label-sm bg-warning">
+                            <span ng-if="sale.orderStatus == 5" class="label label-sm bg-war">
                                         {{ sale.orderStatusName}}
                                 </span>
                             <span ng-if="sale.orderStatus == 6" class="label label-sm bg-danger">
@@ -85,7 +98,8 @@
                         </td>
                         <td data-title="'Total'"><strong class="text-success">{{ sale.total | currency }}</strong></td>
                         <td data-title="'Acciones'">
-                            <button title="Ver detalle de la compra" class="btn btn-primary btn-xs" ui-sref="sale-update({id: sale.id})" data-title="Edit">
+                            <button title="Ver detalle de la compra" class="btn btn-primary btn-xs"
+                                    ui-sref="sale-update({id: sale.id})" data-title="Edit">
                                 <span class="glyphicon glyphicon-eye-open"></span></button>
                     </tr>
                     </tbody>

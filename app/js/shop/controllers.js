@@ -261,6 +261,7 @@
         self.store = $localStorage.appData.user.branchOffices[0];
         self.email = $localStorage.appData.user.email;
         self.address = $localStorage.appData.user.address;
+        self.phone = ''; //$localStorage.appData.user.phone;
         self.orderPaymentType = '';
         $localStorage.items = self.items;
         $localStorage.total = self.total;
@@ -277,10 +278,10 @@
                 cvc: null
             },
             email: self.email,
+            //phone: self.customer.phone,
             amount: $localStorage.total,
             items: $localStorage.items
         };
-
         // get default branch office
         self.getDefaulBranchOffice = function () {
             if (!user.branchOffices)
@@ -322,7 +323,7 @@
                 brand: Conekta.card.getBrand(self.payment.card.number),
                 cardholder: self.payment.card.name,
                 token: token.id,
-                //phone: self.payment.phone,
+                //phone: self.customer.phone,
                 email: self.email,
                 items: $localStorage.items,
                 amount: $localStorage.total,
@@ -333,6 +334,7 @@
             };
             console.log(token.id);
             console.log(params);
+            console.log(params.phone);
 
             params.kind = 'order';
             params.paymentType = parseInt(self.orderPaymentType);
@@ -342,10 +344,11 @@
             params.warehouse = self.defaultWarehouse.id;
             params.employee = $localStorage.appData.user.id;
             params.destination = self.address;
-
             params.orderStatus = 1;
             params.isPaid = 0;
             params.token = token.id;
+            params.phone = self.phone;
+
 
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
@@ -414,7 +417,9 @@
         self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
                 self.customer = data;
-                console.log(self.customer);
+                self.phone = data.phone;
+                //$localStorage.appData.user.phone = data.phone;
+                console.log($localStorage.appData.user.phone);
             });
 
         };

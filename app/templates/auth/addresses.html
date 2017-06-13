@@ -1,6 +1,9 @@
 <div class="content-dashboard">
     <div class="container">
-        <div class="col-xs-12 col-md-12">
+        <div class="col-md-3">
+            <ng-include src="'templates/auth/partials/my-account-items.html'"></ng-include>
+        </div>
+        <div class="col-xs-12 col-md-9">
             <div class="row">
                 <div class="col col-xs-6">
                     <h3 class="info2"><i class="ion-ios-list"></i> Lista de direcciones</h3>
@@ -30,12 +33,12 @@
                        show-filter="false">
                     <tbody>
                     <tr ng-repeat="address in Address.addresses" datasource="address" ref="Address">
-                        <td data-title="'Estado'" sortable="'id'">{{ address.stateName.name }}</td>
-                        <td data-title="'Ciudad'" sortable="'name'">{{ address.cityName.name }}</td>
-                        <td data-title="'Domicilio'" sortable="'price'">{{ address.address }}</td>
-                        <td data-title="'Colonia'">{{ address.neighborhood }}</td>
-                        <td data-title="'Código Postal'">{{ address.zip }}</td>
-                        <td data-title="'Teléfono'">{{ address.phone }}</td>
+                        <td data-title="'Estado'" sortable="'stateName.name'">{{ address.stateName.name }}</td>
+                        <td data-title="'Ciudad'" sortable="'cityName.name'">{{ address.cityName.name }}</td>
+                        <td data-title="'Domicilio'" sortable="'address'">{{ address.address }}</td>
+                        <td data-title="'Colonia'" sortable="'neighborhood'">{{ address.neighborhood }}</td>
+                        <td data-title="'Código Postal'" sortable="'zip'">{{ address.zip }}</td>
+                        <td data-title="'Teléfono'" sortable="'phone'">{{ address.phone }}</td>
                         <td data-title="'Acciones'">
                             <button title="Editar dirección" class="btn btn-primary btn-xs" ui-sref="address-update({id: address.id})" data-title="Edit">
                                 <span class="glyphicon glyphicon-pencil"></span></button>
@@ -45,7 +48,7 @@
                     </tbody>
                     <tfooter>
                         <tr ng-hide="Address.addresses.length">
-                            <td colspan="7" class="text-center">Ningún dato disponible</td>
+                            <td colspan="7" class="text-center">Todavia no ha creado una dirección de envío, haga clic en el botón (+) de arriba para agregar.</td>
                         </tr>
                     </tfooter>
                 </table>
