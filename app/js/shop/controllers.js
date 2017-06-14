@@ -216,8 +216,8 @@
                 angular.forEach(error.data, function (key, value) {
                     NotificationSrv.error(key, value);
                     self.busy = false;
-                })
-            })
+                });
+            });
         };
 
         // get all the states
@@ -444,13 +444,8 @@
         };
         self.getCustomer();
 
-<<<<<<< HEAD
         var shippingAddress = function() {
             var fieldship = 'address,phone,zip,cityName,neighborhood,phone,stateName';
-=======
-        var shippingAddress = function () {
-            var fieldship = 'address,phone,zip';
->>>>>>> 68e745151e2efef7255e55d01ea03522653df24b
             var address = {};
             AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
                 self.addresship = data;
@@ -470,7 +465,7 @@
                     console.log('Error', error);
 
                 });
-            })
+            });
         };
 
         self.createOrder = function () {
@@ -531,18 +526,9 @@
                 $state.go('purchase-completed');
 
             }, function (error) {
-                console.log(error)
+                console.log(error);
             });
         };
-
-<<<<<<< HEAD
-=======
-        self.changeAcordion = function () {
-            self.acordion = !self.acordiontrue;
-        }
-
-
->>>>>>> 68e745151e2efef7255e55d01ea03522653df24b
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
