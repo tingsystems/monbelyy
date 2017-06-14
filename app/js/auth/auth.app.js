@@ -55,7 +55,20 @@
                     'content': {
                         templateUrl: '/templates/auth/history-sales.html',
                         controllerAs: 'Sale',
-                        controller: 'SalesListCtrl'
+                        controller: 'PurchaseListCtrl'
+                    }
+                }
+            })
+            .state('purchase-detail', {
+                url: '/account/purchase-detail/:id',
+                data: {
+                    requiredLogin: true
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/purchase-detail.html',
+                        controllerAs: 'Purchase',
+                        controller: 'PurchaseDetailCtrl'
                     }
                 }
             })

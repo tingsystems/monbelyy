@@ -452,7 +452,7 @@
 
     }
 
-    function SalesListCtrl(OrderSrv, NotificationSrv, NgTableParams, $timeout, $rootScope, $localStorage) {
+    function PurchaseListCtrl(OrderSrv, NotificationSrv, NgTableParams, $timeout, $rootScope, $localStorage) {
 
         var self = this;
         var timeout = $timeout;
@@ -517,6 +517,18 @@
 
     }
 
+    function PurchaseDetailCtrl($stateParams, OrderSrv) {
+        var self = this;
+        self.busy = false;
+
+        if ($stateParams.id) {
+            OrderSrv.get({id: $stateParams.id}).$promise.then(function(data) {
+                self.order = data;
+            })
+        }
+        console.log($stateParams);
+        console.log("Mandaditos");
+    }
 
     // create the module and assign controllers
     angular.module('auth.controllers', ['auth.services'])
@@ -526,7 +538,8 @@
         .controller('AddressCtrl', AddressCtrl)
         .controller('AddressListCtrl', AddressListCtrl)
         .controller('ProfileCtrl', ProfileCtrl)
-        .controller('SalesListCtrl', SalesListCtrl);
+        .controller('PurchaseListCtrl', PurchaseListCtrl)
+        .controller('PurchaseDetailCtrl', PurchaseDetailCtrl);
 
 
     // inject dependencies to controllers
@@ -536,5 +549,6 @@
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state'];
-    SalesListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
+    PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
+    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv'];
 })();
