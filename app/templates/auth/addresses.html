@@ -8,13 +8,13 @@
                 <div class="col col-xs-6">
                     <h3 class="info2"><i class="ion-ios-list"></i> Lista de direcciones</h3>
                 </div>
-                <div class="col col-xs-6 text-right">
-                    <button title="Agregar nueva dirección" ui-sref="address-add" class="btn btn-primary btn-xs"><i class="ion-plus-circled"></i>
-                    </button>
-                </div>
             </div>
             <hr>
             <div class="row">
+                <div class="col-xs-6 col-md-4">
+                    <button title="Agregar nueva dirección" ui-sref="address-add" class="btn add-button btn-xs"><i class="ion-plus-circled"></i>
+                    Agregar dirección</button>
+                </div>
                 <div class="col-xs-10 col-sm-6 col-md-4 pull-right search-ca">
                     <form name="Address.searchForm" ng-submit="Address.globalSearch()" class="ca-form">
                         <div class="input-group">

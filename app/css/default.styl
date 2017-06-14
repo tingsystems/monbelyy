@@ -146,14 +146,24 @@ body
   vertical-align middle
 
 /************** main css ******************/
+.bg-war
+  color #FF9800
+  background-color #faefde
+.bg-paypal
+  color #337ab7
+  background-color #cadbea
+.bg-notpaid
+  color #d22626
+  background #f2dede
+.bg-green
+  background-color #dff0d8
+  color #528a3b
 .bg-gray
   font-weight 700
   background-color #a7abaf
 .bg-info2
   font-weight 700
   background-color #4ecdd6
-.bg-war
-  background-color #daa400
 .bg-success
   background-color #528a3b !important
 .bg-danger
@@ -236,7 +246,7 @@ body
 .ca-form
   padding-right 13px
 .search-ca
-  padding 15px 0
+  padding 0 0 15px 0
   .btn-search-ca
     padding 8.2px 12px !important
 
@@ -1398,6 +1408,12 @@ footer
     border-color cagreen
     background cagreenh !important
     color #fff
+.add-button
+  @extends .btn-cart
+  background-color #565656
+  border-color #565656
+  .btn-cart&:hover, .btn-cart&:focus
+    color #ccc
 .btn-reg
   background #fff
   color cagreen

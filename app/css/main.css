@@ -156,6 +156,22 @@ body {
   margin-left: 2px;
   vertical-align: middle;
 }
+.bg-war {
+  color: #ff9800;
+  background-color: #faefde;
+}
+.bg-paypal {
+  color: #337ab7;
+  background-color: #cadbea;
+}
+.bg-notpaid {
+  color: #d22626;
+  background: #f2dede;
+}
+.bg-green {
+  background-color: #dff0d8;
+  color: #528a3b;
+}
 .bg-gray {
   font-weight: 700;
   background-color: #a7abaf;
@@ -163,9 +179,6 @@ body {
 .bg-info2 {
   font-weight: 700;
   background-color: #4ecdd6;
-}
-.bg-war {
-  background-color: #daa400;
 }
 .bg-success {
   background-color: #528a3b !important;
@@ -271,7 +284,7 @@ body {
   padding-right: 13px;
 }
 .search-ca {
-  padding: 15px 0;
+  padding: 0 0 15px 0;
 }
 .search-ca .btn-search-ca {
   padding: 8.2px 12px !important;
@@ -1659,17 +1672,28 @@ footer .contact-sty .download-app > i:hover {
   background: #7e1a1d !important;
   color: #fff;
 }
-.btn-cart {
+.btn-cart,
+.add-button {
   border-radius: 0 !important;
   color: #fff;
   border-color: #aa261d;
   background: #aa261d;
 }
 .btn-cart.btn-cart:hover,
-.btn-cart.btn-cart:focus {
+.btn-cart.add-button:hover,
+.btn-cart.btn-cart:focus,
+.btn-cart.add-button:focus {
   border-color: #aa261d;
   background: #7e1a1d !important;
   color: #fff;
+}
+.add-button {
+  background-color: #565656;
+  border-color: #565656;
+}
+.btn-cart.add-button:hover,
+.btn-cart.add-button:focus {
+  color: #ccc;
 }
 .btn-reg {
   background: #fff;

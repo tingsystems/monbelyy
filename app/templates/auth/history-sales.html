@@ -31,31 +31,13 @@
                         <td data-title="'Fecha'" sortable="'name'">{{ sale.createdAt | date: 'd/M/y' }}</td>
                         <td data-title="'Cliente'" sortable="'price'">{{ sale.address }}</td>
                         <td data-title="'Tipo'">
-                            <span ng-if="sale.paymentType == 0" class="label label-sm bg-primary">
+                            <span ng-if="sale.paymentType == 3" class="label label-sm bg-paypal">
                                         {{ sale.paymentTypeName }}
                                 </span>
-                            <span ng-if="sale.paymentType == 1" class="label label-sm bg-info">
+                            <span ng-if="sale.paymentType == 6" class="label label-sm bg-green">
                                         {{ sale.paymentTypeName }}
                                 </span>
-                            <span ng-if="sale.paymentType == 2" class="label label-sm bg-war">
-                                        {{ sale.paymentTypeName }}
-                                </span>
-                            <span ng-if="sale.paymentType == 3" class="label label-sm bg-success">
-                                        {{ sale.paymentTypeName }}
-                                </span>
-                            <span ng-if="sale.paymentType == 4" class="label label-sm bg-success">
-                                        {{ sale.paymentTypeName }}
-                                </span>
-                            <span ng-if="sale.paymentType == 5" class="label label-sm bg-success">
-                                        {{ sale.paymentTypeName }}
-                                </span>
-                            <span ng-if="sale.paymentType == 6" class="label label-sm bg-success">
-                                        {{ sale.paymentTypeName }}
-                                </span>
-                            <span ng-if="sale.paymentType == 7" class="label label-sm bg-success">
-                                        {{ sale.paymentTypeName }}
-                                </span>
-                            <span ng-if="sale.paymentType == 8" class="label label-sm bg-success">
+                            <span ng-if="sale.paymentType == 8" class="label label-sm bg-green">
                                         {{ sale.paymentTypeName }}
                                 </span>
                         </td>
@@ -66,7 +48,7 @@
                             <span ng-if="sale.isPaid == 1" class="label label-sm bg-war">
                                         {{ sale.isPaidName }}
                                 </span>
-                            <span ng-if="sale.isPaid == 2" class="label label-sm bg-danger">
+                            <span ng-if="sale.isPaid == 2" class="label label-sm bg-notpaid">
                                         {{ sale.isPaidName}}
                                 </span>
                         </td>
@@ -74,7 +56,7 @@
                             <span ng-if="sale.orderStatus == 0" class="label label-sm bg-primary">
                                         {{ sale.orderStatusName }}
                                 </span>
-                            <span ng-if="sale.orderStatus == 1" class="label label-sm bg-info2">
+                            <span ng-if="sale.orderStatus == 1" class="label label-sm bg-war">
                                         {{ sale.orderStatusName }}
                                 </span>
                             <span ng-if="sale.orderStatus == 2" class="label label-sm bg-gray">
@@ -83,7 +65,7 @@
                             <span ng-if="sale.orderStatus == 3" class="label label-sm bg-gray">
                                         {{ sale.orderStatusName}}
                                 </span>
-                            <span ng-if="sale.orderStatus == 4" class="label label-sm bg-success">
+                            <span ng-if="sale.orderStatus == 4" class="label label-sm bg-green">
                                         {{ sale.orderStatusName}}
                                 </span>
                             <span ng-if="sale.orderStatus == 5" class="label label-sm bg-war">
