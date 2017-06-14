@@ -266,7 +266,7 @@ body {
   padding-right: 13px;
 }
 .search-ca {
-  padding: 15px 0;
+  padding: 0 0 15px 0;
 }
 .search-ca .btn-search-ca {
   padding: 8.2px 12px !important;
@@ -1650,17 +1650,28 @@ footer .contact-sty .download-app > i:hover {
   background: #7e1a1d !important;
   color: #fff;
 }
-.btn-cart {
+.btn-cart,
+.add-button {
   border-radius: 0 !important;
   color: #fff;
   border-color: #aa261d;
   background: #aa261d;
 }
 .btn-cart.btn-cart:hover,
-.btn-cart.btn-cart:focus {
+.btn-cart.add-button:hover,
+.btn-cart.btn-cart:focus,
+.btn-cart.add-button:focus {
   border-color: #aa261d;
   background: #7e1a1d !important;
   color: #fff;
+}
+.add-button {
+  background-color: #565656;
+  border-color: #565656;
+}
+.btn-cart.add-button:hover,
+.btn-cart.add-button:focus {
+  color: #ccc;
 }
 .btn-reg {
   background: #fff;

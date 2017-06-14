@@ -1,35 +1,63 @@
-
-    <div class="col-md-12 text-center" ng-repeat="item in Payment.items">
-        <div class="col-md-6" >
-            <img ng-src="{{item.image}}" alt="" width="100">
-        </div>
-        <div class="col-md-6 pull-rigth list-inline items-incart">
-            <div class="col-md-6"><span>{{ item.name | characters: 30 }}</span></div>
-            <div class="col-md-6"><span class="pull-right">{{item.price | currency}}</span></div>
+<div class="col-md-12 text-center" ng-repeat="item in Payment.items">
+    <div class="col-md-6">
+        <img ng-src="{{item.image}}" alt="" width="100">
+    </div>
+    <div class="col-md-6 pull-rigth list-inline items-incart">
+        <div class="col-md-6"><span>{{ item.name | characters: 30 }}</span></div>
+        <div class="col-md-6"><span class="pull-right">{{item.price | currency}}</span></div>
+    </div>
+</div>
+<div class="col-sm-12 col-md-12" ng-controller="ShopCartCtrl as ShopCart">
+    <div class="details-prodpay">
+        <!--<h4 class="text-center">Resumen de pedido</h4>-->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>{{ ShopCart.total | currency}}</td>
+                </tr>
+                <tr>
+                    <td>Envío</td>
+                    <td>$0</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td><h3><span class="mxn">MXN</span>{{ ShopCart.total | currency }}</h3></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--<a class="btn btn-success btn-cart btn-block" ng-click="ShopCart.processPurchase()">Procesar compra</a>-->
         </div>
     </div>
-    <div class="col-sm-12 col-md-12" ng-controller="ShopCartCtrl as ShopCart">
-        <div class="details-prodpay">
-            <!--<h4 class="text-center">Resumen de pedido</h4>-->
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>{{ ShopCart.total | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Envío</td>
-                        <td>$0</td>
-                    </tr>
-                    <tr>
-                        <td>Total</td>
-                        <td><h3><span class="mxn">MXN</span>{{ ShopCart.total | currency }}</h3></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!--<a class="btn btn-success btn-cart btn-block" ng-click="ShopCart.processPurchase()">Procesar compra</a>-->
-            </div>
+</div>
+<hr>
+<div class="col-sm-12 col-md-12">
+    <h4 class="text-center">Dirección de envío</h4>
+    <div class="details-prodpay">
+        <!--<h4 class="text-center">Resumen de pedido</h4>-->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>Estado</td>
+                    <td>Michocan</td>
+                </tr>
+                <tr>
+                    <td>Ciudad</td>
+                    <td>Morelia</td>
+                </tr>
+                <tr>
+                    <td>Dirección</td>
+                    <td>{{Payment.addresship.address}}</td>
+                </tr>
+                <tr>
+                    <td>CP</td>
+                    <td>{{Payment.addresship.zip}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 

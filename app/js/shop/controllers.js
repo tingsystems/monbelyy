@@ -182,7 +182,7 @@
 
         console.log(self.formDataShip);
 
-        AddressSrv.query().$promise.then(function (data) {
+        AddressSrv.query({customer:self.customer}).$promise.then(function (data) {
             self.addresses = data;
         }, function (error) {
             angular.forEach(error, function (key, value) {
@@ -425,12 +425,17 @@
         };
         self.getCustomer();
 
-        AddressSrv.query().$promise.then(function (data) {
-            self.addresses = data;
+        var shippingAddress = function() {
+            var fieldship = 'address,phone,zip';
+            var address = {};
+            AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
+                self.addresship = data;
+            }, function (error) {
+                NotificationSrv.error("Error");
+            });
+        };
+        shippingAddress();
 
-        }, function (error) {
-            NotificationSrv.error("Error");
-        });
 
         self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
