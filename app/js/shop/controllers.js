@@ -263,7 +263,7 @@
         self.address = $localStorage.appData.user.address;
         self.phone = ''; //$localStorage.appData.user.phone;
         self.orderPaymentType = '';
-        self.acordion = false;
+        self.shiping = true;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
 
@@ -427,7 +427,7 @@
         self.getCustomer();
 
         var shippingAddress = function() {
-            var fieldship = 'address,phone,zip';
+            var fieldship = 'address,phone,zip,cityName,neighborhood,phone,stateName';
             var address = {};
             AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
                 self.addresship = data;
@@ -503,11 +503,6 @@
                 $state.go('purchase-completed');
             });
         };
-
-        self.changeAcordion = function() {
-            self.acordion = !self.acordiontrue;
-        }
-
 
     }
 
