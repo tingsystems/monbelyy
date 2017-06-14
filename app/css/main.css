@@ -739,6 +739,9 @@ header {
   color: #676767;
   font-size: 20px;
 }
+.label-status {
+  margin-bottom: 10px;
+}
 .box-prod {
   background: #fefefe;
   background: -moz-linear-gradient(top, #fefefe 0%, #fefefe 51%, #dfdfdf 100%);
