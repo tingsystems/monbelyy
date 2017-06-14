@@ -1,4 +1,4 @@
-<div id="content-area">
+<div  class="content-dashboard">
     <div class="container">
         <div class="col-md-6 address-form">
             <div class="col-md-12 select-address" style="margin-bottom: 20px">
@@ -103,15 +103,11 @@
                     </div>-->
                 </form>
             </div>
-            <div class="col-md-12 text-left" style="margin-top: 20px;">
-                <div class="col-md-6">
-                    <a class="btn btn-cart" ui-sref="shopcart">Regresar al carrito</a>
-                </div>
-                <div class="col-md-6">
-                    <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
-                    <button ng-if="Payment.address" class="btn btn-cart" type="submit" ng-disabled="!Payment.address" ng-click="Payment.saveShippingAddress()">Continuar</button>
-                    <button ng-if="!Form.$invalid && !Payment.address" class="btn btn-cart" type="submit" ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar</button>
-                </div>
+            <div class="col-md-12 text-right" style="margin-top: 20px;">
+                <a href="" class="btn btn-gray-clear" ui-sref="shopcart"><i class="fa fa-angle-left"></i> Regresar al carrito</a>
+                <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
+                <a ng-if="Payment.address" class="btn btn-red" type="submit" ng-disabled="!Payment.address" ng-click="Payment.saveShippingAddress()">Continuar</a>
+                <a ng-if="!Form.$invalid && !Payment.address" class="btn btn-red" type="submit" ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar</a>
             </div>
         </div>
         <div class="col-md-6">

@@ -36,8 +36,6 @@ i
 .alert-warning
   text-shadow 0 0 0 transparent
 
-p,ul,li
-  color #555
 a:focus
   outline 0 solid
 
@@ -193,7 +191,8 @@ body
       display none
   .sub-main
     display none
-
+.navbar-nav > li > a:hover, .navbar-nav > li > a:focus
+  background-color transparent
 .navbar-info
   .dropdown-menu
     z-index 99999
@@ -516,8 +515,7 @@ header
   background-color #fff    
 #content-area
   margin 0
-  padding 70px 25px
-  background-color #fff
+  padding 100px 25px 70px
   .title-category
     text-align left
     color #746857
@@ -618,6 +616,7 @@ header
 
 .products
   padding 70px 0
+  background-color white
   .box-products
     .prod-title
       h3
@@ -629,7 +628,8 @@ header
       p
         color catext2
         font-size 20px
-
+.label-status
+  margin-bottom 10px
 .box-prod
   background rgba(254,254,254,1);
   background -moz-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
@@ -882,36 +882,7 @@ header
 .tab-pane
   margin-bottom 50px
 
-.nav > li > a:hover, .nav > li > a:focus
-  background-color transparent
-.nav-tabs
-  width 29%
-  border-top 1px solid #ddd
-  border-bottom none !important
-  float left
-  clear both
-.tab-pane
-  width 70%
-  float right
-  margin-top -50px
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus, .nav-tabs > li > a:hover
-  color #cb6133
-  background-color transparent
-  font-size 20px
-  border 0 solid transparent
-  padding 10px 0
-
-.nav-tabs > li > a
-  padding 10px 0
-  border-radius 0
-  font-size 20px
-  color #38270f
-  margin-left 0
-  border none !important
-
-.nav-tabs
-  border-bottom 1px solid #ccc
 
 .see-more
   padding 25px
@@ -1411,9 +1382,9 @@ footer
   border-radius 0 !important
   background cagreen
   font-family "Roboto Slab"
-  font-weight 600 !important
+  font-weight 300 !important
   color #fff
-  font-size 24px !important
+  font-size 20px !important
   .btn-login-ca&:hover, .btn-cart&:focus
     background cagreenh !important
     color #fff
@@ -1506,14 +1477,14 @@ footer
   color #fff
   font-weight 300
   border none
-  border-radius 30px
+  border-radius 2px
   &:hover, &:focus
     background #c24139
     display inline-block
     padding 10px 15px
     color #fff
     font-weight 300
-    border-radius 30px
+    border-radius 2px
 
 .btn-yellow
   background #cbae00
@@ -1798,6 +1769,18 @@ footer
   display none
 
 /*transition tabs*/
+.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus
+  color #c10514
+.nav-tabs.nav-justified > li > a
+  font-size 24px
+  color #555
+  text-align left
+.tab-pane
+  padding 15px
+  border-left 1px solid #ddd
+  border-right 1px solid #ddd
+  border-bottom 1px solid #ddd
+  background-color white
 #products
   padding 0
   text-aling center
