@@ -37,11 +37,6 @@
     function TaxonomySrv($resource, BaseUrl) {
         return $resource(BaseUrl.get() + 'taxonomies/:slug');
     }
-
-    function MessageSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.get() + 'notifications/:id', null, {})
-    }
-
     // service for show notifications with toasty
     function NotificationSrv(SweetAlert, $filter) {
         return {
@@ -66,6 +61,11 @@
 
         }
     }
+    function MessageSrv($resource, BaseUrl) {
+        return $resource(BaseUrl.get() + 'notifications/:id', null, {})
+    }
+
+
 
     // Add interceptor
     function HttpInterceptor($q, NotificationSrv, $rootScope) {
