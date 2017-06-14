@@ -22,7 +22,7 @@
                 </div>
             </div>
             <hr>
-            <div class="table-responsive" loading-container="Sale.tableParams.settings().$loading">
+            <div class="table-responsive dash-footer" loading-container="Sale.tableParams.settings().$loading">
                 <table class="table table-bsaleed bg-white table-striped" ng-table="Sale.tableParams"
                        show-filter="false">
                     <tbody>
@@ -79,10 +79,10 @@
                                 </span>
                         </td>
                         <td data-title="'Total'"><strong class="text-success">{{ sale.total | currency }}</strong></td>
-                        <td data-title="'Acciones'">
-                            <button title="Ver detalle de la compra" class="btn btn-primary btn-xs"
+                        <td data-title="'Acciones'" class="text-center">
+                            <button title="Ver detalle de la compra" class="btn btn-primary gray btn-xs indicators"
                                     ui-sref="purchase-detail({id: sale.id})" data-title="Edit">
-                                <span class="glyphicon glyphicon-eye-open"></span></button>
+                                <span class="ion-ios-eye"></span></button>
                     </tr>
                     </tbody>
                     <tfooter>

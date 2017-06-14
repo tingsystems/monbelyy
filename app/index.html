@@ -74,17 +74,30 @@
                     <a href="mailto:{{initConfig.email}}"><i class="icon ion-ios-email-outline"></i> {{initConfig.email}}</a>
                 </div>
                 <div class="col-sm-6 col-md-5 ca-auth" ng-controller="AccessCtrl as Access">
-                    <a ui-sref="register" class="my-account" ng-if="!Access.isAuthenticated()">
-                        <i class="ion-ios-person-outline fa-2x"></i> Iniciar sesión
-                    </a>
-                    <a class="my-account" ng-if="Access.isAuthenticated()" href="">
-                        <i class="ion-ios-person-outline fa-2x" ui-sref="dashboard" title="Mi cuenta"></i> {{user.username}}
-                        <i ng-click="Access.logout()" data-toggle="tooltip" title="Cerrar sesión" class="fa fa-sign-out logout-ac"></i>
-                    </a>
-                    <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
-                        <span class="qty-cart">{{ items.length }}</span>
-                        <i class="icon ion-ios-cart-outline"></i><span class="hidden-xs">Carrito</span>
-                    </a>
+                    <ul class="nav navbar-nav nav-main navbar-right ">
+                        <li> 
+                            <a ui-sref="register" class="my-account" ng-if="!Access.isAuthenticated()">
+                                <i class="ion-ios-person-outline"></i> Iniciar sesión
+                            </a>
+                        </li>
+                        <li  class="dropdown">
+                            <a  ng-if="Access.isAuthenticated()" class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="ion-ios-person-outline"></i> {{user.username}} 
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ui-sref="dashboard">Mi cuenta</a></li>
+                                <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                        <li><div class="divider-main"></div></li>
+                        <li>
+                            <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
+                                <span class="qty-cart">{{ items.length }}</span>
+                                <i class="icon ion-ios-cart-outline"></i><span class="hidden-xs">Carrito</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

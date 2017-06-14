@@ -1,3 +1,7 @@
+i {
+  font-size: 24px;
+  vertical-align: middle;
+}
 .no-padding {
   padding: 0 !important;
 }
@@ -66,8 +70,20 @@ body {
 .white {
   color: #fff !important;
 }
+.clearfix {
+  clear: both;
+}
+.go-to-shop {
+  margin-top: -10px;
+}
+.divider-main {
+  margin: 15px;
+  width: 1px;
+  height: 20px;
+  background-color: #ccc;
+}
 .content {
-  margin-top: 100px;
+  margin-top: 170px;
 }
 .content-post {
   margin: 20px 0;
@@ -168,11 +184,6 @@ body {
 .bg-danger {
   background-color: #d22626 !important;
 }
-.dropdown-menu {
-  width: 100vw;
-  min-width: 90vw;
-  top: 100px;
-}
 .log-section-mobile {
   display: none;
 }
@@ -201,22 +212,28 @@ body {
 .header.smaller .sub-main {
   display: none;
 }
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+  background-color: transparent;
+}
+.navbar-info .dropdown-menu {
+  z-index: 99999;
+}
 .navbar-info .nav-info {
   margin-top: 12px;
 }
 .navbar-info .my-account {
-  font-size: 24px;
+  font-size: 18px;
   padding-right: 15px;
   text-decoration: none;
 }
 .navbar-info .my-account .ion-ios-person-outline {
   vertical-align: middle;
-  font-size: 36px !important;
 }
 .navbar-info .shopping-cart {
-  font-size: 24px;
+  font-size: 18px;
   padding-left: 20px;
-  border-left: 1px solid #ccc;
+  margin-top: -8px;
 }
 .navbar-info .shopping-cart a {
   font-size: 24px;
@@ -243,8 +260,8 @@ body {
   border-radius: 30px;
   background-color: #aa261d;
   font-size: 16px;
-  top: 0px;
-  right: 85px;
+  top: 5px;
+  right: 60px;
   width: 20px;
   height: 20px;
 }
@@ -277,6 +294,7 @@ body {
 header {
   width: 100%;
   overflow: hidden;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 999;
@@ -286,12 +304,12 @@ header {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
+  box-shadow: 0 7px 10px rgba(0,0,0,0.3);
 }
 .header {
   text-align: center;
 }
 .header .navbar-default {
-  position: absolute;
   background-color: #fff;
   left: 0;
   right: 0;
@@ -299,7 +317,6 @@ header {
   border-radius: 0;
   margin-bottom: 0;
   z-index: 9999;
-  box-shadow: 0 7px 10px rgba(0,0,0,0.3);
   border-top: 1px solid #eee;
 }
 .header .navbar-default .navbar-brand {
@@ -529,7 +546,7 @@ header {
   color: #555;
 }
 .navbar-info {
-  padding: 1.3em 0;
+  padding: 1em 0 0.2em;
   background-color: #fff;
 }
 .navbar-info a {
@@ -560,7 +577,6 @@ header {
 }
 .info2 {
   font-family: 'Roboto';
-  text-transform: uppercase;
   font-weight: 100;
   color: #565656;
 }
@@ -584,8 +600,7 @@ header {
 }
 #content-area {
   margin: 0;
-  padding: 70px 25px;
-  background-color: #fff;
+  padding: 100px 25px 70px;
 }
 #content-area .title-category {
   text-align: left;
@@ -710,6 +725,7 @@ header {
 }
 .products {
   padding: 70px 0;
+  background-color: #fff;
 }
 .products .box-products .prod-title h3 {
   font-weight: 600;
@@ -1017,43 +1033,6 @@ color
 }
 .tab-pane {
   margin-bottom: 50px;
-}
-.nav > li > a:hover,
-.nav > li > a:focus {
-  background-color: transparent;
-}
-.nav-tabs {
-  width: 29%;
-  border-top: 1px solid #ddd;
-  border-bottom: none !important;
-  float: left;
-  clear: both;
-}
-.tab-pane {
-  width: 70%;
-  float: right;
-  margin-top: -50px;
-}
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li > a:hover {
-  color: #cb6133;
-  background-color: transparent;
-  font-size: 20px;
-  border: 0 solid transparent;
-  padding: 10px 0;
-}
-.nav-tabs > li > a {
-  padding: 10px 0;
-  border-radius: 0;
-  font-size: 20px;
-  color: #38270f;
-  margin-left: 0;
-  border: none !important;
-}
-.nav-tabs {
-  border-bottom: 1px solid #ccc;
 }
 .see-more {
   padding: 25px;
@@ -1627,6 +1606,25 @@ footer .contact-sty .download-app > i {
 footer .contact-sty .download-app > i:hover {
   color: #d96263;
 }
+.search-bar {
+  margin-bottom: 20px;
+}
+.indicators {
+  opacity: 0.8;
+  border-radius: 0;
+  padding: 0 8px;
+}
+.glyphicon-remove {
+  font-size: 18px;
+  color: #777;
+  vertical-align: middle;
+  margin-top: -10px;
+}
+.btn-shop {
+  background-color: #f5f5f5;
+  padding: 0 15px;
+  border: 1px solid #eee;
+}
 .panel-title > input[type='radio'] {
   cursor: pointer;
 }
@@ -1647,9 +1645,9 @@ footer .contact-sty .download-app > i:hover {
   border-radius: 0 !important;
   background: #aa261d;
   font-family: "Roboto Slab";
-  font-weight: 600 !important;
+  font-weight: 300 !important;
   color: #fff;
-  font-size: 24px !important;
+  font-size: 20px !important;
 }
 .btn-login-ca.btn-login-ca:hover,
 .btn-cart.btn-login-ca:focus {
@@ -1671,6 +1669,13 @@ footer .contact-sty .download-app > i:hover {
   background: #7e1a1d !important;
   color: #fff;
 }
+.btn-gray-clear-sm {
+  color: #908f8f;
+  border-color: #908f8f;
+  background: transparent;
+  padding: 0px 13px;
+  font-size: 14px !important;
+}
 .add-button {
   background-color: #565656;
   border-color: #565656;
@@ -1690,6 +1695,10 @@ footer .contact-sty .download-app > i:hover {
   border-color: #aa261d;
   background-color: transparent;
   color: #aa261d;
+}
+.gray {
+  background-color: #919191;
+  border-color: #919191;
 }
 .btn {
   font-size: 18px;
@@ -1853,9 +1862,9 @@ footer .contact-sty .download-app > i:hover {
   background: transparent;
   display: inline-block;
   padding: 10px 15px !important;
-  color: #555;
+  color: #888;
   font-weight: 300;
-  border: 1px solid #555;
+  border: 1px solid #ddd;
   border-radius: 3px;
   -webkit-transition: all ease 0.1s;
   -moz-transition: all ease 0.1s;
@@ -1984,6 +1993,15 @@ footer .contact-sty .download-app > i:hover {
 .mail i {
   color: #ffa500;
 }
+.list-group-item.active,
+.list-group-item.active:hover {
+  color: #aa261d;
+  background-color: transparent;
+}
+.list-group-item.active:focus {
+  background-color: #aa261d;
+  color: #fff;
+}
 .form-section {
   background: transparent;
   padding-bottom: 100px;
@@ -1997,7 +2015,7 @@ footer .contact-sty .download-app > i:hover {
   background: transparent;
 }
 .form-item {
-  padding-top: 20px;
+  padding-top: 5px;
 }
 .cart-qty {
   width: 90px !important;
@@ -2009,7 +2027,7 @@ footer .contact-sty .download-app > i:hover {
   margin-bottom: 15px;
   display: block;
   width: 100%;
-  height: 44px;
+  height: 39px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -2074,6 +2092,23 @@ footer .contact-sty .download-app > i:hover {
 }
 .owl-nav {
   display: none;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+  color: #c10514;
+}
+.nav-tabs.nav-justified > li > a {
+  font-size: 24px;
+  color: #555;
+  text-align: left;
+}
+.tab-pane {
+  padding: 15px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
 }
 #products {
   padding: 0;
