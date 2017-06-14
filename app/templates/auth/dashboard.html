@@ -6,23 +6,106 @@
         </div>
         <div class="col-md-9">
             <div class="title-section">
-                <h3 class="info2"><i class="ion-home"></i> Mi cuenta: {{user.username}}</h3>
-                <hr>
-                <div class="row dash">
-                    <div class="col-md-5">
-                        <div class="col-md-3">
-                            <div class="img-profile" style="width: 100px">
-                                <p><i class="ion-ios-person-outline"></i></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>Vozdemando</h4>
-                            <p><i class="ion-ios-gear"></i> Configuración</p>
-                            <p><i class="ion-ios-location-outline"></i> Mis direcciones</p>
-                        </div>
+                <h3 class="info2 pull-left"><i class="ion-person"></i> Mi cuenta: {{user.username}}</h3>
+                <div class="go-to-shop pull-right">
+                    <a href="#" class="btn-gray-clear"> Ir a comprar!</a>
+                </div>
+                <hr class="clearfix">
+                <div class="container-fluid dash-footer">
+                    <!--TODO: Mostrar últimas 3 compras realizadas-->
+                    <div class="col-md-12">
+                         <h4>Mis compras recientes</h4>
+                    </div>
+                    <div class="table-responsive col-md-12" loading-container="Sale.tableParams.settings().$loading">
+                        <table class="table table-bsaleed bg-white table-striped" ng-table="Sale.tableParams"
+                            show-filter="false">
+                            <tbody>
+                            <tr ng-repeat="sale in Sale.sales" datasource="sale" ref="Sale">
+                                <td data-title="'Folio'" sortable="'id'">#{{ sale.id }}</td>
+                                <td data-title="'Fecha'" sortable="'name'">{{ sale.createdAt | date: 'd/M/y' }}</td>
+                                <td data-title="'Cliente'" sortable="'price'">{{ sale.address }}</td>
+                                <td data-title="'Tipo'">
+                                    <span ng-if="sale.paymentType == 0" class="label label-sm bg-primary">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 1" class="label label-sm bg-info">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 2" class="label label-sm bg-war">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 3" class="label label-sm bg-success">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 4" class="label label-sm bg-success">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 5" class="label label-sm bg-success">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 6" class="label label-sm bg-success">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 7" class="label label-sm bg-success">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                    <span ng-if="sale.paymentType == 8" class="label label-sm bg-success">
+                                                {{ sale.paymentTypeName }}
+                                        </span>
+                                </td>
+                                <td data-title="'Pago'">
+                                    <span ng-if="sale.isPaid == 0" class="label label-sm bg-success">
+                                                {{ sale.isPaidName }}
+                                        </span>
+                                    <span ng-if="sale.isPaid == 1" class="label label-sm bg-war">
+                                                {{ sale.isPaidName }}
+                                        </span>
+                                    <span ng-if="sale.isPaid == 2" class="label label-sm bg-danger">
+                                                {{ sale.isPaidName}}
+                                        </span>
+                                </td>
+                                <td data-title="'Compra'">
+                                    <span ng-if="sale.orderStatus == 0" class="label label-sm bg-primary">
+                                                {{ sale.orderStatusName }}
+                                        </span>
+                                    <span ng-if="sale.orderStatus == 1" class="label label-sm bg-info2">
+                                                {{ sale.orderStatusName }}
+                                        </span>
+                                    <span ng-if="sale.orderStatus == 2" class="label label-sm bg-gray">
+                                                {{ sale.orderStatusName}}
+                                        </span>
+                                    <span ng-if="sale.orderStatus == 3" class="label label-sm bg-gray">
+                                                {{ sale.orderStatusName}}
+                                        </span>
+                                    <span ng-if="sale.orderStatus == 4" class="label label-sm bg-success">
+                                                {{ sale.orderStatusName}}
+                                        </span>
+                                    <span ng-if="sale.orderStatus == 5" class="label label-sm bg-war">
+                                                {{ sale.orderStatusName}}
+                                        </span>
+                                    <span ng-if="sale.orderStatus == 6" class="label label-sm bg-danger">
+                                                {{ sale.orderStatusName}}
+                                        </span>
+                                    <span ng-if="sale.orderStatus == 7" class="label label-sm bg-success">
+                                                {{ sale.orderStatusName}}
+                                        </span>
+                                </td>
+                                <td data-title="'Total'"><strong class="text-success">{{ sale.total | currency }}</strong></td>
+                                <td data-title="'Acciones'">
+                                    <button title="Ver detalle de la compra" class="btn btn-primary btn-xs"
+                                            ui-sref="purchase-detail({id: sale.id})" data-title="Edit">
+                                        <span class="glyphicon glyphicon-eye-open"></span></button>
+                            </tr>
+                            </tbody>
+                            <tfooter>
+                                <tr ng-hide="Sale.sales.length">
+                                    <td colspan="7" class="text-center">Aun no haz realizado una compra</td>
+                                </tr>
+                            </tfooter>
+                        </table>
                     </div>
                 </div>
-                <div class="row text-center dash-footer">
+                <div class="container-fluid text-center dash-footer">
                     <div class="col-md-3 item">
                         <p class="item-number">4</p>
                         <p class="item-name">Mis compras</p>

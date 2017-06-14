@@ -1,3 +1,7 @@
+i {
+  font-size: 24px;
+  vertical-align: middle;
+}
 .no-padding {
   padding: 0 !important;
 }
@@ -24,6 +28,11 @@
 }
 .alert-warning {
   text-shadow: 0 0 0 transparent;
+}
+p,
+ul,
+li {
+  color: #555;
 }
 a:focus {
   outline: 0 solid;
@@ -66,8 +75,20 @@ body {
 .white {
   color: #fff !important;
 }
+.clearfix {
+  clear: both;
+}
+.go-to-shop {
+  margin-top: -10px;
+}
+.divider-main {
+  margin: 15px;
+  width: 1px;
+  height: 20px;
+  background-color: #ccc;
+}
 .content {
-  margin-top: 100px;
+  margin-top: 170px;
 }
 .content-post {
   margin: 20px 0;
@@ -152,11 +173,6 @@ body {
 .bg-danger {
   background-color: #d22626 !important;
 }
-.dropdown-menu {
-  width: 100vw;
-  min-width: 90vw;
-  top: 100px;
-}
 .log-section-mobile {
   display: none;
 }
@@ -185,22 +201,24 @@ body {
 .header.smaller .sub-main {
   display: none;
 }
+.navbar-info .dropdown-menu {
+  z-index: 99999;
+}
 .navbar-info .nav-info {
   margin-top: 12px;
 }
 .navbar-info .my-account {
-  font-size: 24px;
+  font-size: 18px;
   padding-right: 15px;
   text-decoration: none;
 }
 .navbar-info .my-account .ion-ios-person-outline {
   vertical-align: middle;
-  font-size: 36px !important;
 }
 .navbar-info .shopping-cart {
-  font-size: 24px;
+  font-size: 18px;
   padding-left: 20px;
-  border-left: 1px solid #ccc;
+  margin-top: -8px;
 }
 .navbar-info .shopping-cart a {
   font-size: 24px;
@@ -227,8 +245,8 @@ body {
   border-radius: 30px;
   background-color: #aa261d;
   font-size: 16px;
-  top: 0px;
-  right: 85px;
+  top: 5px;
+  right: 60px;
   width: 20px;
   height: 20px;
 }
@@ -261,6 +279,7 @@ body {
 header {
   width: 100%;
   overflow: hidden;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 999;
@@ -270,12 +289,12 @@ header {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
+  box-shadow: 0 7px 10px rgba(0,0,0,0.3);
 }
 .header {
   text-align: center;
 }
 .header .navbar-default {
-  position: absolute;
   background-color: #fff;
   left: 0;
   right: 0;
@@ -283,7 +302,6 @@ header {
   border-radius: 0;
   margin-bottom: 0;
   z-index: 9999;
-  box-shadow: 0 7px 10px rgba(0,0,0,0.3);
   border-top: 1px solid #eee;
 }
 .header .navbar-default .navbar-brand {
@@ -513,7 +531,7 @@ header {
   color: #555;
 }
 .navbar-info {
-  padding: 1.3em 0;
+  padding: 1em 0 0.2em;
   background-color: #fff;
 }
 .navbar-info a {
@@ -544,7 +562,6 @@ header {
 }
 .info2 {
   font-family: 'Roboto';
-  text-transform: uppercase;
   font-weight: 100;
   color: #565656;
 }
@@ -1611,6 +1628,11 @@ footer .contact-sty .download-app > i {
 footer .contact-sty .download-app > i:hover {
   color: #d96263;
 }
+.btn-shop {
+  background-color: #f5f5f5;
+  padding: 0 15px;
+  border: 1px solid #eee;
+}
 .btn-paypal {
   border-radius: 0 !important;
   color: #fff;
@@ -1823,9 +1845,9 @@ footer .contact-sty .download-app > i:hover {
   background: transparent;
   display: inline-block;
   padding: 10px 15px !important;
-  color: #555;
+  color: #888;
   font-weight: 300;
-  border: 1px solid #555;
+  border: 1px solid #ddd;
   border-radius: 3px;
   -webkit-transition: all ease 0.1s;
   -moz-transition: all ease 0.1s;

@@ -5,6 +5,9 @@ cablack = #323232
 cagreen = #aa261d
 cagreenh = #7e1a1d
 
+i 
+  font-size: 24px;
+  vertical-align: middle;
 /************** deafault css******************/
 .no-padding
   padding 0 !important
@@ -33,6 +36,8 @@ cagreenh = #7e1a1d
 .alert-warning
   text-shadow 0 0 0 transparent
 
+p,ul,li
+  color #555
 a:focus
   outline 0 solid
 
@@ -72,9 +77,19 @@ body
 .white
   color white !important
 
+.clearfix
+  clear both
+
+.go-to-shop
+  margin-top -10px  
 /************** Grid css******************/
+.divider-main
+  margin 15px
+  width 1px 
+  height 20px
+  background-color #ccc
 .content
-  margin-top 100px
+  margin-top 170px
 .content-post
   margin 20px 0
   article
@@ -143,10 +158,7 @@ body
   background-color #528a3b !important
 .bg-danger
   background-color #d22626 !important
-.dropdown-menu 
-  width 100vw
-  min-width 90vw
-  top 100px
+
 
 .log-section-mobile
   display none
@@ -170,19 +182,20 @@ body
     display none
 
 .navbar-info
+  .dropdown-menu
+    z-index 99999
   .nav-info
     margin-top 12px
   .my-account 
-    font-size 24px 
+    font-size 18px 
     padding-right 15px
     text-decoration none
     .ion-ios-person-outline
       vertical-align middle
-      font-size 36px !important
   .shopping-cart
-    font-size 24px
+    font-size 18px
     padding-left 20px 
-    border-left 1px solid #ccc
+    margin-top -8px
     a
       font-size 24px
       font-weight 100
@@ -203,8 +216,8 @@ body
   border-radius 30px
   background-color cagreen
   font-size 16px
-  top 0px
-  right 85px
+  top 5px
+  right 60px
   width 20px
   height 20px
 .shopcart-img
@@ -230,6 +243,7 @@ body
 header
   width 100%
   overflow hidden
+  position absolute
   top 0
   left 0
   z-index 999
@@ -239,12 +253,11 @@ header
   -ms-transition height 0.3s
   -o-transition height 0.3s
   transition height 0.3s
-
+  box-shadow 0 7px 10px rgba(0,0,0,0.3)
 .header
   text-align center
 
   .navbar-default
-    position absolute
     background-color white
     left 0
     right 0
@@ -252,7 +265,6 @@ header
     border-radius 0
     margin-bottom 0
     z-index 9999
-    box-shadow 0 7px 10px rgba(0,0,0,0.3)
     border-top 1px solid #eee
     .navbar-brand
       padding 5px 15px
@@ -448,7 +460,7 @@ header
 
 /*header info*/
 .navbar-info
-  padding 1.3em 0
+  padding 1em 0 0.2em 
   background-color #fff
   a
     color catext
@@ -473,7 +485,6 @@ header
   font-size 1.7em
 .info2
   font-family 'Roboto'
-  text-transform uppercase
   font-weight 100
   color #565656
 .dividerw
@@ -1354,6 +1365,10 @@ footer
         color #d96263
 
 /**************** Buttons ***************/
+.btn-shop
+  background-color #f5f5f5
+  padding 0 15px
+  border 1px solid #eee
 .btn-paypal
   border-radius 0 !important
   color #fff
@@ -1538,9 +1553,9 @@ footer
   background transparent
   display inline-block
   padding 10px 15px !important
-  color #555
+  color #888
   font-weight 300
-  border 1px solid #555
+  border 1px solid #ddd
   border-radius 3px
   -webkit-transition all ease 0.1s
   -moz-transition all ease 0.1s
