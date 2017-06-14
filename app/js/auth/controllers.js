@@ -6,7 +6,7 @@
         self.busy = false;
         self.formData = {};
         self.formDataLogin = {};
-        self.branchDefault = { branchOffices: ["b69d0047-3502-47fe-9d88-33fac4ee188e"] };
+        self.branchDefault = {branchOffices: ["b69d0047-3502-47fe-9d88-33fac4ee188e"]};
         //self.branchDefault = { branchOffices : [$localStorage.appData.user.branchOffices[0].id]};
         self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
         $rootScope.user = $localStorage.appData.user;
@@ -15,15 +15,14 @@
 
         // Logic for save the session
         self.saveSession = function (response) {
-            console.log(response);
             // save user info to local storage
             $localStorage.appData = {user: angular.copy(response.data.user)};
             $rootScope.user = $localStorage.appData.user;
             /*delete $localStorage.appData.user.groups;
-            delete $localStorage.appData.user.permissions;
-            delete $localStorage.appData.user.projects;
-            delete $localStorage.appData.user.is_superuser;
-            delete $localStorage.appData.user.branchOffices;*/
+             delete $localStorage.appData.user.permissions;
+             delete $localStorage.appData.user.projects;
+             delete $localStorage.appData.user.is_superuser;
+             delete $localStorage.appData.user.branchOffices;*/
             self.idUser = $localStorage.appData.user.id;
             //$scope.app.data = $localStorage.appData;
             // Redirect user here after a successful log in.
@@ -317,8 +316,6 @@
             paginationMinBlocks: 2,
             getData: self.getData
         });
-
-        console.log(self.idUser);
         self.getAddresses = function () {
             AddressSrv.query({customer: self.idUser}).$promise.then(function (data) {
                 self.addresses = data;
@@ -410,13 +407,12 @@
         };
 
         self.submitForm = function () {
-           updateCustomer();
+            updateCustomer();
         };
 
         self.getCustomer = function () {
             CustomerSrv.get({id: self.idUser}).$promise.then(function (data) {
                 self.profileData = data;
-                console.log(self.profileData);
                 self.create = false;
                 if (self.profileData.state)
                     StateSrv.getCities({
@@ -472,11 +468,12 @@
             self.params.pageSize = params.count();
             self.params.ordering = sorting;
             self.params.search = self.searchTerm;
+            self.params.customer = self.idUser;
 
-            OrderSrv.get(self.params).$promise.then(function(data){
+            OrderSrv.get(self.params).$promise.then(function (data) {
                 params.total(data.count);
                 self.sales = data.results;
-            }, function(error) {
+            }, function (error) {
                 angular.forEach(error, function (value, key) {
                     NotificationSrv.error(value + '' + key);
                 })
@@ -503,14 +500,41 @@
         var self = this;
         self.busy = false;
 
+        //aditional keys
+        var aditionalKey = function (array) {
+            if (self.purchase.metadata) {
+                if (self.purchase.metadata.taxInverse === 0) {
+                    //apply tax inverse
+                    angular.forEach(array, function (obj, ind) {
+                        obj.price = (parseFloat(obj.price) / 1.16);
+                        obj.subtotal = (parseFloat(obj.price) * parseFloat(obj.qty));
+                        obj.promotionFloat = parseFloat(obj.promotion);
+                        if (obj.promotionFloat > 0) {
+                            obj.subtotalDiscount = obj.subtotal - obj.promotionFloat;
+                            obj.subtotalDiscount = (obj.subtotalDiscount / 1.16);
+                        }
+                    });
+                }
+                else {
+                    angular.forEach(array, function (obj, ind) {
+                        obj.subtotal = (parseFloat(obj.price) * parseFloat(obj.qty));
+                        obj.promotionFloat = parseFloat(obj.promotion);
+                        if (obj.promotionFloat > 0) {
+                            obj.subtotalDiscount = obj.subtotal - obj.promotionFloat;
+                        }
+                    });
+                }
+            }
+            return array;
+        };
+
         if ($stateParams.id) {
-            OrderSrv.get({id: $stateParams.id}).$promise.then(function(data) {
+            OrderSrv.get({id: $stateParams.id}).$promise.then(function (data) {
                 self.purchase = data;
+                self.purchase.items = aditionalKey(self.purchase.items);
                 return self.purchase;
             })
         }
-        console.log($stateParams);
-        console.log("Mandaditos");
     }
 
     // create the module and assign controllers
