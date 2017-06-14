@@ -1,5 +1,153 @@
 <div id="content-area">
     <div class="container">
-        <h3 class="info2">Detalle de la compra</h3>
+        <div class="col-md-3">
+            <ng-include src="'templates/auth/partials/my-account-items.html'"></ng-include>
+        </div>
+        <div class="col-md-9">
+            <h3 class="info2"><i class="ion-ios-list-outline"></i> Detalle de la compra</h3>
+            <div class="col-md-12 text-center dash-footer">
+                <div class="col-md-3 item">
+                    <p class="item-number">Folio</p>
+                    <p class="item-name">#{{Purchase.purchase.id}}</p>
+                </div>
+                <div class="col-md-3 item">
+                    <p class="item-number">Stock</p>
+                    <p class="item-name" ng-if="Purchase.purchase.statusStock==0">{{Purchase.purchase.statusStockName}}</p>
+                    <p class="item-name" ng-if="Purchase.purchase.statusStock==1">{{Purchase.purchase.statusStockName}}</p>
+                    <p class="item-name" ng-if="Purchase.purchase.statusStock==2">{{Purchase.purchase.statusStockName}}</p>
+                    <p class="item-name" ng-if="Purchase.purchase.statusStock==3">{{Purchase.purchase.statusStockName}}</p>
+                </div>
+                <div class="col-md-3 item">
+                    <p class="item-number">Total de compra</p>
+                    <p class="item-name">{{Purchase.purchase.total | currency}}</p>
+                </div>
+                <div class="col-md-3 item">
+                    <p class="item-number">Fecha</p>
+                    <p class="item-name">{{ Purchase.purchase.createdAt | date:'short'}}</p>
+                </div>
+            </div>
+            <div class="col-md-12" style="margin-top: 10px">
+                <div class="payment-sidebar">
+                    <div class="payment-header">
+                        <div class="row label-status">
+                            <div class="col-md-1">
+                                <h4>
+                                    <span ng-if="Purchase.purchase.paymentType == 3" class="label label-sm bg-paypal">
+                                        {{ Purchase.purchase.paymentTypeName }}
+                                    </span>
+                                    <span ng-if="Purchase.purchase.paymentType == 6" class="label label-sm bg-green">
+                                        {{ Purchase.purchase.paymentTypeName }}
+                                    </span>
+                                    <span ng-if="Purchase.purchase.paymentType == 8" class="label label-sm bg-war">
+                                        {{ Purchase.purchase.paymentTypeName }}
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="col-md-1">
+                                <h4>
+                                    <span ng-if="Purchase.purchase.isPaid == 0" class="label label-sm bg-success">
+                                        {{ Purchase.purchase.isPaidName }}
+                                    </span>
+                                    <span ng-if="Purchase.purchase.isPaid == 1" class="label label-sm bg-warning">
+                                        {{ Purchase.purchase.isPaidName }}
+                                    </span>
+                                    <span ng-if="Purchase.purchase.isPaid == 2" class="label label-sm bg-notpaid">
+                                        {{ Purchase.purchase.isPaidName }}
+                                    </span>
+                                </h4>
+                            </div>
+                            <!--<div class="col-md-1">
+                                <h4>
+                                    <span ng-if="Purchase.purchase.orderStatus == 0" class="label label-sm bg-primary">
+                                        {{ Purchase.purchase.purchaseStatusName }}
+                                </span>
+                                    <span ng-if="Purchase.purchase.orderStatus == 1" class="label label-sm bg-war">
+                                        {{ Purchase.purchase.orderStatusName }}
+                                </span>
+                                    <span ng-if="Purchase.purchase.orderStatus == 2" class="label label-sm bg-default">
+                                        {{ Purchase.purchase.orderStatusName}}
+                                </span>
+                                    <span ng-if="Purchase.purchase.orderStatus == 3" class="label label-sm bg-default">
+                                        {{ Purchase.purchase.orderStatusName}}
+                                </span>
+                                    <span ng-if="Purchase.purchase.orderStatus == 4" class="label label-sm bg-green">
+                                        {{ Purchase.purchase.orderStatusName}}
+                                </span>
+                                    <span ng-if="Purchase.purchase.orderStatus == 5" class="label label-sm bg-war">
+                                        {{ Purchase.purchase.orderStatusName}}
+                                </span>
+                                    <span ng-if="Purchase.purchase.orderStatus == 6" class="label label-sm bg-danger">
+                                        {{ Purchase.purchase.orderStatusName}}
+                                </span>
+                                    <span ng-if="Purchase.purchase.orderStatus == 8" class="label label-sm bg-orange">
+                                        {{ Purchase.purchase.orderStatusName}}
+                                </span>
+                                </h4>
+                            </div>-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th width="5%">Cantidad</th>
+                                        <th width="50%">Descripción</th>
+                                        <th>Precio unitario</th>
+                                        <th>Importe</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in Purchase.purchase.items">
+                                        <th scope="row">{{item.qty}}</th>
+                                        <td>{{item.itemId}} - {{item.name}}</td>
+                                        <td>{{item.price | currency}}</td>
+                                        <td ng-if="item.subtotalDiscount">{{item.subtotalDiscount | currency}}
+                                            <span class="glyphicon  glyphicon-exclamation-sign">
+                                            <md-tooltip md-direction="right">Este producto tuvo {{item.promotion | currency}} de descuento.</md-tooltip></span></p>
+                                        </td>
+                                        <td ng-if="!item.subtotalDiscount">{{item.subtotal | currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: right;" colspan="3">Descuento</th>
+                                        <td>{{Purchase.purchase.promoTotal | currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: right;" colspan="3">Subtotal</th>
+                                        <td>{{Purchase.purchase.subTotal | currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: right;">IVA</th>
+                                        <td>{{Purchase.purchase.taxTotal | currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="3" style="text-align: right;">TOTAL</th>
+                                        <td>{{Purchase.purchase.total | currency}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-footer">
+                        <div class="row">
+                            <div class="col-md-8" ng-if="Purchase.purchase.comments">
+                                <h4><strong>Nota:</strong> {{ Purchase.purchase.comments}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-mount">
+                        <div class="pull-right btn-inv">
+                            <button title="Regresar a mis compras" class="btn btn-md btn-info"
+                                    ui-sref="sales">
+                                Regresar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

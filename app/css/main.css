@@ -156,6 +156,9 @@ body {
   margin-left: 2px;
   vertical-align: middle;
 }
+.label-status .col-md-1 {
+  margin-right: 20px;
+}
 .bg-war {
   color: #ff9800;
   background-color: #faefde;
@@ -1659,6 +1662,9 @@ footer .contact-sty .download-app > i:hover {
   background-color: #f5f5f5;
   padding: 0 15px;
   border: 1px solid #eee;
+
+.panel-title > input[type='radio'] {
+  cursor: pointer;
 }
 .btn-paypal {
   border-radius: 0 !important;

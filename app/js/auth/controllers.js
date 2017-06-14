@@ -322,26 +322,8 @@
         self.getAddresses = function () {
             AddressSrv.query({customer: self.idUser}).$promise.then(function (data) {
                 self.addresses = data;
-                angular.forEach(self.addresses, function (value, key) {
-                    if (value.state && value.city) {
-                        self.getStateName(value.state, key);
-                        self.getCityName(value.city, key);
-                    }
-                })
+                return self.addresses;
             });
-            //return self.addresses;
-        };
-
-        self.getStateName = function (id, ind) {
-            StateSrv.getState({id: id}).$promise.then(function (data) {
-                self.addresses[ind]["stateName"] = data;
-            })
-        };
-
-        self.getCityName = function (id, ind) {
-            StateSrv.getCity({id: id}).$promise.then(function (data) {
-                self.addresses[ind]["cityName"] = data;
-            })
         };
 
         self.deleteAddress = function (id) {
@@ -480,7 +462,6 @@
         };
 
         self.getData = function (params) {
-            console.log("HOla");
             var sorting = '-createdAt';
             // parser for ordering params
             angular.forEach(params.sorting(), function (value, key) {
@@ -493,6 +474,7 @@
             self.params.search = self.searchTerm;
 
             OrderSrv.get(self.params).$promise.then(function(data){
+                params.total(data.count);
                 self.sales = data.results;
             }, function(error) {
                 angular.forEach(error, function (value, key) {
@@ -523,7 +505,8 @@
 
         if ($stateParams.id) {
             OrderSrv.get({id: $stateParams.id}).$promise.then(function(data) {
-                self.order = data;
+                self.purchase = data;
+                return self.purchase;
             })
         }
         console.log($stateParams);

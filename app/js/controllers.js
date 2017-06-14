@@ -141,7 +141,7 @@
         $rootScope.pageTitle = 'Blog - Corriente Alterna';
     }
 
-    function PostDetailCtrl(EntrySrv, $stateParams, $rootScope) {
+    function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
         var self = this;
         $rootScope.pageTitle = 'Corriente Alterna';
 
@@ -596,7 +596,7 @@
     HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope','$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
-    PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope'];
+    PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['EntrySrv', '$rootScope', '$scope'];

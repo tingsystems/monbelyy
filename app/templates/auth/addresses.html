@@ -33,8 +33,8 @@
                        show-filter="false">
                     <tbody>
                     <tr ng-repeat="address in Address.addresses" datasource="address" ref="Address">
-                        <td data-title="'Estado'" sortable="'stateName.name'">{{ address.stateName.name }}</td>
-                        <td data-title="'Ciudad'" sortable="'cityName.name'">{{ address.cityName.name }}</td>
+                        <td data-title="'Estado'" sortable="'stateName.name'">{{ address.stateName }}</td>
+                        <td data-title="'Ciudad'" sortable="'cityName.name'">{{ address.cityName }}</td>
                         <td data-title="'Domicilio'" sortable="'address'">{{ address.address }}</td>
                         <td data-title="'Colonia'" sortable="'neighborhood'">{{ address.neighborhood }}</td>
                         <td data-title="'Código Postal'" sortable="'zip'">{{ address.zip }}</td>

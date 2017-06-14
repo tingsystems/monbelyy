@@ -32,7 +32,7 @@
     </div>
 </div>
 <hr>
-<div class="col-sm-12 col-md-12">
+<div class="col-sm-12 col-md-12" ng-if="Payment.shiping">
     <h4 class="text-center">Dirección de envío</h4>
     <div class="details-prodpay">
         <!--<h4 class="text-center">Resumen de pedido</h4>-->
@@ -41,15 +41,15 @@
                 <tbody>
                 <tr>
                     <td>Estado</td>
-                    <td>Michocan</td>
+                    <td>{{Payment.addresship.stateName}}</td>
                 </tr>
                 <tr>
                     <td>Ciudad</td>
-                    <td>Morelia</td>
+                    <td>{{Payment.addresship.cityName}}</td>
                 </tr>
                 <tr>
                     <td>Dirección</td>
-                    <td>{{Payment.addresship.address}}</td>
+                    <td>{{Payment.addresship.address}}, {{Payment.addresship.neighborhood }}</td>
                 </tr>
                 <tr>
                     <td>CP</td>

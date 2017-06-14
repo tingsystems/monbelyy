@@ -157,7 +157,7 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'http://api.taki.tingsystems.com';
-        //$rootScope.host = 'http://192.168.1.71'; 
+        //$rootScope.host = 'http://192.168.1.67';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
         $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
@@ -170,7 +170,8 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-43',
             meta_color: '#eee7de',
-            img_default: ' https://www.corriente-alterna.com/img/img-default-ca.png',
+            //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
+            img_default: '../../img/img-default-ca.png',
             email: 'info@corriente-alterna.com',
             phone: '353 110 1895'
 
