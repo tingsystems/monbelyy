@@ -29,11 +29,6 @@ i {
 .alert-warning {
   text-shadow: 0 0 0 transparent;
 }
-p,
-ul,
-li {
-  color: #555;
-}
 a:focus {
   outline: 0 solid;
 }
@@ -216,6 +211,10 @@ body {
 }
 .header.smaller .sub-main {
   display: none;
+}
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+  background-color: transparent;
 }
 .navbar-info .dropdown-menu {
   z-index: 99999;
@@ -601,8 +600,7 @@ header {
 }
 #content-area {
   margin: 0;
-  padding: 70px 25px;
-  background-color: #fff;
+  padding: 100px 25px 70px;
 }
 #content-area .title-category {
   text-align: left;
@@ -727,6 +725,7 @@ header {
 }
 .products {
   padding: 70px 0;
+  background-color: #fff;
 }
 .products .box-products .prod-title h3 {
   font-weight: 600;
@@ -1034,43 +1033,6 @@ color
 }
 .tab-pane {
   margin-bottom: 50px;
-}
-.nav > li > a:hover,
-.nav > li > a:focus {
-  background-color: transparent;
-}
-.nav-tabs {
-  width: 29%;
-  border-top: 1px solid #ddd;
-  border-bottom: none !important;
-  float: left;
-  clear: both;
-}
-.tab-pane {
-  width: 70%;
-  float: right;
-  margin-top: -50px;
-}
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li > a:hover {
-  color: #cb6133;
-  background-color: transparent;
-  font-size: 20px;
-  border: 0 solid transparent;
-  padding: 10px 0;
-}
-.nav-tabs > li > a {
-  padding: 10px 0;
-  border-radius: 0;
-  font-size: 20px;
-  color: #38270f;
-  margin-left: 0;
-  border: none !important;
-}
-.nav-tabs {
-  border-bottom: 1px solid #ccc;
 }
 .see-more {
   padding: 25px;
@@ -1662,7 +1624,7 @@ footer .contact-sty .download-app > i:hover {
   background-color: #f5f5f5;
   padding: 0 15px;
   border: 1px solid #eee;
-
+}
 .panel-title > input[type='radio'] {
   cursor: pointer;
 }
@@ -1683,9 +1645,9 @@ footer .contact-sty .download-app > i:hover {
   border-radius: 0 !important;
   background: #aa261d;
   font-family: "Roboto Slab";
-  font-weight: 600 !important;
+  font-weight: 300 !important;
   color: #fff;
-  font-size: 24px !important;
+  font-size: 20px !important;
 }
 .btn-login-ca.btn-login-ca:hover,
 .btn-cart.btn-login-ca:focus {
@@ -2130,6 +2092,23 @@ footer .contact-sty .download-app > i:hover {
 }
 .owl-nav {
   display: none;
+}
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+  color: #c10514;
+}
+.nav-tabs.nav-justified > li > a {
+  font-size: 24px;
+  color: #555;
+  text-align: left;
+}
+.tab-pane {
+  padding: 15px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
 }
 #products {
   padding: 0;
