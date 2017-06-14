@@ -149,7 +149,7 @@
                     console.log("Carrito", data.id);
                     self.cart = data;
                     $localStorage.cart = self.cart;
-                    NotificationSrv.success("Pedido realizado correctamente");
+                    //NotificationSrv.success("Pedido realizado correctamente");
                     //self.clearCart();
                     $rootScope.items = 0;
                 });
@@ -263,6 +263,7 @@
         self.address = $localStorage.appData.user.address;
         self.phone = ''; //$localStorage.appData.user.phone;
         self.orderPaymentType = '';
+        self.acordion = false;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
 
@@ -502,6 +503,10 @@
                 $state.go('purchase-completed');
             });
         };
+
+        self.changeAcordion = function() {
+            self.acordion = !self.acordiontrue;
+        }
 
 
     }

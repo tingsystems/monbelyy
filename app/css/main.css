@@ -1624,6 +1624,9 @@ footer .contact-sty .download-app > i {
 footer .contact-sty .download-app > i:hover {
   color: #d96263;
 }
+.panel-title > input[type='radio'] {
+  cursor: pointer;
+}
 .btn-paypal {
   border-radius: 0 !important;
   color: #fff;
