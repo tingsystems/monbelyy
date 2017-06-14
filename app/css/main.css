@@ -1601,6 +1601,10 @@ color
   border-color: rgba(0,0,0,0.4);
   outline: none !important;
 }
+.panel-title > span > label {
+  cursor: pointer;
+  font-family: 'Roboto Slab';
+}
 .ca-phone {
   text-align: left;
 }
@@ -1662,7 +1666,7 @@ footer .contact-sty .download-app > i:hover {
   background-color: #f5f5f5;
   padding: 0 15px;
   border: 1px solid #eee;
-
+}
 .panel-title > input[type='radio'] {
   cursor: pointer;
 }
