@@ -106,8 +106,8 @@
                 <div class="col-md-6"><a href="" ui-sref="shopcart">Regresar al carrito</a></div>
                 <div class="col-md-6">
                     <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
-                    <button ng-if="Payment.address" class="btn btn-cart" type="submit" ng-disabled="!Payment.address" ng-click="Payment.saveShippingAddress()">Continuar1</button>
-                    <button ng-if="!Form.$invalid && !Payment.address" class="btn btn-cart" type="submit" ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar2</button>
+                    <button ng-if="Payment.address" class="btn btn-cart" type="submit" ng-disabled="!Payment.address" ng-click="Payment.saveShippingAddress()">Continuar</button>
+                    <button ng-if="!Form.$invalid && !Payment.address" class="btn btn-cart" type="submit" ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar</button>
                 </div>
             </div>
         </div>
