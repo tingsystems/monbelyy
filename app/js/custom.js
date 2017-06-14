@@ -97,3 +97,11 @@ $('ul.nav li.dropdown').hover(function() {
 }, function() {
   $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 });
+
+
+$(document).ready(function(){
+    $('#nav-dash a').click(function(){
+        $('a').removeClass("active");
+        $(this).addClass("active"); 
+    });
+});

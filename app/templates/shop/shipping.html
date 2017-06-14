@@ -2,11 +2,12 @@
     <div class="container">
         <div class="col-md-6 address-form">
             <div class="col-md-12 select-address" style="margin-bottom: 20px">
-                <h3><a href=""><i class="fa fa-address-card"></i></a> Seleccionar dirección existente</h3>
+                <h3><i class="ion-ios-location-outline"></i></a> Seleccionar dirección existente</h3>
                 <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
             </div>
+            <hr class="clearfix">
             <div class="col-md-12">
-                <h3><i class="fa fa-paper-plane"></i> Nueva direccíon de envío</h3>
+                <h3><i class="ion-ios-plus-outline"></i> Nueva direccíon de envío</h3>
                 <form class="form-horizontal" name="Form" novalidate>
                     <div class="col-md-6">
                         <div class="form-item">
@@ -102,8 +103,10 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-12 text-center" style="margin-top: 20px">
-                <div class="col-md-6"><a href="" ui-sref="shopcart">Regresar al carrito</a></div>
+            <div class="col-md-12 text-left" style="margin-top: 20px;">
+                <div class="col-md-6">
+                    <a href="" class="btn btn-gray-clear" ui-sref="shopcart" style="background: #eee;">Regresar al carrito</a>
+                </div>
                 <div class="col-md-6">
                     <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
                     <button ng-if="Payment.address" class="btn btn-cart" type="submit" ng-disabled="!Payment.address" ng-click="Payment.saveShippingAddress()">Continuar1</button>

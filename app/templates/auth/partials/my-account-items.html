@@ -1,9 +1,8 @@
-<div class="list-group list-dash">
-    <a href="#" class="list-group-item active" ui-sref="dashboard">
+<div id="nav-dash" class="list-group list-dash">
+    <a href="#" class="list-group-item" ng-class="{'active': dashboard}"  ng-click="dashboard = !dashboard" ui-sref="dashboard">
         <i class="ion-ios-person-outline"></i> Mi cuenta
     </a>
-    <a href="#" class="list-group-item" ui-sref="sales"><i class="ion-bag"></i> Mis compras</a>
-    <a href="#" class="list-group-item" ui-sref="address"><i class="ion-ios-location-outline"></i> Mis direcciones</a>
-    <a href="#" class="list-group-item" ui-sref="sales"><i class="fa fa-credit-card"></i> Mis tarjetas guardadas</a>    
-    <a href="#" class="list-group-item" ui-sref="profile"><i class="ion-ios-gear-outline"></i> Configuración</a>
-</div>
+    <a href="#" class="list-group-item" ng-class="{'active': sales}"  ng-click="sales = !sales" ui-sref="sales"><i class="ion-bag"></i> Mis compras</a>
+    <a href="#" class="list-group-item" ui-sref="address" ng-class="{'active': address}"  ng-click="address = !address"><i class="ion-ios-location-outline"></i> Mis direcciones</a>
+    <a href="#" class="list-group-item"  ui-sref="profile"  ng-class="{'active': profile}"  ng-click="profile = !profile"><i class="ion-ios-gear-outline"></i> Configuración</a>
+</div> 

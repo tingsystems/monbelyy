@@ -1641,6 +1641,20 @@ footer .contact-sty .download-app > i {
 footer .contact-sty .download-app > i:hover {
   color: #d96263;
 }
+.search-bar {
+  margin-bottom: 20px;
+}
+.indicators {
+  opacity: 0.8;
+  border-radius: 0;
+  padding: 0 8px;
+}
+.glyphicon-remove {
+  font-size: 18px;
+  color: #777;
+  vertical-align: middle;
+  margin-top: -10px;
+}
 .btn-shop {
   background-color: #f5f5f5;
   padding: 0 15px;
@@ -1687,6 +1701,13 @@ footer .contact-sty .download-app > i:hover {
   background: #7e1a1d !important;
   color: #fff;
 }
+.btn-gray-clear-sm {
+  color: #908f8f;
+  border-color: #908f8f;
+  background: transparent;
+  padding: 0px 13px;
+  font-size: 14px !important;
+}
 .add-button {
   background-color: #565656;
   border-color: #565656;
@@ -1706,6 +1727,10 @@ footer .contact-sty .download-app > i:hover {
   border-color: #aa261d;
   background-color: transparent;
   color: #aa261d;
+}
+.gray {
+  background-color: #919191;
+  border-color: #919191;
 }
 .btn {
   font-size: 18px;
@@ -2000,6 +2025,15 @@ footer .contact-sty .download-app > i:hover {
 .mail i {
   color: #ffa500;
 }
+.list-group-item.active,
+.list-group-item.active:hover {
+  color: #aa261d;
+  background-color: transparent;
+}
+.list-group-item.active:focus {
+  background-color: #aa261d;
+  color: #fff;
+}
 .form-section {
   background: transparent;
   padding-bottom: 100px;
@@ -2013,7 +2047,7 @@ footer .contact-sty .download-app > i:hover {
   background: transparent;
 }
 .form-item {
-  padding-top: 20px;
+  padding-top: 5px;
 }
 .cart-qty {
   width: 90px !important;
@@ -2025,7 +2059,7 @@ footer .contact-sty .download-app > i:hover {
   margin-bottom: 15px;
   display: block;
   width: 100%;
-  height: 44px;
+  height: 39px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;

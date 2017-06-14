@@ -1373,7 +1373,17 @@ footer
       padding-right 20px
       &:hover
         color #d96263
-
+.search-bar
+  margin-bottom 20px
+.indicators
+  opacity 0.8
+  border-radius 0
+  padding 0 8px  
+.glyphicon-remove
+  font-size 18px
+  color #777
+  vertical-align middle
+  margin-top -10px  
 /**************** Buttons ***************/
 .btn-shop
   background-color #f5f5f5
@@ -1408,6 +1418,12 @@ footer
     border-color cagreen
     background cagreenh !important
     color #fff
+.btn-gray-clear-sm
+  color #908f8f
+  border-color #908f8f
+  background transparent
+  padding 0px 13px
+  font-size 14px !important    
 .add-button
   @extends .btn-cart
   background-color #565656
@@ -1423,6 +1439,10 @@ footer
     border-color cagreen
     background-color transparent
     color cagreen
+
+.gray
+  background-color #919191
+  border-color #919191
 
 .btn
   font-size 18px
@@ -1680,7 +1700,12 @@ footer
   i
     color #FFA500
 /******** Form section *************/
-
+.list-group-item.active, .list-group-item.active:hover
+    color #aa261d
+    background-color transparent
+.list-group-item.active:focus
+    background-color #aa261d 
+    color white
 .form-section
   background transparent
   padding-bottom  100px
@@ -1691,7 +1716,7 @@ footer
   background transparent
   //margin-top 100px
 .form-item
-  padding-top 20px
+  padding-top 5px
 .cart-qty
   width 90px !important
   height auto !important
@@ -1701,7 +1726,7 @@ footer
   margin-bottom 15px
   display block
   width 100%
-  height 44px
+  height 39px
   padding 6px 12px
   font-size 14px
   line-height 1.42857143
