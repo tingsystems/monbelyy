@@ -294,6 +294,17 @@
         };
         self.getDefaulBranchOffice();
 
+        var clearCart = function () {
+            self.items = [];
+            self.total = 0;
+            $localStorage.items = [];
+            $localStorage.cart = [];
+            $localStorage.total = 0;
+            $localStorage.promoTotal = 0;
+            self.promoTotal = 0;
+            self.typeTax = false;
+        };
+
         var publishKey = 'key_B34Yd1rcLM2Pyxpg';
         //var publishKey = $rootScope.currentKey;
         var setPublishableKey = function () {
@@ -357,8 +368,9 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
-                $state.go('purchase-completed');
                 clearCart();
+                $state.go('purchase-completed');
+
             });
             /* ChargeSrv.save(params).$promise.then(function (response) {
              NotificationSrv.success('Cargo creado correctamente!');
@@ -419,18 +431,8 @@
             $localStorage.total = self.total;
         };
         getTotal();
-        var clearCart = function () {
-            self.items = [];
-            self.total = 0;
-            $localStorage.items = [];
-            $localStorage.total = 0;
-            $localStorage.promoTotal = 0;
-            self.promoTotal = 0;
-            self.customer = null;
-            self.globalDiscount.value = 0;
-            self.typeTax = false;
-        };
-        
+
+
         self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
                 self.customer = data;
@@ -520,14 +522,15 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
-                $state.go('purchase-completed');
                 clearCart();
+                $state.go('purchase-completed');
+
             }, function (error) {
                 console.log(error)
             });
         };
 
-        self.changeAcordion = function() {
+        self.changeAcordion = function () {
             self.acordion = !self.acordiontrue;
         }
 
