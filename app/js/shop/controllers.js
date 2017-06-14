@@ -149,8 +149,6 @@
                     console.log("Carrito", data.id);
                     self.cart = data;
                     $localStorage.cart = self.cart;
-                    //NotificationSrv.success("Pedido realizado correctamente");
-                    //self.clearCart();
                     $rootScope.items = 0;
                 });
                 $state.go('shipping-address');
@@ -182,7 +180,7 @@
 
         console.log(self.formDataShip);
 
-        AddressSrv.query({customer:self.customer}).$promise.then(function (data) {
+        AddressSrv.query({customer: self.customer}).$promise.then(function (data) {
             self.addresses = data;
         }, function (error) {
             angular.forEach(error, function (key, value) {
@@ -296,6 +294,17 @@
         };
         self.getDefaulBranchOffice();
 
+        var clearCart = function () {
+            self.items = [];
+            self.total = 0;
+            $localStorage.items = [];
+            $localStorage.cart = [];
+            $localStorage.total = 0;
+            $localStorage.promoTotal = 0;
+            self.promoTotal = 0;
+            self.typeTax = false;
+        };
+
         var publishKey = 'key_B34Yd1rcLM2Pyxpg';
         //var publishKey = $rootScope.currentKey;
         var setPublishableKey = function () {
@@ -327,7 +336,7 @@
                 //phone: self.customer.phone,
                 email: self.email,
                 items: $localStorage.items,
-                amount: $localStorage.total,
+                total: $localStorage.total,
                 shop: self.store
                 //kind: 'card_payment'
                 /*production: self.charge.production,
@@ -340,6 +349,12 @@
             params.kind = 'order';
             params.paymentType = parseInt(self.orderPaymentType);
             params.itemCount = self.itemCount;
+            if (!self.customer.phone) {
+                if (self.address.phone) {
+                    self.customer.phone = self.address.phone
+                }
+            }
+            console.log(self.customer);
             params.customer = self.customer;
             params.cartId = $localStorage.cart.id;
             params.warehouse = self.defaultWarehouse.id;
@@ -353,7 +368,9 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
+                clearCart();
                 $state.go('purchase-completed');
+
             });
             /* ChargeSrv.save(params).$promise.then(function (response) {
              NotificationSrv.success('Cargo creado correctamente!');
@@ -415,6 +432,7 @@
         };
         getTotal();
 
+
         self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
                 self.customer = data;
@@ -426,8 +444,13 @@
         };
         self.getCustomer();
 
+<<<<<<< HEAD
         var shippingAddress = function() {
             var fieldship = 'address,phone,zip,cityName,neighborhood,phone,stateName';
+=======
+        var shippingAddress = function () {
+            var fieldship = 'address,phone,zip';
+>>>>>>> 68e745151e2efef7255e55d01ea03522653df24b
             var address = {};
             AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
                 self.addresship = data;
@@ -460,23 +483,27 @@
             params.isPaid = 2;
             params.itemCount = self.itemCount;
             params.store = self.defaultbranchOffice.id;
+
+            if (!self.customer.phone) {
+                if (self.address.phone) {
+                    self.customer.phone = self.address.phone
+                }
+            }
             params.customer = self.customer;
             params.cartId = $localStorage.cart.id;
             params.warehouse = self.defaultWarehouse.id;
             params.employee = $localStorage.appData.user.id;
             params.destination = self.address;
-
-
-            if(params.paymentType===8){
+            if (params.paymentType === 8) {
                 params.orderStatus = 1;
                 params.isPaid = 0;
                 params.token = token.id;
-            };
+            }
 
-            if(params.paymentType===6){
+            if (params.paymentType === 6) {
                 params.orderStatus = 1;
                 params.isPaid = 2;
-            };
+            }
 
             if (self.taxInverse) {
                 params.taxTotal = self.taxTotal2;
@@ -500,10 +527,22 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 console.log(data);
+                clearCart();
                 $state.go('purchase-completed');
+
+            }, function (error) {
+                console.log(error)
             });
         };
 
+<<<<<<< HEAD
+=======
+        self.changeAcordion = function () {
+            self.acordion = !self.acordiontrue;
+        }
+
+
+>>>>>>> 68e745151e2efef7255e55d01ea03522653df24b
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
