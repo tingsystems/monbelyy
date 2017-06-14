@@ -350,16 +350,15 @@
             params.paymentType = parseInt(self.orderPaymentType);
             params.itemCount = self.itemCount;
             if (!self.customer.phone) {
-                if (self.address.phone) {
-                    self.customer.phone = self.address.phone
+                if (self.addresship.phone) {
+                    self.customer.phone = self.addresship.phone
                 }
             }
-            console.log(self.customer);
             params.customer = self.customer;
             params.cartId = $localStorage.cart.id;
             params.warehouse = self.defaultWarehouse.id;
             params.employee = $localStorage.appData.user.id;
-            params.destination = self.address;
+            params.destination = self.addresship.id;
             params.orderStatus = 1;
             params.isPaid = 0;
             params.token = token.id;
@@ -480,15 +479,15 @@
             params.store = self.defaultbranchOffice.id;
 
             if (!self.customer.phone) {
-                if (self.address.phone) {
-                    self.customer.phone = self.address.phone
+                if (self.addresship.phone) {
+                    self.customer.phone = self.addresship.phone
                 }
             }
             params.customer = self.customer;
             params.cartId = $localStorage.cart.id;
             params.warehouse = self.defaultWarehouse.id;
             params.employee = $localStorage.appData.user.id;
-            params.destination = self.address;
+            params.destination = self.addresship.id;
             if (params.paymentType === 8) {
                 params.orderStatus = 1;
                 params.isPaid = 0;

@@ -69,15 +69,12 @@
                     <p class="item-name">#{{Purchase.purchase.id}}</p>
                 </div>
                 <div class="col-md-3 item">
-                    <p class="item-number">Stock</p>
-                    <p class="item-name" ng-if="Purchase.purchase.statusStock==0">{{Purchase.purchase.statusStockName}}</p>
-                    <p class="item-name" ng-if="Purchase.purchase.statusStock==1">{{Purchase.purchase.statusStockName}}</p>
-                    <p class="item-name" ng-if="Purchase.purchase.statusStock==2">{{Purchase.purchase.statusStockName}}</p>
-                    <p class="item-name" ng-if="Purchase.purchase.statusStock==3">{{Purchase.purchase.statusStockName}}</p>
+                    <p class="item-number">Tipo de pago</p>
+                    <p class="item-name">{{ Purchase.purchase.paymentTypeName }}</p>
                 </div>
                 <div class="col-md-3 item">
-                    <p class="item-number">Total de compra</p>
-                    <p class="item-name">{{Purchase.purchase.total | currency}}</p>
+                    <p class="item-number">Estado del pago</p>
+                    <p class="item-name">{{ Purchase.purchase.isPaidName }}</p>
                 </div>
                 <div class="col-md-3 item">
                     <p class="item-number">Fecha</p>
