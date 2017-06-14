@@ -1764,7 +1764,7 @@ footer .contact-sty .download-app > i:hover {
   color: #fff;
   font-weight: 300;
   border: none;
-  border-radius: 30px;
+  border-radius: 2px;
 }
 .btn-red:hover,
 .btn-red:focus {
@@ -1773,7 +1773,7 @@ footer .contact-sty .download-app > i:hover {
   padding: 10px 15px;
   color: #fff;
   font-weight: 300;
-  border-radius: 30px;
+  border-radius: 2px;
 }
 .btn-yellow {
   background: #cbae00;
