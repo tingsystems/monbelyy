@@ -106,7 +106,6 @@
         self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
-                //$localStorage.appData.user.branchOffices = data.branchOffices;
                 $localStorage.appData.user.firstName = data.firstName;
             });
         };

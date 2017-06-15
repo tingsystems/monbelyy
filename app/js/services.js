@@ -54,7 +54,7 @@
                     title: !title ? 'Mensaje' : title,
                     text: msg,
                     type: "error",
-                    timer: 1500,
+                    timer: 2500,
                     showConfirmButton: false
                 });
             }
@@ -148,7 +148,23 @@
             'logout': { method: 'POST', url: '#host#/api/{{apiV}}/auth/logout' }
         });
     }
+    //error services
+    function ErrorSrv(NotificationSrv) {
+        return{
+            error: function (data) {
+                if(data.data.isArray){
+                    angular.forEach(data.data, function (value) {
+                        NotificationSrv.error(value);
+                    });
 
+                }else{
+                    angular.forEach(data.data, function (value,key) {
+                        NotificationSrv.error(key + ' : '+ value);
+                    });
+                }
+            }
+        };
+    }
 
     // Assign factory to module
     angular.module('ts.services', ['ngResource'])
@@ -163,7 +179,8 @@
         .factory('StateSrv', StateSrv)
         .factory('AccessSrv', AccessSrv)
         .factory('AttachmentCmsSrv', AttachmentCmsSrv)
-        .factory('urlAttachment', urlAttachment);
+        .factory('urlAttachment', urlAttachment)
+        .factory('ErrorSrv', ErrorSrv);
 
     // Inject factory the dependencies
     BaseUrl.$inject = [];
@@ -178,4 +195,5 @@
     AccessSrv.$inject = ['$resource'];
     AttachmentCmsSrv.$inject = ['$resource', 'urlAttachment'];
     urlAttachment.$inject = [];
+    ErrorSrv.$inject = ['NotificationSrv'];
 })();
