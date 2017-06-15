@@ -536,6 +536,74 @@
         }
     }
 
+    function ProfilePanelCtrl(OrderSrv, NotificationSrv, NgTableParams, $timeout, $localStorage) {
+        var self = this;
+        var timeout = $timeout;
+        self.formData = {};
+        self.searchTerm = '';
+        self.params = {};
+        self.sales = [];
+        self.create = false;
+        self.busy = false;
+        self.initialState = function () {
+        };
+console.log("Putito");
+        self.idUser = $localStorage.appData.user.customer;
+
+        self.globalSearch = function () {
+            // Cancels a task associated with the promise
+            $timeout.cancel(timeout);
+            // Get the products after half second
+            timeout = $timeout(function () {
+                self.tableParams.page(1);
+                self.tableParams.reload();
+            }, 500);
+        };
+
+        self.getData = function (params) {
+            var sorting = '-createdAt';
+            // parser for ordering params
+            angular.forEach(params.sorting(), function (value, key) {
+                sorting = value === 'desc' ? '-' + key : key;
+            });
+
+            self.params.page = params.page();
+            self.params.pageSize = params.count();
+            self.params.ordering = sorting;
+            self.params.search = self.searchTerm;
+            self.params.customer = self.idUser;
+
+            OrderSrv.get(self.params).$promise.then(function (data) {
+                params.total(data.count);
+                self.purchases = data.results;
+                self.purchasesCount = self.purchases.length;
+                console.log(self.purchasesCount);
+                self.purchaseRecent = self.purchases.slice(0, 3);
+            }, function (error) {
+                angular.forEach(error, function (value, key) {
+                    NotificationSrv.error(value + '' + key);
+                })
+            });
+        };
+
+        self.tableParams = new NgTableParams({
+            // default params
+            page: 1, // The page number to show
+            count: 10 // The number of items to show per page
+        }, {
+            // default settings
+            // page size buttons (right set of buttons in demo)
+            //counts: [],
+            // determines the pager buttons (left set of buttons in demo)
+            paginationMaxBlocks: 13,
+            paginationMinBlocks: 2,
+            getData: self.getData
+        });
+
+    }
+
+
+
     // create the module and assign controllers
     angular.module('auth.controllers', ['auth.services'])
         .controller('AccessCtrl', AccessCtrl)
@@ -545,7 +613,8 @@
         .controller('AddressListCtrl', AddressListCtrl)
         .controller('ProfileCtrl', ProfileCtrl)
         .controller('PurchaseListCtrl', PurchaseListCtrl)
-        .controller('PurchaseDetailCtrl', PurchaseDetailCtrl);
+        .controller('PurchaseDetailCtrl', PurchaseDetailCtrl)
+        .controller('ProfilePanelCtrl', ProfilePanelCtrl);
 
 
     // inject dependencies to controllers
@@ -557,4 +626,5 @@
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
     PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv'];
+    ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$localStorage'];
 })();
