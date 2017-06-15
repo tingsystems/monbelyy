@@ -7,11 +7,12 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
-                                <input type="radio" value="8" name="paymentType"
+                                <input type="radio" value="8" name="paymentType" id="creditCard"
                                        ng-click="Payment.creditCard=!Payment.creditCard"
                                        ng-model="Payment.orderPaymentType">
-                                <a data-toggle="collapse" href=""><span class="fa fa-credit-card-alt">
-                            </span> Tarjeta de crédito</a>
+                                <span class="fa fa-credit-card-alt">
+                                    <label for="creditCard">Tarjeta de crédito</label>
+                                </span>
                             </h4>
                         </div>
                         <div id="collapseOne" ng-if="Payment.creditCard" class="panel-collapse collapse in">
@@ -112,10 +113,11 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
-                                <input disabled type="radio" value="3" name="paymentType" ng-model="Payment.orderPaymentType">
-                                <a data-toggle="collapse" href="" ng-click="Payment.paypal=!Payment.paypal"><span
-                                        class="fa fa-paypal">
-                                                    </span> Pago con Paypal</a>
+                                <input disabled type="radio" value="3" id="paypal" ng-click="Payment.paypal=!Payment.paypal"
+                                       name="paymentType" ng-model="Payment.orderPaymentType">
+                                <span class="fa fa-paypal">
+                                    <label for="paypal">Pago con Paypal</label>
+                                </span>
                             </h4>
                         </div>
                         <div id="collapseTwo" ng-if="Payment.paypal" class="panel-collapse collapse in">
@@ -135,9 +137,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
-                                <input type="radio" ng-click="Payment.depositBank=!Payment.depositBank" value="6" name="paymentType" ng-model="Payment.orderPaymentType">
-                                <a data-toggle="collapse"><span class="fa fa-university">
-                            </span> Depósito Bancario</a>
+                                <input type="radio" id="depositBank" ng-click="Payment.depositBank=!Payment.depositBank" value="6" name="paymentType" ng-model="Payment.orderPaymentType">
+                                <span class="fa fa-university">
+                                    <label for="depositBank"> Depósito bancario</label></span>
                             </h4>
                         </div>
                         <div id="collapseThree" ng-if="Payment.depositBank" class="panel-collapse collapse in">
@@ -156,7 +158,7 @@
                 </div>
             </div>
             <div class="col-md-12 text-center" style="margin-top: 20px">
-                <div class="col-md-6"><a href="">Volver a dirección de envío</a></div>
+                <div class="col-md-6"><button ui-sref="shipping-address" class="btn btn-cart">Volver a dirección de envío</button></div>
                 <div class="col-md-6">
                     <!--<button ng-if="Payment.depositBank" class="btn btn-cart" ui-sref="checkout">Finalizar compra</button>-->
                 </div>

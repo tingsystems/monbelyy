@@ -1,10 +1,68 @@
-<div id="content-area">
+<div class="content-dashboard">
     <div class="container">
+        
         <div class="col-md-3">
             <ng-include src="'templates/auth/partials/my-account-items.html'"></ng-include>
         </div>
         <div class="col-md-9">
             <h3 class="info2"><i class="ion-ios-list-outline"></i> Detalle de la compra</h3>
+            <hr>
+             <div class="row label-status">
+                <div class="col-md-1">
+                    <h4>
+                        <span ng-if="Purchase.purchase.paymentType == 3" class="label label-sm bg-paypal">
+                            {{ Purchase.purchase.paymentTypeName }}
+                        </span>
+                        <span ng-if="Purchase.purchase.paymentType == 6" class="label label-sm bg-green">
+                            {{ Purchase.purchase.paymentTypeName }}
+                        </span>
+                        <span ng-if="Purchase.purchase.paymentType == 8" class="label label-sm bg-war">
+                            {{ Purchase.purchase.paymentTypeName }}
+                        </span>
+                    </h4>
+                </div>
+                <div class="col-md-1">
+                    <h4>
+                        <span ng-if="Purchase.purchase.isPaid == 0" class="label label-sm bg-success">
+                            {{ Purchase.purchase.isPaidName }}
+                        </span>
+                        <span ng-if="Purchase.purchase.isPaid == 1" class="label label-sm bg-warning">
+                            {{ Purchase.purchase.isPaidName }}
+                        </span>
+                        <span ng-if="Purchase.purchase.isPaid == 2" class="label label-sm bg-notpaid">
+                            {{ Purchase.purchase.isPaidName }}
+                        </span>
+                    </h4>
+                </div>
+                <!--<div class="col-md-1">
+                    <h4>
+                        <span ng-if="Purchase.purchase.orderStatus == 0" class="label label-sm bg-primary">
+                            {{ Purchase.purchase.purchaseStatusName }}
+                    </span>
+                        <span ng-if="Purchase.purchase.orderStatus == 1" class="label label-sm bg-war">
+                            {{ Purchase.purchase.orderStatusName }}
+                    </span>
+                        <span ng-if="Purchase.purchase.orderStatus == 2" class="label label-sm bg-default">
+                            {{ Purchase.purchase.orderStatusName}}
+                    </span>
+                        <span ng-if="Purchase.purchase.orderStatus == 3" class="label label-sm bg-default">
+                            {{ Purchase.purchase.orderStatusName}}
+                    </span>
+                        <span ng-if="Purchase.purchase.orderStatus == 4" class="label label-sm bg-green">
+                            {{ Purchase.purchase.orderStatusName}}
+                    </span>
+                        <span ng-if="Purchase.purchase.orderStatus == 5" class="label label-sm bg-war">
+                            {{ Purchase.purchase.orderStatusName}}
+                    </span>
+                        <span ng-if="Purchase.purchase.orderStatus == 6" class="label label-sm bg-danger">
+                            {{ Purchase.purchase.orderStatusName}}
+                    </span>
+                        <span ng-if="Purchase.purchase.orderStatus == 8" class="label label-sm bg-orange">
+                            {{ Purchase.purchase.orderStatusName}}
+                    </span>
+                    </h4>
+                </div>-->
+            </div>
             <div class="col-md-12 text-center dash-footer">
                 <div class="col-md-3 item">
                     <p class="item-number">Folio</p>
@@ -78,9 +136,9 @@
                     </div>
                     <div class="payment-mount">
                         <div class="pull-right btn-inv">
-                            <button title="Regresar a mis compras" class="btn btn-md btn-info"
+                            <button title="Regresar a mis compras" class="btn btn-md btn-gray-clear"
                                     ui-sref="sales">
-                                Regresar
+                                <i class="fa fa-angle-left"></i> Regresar
                             </button>
                         </div>
                     </div>
