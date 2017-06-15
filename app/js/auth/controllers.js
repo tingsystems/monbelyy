@@ -545,9 +545,12 @@
         self.sales = [];
         self.create = false;
         self.busy = false;
+        self.pending = 0;
+        self.processing = 0;
+        self.shipped = 0;
+
         self.initialState = function () {
         };
-console.log("Putito");
         self.idUser = $localStorage.appData.user.customer;
 
         self.globalSearch = function () {
@@ -577,8 +580,20 @@ console.log("Putito");
                 params.total(data.count);
                 self.purchases = data.results;
                 self.purchasesCount = self.purchases.length;
-                console.log(self.purchasesCount);
                 self.purchaseRecent = self.purchases.slice(0, 3);
+
+                angular.forEach(self.purchases, function(value,key){
+                    if(value.paymentType === 9){
+                        self.shipped++;
+                    }
+                    if(value.paymentType === 1){
+                        self.pending++;
+                    }
+                    if(value.paymentType === 2){
+                        self.processing++;
+                    }
+                });
+
             }, function (error) {
                 angular.forEach(error, function (value, key) {
                     NotificationSrv.error(value + '' + key);

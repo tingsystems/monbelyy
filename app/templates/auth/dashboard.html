@@ -17,15 +17,15 @@
                         <p class="item-name"><a ui-sref="sales" title="Ver mis compras">Mis compras</a></p>
                     </div>
                     <div class="col-md-3 item">
-                        <p class="item-number">0</p>
+                        <p class="item-number">{{ Panel.pending }}</p>
                         <p class="item-name">Pagos pendientes</p>
                     </div>
                     <div class="col-md-3 item">
-                        <p class="item-number">0</p>
+                        <p class="item-number">{{ Panel.processing }}</p>
                         <p class="item-name">En proceso</p>
                     </div>
                     <div class="col-md-3 item">
-                        <p class="item-number">4</p>
+                        <p class="item-number">{{ Panel.shipped }}</p>
                         <p class="item-name">Enviados</p>
                     </div>
                 </div>
