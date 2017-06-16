@@ -49,13 +49,13 @@
                 }
             })
             .state('purchase-completed', {
-                url: '/purchase/completed',
+                url: '/purchase/completed/:orderId',
                 data: { pageTitle: 'Compra completada' },
                 views: {
                     'content': {
                         templateUrl: '/templates/shop/partials/purchase-completed.html',
                         controllerAs: 'Purchase',
-                        controller: 'PaymentCtrl'
+                        controller: 'PurchaseCompletedCtrl'
                     }
                 }
             });

@@ -302,6 +302,7 @@
             $localStorage.cart = [];
             $localStorage.total = 0;
             $localStorage.promoTotal = 0;
+            delete $localStorage.appData.user.address;
             self.promoTotal = 0;
             self.typeTax = false;
         };
@@ -410,7 +411,7 @@
         self.getCustomer();
 
         var shippingAddress = function () {
-            var fieldship = 'address,phone,zip,cityName,neighborhood,phone,stateName';
+            var fieldship = 'id,address,phone,zip,cityName,neighborhood,phone,stateName';
             var address = {};
             AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
                 self.addresship = data;
@@ -427,7 +428,6 @@
             }, function (error) {
                 angular.forEach(error, function (value, key) {
                     NotificationSrv.error(key);
-
                 });
             });
         };
@@ -485,7 +485,7 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 clearCart();
-                $state.go('purchase-completed');
+                $state.go('purchase-completed', {orderId: data.id});
 
             }, function (data) {
                 ErrorSrv.error(data);
@@ -603,16 +603,63 @@
 
     }
 
+    function PurchaseCompletedCtrl(OrderSrv, $stateParams, NotificationSrv) {
+        var self = this;
+        self.busy = false;
+
+        //aditional keys
+        var aditionalKey = function (array) {
+            if (self.purchase.metadata) {
+                if (self.purchase.metadata.taxInverse === 0) {
+                    //apply tax inverse
+                    angular.forEach(array, function (obj, ind) {
+                        obj.price = (parseFloat(obj.price) / 1.16);
+                        obj.subtotal = (parseFloat(obj.price) * parseFloat(obj.qty));
+                        obj.promotionFloat = parseFloat(obj.promotion);
+                        if (obj.promotionFloat > 0) {
+                            obj.subtotalDiscount = obj.subtotal - obj.promotionFloat;
+                            obj.subtotalDiscount = (obj.subtotalDiscount / 1.16);
+                        }
+                    });
+                }
+                else {
+                    angular.forEach(array, function (obj, ind) {
+                        obj.subtotal = (parseFloat(obj.price) * parseFloat(obj.qty));
+                        obj.promotionFloat = parseFloat(obj.promotion);
+                        if (obj.promotionFloat > 0) {
+                            obj.subtotalDiscount = obj.subtotal - obj.promotionFloat;
+                        }
+                    });
+                }
+            }
+            return array;
+        };
+
+
+        if ($stateParams.orderId) {
+            OrderSrv.get({id: $stateParams.orderId}).$promise.then(function (data) {
+                self.purchase = data;
+                self.purchase.items = aditionalKey(self.purchase.items);
+
+            });
+        }else{
+            NotificationSrv.error('No pudimos cargar su detalle de venta, le enviaremos un correo electronico');
+        }
+
+    }
+
 // create the module and assign controllers
     angular.module('shop.controllers', ['shop.services'])
         .controller('ShopCartCtrl', ShopCartCtrl)
         .controller('ShippingAddressCtrl', ShippingAddressCtrl)
         .controller('PaymentCtrl', PaymentCtrl)
-        .controller('OrderCtrl', OrderCtrl);
+        .controller('OrderCtrl', OrderCtrl)
+        .controller('PurchaseCompletedCtrl', PurchaseCompletedCtrl);
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter'];
+    PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
 })();
