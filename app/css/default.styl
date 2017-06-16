@@ -2,11 +2,11 @@ catext = #565656
 catext2 = #676767
 catext3 = #717171
 cablack = #323232
-cagreen = #aa261d
+cagreen = #1887ce
 cagreenh = #7e1a1d
+primary = #555555
 
 i 
-  font-size: 24px;
   vertical-align: middle;
 /************** deafault css******************/
 .no-padding
@@ -58,18 +58,18 @@ h5,
 h6
   margin 0 0 15px
   font-weight 500
-  font-family 'Roboto Slab', sans-serif
+  font-family 'Poppins', sans-serif
 
 .section_padding
   padding: 80px 0
 
 p
-  font-family 'Roboto', sans-serif
+  font-family 'Poppins', sans-serif
   font-weight 300
   font-size 16px
 
 body
-  font-family 'Roboto', sans-serif
+  font-family 'Poppins', sans-serif
   background #f5f5f5
 
 .white
@@ -87,7 +87,7 @@ body
   height 20px
   background-color #ccc
 .content
-  margin-top 170px
+  margin-top 200px
 .content-post
   margin 20px 0
   article
@@ -173,41 +173,14 @@ body
 
 .log-section-mobile
   display none
-.header.smaller
-  height 160px
-  position fixed
-  .navbar-default
-    background #fff /* fallback for old browsers */
-    .navbar-nav > li > a
-      color catext
-      padding 33px 15px
-     .navbar-nav > li > a:hover
-        color cagreen
-    .logo-white
-      display inline
-      width 150px
-      margin 5px 0
-    .logo
-      display none
-  .sub-main
-    display none
-.navbar-nav > li > a:hover, .navbar-nav > li > a:focus
-  background-color transparent
+
 .navbar-info
   .dropdown-menu
     z-index 99999
-  .nav-info
-    margin-top 12px
-  .my-account 
-    font-size 18px 
-    padding-right 15px
-    text-decoration none
-    .ion-ios-person-outline
-      vertical-align middle
   .shopping-cart
     font-size 18px
     padding-left 20px 
-    margin-top -8px
+    margin-top 8px
     a
       font-size 24px
       font-weight 100
@@ -226,10 +199,10 @@ body
   color white
   text-align center
   border-radius 30px
-  background-color cagreen
+  background-color orange
   font-size 16px
-  top 5px
-  right 60px
+  top -5px
+  right 30px
   width 20px
   height 20px
 .shopcart-img
@@ -251,7 +224,18 @@ body
   padding 0 0 15px 0
   .btn-search-ca
     padding 8.2px 12px !important
-
+.nav-user
+  margin-top 30px
+.nav-user.nav > li > a:hover, 
+.nav-user.nav > li > a:focus 
+  background-color transparent
+.nav-user.nav > li > .shopping-cart
+  padding-top 0
+  padding-bottom 0
+  padding-right 45px
+  margin-top 8px
+.nav-user.nav > li > .shopping-cart i 
+  font-size 40px
 header
   width 100%
   overflow hidden
@@ -273,22 +257,24 @@ header
     background-color white
     left 0
     right 0
-    height 100px
+    height 65px
     border-radius 0
     margin-bottom 0
-    z-index 9999
     border-top 1px solid #eee
     .navbar-brand
       padding 5px 15px
     .navbar-nav > li > a
       color catext
-      padding 37px 15px
+      padding 22px 20px
       font-size 18px
-      font-family 'Roboto Slab', sans-serif
-      font-weight 500
+      font-family 'Poppins', sans-serif
+      font-weight 300
       -webkit-transition all ease-in-out .35s
       -o-transition all ease-in-out .35s
       transition all ease-in-out .35s
+    .navbar-nav > li > a
+      &:first-child
+        padding 22px 35px 10px 0px  
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus
       background-color transparent
       color cagreen
@@ -304,35 +290,16 @@ header
         border none
         &:hover
           border none
-    .navbar-nav
-      .dropdown:hover .dropdown-toggle
-        background-color transparent
-        color cagreen
-      .dropdown
-        .dropdown-menu
-          width 100%
-          background-color white
-          border none
-          border-top 2px solid cagreen !important
-          -webkit-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
-          -moz-box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
-          box-shadow 0px 5px 5px rgba(0, 0, 0, 0.33)
-        .dropdown-menu >  li > a
-          color #5d5d5d
-          font-weight 300
-          font-size 16px
-          padding 10px 15px
-        .dropdown-menu >  li > a:hover
-          background transparent
-          color cagreen
 
   .logo
-    width 180px
+    width 100px
     margin-top 5px
 
   .logo-white
       display none
-
+.middle-space
+  background-color white
+  padding 10px 0
 .navbar-header
   color #d2b770 !important
   text-align left
@@ -472,12 +439,13 @@ header
 
 /*header info*/
 .navbar-info
-  padding 1em 0 0.2em 
+  padding 0.8em 0 0em
   background-color #fff
+  border-bottom 1px solid #ddd
   a
     color catext
-    font-size 18px
-    font-family "Roboto Slab, sans-serif"
+    font-size 14px
+    font-family 'Poppins', sans-serif
 
 /************** content area default ****************/
 .address-form
@@ -496,7 +464,7 @@ header
   color rgba(0, 0, 0, 0.20)
   font-size 1.7em
 .info2
-  font-family 'Roboto'
+  font-family 'Poppins', sans-serif
   font-weight 100
   color #565656
 .dividerw
@@ -581,10 +549,7 @@ header
     &:hover
       color cagreenh
       font-weight 800
-  .my-account
-    position absolute
-    padding-top 20px
-    padding-right 5px
+  
   .my-logout
     position absolute
     padding-top 10px
@@ -630,6 +595,16 @@ header
         font-size 20px
 .label-status
   margin-bottom 10px
+.list-social-media
+  text-align right
+  li
+    display inline-block  
+  a  
+    font-size 18px
+    color #777
+    padding-left 15px
+    &:hover
+      color cagreen
 .box-prod
   background rgba(254,254,254,1);
   background -moz-linear-gradient(top, rgba(254,254,254,1) 0%, rgba(254,254,254,1) 51%, rgba(223,223,223,1) 100%);
@@ -645,7 +620,7 @@ header
   .prod-descrip
     color #717171
     height 65px
-    font-family Roboto
+    font-family 'Poppins', sans-serif
     padding 15px 10% 0
     margin-bottom 20px
     font-weight 100
@@ -661,7 +636,7 @@ header
     .reg-descrip
       color catext3
       font-weight 100
-      font-family Roboto
+      font-family 'Poppins', sans-serif
     .reg-q
       color cagreen
       margin 1.5em 0
@@ -1314,7 +1289,7 @@ header
 /*PROFILE*/
 .panel-title > span > label
   cursor pointer
-  font-family 'Roboto Slab'
+  font-family 'Poppins', sans-serif
 .ca-phone
   text-align left
 .ca-auth
@@ -1381,7 +1356,7 @@ footer
   padding 10px 0
   border-radius 0 !important
   background cagreen
-  font-family "Roboto Slab"
+  font-family 'Poppins', sans-serif
   font-weight 300 !important
   color #fff
   font-size 20px !important
@@ -1451,6 +1426,24 @@ footer
   border-right 1px solid #eee
   border-top 1px solid #eee
   border-bottom 1px solid #eee
+
+.btn-blue
+  background-color #1887CE 
+  display inline-block
+  border 1px solid #1887CE
+  padding 10px 15px !important
+  color white
+  font-weight 300
+  border-radius 0
+  
+  &:hover, &:focus
+    background-color #136A9B !important
+    display inline-block
+    padding 10px 15px !important
+    color white
+    font-weight 300
+    border-radius 0
+    border 1px solid #136A9B
 
 .btn-gray
   background #f5f5f5
@@ -1685,6 +1678,54 @@ footer
 .list-group-item.active:focus
     background-color #aa261d 
     color white
+.search-prd
+  margin-top 30px
+  .form-group
+    .ion-ios-search  
+      float right
+      margin-top -40px
+      font-size 30px
+      color primary 
+      padding 0 10px   
+.form-search
+  background-color transparent  
+  color primary !important
+  font-weight 300 !important
+.form-search::-webkit-input-placeholder 
+  color primary
+.form-search:-moz-placeholder
+  color primary
+.form-search::-moz-placeholder
+  color primary
+.form-search:-ms-input-placeholder 
+  color primary    
+.form-search
+  border 1px solid #ddd
+  display block
+  width 100%
+  height 44px
+  padding 6px 12px
+  font-size 14px
+  line-height 1.42857143
+  color primary
+  -webkit-box-shadow inset 0 1px 1px rgba(0, 0, 0, 0)
+  box-shadow inset 0 1px 1px rgba(0, 0, 0, 0)
+  -webkit-transition border-color ease-in-out .15s
+  -webkit-box-shadow ease-in-out .15s
+  -o-transition border-color ease-in-out .15s
+  box-shadow ease-in-out .15s
+  transition border-color ease-in-out .15s
+  box-shadow ease-in-out .15s
+  transition all ease .1s
+  border-radius 50px
+  
+  &:focus
+    color primary
+    border 1px solid #1887CE
+    outline 0
+    -webkit-box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
+    box-shadow 0 0 0 9px rgba(0, 0, 0, 0)
+  
 .form-section
   background transparent
   padding-bottom  100px
