@@ -27,15 +27,27 @@
             <div class="row text-center">
                 <div class="col-sm-4 col-md-3" ng-repeat="product in Home.products">
                     <div class="box-prod">
-                        <a href="" ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
+                        <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
                             <div class="bg-prod" style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
-                            <h3 class="prod-descrip">{{product.name}}</h3>
                         </a>
-                        <h4 class="prod-price"><strong>{{product.price | currency}}</strong></h4>
-                        <button class="btn btn-success btn-cart"
+                        <div class="box-container no-padding container-fluid">
+                            <div class="col-sm-12 no-pd-l text-center">
+                                <p>{{product.name}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="container-fluid no-padding">
+                            <div class="col-xs-6 no-pd-l">
+                                <a class="btn btn-gray-clear btn-block"  ui-sref="product-detail({slug:product.slug})">Ver más</a>
+                            </div>
+                            <div class="col-xs-6 no-pd-r">
+                                <button class="btn btn-red btn-block"
                                 ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url, name: product.name, price: product.price, qty: 1}, 1)"
-                                ng-disabled="Shop.itemInCart(product)">Agregar al carrito</button>
+                                ng-disabled="Shop.itemInCart(product)">Cotizar</button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
