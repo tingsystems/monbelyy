@@ -35,13 +35,17 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'servicios1489618796',
+            taxonomies: 'promotions',
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
             fields: 'title,content,attachments,slug,excerpt'
         }).$promise.then(function (results) {
-            self.services = results.results;
+            self.promoHome = results.results;
+            //get featureImage
+            angular.forEach(self.promoHome, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+            });
         });
 
     }

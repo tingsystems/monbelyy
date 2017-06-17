@@ -192,7 +192,7 @@ body {
 .navbar-info .shopping-cart {
   font-size: 18px;
   padding-left: 20px;
-  margin-top: 8px;
+  margin-top: 3px;
 }
 .navbar-info .shopping-cart a {
   font-size: 24px;
@@ -279,7 +279,7 @@ header {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
-  box-shadow: 0 7px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0px 23px rgba(0,0,0,0.1);
 }
 .header {
   text-align: center;
@@ -354,6 +354,10 @@ header {
   font-size: 22px;
   font-weight: bold;
   color: #aaa;
+}
+#section-prom {
+  margin-top: 80px;
+  margin-bottom: 40px;
 }
 #us {
   padding: 60px 0;
@@ -445,8 +449,11 @@ header {
 .slider-img {
   background-position: top center;
   background-size: 100%;
-  height: 500px;
+  height: 515px;
   background-repeat: no-repeat;
+}
+.box-image-promo {
+  padding-bottom: 15px;
 }
 .bg-inner {
   width: 100%;
@@ -685,10 +692,10 @@ header {
   padding-bottom: 15px;
 }
 .box-prod .box-container {
-  height: 45px !important;
+  height: 80px !important;
 }
 .box-prod .box-container p {
-  font-size: 18px;
+  font-size: 16px;
 }
 .box-prod .prod-descrip {
   color: #717171;
@@ -713,10 +720,10 @@ header {
   padding-bottom: 15px;
 }
 .products .box-prod .box-container {
-  height: 45px !important;
+  height: 80px !important;
 }
 .products .box-prod .box-container p {
-  font-size: 18px;
+  font-size: 16px;
 }
 .products .box-prod .prod-descrip {
   color: #717171;
@@ -1826,23 +1833,23 @@ footer .contact-sty .download-app > i:hover {
   border-radius: 0px;
 }
 .btn-orange {
-  background: #cb6133;
+  background: #ff7300;
   display: inline-block;
   padding: 10px 15px;
   color: #fff !important;
   font-weight: 300;
-  border: 1px solid #cb6133;
+  border: 1px solid #ff7300;
   -webkit-transition: all ease 0.1s;
   -moz-transition: all ease 0.1s;
   -ms-transition: all ease 0.1s;
   -o-transition: all ease 0.1s;
   transition: all ease 0.1s;
-  border-radius: 30px;
+  border-radius: 2px;
 }
 .btn-orange:hover,
 .btn-orange:focus {
-  border: 1px solid #9b4a27;
-  background: #9b4a27;
+  border: 1px solid #bc5508;
+  background: #bc5508;
   display: inline-block;
   padding: 10px 15px;
   color: #fff;
@@ -2205,10 +2212,7 @@ footer .contact-sty .download-app > i:hover {
 }
 .tab-pane {
   padding: 15px;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fff;
+  background-color: transparent;
 }
 #products {
   padding: 0;

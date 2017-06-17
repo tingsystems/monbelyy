@@ -3,7 +3,7 @@
         <div class="col-sm-6 col-sm-offset-3">
             <uib-tabset active="activeJustified" justified="true">
                 <uib-tab index="0" heading="Iniciar sesión">
-                    <form name="loginForm" novalidate ng-submit="Access.login()">
+                    <form class="padding" name="loginForm" novalidate ng-submit="Access.login()">
                         <div class="form-group" ng-class="{ 'has-error': loginForm.username.$touched && loginForm.username.$invalid }">
                             <input type="text" ng-model="Access.formDataLogin.username" class="form-control" id="user" name="username"
                                     placeholder="Nombre de usuario" required>
