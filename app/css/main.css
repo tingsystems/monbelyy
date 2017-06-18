@@ -684,6 +684,20 @@ header {
   text-align: left;
   color: #fff;
 }
+#news {
+  padding: 30px 0;
+  background-color: #f5f5f5;
+}
+.box-blog-home h3 {
+  color: #555;
+  font-size: 18px;
+}
+.box-blog-home .box-img-blog {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
+}
 .box-prod {
   background: #fff;
   padding: 20px 0;
@@ -1586,21 +1600,35 @@ color
 .content-profile .form-controlform-control:focus {
   border-color: none !important;
 }
+#footer-top {
+  padding: 50px 0;
+}
 footer {
-  background-color: #323232;
+  background-color: #106a9d;
   padding: 30px 0;
+}
+footer .divider-white {
+  border-color: #fff;
+}
+footer .white {
+  color: #fff;
+}
+footer .payment-type.contact-sty i {
+  color: #fff;
+  padding-left: 4px;
+  font-size: 22px;
 }
 footer .contact-sty h3 {
   color: #fff;
   padding-bottom: 5px;
   font-size: 18;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 1px solid #fff;
 }
 footer .contact-sty .list a {
-  color: #ccc;
+  color: #fff;
 }
 footer .contact-sty .list a:hover {
-  color: #1887ce;
+  color: #fff;
   transition: all 0.25s ease-in-out;
 }
 footer .contact-sty .download-app > i {
