@@ -7,7 +7,7 @@
         self.formData = {};
         self.formDataLogin = {};
         //self.branchDefault = {branchOffices: ["7454e28c-189a-48d7-a439-0f9f8fec89d4"]};
-        self.branchDefault = { branchOffices : [$localStorage.appData.user.branchOffices[0].id]};
+        self.branchDefault = '';
         self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
         $rootScope.user = $localStorage.appData.user;
 
@@ -27,6 +27,7 @@
             //$scope.app.data = $localStorage.appData;
             // Redirect user here after a successful log in.
             self.getCustomer();
+            self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
             $state.go('dashboard');
         };
 
@@ -582,14 +583,14 @@
                 self.purchasesCount = self.purchases.length;
                 self.purchaseRecent = self.purchases.slice(0, 3);
 
-                angular.forEach(self.purchases, function(value,key){
-                    if(value.paymentType === 9){
+                angular.forEach(self.purchases, function (value, key) {
+                    if (value.paymentType === 9) {
                         self.shipped++;
                     }
-                    if(value.paymentType === 1){
+                    if (value.paymentType === 1) {
                         self.pending++;
                     }
-                    if(value.paymentType === 2){
+                    if (value.paymentType === 2) {
                         self.processing++;
                     }
                 });
@@ -616,7 +617,6 @@
         });
 
     }
-
 
 
     // create the module and assign controllers
