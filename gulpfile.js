@@ -15,7 +15,8 @@ var gulp = require('gulp'),
     useref = require('gulp-useref'),
     uglify = require('gulp-uglify'),
     uncss = require('gulp-uncss'),
-    htmlmin = require('gulp-htmlmin');
+    htmlmin = require('gulp-htmlmin'),
+    refHash = require('gulp-ref-hash');
 
 //	Servidor	web	de	desarrollo
 gulp.task('server', function () {
@@ -88,6 +89,12 @@ gulp.task('templates', function (done) {
 
 gulp.task('compress', function (done) {
     gulp.src('./app/index.html')
+        .pipe(refHash({
+            paths: {
+                js: 'js/',
+                css: 'css/'
+            }
+        })) // Generate hashed filenames for the build blocks
         .pipe(useref())
         .pipe(gulpif('*.js', uglify({mangle: false, compress: true})))
         .pipe(gulpif('*.css', minifyCss()))
@@ -130,4 +137,5 @@ gulp.task('watch', function () {
 
 gulp.task('default', ['server', 'inject', 'watch']);
 gulp.task('dist', ['server-dist', 'inject', 'watch']);
+gulp.task('build', ['templates', 'compress', 'copy']);
 gulp.task('build', ['templates', 'compress', 'copy']);
