@@ -21,7 +21,7 @@
         });
 
         ProductSrv.get({
-            taxonomies: 'lo-mas-buscado1490803659',
+            taxonomies: 'promocion',
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
@@ -35,7 +35,7 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'promotions',
+            taxonomies: 'promocion',
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
@@ -124,7 +124,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'blog1489621339',
+                taxonomies: 'blog',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,

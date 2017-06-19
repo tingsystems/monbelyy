@@ -6,8 +6,8 @@
         self.busy = false;
         self.formData = {};
         self.formDataLogin = {};
-        self.branchDefault = {branchOffices: ["7454e28c-189a-48d7-a439-0f9f8fec89d4"]};
-        //self.branchDefault = { branchOffices : [$localStorage.appData.user.branchOffices[0].id]};
+        //self.branchDefault = {branchOffices: ["7454e28c-189a-48d7-a439-0f9f8fec89d4"]};
+        self.branchDefault = { branchOffices : [$localStorage.appData.user.branchOffices[0].id]};
         self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
         $rootScope.user = $localStorage.appData.user;
 
