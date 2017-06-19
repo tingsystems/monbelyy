@@ -41,16 +41,6 @@
                     }
                 }
             })
-            .state('login', {
-                url: '/login',
-                views: {
-                    'content': {
-                        templateUrl: '/templates/login.html',
-                        controllerAs: 'Login',
-                        controller: 'LoginCtrl'
-                    }
-                }
-            })
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
@@ -75,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -86,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -115,7 +105,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -126,7 +116,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -134,33 +124,10 @@
                         controller: 'ProductDetailCtrl'
                     }
                 }
-            })
-            .state('shopcart', {
-                url: '/shopcart',
-                data: { pageTitle: 'Carrito de compras' },
-                views: {
-                    'content': {
-                        templateUrl: '/templates/shopcart.html',
-                        controllerAs: 'Shopcart',
-                        controller: 'ShopCartCtrl'
-                    }
-                }
-            })
-            .state('payment', {
-                url: '/payment',
-                data: { pageTitle: 'Proceso de pago' },
-                views: {
-                    'content': {
-                        templateUrl: '/templates/payment.html',
-                        controllerAs: 'Payment',
-                        controller: 'PaymentCtrl'
-                    }
-                }
             });
 
-
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -176,17 +143,25 @@
 
     }
 
+    function AuthProvider($authProvider) {
+        // config params
+        $authProvider.loginUrl = '#host#/api/{{apiShop}}/auth/token';
+        $authProvider.tokenName = 'access_token';
+        $authProvider.tokenPrefix = 'ca';
+    }
+
     /**
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, translate, $localStorage, PostSrv) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://www.tingsystems.com';
-        //$rootScope.host = 'http://192.168.1.149';
-        $rootScope.apiV = 'v1';
+        $rootScope.host = 'http://api.moons.mx';
+        //$rootScope.host = 'http://192.168.1.67';
+        $rootScope.apiV = 'v2';
+        $rootScope.apiShop = 'v1';
         $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
-        $http.defaults.headers.common['TS-TOKEN'] = 'qg4AkRlXmMV3viERPyYFkiVrpfWd8ZymK7KosHiY';
+        $http.defaults.headers.common['PROJECT-ID'] = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -195,9 +170,10 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-43',
             meta_color: '#eee7de',
-            img_default: ' https://www.corriente-alterna.com/img/img-default.jpg',
-            email: 'info@corriente-alterna.com',
-            phone: '353 110 1895'
+            //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
+            img_default: '../../img/img-default-ca.png',
+            email: 'info@moons.mx',
+            phone: '01 (55) 55 58 98 99'
 
         };
         // initialise google analytics
@@ -208,7 +184,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Corriente Alterna',
+                'title': 'Moons',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -217,7 +193,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Corriente Alterna';
+        $rootScope.pageTitle = 'Moons';
         function showResponsive($window) {
             if ($window.innerWidth <= 768) {
                 return true
@@ -233,7 +209,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'b27b4218-8285-4b44-b9a7-f04a96108dd1',
+                parent: 'ac3a5d0e-9faa-475b-adbe-9f91be15b92f',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -244,7 +220,7 @@
 
         if (!$rootScope.NavMenuSocial) {
             TaxonomySrv.query({
-                parent: '924838a3-4f24-40e5-8d4f-f9aaf406ab9a',
+                parent: '61265a3d-c57f-41a1-9a92-7db5458a3cde',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -255,7 +231,7 @@
 
         if (!$rootScope.footerNavMenuConact) {
             TaxonomySrv.query({
-                parent: 'ee529e2b-1315-4e57-a269-981ee999c0a5',
+                parent: 'f84e9c4c-9ce8-4948-a46d-cbc1cf2230ea',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -265,7 +241,7 @@
         }
         if (!$rootScope.contactHelp) {
             TaxonomySrv.query({
-                parent: 'b41db416-2beb-42ae-83d8-af19be924097',
+                parent: 'f84f6cde-0cd5-47b2-b215-3a91e9190052',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -275,10 +251,10 @@
         }
 
         if (!$rootScope.contactMenuData) {
-            PostSrv.get({
-                category: 'datos-de-contacto',
+            EntrySrv.get({
+                taxonomies: 'datos-de-contacto1489620879',
                 isActive: 'True',
-                sizePage: 5,
+                pageSize: 5,
                 ordering: '-createdAt',
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
@@ -286,19 +262,40 @@
             });
         }
 
-        $rootScope.ecommerce = false;
+        $rootScope.ecommerce = true;
 
+        $rootScope.$on('$stateChangeStart', function (event, toState) {
+            var requiredLogin = false;
+            // check if this state need login
+            if (toState.data && toState.data.requiredLogin)
+                requiredLogin = true;
+
+            // if yes and if this user is not logged in, redirect him to login page
+            if (requiredLogin && !$auth.isAuthenticated()) {
+                event.preventDefault();
+                if ($state.current.name != '500' && $state.current.name != '400') {
+                    $state.go('register');
+                }
+            }
+        });
+
+        //init $localStorage.appData
+        if (!angular.isDefined($localStorage.appData)) {
+            $localStorage.appData = {};
+        }
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select','ngTable'])
         .config(Routes)
         .config(AppConfig)
+        .config(AuthProvider)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'translate', '$localStorage', 'PostSrv'];
+         'EntrySrv', '$auth', '$localStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
+    AuthProvider.$inject = ['$authProvider'];
 })();

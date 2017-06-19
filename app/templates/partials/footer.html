@@ -1,27 +1,13 @@
-<div class="container">
-    <div class="col-sm-4 contact-sty">
-        <h3>Contáctanos</h3>
-        <ul class="list">
-            <li ng-repeat="post in contactMenuData">
-                <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
-                        ng-bind-html="post.content | trustHtml"></span></a>
-            </li>
-        </ul>
-        <!--<ul class="list list-sidebar">
-            <li ng-repeat="item in NavMenuSocial">
-                <a href="{{ item.link }}" target="_blank"><i class="{{ item.name }}" data-pack="social"></i></a>
-            </li>
-        </ul>-->
-    </div>
-    <div class="col-sm-4 contact-sty">
+<div id="footer-top" class="container">
+    <div class="col-sm-3 contact-sty">
         <h3>
-            Acerca de Corriente Alterna
+            Información
         </h3>
         <ul class="list">
             <li ng-repeat="option in footerNavMenuConact"><a href="{{option.link}}">{{option.name}}</a></li>
         </ul>
     </div>
-    <div class="col-sm-4 contact-sty">
+    <div class="col-sm-3 contact-sty">
         <h3>
             Ayuda
         </h3>
@@ -29,5 +15,27 @@
             <li ng-repeat="option in contactHelp"><a href="{{option.link}}">{{option.name}}</a></li>
         </ul>
     </div>
+    <div class="col-sm-3 contact-sty">
+        <h3>Contáctanos</h3>
+        <ul class="list">
+            <li ng-repeat="post in contactMenuData">
+                <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
+                        ng-bind-html="post.content | trustHtml"></span></a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-3 contact-sty payment-type">
+        <h3>Formas de pago</h3> 
+        <i class="fa fa-cc-amex" aria-hidden="true"></i>
+        <i class="fa fa-cc-discover" aria-hidden="true"></i>
+        <i class="fa fa-cc-paypal" aria-hidden="true"></i>
+        <i class="fa fa-cc-visa" aria-hidden="true"></i>
+
+    </div>
+    
+</div>
+<hr class="divider-white">
+<div class="text-center">
+    <p class="white">© 2017 Moons</p>
 </div>
 

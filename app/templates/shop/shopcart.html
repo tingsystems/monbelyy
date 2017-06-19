@@ -1,0 +1,86 @@
+<div class="header-title">
+    <h2 class="title text-center">Carrito de compras</h2>
+</div>
+<section class="content-area2" class="shop-cart">
+    <div class="container">
+        <div ng-if="ShopCart.items.length==0" class="text-center">
+            <h3 class="info"><i class="fa fa-warning"></i> No se han agregado productos al carrito</h3>
+            <a class="btn btn-outline-red" ui-sref="products">Ver productos</a>
+        </div>
+        <div class="row" ng-if="ShopCart.items.length>0">
+            <div class="col-sm-3 col-md-2 pull-right text-right">
+                <div class="clear-cart">
+                    <button class="btn btn-outline-red" ng-click="ShopCart.clearCart()">Vaciar Carrito</button>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-2 pull-right">
+                <div class="clear-cart">
+                    <button class="btn btn-outline-red" ui-sref="products">Seguir comprando</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid" ng-if="ShopCart.items.length>0">
+            <div class="col-md-9 text-center">
+                <div class="product-cart col-sm-6 col-md-12" ng-repeat="product in ShopCart.items">
+                    <div class="col-md-3">
+                        <div class="shopcart-img">
+                            <div class="shopcart-img" style="background-image:url('{{ product.image }}');"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="shopcart-descrip">
+                            <h4>{{ product.name }}</h4>
+                            <h3>{{ product.price | currency }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-sm-offset-3 col-sm-4">
+                            <div class="shopcart-qty">
+                                <label for="qty">Cantidad</label>
+                                <input type="number" min="0" id="qty" ng-model="product.qty" ng-click="ShopCart.setItem({id: product.id, name: product.name, price: product.price, qty: product.qty}, product.qty)"
+                                    class="form-control cart-qty" placeholder="{{ product.qty }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 hidden-lg">
+                            <div class="shopcart-delete-sm">
+                                <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)" title="Eliminar producto"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 visible-lg">
+                        <div class="shopcart-delete-lg">
+                            <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)" title="Eliminar producto"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 excerpt-shopping">
+                <div class="details-prod">
+                    <h4 class="text-center">Resumen de pedido</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal({{ items.length }})</td>
+                                    <td>{{ ShopCart.total | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Envío</td>
+                                    <td>$0</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>{{ ShopCart.total | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a class="btn btn-success btn-cart btn-block" ng-click="ShopCart.processPurchase()"><i class="fa fa-credit-card"></i> Procesar compra</a>
+                        <a class="btn btn-success btn-paypal btn-block"><i class="fa fa-paypal"></i> Pagar con Paypal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

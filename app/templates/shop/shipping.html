@@ -1,0 +1,118 @@
+<div  class="content-dashboard">
+    <div class="container">
+        <div class="col-md-6 address-form">
+            <div class="col-md-12 select-address" style="margin-bottom: 20px">
+                <h3><i class="ion-ios-location-outline"></i></a> Seleccionar dirección existente</h3>
+                <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
+            </div>
+            <hr class="clearfix">
+            <div class="col-md-12">
+                <h3><i class="ion-ios-plus-outline"></i> Nueva direccíon de envío</h3>
+                <form class="form-horizontal" name="Form" novalidate>
+                    <div class="col-md-6">
+                        <div class="form-item">
+                            <label for="state">Estado</label>
+                            <ui-select on-select="Payment.getCitiesByState($model)"
+                                       title="Estado" ng-model="Payment.formData.state"
+                                       name="states"
+                                       id="state" required>
+                                <ui-select-match placeholder="Selecciona un Estado *..."
+                                                 allow-clear="true">
+                                    {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                        repeat="state.id as state in Payment.states | filter: {name: $select.search}">
+                                    <div ng-bind-html="state.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-item">
+                            <label for="city">Ciudad</label>
+                            <ui-select ng-model="Payment.formData.city" id="city" name="cities"
+                                       ng-required="Payment.formData.state" ng-disabled="Payment.busyCity"
+                                       title="Ciudad" required>
+                                <ui-select-match placeholder="Selecciona una Ciudad *..." allow-clear="true">
+                                    {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                        repeat="city.id as city in Payment.cities | filter: {name: $select.search}">
+                                    <div ng-bind-html="city.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-item"
+                             ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
+                            <label for="address">Dirección</label>
+                            <input ng-model="Payment.formData.address" type="text"
+                                   class="form-control" id="address" name="address"
+                                   placeholder="Dirección"
+                                   required>
+                            <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
+                                <a ng-message="required" data-toggle="tooltip" title="Holiis"></a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-8">
+                        <div class="form-item"
+                             ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
+                            <label for="neighborhood">Colonia</label>
+                            <input ng-model="Payment.formData.neighborhood" type="text" class="form-control"
+                                   id="neighborhood"
+                                   name="neighborhood"
+                                   placeholder="Colonia"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-item" ng-class="{ 'has-error': Form.zip.$touched && Form.zip.$invalid }">
+                            <label for="zip">Código Postal</label>
+                            <input ng-model="Payment.formData.zip" type="text" ng-pattern="/^[0-9]{5}$/" maxlength="5"
+                                   class="form-control" id="zip" name="zip"
+                                   placeholder="Código Postal"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item" ng-class="{ 'has-error': Form.phone.$touched && Form.phone.$invalid }">
+                            <label for="phone">Teléfono</label>
+                            <input ng-model="Payment.formData.phone" type="text" maxlength="20" class="form-control"
+                                   id="phone"
+                                   name="phone"
+                                   placeholder="Teléfono" required>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-item" ng-class="{ 'has-error': Form.mobile.$touched && Form.mobile.$invalid }">
+                            <label for="mobile">Celular</label>
+                            <input ng-model="Payment.formData.mobile" type="text" ng-maxlength="20" class="form-control"
+                                   id="mobile"
+                                   name="mobile"
+                                   placeholder="Celular" required>
+                        </div>
+
+                    </div>
+                    <!--<div class="col-md-12" ng-if="idUser">
+                        <input type="checkbox"><span>Guardar mi información para la aproxima ocasión</span>
+                        {{Shipping.saveAddressNew}}
+                    </div>-->
+                </form>
+            </div>
+            <div class="col-md-12 text-right" style="margin-top: 20px;">
+                <a href="" class="btn btn-gray-clear" ui-sref="shopcart"><i class="fa fa-angle-left"></i> Regresar al carrito</a>
+                <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
+                <a ng-if="Payment.address" class="btn btn-red" type="submit" ng-disabled="!Payment.address" ng-click="Payment.saveShippingAddress()">Continuar</a>
+                <a ng-if="!Form.$invalid && !Payment.address" class="btn btn-red" type="submit" ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ng-include src="'/templates/shop/partials/cart-details.html'"></ng-include>
+        </div>
+    </div>
+</div>
+

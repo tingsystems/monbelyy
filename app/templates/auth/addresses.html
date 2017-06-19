@@ -1,0 +1,59 @@
+<div class="content-dashboard">
+    <div class="container">
+        <div class="col-md-3">
+            <ng-include src="'templates/auth/partials/my-account-items.html'"></ng-include>
+        </div>
+        <div class="col-xs-12 col-md-9">
+            <div class="row">
+                <div class="col col-xs-6">
+                    <h3 class="info2"><i class="ion-ios-list"></i> Lista de direcciones</h3>
+                </div>
+            </div>
+            <hr>
+            <div class="row search-bar">
+                <div class="col-xs-10 col-sm-6">
+                    <form name="Address.searchForm" ng-submit="Address.globalSearch()" class="ca-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar" name="searchTerm"
+                                   ng-model="Address.searchTerm" ng-change="Address.globalSearch()"/>
+                            <span class="input-group-btn">
+                    <button class="btn btn-default btn-search-ca" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-6 col-sm-6 text-right">
+                    <button title="Agregar nueva dirección" ui-sref="address-add" class="btn btn-gray-clear-sm btn-xs"><i class="ion-ios-plus-empty"></i>
+                    Agregar dirección</button>
+                </div>
+            </div>
+            <div class="table-responsive" loading-container="Address.tableParams.settings().$loading">
+                <table class="table table-bordered bg-white table-striped" ng-table="Address.tableParams"
+                       show-filter="false">
+                    <tbody>
+                    <tr ng-repeat="address in Address.addresses" datasource="address" ref="Address">
+                        <td data-title="'Estado'" sortable="'stateName.name'">{{ address.stateName }}</td>
+                        <td data-title="'Ciudad'" sortable="'cityName.name'">{{ address.cityName }}</td>
+                        <td data-title="'Domicilio'" sortable="'address'">{{ address.address }}</td>
+                        <td data-title="'Colonia'" sortable="'neighborhood'">{{ address.neighborhood }}</td>
+                        <td data-title="'Código Postal'" sortable="'zip'">{{ address.zip }}</td>
+                        <td data-title="'Teléfono'" sortable="'phone'">{{ address.phone }}</td>
+                        <td data-title="'Acciones'">
+                            <button title="Editar dirección" class="btn btn-info btn-xs indicators" ui-sref="address-update({id: address.id})" data-title="Edit">
+                                <span class="ion-ios-compose"></span></button>
+                            <button title="Eliminar dirección" class="btn btn-danger btn-xs indicators" ng-click="Address.deleteAddress(address.id)">
+                                <span class="ion-ios-trash"></span></button></td>
+                    </tr>
+                    </tbody>
+                    <tfooter>
+                        <tr ng-hide="Address.addresses.length">
+                            <td colspan="7" class="text-center">Todavia no ha creado una dirección de envío, haga clic en el botón (+) de arriba para agregar.</td>
+                        </tr>
+                    </tfooter>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

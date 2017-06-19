@@ -2,57 +2,42 @@
     <h2 class="title text-center">{{Product.categoryName}}</h2>
 </div>
 <section id="content-area" class="content-blog">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="content-pages" infinite-scroll='Product.getMorePosts()' infinite-scroll-disabled='Product.busy || !Product.next || Product.loadPosts'>
-                    <div class="row text-center">
-                        <div class="col-sm-4" ng-repeat="entry in Product.list">
-                            <div class="box-prod">
-                                <a ui-sref="product-detail({slug:entry.slug})" ng-if="!Product.isPost">
-                                    <div class="bg-prod" style="background-image: url('{{entry.urlImages.original }}')"></div>
-                                    <h3 class="prod-descrip">{{entry.title}}</h3>
-
-                                    <h4 class="prod-price" ng-if="!Product.isPost"><strong>{{entry.price | currency}}</strong></h4>
-                                </a>
-                                <a ui-sref="post_detail({slug:entry.slug})" ng-if="Product.isPost">
-                                    <div class="bg-prod" style="background-image: url('{{entry.urlImages.original }}')"></div>
-                                    <h3 class="prod-descrip">{{entry.title}}</h3>
-
-                                    <h4 class="prod-price" ng-if="!Product.isPost"><strong>{{entry.price | currency}}</strong></h4>
-                                </a>
-                                <a ui-sref="category({slug:entry.slug})" class="btn btn-success btn-cart" ng-if="!Product.isPost">Agregar al Carrito</a>
-                                <a ui-sref="post_detail({slug: entry.slug})" class="btn btn-success btn-cart" ng-if="Product.isPost">Ver más</a>
-                            </div>
-                        </div>
-                        <!--<div class="box-white col-sm-12 box-blog" ng-repeat="entry in Product.list">
-                            <a post-link="{ link: {url: entry.link, target: '_blank'} }"
-                               ui-sref="post_detail({slug: entry.slug})" title="{{ entry.title }}">
-
-                                <div class="simple-header col-md-4 col-sm-4">
-                                    <div class="img-box" style="background-image: url('{{ entry.urlImages.thumbnails ? entry.urlImages.thumbnails : initConfig.img_default }}')"></div>
-                                </div>
-                                <div class="blog-container col-md-8 col-sm-8">
-                                    <h3>{{ entry.title }}</h3>
-                                    <p>{{ entry.excerpt| characters:250 }}</p>
-                                    <br/><br/>
-                                    <button class="btn btn-red">Leer más <i class="fa fa-angle-right"></i></button>
-                                </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="content-pages" infinite-scroll='Product.getMorePosts()'
+                 infinite-scroll-disabled='Product.busy || !Product.next || Product.loadPosts'>
+                <div class="row text-center">
+                    <div class="col-sm-4" ng-repeat="product in Product.list">
+                        <div class="box-prod" ng-if="!Product.isPost">
+                            <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
+                                <div class="bg-prod"
+                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
+                                <h3 class="prod-descrip">{{product.name | characters: 30}}</h3>
+                                <h4 class="prod-price"><strong>{{product.price | currency}}</strong></h4>
                             </a>
-                        </div>-->
-                        <div class="col-sm-12" ng-show="Product.busy">
-                            <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
+                            <a ng-click="Product.setItem({id: product.id, image: product.featuredImage.url, name: product.name, price: product.price, qty: 1}, 1)"
+                               ng-disabled="Product.itemInCart(product)"
+                               class="btn btn-success btn-cart">Agregar al Carrito</a>
                         </div>
-                        <div class="col-sm-12" ng-show="!Product.busy">
-                            <h2 class="text-center no-content" ng-show="!Product.list.length">Lo sentimos no contamos con contenido disponible</h2>
+                        <div class="box-prod" ng-if="Product.isPost">
+                            <a ui-sref="post_detail({slug:product.slug})">
+                                <div class="bg-prod"
+                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
+                                <h3 class="prod-descrip">{{product.title}}</h3>
+                            </a>
+                            <a ui-sref="post_detail({slug: product.slug})" class="btn btn-success btn-cart">Ver más</a>
                         </div>
                     </div>
-                    <!--post list -->
+                    <div class="col-sm-12" ng-show="Product.busy">
+                        <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
+                    </div>
+                    <div class="col-sm-12" ng-show="!Product.busy">
+                        <h2 class="text-center no-content" ng-show="!Product.list.length">Lo sentimos no contamos con
+                            contenido disponible</h2>
+                    </div>
                 </div>
+                <!--post list -->
             </div>
-            <!--<div class="col-md-3 col-sm-3 widgets">
-                <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
-            </div>-->
         </div>
     </div>
 </section>

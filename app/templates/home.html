@@ -1,90 +1,94 @@
-<!-- slider -->
-<div id="carouse-principal" class="carousel slide">
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-        <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-            <uib-slide ng-repeat="slide in Home.mainSlider">
-                <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                    <div class="slider-img" style="background-image:url('{{ slide.urlImages.original }}');"></div>
-                </a>
-            </uib-slide>
-        </uib-carousel>
+<div id="section-prom" class="container">
+    <div class="col-sm-9">
+        <div id="carouse-principal" class="carousel slide">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
+                    <uib-slide ng-repeat="slide in Home.mainSlider">
+                        <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                            <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
+                        </a>
+                    </uib-slide>
+                </uib-carousel>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3 no-padding">
+       <div class="box-image-promo" ng-repeat="promo in Home.promoHome">
+            <a post-link="{ link: {url: promo.link, target: '_self'} }">
+                <img src="{{ promo.featuredImage.url }}" alt="Promotions">
+            </a>
+       </div>
     </div>
 </div>
-<section class="services">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4 box-service text-center" ng-repeat="service in Home.services">
-                <a ui-sref="post_detail({slug: service.slug})">
-                    <div class="col-md-3">
-                        <span><i class="{{service.excerpt}}"></i></span>
-                    </div>
-                    <div class="col-md-9">
-                        <h3>{{service.title}}</h3>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- slider -->
+
+
 <section class="products">
     <div class="container">
-        <div class="box-products">
-            <div class="row text-center">
-                <div class="prod-title">
-                    <h3>Conoce nuestros productos</h3>
-                </div>
-                <div class="prod-entry">
-                    <p>Somos la mejor opción en equipo de automatización industrial con
-                        tecnología de punta al mejor precio, capacitando y apoyando a la industría nacional.</p>
-                </div>
+        <div class="row text-center">
+            <div class="prod-title">
+                <h3>Conoce nuestros productos</h3>
             </div>
-            <div class="row text-center">
-                <div class="col-sm-4" ng-repeat="product in Home.products">
-                    <div class="box-prod">
-                        <div class="bg-prod" style="background-image: url('{{product.urlImages.original }}')"></div>
-                        <h3 class="prod-descrip">{{product.title}}</h3>
-                        <h4 class="prod-price" ng-if="ecommerce"><strong>{{product.excerpt}}</strong></h4>
-                        <h4 class="prod-price" ng-if="!ecommerce"><strong>Proximamente</strong></h4>
-                        <button class="btn btn-success btn-cart" ng-disabled="!ecommerce">Agregar al carrito</button>
+            <div class="prod-entry">
+                <p> Nosotros creamos un ambiente saludable, amigable, y funcional tanto en la industria <br> como 
+                en el hogar para nuestros animales de compañía.</p>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="box-products" ng-controller="ShoppingCtrl as Shop">
+                <div class="row text-center">
+                    <div class="col-sm-4" ng-repeat="product in Home.products">
+                        <div class="box-prod">
+                            <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
+                                <div class="bg-prod" style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                            </a>
+                            <div class="box-container no-padding container-fluid">
+                                <div class="col-sm-12 no-pd-l text-center">
+                                    <p>{{product.name}}</p>
+                                    <h4>{{ product.price | currency }}</h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="container-fluid no-padding">
+                                <div class="col-xs-6 no-pd-l">
+                                    <a class="btn btn-gray-clear btn-block"  ui-sref="product-detail({slug:product.slug})">Ver más</a>
+                                </div>
+                                <div class="col-xs-6 no-pd-r">
+                                    <button class="btn btn-orange btn-block"
+                                    ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url, name: product.name, price: product.price, qty: 1}, 1)"
+                                    ng-disabled="Shop.itemInCart(product)">Cotizar</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+            <h3>Twitter here</h3>
+        </div>
     </div>
 </section>
 
-<section class="register">
+<section id="news">
     <div class="container">
-        <div class="row">
-            <div class="col-md-7">
-                <div class="reg-content">
-                    <h2 class="reg-descrip">Acude a nuestros cursos, talleres y asesorías
-                        para la utilización del producto que adquiriste con
-                        nosotros. Para nosotros es importante atender todas tus necesidades.</h2>
-
-                    <h4 class="reg-q"><a href="">¿Cómo registrarme y acudir a los cursos?</a></h4>
-                    <button class="btn btn-success btn-lg btn-reg">Más información</button>
+        <h3 class="text-center">
+            Noticias
+        </h3>
+        <div class="col-sm-3">
+            <div class="box-blog-home">
+                <div class="box-img-bg"></div>
+                <div class="box-title">
+                    <h3>Lorem impsum</h3>
                 </div>
-
+                <a href="#" class="btn-orange btn-block">Leer más <i class="fa fa-angle-right pull-right"></i></a>
             </div>
         </div>
     </div>
 </section>
 
-<!--<section id="us" class="section_padding" style="background-image: url('{{Home.postAbout.urlImages.original}}')">
-    <div class="container">
-        <div class="col-md-7 col-sm-7 who-us">
-            <article ng-bind-html="Home.postAbout.content"></article>
-            <img src="img/iconss.png" alt="Descarga la app en iOS y Android"/>
-
-            <p class="pull-right"><a class="clr-link" post-link="{ link: {url: Home.postAbout.link, target: '_blank'} }"
-                                     ui-sref="post_detail({slug: Home.postAbout.slug})" title="{{ Home.postAbout.title }}">Leer
-                más...</a></p>
-        </div>
-
-    </div>
-</section>-->
 
 
 

@@ -8,7 +8,6 @@
     "angular-resource": "1.4.14",
     "angular-ui-router": "0.2.18",
     "animate.css": "~3.4.0",
-    "font-awesome": "fontawesome#~4.5.0",
     "angular-sanitize": "1.4.14",
     "bootstrap": "~3.3.6",
     "ngInfiniteScroll": "~1.2.2",
@@ -20,11 +19,17 @@
     "ng-repeat-owl-carousel": "*",
     "angular-block-ui": "^0.2.2",
     "angular-toasty": "^1.0.5",
-    "angular-scroll": "^1.0.0",
+    "angular-scroll": "1.0.0",
     "angular-truncate": "*",
     "angular-touch": "1.5.9",
     "ngstorage": "^0.3.11",
-    "angular-google-maps": "^2.4.0"
+    "angular-google-maps": "^2.4.0",
+    "ngSweetAlert": "angular-sweetalert#^1.1.2",
+    "satellizer": "^0.15.5",
+    "angular-ui-select": "0.17.0",
+    "ng-table": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "angular-messages": "^1.6.4"
   },
   "overrides": {
     "bootstrap": {
