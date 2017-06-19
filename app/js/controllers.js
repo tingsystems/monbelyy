@@ -48,6 +48,20 @@
             });
         });
 
+        EntrySrv.get({
+            taxonomies: 'ultimas-noticias',
+            isActive: 'True',
+            pageSize: 4,
+            ordering: '-createdAt',
+            fields: 'title,content,attachments,slug,excerpt'
+        }).$promise.then(function (results) {
+            self.newsHome = results.results;
+            //get featureImage
+            angular.forEach(self.newsHome, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+            });
+        });
+
     }
 
     function PostCtrl(EntrySrv, $stateParams, TaxonomySrv, $rootScope, $filter) {

@@ -299,7 +299,7 @@ header {
 .header .navbar-default .navbar-nav > li > a {
   color: #565656;
   padding: 22px 20px;
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   -webkit-transition: all ease-in-out 0.35s;
@@ -307,7 +307,7 @@ header {
   transition: all ease-in-out 0.35s;
 }
 .header .navbar-default .navbar-nav > li > a:first-child {
-  padding: 22px 35px 10px 0px;
+  padding: 22px 25px 10px 0px;
 }
 .header .navbar-default .navbar-nav > li > a:hover,
 .header .navbar-default .navbar-nav > li > a:focus {
@@ -691,8 +691,10 @@ header {
 .box-blog-home h3 {
   color: #555;
   font-size: 18px;
+  margin: 15px 0;
+  height: 50px;
 }
-.box-blog-home .box-img-blog {
+.box-blog-home .box-img-bg {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -706,7 +708,7 @@ header {
   padding-bottom: 15px;
 }
 .box-prod .box-container {
-  height: 80px !important;
+  height: 100px !important;
 }
 .box-prod .box-container p {
   font-size: 16px;
@@ -734,7 +736,7 @@ header {
   padding-bottom: 15px;
 }
 .products .box-prod .box-container {
-  height: 80px !important;
+  height: 100px !important;
 }
 .products .box-prod .box-container p {
   font-size: 16px;
@@ -866,7 +868,7 @@ header {
   margin-bottom: 25px;
 }
 .product-detail .detail-price {
-  text-align: right;
+  text-align: left;
 }
 .product-detail .prod-detail-descrip p {
   font-size: 18px;
@@ -883,6 +885,12 @@ header {
 }
 .product-info .info-descrip a {
   color: #f5f5f5;
+}
+.content-blog {
+  padding: 55px 25px 70px !important;
+}
+.content-blog .breadcrumb {
+  padding: 15px 0 15px !important;
 }
 #product-detail {
   margin: 100px 0;
@@ -1733,7 +1741,7 @@ footer .contact-sty .download-app > i:hover {
   border-color: #919191;
 }
 .btn {
-  font-size: 18px;
+  font-size: 16px;
 }
 .btn-outline-red {
   color: #d9534f;
