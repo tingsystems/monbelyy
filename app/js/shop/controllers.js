@@ -199,10 +199,12 @@
             CustomerSrv.get({id: self.customer}).$promise.then(function (data) {
                 customer = data;
                 //if user has not phone add the shipmet phone
-                if (!customer.phone) {
+                if (!customer.phone || !customer.state || !customer.city) {
                     customer.phone = address.phone;
+                    customer.state = address.state;
+                    customer.city = address.city;
                     CustomerSrv.update({id: customer.id}, customer).$promise.then(function (data) {
-                    })
+                    });
                 }
             });
             address.customer = self.customer;
@@ -361,7 +363,7 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 clearCart();
-                $state.go('purchase-completed');
+                $state.go('purchase-completed', {orderId: data.id});
             }, function (data) {
                 ErrorSrv.error(data);
             });
