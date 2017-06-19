@@ -40,7 +40,7 @@
                 url: '/history/sales',
                 data: {
                     requiredLogin : true,
-                    pageTitle: 'Compras - Corriente Alterna'
+                    pageTitle: 'Compras - Moons'
                 },
                 views: {
                     'content': {

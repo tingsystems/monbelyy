@@ -4,10 +4,10 @@
     function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Corriente Alterna';
+        $rootScope.pageTitle = 'Moons Aquariums';
 
         EntrySrv.get({
-            taxonomies: 'slider1489619194',
+            taxonomies: 'slider1497888818',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -68,7 +68,7 @@
             }).$promise.then(function (results) {
                 if (results.results) {
                     self.categoryName = results.results[0].name;
-                    $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
+                    $rootScope.pageTitle = self.categoryName + ' - Moons';
                 }
             });
         }
@@ -142,12 +142,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Corriente Alterna';
+        $rootScope.pageTitle = 'Blog - Moons';
     }
 
     function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Corriente Alterna';
+        $rootScope.pageTitle = 'Moons';
 
         self.busy = true;
         EntrySrv.get({
@@ -167,7 +167,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.title + ' - Corriente Alterna';
+            $rootScope.pageTitle = results.title + ' - Moons';
             self.busy = false;
         });
     }
@@ -175,9 +175,9 @@
     function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name == 'home') {
-            $rootScope.pageTitle = 'Corriente Alterna';
+            $rootScope.pageTitle = 'Moons';
         } else if ($state.current.name == 'contact') {
-            $rootScope.pageTitle = 'Contacto - Corriente Alterna';
+            $rootScope.pageTitle = 'Contacto - Moons';
         }
 
         self.contactInitialState = function () {
@@ -402,7 +402,7 @@
 
     function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter){
         var self = this;
-        $rootScope.pageTitle = 'Corriente Alterna';
+        $rootScope.pageTitle = 'Moons';
 
         self.busy = true;
         ProductSrv.get({
@@ -421,7 +421,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.title + ' - Corriente Alterna';
+            $rootScope.pageTitle = results.title + ' - Moons';
             self.busy = false;
         });
 
@@ -451,7 +451,7 @@
                     self.categoryId = results.id;
                     self.category = results;
                     self.getMorePosts();
-                    $rootScope.pageTitle = self.categoryName + ' - Corriente Alterna';
+                    $rootScope.pageTitle = self.categoryName + ' - Moons';
                 }
             });
         }

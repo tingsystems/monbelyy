@@ -6,7 +6,7 @@
         self.busy = false;
         self.formData = {};
         self.formDataLogin = {};
-        self.branchDefault = {branchOffices: ["b69d0047-3502-47fe-9d88-33fac4ee188e"]};
+        self.branchDefault = {branchOffices: ["7454e28c-189a-48d7-a439-0f9f8fec89d4"]};
         //self.branchDefault = { branchOffices : [$localStorage.appData.user.branchOffices[0].id]};
         self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
         $rootScope.user = $localStorage.appData.user;
@@ -42,7 +42,7 @@
 
         };
         // Application for oauth authorization
-        self.client_id = 'ppUsGThJxz4Oip9nfG1hfmg6dzOQ8f5SH3NDEjkU';
+        self.client_id = 'CKLZaUXlx9ay0437WgsElHxKLMx0ZW4MFFrzNwG3';
         // Login with username and password
         self.login = function () {
             // ajax request to send the formData
@@ -77,7 +77,7 @@
                         $localStorage.appData.user = self.branchDefault;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name != 'register') {
-                            NotificationSrv.success("Te esperamos pronto", "Corriente Alterna");
+                            NotificationSrv.success("Te esperamos pronto", "Moon's Aquariums");
                             $state.go('home');
                         }
                     })
@@ -91,7 +91,7 @@
             var account = angular.copy(self.formData);
             self.busy = true;
             RegisterSrv.save(account).$promise.then(function (data) {
-                NotificationSrv.success('Cuenta creada correctamente', 'Ya falto poco para pertenecer a Corriente Alterna');
+                NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a Moon's Aquariums");
                 self.busy = false;
                 self.formData = {};
                 $state.go('success');

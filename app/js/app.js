@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -105,7 +105,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -116,7 +116,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: { pageTitle: 'Corriente Alterna' },
+                data: { pageTitle: 'Moons' },
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -156,12 +156,12 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'http://api.taki.tingsystems.com';
+        $rootScope.host = 'http://api.moons.mx';
         //$rootScope.host = 'http://192.168.1.67';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
         $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
-        $http.defaults.headers.common['PROJECT-ID'] = 'e7d3007e-4702-4da4-88df-d57c3f80d524';
+        $http.defaults.headers.common['PROJECT-ID'] = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -172,8 +172,8 @@
             meta_color: '#eee7de',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default-ca.png',
-            email: 'info@corriente-alterna.com',
-            phone: '353 110 1895'
+            email: 'info@moons.mx',
+            phone: '01 (55) 55 58 98 99'
 
         };
         // initialise google analytics
@@ -184,7 +184,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Corriente Alterna',
+                'title': 'Moons',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -193,7 +193,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Corriente Alterna';
+        $rootScope.pageTitle = 'Moons';
         function showResponsive($window) {
             if ($window.innerWidth <= 768) {
                 return true
@@ -209,7 +209,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'ae7e1afc-0f16-4172-a7c7-1698f2ebb460',
+                parent: 'ac3a5d0e-9faa-475b-adbe-9f91be15b92f',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -287,7 +287,7 @@
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app','ngMessages', 'ui.select','ngTable'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select','ngTable'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)

@@ -5,7 +5,7 @@
         $stateProvider
             .state('register', {
                 url: '/login',
-                data: {pageTitle: 'Corriente Alterna'},
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
@@ -16,7 +16,7 @@
             })
             .state('success', {
                 url: '/account/success',
-                data: {pageTitle: 'Corriente Alterna'},
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/validate_account.html'
@@ -25,7 +25,7 @@
             })
             .state('validate', {
                 url: '/validate/:token',
-                data: {pageTitle: 'Corriente Alterna'},
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/account_activated.html',
@@ -38,7 +38,7 @@
                 url: '/account/dashboard',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Corriente Alterna'
+                    pageTitle: 'Moons'
                 },
                 views: {
                     'content': {
@@ -76,7 +76,7 @@
                 url: '/account/profile',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Perfil - Corriente Alterna'
+                    pageTitle: 'Perfil - Moons'
                 },
                 views: {
                     'content': {
@@ -90,7 +90,7 @@
                 url: '/account/addresses',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Corriente Alterna'
+                    pageTitle: 'Direcciones - Moons'
                 },
                 views: {
                     'content': {
@@ -104,7 +104,7 @@
                 url: '/account/address',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Corriente Alterna'
+                    pageTitle: 'Direcciones - Moons'
                 },
                 views: {
                     'content': {
@@ -118,7 +118,7 @@
                 url: '/account/address/update/:id',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Corriente Alterna'
+                    pageTitle: 'Direcciones - Moons'
                 },
                 views: {
                     'content': {
