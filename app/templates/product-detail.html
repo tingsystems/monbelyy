@@ -10,50 +10,35 @@
     </div>
 </div>
 <section id="content-area" class="content-blog product-detail" ng-controller="ShoppingCtrl as Shop">
-    <h1 class="text-center detail-title">{{Product.detail.name}}</h1>
-    <div class="row text-center">
-        <div class="col-md-6 col-md-offset-3">
-            <!-- slider -->
-            <div id="carouse-principal" class="carousel slide" style="margin-bottom: 25px">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-                        <uib-slide ng-repeat="slide in Product.detail.attachments">
-                            <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                                <div class="detail-img" style="background-image:url('{{ slide.url }}');"></div>
-                            </a>
-                        </uib-slide>
-                    </uib-carousel>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <h3 class="detail-price">{{ Product.detail.price | currency}}</h3>
-            </div>
-            <div class="col-md-4 detail-qty">
-                <input type="number" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
+    <div class="col-sm-4">
+         <div id="carouse-principal" class="carousel slide" style="margin-bottom: 25px">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
+                    <uib-slide ng-repeat="slide in Product.detail.attachments">
+                        <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                            <div class="detail-img" style="background-image:url('{{ slide.url }}');"></div>
+                        </a>
+                    </uib-slide>
+                </uib-carousel>
             </div>
         </div>
     </div>
-    <div class="row text-center">
-        <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+    <div class="col-sm-8">
+        <h3 class="detail-title">{{Product.detail.name}}</h3>
+        <hr>
+        <div class="col-sm-4 text-left">
+            <h3 class="detail-price">{{ Product.detail.price | currency}}</h3>
+            <div class="detail-qty">
+                <small>Cantidad</small>
+                <input type="number" placeholder="0" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
+            </div>
+             <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url, qty: Product.detail.qty}, Product.detail.qty)"
                 ng-disabled="Shop.itemInCart(Product.detail.id)"
-                class="btn btn-success btn-cart">Agregar a carrito</button>
+                class="btn btn-orange">Agregar a carrito</button>
+        </div>
         <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
             {{Product.detail.description}}</h4>
-    </div>
-</section>
-<section class="product-info">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-md-6">
-                <h1 class="info-descrip">¿Tienes dudas acerca de este producto?</h1>
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <h1 class="info-descrip">¡Llámanos!<br>
-                <a href=""><i class="ion-ios-telephone-outline"></i> 333 333 33 33</a>
-                </h1>
-            </div>
-        </div>
     </div>
 </section>
