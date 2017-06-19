@@ -42,7 +42,9 @@
                 },
                 views: {
                     'content': {
-                        templateUrl: '/templates/auth/dashboard.html'
+                        templateUrl: '/templates/auth/dashboard.html',
+                        controllerAs: 'Panel',
+                        controller: 'ProfilePanelCtrl'
                     }
                 }
             })

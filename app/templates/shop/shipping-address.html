@@ -7,7 +7,9 @@
                         <label for="address1">Selecciona una direccion de envio</label>
                         <ui-select on-select="Payment.selectedAddress($model)"
                                    ng-model="Payment.address" id="address1" name="address1"
-                                   title="Direccion" required>
+                                   title="Direccion"
+                                   ng-disabled="!Payment.addresses.length"
+                                   required>
                             <ui-select-match placeholder="Selecciona una dirección de envio *..."
                                              allow-clear="true">
                                 {{$select.selected.address}}
