@@ -38,7 +38,7 @@
             taxonomies: 'promocion',
             isActive: 'True',
             pageSize: 20,
-            ordering: '-createdAt',
+            ordering: 'createdAt',
             fields: 'title,content,attachments,slug,excerpt'
         }).$promise.then(function (results) {
             self.promoHome = results.results;

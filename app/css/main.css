@@ -262,9 +262,11 @@ body {
   padding-bottom: 0;
   padding-right: 45px;
   margin-top: 8px;
+  color: #1887ce;
 }
 .nav-user.nav > li > .shopping-cart i {
   font-size: 40px;
+  color: #1887ce;
 }
 header {
   width: 100%;
@@ -347,6 +349,10 @@ header {
   color: #d2b770 !important;
   text-align: left;
 }
+#section-promo {
+  background-color: #fff;
+  padding: 30px 0;
+}
 #security {
   text-align: center;
   background: #f5f5f5;
@@ -356,10 +362,6 @@ header {
   font-size: 22px;
   font-weight: bold;
   color: #aaa;
-}
-#section-prom {
-  margin-top: 60px;
-  margin-bottom: 40px;
 }
 #us {
   padding: 60px 0;
@@ -1619,14 +1621,14 @@ color
   border-color: none !important;
 }
 #footer-top {
-  padding: 50px 0;
+  padding: 80px 0;
+  background-image: url("../img/bg-contact.jpg");
+  background-size: cover;
+  background-position: center;
 }
-footer {
+.bottom-footer {
   background-color: #1887ce;
   padding: 30px 0;
-}
-footer .divider-white {
-  border-color: #fff;
 }
 footer .white {
   color: #fff;

@@ -1,24 +1,15 @@
-<div id="section-prom" class="container">
-    <div class="col-sm-9">
-        <div id="carouse-principal" class="carousel slide">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-                    <uib-slide ng-repeat="slide in Home.mainSlider">
-                        <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                            <div class="slider-img"
-                                 style="background-image:url('{{ slide.featuredImage.url }}');"></div>
-                        </a>
-                    </uib-slide>
-                </uib-carousel>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3 no-padding">
-        <div class="box-image-promo" ng-repeat="promo in Home.promoHome">
-            <a post-link="{ link: {url: promo.link, target: '_self'} }">
-                <img src="{{ promo.featuredImage.url }}" alt="Promotions">
-            </a>
+<div id="section-prom">
+    <div id="carouse-principal" class="carousel slide">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
+                <uib-slide ng-repeat="slide in Home.mainSlider">
+                    <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                        <div class="slider-img"
+                                style="background-image:url('{{ slide.featuredImage.url }}');"></div>
+                    </a>
+                </uib-slide>
+            </uib-carousel>
         </div>
     </div>
 </div>
@@ -71,7 +62,17 @@
         </div>
     </div>
 </section>
-
+<div id="section-promo">
+    <div class="container">
+        <div class="col-sm-4" ng-repeat="promo in Home.promoHome">
+            <div class="box-image-promo" >
+                <a post-link="{ link: {url: promo.link, target: '_self'} }">
+                    <img src="{{ promo.featuredImage.url }}" alt="Promotions">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 <section id="news">
     <div class="container">
         <h2 class="text-center">
