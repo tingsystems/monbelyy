@@ -39,7 +39,7 @@
             isActive: 'True',
             pageSize: 20,
             ordering: 'createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
+            fields: 'title,content,attachments,slug,excerpt, link'
         }).$promise.then(function (results) {
             self.promoHome = results.results;
             //get featureImage
@@ -435,7 +435,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.title + ' - Moons';
+            $rootScope.pageTitle = results.name + ' - Moons';
             self.busy = false;
         });
 
