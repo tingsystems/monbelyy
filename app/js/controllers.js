@@ -236,47 +236,6 @@
         self.busy = false;
         self.searchTerm = angular.copy($stateParams.q);
         self.kindTerm = angular.copy($stateParams.kind);
-        console.log(self.searchTerm);
-        console.log(self.kindTerm);
-
-        if ($stateParams.q) {
-            if (self.kindTerm === 'product') {
-                console.log(self.kindTerm);
-                ProductSrv.get({
-                    isActive: 'True',
-                    pageSize: 9,
-                    fields: 'id,attachments,description,name,price,slug',
-                    ordering: '-createdAt',
-                    page: self.page,
-                    search: self.searchTerm
-                }).$promise.then(function (results) {
-                    self.list = self.list.concat(results.results);
-                    self.busy = false;
-                    self.next = results.next;
-                    //get featureImage
-                    angular.forEach(self.list, function (obj, ind) {
-                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                    });
-                });
-
-            }
-            else {
-                console.log(self.kindTerm);
-                EntrySrv.get({
-                    kind: 'post',
-                    isActive: 'True',
-                    fields: 'attachments,title,link,slug,excerpt',
-                    pageSize: 10,
-                    ordering: '-createdAt',
-                    search: self.searchTerm,
-                    page: self.page
-                }).$promise.then(function (results) {
-                    //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
-                    self.listSearch = results.results;
-                });
-
-            }
-        }
 
         self.errorRecovery = function () {
             self.page -= 1;
@@ -291,23 +250,48 @@
             self.page += 1;
             self.busy = true;
 
-            EntrySrv.get({
-                kind: 'post',
-                isActive: 'True',
-                pageSize: 10,
-                fields: 'attachments,title,link,slug,excerpt',
-                ordering: '-createdAt',
-                search: self.searchTerm,
-                page: self.page
-            }).$promise.then(function (results) {
-                //self.responseResults = $filter('filter')(results.results, {'slug': '!slider'});
-                self.listSearch = self.listSearch.concat(results.results);
-                self.busy = false;
-                self.next = results.next;
-                self.loadPostError = false;
-            }, function (error) {
-                self.loadPostError = false;
-            });
+            if ($stateParams.q) {
+                if (self.kindTerm === 'product') {
+                    ProductSrv.get({
+                        isActive: 'True',
+                        pageSize: 9,
+                        fields: 'id,attachments,description,name,price,slug',
+                        ordering: '-createdAt',
+                        page: self.page,
+                        search: self.searchTerm
+                    }).$promise.then(function (results) {
+                        self.listSearch = self.listSearch.concat(results.results);
+                        //get featureImage
+                        angular.forEach(self.listSearch, function (obj, ind) {
+                            obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                        });
+                        self.busy = false;
+                        self.next = results.next;
+                    });
+
+                }
+                else {
+                    EntrySrv.get({
+                        kind: 'post',
+                        isActive: 'True',
+                        fields: 'attachments,title,link,slug,excerpt',
+                        pageSize: 10,
+                        ordering: '-createdAt',
+                        search: self.searchTerm,
+                        page: self.page
+                    }).$promise.then(function (results) {
+                        self.listSearch = self.listSearch.concat(results.results);
+                        self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
+                        //get featureImage
+                        angular.forEach(self.listSearch, function (obj, ind) {
+                            obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                        });
+                        self.busy = false;
+                        self.next = results.next;
+                    });
+
+                }
+            }
         };
 
         self.getMorePosts();
