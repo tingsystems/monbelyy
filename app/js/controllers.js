@@ -21,7 +21,7 @@
         });
 
         ProductSrv.get({
-            taxonomies: 'promocion',
+            taxonomies: 'productos-inicio',
             isActive: 'True',
             pageSize: 6,
             ordering: '-createdAt',
