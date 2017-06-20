@@ -82,7 +82,7 @@ body {
   background-color: #ccc;
 }
 .content {
-  margin-top: 150px;
+  margin-top: 180px;
 }
 .content-post {
   margin: 20px 0;
@@ -268,7 +268,6 @@ body {
 }
 header {
   width: 100%;
-  overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -310,7 +309,7 @@ header {
   transition: all ease-in-out 0.35s;
 }
 .header .navbar-default .navbar-nav > li > a:first-child {
-  padding: 46px 15px 10px 0px;
+  padding: 46px 20px 10px 0px;
 }
 .header .navbar-default .navbar-nav > li > a:hover,
 .header .navbar-default .navbar-nav > li > a:focus {
@@ -359,7 +358,7 @@ header {
   color: #aaa;
 }
 #section-prom {
-  margin-top: 80px;
+  margin-top: 60px;
   margin-bottom: 40px;
 }
 #us {

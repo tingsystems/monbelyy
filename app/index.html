@@ -32,7 +32,7 @@
     <meta property="og:description" content="{{ post.excerpt }}" ng-if="post" />
     <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://www.corriente-alterna.com{{ $state.href($state.current.name) }}" />
+    <meta property="og:url" content="http://moons.desarrollapps.com{{ $state.href($state.current.name) }}" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" />
 
@@ -89,48 +89,6 @@
                 </div>
             </div>
         </div>
-        <!--
-        <div class="middle-space">
-            <div class="container">
-                <div class="col-sm-3 text-left">
-                    <a ui-sref="home"><img src="img/logo.jpg" class="logo" alt="Moons Aquariums"></a>
-                </div>
-                <div class="col-sm-5">
-                    <form name="search" class="search-prd">
-                        <div class="form-group">
-                            <input type="text" class="form-search" id="search" placeholder="Buscar">
-                            <i class="ion-ios-search"></i>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-sm-4"  ng-controller="AccessCtrl as Access">
-                    <ul class="nav navbar-nav nav-user navbar-right ">                      
-                        <li>
-                            <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
-                                <span class="qty-cart">{{ items.length }}</span>
-                                <i class="icon ion-ios-cart-outline"></i><span class="hidden-xs"></span>
-                            </a>
-                        </li>
-                        <li>  
-                            <a ui-sref="register" class="my-account btn-blue" ng-if="!Access.isAuthenticated()">
-                                <i class="ion-ios-person"></i> Iniciar sesión
-                            </a>
-                        </li>
-                        <li  class="dropdown">
-                            <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <i class="ion-ios-person"></i> {{user.username}} 
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a ui-sref="dashboard">Mi cuenta</a></li>
-                                <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        -->
         <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
             <div class="container container-tab">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -197,7 +155,6 @@
     <footer id="footer_area">
         <ng-include src="'/templates/partials/footer.html'"></ng-include>
     </footer>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjGVa5h-ccW9wOy401EBhJXaEUogH0ZY"></script>
     <!-- build:js js/vendor.min.js -->
     <!-- bower:js -->
     <script src="lib/jquery/dist/jquery.js"></script>
