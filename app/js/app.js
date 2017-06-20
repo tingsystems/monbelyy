@@ -44,7 +44,7 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
-                    'title': { template: '<title>{{pageTitle}}</title>' },
+                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'Post',
@@ -55,7 +55,7 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
-                    'title': { template: '<title>{{pageTitle}}</title>' },
+                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'Page',
@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -86,7 +86,11 @@
                 }
             })
             .state('search', {
-                url: '/busqueda',
+                url: '/busqueda?q&kind',
+                params: {
+                    q: null,
+                    kind: null
+                },
                 views: {
                     'content': {
                         templateUrl: '/templates/search.html',
@@ -105,7 +109,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -116,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -286,15 +290,15 @@
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
-        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'uiGmapgoogle-maps', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select','ngTable'])
+        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI',
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select', 'ngTable'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-         'EntrySrv', '$auth', '$localStorage'];
+        'EntrySrv', '$auth', '$localStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
     AuthProvider.$inject = ['$authProvider'];

@@ -5,17 +5,12 @@
     <div class="container">
         <div ng-if="ShopCart.items.length==0" class="text-center">
             <h3 class="info"><i class="fa fa-warning"></i> No se han agregado productos al carrito</h3>
-            <a class="btn btn-outline-red" ui-sref="products">Ver productos</a>
+            <a class="btn btn-orange" ui-sref="products">Ver productos</a>
         </div>
         <div class="row" ng-if="ShopCart.items.length>0">
             <div class="col-sm-3 col-md-2 pull-right text-right">
                 <div class="clear-cart">
                     <button class="btn btn-gray-clear" ng-click="ShopCart.clearCart()">Vaciar Carrito</button>
-                </div>
-            </div>
-            <div class="col-sm-3 col-md-2 pull-right">
-                <div class="clear-cart">
-                    <button class="btn btn-gray-clear" ui-sref="products">Seguir comprando</button>
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@
     <meta property="og:description" content="{{ post.excerpt }}" ng-if="post"/>
     <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://www.corriente-alterna.com{{ $state.href($state.current.name) }}"/>
+    <meta property="og:url" content="http://moons.desarrollapps.com{{ $state.href($state.current.name) }}"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
 
@@ -69,10 +69,17 @@
             <div class="col-sm-3 nav-info ca-phone">
                 <a href="tel:015555589899"><i class="icon ion-ios-telephone-outline"></i> 01 (55) 55 58 98 99</a>
             </div>
-            <div class="col-sm-3 nav-info ca-phone">
-                <a href="mailto:info@moons.mx}"><i class="icon ion-email"></i> info@moons.mx</a>
+            <div class="col-sm-5 nav-info ca-phone" ng-controller="GetQuerySearchCtrl as Search">
+                <form name="search" role="search" class="search-prd" ng-submit="Search.globalSearch('product')">
+                    <div class="form-group">
+                        <input type="text" class="form-search" id="search" placeholder="Buscar"
+                               ng-model="Search.searchTerm" required>
+
+                        <i class="ion-ios-search"></i>
+                    </div>
+                </form>
             </div>
-            <div class="col-sm-6 ca-auth">
+            <div class="col-sm-4 ca-auth">
                 <ul class="list-social-media">
                     <li><a href=""><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -84,22 +91,25 @@
             </div>
         </div>
     </div>
-    <div class="middle-space">
-        <div class="container">
-            <div class="col-sm-3 text-left">
-                <a ui-sref="home"><img src="img/logo.jpg" class="logo" alt="Moons Aquariums"></a>
+    <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
+        <div class="container container-tab">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-mainMenu"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">
+                    <a ui-sref="home"><img src="img/logo.jpg" class="logo" alt="Moons Aquariums"></a>
+                </div>
             </div>
-            <div class="col-sm-5" ng-controller="GetQuerySearchCtrl as search">
-                <form name="search" class="search-prd" novalidate>
-                    <div class="form-group">
-                        <input type="text" class="form-search" id="search" placeholder="Buscar"
-                               ng-model="search.searchTerm" my-enter="search.globalSearch(product)">
-                        <i class="ion-ios-search"></i>
-                    </div>
-                </form>
-            </div>
-            <div class="col-sm-4" ng-controller="AccessCtrl as Access">
-                <ul class="nav navbar-nav nav-user navbar-right ">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <div class="collapse navbar-collapse" id="header-mainMenu">
+                <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">
                     <li>
                         <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce"
                            ng-controller="AccessCtrl as Access">
@@ -124,31 +134,14 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
-        </div>
-    </div>
-    <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
-        <div class="container container-tab">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-mainMenu"
-                        aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-
-            <div class="collapse navbar-collapse" id="header-mainMenu">
-                <ul class="nav navbar-nav nav-main">
+                <ul class="nav navbar-nav nav-main navbar-right">
                     <!--<li ng-repeat="item in mainNavMenu">-->
                     <li ng-repeat="item in mainNavMenu">
                         <a href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
 
                     </li>
                 </ul>
+
             </div>
         </div>
         <!-- /.navbar-collapse -->
@@ -167,7 +160,6 @@
 <footer id="footer_area">
     <ng-include src="'/templates/partials/footer.html'"></ng-include>
 </footer>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEjGVa5h-ccW9wOy401EBhJXaEUogH0ZY"></script>
 <!-- build:js js/vendor.min.js -->
 <!-- bower:js -->
 <script src="lib/jquery/dist/jquery.js"></script>
@@ -189,14 +181,6 @@
 <script src="lib/angular-truncate/src/truncate.js"></script>
 <script src="lib/angular-touch/angular-touch.js"></script>
 <script src="lib/ngstorage/ngStorage.js"></script>
-<script src="lib/angular-simple-logger/dist/angular-simple-logger.js"></script>
-<script src="lib/lodash/lodash.js"></script>
-<script src="lib/markerclustererplus/src/markerclusterer.js"></script>
-<script src="lib/google-maps-utility-library-v3-markerwithlabel/dist/markerwithlabel.js"></script>
-<script src="lib/google-maps-utility-library-v3-infobox/dist/infobox.js"></script>
-<script src="lib/google-maps-utility-library-v3-keydragzoom/dist/keydragzoom.js"></script>
-<script src="lib/js-rich-marker/src/richmarker.js"></script>
-<script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
 <script src="lib/sweetalert/dist/sweetalert.min.js"></script>
 <script src="lib/ngSweetAlert/SweetAlert.js"></script>
 <script src="lib/satellizer/dist/satellizer.js"></script>
@@ -236,7 +220,6 @@
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 </script>
-<toasty></toasty>
 </body>
 
 </html>

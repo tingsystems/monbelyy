@@ -82,7 +82,7 @@ body {
   background-color: #ccc;
 }
 .content {
-  margin-top: 235px;
+  margin-top: 180px;
 }
 .content-post {
   margin: 20px 0;
@@ -268,7 +268,6 @@ body {
 }
 header {
   width: 100%;
-  overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -288,10 +287,13 @@ header {
   background-color: #fff;
   left: 0;
   right: 0;
-  height: 65px;
+  height: 120px;
   border-radius: 0;
   margin-bottom: 0;
   border-top: 1px solid #eee;
+}
+.header .navbar-default .navbar-nav > li > .shopping-cart {
+  padding: 0 30px 0px 16px !important;
 }
 .header .navbar-default .navbar-brand {
   padding: 5px 15px;
@@ -307,7 +309,7 @@ header {
   transition: all ease-in-out 0.35s;
 }
 .header .navbar-default .navbar-nav > li > a:first-child {
-  padding: 22px 25px 10px 0px;
+  padding: 46px 20px 10px 0px;
 }
 .header .navbar-default .navbar-nav > li > a:hover,
 .header .navbar-default .navbar-nav > li > a:focus {
@@ -356,7 +358,7 @@ header {
   color: #aaa;
 }
 #section-prom {
-  margin-top: 80px;
+  margin-top: 60px;
   margin-bottom: 40px;
 }
 #us {
@@ -468,6 +470,9 @@ header {
 .carousel-inner {
   background-color: transparent;
 }
+.no-margin {
+  margin: 0;
+}
 .carousel-caption {
   top: 20%;
   padding: 30px 60px;
@@ -513,12 +518,12 @@ header {
 .navbar-info {
   padding: 0.8em 0 0em;
   background-color: #fff;
-  border-bottom: 1px solid #ddd;
 }
 .navbar-info a {
   color: #565656;
-  font-size: 14px;
+  font-size: 15px;
   font-family: 'Poppins', sans-serif;
+  line-height: 35px;
 }
 .address-form {
   border-right: 1px solid #ddd;
@@ -538,7 +543,7 @@ header {
   padding-bottom: 10px;
 }
 .info {
-  color: rgba(0,0,0,0.2);
+  color: rgba(0,0,0,0.5);
   font-size: 1.7em;
 }
 .info2 {
@@ -685,7 +690,7 @@ header {
   color: #fff;
 }
 #news {
-  padding: 30px 0;
+  padding: 60px 0;
   background-color: #f5f5f5;
 }
 .title {
@@ -716,6 +721,7 @@ header {
 }
 .box-prod .box-container p {
   font-size: 16px;
+  margin: 15px 0;
 }
 .box-prod .prod-descrip {
   color: #717171;
@@ -1434,7 +1440,7 @@ color
   color: #999;
 }
 #breadcrumb {
-  background-color: #f5f5f5;
+  background-color: #eee;
   border-bottom: 1px solid #f5f5f5;
 }
 #breadcrumb .breadcrumb {
@@ -1784,7 +1790,7 @@ footer .contact-sty .download-app > i:hover {
   display: inline-block;
   border: 1px solid #1887ce;
   padding: 10px 15px !important;
-  color: #fff;
+  color: #fff !important;
   font-weight: 300;
   border-radius: 0;
 }
@@ -2083,14 +2089,14 @@ footer .contact-sty .download-app > i:hover {
   color: #fff;
 }
 .search-prd {
-  margin-top: 30px;
+  margin-top: 0;
 }
 .search-prd .form-group .ion-ios-search {
   float: right;
   margin-top: -40px;
   font-size: 30px;
   color: #555;
-  padding: 0 10px;
+  padding: 4px 10px;
 }
 .form-search {
   background-color: transparent;
@@ -2113,7 +2119,7 @@ footer .contact-sty .download-app > i:hover {
   border: 1px solid #ddd;
   display: block;
   width: 100%;
-  height: 44px;
+  height: 34px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -2322,9 +2328,9 @@ footer .contact-sty .download-app > i:hover {
   width: 100%;
   height: 100%;
   opacity: 1;
-  background: rgba(255,255,255,0.8) /* fallback for old browsers */;
-  background: -webkit-linear-gradient(to left, rgba(255,255,255,0.8), rgba(255,255,255,0.8)) /* Chrome 10-25, Safari 5.1-6 */;
-  background: linear-gradient(to left, rgba(255,255,255,0.8), rgba(255,255,255,0.8)) /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+  background: #56ccf2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2f80ed, #56ccf2); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2f80ed, #56ccf2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .block-ui-message {
   background: transparent;

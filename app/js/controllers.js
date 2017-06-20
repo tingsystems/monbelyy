@@ -39,7 +39,7 @@
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
+            fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
             self.promoHome = results.results;
             //get featureImage
@@ -220,77 +220,66 @@
         };
     }
 
-    function GetQuerySearchCtrl($rootScope, $state) {
+    function GetQuerySearchCtrl($state) {
         var self = this;
-
-
-        $rootScope.searchTerm = '';
-
         self.globalSearch = function (kind) {
-            console.log('lalala');
-            $rootScope.searchTerm = angular.copy(self.searchTerm);
-            $rootScope.kindTerm = angular.copy(kind);
-            $state.go('search');
-            self.searchTerm = '';
+            $state.go('search', {q: self.searchTerm, kind: kind});
         };
-
     }
 
-    function SearchCtrl(EntrySrv, ProductSrv, $rootScope, $scope, $filter) {
+    function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams) {
         var self = this;
 
         self.listSearch = [];
         self.page = 0;
         self.next = true;
         self.busy = false;
-        self.searchTerm = angular.copy($rootScope.searchTerm);
-        self.kindTerm = angular.copy($rootScope.kindTerm);
-        $rootScope.searchTerm = '';
+        self.searchTerm = angular.copy($stateParams.q);
+        self.kindTerm = angular.copy($stateParams.kind);
+        console.log(self.searchTerm);
+        console.log(self.kindTerm);
 
-        // watch for global search term
-        $scope.$watch(function () {
-            return $rootScope.searchTerm;
-        }, function (value) {
-            if (value !== '') {
-                self.searchTerm = angular.copy($rootScope.searchTerm);
-                $rootScope.searchTerm = '';
-                if (self.kindTerm === 'product') {
-                    ProductSrv.get({
-                        isActive: 'True',
-                        pageSize: 9,
-                        fields: 'id,attachments,description,name,price,slug',
-                        ordering: '-createdAt',
-                        page: self.page,
-                        search: self.searchTerm
-                    }).$promise.then(function (results) {
-                        self.list = self.list.concat(results.results);
-                        self.busy = false;
-                        self.next = results.next;
-                        //get featureImage
-                        angular.forEach(self.list, function (obj, ind) {
-                            obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                        });
+        if ($stateParams.q) {
+            if (self.kindTerm === 'product') {
+                console.log(self.kindTerm);
+                ProductSrv.get({
+                    isActive: 'True',
+                    pageSize: 9,
+                    fields: 'id,attachments,description,name,price,slug',
+                    ordering: '-createdAt',
+                    page: self.page,
+                    search: self.searchTerm
+                }).$promise.then(function (results) {
+                    self.list = self.list.concat(results.results);
+                    self.busy = false;
+                    self.next = results.next;
+                    //get featureImage
+                    angular.forEach(self.list, function (obj, ind) {
+                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                     });
-
-                }
-                else {
-                    EntrySrv.get({
-                        kind: 'post',
-                        isActive: 'True',
-                        fields: 'attachments,title,link,slug,excerpt',
-                        pageSize: 10,
-                        ordering: '-createdAt',
-                        search: self.searchTerm,
-                        page: self.page
-                    }).$promise.then(function (results) {
-                        //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
-                        self.listSearch = results.results;
-                    });
-
-                }
+                });
 
             }
-        });
+            else {
+                console.log(self.kindTerm);
+                EntrySrv.get({
+                    kind: 'post',
+                    isActive: 'True',
+                    fields: 'attachments,title,link,slug,excerpt',
+                    pageSize: 10,
+                    ordering: '-createdAt',
+                    search: self.searchTerm,
+                    page: self.page
+                }).$promise.then(function (results) {
+                    //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
+                    self.listSearch = results.results;
+                });
+
+            }
+        }
+        else {
+            console.log('elelele')
+        }
 
         self.errorRecovery = function () {
             self.page -= 1;
@@ -643,8 +632,8 @@
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
-    GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
-    SearchCtrl.$inject = ['EntrySrv', '$rootScope', '$scope'];
+    GetQuerySearchCtrl.$inject = ['$state'];
+    SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
