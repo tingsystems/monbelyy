@@ -6,7 +6,8 @@
                 <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
                     <uib-slide ng-repeat="slide in Home.mainSlider">
                         <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                            <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
+                            <div class="slider-img"
+                                 style="background-image:url('{{ slide.featuredImage.url }}');"></div>
                         </a>
                     </uib-slide>
                 </uib-carousel>
@@ -14,11 +15,11 @@
         </div>
     </div>
     <div class="col-sm-3 no-padding">
-       <div class="box-image-promo" ng-repeat="promo in Home.promoHome">
+        <div class="box-image-promo" ng-repeat="promo in Home.promoHome">
             <a post-link="{ link: {url: promo.link, target: '_self'} }">
                 <img src="{{ promo.featuredImage.url }}" alt="Promotions">
             </a>
-       </div>
+        </div>
     </div>
 </div>
 <!-- slider -->
@@ -31,17 +32,18 @@
                 <h3>Conoce nuestros productos</h3>
             </div>
             <div class="prod-entry">
-                <p> Nosotros creamos un ambiente saludable, amigable, y funcional tanto en la industria <br> como 
-                en el hogar para nuestros animales de compañía.</p>
+                <p> Nosotros creamos un ambiente saludable, amigable, y funcional tanto en la industria <br> como
+                    en el hogar para nuestros animales de compañía.</p>
             </div>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-12">
             <div class="box-products" ng-controller="ShoppingCtrl as Shop">
                 <div class="row text-center">
-                    <div class="col-sm-4" ng-repeat="product in Home.products">
+                    <div class="col-sm-3" ng-repeat="product in Home.products">
                         <div class="box-prod">
                             <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
-                                <div class="bg-prod" style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                                <div class="bg-prod"
+                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
                             </a>
                             <div class="box-container no-padding container-fluid">
                                 <div class="col-sm-12 no-pd-l text-center">
@@ -52,21 +54,20 @@
                             <hr>
                             <div class="container-fluid no-padding">
                                 <div class="col-xs-6 no-pd-l">
-                                    <a class="btn btn-gray-clear btn-block"  ui-sref="product-detail({slug:product.slug})">Ver más</a>
+                                    <a class="btn btn-gray-clear btn-block"
+                                       ui-sref="product-detail({slug:product.slug})">Ver más</a>
                                 </div>
                                 <div class="col-xs-6 no-pd-r">
                                     <button class="btn btn-orange btn-block"
-                                    ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url, name: product.name, price: product.price, qty: 1}, 1)"
-                                    ng-disabled="Shop.itemInCart(product)">Agregar</button>
+                                            ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url, name: product.name, price: product.price, qty: 1}, 1)"
+                                            ng-disabled="Shop.itemInCart(product)">Agregar
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-3">
-            <h3>Twitter here</h3>
         </div>
     </div>
 </section>
@@ -78,11 +79,13 @@
         </h3>
         <div class="col-sm-3" ng-repeat="news in Home.newsHome">
             <div class="box-blog-home">
-                <div class="box-img-bg" style="background-image: url('{{news.featuredImage.url ? news.featuredImage.url : initConfig.img_default}}')"></div>
-                <div class="box-title"> 
+                <div class="box-img-bg"
+                     style="background-image: url('{{news.featuredImage.url ? news.featuredImage.url : initConfig.img_default}}')"></div>
+                <div class="box-title">
                     <h3>{{ news.title }}</h3>
                 </div>
-                <a ui-sref="post_detail({slug:news.slug})" class="btn-orange btn-block">Leer más <i class="fa fa-angle-right pull-right"></i></a>
+                <a ui-sref="post_detail({slug:news.slug})" class="btn-orange btn-block">Leer más <i
+                        class="fa fa-angle-right pull-right"></i></a>
             </div>
         </div>
     </div>
