@@ -69,10 +69,15 @@
                 <div class="col-sm-3 nav-info ca-phone">
                     <a href="tel:015555589899"><i class="icon ion-ios-telephone-outline"></i> 01 (55) 55 58 98 99</a>
                 </div>
-                <div class="col-sm-3 nav-info ca-phone">
-                    <a href="mailto:info@moons.mx}"><i class="icon ion-email"></i> info@moons.mx</a>
+                <div class="col-sm-5 nav-info ca-phone">
+                    <form name="search" class="search-prd">
+                        <div class="form-group">
+                            <input type="text" class="form-search" id="search" placeholder="Buscar">
+                            <i class="ion-ios-search"></i>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-sm-6 ca-auth">
+                <div class="col-sm-4 ca-auth">
                     <ul class="list-social-media">
                         <li><a href=""><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -84,6 +89,7 @@
                 </div>
             </div>
         </div>
+        <!--
         <div class="middle-space">
             <div class="container">
                 <div class="col-sm-3 text-left">
@@ -124,6 +130,7 @@
                 </div>
             </div>
         </div>
+        -->
         <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
             <div class="container container-tab">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -134,17 +141,44 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <div class="navbar-brand">
+                        <a ui-sref="home"><img src="img/logo.jpg" class="logo" alt="Moons Aquariums"></a>
+                    </div>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
 
                 <div class="collapse navbar-collapse" id="header-mainMenu">
-                    <ul class="nav navbar-nav nav-main">
+                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">                      
+                        <li>
+                            <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
+                                <span class="qty-cart">{{ items.length }}</span>
+                                <i class="icon ion-ios-cart-outline"></i><span class="hidden-xs"></span>
+                            </a>
+                        </li>
+                        <li>  
+                            <a ui-sref="register" class="my-account btn-blue" ng-if="!Access.isAuthenticated()">
+                                <i class="ion-ios-person"></i> Iniciar sesión
+                            </a>
+                        </li>
+                        <li  class="dropdown">
+                            <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="ion-ios-person"></i> {{user.username}} 
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ui-sref="dashboard">Mi cuenta</a></li>
+                                <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav nav-main navbar-right">
                         <!--<li ng-repeat="item in mainNavMenu">-->
                         <li ng-repeat="item in mainNavMenu">
                             <a href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
 
                         </li>
                     </ul>
+                    
                 </div>
             </div>
             <!-- /.navbar-collapse -->
