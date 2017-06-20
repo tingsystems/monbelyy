@@ -435,7 +435,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.title + ' - Moons';
+            $rootScope.pageTitle = results.name + ' - Moons';
             self.busy = false;
         });
 
