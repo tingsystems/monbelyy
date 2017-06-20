@@ -39,7 +39,7 @@
             isActive: 'True',
             pageSize: 20,
             ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
+            fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
             self.promoHome = results.results;
             //get featureImage
