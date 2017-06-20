@@ -21,9 +21,9 @@
         });
 
         ProductSrv.get({
-            taxonomies: 'promocion',
+            taxonomies: 'productos-inicio',
             isActive: 'True',
-            pageSize: 4,
+            pageSize: 6,
             ordering: '-createdAt',
             fields: 'name,description,attachments,slug,code,taxonomy,price,id'
         }).$promise.then(function (results) {
@@ -38,8 +38,8 @@
             taxonomies: 'promocion',
             isActive: 'True',
             pageSize: 20,
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
+            ordering: 'createdAt',
+            fields: 'title,content,attachments,slug,excerpt, link'
         }).$promise.then(function (results) {
             self.promoHome = results.results;
             //get featureImage
@@ -448,7 +448,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.title + ' - Moons';
+            $rootScope.pageTitle = results.name + ' - Moons';
             self.busy = false;
         });
 
