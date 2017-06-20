@@ -2081,11 +2081,11 @@ footer .contact-sty .download-app > i:hover {
 }
 .list-group-item.active,
 .list-group-item.active:hover {
-  color: #aa261d;
+  color: #1887ce;
   background-color: transparent;
 }
 .list-group-item.active:focus {
-  background-color: #aa261d;
+  background-color: #1887ce;
   color: #fff;
 }
 .search-prd {

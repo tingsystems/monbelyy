@@ -32,7 +32,7 @@
             <h3 class="detail-price">{{ Product.detail.price | currency}}</h3>
             <div class="detail-qty">
                 <small>Cantidad</small>
-                <input type="number" placeholder="0" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
+                <input type="number" placeholder="1" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
             </div>
              <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url, qty: Product.detail.qty}, Product.detail.qty)"
