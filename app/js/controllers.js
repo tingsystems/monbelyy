@@ -16,7 +16,7 @@
             self.mainSlider = results.results;
             //get featureImage
             angular.forEach(self.mainSlider, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
 
@@ -30,7 +30,7 @@
             self.products = results.results;
             //get featureImage
             angular.forEach(self.products, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
 
@@ -44,7 +44,7 @@
             self.promoHome = results.results;
             //get featureImage
             angular.forEach(self.promoHome, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
 
@@ -58,7 +58,7 @@
             self.newsHome = results.results;
             //get featureImage
             angular.forEach(self.newsHome, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
 
@@ -105,7 +105,7 @@
                 self.next = results.next;
                 //get featureImage
                 angular.forEach(self.list, function (obj, ind) {
-                    obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 });
             });
         };
@@ -150,7 +150,7 @@
                 self.next = results.next;
                 //get featureImage
                 angular.forEach(self.list, function (obj, ind) {
-                    obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 });
             });
         };
@@ -195,7 +195,7 @@
         }
 
         self.contactInitialState = function () {
-            self.notification = { name: '', email: '', message: '', phone: '', kind: '' };
+            self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
             self.context = {};
 
         };
@@ -208,10 +208,10 @@
             self.context.context = angular.copy(self.notification);
             self.busy = true;
             MessageSrv.create(self.context).$promise.then(function (data) {
-                self.contactInitialState();
-                NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
-                self.busy = false;
-            },
+                    self.contactInitialState();
+                    NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                    self.busy = false;
+                },
                 function (data) {
                     //error
                     NotificationSrv.error('Hubo ' + ' un error al procesar el formulario, intenta más tarde por favor');
@@ -223,17 +223,20 @@
     function GetQuerySearchCtrl($rootScope, $state) {
         var self = this;
 
+
         $rootScope.searchTerm = '';
 
-        self.globalSearch = function () {
+        self.globalSearch = function (kind) {
+            console.log('lalala');
             $rootScope.searchTerm = angular.copy(self.searchTerm);
+            $rootScope.kindTerm = angular.copy(kind);
             $state.go('search');
             self.searchTerm = '';
         };
 
     }
 
-    function SearchCtrl(EntrySrv, $rootScope, $scope, $filter) {
+    function SearchCtrl(EntrySrv, ProductSrv, $rootScope, $scope, $filter) {
         var self = this;
 
         self.listSearch = [];
@@ -241,27 +244,51 @@
         self.next = true;
         self.busy = false;
         self.searchTerm = angular.copy($rootScope.searchTerm);
+        self.kindTerm = angular.copy($rootScope.kindTerm);
         $rootScope.searchTerm = '';
 
         // watch for global search term
         $scope.$watch(function () {
             return $rootScope.searchTerm;
         }, function (value) {
-            if (value != '') {
+            if (value !== '') {
                 self.searchTerm = angular.copy($rootScope.searchTerm);
                 $rootScope.searchTerm = '';
-                EntrySrv.get({
-                    kind: 'post',
-                    isActive: 'True',
-                    fields: 'attachments,title,link,slug,excerpt',
-                    pageSize: 10,
-                    ordering: '-createdAt',
-                    search: self.searchTerm,
-                    page: self.page
-                }).$promise.then(function (results) {
-                    //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
-                    self.listSearch = results.results;
-                });
+                if (self.kindTerm === 'product') {
+                    ProductSrv.get({
+                        isActive: 'True',
+                        pageSize: 9,
+                        fields: 'id,attachments,description,name,price,slug',
+                        ordering: '-createdAt',
+                        page: self.page,
+                        search: self.searchTerm
+                    }).$promise.then(function (results) {
+                        self.list = self.list.concat(results.results);
+                        self.busy = false;
+                        self.next = results.next;
+                        //get featureImage
+                        angular.forEach(self.list, function (obj, ind) {
+                            obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                        });
+                    });
+
+                }
+                else {
+                    EntrySrv.get({
+                        kind: 'post',
+                        isActive: 'True',
+                        fields: 'attachments,title,link,slug,excerpt',
+                        pageSize: 10,
+                        ordering: '-createdAt',
+                        search: self.searchTerm,
+                        page: self.page
+                    }).$promise.then(function (results) {
+                        //self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
+                        self.listSearch = results.results;
+                    });
+
+                }
+
             }
         });
 
@@ -338,16 +365,16 @@
             });
         };
 
-        var getAttachmentByTaxonomy = function(array){
+        var getAttachmentByTaxonomy = function (array) {
             angular.forEach(array, function (obj, ind) {
                 AttachmentCmsSrv.get({
                     pageSize: 1,
                     page: 1,
-                    project : $rootScope.projectId,
+                    project: $rootScope.projectId,
                     reference: obj.id,
                     kind: 'featuredImage'
                 }).$promise.then(function (results) {
-                    obj.featuredImage = $filter('filter')(results.results, { kind: 'featuredImage' })[0];
+                    obj.featuredImage = $filter('filter')(results.results, {kind: 'featuredImage'})[0];
 
                 }, function (error) {
                     console.log(error)
@@ -414,7 +441,7 @@
         };
     }
 
-    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter){
+    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter) {
         var self = this;
         $rootScope.pageTitle = 'Moons';
 
@@ -426,9 +453,9 @@
         }).$promise.then(function (results) {
             self.detail = results;
             // get featureImage
-            self.detail.featuredImage = $filter('filter')(self.detail.attachments, { kind: 'featuredImage' })[0];
+            self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
             //get galeries
-            self.detail.galleryImages = $filter('filter')(self.detail.attachments, { kind: 'gallery_image' });
+            self.detail.galleryImages = $filter('filter')(self.detail.attachments, {kind: 'gallery_image'});
 
             if (!self.detail.featuredImage) {
                 self.detail.featuredImage = {};
@@ -441,7 +468,7 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, $stateParams, $rootScope, $localStorage, $filter){
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, $stateParams, $rootScope, $localStorage, $filter) {
         var self = this;
 
         self.list = [];
@@ -488,18 +515,18 @@
                 self.next = results.next;
                 //get featureImage
                 angular.forEach(self.list, function (obj, ind) {
-                    obj.featuredImage = $filter('filter')(obj.attachments, { kind: 'featuredImage' })[0];
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 });
             });
         };
 
         self.itemInCart = function (item) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            var find_item = $filter('filter')(self.items, {id: item.id})[0];
             return !!find_item;
         };
 
         self.setItem = function (item, qty) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            var find_item = $filter('filter')(self.items, {id: item.id})[0];
             if (find_item) {
                 if (qty < 1) {
                     // Remove item from cart
@@ -539,7 +566,7 @@
             $localStorage.total = 0;
         };
         self.itemInCart = function (item) {
-            var find_item = $filter('filter')(self.items, { id: item })[0];
+            var find_item = $filter('filter')(self.items, {id: item})[0];
             return !!find_item;
         };
         // we calculate the total from items on the cart
@@ -556,7 +583,7 @@
             $localStorage.total = self.total;
         };
         self.setItem = function (item, qty) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            var find_item = $filter('filter')(self.items, {id: item.id})[0];
             if (find_item) {
                 NotificationSrv.error("Este producto ya esta en el carrito.", item.name);
                 if (qty < 1) {
@@ -573,11 +600,11 @@
                     isPercentage: "0",
                     discount: "0"
                 };
-                if(item.qty && item.qty>0){
+                if (item.qty && item.qty > 0) {
                     self.items.push(item);
                     NotificationSrv.success('Producto agregado al carrito', item.name);
                     $localStorage.items = self.items;
-                }else{
+                } else {
                     NotificationSrv.error("Ingresa la cantidad, para poder  agregar", item.name)
                 }
             }
@@ -585,7 +612,7 @@
         };
         // remove item from cart
         self.removeItem = function (item) {
-            var find_item = $filter('filter')(self.items, { id: item.id })[0];
+            var find_item = $filter('filter')(self.items, {id: item.id})[0];
             if (find_item) {
                 self.items.splice([self.items.indexOf(find_item)], 1)
             }
@@ -612,14 +639,14 @@
 
     // inject dependencies to controllers
     HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter'];
-    PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope','$filter'];
+    PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
     ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$rootScope', '$state', '$filter'];
     SearchCtrl.$inject = ['EntrySrv', '$rootScope', '$scope'];
     NavBarCtrl.$inject = [];
-    ProductsCtrl.$inject = ['ProductSrv','ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
+    ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
