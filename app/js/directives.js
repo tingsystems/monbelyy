@@ -39,7 +39,7 @@
                         // Load the image source in the background and replace the element source once it's ready
                         var img = new Image();
                         img.src = obj.url;
-                        img.onload = function(){
+                        img.onload = function () {
                             attrs.$set('src', obj.url);
                         };
                     }
@@ -51,7 +51,21 @@
     // create the module and assign controllers
     angular.module('ts.directives', [])
         .directive('postLink', postLink)
-        .directive('postImage', postImage);
+        .directive('postImage', postImage)
+        .directive('myEnter', function () {
+            return function (scope, element, attrs) {
+                console.log("lsldldld");
+                element.bind("keydown keypress", function (event) {
+                    if (event.which === 13) {
+                        scope.$apply(function () {
+                            scope.$eval(attrs.myEnter);
+                        });
+
+                        event.preventDefault();
+                    }
+                });
+            };
+        });
 
     // inject dependencies to controllers
     postLink.$inject = [];

@@ -6,16 +6,10 @@
 
     function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
         var self = this;
-        var user = $localStorage.appData.user;
-        self.params = {};
-        self.branchOffice = '';
-        self.items = $localStorage.items ? $localStorage.items : [];
-        self.defaultbranchOffice = '';
-        self.customer = $localStorage.appData.user.customer;
-        self.email = $localStorage.appData.user.email;
-        self.customerName = $localStorage.appData.user.firstName;
         self.total = $localStorage.total;
+        self.params = {};
         var items = [];
+        self.items = $localStorage.items ? $localStorage.items : [];
         $localStorage.items = self.items;
         self.items = $localStorage.items;
         self.itemCount = self.items.length;
@@ -25,6 +19,12 @@
         self.taxInverse = false;
 
         if ($auth.isAuthenticated()) {
+            var user = $localStorage.appData.user;
+            self.branchOffice = '';
+            self.defaultbranchOffice = '';
+            self.customer = $localStorage.appData.user.customer ? $localStorage.appData.user.customer : '';
+            self.email = $localStorage.appData.user.email ? $localStorage.appData.user.email : '';
+            self.customerName = $localStorage.appData.user.firstName ? $localStorage.appData.user.firstName : '';
             // get default branch office
             self.getDefaulBranchOffice = function () {
                 if (!user.branchOffices)
@@ -644,7 +644,7 @@
                 self.purchase.items = aditionalKey(self.purchase.items);
 
             });
-        }else{
+        } else {
             NotificationSrv.error('No pudimos cargar su detalle de venta, le enviaremos un correo electronico');
         }
 

@@ -44,7 +44,7 @@
             .state('post_detail', {
                 url: '/:slug\.html',
                 views: {
-                    'title': { template: '<title>{{pageTitle}}</title>' },
+                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/single.html',
                         controllerAs: 'Post',
@@ -55,7 +55,7 @@
             .state('page', {
                 url: '/page/:slug',
                 views: {
-                    'title': { template: '<title>{{pageTitle}}</title>' },
+                    'title': {template: '<title>{{pageTitle}}</title>'},
                     'content': {
                         templateUrl: '/templates/page.html',
                         controllerAs: 'Page',
@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -86,7 +86,11 @@
                 }
             })
             .state('search', {
-                url: '/busqueda',
+                url: '/busqueda?q&kind',
+                params: {
+                    q: null,
+                    kind: null
+                },
                 views: {
                     'content': {
                         templateUrl: '/templates/search.html',
@@ -105,7 +109,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -116,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: { pageTitle: 'Moons' },
+                data: {pageTitle: 'Moons'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -169,7 +173,7 @@
         //various config
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-43',
-            meta_color: '#eee7de',
+            meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
             email: 'info@moons.mx',
@@ -283,18 +287,38 @@
         if (!angular.isDefined($localStorage.appData)) {
             $localStorage.appData = {};
         }
+
+        $rootScope.$on('UNAUTHORIZED', function (event, args) {
+            if ($state.current.name !== 'register') {
+                $auth.logout()
+                    .then(function () {
+                        // delete appData
+                        delete $localStorage.appData;
+                        // Desconectamos al usuario y lo redirijimos
+                        if ($state.current.name !== 'register') {
+                            //NotificationSrv.error('Tu sesión ha caducado por favor inicia sesión de nuevo');
+                            $state.go('register');
+                        }
+                    })
+                    .catch(function (response) {
+                        // Handle errors here, such as displaying a notification
+                        console.log(response);
+                    });
+            }
+        });
+
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
-        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI', 'angular-toasty',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select','ngTable'])
+        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI',
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select', 'ngTable'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-         'EntrySrv', '$auth', '$localStorage'];
+        'EntrySrv', '$auth', '$localStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
     AuthProvider.$inject = ['$authProvider'];

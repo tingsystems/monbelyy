@@ -7,9 +7,11 @@
         self.formData = {};
         self.formDataLogin = {};
         //self.branchDefault = {branchOffices: ["7454e28c-189a-48d7-a439-0f9f8fec89d4"]};
-        self.branchDefault = '';
-        self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
+        //self.branchDefault = '';
+        //self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
         $rootScope.user = $localStorage.appData.user;
+        self.items = $localStorage.items ? $localStorage.items : [];
+        self.itemCount = self.items.length;
 
         self.processing = false;
 
@@ -18,17 +20,16 @@
             // save user info to local storage
             $localStorage.appData = {user: angular.copy(response.data.user)};
             $rootScope.user = $localStorage.appData.user;
-            /*delete $localStorage.appData.user.groups;
-             delete $localStorage.appData.user.permissions;
-             delete $localStorage.appData.user.projects;
-             delete $localStorage.appData.user.is_superuser;
-             delete $localStorage.appData.user.branchOffices;*/
             self.idUser = $localStorage.appData.user.id;
-            //$scope.app.data = $localStorage.appData;
-            // Redirect user here after a successful log in.
-            self.getCustomer();
-            self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
-            $state.go('dashboard');
+            CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
+                $localStorage.appData.user.customer = data.id;
+                $localStorage.appData.user.firstName = data.firstName;
+                self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
+                // Redirect user here after a successful log in.
+                $state.go('dashboard');
+            });
+
+
         };
 
         // Social auth
@@ -104,12 +105,6 @@
             })
         };
 
-        self.getCustomer = function () {
-            CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
-                $localStorage.appData.user.customer = data.id;
-                $localStorage.appData.user.firstName = data.firstName;
-            });
-        };
 
     }
 
@@ -550,10 +545,7 @@
         self.processing = 0;
         self.shipped = 0;
 
-        self.initialState = function () {
-        };
         self.idUser = $localStorage.appData.user.customer;
-
         self.globalSearch = function () {
             // Cancels a task associated with the promise
             $timeout.cancel(timeout);

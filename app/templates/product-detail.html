@@ -34,10 +34,12 @@
                 <small>Cantidad</small>
                 <input type="number" placeholder="0" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
             </div>
-             <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+            <div class="btn-product-detail">
+                <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url, qty: Product.detail.qty}, Product.detail.qty)"
-                ng-disabled="Shop.itemInCart(Product.detail.id)"
-                class="btn btn-orange">Agregar a carrito</button>
+                        ng-disabled="Shop.itemInCart(Product.detail.id)"
+                        class="btn btn-orange">Agregar a carrito</button>
+            </div>
         </div>
         <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
             {{Product.detail.description}}</h4>

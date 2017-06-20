@@ -30,7 +30,7 @@
         <div class="col-sm-9">
             <div class="box-products" ng-controller="ShoppingCtrl as Shop">
                 <div class="row text-center"> 
-                    <div class="col-sm-4" ng-repeat="product in Home.products">
+                    <div class="col-sm-6 col-md-4" ng-repeat="product in Home.products">
                         <div class="box-prod">
                             <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
                                 <div class="bg-prod"
@@ -68,7 +68,7 @@
 
 <div id="section-promo">
     <div class="container">
-        <div class="col-sm-4" ng-repeat="promo in Home.promoHome">
+        <div class="col-sm-4 item-promo" ng-repeat="promo in Home.promoHome">
             <div class="box-image-promo" >
                 <a post-link="{ link: {url: promo.link, target: '_self'} }">
                     <img src="{{ promo.featuredImage.url }}" alt="Promotions">
