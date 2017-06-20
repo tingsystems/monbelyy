@@ -173,7 +173,7 @@
         //various config
         $rootScope.initConfig = {
             googleKey: 'UA-53555832-43',
-            meta_color: '#eee7de',
+            meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
             email: 'info@moons.mx',
