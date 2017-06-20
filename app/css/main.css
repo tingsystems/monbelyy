@@ -1,3 +1,6 @@
+.hide-desk {
+  display: none;
+}
 i {
   vertical-align: middle;
 }
@@ -349,9 +352,15 @@ header {
   color: #d2b770 !important;
   text-align: left;
 }
+#twitter-styl {
+  border: 1px solid #eee;
+  padding: 0;
+}
 #section-promo {
   background-color: #fff;
-  padding: 30px 0;
+  padding: 50px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 #security {
   text-align: center;
@@ -518,8 +527,10 @@ header {
   color: #555;
 }
 .navbar-info {
+  background-image: url("../img/cats-dogs.png");
   padding: 0.8em 0 0em;
   background-color: #fff;
+  background-size: 215px;
 }
 .navbar-info a {
   color: #565656;
@@ -1787,6 +1798,13 @@ footer .contact-sty .download-app > i:hover {
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
+.btn-blue-clear {
+  background-color: transparent;
+  color: #1887ce !important;
+}
+.btn-blue-clear:hover {
+  color: #136a9b;
+}
 .btn-blue {
   background-color: #1887ce;
   display: inline-block;
@@ -2655,8 +2673,8 @@ footer .contact-sty .download-app > i:hover {
   header .navbar-default .navbar-nav > li > a {
     font-size: 16px;
   }
-  header .logo {
-    width: 180px;
+  .header .logo {
+    width: 100px;
     padding: 25px 14px 0 25px;
     margin-top: 10px !important;
   }
@@ -2778,6 +2796,15 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .hide-desk {
+    display: inline;
+  }
+  .xs-hide {
+    display: none;
+  }
+  .nav-user.nav > li > .shopping-cart i {
+    font-size: 33px;
+  }
   .excerpt-shopping {
     padding-top: 50px;
   }
@@ -2804,7 +2831,7 @@ footer .contact-sty .download-app > i:hover {
     height: 235px;
   }
   .content {
-    margin-top: 0;
+    margin-top: 225px;
   }
   .header-title {
     height: 80px;
@@ -2813,6 +2840,9 @@ footer .contact-sty .download-app > i:hover {
     color: #fff;
     font-size: 2em;
     padding: 20px 4px 2px;
+  }
+  .ca-phone {
+    display: none;
   }
   .services .box-service h3 {
     text-align: center;
@@ -2825,7 +2855,7 @@ footer .contact-sty .download-app > i:hover {
   }
   .navbar-info a,
   .navbar-info a > i {
-    font-size: 16px;
+    font-size: 14px;
   }
   .qty-cart {
     right: 17%;
@@ -3086,8 +3116,7 @@ footer .contact-sty .download-app > i:hover {
   }
   .navbar-nav {
     background: transparent;
-    margin-top: 25px;
-    border-top: 1px solid #f5f5f5;
+    margin-top: 0;
   }
   .fluid-res {
     padding: 0;
@@ -3095,9 +3124,14 @@ footer .contact-sty .download-app > i:hover {
   #wrap {
     display: none;
   }
-  header .logo {
-    margin-top: 10px;
-    width: 200px;
+  .list-social-media {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  .header .logo {
+    margin-top: 5px;
+    width: 75px;
   }
   h2.title-outstanding {
     font-size: 16px !important;
