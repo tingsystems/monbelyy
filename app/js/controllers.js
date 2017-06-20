@@ -277,9 +277,6 @@
 
             }
         }
-        else {
-            console.log('elelele')
-        }
 
         self.errorRecovery = function () {
             self.page -= 1;

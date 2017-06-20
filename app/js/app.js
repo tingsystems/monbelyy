@@ -287,6 +287,26 @@
         if (!angular.isDefined($localStorage.appData)) {
             $localStorage.appData = {};
         }
+
+        $rootScope.$on('UNAUTHORIZED', function (event, args) {
+            if ($state.current.name !== 'register') {
+                $auth.logout()
+                    .then(function () {
+                        // delete appData
+                        delete $localStorage.appData;
+                        // Desconectamos al usuario y lo redirijimos
+                        if ($state.current.name !== 'register') {
+                            //NotificationSrv.error('Tu sesión ha caducado por favor inicia sesión de nuevo');
+                            $state.go('register');
+                        }
+                    })
+                    .catch(function (response) {
+                        // Handle errors here, such as displaying a notification
+                        console.log(response);
+                    });
+            }
+        });
+
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
