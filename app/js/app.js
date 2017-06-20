@@ -171,7 +171,7 @@
             googleKey: 'UA-53555832-43',
             meta_color: '#eee7de',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
-            img_default: '../../img/img-default-ca.png',
+            img_default: '../../img/img-default.jpg',
             email: 'info@moons.mx',
             phone: '01 (55) 55 58 98 99'
 
@@ -231,7 +231,7 @@
 
         if (!$rootScope.footerNavMenuConact) {
             TaxonomySrv.query({
-                parent: 'f84e9c4c-9ce8-4948-a46d-cbc1cf2230ea',
+                parent: 'a0734bc0-6325-4f4a-b6cf-f8181db71e12',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -241,7 +241,7 @@
         }
         if (!$rootScope.contactHelp) {
             TaxonomySrv.query({
-                parent: 'f84f6cde-0cd5-47b2-b215-3a91e9190052',
+                parent: 'f2d48db9-e7ac-4dfc-aeeb-da6ca4aaec19',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -252,7 +252,7 @@
 
         if (!$rootScope.contactMenuData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1489620879',
+                taxonomies: 'contactanos',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: '-createdAt',

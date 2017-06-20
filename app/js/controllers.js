@@ -23,7 +23,7 @@
         ProductSrv.get({
             taxonomies: 'promocion',
             isActive: 'True',
-            pageSize: 20,
+            pageSize: 4,
             ordering: '-createdAt',
             fields: 'name,description,attachments,slug,code,taxonomy,price,id'
         }).$promise.then(function (results) {
