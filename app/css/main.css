@@ -1,6 +1,9 @@
 .hide-desk {
   display: none;
 }
+.hide-tablet {
+  display: none;
+}
 i {
   vertical-align: middle;
 }
@@ -2565,6 +2568,33 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .btn-sm {
+    padding: 5px 5px !important;
+    font-size: 14px !important;
+  }
+  .nav-user > li {
+    float: left !important;
+  }
+  .nav-user {
+    background: transparent !important;
+    margin-top: 0 !important;
+    box-shadow: none !important;
+    border-top: 0 !important;
+  }
+  .nav-user .btn {
+    font-size: 14px;
+    padding: 5px 5px !important;
+  }
+  .hide-tablet {
+    display: inline;
+  }
+  .mobile,
+  .ca-phone {
+    display: none;
+  }
+  .header .navbar-default {
+    height: 80px;
+  }
   .excerpt-shopping {
     padding-top: 50px;
   }
@@ -2585,9 +2615,6 @@ footer .contact-sty .download-app > i:hover {
   }
   .content {
     margin-top: 100px;
-  }
-  .navbar-default {
-    margin-top: 90px;
   }
   .services .box-service h3 {
     padding: 12px 20px 0;
@@ -2703,6 +2730,7 @@ footer .contact-sty .download-app > i:hover {
     display: block !important;
     border-top: 0px solid #fff;
     border-color: transparent;
+    background-color: #fff;
   }
   .navbar-default .navbar-toggle:hover,
   .navbar-default .navbar-toggle:focus {
@@ -2762,7 +2790,9 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
-<<<<<<< HEAD
+  .hide-tablet {
+    display: none;
+  }
   .hide-desk {
     display: inline;
   }
@@ -2771,13 +2801,12 @@ footer .contact-sty .download-app > i:hover {
   }
   .nav-user.nav > li > .shopping-cart i {
     font-size: 33px;
-=======
+  }
   #section-promo .item-promo {
     text-align: center;
   }
   .btn-product-detail {
     text-align: center;
->>>>>>> fedc5f1056f41739a309f3ca1a008d9e9760d7c4
   }
   .excerpt-shopping {
     padding-top: 50px;

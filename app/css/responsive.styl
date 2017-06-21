@@ -66,6 +66,26 @@
 
 
 @media only screen and (min-width: 768px) and (max-width: 1024px)
+  .btn-sm
+    padding 5px 5px !important
+    font-size 14px !important
+  .nav-user > li
+    float left !important
+  .nav-user 
+    background transparent !important
+    margin-top 0 !important
+    box-shadow none !important
+    border-top 0 !important
+    .btn
+      font-size 14px
+      padding 5px 5px !important
+
+  .hide-tablet
+    display inline
+  .mobile, .ca-phone
+    display none
+  .header .navbar-default
+    height 80px
   .excerpt-shopping
     padding-top 50px
   .detail-qty
@@ -80,8 +100,6 @@
     padding 20px 0
   .content
     margin-top 100px
-  .navbar-default 
-    margin-top 90px
   .services .box-service h3 
     padding 12px 20px 0
     text-align center
@@ -175,6 +193,7 @@
     display block !important
     border-top 0px solid white
     border-color transparent
+    background-color white
 
   .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus
     background transparent
@@ -236,6 +255,8 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  .hide-tablet
+    display none
   .hide-desk
     display inline 
   .xs-hide

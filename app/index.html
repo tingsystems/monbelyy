@@ -78,20 +78,47 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-sm-4 hide-desk">
+                <div class="col-sm-4 hide-tablet">
                     <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">                      
-                        <li class="col-xs-6">
+                        <li>
                             <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
                                 <span class="qty-cart">{{ items.length }}</span>
                                 <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
                             </a>
                         </li>
-                        <li class="col-xs-6">  
+                        <li>  
+                            <a ui-sref="register" class="my-account btn-blue btn-sm" ng-if="!Access.isAuthenticated()">
+                                <i class="ion-ios-person"></i> Iniciar sesión
+                            </a>
+                        </li>
+                        <li>
+                            <div  class="dropdown ">
+                                <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <i class="ion-ios-person"></i> {{user.username}} 
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a ui-sref="dashboard">Mi cuenta</a></li>
+                                    <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 hide-desk">
+                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">                      
+                        <li class="col-xs-6 col-sm-6">
+                            <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
+                                <span class="qty-cart">{{ items.length }}</span>
+                                <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6">  
                             <a ui-sref="register" class="my-account btn-blue-clear" ng-if="!Access.isAuthenticated()">
                                 <i class="ion-ios-person"></i> Iniciar sesión
                             </a>
                         </li>
-                        <div class="col-xs-6">
+                        <div class="col-xs-6 col-sm-6">
                             <div  class="dropdown ">
                                 <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue-clear" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <i class="ion-ios-person"></i> {{user.username}} 
