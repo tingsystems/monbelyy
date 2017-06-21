@@ -243,6 +243,10 @@ body {
   color: #3c3c3c;
   font-size: 2em;
 }
+.shopcart-delete-sm > a {
+  color: #1887ce;
+  font-size: 2em;
+}
 .product-cart {
   padding: 5px 0;
   border-bottom: 1px solid #eee;
@@ -2568,6 +2572,9 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .shopcart-qty > input {
+    margin: 0 auto;
+  }
   .btn-sm {
     padding: 5px 5px !important;
     font-size: 14px !important;
@@ -2790,6 +2797,9 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .shopcart-qty > input {
+    margin: 0 auto;
+  }
   .hide-tablet {
     display: none;
   }

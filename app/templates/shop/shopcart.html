@@ -18,26 +18,24 @@
         <div class="container-fluid" ng-if="ShopCart.items.length>0">
             <div class="col-md-9 text-center">
                 <div class="product-cart col-sm-6 col-md-12" ng-repeat="product in ShopCart.items">
-                    <div class="col-md-3">
+                    <div class="col-sm-12 col-md-3">
                         <div class="shopcart-img">
-                            <div class="shopcart-img" style="background-image:url('{{ product.image }}');"></div>
+                            <div class="shopcart-img" style="background-image: url('{{product.image ? product.image : initConfig.img_default}}')"></div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-12 col-md-5">
                         <div class="shopcart-descrip">
                             <h4>{{ product.name }}</h4>
                             <h3>{{ product.price | currency }}</h3>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="col-sm-offset-3 col-sm-4">
+                    <div class="col-sm-12 col-md-2">
                             <div class="shopcart-qty">
                                 <label for="qty">Cantidad</label>
                                 <input type="number" min="0" id="qty" ng-model="product.qty" ng-click="ShopCart.setItem({id: product.id, name: product.name, price: product.price, qty: product.qty}, product.qty)"
                                     class="form-control cart-qty" placeholder="{{ product.qty }}">
                             </div>
-                        </div>
-                        <div class="col-sm-4 hidden-lg">
+                        <div class="col-sm-12 hidden-lg">
                             <div class="shopcart-delete-sm">
                                 <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)" title="Eliminar producto"></a>
                             </div>
