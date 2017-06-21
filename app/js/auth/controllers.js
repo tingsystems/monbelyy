@@ -70,13 +70,6 @@
             return $auth.isAuthenticated();
         };
 
-        if (self.isAuthenticated) {
-            $state.go('dashboard');
-        }
-        else {
-            $state.go('register');
-        }
-
         self.logout = function () {
             AccessSrv.logout({token: $auth.getToken(), client_id: self.client_id}).$promise.then(function (data) {
                 $auth.logout()
