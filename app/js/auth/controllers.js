@@ -9,7 +9,10 @@
         //self.branchDefault = {branchOffices: ["7454e28c-189a-48d7-a439-0f9f8fec89d4"]};
         //self.branchDefault = '';
         //self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
-        $rootScope.user = $localStorage.appData.user;
+        if ($localStorage.appData) {
+            $rootScope.user = $localStorage.appData.user;
+        }
+
         self.items = $localStorage.items ? $localStorage.items : [];
         self.itemCount = self.items.length;
 
@@ -66,6 +69,13 @@
         self.isAuthenticated = function () {
             return $auth.isAuthenticated();
         };
+
+        if (self.isAuthenticated) {
+            $state.go('dashboard');
+        }
+        else {
+            $state.go('register');
+        }
 
         self.logout = function () {
             AccessSrv.logout({token: $auth.getToken(), client_id: self.client_id}).$promise.then(function (data) {

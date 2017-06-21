@@ -294,6 +294,9 @@
                     .then(function () {
                         // delete appData
                         delete $localStorage.appData;
+                        delete $localStorage.cart;
+                        delete $localStorage.items;
+                        delete $localStorage.total;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name !== 'register') {
                             //NotificationSrv.error('Tu sesión ha caducado por favor inicia sesión de nuevo');
