@@ -1,24 +1,15 @@
-<div id="section-prom" class="container">
-    <div class="col-sm-9">
-        <div id="carouse-principal" class="carousel slide">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-                    <uib-slide ng-repeat="slide in Home.mainSlider">
-                        <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                            <div class="slider-img"
-                                 style="background-image:url('{{ slide.featuredImage.url }}');"></div>
-                        </a>
-                    </uib-slide>
-                </uib-carousel>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3 no-padding">
-        <div class="box-image-promo" ng-repeat="promo in Home.promoHome">
-            <a post-link="{ link: {url: promo.link, target: '_self'} }">
-                <img src="{{ promo.featuredImage.url }}" alt="Promotions">
-            </a>
+<div id="section-prom">
+    <div id="carouse-principal" class="carousel slide">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
+                <uib-slide ng-repeat="slide in Home.mainSlider">
+                    <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                        <div class="slider-img"
+                                style="background-image:url('{{ slide.featuredImage.url }}');"></div>
+                    </a>
+                </uib-slide>
+            </uib-carousel>
         </div>
     </div>
 </div>
@@ -36,10 +27,10 @@
                     en el hogar para nuestros animales de compañía.</p>
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-9">
             <div class="box-products" ng-controller="ShoppingCtrl as Shop">
-                <div class="row text-center">
-                    <div class="col-sm-3" ng-repeat="product in Home.products">
+                <div class="row text-center"> 
+                    <div class="col-sm-6 col-md-4" ng-repeat="product in Home.products">
                         <div class="box-prod">
                             <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
                                 <div class="bg-prod"
@@ -60,7 +51,7 @@
                                 <div class="col-xs-6 no-pd-r">
                                     <button class="btn btn-orange btn-block"
                                             ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url, name: product.name, price: product.price, qty: 1}, 1)"
-                                            ng-disabled="Shop.itemInCart(product)">Agregar
+                                            ng-disabled="Shop.itemInCart(product)">Comprar
                                     </button>
                                 </div>
                             </div>
@@ -69,9 +60,23 @@
                 </div>
             </div>
         </div>
+        <div id="twitter-styl" class="col-sm-3">
+            <a class="twitter-timeline" data-height="900" href="https://twitter.com/MOONS_AQUARIUMS">Tweets by MOONS_AQUARIUMS</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
     </div>
 </section>
 
+<div id="section-promo">
+    <div class="container">
+        <div class="col-sm-4 item-promo" ng-repeat="promo in Home.promoHome">
+            <div class="box-image-promo" >
+                <a post-link="{ link: {url: promo.link, target: '_self'} }">
+                    <img src="{{ promo.featuredImage.url }}" alt="Promotions">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 <section id="news">
     <div class="container">
         <h2 class="text-center">

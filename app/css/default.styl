@@ -7,6 +7,8 @@ cagreenh = #7e1a1d
 primary = #555555
 monsyellow = #ffa500
 
+.hide-desk
+  display none
 i 
   vertical-align: middle;
 /************** deafault css******************/
@@ -235,8 +237,10 @@ body
   padding-bottom 0
   padding-right 45px
   margin-top 8px
+  color #1887CE
 .nav-user.nav > li > .shopping-cart i 
   font-size 40px
+  color #1887CE
 header
   width 100%
   position absolute
@@ -306,7 +310,14 @@ header
   color #d2b770 !important
   text-align left
 /* home */
-
+#twitter-styl
+  border 1px solid #eee
+  padding 0
+#section-promo
+  background-color white
+  padding 50px 0
+  border-top 1px solid #eee
+  border-bottom 1px solid #eee
 #security
   text-align center
   background #f5f5f5
@@ -314,10 +325,7 @@ header
   p
     font-size 22px
     font-weight bold
-    color #aaaaaa
-#section-prom
-  margin-top 60px
-  margin-bottom 40px    
+    color #aaaaaa   
 #us
   padding 60px 0
   background-size cover
@@ -446,10 +454,13 @@ header
     font-size 45px
     color #555
 
+
 /*header info*/
 .navbar-info
+  background-image url('../img/cats-dogs.png')
   padding 0.8em 0 0em
   background-color #fff
+  background-size 215px
   a
     color catext
     font-size 15px
@@ -1305,36 +1316,10 @@ header
   color #f5f5f5
   background-color cagreen
 
-/* Payment method */
-.paymentWrap
-  padding 50px
-  .paymentBtnGroup
-    max-width 800px
-    margin auto
-    .paymentMethod
-      padding 40px
-      box-shadow none
-      position relative
-      .method
-        position absolute
-        right 3px
-        top 3px
-        bottom 3px
-        left 3px
-        background-size contain
-        background-position center
-        background-repeat no-repeat
-        border 2px solid transparent
-        transition all 0.5s
-        &.paypal
-          background-image url("http://www.ayudapayoneer.com/wp-content/uploads/2015/10/payoneer-paypal-01.png")
-        &.bank-deposit
-          background-image url("https://elsoldemexico.com.mx/wp-content/uploads/2016/03/bancos.jpg")
-        &.credit-card
-          background-image url("http://www.doctoraboitiz.com/joomla30/images/Dr.Aboitiz/bienvenidas-sus-tarjetas-de-credito-y-debito.jpg")
-        &:hover
-          border-color rgba(0,0,0,.4)
-          outline none !important
+/* CartShop Details */
+.cart-detail-ship
+  padding 20px
+
 /*PROFILE*/
 .panel-title > span > label
   cursor pointer
@@ -1354,12 +1339,14 @@ header
       border-color none !important
 /************** footer area css ******************/
 #footer-top
-  padding 50px 0
-footer
+  padding 80px 0 
+  background-image: url(../img/bg-contact.jpg);
+  background-size: cover;
+  background-position: center;
+.bottom-footer
   background-color #1887ce
-  padding 30px 0
-  .divider-white
-    border-color white
+  padding 30px 0  
+footer
   .white
     color white  
   .payment-type.contact-sty i
@@ -1486,6 +1473,11 @@ footer
   border-top 1px solid #eee
   border-bottom 1px solid #eee
 
+.btn-blue-clear
+  background-color transparent
+  color #1887CE !important
+  &:hover
+    color #136A9B
 .btn-blue
   background-color #1887CE 
   display inline-block
@@ -1575,6 +1567,7 @@ footer
   background #FF7300
   display inline-block
   padding 10px 15px
+  text-align center
   color white !important
   font-weight 300
   border 1px solid #FF7300
@@ -1748,10 +1741,10 @@ footer
     color #FFA500
 /******** Form section *************/
 .list-group-item.active, .list-group-item.active:hover
-    color #aa261d
+    color #1887ce
     background-color transparent
 .list-group-item.active:focus
-    background-color #aa261d 
+    background-color #1887ce
     color white
 .search-prd
   margin-top 0

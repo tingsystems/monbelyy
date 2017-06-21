@@ -1,3 +1,6 @@
+.hide-desk {
+  display: none;
+}
 i {
   vertical-align: middle;
 }
@@ -262,9 +265,11 @@ body {
   padding-bottom: 0;
   padding-right: 45px;
   margin-top: 8px;
+  color: #1887ce;
 }
 .nav-user.nav > li > .shopping-cart i {
   font-size: 40px;
+  color: #1887ce;
 }
 header {
   width: 100%;
@@ -347,6 +352,16 @@ header {
   color: #d2b770 !important;
   text-align: left;
 }
+#twitter-styl {
+  border: 1px solid #eee;
+  padding: 0;
+}
+#section-promo {
+  background-color: #fff;
+  padding: 50px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
 #security {
   text-align: center;
   background: #f5f5f5;
@@ -356,10 +371,6 @@ header {
   font-size: 22px;
   font-weight: bold;
   color: #aaa;
-}
-#section-prom {
-  margin-top: 60px;
-  margin-bottom: 40px;
 }
 #us {
   padding: 60px 0;
@@ -516,8 +527,10 @@ header {
   color: #555;
 }
 .navbar-info {
+  background-image: url("../img/cats-dogs.png");
   padding: 0.8em 0 0em;
   background-color: #fff;
+  background-size: 215px;
 }
 .navbar-info a {
   color: #565656;
@@ -1558,42 +1571,8 @@ color
   color: #f5f5f5;
   background-color: #1887ce;
 }
-.paymentWrap {
-  padding: 50px;
-}
-.paymentWrap .paymentBtnGroup {
-  max-width: 800px;
-  margin: auto;
-}
-.paymentWrap .paymentBtnGroup .paymentMethod {
-  padding: 40px;
-  box-shadow: none;
-  position: relative;
-}
-.paymentWrap .paymentBtnGroup .paymentMethod .method {
-  position: absolute;
-  right: 3px;
-  top: 3px;
-  bottom: 3px;
-  left: 3px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 2px solid transparent;
-  transition: all 0.5s;
-}
-.paymentWrap .paymentBtnGroup .paymentMethod .method.paypal {
-  background-image: url("http://www.ayudapayoneer.com/wp-content/uploads/2015/10/payoneer-paypal-01.png");
-}
-.paymentWrap .paymentBtnGroup .paymentMethod .method.bank-deposit {
-  background-image: url("https://elsoldemexico.com.mx/wp-content/uploads/2016/03/bancos.jpg");
-}
-.paymentWrap .paymentBtnGroup .paymentMethod .method.credit-card {
-  background-image: url("http://www.doctoraboitiz.com/joomla30/images/Dr.Aboitiz/bienvenidas-sus-tarjetas-de-credito-y-debito.jpg");
-}
-.paymentWrap .paymentBtnGroup .paymentMethod .method:hover {
-  border-color: rgba(0,0,0,0.4);
-  outline: none !important;
+.cart-detail-ship {
+  padding: 20px;
 }
 .panel-title > span > label {
   cursor: pointer;
@@ -1619,14 +1598,14 @@ color
   border-color: none !important;
 }
 #footer-top {
-  padding: 50px 0;
+  padding: 80px 0;
+  background-image: url("../img/bg-contact.jpg");
+  background-size: cover;
+  background-position: center;
 }
-footer {
+.bottom-footer {
   background-color: #1887ce;
   padding: 30px 0;
-}
-footer .divider-white {
-  border-color: #fff;
 }
 footer .white {
   color: #fff;
@@ -1785,6 +1764,13 @@ footer .contact-sty .download-app > i:hover {
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
+.btn-blue-clear {
+  background-color: transparent;
+  color: #1887ce !important;
+}
+.btn-blue-clear:hover {
+  color: #136a9b;
+}
 .btn-blue {
   background-color: #1887ce;
   display: inline-block;
@@ -1882,6 +1868,7 @@ footer .contact-sty .download-app > i:hover {
   background: #ff7300;
   display: inline-block;
   padding: 10px 15px;
+  text-align: center;
   color: #fff !important;
   font-weight: 300;
   border: 1px solid #ff7300;
@@ -2081,11 +2068,11 @@ footer .contact-sty .download-app > i:hover {
 }
 .list-group-item.active,
 .list-group-item.active:hover {
-  color: #aa261d;
+  color: #1887ce;
   background-color: transparent;
 }
 .list-group-item.active:focus {
-  background-color: #aa261d;
+  background-color: #1887ce;
   color: #fff;
 }
 .search-prd {
@@ -2652,8 +2639,8 @@ footer .contact-sty .download-app > i:hover {
   header .navbar-default .navbar-nav > li > a {
     font-size: 16px;
   }
-  header .logo {
-    width: 180px;
+  .header .logo {
+    width: 100px;
     padding: 25px 14px 0 25px;
     margin-top: 10px !important;
   }
@@ -2775,6 +2762,23 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+<<<<<<< HEAD
+  .hide-desk {
+    display: inline;
+  }
+  .xs-hide {
+    display: none;
+  }
+  .nav-user.nav > li > .shopping-cart i {
+    font-size: 33px;
+=======
+  #section-promo .item-promo {
+    text-align: center;
+  }
+  .btn-product-detail {
+    text-align: center;
+>>>>>>> fedc5f1056f41739a309f3ca1a008d9e9760d7c4
+  }
   .excerpt-shopping {
     padding-top: 50px;
   }
@@ -2801,7 +2805,7 @@ footer .contact-sty .download-app > i:hover {
     height: 235px;
   }
   .content {
-    margin-top: 0;
+    margin-top: 225px;
   }
   .header-title {
     height: 80px;
@@ -2810,6 +2814,9 @@ footer .contact-sty .download-app > i:hover {
     color: #fff;
     font-size: 2em;
     padding: 20px 4px 2px;
+  }
+  .ca-phone {
+    display: none;
   }
   .services .box-service h3 {
     text-align: center;
@@ -2822,7 +2829,7 @@ footer .contact-sty .download-app > i:hover {
   }
   .navbar-info a,
   .navbar-info a > i {
-    font-size: 16px;
+    font-size: 14px;
   }
   .qty-cart {
     right: 17%;
@@ -3083,8 +3090,7 @@ footer .contact-sty .download-app > i:hover {
   }
   .navbar-nav {
     background: transparent;
-    margin-top: 25px;
-    border-top: 1px solid #f5f5f5;
+    margin-top: 0;
   }
   .fluid-res {
     padding: 0;
@@ -3092,9 +3098,14 @@ footer .contact-sty .download-app > i:hover {
   #wrap {
     display: none;
   }
-  header .logo {
-    margin-top: 10px;
-    width: 200px;
+  .list-social-media {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  .header .logo {
+    margin-top: 5px;
+    width: 75px;
   }
   h2.title-outstanding {
     font-size: 16px !important;
