@@ -1581,6 +1581,10 @@ color
 .cart-detail-ship {
   padding: 20px;
 }
+.panel-title > label > a {
+  cursor: pointer;
+  color: #555;
+}
 .panel-title > span > label {
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
