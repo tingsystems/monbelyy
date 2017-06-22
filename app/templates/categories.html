@@ -1,3 +1,15 @@
+<div id="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
+            <li ng-if="Product.detail.taxonomies.length"><a
+                    ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{ Product.taxonomies[0].name }}</a>
+            </li>
+            <li class="active">{{ Product.categoryName }}</li>
+        </ol>
+    </div>
+</div>
+<hr class="no-margin">
 <section id="content-area" class="content-blog">
     <div class="content-pages" infinite-scroll='Product.getMorePosts()'
             infinite-scroll-disabled='Product.busy || !Product.next || Product.loadPosts'>
