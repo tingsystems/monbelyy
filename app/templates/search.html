@@ -6,7 +6,7 @@
             <hr>
             <div class="col-sm-3" ng-repeat="item in Search.listSearch">
                 <div class="box-prod" ng-if="!Search.isPost">
-                    <a ui-sref="item-detail({slug:item.slug})" title="Ver detalles del producto">
+                    <a ui-sref="product-detail({slug:item.slug})" title="Ver detalles del producto">
                         <div class="bg-prod" style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}')"></div>
                     </a>
                     <div class="box-container no-padding container-fluid">
