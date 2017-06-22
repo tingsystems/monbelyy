@@ -8,7 +8,7 @@
             <h3 class="info2"><i class="ion-ios-list-outline"></i> Detalle de la compra</h3>
             <hr>
              <div class="row label-status">
-                <div class="col-md-1">
+                <div class="col-xs-2 col-md-1">
                     <h4>
                         <span ng-if="Purchase.purchase.paymentType == 3" class="label label-sm bg-paypal">
                             {{ Purchase.purchase.paymentTypeName }}
@@ -21,7 +21,7 @@
                         </span>
                     </h4>
                 </div>
-                <div class="col-md-1">
+                <div class="col-xs-2 col-md-1">
                     <h4>
                         <span ng-if="Purchase.purchase.isPaid == 0" class="label label-sm bg-success">
                             {{ Purchase.purchase.isPaidName }}

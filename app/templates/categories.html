@@ -1,10 +1,22 @@
+<div id="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
+            <li ng-if="Product.detail.taxonomies.length"><a
+                    ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{ Product.taxonomies[0].name }}</a>
+            </li>
+            <li class="active">{{ Product.categoryName }}</li>
+        </ol>
+    </div>
+</div>
+<hr class="no-margin">
 <section id="content-area" class="content-blog">
     <div class="content-pages" infinite-scroll='Product.getMorePosts()'
             infinite-scroll-disabled='Product.busy || !Product.next || Product.loadPosts'>
         <div class="container">
             <h2 class="title">{{Product.categoryName}}</h2>
             <hr> 
-            <div class="col-sm-3" ng-repeat="product in Product.list">
+            <div class="col-sm-6 col-md-3" ng-repeat="product in Product.list">
                 <div class="box-prod" ng-if="!Product.isPost">
                     <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
                         <div class="bg-prod" style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
