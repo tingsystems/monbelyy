@@ -224,6 +224,7 @@
         var self = this;
         self.globalSearch = function (kind) {
             $state.go('search', {q: self.searchTerm, kind: kind});
+            self.searchTerm = '';
         };
     }
 
@@ -236,6 +237,7 @@
         self.busy = false;
         self.searchTerm = angular.copy($stateParams.q);
         self.kindTerm = angular.copy($stateParams.kind);
+        self.isPost = true;
 
         self.errorRecovery = function () {
             self.page -= 1;
@@ -252,6 +254,7 @@
 
             if ($stateParams.q) {
                 if (self.kindTerm === 'product') {
+                    self.isPost = false;
                     ProductSrv.get({
                         isActive: 'True',
                         pageSize: 9,
