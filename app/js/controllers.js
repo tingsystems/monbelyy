@@ -524,7 +524,7 @@
 
     }
 
-    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
+    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -575,7 +575,23 @@
                 };
                 if (item.qty && item.qty > 0) {
                     self.items.push(item);
-                    NotificationSrv.success('Producto agregado al carrito', item.name);
+                    SweetAlert.swal({
+                            title: "Producto agregado al carrito",
+                            text: item.name,
+                            type: "success",
+                            showCancelButton: true,
+                            cancelButtonText: "Ir al carrito",
+                            confirmButtonColor: "#D32F2F",
+                            confirmButtonText: "Seguir comprando",
+                            closeOnConfirm: true,
+                            closeOnCancel: true
+                        },
+                        function (isConfirm) {
+                            if (!isConfirm) {
+                                $state.go('shopcart')
+                            }
+                        });
+                    
                     $localStorage.items = self.items;
                 } else {
                     NotificationSrv.error("Ingresa la cantidad, para poder  agregar", item.name)
@@ -623,5 +639,5 @@
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
-    ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'SweetAlert'];
 })();
