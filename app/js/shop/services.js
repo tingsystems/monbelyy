@@ -10,7 +10,7 @@
             get: function () {
                 return '#host#/api/{{apiShop}}/';
             }
-        }
+        };
     }
 
     function CustomerSrv($resource, BaseUrlShop) {
@@ -41,7 +41,7 @@
                 method: 'PATCH',
                 url: BaseUrlShop.get() + 'carts/:id'
             }
-        })
+        });
     }
 
     function OrderSrv($resource, BaseUrlShop) {
@@ -54,7 +54,12 @@
                 method: 'PATCH',
                 url: BaseUrlShop.get() + 'orders/:id'
             }
-        })
+        });
+    }
+
+    function ValidCouponSrv($resource, BaseUrlShop) {
+        return $resource(BaseUrlShop.get() + 'valid/coupon/:id', null, {});
+
     }
 
     // Assign factory to module
@@ -62,12 +67,14 @@
         .factory('BaseUrlShop', BaseUrlShop)
         .factory('CustomerSrv', CustomerSrv)
         .factory('CartsSrv', CartsSrv)
-        .factory('OrderSrv', OrderSrv);
+        .factory('OrderSrv', OrderSrv)
+        .factory('ValidCouponSrv', ValidCouponSrv);
 
     // Inject factory the dependencies
     BaseUrlShop.$inject = [];
     CustomerSrv.$inject = ['$resource', 'BaseUrlShop'];
     CartsSrv.$inject = ['$resource', 'BaseUrlShop'];
     OrderSrv.$inject = ['$resource', 'BaseUrlShop'];
+    ValidCouponSrv.$inject = ['$resource', 'BaseUrlShop'];
 
 })();

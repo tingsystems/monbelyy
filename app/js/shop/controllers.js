@@ -248,7 +248,7 @@
         };
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, ValidCouponSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter) {
         var self = this;
         var user = $localStorage.appData.user;
         self.items = $localStorage.items ? $localStorage.items : [];
@@ -493,6 +493,17 @@
                 ErrorSrv.error(data);
             });
         };
+
+        self.validCoupon = function () {
+            var params = {};
+            params.code = self.coupon;
+            params.customer = self.idUser;
+            if (params.code && params.customer) {
+                ValidCouponSrv.save(params).$promise.then(function (data) {
+                    console.log(data);
+                });
+            }
+        };
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
@@ -662,6 +673,6 @@
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', 'ValidCouponSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
 })();
