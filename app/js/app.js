@@ -288,6 +288,17 @@
             $localStorage.appData = {};
         }
 
+        //init $localStorage.appData
+        if (!angular.isDefined($localStorage.globalDiscount)) {
+            $localStorage.globalDiscount = {amount: 0};
+        }
+        if (!angular.isDefined($localStorage.promoTotal)) {
+            $localStorage.promoTotal = 0;
+        }
+        if (!angular.isDefined($localStorage.ship)) {
+            $localStorage.ship = false;
+        }
+
         $rootScope.$on('UNAUTHORIZED', function (event, args) {
             if ($state.current.name !== 'register') {
                 $auth.logout()

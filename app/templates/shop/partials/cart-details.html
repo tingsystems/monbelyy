@@ -18,32 +18,38 @@
                 <tbody>
                 <tr>
                     <td>Subtotal</td>
-                    <td>{{ ShopCart.total | currency}}</td>
+                    <td>{{ ShopCart.subTotal | currency}}</td>
                 </tr>
                 <tr>
                     <td>Envío</td>
-                    <td>$0</td>
+                    <td>{{ShopCart.shipmentTotal | currency}}</td>
                 </tr>
                 <tr>
                     <td>Total</td>
                     <td><h3><span class="mxn">MXN</span>{{ ShopCart.total | currency }}</h3></td>
                 </tr>
+                <tr ng-if="ShopCart.promoTotal">
+                    <td>Descuento</td>
+                    <td>{{ShopCart.promoTotal | currency}}</td>
+                </tr>
                 </tbody>
             </table>
             <!--<a class="btn btn-success btn-cart btn-block" ng-click="ShopCart.processPurchase()">Procesar compra</a>-->
         </div>
-        <div class="row">
+        <div class="row" ng-if="Payment.shiping">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name"></label>
                     <input type="text" class="form-control"
-                           ng-model="Payment.coupon"
+                           ng-model="ShopCart.coupon"
                            name="name"
                            placeholder="Código de cupón"
-                           id="name" required/>
+                           id="name"/>
                 </div>
             </div>
-            <div class="col-md-6"><button ng-click="Payment.validCoupon()" class="btn btn-blue">Aplicar</button></div>
+            <div class="col-md-6">
+                <button ng-click="ShopCart.validCoupon()" class="btn btn-blue" style="margin-top: 7%">Aplicar</button>
+            </div>
         </div>
     </div>
     <hr>

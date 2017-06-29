@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv) {
+    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, ValidCouponSrv) {
         var self = this;
         self.total = $localStorage.total;
         self.params = {};
@@ -17,6 +17,10 @@
         $rootScope.items = $localStorage.items;
         self.tax = false;
         self.taxInverse = false;
+        self.idUser = $localStorage.appData.user.customer;
+        $localStorage.globalDiscount = {amount: 0};
+        $localStorage.shipmentTotal = 0;
+        $localStorage.ship = false;
 
         if ($auth.isAuthenticated()) {
             var user = $localStorage.appData.user;
@@ -99,7 +103,10 @@
             self.total = 0;
             $localStorage.items = [];
             $localStorage.total = 0;
-            //$localStorage.promoTotal = 0;
+            $localStorage.globalDiscount = {amount: 0};
+            $localStorage.promoTotal = 0;
+            $localStorage.shipmentTotal = 0;
+            $localStorage.ship = false;
         };
 
         self.removeItem = function (item) {
@@ -112,14 +119,52 @@
             }
         };
 
+        var applyDiscountPercentage = function () {
+            if ($localStorage.globalDiscount.amount === 0)
+                return;
+            // get fraction value discount
+            $localStorage.globalDiscount.discount = (parseFloat($localStorage.globalDiscount.amount) / 100) * self.total;
+            // subtract import and discount
+            self.total = self.total - $localStorage.globalDiscount.discount;
+            self.promoTotal += parseFloat($localStorage.globalDiscount.discount);
+            $localStorage.total = self.total;
+            $localStorage.promoTotal = self.promoTotal;
+        };
+        // calculate discount cash global
+        var applyDiscountCash = function () {
+            if ($localStorage.globalDiscount.amount === 0)
+                return;
+            $localStorage.globalDiscount.discount = $localStorage.globalDiscount.amount;
+            self.total = (self.total - parseFloat($localStorage.globalDiscount.discount));
+            self.promoTotal += parseFloat($localStorage.globalDiscount.discount);
+            $localStorage.total = self.total;
+            $localStorage.promoTotal = self.promoTotal;
+        };
+
         var getTotal = function () {
             self.total = 0;
+            self.import = 0;
+            self.subTotal = 0;
+            self.promoTotal = 0;
             angular.forEach(self.items, function (value, key) {
                 //first Time calcule
-                //value.import = parseFloat(value.price) * value.qty;
+                self.import = parseFloat(value.price) * value.qty;
                 self.total += parseFloat(value.price) * value.qty;
+                self.subTotal += self.import;
             });
+            if ($localStorage.globalDiscount.isPercentage === 0) {
+                applyDiscountPercentage();
+            }
+            else {
+                applyDiscountCash();
+            }
+            if ($localStorage.ship) {
+                $localStorage.shipmentTotal = 0;
+
+            }
+            self.shipmentTotal = $localStorage.shipmentTotal;
             $localStorage.total = self.total;
+            $localStorage.promoTotal = self.promoTotal;
         };
         getTotal();
 
@@ -151,6 +196,35 @@
                     $rootScope.items = 0;
                 });
                 $state.go('shipping-address');
+            }
+        };
+
+        self.validCoupon = function () {
+            var params = {};
+            params.code = self.coupon;
+            params.customer = self.idUser;
+            if (params.code && params.customer) {
+                ValidCouponSrv.save(params).$promise.then(function (data) {
+                    self.code = data;
+                    if (self.code.isValid) {
+                        if (!self.code.shipmentFree) {
+                            $localStorage.globalDiscount.isPercentage = self.code.discountType;
+                            $localStorage.globalDiscount.amount = self.code.amount;
+                            $localStorage.globalDiscount.coupon = self.code.id;
+                            getTotal();
+                            NotificationSrv.success(" Cupón aplicado correctamente");
+                        }
+                        else {
+                            $localStorage.ship = true;
+                            $localStorage.globalDiscount.coupon = self.code.id;
+                            getTotal();
+                            NotificationSrv.success(" Felicidades, tienes envio gratis");
+                        }
+                    }
+                    else {
+                        NotificationSrv.error(" Cupón no valido");
+                    }
+                });
             }
         };
 
@@ -248,7 +322,7 @@
         };
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, ValidCouponSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter) {
         var self = this;
         var user = $localStorage.appData.user;
         self.items = $localStorage.items ? $localStorage.items : [];
@@ -333,6 +407,7 @@
 
         initialGateway();
         var successResponseHandler = function (token) {
+            var coupon = '';
             var params = {
                 brand: Conekta.card.getBrand(self.payment.card.number),
                 cardholder: self.payment.card.name,
@@ -340,8 +415,13 @@
                 email: self.email,
                 items: $localStorage.items,
                 total: $localStorage.total,
-                shop: self.store
+                shop: self.store,
+                promoTotal: $localStorage.promoTotal,
+                shipmentTotal: $localStorage.shipmentTotal
             };
+            if ('coupon' in $localStorage.globalDiscount) {
+                params.coupon = $localStorage.globalDiscount.coupon;
+            }
             params.kind = 'order';
             params.paymentType = parseInt(self.orderPaymentType);
             params.itemCount = self.itemCount;
@@ -437,7 +517,13 @@
         self.createOrder = function () {
             //self.promoTotal = $localStorage.promoTotal;
             //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
+            var coupon = '';
             var params = {metadata: {taxInverse: false}};
+            if ('coupon' in $localStorage.globalDiscount) {
+                coupon = $localStorage.globalDiscount.coupon;
+
+                params.coupon = coupon;
+            }
             params.kind = 'order';
             params.orderStatus = 1;
             params.paymentType = parseInt(self.orderPaymentType);
@@ -484,6 +570,8 @@
             else {
                 params.total = self.total;
             }
+            params.promoTotal = $localStorage.promoTotal;
+            params.shipmentTotal = $localStorage.shipmentTotal;
 
             OrderSrv.save(params).$promise.then(function (data) {
                 clearCart();
@@ -494,16 +582,6 @@
             });
         };
 
-        self.validCoupon = function () {
-            var params = {};
-            params.code = self.coupon;
-            params.customer = self.idUser;
-            if (params.code && params.customer) {
-                ValidCouponSrv.save(params).$promise.then(function (data) {
-                    console.log(data);
-                });
-            }
-        };
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
@@ -670,9 +748,9 @@
         .controller('PurchaseCompletedCtrl', PurchaseCompletedCtrl);
 
     // inject dependencies to controllers
-    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv'];
+    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', 'ValidCouponSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
 })();
