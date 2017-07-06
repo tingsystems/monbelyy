@@ -17,7 +17,6 @@
         $rootScope.items = $localStorage.items;
         self.tax = false;
         self.taxInverse = false;
-        self.idUser = $localStorage.appData.user.customer;
         $localStorage.globalDiscount = {amount: 0};
         $localStorage.shipmentTotal = 0;
         $localStorage.ship = false;
@@ -201,6 +200,7 @@
 
         self.validCoupon = function () {
             var params = {};
+            self.idUser = $localStorage.appData.user.customer;
             params.code = self.coupon;
             params.customer = self.idUser;
             if (params.code && params.customer) {
