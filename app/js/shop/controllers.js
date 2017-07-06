@@ -322,7 +322,7 @@
         };
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window) {
         var self = this;
         var user = $localStorage.appData.user;
         self.items = $localStorage.items ? $localStorage.items : [];
@@ -551,6 +551,11 @@
                 params.isPaid = 2;
             }
 
+            if (params.paymentType === 3) {
+                params.orderStatus = 1;
+                params.isPaid = 2;
+            }
+
             if (self.taxInverse) {
                 params.taxTotal = self.taxTotal2;
             }
@@ -575,13 +580,15 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 clearCart();
-                $state.go('purchase-completed', {orderId: data.id});
-
+                if(data.paymentType === 3){
+                    $window.location.href = data.metadata.approvalUrl;
+                }else{
+                    $state.go('purchase-completed', {orderId: data.id});
+                }
             }, function (data) {
                 ErrorSrv.error(data);
             });
         };
-
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
@@ -751,6 +758,6 @@
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
 })();
