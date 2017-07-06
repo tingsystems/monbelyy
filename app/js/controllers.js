@@ -6,6 +6,10 @@
         self.mainSlider = [];
         $rootScope.pageTitle = 'Moons Aquariums';
 
+        $rootScope.toggleSidebar = function() {
+            $rootScope.visible = !$rootScope.visible;
+        };
+
         EntrySrv.get({
             taxonomies: 'slider1497888818',
             isActive: 'True',
@@ -44,6 +48,20 @@
             self.promoHome = results.results;
             //get featureImage
             angular.forEach(self.promoHome, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+            });
+        });
+
+         EntrySrv.get({
+            taxonomies: 'promociones-y-cupones',
+            isActive: 'True',
+            pageSize: 20,
+            ordering: 'createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.promoCoHome = results.results;
+            //get featureImage
+            angular.forEach(self.promoCoHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
