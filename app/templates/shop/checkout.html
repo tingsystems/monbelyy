@@ -113,10 +113,10 @@
                     <div class="panel panel-default">
                         <div class="panel-heading panel-white">
                             <h4 class="panel-title">
-                                <input disabled type="radio" value="3" id="paypal" ng-click="Payment.paypal=!Payment.paypal"
+                                <input type="radio" value="3" id="paypal" ng-click="Payment.paypal=!Payment.paypal"
                                        name="paymentType" ng-model="Payment.orderPaymentType">
                                 <span class="fa fa-paypal">
-                                    <label for="paypal" ng-click="Payment.paypal=!Payment.paypal">Pago con paypal</label>
+                                    <label for="paypal">Pago con paypal</label>
                                 </span>
                             </h4>
                         </div>
@@ -127,9 +127,9 @@
                                         <!--<p>Luego de hacer clic en "Finalizar el pedido", serás
                                             redirigido a PayPal para completar tu compra de forma segura.</p>-->
                                         <img src="../../img/paypall.png" alt="" width="200">
-                                        <p>Proximamente, pordrá realizar su pago, con la facilidad de Paypal.</p>
+                                        <p>Realice su pago, con la facilidad de Paypal.</p>
                                     </div>
-                                    <!--<button ng-if="Payment.paypal" class="btn btn-cart" ui-sref="checkout">Finalizar el pedido</button>-->
+                                    <button ng-if="Payment.paypal" class="btn btn-blue" ng-click="Payment.createOrder()">Realizar pago</button>
                                 </div>
                             </div>
                         </div>
