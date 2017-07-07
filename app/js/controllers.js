@@ -49,6 +49,7 @@
             //get featureImage
             angular.forEach(self.promoHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                console.log(obj.link)
             });
         });
 
@@ -63,6 +64,7 @@
             //get featureImage
             angular.forEach(self.promoCoHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                console.log(obj.link)
             });
         });
 
