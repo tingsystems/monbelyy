@@ -118,8 +118,9 @@
             self.busy = true;
             RegisterSrv.recovery(self.formData).$promise.then(function (data) {
                 NotificationSrv.success('Le hemos enviado un email para recuperar su contraseña');
+                self.formData = {};
                 self.busy = false;
-                $state.go('access.signin');
+                $state.go('register');
             }, function (error) {
                 self.busy = false;
                 angular.forEach(error.data, function (value, key) {
