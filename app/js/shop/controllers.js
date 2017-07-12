@@ -203,6 +203,7 @@
             self.idUser = $localStorage.appData.user.customer;
             params.code = self.coupon;
             params.customer = self.idUser;
+            params.items = self.items;
             if (params.code && params.customer) {
                 ValidCouponSrv.save(params).$promise.then(function (data) {
                     self.code = data;
@@ -222,7 +223,7 @@
                         }
                     }
                     else {
-                        NotificationSrv.error(" Cupón no valido");
+                        NotificationSrv.error("Cupón no valido, " + data.reason);
                     }
                 });
             }
@@ -580,9 +581,9 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 clearCart();
-                if(data.paymentType === 3){
+                if (data.paymentType === 3) {
                     $window.location.href = data.metadata.approvalUrl;
-                }else{
+                } else {
                     $state.go('purchase-completed', {orderId: data.id});
                 }
             }, function (data) {
