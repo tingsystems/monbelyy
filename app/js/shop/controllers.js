@@ -323,7 +323,7 @@
         };
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams) {
         var self = this;
         var user = $localStorage.appData.user;
         self.items = $localStorage.items ? $localStorage.items : [];
@@ -340,6 +340,8 @@
         self.phone = ''; //$localStorage.appData.user.phone;
         self.orderPaymentType = '';
         self.shiping = true;
+        self.busyPaypal = false;
+        self.orderPaypal = '';
         $localStorage.items = self.items;
         $localStorage.total = self.total;
 
@@ -580,9 +582,12 @@
             params.shipmentTotal = $localStorage.shipmentTotal;
 
             OrderSrv.save(params).$promise.then(function (data) {
-                clearCart();
+                //clearCart();
                 if (data.paymentType === 3) {
+                    self.busyPaypal = true;
+                    self.orderPaypal = data.id;
                     $window.location.href = data.metadata.approvalUrl;
+                    console.log(self.orderPaypal);
                 } else {
                     $state.go('purchase-completed', {orderId: data.id});
                 }
@@ -590,6 +595,35 @@
                 ErrorSrv.error(data);
             });
         };
+
+        self.paypalSuccess = function(paymentId, token, PayerID){
+            console.log(self.orderPaypal);
+            NotificationSrv.success('Se completo la venta');
+            /*self.paramsPaypal = {};
+            console.log(paymentId, token, PayerID);
+            OrderSrv.update().$promise().then(function(data){
+                console.log(data);
+            }, function(error){
+                ErrorSrv.error(error);
+            })*/
+        };
+
+        self.paypalCancel = function(token){
+            console.log(token);
+            NotificationSrv.error('Se cancelo la venta');
+        }
+
+        if ($stateParams.paymentId && $stateParams.token && $stateParams.PayerID) {
+            if ($state.current.name == 'paypal-success') {
+                self.paypalSuccess($stateParams.paymentId, $stateParams.token, $stateParams.PayerID);
+            }
+        }
+
+        if ($stateParams.token) {
+            if ($state.current.name == 'paypal-cancel') {
+                self.paypalCancel($stateParams.token);
+            }
+        }
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
@@ -759,6 +793,6 @@
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
 })();

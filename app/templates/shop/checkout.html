@@ -129,7 +129,10 @@
                                         <img src="../../img/paypall.png" alt="" width="200">
                                         <p>Realice su pago, con la facilidad de Paypal.</p>
                                     </div>
-                                    <button ng-if="Payment.paypal" class="btn btn-blue" ng-click="Payment.createOrder()">Realizar pago</button>
+                                    <button ng-if="Payment.paypal" class="btn btn-blue" ng-click="Payment.createOrder()">Realizar pago <span ng-show="Payment.busyPaypal"><i class="fa fa-spinner fa-spin"></i>
+                                    </span>
+                                        <div class="md-ripple-container"></div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
