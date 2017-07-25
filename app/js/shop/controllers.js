@@ -151,10 +151,10 @@
                 self.total += parseFloat(value.price) * value.qty;
                 self.subTotal += self.import;
             });
-            if ($localStorage.globalDiscount.isPercentage === 0) {
+            if ($localStorage.globalDiscount.isPercentage === 1) {
                 applyDiscountPercentage();
             }
-            else {
+            else if ($localStorage.globalDiscount.isPercentage === 0) {
                 applyDiscountCash();
             }
             if ($localStorage.ship) {
@@ -221,12 +221,24 @@
                             getTotal();
                             NotificationSrv.success(" Felicidades, tienes envio gratis");
                         }
+                        self.codeUsed = true;
                     }
                     else {
                         NotificationSrv.error("Cupón no valido, " + data.reason);
                     }
                 });
             }
+        };
+
+        self.removeCoupon = function () {
+            $localStorage.globalDiscount = {amount: 0};
+            $localStorage.promoTotal = 0;
+            $localStorage.shipmentTotal = 0;
+            $localStorage.ship = false;
+            self.codeUsed = false;
+            getTotal();
+
+
         };
 
     }
