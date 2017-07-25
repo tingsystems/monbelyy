@@ -114,12 +114,15 @@
     function RecoveryPasswordCtrl(RegisterSrv, NotificationSrv, $state, $stateParams) {
         var self = this;
         self.formData = {};
+        //self.passwordData = {};
+        self.recovery = false;
         self.recoveryPassword = function () {
             self.busy = true;
             RegisterSrv.recovery(self.formData).$promise.then(function (data) {
-                NotificationSrv.success('Le hemos enviado un email para recuperar su contraseña');
+                console.log(data);
+                NotificationSrv.success('Le hemos enviado un email para recuperar su contraseña', data.email);
                 self.busy = false;
-                $state.go('access.signin');
+                //$state.go('register');
             }, function (error) {
                 self.busy = false;
                 angular.forEach(error.data, function (value, key) {
@@ -127,6 +130,10 @@
                 });
             });
         };
+
+        if($state.current.name === 'recovery-password'){
+            self.recovery = true;
+        }
 
         if ($stateParams.token) {
             self.busy = true;
@@ -149,7 +156,7 @@
             RegisterSrv.set({token: $stateParams.token}, self.formData).$promise.then(function (data) {
                 NotificationSrv.success("Contraseña actualizada correctamente");
                 self.busy = false;
-                $state.go('access.signin');
+                $state.go('register');
             }, function (error) {
                 self.busy = false;
                 angular.forEach(error.data, function (value, key) {

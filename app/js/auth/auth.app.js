@@ -130,6 +130,32 @@
                     }
                 }
             })
+            .state('recovery-password', {
+                url: '/account/recovery/password',
+                data: {
+                    pageTitle: 'Recuperar contraseña - Moons'
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/recovery-password.html',
+                        controllerAs: 'Recovery',
+                        controller: 'RecoveryPasswordCtrl'
+                    }
+                }
+            })
+            .state('new-password', {
+                url: '/account/new/password',
+                data: {
+                    pageTitle: 'Reestablecer contraseña - Moons'
+                },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/auth/recovery-password.html',
+                        controllerAs: 'Recovery',
+                        controller: 'RecoveryPasswordCtrl'
+                    }
+                }
+            });
     }
 
     angular.module('auth.app', ['ui.router', 'auth.controllers','ngMessages'])

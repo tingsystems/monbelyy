@@ -151,10 +151,10 @@
                 self.total += parseFloat(value.price) * value.qty;
                 self.subTotal += self.import;
             });
-            if ($localStorage.globalDiscount.isPercentage === 0) {
+            if ($localStorage.globalDiscount.isPercentage === 1) {
                 applyDiscountPercentage();
             }
-            else {
+            else if ($localStorage.globalDiscount.isPercentage === 0) {
                 applyDiscountCash();
             }
             if ($localStorage.ship) {
@@ -203,6 +203,7 @@
             self.idUser = $localStorage.appData.user.customer;
             params.code = self.coupon;
             params.customer = self.idUser;
+            params.items = self.items;
             if (params.code && params.customer) {
                 ValidCouponSrv.save(params).$promise.then(function (data) {
                     self.code = data;
@@ -220,12 +221,24 @@
                             getTotal();
                             NotificationSrv.success(" Felicidades, tienes envio gratis");
                         }
+                        self.codeUsed = true;
                     }
                     else {
-                        NotificationSrv.error(" Cupón no valido");
+                        NotificationSrv.error("Cupón no valido, " + data.reason);
                     }
                 });
             }
+        };
+
+        self.removeCoupon = function () {
+            $localStorage.globalDiscount = {amount: 0};
+            $localStorage.promoTotal = 0;
+            $localStorage.shipmentTotal = 0;
+            $localStorage.ship = false;
+            self.codeUsed = false;
+            getTotal();
+
+
         };
 
     }
@@ -580,9 +593,9 @@
 
             OrderSrv.save(params).$promise.then(function (data) {
                 clearCart();
-                if(data.paymentType === 3){
+                if (data.paymentType === 3) {
                     $window.location.href = data.metadata.approvalUrl;
-                }else{
+                } else {
                     $state.go('purchase-completed', {orderId: data.id});
                 }
             }, function (data) {
