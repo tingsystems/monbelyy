@@ -48,7 +48,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <button ng-click="ShopCart.validCoupon()" class="btn btn-blue" style="margin-top: 7%">Aplicar</button>
+                <button ng-click="ShopCart.validCoupon()" class="btn btn-blue" style="margin-top: 7%" ng-if="!ShopCart.codeUsed">Aplicar</button>
+                <button ng-click="ShopCart.removeCoupon()" class="btn btn-blue" style="margin-top: 7%" ng-if="ShopCart.codeUsed">Eliminar</button>
             </div>
         </div>
     </div>
