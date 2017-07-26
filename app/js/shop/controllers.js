@@ -341,10 +341,10 @@
         self.orderPaymentType = '';
         self.shiping = true;
         self.busyPaypal = false;
-        self.orderPaypal = '';
+        self.paypalBtn = 'Realizar pago';
+
         $localStorage.items = self.items;
         $localStorage.total = self.total;
-
         $rootScope.items = $localStorage.items;
         $rootScope.idUser = self.idUser;
         self.busyCard = false;
@@ -582,12 +582,12 @@
             params.shipmentTotal = $localStorage.shipmentTotal;
 
             OrderSrv.save(params).$promise.then(function (data) {
-                //clearCart();
+                clearCart();
                 if (data.paymentType === 3) {
                     self.busyPaypal = true;
-                    self.orderPaypal = data.id;
+                    self.paypalBtn = self.busyPaypal ? 'Procesando' : 'Realizar pago';
+                    $localStorage.orderPaypal = data.id;
                     $window.location.href = data.metadata.approvalUrl;
-                    console.log(self.orderPaypal);
                 } else {
                     $state.go('purchase-completed', {orderId: data.id});
                 }
@@ -597,21 +597,29 @@
         };
 
         self.paypalSuccess = function(paymentId, token, PayerID){
-            console.log(self.orderPaypal);
-            NotificationSrv.success('Se completo la venta');
-            /*self.paramsPaypal = {};
-            console.log(paymentId, token, PayerID);
-            OrderSrv.update().$promise().then(function(data){
-                console.log(data);
-            }, function(error){
+            self.params = {};
+            self.updateParams = {};
+            self.params.id = $localStorage.orderPaypal;
+            self.params.fields = 'id,customerName,metadata';
+
+            OrderSrv.get(self.params).$promise.then(function(data){
+                var metadata = data.metadata;
+                metadata.payerID = PayerID;
+                self.updateParams.isPaid = 0;
+                self.updateParams.metadata = metadata;
+                OrderSrv.update({id:data.id},self.updateParams).$promise.then(function(data){
+                    //NotificationSrv.success("Actualizado");
+                }, function(error){
+                    ErrorSrv.error(error);
+                })
+            }, function (error) {
                 ErrorSrv.error(error);
-            })*/
+            });
         };
 
         self.paypalCancel = function(token){
-            console.log(token);
             NotificationSrv.error('Se cancelo la venta');
-        }
+        };
 
         if ($stateParams.paymentId && $stateParams.token && $stateParams.PayerID) {
             if ($state.current.name == 'paypal-success') {
