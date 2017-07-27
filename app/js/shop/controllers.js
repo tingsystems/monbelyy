@@ -204,6 +204,17 @@
             params.code = self.coupon;
             params.customer = self.idUser;
             params.items = self.items;
+            var taxonomies = [];
+            angular.forEach(self.items, function (obj, ind) {
+                taxonomies.concat(obj.taxonomies);
+                if (obj.taxonomies.length) {
+                    angular.forEach(obj.taxonomies, function (obj, ind) {
+                        taxonomies.push({id: obj.id});
+                    });
+                }
+            });
+            console.log(taxonomies);
+            params.taxonomies = taxonomies;
             if (params.code && params.customer) {
                 ValidCouponSrv.save(params).$promise.then(function (data) {
                     self.code = data;

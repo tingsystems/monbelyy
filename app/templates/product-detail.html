@@ -36,7 +36,8 @@
             </div>
             <div class="btn-product-detail">
                 <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
-                                        price: Product.detail.price, image: Product.detail.featuredImage.url, qty: Product.detail.qty}, Product.detail.qty)"
+                                        price: Product.detail.price, image: Product.detail.featuredImage.url,
+                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies}, Product.detail.qty)"
                         ng-disabled="Shop.itemInCart(Product.detail.id)"
                         class="btn btn-orange">Agregar a carrito</button>
             </div>
