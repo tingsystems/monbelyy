@@ -58,6 +58,28 @@
                         controller: 'PurchaseCompletedCtrl'
                     }
                 }
+            })
+            .state('paypal-success', {
+                url: '/paypal/success?paymentId&token&PayerID',
+                data: {pageTitle: 'Comprar'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/paypal-success.html',
+                        controllerAs: 'Payment',
+                        controller: 'PaymentCtrl'
+                    }
+                }
+            })
+            .state('paypal-cancel', {
+                url: '/paypal/cancel?token',
+                data: {pageTitle: 'Comprar'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/paypal-cancel.html',
+                        controllerAs: 'Payment',
+                        controller: 'PaymentCtrl'
+                    }
+                }
             });
 
     }
