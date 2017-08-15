@@ -473,30 +473,50 @@
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
+        self.activeProd = false;
+        self.selectFilter = '';
+        self.slugItem = $stateParams.slug;
 
         // get post by category
         if ($stateParams.slug) {
-            ProductTaxonomySrv.get({
-                slug: $stateParams.slug,
-                isActive: 'True'
-            }).$promise.then(function (results) {
-                if (results) {
-                    self.categoryName = results.name;
-                    self.categoryId = results.id;
-                    self.category = results;
-                    self.getMorePosts();
-                    $rootScope.pageTitle = self.categoryName + ' - Moons';
-                }
-            });
+                ProductTaxonomySrv.get({
+                    slug: $stateParams.slug,
+                    isActive: 'True'
+                }).$promise.then(function (results) {
+                    if (results) {
+                        self.categoryName = results.name;
+                        self.categoryId = results.id;
+                        self.category = results;
+                        console.log($stateParams.slug);
+                        self.getMorePosts($stateParams.slug);
+                        $rootScope.pageTitle = self.categoryName + ' - Moons';
+                    }
+                    ProductTaxonomySrv.query({
+                        parent: results.id,
+                        isActive: 'True'
+                    }).$promise.then(function (data) {
+                        self.lines = [];
+                        self.brands = [];
+                        self.childrens = data;
+                        angular.forEach(self.childrens, function (obj, ind) {
+                            if (obj.kind === 'linea') {
+                                self.lines.push(obj);
+                            }
+                            else if (obj.kind === 'brand') {
+                                self.brands.push(obj);
+                            }
+                        });
+                    })
+                });
         }
 
-        self.getMorePosts = function () {
-            if (self.busy || !self.next || !self.category) return;
+        self.getMorePosts = function (slug) {
+            if (self.busy || !self.next) return;
+            console.log(slug);
             self.page += 1;
             self.busy = true;
-
             ProductSrv.get({
-                taxonomies: self.category.slug,
+                taxonomies: slug,
                 isActive: 'True',
                 pageSize: 9,
                 fields: 'id,attachments,description,name,price,slug',
@@ -542,6 +562,65 @@
             }
         };
 
+        self.getProductsFilter = function(slug){
+            self.activeProd = !self.activeProd;
+            if(self.activeProd){
+                ProductSrv.get({
+                    taxonomies: $stateParams.slug + ',' + slug,
+                    isActive: 'True',
+                    pageSize: 9,
+                    fields: 'id,attachments,description,name,price,slug',
+                    ordering: '-createdAt'
+                }).$promise.then(function (results) {
+                    self.activeProd = true;
+                    self.list = results.results;
+                    self.busy = false;
+                    //get featureImage
+                    angular.forEach(self.list, function (obj, ind) {
+                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    });
+                });
+            }else{
+                ProductSrv.get({
+                    taxonomies: $stateParams.slug,
+                    isActive: 'True',
+                    pageSize: 9,
+                    fields: 'id,attachments,description,name,price,slug',
+                    ordering: '-createdAt'
+                }).$promise.then(function (results) {
+                    self.activeProd = false;
+                    self.list = results.results;
+                    self.busy = false;
+                    //get featureImage
+                    angular.forEach(self.list, function (obj, ind) {
+                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    });
+                });
+            }
+        };
+
+        self.hola = function() {
+            ProductSrv.get({
+                taxonomies: $stateParams.slug,
+                isActive: 'True',
+                pageSize: 9,
+                page: 1,
+                fields: 'id,attachments,description,name,price,slug',
+                ordering: '-price'
+            }).$promise.then(function (results) {
+                self.getMorePosts($stateParams.slug);
+                self.activeProd = false;
+                self.list = results.results;
+                console.log(results.next);
+                self.busy = false;
+                self.next = results.next;
+
+                //get featureImage
+                angular.forEach(self.list, function (obj, ind) {
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                });
+            });
+        }
     }
 
     function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert) {

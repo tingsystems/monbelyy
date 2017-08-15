@@ -11,34 +11,34 @@
 </div>
 <hr class="no-margin">
 <section id="content-area" class="content-blog">
-    <div class="content-pages" infinite-scroll='Product.getMorePosts()'
-         infinite-scroll-disabled='Product.busy || !Product.next || Product.loadPosts'>
+    <div class="content-pages" infinite-scroll='Product.getMorePosts(Product.slugItem)'
+         infinite-scroll-disabled='Product.busy || !Product.next'>
         <div class="container">
             <div class="col-sm-3">
                 <div class="box-widget-white ng-scope">
                     <h4 class="widget-title-first">Filtrar por</h4>
                     <div class="box-widget-container">
-                        <select name="" id="price" class="form-control">
-                           <option value="">Más Vendidos</option>
-                           <option value="">Alfabeticamente de A-Z</option>
-                           <option value="">Precio menor</option>
-                           <option value="">Precio mayor</option>
+                        <select name="" id="price" class="form-control" ng-model="Product.selectFilter" ng-change="Product.hola()">
+                           <option value="" ng-model="Product.hola1">Más Vendidos</option>
+                           <option value="asc">Alfabeticamente de A-Z</option>
+                           <option value="min">Precio menor</option>
+                           <option value="max">Precio mayor</option>
                        </select>
                     </div>
                     <h4 class="widget-title">Marcas</h4>
                     <div class="box-widget-container" style="padding-bottom: 5px;">
                         <ul class="list">
-                            <li><a href="#" target="_blank"><input type="checkbox"> Animal Planet </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Happy Pet </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Pedigree </a></li>
+                            <li ng-repeat="children in Product.brands">
+                                <a href="#" target="_blank"><input type="checkbox" ng-model="children.id" ng-change="Product.getProductsFilter(children.slug)"> {{children.name}} </a>
+                            </li>
                         </ul>
                     </div>
                     <h4 class="widget-title">Tipos</h4>
                     <div class="box-widget-container" style="padding-bottom: 5px;">
                         <ul class="list">
-                            <li><a href="#" target="_blank"><input type="checkbox"> Alimentos </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Juguetes </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Accesorios </a></li>
+                            <li ng-repeat="children in Product.lines">
+                                <a href="#" target="_blank"><input type="checkbox" ng-model="children.id" ng-change="Product.getProductsFilter(children.slug)"> {{children.name}}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
