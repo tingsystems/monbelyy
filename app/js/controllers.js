@@ -600,21 +600,33 @@
         };
 
         self.hola = function() {
-            ProductSrv.get({
-                taxonomies: $stateParams.slug,
-                isActive: 'True',
-                pageSize: 9,
-                page: 1,
-                fields: 'id,attachments,description,name,price,slug',
-                ordering: '-price'
-            }).$promise.then(function (results) {
+            console.log(self.selectFilter);
+            var paramsRange = {};
+            paramsRange.taxonomies = $stateParams.slug;
+            paramsRange.isActive = 'True';
+            paramsRange.pageSize = 9;
+            paramsRange.page = 1;
+            paramsRange.fields = 'id,attachments,description,name,price,slug';
+            paramsRange.ordering = '-createdAt';
+
+            if(self.selectFilter === 1){
+                paramsRange.ordering = '-price';
+            }
+
+            if(self.selectFilter === 2){
+                paramsRange.ordering = 'price';
+            }
+
+
+            //self.getMorePosts($stateParams.slug);
+            ProductSrv.get(paramsRange).$promise.then(function (results) {
                 self.getMorePosts($stateParams.slug);
                 self.activeProd = false;
                 self.list = results.results;
                 console.log(results.next);
                 self.busy = false;
                 self.next = results.next;
-
+                self.page = 1;
                 //get featureImage
                 angular.forEach(self.list, function (obj, ind) {
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
