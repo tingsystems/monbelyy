@@ -599,7 +599,7 @@
             }
         };
 
-        self.hola = function() {
+        self.filterbyPice = function() {
             console.log(self.selectFilter);
             var paramsRange = {};
             paramsRange.taxonomies = $stateParams.slug;
@@ -609,12 +609,12 @@
             paramsRange.fields = 'id,attachments,description,name,price,slug';
             paramsRange.ordering = '-createdAt';
 
-            if(self.selectFilter === 1){
-                paramsRange.ordering = '-price';
+            if(self.selectFilter === '2'){
+                paramsRange.ordering = 'price';
             }
 
-            if(self.selectFilter === 2){
-                paramsRange.ordering = 'price';
+            if(self.selectFilter === '3'){
+                paramsRange.ordering = '-price';
             }
 
 
