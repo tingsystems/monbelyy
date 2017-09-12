@@ -1,10 +1,11 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter) {
+    function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         $rootScope.pageTitle = 'Moons Aquariums';
+        var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         $rootScope.toggleSidebar = function() {
             $rootScope.visible = !$rootScope.visible;
@@ -29,7 +30,8 @@
             isActive: 'True',
             pageSize: 6,
             ordering: '-createdAt',
-            fields: 'name,description,attachments,slug,code,taxonomy,price,id'
+            fields: 'name,description,attachments,slug,code,taxonomy,price,id,priceList',
+            priceList : list
         }).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
@@ -53,7 +55,7 @@
             });
         });
 
-         EntrySrv.get({
+        EntrySrv.get({
             taxonomies: 'promociones-y-cupones',
             isActive: 'True',
             pageSize: 20,
@@ -434,15 +436,17 @@
         };
     }
 
-    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter) {
+    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage) {
         var self = this;
         $rootScope.pageTitle = 'Moons';
+        var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         self.busy = true;
         ProductSrv.get({
             slug: $stateParams.slug,
             isActive: 'True',
-            fields: 'attachments,id,name,price,slug,description,code,taxonomies'
+            fields: 'attachments,id,name,price,slug,description,code,taxonomies,priceList',
+            priceList : list
         }).$promise.then(function (results) {
             self.detail = results;
             // get featureImage
@@ -473,6 +477,7 @@
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
+        var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         // get post by category
         if ($stateParams.slug) {
@@ -499,8 +504,9 @@
                 taxonomies: self.category.slug,
                 isActive: 'True',
                 pageSize: 9,
-                fields: 'id,attachments,description,name,price,slug',
+                fields: 'id,attachments,description,name,price,slug,priceList',
                 ordering: '-createdAt',
+                priceList: list,
                 page: self.page
             }).$promise.then(function (results) {
                 self.list = self.list.concat(results.results);
@@ -647,7 +653,7 @@
         .controller('ShoppingCtrl', ShoppingCtrl);
 
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter'];
+    HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
@@ -657,7 +663,7 @@
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
-    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter'];
+    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'SweetAlert'];
 })();

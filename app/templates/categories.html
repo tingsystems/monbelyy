@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 no-padding">
+            <div class="col-sm-9 no-padding" ng-controller="AccessCtrl as Access">
                 <h2 class="title">{{Product.categoryName}}</h2>
                 <hr>
                 <div class="col-sm-6 col-md-4" ng-repeat="product in Product.list">
@@ -55,12 +55,13 @@
                         <div class="box-container no-padding container-fluid">
                             <div class="col-sm-12 no-pd-l text-center">
                                 <p>{{product.name}}</p>
-                                <h4>{{ product.price | currency }}</h4>
+                                    <h4 ng-if="Access.isAuthenticated()">{{ product.price | currency }}</h4>
+
                             </div>
                         </div>
                         <hr>
                         <div class="container-fluid no-padding">
-                            <div class="col-xs-6 no-pd-l">
+                            <div class="no-pd-l" ng-class="Access.isAuthenticated() ? 'col-xs-6': 'col-xs-12'">
                                 <a class="btn btn-gray-clear btn-block" ui-sref="product-detail({slug:product.slug})">Ver
                                     más</a>
                             </div>
@@ -69,7 +70,7 @@
                                         ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
                                             name: product.name, price: product.price, qty: 1,
                                             taxonomies : product.taxonomies}, 1)"
-                                        ng-disabled="Product.itemInCart(product)">Agregar
+                                        ng-disabled="Product.itemInCart(product)" ng-if="Access.isAuthenticated()">Agregar
                                 </button>
                             </div>
                         </div>
