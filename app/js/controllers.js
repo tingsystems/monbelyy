@@ -478,30 +478,48 @@
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
+        self.activeProd = false;
+        self.selectFilter = '';
+        self.slugItem = $stateParams.slug;
 
         // get post by category
         if ($stateParams.slug) {
-            ProductTaxonomySrv.get({
-                slug: $stateParams.slug,
-                isActive: 'True'
-            }).$promise.then(function (results) {
-                if (results) {
-                    self.categoryName = results.name;
-                    self.categoryId = results.id;
-                    self.category = results;
-                    self.getMorePosts();
-                    $rootScope.pageTitle = self.categoryName + ' - Moons';
-                }
-            });
+                ProductTaxonomySrv.get({
+                    slug: $stateParams.slug,
+                    isActive: 'True'
+                }).$promise.then(function (results) {
+                    if (results) {
+                        self.categoryName = results.name;
+                        self.categoryId = results.id;
+                        self.category = results;
+                        self.getMorePosts($stateParams.slug);
+                        $rootScope.pageTitle = self.categoryName + ' - Moons';
+                    }
+                    ProductTaxonomySrv.query({
+                        parent: results.id,
+                        isActive: 'True'
+                    }).$promise.then(function (data) {
+                        self.lines = [];
+                        self.brands = [];
+                        self.childrens = data;
+                        angular.forEach(self.childrens, function (obj, ind) {
+                            if (obj.kind === 'Tipo') {
+                                self.lines.push(obj);
+                            }
+                            else if (obj.kind === 'Marca') {
+                                self.brands.push(obj);
+                            }
+                        });
+                    });
+                });
         }
 
-        self.getMorePosts = function () {
-            if (self.busy || !self.next || !self.category) return;
+        self.getMorePosts = function (slug) {
+            if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
-
             ProductSrv.get({
-                taxonomies: self.category.slug,
+                taxonomies: slug,
                 isActive: 'True',
                 pageSize: 9,
                 fields: 'id,attachments,description,name,price,slug,priceList',
@@ -529,7 +547,7 @@
             if (find_item) {
                 if (qty < 1) {
                     // Remove item from cart
-                    self.items.splice([self.items.indexOf(find_item)], 1)
+                    self.items.splice([self.items.indexOf(find_item)], 1);
                 } else {
                     if (qty) {
                         self.items[self.items.indexOf(find_item)].qty = qty;
@@ -548,6 +566,78 @@
             }
         };
 
+        self.getProductsFilter = function(slug){
+            self.activeProd = !self.activeProd;
+            if(self.activeProd){
+                ProductSrv.get({
+                    taxonomies: $stateParams.slug + ',' + slug,
+                    isActive: 'True',
+                    pageSize: 9,
+                    fields: 'id,attachments,description,name,price,slug,priceList',
+                    ordering: '-createdAt',
+                    priceList: list
+                }).$promise.then(function (results) {
+                    self.activeProd = true;
+                    self.list = results.results;
+                    self.busy = false;
+                    //get featureImage
+                    angular.forEach(self.list, function (obj, ind) {
+                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    });
+                });
+            }else{
+                ProductSrv.get({
+                    taxonomies: $stateParams.slug,
+                    isActive: 'True',
+                    pageSize: 9,
+                    fields: 'id,attachments,description,name,price,slug,priceList',
+                    ordering: '-createdAt',
+                    priceList: list
+                }).$promise.then(function (results) {
+                    self.activeProd = false;
+                    self.list = results.results;
+                    self.busy = false;
+                    //get featureImage
+                    angular.forEach(self.list, function (obj, ind) {
+                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    });
+                });
+            }
+        };
+
+        self.filterbyPice = function() {
+            var paramsRange = {};
+            paramsRange.taxonomies = $stateParams.slug;
+            paramsRange.isActive = 'True';
+            paramsRange.pageSize = 9;
+            paramsRange.page = 1;
+            paramsRange.fields = 'id,attachments,description,name,price,slug,priceList';
+            paramsRange.ordering = '-createdAt';
+            paramsRange.priceList = list;
+
+            if(self.selectFilter === '2'){
+                paramsRange.ordering = 'price';
+            }
+
+            if(self.selectFilter === '3'){
+                paramsRange.ordering = '-price';
+            }
+
+
+            //self.getMorePosts($stateParams.slug);
+            ProductSrv.get(paramsRange).$promise.then(function (results) {
+                self.getMorePosts($stateParams.slug);
+                self.activeProd = false;
+                self.list = results.results;
+                self.busy = false;
+                self.next = results.next;
+                self.page = 1;
+                //get featureImage
+                angular.forEach(self.list, function (obj, ind) {
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                });
+            });
+        };
     }
 
     function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert) {
