@@ -62,13 +62,27 @@
 
     }
 
+    function PriceListSrv($resource, BaseUrlShop) {
+        return $resource(BaseUrlShop.get() + 'item/price/lists/:id',
+            null, {
+                'customer': {
+                    method: 'GET',
+                    url: BaseUrlShop.get() + 'item/price/lists/:id',
+                    isArray: true
+                }
+            });
+
+    }
+
+
     // Assign factory to module
     angular.module('shop.services', ['ngResource'])
         .factory('BaseUrlShop', BaseUrlShop)
         .factory('CustomerSrv', CustomerSrv)
         .factory('CartsSrv', CartsSrv)
         .factory('OrderSrv', OrderSrv)
-        .factory('ValidCouponSrv', ValidCouponSrv);
+        .factory('ValidCouponSrv', ValidCouponSrv)
+        .factory('PriceListSrv', PriceListSrv);
 
     // Inject factory the dependencies
     BaseUrlShop.$inject = [];
@@ -76,5 +90,6 @@
     CartsSrv.$inject = ['$resource', 'BaseUrlShop'];
     OrderSrv.$inject = ['$resource', 'BaseUrlShop'];
     ValidCouponSrv.$inject = ['$resource', 'BaseUrlShop'];
+    PriceListSrv.$inject = ['$resource', 'BaseUrlShop'];
 
 })();

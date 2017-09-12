@@ -160,8 +160,9 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
+        //$rootScope.host = 'http://api.moons.mx';
         $rootScope.host = 'http://api.moons.mx';
-        //$rootScope.host = 'http://192.168.1.71';
+        $rootScope.hostAnnalise = 'http://api.moons.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
         $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
@@ -297,6 +298,10 @@
         }
         if (!angular.isDefined($localStorage.ship)) {
             $localStorage.ship = false;
+        }
+
+        if (!angular.isDefined($localStorage.priceList)) {
+            $localStorage.priceList = '';
         }
 
         $rootScope.$on('UNAUTHORIZED', function (event, args) {

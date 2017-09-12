@@ -28,9 +28,9 @@
     <div class="col-sm-8">
         <h3 class="detail-title">{{Product.detail.name}}</h3>
         <hr>
-        <div class="col-sm-4 text-left">
-            <h3 class="detail-price">{{ Product.detail.price | currency}}</h3>
-            <div class="detail-qty">
+        <div class="col-sm-4 text-left" ng-controller="AccessCtrl as Access">
+            <h3 class="detail-price" ng-if="Access.isAuthenticated()">{{ Product.detail.price | currency}}</h3>
+            <div class="detail-qty" ng-if="Access.isAuthenticated()">
                 <small>Cantidad</small>
                 <input type="number" placeholder="0" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
             </div>
@@ -39,7 +39,7 @@
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies}, Product.detail.qty)"
                         ng-disabled="Shop.itemInCart(Product.detail.id)"
-                        class="btn btn-orange">Agregar a carrito</button>
+                        class="btn btn-orange" ng-if="Access.isAuthenticated()">Agregar a carrito</button>
             </div>
         </div>
         <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
