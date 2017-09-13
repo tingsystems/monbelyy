@@ -1,7 +1,7 @@
 <section id="content-area" class="content-blog">
     <div class="content-pages" infinite-scroll='Search.getMorePosts()'
          infinite-scroll-disabled='Search.busy || !Search.next || Search.loadPosts'>
-        <div class="container">
+        <div class="container" ng-controller="AccessCtrl as Access">
             <h2 class="title">Resultados de la busqueda: {{ Search.searchTerm }}</h2>
             <hr>
             <div class="col-sm-3" ng-repeat="item in Search.listSearch">
@@ -12,7 +12,7 @@
                     <div class="box-container no-padding container-fluid">
                         <div class="col-sm-12 no-pd-l text-center">
                             <p>{{item.name}}</p>
-                            <h4>{{ item.price | currency }}</h4>
+                            <h4 ng-if="Access.isAuthenticated()">{{ item.price | currency }}</h4>
                         </div>
                     </div>
                     <hr>

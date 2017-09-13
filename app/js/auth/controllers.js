@@ -81,8 +81,9 @@
                         $localStorage.total = 0;
                         $localStorage.cart = {};
                         $localStorage.appData.user = self.branchDefault;
+                        $localStorage.priceList = '';
                         // Desconectamos al usuario y lo redirijimos
-                        if ($state.current.name != 'register') {
+                        if ($state.current.name !== 'register') {
                             NotificationSrv.success("Te esperamos pronto", "Moon's Aquariums");
                             $state.go('home');
                         }
