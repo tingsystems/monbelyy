@@ -5,13 +5,13 @@
     function BaseUrl() {
         return {
             get: function () {
-                return '#host#/api/{{apiV}}/';
+                return '#hostAnnalise#/api/{{apiV}}/';
             },
             shop: function(){
                 return '#host#/api/{{apiShop}}/public/'
             }
 
-        }
+        };
     }
 
     function urlAttachment() {
@@ -19,19 +19,19 @@
             get: function () {
                 return  '#host#/api/v1/';
             }
-        }
+        };
     }
 
     function EntrySrv($resource, BaseUrl) {
-        return $resource(BaseUrl.get() + 'posts/:slug', null, {})
+        return $resource(BaseUrl.get() + 'posts/:slug', null, {});
     }
 
     function ProductSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.shop() + 'items/:slug', null, {})
+        return $resource(BaseUrl.shop() + 'items/:slug', null, {});
     }
 
     function ProductTaxonomySrv($resource, BaseUrl) {
-        return $resource(BaseUrl.shop() + 'taxonomies/:slug', null, {})
+        return $resource(BaseUrl.shop() + 'taxonomies/:slug', null, {});
     }
 
     function TaxonomySrv($resource, BaseUrl) {
@@ -59,10 +59,10 @@
                 });
             }
 
-        }
+        };
     }
     function MessageSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.get() + 'notifications/:id', null, {})
+        return $resource(BaseUrl.get() + 'notifications/:id', null, {});
     }
 
 
@@ -80,6 +80,7 @@
                 config.url = config.url.replace('{{apiV}}', $rootScope.apiV);
                 config.url = config.url.replace('{{apiShop}}', $rootScope.apiShop);
                 config.url = config.url.replace('#host#', $rootScope.host);
+                config.url = config.url.replace('#hostAnnalise#', $rootScope.hostAnnalise);
                 // Return the config or wrap it in a promise if blank.
                 return config || $q.when(config);
             },

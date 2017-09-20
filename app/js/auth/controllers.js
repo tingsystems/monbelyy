@@ -1,14 +1,12 @@
 (function () {
     'use strict';
 
-    function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv) {
+    function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
+                        PriceListSrv) {
         var self = this;
         self.busy = false;
         self.formData = {};
         self.formDataLogin = {};
-        //self.branchDefault = {branchOffices: ["7454e28c-189a-48d7-a439-0f9f8fec89d4"]};
-        //self.branchDefault = '';
-        //self.user = $localStorage.appData.user ? $localStorage.appData.user : $localStorage.appData.user = self.branchDefault;
         if ($localStorage.appData) {
             $rootScope.user = $localStorage.appData.user;
         }
@@ -28,6 +26,9 @@
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
                 self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
+                PriceListSrv.customer({customers: $localStorage.appData.user.customer}).$promise.then(function (data) {
+                    $localStorage.priceList = data[0].slug;
+                });
                 // Redirect user here after a successful log in.
                 $state.go('dashboard');
             });
@@ -131,7 +132,7 @@
             });
         };
 
-        if($state.current.name === 'recovery-password'){
+        if ($state.current.name === 'recovery-password') {
             self.recovery = true;
         }
 
@@ -542,7 +543,7 @@
         }
     }
 
-    function ProfilePanelCtrl(OrderSrv, NotificationSrv, NgTableParams, $timeout, $localStorage) {
+    function ProfilePanelCtrl(OrderSrv, NotificationSrv, NgTableParams, PriceListSrv, $timeout, $localStorage) {
         var self = this;
         var timeout = $timeout;
         self.formData = {};
@@ -635,7 +636,7 @@
 
 
     // inject dependencies to controllers
-    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv'];
+    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
@@ -643,5 +644,5 @@
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
     PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv'];
-    ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$localStorage'];
+    ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage'];
 })();

@@ -11,39 +11,39 @@
 </div>
 <hr class="no-margin">
 <section id="content-area" class="content-blog">
-    <div class="content-pages" infinite-scroll='Product.getMorePosts()'
-         infinite-scroll-disabled='Product.busy || !Product.next || Product.loadPosts'>
+    <div class="content-pages" infinite-scroll='Product.getMorePosts(Product.slugItem)'
+         infinite-scroll-disabled='Product.busy || !Product.next'>
         <div class="container">
             <div class="col-sm-3">
                 <div class="box-widget-white ng-scope">
                     <h4 class="widget-title-first">Filtrar por</h4>
                     <div class="box-widget-container">
-                        <select name="" id="price" class="form-control">
-                           <option value="">Más Vendidos</option>
-                           <option value="">Alfabeticamente de A-Z</option>
-                           <option value="">Precio menor</option>
-                           <option value="">Precio mayor</option>
+                        <select name="" id="price" class="form-control" ng-model="Product.selectFilter" ng-change="Product.filterbyPice()">
+                           <option value= "0" ng-model="Product.hola1">Más Vendidos</option>
+                           <option value="1">Alfabeticamente de A-Z</option>
+                           <option value="2">Precio menor</option>
+                           <option value="3">Precio mayor</option>
                        </select>
                     </div>
                     <h4 class="widget-title">Marcas</h4>
                     <div class="box-widget-container" style="padding-bottom: 5px;">
                         <ul class="list">
-                            <li><a href="#" target="_blank"><input type="checkbox"> Animal Planet </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Happy Pet </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Pedigree </a></li>
+                            <li ng-repeat="children in Product.brands">
+                                <a href="#" target="_blank"><input type="checkbox" ng-model="children.id" ng-change="Product.getProductsFilter(children.slug)"> {{children.name}} </a>
+                            </li>
                         </ul>
                     </div>
                     <h4 class="widget-title">Tipos</h4>
                     <div class="box-widget-container" style="padding-bottom: 5px;">
                         <ul class="list">
-                            <li><a href="#" target="_blank"><input type="checkbox"> Alimentos </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Juguetes </a></li>
-                            <li><a href="#" target="_blank"><input type="checkbox"> Accesorios </a></li>
+                            <li ng-repeat="children in Product.lines">
+                                <a href="#" target="_blank"><input type="checkbox" ng-model="children.id" ng-change="Product.getProductsFilter(children.slug)"> {{children.name}}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 no-padding">
+            <div class="col-sm-9 no-padding" ng-controller="AccessCtrl as Access">
                 <h2 class="title">{{Product.categoryName}}</h2>
                 <hr>
                 <div class="col-sm-6 col-md-4" ng-repeat="product in Product.list">
@@ -55,12 +55,13 @@
                         <div class="box-container no-padding container-fluid">
                             <div class="col-sm-12 no-pd-l text-center">
                                 <p>{{product.name}}</p>
-                                <h4>{{ product.price | currency }}</h4>
+                                    <h4 ng-if="Access.isAuthenticated()">{{ product.price | currency }}</h4>
+
                             </div>
                         </div>
                         <hr>
                         <div class="container-fluid no-padding">
-                            <div class="col-xs-6 no-pd-l">
+                            <div class="no-pd-l" ng-class="Access.isAuthenticated() ? 'col-xs-6': 'col-xs-12'">
                                 <a class="btn btn-gray-clear btn-block" ui-sref="product-detail({slug:product.slug})">Ver
                                     más</a>
                             </div>
@@ -69,7 +70,7 @@
                                         ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
                                             name: product.name, price: product.price, qty: 1,
                                             taxonomies : product.taxonomies}, 1)"
-                                        ng-disabled="Product.itemInCart(product)">Agregar
+                                        ng-disabled="Product.itemInCart(product)" ng-if="Access.isAuthenticated()">Agregar
                                 </button>
                             </div>
                         </div>
