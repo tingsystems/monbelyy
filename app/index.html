@@ -53,6 +53,14 @@
     <link rel="stylesheet" href="/css/main.css">
     <!-- endinject -->
     <!-- endbuild -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.10&appId=808603182547379";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 </head>
 
 <body>
@@ -249,13 +257,13 @@
     <script src="/js/services.js"></script>
     <script src="/js/templates.js"></script>
     <script src="/js/translate.js"></script>
-    <script src="/js/shop/controllers.js"></script>
-    <script src="/js/shop/services.js"></script>
-    <script src="/js/shop/shop.app.js"></script>
     <script src="/js/auth/auth.app.js"></script>
     <script src="/js/auth/controllers.js"></script>
     <script src="/js/auth/directives.js"></script>
     <script src="/js/auth/services.js"></script>
+    <script src="/js/shop/controllers.js"></script>
+    <script src="/js/shop/services.js"></script>
+    <script src="/js/shop/shop.app.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
     <script>

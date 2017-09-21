@@ -1,3 +1,16 @@
+#facebook-styl iframe {
+  width: 100%;
+}
+.comments {
+  border: 1px solid #eee;
+  margin: 25px 0;
+  color: #555;
+  padding: 15px;
+}
+.comments h3,
+.comments label {
+  color: #555;
+}
 .hide-desk {
   display: none;
 }
