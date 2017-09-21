@@ -1,3 +1,16 @@
+#facebook-styl iframe {
+  width: 100%;
+}
+.comments {
+  border: 1px solid #eee;
+  margin: 25px 0;
+  color: #555;
+  padding: 15px;
+}
+.comments h3,
+.comments label {
+  color: #555;
+}
 .hide-desk {
   display: none;
 }
@@ -80,6 +93,21 @@ body {
 }
 .go-to-shop {
   margin-top: -10px;
+}
+.alert-orange {
+  background-color: #ffa500;
+  margin: 25px 0;
+  padding: 15px;
+  border-radius: 2px;
+}
+.alert-orange h3 {
+  color: #fff;
+  font-weigh: 300;
+  font-size: 16px;
+  line-height: 22px;
+}
+.alert-orange h3 strong {
+  font-size: 20px;
 }
 .divider-main {
   margin: 15px;
