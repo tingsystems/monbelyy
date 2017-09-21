@@ -81,6 +81,21 @@ body {
 .go-to-shop {
   margin-top: -10px;
 }
+.alert-orange {
+  background-color: #ffa500;
+  margin: 25px 0;
+  padding: 15px;
+  border-radius: 2px;
+}
+.alert-orange h3 {
+  color: #fff;
+  font-weigh: 300;
+  font-size: 16px;
+  line-height: 22px;
+}
+.alert-orange h3 strong {
+  font-size: 20px;
+}
 .divider-main {
   margin: 15px;
   width: 1px;
