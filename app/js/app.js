@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -199,6 +199,7 @@
         });
         // init for page title
         $rootScope.pageTitle = 'Moons';
+
         function showResponsive($window) {
             if ($window.innerWidth <= 768) {
                 return true;
@@ -330,7 +331,8 @@
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select', 'ngTable'])
+        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app',
+        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
