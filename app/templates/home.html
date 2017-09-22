@@ -74,7 +74,8 @@
                                             ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
                                              name: product.name, price: product.price, qty: 1,
                                              taxonomies : product.taxonomies}, 1)"
-                                            ng-disabled="Shop.itemInCart(product)" ng-if="Access.isAuthenticated()">Comprar
+                                            ng-disabled="Shop.itemInCart(product)" ng-if="Access.isAuthenticated()">
+                                        Comprar
                                     </button>
                                 </div>
                             </div>
@@ -87,41 +88,44 @@
         <div class="col-sm-3">
             <div class="col-md-12 no-padding">
                 <div class="alert-orange">
-                    <h3><i class="fa fa-dollar fa-4x pull-left"></i> En la compra de <strong>$2500</strong> o más el envío es gratuito
+                    <h3><i class="fa fa-dollar fa-4x pull-left"></i> En la compra de <strong>$2500</strong> o más el
+                        envío es gratuito
                         en CDMX y área metropolitana.</h3>
                 </div>
             </div>
             <div id="facebook-styl" class="col-md-12 no-padding">
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMoonsCDMX%2F&tabs=timeline&width=300&height=400&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=510283729125304" width="250" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMoonsCDMX%2F&tabs=timeline&width=300&height=400&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=510283729125304"
+                        width="250" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+                        allowTransparency="true"></iframe>
             </div>
             <div id="twitter-styl" class="col-md-12">
                 <a class="twitter-timeline" data-height="400" href="https://twitter.com/MOONS_AQUARIUMS">Tweets by
                     MOONS_AQUARIUMS</a>
                 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
-            <div class="comments col-sm-12">
+            <div class="comments col-sm-12" ng-controller="ContactCtrl as Contact">
                 <h3>¿Tienes dudas?</h3>
-                <form action="">
+                <form ng-submit="Contact.createNotification('CONTACT_FORM')">
                     <div class="form-group">
                         <label for="name"><i class="fa fa-user"></i> Nombre</label>
-                        <input type="text" id="name" class="form-control" placeholder="Nombre" required>
+                        <input type="text" id="name" class="form-control" placeholder="Nombre"
+                               ng-model="Contact.notification.name" required>
                     </div>
                     <div class="form-group">
                         <label for="mobil"><i class="fa fa-whatsapp"></i> Whatsapp</label>
-                        <input type="text" id="mobil" class="form-control" placeholder="Whatsapp" required>
+                        <input type="text" name="mobil" id="mobil" class="form-control" placeholder="Whatsapp"
+                               ng-model="Contact.notification.phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="city"><i class="fa fa-map-marker"></i> Selecciona ciudad</label>
-                        <select class="form-control" name="" id="city" required>
-                            <option value="">México</option>
-                            <option value="">Michoacán</option>
-                            <option value="">Sinaloa</option>
-                        </select>
+                        <label for="city"><i class="fa fa-map-marker"></i> Ciudad</label>
+                        <input type="text" name="city" id="city" class="form-control" placeholder="Ciudad" required
+                               ng-model="Contact.notification.city">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" name="" id="message" width="100%" placeholder="Mensaje" required></textarea>
+                        <textarea class="form-control" name="message" id="message" placeholder="Mensaje"
+                                  required ng-model="Contact.notification.message"></textarea>
                     </div>
-                    <button class="btn-orange btn-block"><i class="fa fa-envelope"></i> Enviar</button>
+                    <button class="btn-orange btn-block" type="submit"><i class="fa fa-envelope"></i> Enviar</button>
                 </form>
             </div>
         </div>

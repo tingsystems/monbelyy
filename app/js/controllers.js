@@ -214,11 +214,11 @@
         });
     }
 
-    function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
+    function ContactCtrl(NotificationTakiSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
-        if ($state.current.name == 'home') {
+        if ($state.current.name === 'home') {
             $rootScope.pageTitle = 'Moons';
-        } else if ($state.current.name == 'contact') {
+        } else if ($state.current.name === 'contact') {
             $rootScope.pageTitle = 'Contacto - Moons';
         }
 
@@ -230,14 +230,23 @@
         self.contactInitialState();
 
         self.createNotification = function (kind) {
-            // ajax request to send the formData
-            self.notification.kind = kind;
-            self.notification.send_from = $rootScope.initConfig.email;
-            self.context.context = angular.copy(self.notification);
+            self.notification = {
+                metadata: {
+                    to: [{'fromName': 'Hola', 'email': $rootScope.initConfig.email}],
+                    kind: kind,
+                    prefix: 'default',
+                    fromName: self.notification.name,
+                    replyTo: {"email": self.notification.email, "phone": self.notification.phone},
+                    siteName: $rootScope.initConfig.siteName,
+                    message: self.notification.message
+                },
+                queue: 'notifications'
+            };
             self.busy = true;
-            MessageSrv.create(self.context).$promise.then(function (data) {
+            NotificationTakiSrv.save(self.notification).$promise.then(function (data) {
                     self.contactInitialState();
                     NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                    // enviar al estado de gracias
                     self.busy = false;
                 },
                 function (data) {
@@ -776,7 +785,7 @@
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
-    ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
+    ContactCtrl.$inject = ['NotificationTakiSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$state'];
     SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage'];
     NavBarCtrl.$inject = [];
