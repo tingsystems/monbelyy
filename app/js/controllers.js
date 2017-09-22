@@ -223,7 +223,7 @@
         }
 
         self.contactInitialState = function () {
-            self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
+            self.notification = {name: '', email: '', message: '', phone: '', kind: '', city: ''};
             self.context = {};
 
         };
@@ -236,6 +236,7 @@
                     kind: kind,
                     prefix: 'default',
                     fromName: self.notification.name,
+                    city: self.notification.city,
                     replyTo: {"email": self.notification.email, "phone": self.notification.phone},
                     siteName: $rootScope.initConfig.siteName,
                     message: self.notification.message
