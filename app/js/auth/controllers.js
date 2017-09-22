@@ -117,11 +117,12 @@
         var self = this;
         self.formData = {};
         //self.passwordData = {};
+        // 1 is for webSite
+        self.formData.client_kind = 1;
         self.recovery = false;
         self.recoveryPassword = function () {
             self.busy = true;
             RegisterSrv.recovery(self.formData).$promise.then(function (data) {
-                console.log(data);
                 NotificationSrv.success('Le hemos enviado un email para recuperar su contraseña', data.email);
                 self.busy = false;
                 //$state.go('register');
@@ -153,7 +154,7 @@
             self.busy = true;
             if (self.formData.password2 != self.formData.password) {
                 NotificationSrv.error('Las contraseñas no coinciden');
-                return
+                return;
             }
             RegisterSrv.set({token: $stateParams.token}, self.formData).$promise.then(function (data) {
                 NotificationSrv.success("Contraseña actualizada correctamente");
