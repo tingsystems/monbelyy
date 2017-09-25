@@ -73,7 +73,6 @@
             //get featureImage
             angular.forEach(self.brands, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                console.log(obj.link)
             });
         });
 
