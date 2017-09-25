@@ -74,6 +74,10 @@
 
     }
 
+    function NotificationTakiSrv($resource, BaseUrlShop) {
+        return $resource(BaseUrlShop.get() + 'notifications/:id', null, {});
+    }
+
 
     // Assign factory to module
     angular.module('shop.services', ['ngResource'])
@@ -82,7 +86,8 @@
         .factory('CartsSrv', CartsSrv)
         .factory('OrderSrv', OrderSrv)
         .factory('ValidCouponSrv', ValidCouponSrv)
-        .factory('PriceListSrv', PriceListSrv);
+        .factory('PriceListSrv', PriceListSrv)
+        .factory('NotificationTakiSrv', NotificationTakiSrv);
 
     // Inject factory the dependencies
     BaseUrlShop.$inject = [];
@@ -91,5 +96,6 @@
     OrderSrv.$inject = ['$resource', 'BaseUrlShop'];
     ValidCouponSrv.$inject = ['$resource', 'BaseUrlShop'];
     PriceListSrv.$inject = ['$resource', 'BaseUrlShop'];
+    NotificationTakiSrv.$inject = ['$resource', 'BaseUrlShop'];
 
 })();

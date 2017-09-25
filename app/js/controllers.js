@@ -7,7 +7,8 @@
         $rootScope.pageTitle = 'Moons Aquariums';
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
-        $rootScope.toggleSidebar = function() {
+
+        $rootScope.toggleSidebar = function () {
             $rootScope.visible = !$rootScope.visible;
         };
 
@@ -25,14 +26,21 @@
             });
         });
 
-        ProductSrv.get({
-            taxonomies: 'productos-inicio',
-            isActive: 'True',
-            pageSize: 9,
-            ordering: '-createdAt',
-            fields: 'name,description,attachments,slug,code,taxonomy,price,id,priceList',
-            priceList : list
-        }).$promise.then(function (results) {
+        var paramsProducts = {};
+        paramsProducts.taxonomies = 'productos-inicio';
+        paramsProducts.isActive = 'True';
+        paramsProducts.pageSize = 6;
+        paramsProducts.ordering = '-createdAt';
+        if (list !== '') {
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList';
+            paramsProducts.priceList = list;
+        }
+        else {
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id';
+        }
+
+
+        ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
             angular.forEach(self.products, function (obj, ind) {
@@ -51,7 +59,6 @@
             //get featureImage
             angular.forEach(self.promoHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                console.log(obj.link)
             });
         });
 
@@ -81,7 +88,6 @@
             //get featureImage
             angular.forEach(self.promoCoHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                console.log(obj.link)
             });
         });
 
@@ -223,30 +229,40 @@
         });
     }
 
-    function ContactCtrl(MessageSrv, NotificationSrv, $rootScope, $state) {
+    function ContactCtrl(NotificationTakiSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
-        if ($state.current.name == 'home') {
+        if ($state.current.name === 'home') {
             $rootScope.pageTitle = 'Moons';
-        } else if ($state.current.name == 'contact') {
+        } else if ($state.current.name === 'contact') {
             $rootScope.pageTitle = 'Contacto - Moons';
         }
 
         self.contactInitialState = function () {
-            self.notification = {name: '', email: '', message: '', phone: '', kind: ''};
+            self.notification = {name: '', email: '', message: '', phone: '', kind: '', city: ''};
             self.context = {};
 
         };
         self.contactInitialState();
 
         self.createNotification = function (kind) {
-            // ajax request to send the formData
-            self.notification.kind = kind;
-            self.notification.send_from = $rootScope.initConfig.email;
-            self.context.context = angular.copy(self.notification);
+            self.notification = {
+                metadata: {
+                    to: [{'fromName': 'Hola', 'email': $rootScope.initConfig.email}],
+                    kind: kind,
+                    prefix: 'default',
+                    fromName: self.notification.name,
+                    city: self.notification.city,
+                    replyTo: {"email": self.notification.email, "phone": self.notification.phone},
+                    siteName: $rootScope.initConfig.siteName,
+                    message: self.notification.message
+                },
+                queue: 'notifications'
+            };
             self.busy = true;
-            MessageSrv.create(self.context).$promise.then(function (data) {
+            NotificationTakiSrv.save(self.notification).$promise.then(function (data) {
                     self.contactInitialState();
                     NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                    // enviar al estado de gracias
                     self.busy = false;
                 },
                 function (data) {
@@ -265,7 +281,7 @@
         };
     }
 
-    function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams) {
+    function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage) {
         var self = this;
 
         self.listSearch = [];
@@ -292,14 +308,21 @@
             if ($stateParams.q) {
                 if (self.kindTerm === 'product') {
                     self.isPost = false;
-                    ProductSrv.get({
-                        isActive: 'True',
-                        pageSize: 9,
-                        fields: 'id,attachments,description,name,price,slug',
-                        ordering: '-createdAt',
-                        page: self.page,
-                        search: self.searchTerm
-                    }).$promise.then(function (results) {
+                    var list = $localStorage.priceList ? $localStorage.priceList : '';
+                    var paramsProducts = {};
+                    paramsProducts.isActive = 'True';
+                    paramsProducts.pageSize = 9;
+                    paramsProducts.ordering = '-createdAt';
+                    paramsProducts.page = self.page;
+                    paramsProducts.search = self.searchTerm;
+                    if (list !== '') {
+                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceList';
+                        paramsProducts.priceList = list;
+                    }
+                    else {
+                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceListd';
+                    }
+                    ProductSrv.get(paramsProducts).$promise.then(function (results) {
                         self.listSearch = self.listSearch.concat(results.results);
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
@@ -456,13 +479,19 @@
         $rootScope.pageTitle = 'Moons';
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
+        var paramsProducts = {};
+        paramsProducts.slug = $stateParams.slug;
+        paramsProducts.isActive = 'True';
+        if (list !== '') {
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList';
+            paramsProducts.priceList = list;
+        }
+        else {
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies';
+        }
+
         self.busy = true;
-        ProductSrv.get({
-            slug: $stateParams.slug,
-            isActive: 'True',
-            fields: 'attachments,id,name,price,slug,description,code,taxonomies,priceList',
-            priceList : list
-        }).$promise.then(function (results) {
+        ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.detail = results;
             // get featureImage
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
@@ -499,49 +528,54 @@
 
         // get post by category
         if ($stateParams.slug) {
-                ProductTaxonomySrv.get({
-                    slug: $stateParams.slug,
+            ProductTaxonomySrv.get({
+                slug: $stateParams.slug,
+                isActive: 'True'
+            }).$promise.then(function (results) {
+                if (results) {
+                    self.categoryName = results.name;
+                    self.categoryId = results.id;
+                    self.category = results;
+                    self.getMorePosts($stateParams.slug);
+                    $rootScope.pageTitle = self.categoryName + ' - Moons';
+                }
+                ProductTaxonomySrv.query({
+                    parent: results.id,
                     isActive: 'True'
-                }).$promise.then(function (results) {
-                    if (results) {
-                        self.categoryName = results.name;
-                        self.categoryId = results.id;
-                        self.category = results;
-                        self.getMorePosts($stateParams.slug);
-                        $rootScope.pageTitle = self.categoryName + ' - Moons';
-                    }
-                    ProductTaxonomySrv.query({
-                        parent: results.id,
-                        isActive: 'True'
-                    }).$promise.then(function (data) {
-                        self.lines = [];
-                        self.brands = [];
-                        self.childrens = data;
-                        angular.forEach(self.childrens, function (obj, ind) {
-                            if (obj.kind === 'Tipo') {
-                                self.lines.push(obj);
-                            }
-                            else if (obj.kind === 'Marca') {
-                                self.brands.push(obj);
-                            }
-                        });
+                }).$promise.then(function (data) {
+                    self.lines = [];
+                    self.brands = [];
+                    self.childrens = data;
+                    angular.forEach(self.childrens, function (obj, ind) {
+                        if (obj.kind === 'Tipo') {
+                            self.lines.push(obj);
+                        }
+                        else if (obj.kind === 'Marca') {
+                            self.brands.push(obj);
+                        }
                     });
                 });
+            });
         }
 
         self.getMorePosts = function (slug) {
             if (self.busy || !self.next) return;
             self.page += 1;
             self.busy = true;
-            ProductSrv.get({
-                taxonomies: slug,
-                isActive: 'True',
-                pageSize: 9,
-                fields: 'id,attachments,description,name,price,slug,priceList',
-                ordering: '-createdAt',
-                priceList: list,
-                page: self.page
-            }).$promise.then(function (results) {
+            var paramsProducts = {};
+            paramsProducts.taxonomies = slug;
+            paramsProducts.isActive = 'True';
+            paramsProducts.pageSize = 9;
+            paramsProducts.ordering = '-createdAt';
+            paramsProducts.page = self.page;
+            if (list !== '') {
+                paramsProducts.fields = 'id,attachments,description,name,price,slug,priceList';
+                paramsProducts.priceList = list;
+            }
+            else {
+                paramsProducts.fields = 'id,attachments,description,name,price,slug';
+            }
+            ProductSrv.get(paramsProducts).$promise.then(function (results) {
                 self.list = self.list.concat(results.results);
                 self.busy = false;
                 self.next = results.next;
@@ -581,9 +615,9 @@
             }
         };
 
-        self.getProductsFilter = function(slug){
+        self.getProductsFilter = function (slug) {
             self.activeProd = !self.activeProd;
-            if(self.activeProd){
+            if (self.activeProd) {
                 ProductSrv.get({
                     taxonomies: $stateParams.slug + ',' + slug,
                     isActive: 'True',
@@ -600,7 +634,7 @@
                         obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                     });
                 });
-            }else{
+            } else {
                 ProductSrv.get({
                     taxonomies: $stateParams.slug,
                     isActive: 'True',
@@ -620,21 +654,26 @@
             }
         };
 
-        self.filterbyPice = function() {
+        self.filterbyPice = function () {
             var paramsRange = {};
             paramsRange.taxonomies = $stateParams.slug;
             paramsRange.isActive = 'True';
             paramsRange.pageSize = 9;
             paramsRange.page = 1;
-            paramsRange.fields = 'id,attachments,description,name,price,slug,priceList';
             paramsRange.ordering = '-createdAt';
-            paramsRange.priceList = list;
+            if (list !== '') {
+                paramsRange.fields = 'id,attachments,description,name,price,slug,priceList';
+                paramsRange.priceList = list;
+            }
+            else {
+                paramsRange.fields = 'id,attachments,description,name,price,slug';
+            }
 
-            if(self.selectFilter === '2'){
+            if (self.selectFilter === '2') {
                 paramsRange.ordering = 'price';
             }
 
-            if(self.selectFilter === '3'){
+            if (self.selectFilter === '3') {
                 paramsRange.ordering = '-price';
             }
 
@@ -722,7 +761,7 @@
                                 $state.go('shopcart')
                             }
                         });
-                    
+
                     $localStorage.items = self.items;
                 } else {
                     NotificationSrv.error("Ingresa la cantidad, para poder  agregar", item.name)
@@ -762,9 +801,9 @@
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
-    ContactCtrl.$inject = ['MessageSrv', 'NotificationSrv', '$rootScope', '$state'];
+    ContactCtrl.$inject = ['NotificationTakiSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$state'];
-    SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams'];
+    SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];

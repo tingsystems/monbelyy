@@ -177,7 +177,8 @@
             meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
-            email: 'info@moons.mx',
+            //email: 'hola@moons.mx',
+            email: 'dante@tingsystems.com',
             phone: '01 (55) 55 58 98 99'
 
         };
@@ -199,11 +200,10 @@
         });
         // init for page title
         $rootScope.pageTitle = 'Moons';
+
         function showResponsive($window) {
-            if ($window.innerWidth <= 768) {
-                return true;
-            }
-            return false;
+            return $window.innerWidth <= 768;
+
         }
 
         $rootScope.showResponsive = showResponsive($window);
