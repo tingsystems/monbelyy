@@ -28,7 +28,7 @@
         ProductSrv.get({
             taxonomies: 'productos-inicio',
             isActive: 'True',
-            pageSize: 6,
+            pageSize: 9,
             ordering: '-createdAt',
             fields: 'name,description,attachments,slug,code,taxonomy,price,id,priceList',
             priceList : list
@@ -50,6 +50,21 @@
             self.promoHome = results.results;
             //get featureImage
             angular.forEach(self.promoHome, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                console.log(obj.link)
+            });
+        });
+
+        EntrySrv.get({
+            taxonomies: 'marcas',
+            isActive: 'True',
+            pageSize: 20,
+            ordering: 'createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.brands = results.results;
+            //get featureImage
+            angular.forEach(self.brands, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 console.log(obj.link)
             });
