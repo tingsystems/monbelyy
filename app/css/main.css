@@ -1,3 +1,33 @@
+#facebook-styl iframe {
+  width: 100%;
+}
+#brands {
+  background-color: #fff;
+  padding: 30px 0;
+}
+#brands .brand {
+  height: 150px;
+  padding: 10px;
+  opacity: 0.5;
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  -ms-transition: all ease 0.5s;
+  -o-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+#brands .brand:hover {
+  opacity: 1;
+}
+.comments {
+  border: 1px solid #eee;
+  margin: 25px 0;
+  color: #555;
+  padding: 15px;
+}
+.comments h3,
+.comments label {
+  color: #555;
+}
 .hide-desk {
   display: none;
 }
@@ -80,6 +110,21 @@ body {
 }
 .go-to-shop {
   margin-top: -10px;
+}
+.alert-orange {
+  background-color: #ffa500;
+  margin: 25px 0;
+  padding: 15px;
+  border-radius: 2px;
+}
+.alert-orange h3 {
+  color: #fff;
+  font-weigh: 300;
+  font-size: 16px;
+  line-height: 22px;
+}
+.alert-orange h3 strong {
+  font-size: 20px;
 }
 .divider-main {
   margin: 15px;
@@ -2574,6 +2619,41 @@ footer .contact-sty .download-app > i:hover {
   background-size: cover;
   height: 70px;
   background-position: center;
+}
+#carousel-thumbnail .thumbnail {
+  display: block;
+  padding: 4px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  border-radius: 0;
+  border: none;
+  background-color: none;
+}
+#carousel-thumbnail .carousel-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 15%;
+  opacity: 0.5;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: none;
+}
+#carousel-thumbnail .carousel-control.left {
+  background-image: none;
+}
+#carousel-thumbnail .carousel-control.right {
+  left: auto;
+  right: 0;
+  background-image: none;
+}
+#carousel-thumbnail .carousel-control {
+  padding-top: 10.25%;
+  width: 5%;
 }
 @-moz-keyframes sk-circleBounceDelay {
   0%, 80%, 100% {

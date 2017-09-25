@@ -54,6 +54,14 @@
     <link rel="stylesheet" href="/css/main.css">
     <!-- endinject -->
     <!-- endbuild -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.10&appId=808603182547379";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 </head>
 
 <body>
@@ -64,9 +72,9 @@
     Para mejorar la experiencia..
 </p>
 <![endif]-->
-    <header class="header"> 
+    <header class="header">
         <div class="navbar-info">
-            <div class="container"> 
+            <div class="container">
                 <div class="col-sm-4 nav-info ca-phone">
                     <a href="tel:018007143764"><i class="icon ion-ios-telephone-outline"></i>  01 800 714 3764</a>
                     <a href="tel:018007143759">y  01 800 714 3759</a>
@@ -80,14 +88,14 @@
                     </form>
                 </div>
                 <div class="col-sm-4 hide-tablet">
-                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">                      
+                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">
                         <li>
                             <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
                                 <span class="qty-cart">{{ items.length }}</span>
                                 <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
                             </a>
                         </li>
-                        <li>  
+                        <li>
                             <a ui-sref="register" class="my-account btn-blue btn-sm" ng-if="!Access.isAuthenticated()">
                                 <i class="ion-ios-person"></i> Iniciar sesión
                             </a>
@@ -95,7 +103,7 @@
                         <li>
                             <div  class="dropdown ">
                                 <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="ion-ios-person"></i> {{user.username}} 
+                                    <i class="ion-ios-person"></i> {{user.username}}
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -107,14 +115,14 @@
                     </ul>
                 </div>
                 <div class="col-sm-4 hide-desk">
-                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">                      
+                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">
                         <li class="col-xs-6 col-sm-6">
                             <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
                                 <span class="qty-cart">{{ items.length }}</span>
                                 <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
                             </a>
                         </li>
-                        <li class="col-xs-6 col-sm-6">  
+                        <li class="col-xs-6 col-sm-6">
                             <a ui-sref="register" class="my-account btn-blue-clear" ng-if="!Access.isAuthenticated()">
                                 <i class="ion-ios-person"></i> Iniciar sesión
                             </a>
@@ -122,7 +130,7 @@
                         <div class="col-xs-6 col-sm-6">
                             <div  class="dropdown ">
                                 <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue-clear" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="ion-ios-person"></i> {{user.username}} 
+                                    <i class="ion-ios-person"></i> {{user.username}}
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -135,7 +143,7 @@
                 </div>
                 <div class="col-sm-3 ca-auth">
                     <ul class="list-social-media">
-                        <li><a href="http://facebook.com/MoonsEnMexico" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.facebook.com/MoonsCDMX/" target="_blank"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="https://twitter.com/MOONS_AQUARIUMS" target="_blank"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="https://www.instagram.com/moonsmexico/" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         <li><a href="https://www.youtube.com/channel/UCgJdfLAt97jVXdVlzlZNlhQ" target="_blank"><i class="fa fa-youtube"></i></a></li>
@@ -162,21 +170,21 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
 
                 <div class="collapse navbar-collapse" id="header-mainMenu">
-                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">                      
+                    <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">
                         <li>
                             <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce" ng-controller="AccessCtrl as Access">
                                 <span class="qty-cart">{{ items.length }}</span>
                                 <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
                             </a>
                         </li>
-                        <li>  
+                        <li>
                             <a ui-sref="register" class="my-account btn-blue" ng-if="!Access.isAuthenticated()">
                                 <i class="ion-ios-person"></i> Iniciar sesión
                             </a>
                         </li>
                         <li  class="dropdown">
                             <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <i class="ion-ios-person"></i> {{user.username}} 
+                                <i class="ion-ios-person"></i> {{user.username}}
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -192,10 +200,9 @@
 
                         </li>
                     </ul>
-                    
+
                 </div>
             </div>
-            <!-- /.navbar-collapse -->
         </nav>
     </header>
     <!-- end header top area -->
@@ -273,7 +280,24 @@
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
     </script>
-    <toasty></toasty>
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '342725962844328');
+        fbq('track', 'PageView');
+    </script>
+    <!--Start of Zendesk Chat Script-->
+    <script type="text/javascript">
+        window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+            d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+        _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+            $.src="https://v2.zopim.com/?57UWbcIGahudxsF0fGGc497kpCWb2TEO";z.t=+new Date;$.
+                type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+    </script>
+    <!--End of Zendesk Chat Script-->
 </body>
 
 </html>
