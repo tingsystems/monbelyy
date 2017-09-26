@@ -372,7 +372,6 @@
         self.busyPaypal = false;
         self.paypalBtn = 'Realizar pago';
         self.shipping = angular.copy($stateParams.shipping);
-        console.log(self.shipping);
 
         $localStorage.items = self.items;
         $localStorage.total = self.total;
@@ -528,12 +527,14 @@
 
         var shippingAddress = function () {
             var fieldship = 'id,address,phone,zip,cityName,neighborhood,phone,stateName';
-            var address = {};
-            AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
-                self.addresship = data;
-            }, function (error) {
-                NotificationSrv.error("Error");
-            });
+            if (self.address) {
+                AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
+                    self.addresship = data;
+                }, function (error) {
+                    NotificationSrv.error("Error");
+                });
+            }
+
         };
         shippingAddress();
 
@@ -573,7 +574,10 @@
             params.cartId = $localStorage.cart.id;
             params.warehouse = self.defaultWarehouse.id;
             params.employee = $localStorage.appData.user.id;
-            params.destination = self.addresship.id;
+            if (self.addresship) {
+                params.destination = self.addresship.id;
+            }
+
             if (params.paymentType === 8) {
                 params.orderStatus = 1;
                 params.isPaid = 0;
@@ -659,7 +663,7 @@
         }
 
         if ($stateParams.token) {
-            if ($state.current.name == 'paypal-cancel') {
+            if ($state.current.name === 'paypal-cancel') {
                 self.paypalCancel($stateParams.token);
             }
         }
