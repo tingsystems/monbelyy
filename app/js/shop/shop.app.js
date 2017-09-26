@@ -31,14 +31,17 @@
                 data: { pageTitle: 'Gracias' },
                 views: {
                     'content': {
-                        templateUrl: '/templates/shop/thanks.html',
+                        templateUrl: '/templates/shop/thanks.html'
                     }
                 }
             })
 
             .state('checkout', {
-                url: '/shipping/checkout',
+                url: '/shipping/checkout?shipping',
                 data: { pageTitle: 'Método de pago' },
+                params: {
+                    shipping: null
+                },
                 views: {
                     'content': {
                         templateUrl: '/templates/shop/checkout.html',

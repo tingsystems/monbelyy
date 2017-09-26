@@ -272,6 +272,7 @@
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
         self.params.customer = self.customer;
+        self.sendOptions = "0";
         AddressSrv.query({customer: self.customer}).$promise.then(function (data) {
             self.addresses = data;
         }, function (error) {
@@ -285,14 +286,13 @@
                 newShippingAddress();
             } else {
                 $localStorage.appData.user.address = self.address;
-                $state.go('checkout');
+                $state.go('checkout', {shipping: self.sendOptions});
             }
         };
 
         self.newShippingAddress = function () {
             var address = angular.copy(self.formData);
             var customer = {};
-            console.log(self.customer);
             CustomerSrv.get({id: self.customer}).$promise.then(function (data) {
                 customer = data;
                 //if user has not phone add the shipmet phone
@@ -311,7 +311,7 @@
                 NotificationSrv.success('Domicilio agregado correctamente');
                 self.busy = false;
                 self.formData = {};
-                $state.go('checkout');
+                $state.go('checkout', {shipping: self.sendOptions});
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
                     NotificationSrv.error(key, value);
@@ -319,6 +319,12 @@
                 });
             });
         };
+
+        self.retriveInStore = function () {
+            $state.go('checkout', {shipping: self.sendOptions});
+
+        };
+
 
         // get all the states
         self.busyState = true;
@@ -348,7 +354,6 @@
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams) {
         var self = this;
         var user = $localStorage.appData.user;
-        self.showAdress = false;
         self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -366,6 +371,8 @@
         self.shiping = true;
         self.busyPaypal = false;
         self.paypalBtn = 'Realizar pago';
+        self.shipping = angular.copy($stateParams.shipping);
+        console.log(self.shipping);
 
         $localStorage.items = self.items;
         $localStorage.total = self.total;
@@ -545,7 +552,7 @@
             //self.promoTotal = $localStorage.promoTotal;
             //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
             var coupon = '';
-            var params = {metadata: {taxInverse: false}};
+            var params = {metadata: {taxInverse: false, shipping: self.shipping}};
             if ('coupon' in $localStorage.globalDiscount) {
                 coupon = $localStorage.globalDiscount.coupon;
 
@@ -620,20 +627,20 @@
             });
         };
 
-        self.paypalSuccess = function(paymentId, token, PayerID){
+        self.paypalSuccess = function (paymentId, token, PayerID) {
             self.params = {};
             self.updateParams = {};
             self.params.id = $localStorage.orderPaypal;
             self.params.fields = 'id,customerName,metadata';
 
-            OrderSrv.get(self.params).$promise.then(function(data){
+            OrderSrv.get(self.params).$promise.then(function (data) {
                 var metadata = data.metadata;
                 metadata.payerID = PayerID;
                 self.updateParams.isPaid = 0;
                 self.updateParams.metadata = metadata;
-                OrderSrv.update({id:data.id},self.updateParams).$promise.then(function(data){
+                OrderSrv.update({id: data.id}, self.updateParams).$promise.then(function (data) {
                     //NotificationSrv.success("Actualizado");
-                }, function(error){
+                }, function (error) {
                     ErrorSrv.error(error);
                 })
             }, function (error) {
@@ -641,7 +648,7 @@
             });
         };
 
-        self.paypalCancel = function(token){
+        self.paypalCancel = function (token) {
             NotificationSrv.error('Se cancelo la venta');
         };
 
