@@ -11,9 +11,8 @@
 </div>
 <hr class="no-margin">
 <section id="content-area" class="content-blog">
-    <div class="content-pages" infinite-scroll='Product.getMorePosts(Product.slugItem)'
-         infinite-scroll-disabled='Product.busy || !Product.next || !Product.ready'>
-        <div class="container">
+    <div class="content-pages" loading-container="Product.tableParams.settings().$loading">
+        <div class="container" ng-table="Product.tableParams" show-filter="false">
             <div class="col-sm-3">
                 <div class="box-widget-white ng-scope">
                     <h4 class="widget-title-first">Filtrar por</h4>
@@ -75,14 +74,15 @@
                     </div>
                 </div>
                 <div class="alert-orange">
-                    <h3><i class="fa fa-dollar fa-4x pull-left"></i> En la compra de <strong>$2500</strong> o más el envío es gratuito
+                    <h3><i class="fa fa-dollar fa-4x pull-left"></i> En la compra de <strong>$2500</strong> o más el
+                        envío es gratuito
                         en CDMX y área metropolitana.</h3>
                 </div>
             </div>
             <div class="col-sm-9 no-padding" ng-controller="AccessCtrl as Access">
                 <h2 class="title">{{Product.categoryName}}</h2>
                 <hr>
-                <div class="col-sm-6 col-md-4" ng-repeat="product in Product.list">
+                <div class="col-sm-6 col-md-4" ng-repeat="product in $data">
                     <div class="box-prod" ng-if="!Product.isPost">
                         <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
                             <div class="bg-prod"
@@ -122,13 +122,24 @@
                         <a ui-sref="post_detail({slug: product.slug})" class="btn btn-success btn-cart">Ver más</a>
                     </div>
                 </div>
-                <div class="col-sm-12" ng-show="Product.busy">
+               <!-- <div class="col-sm-12" ng-show="Product.busy">
                     <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
                 </div>
                 <div class="col-sm-12" ng-show="!Product.busy">
-                    <h2 class="text-center no-content" ng-show="!Product.list.length">Lo sentimos no contamos con
+                    <h2 class="text-center no-content" ng-show="!$data.length">Lo sentimos no contamos con
                         contenido disponible</h2>
+                </div>-->
+
+                <div class="hide">
+                    <table>
+                        <tbody>
+                        <tr ng-repeat="order in $data">
+                            <td>{{ order.name }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
         <!--post list -->

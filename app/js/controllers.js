@@ -508,7 +508,7 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, $stateParams, $rootScope, $localStorage, $filter) {
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter) {
         var self = this;
 
         self.list = [];
@@ -565,43 +565,6 @@
             });
         }
 
-        self.getMorePosts = function (slug, page) {
-            if (self.busy || !self.next || !self.ready) {
-                console.log('no entro');
-                return;
-            }
-            if (page) {
-                self.params.page = page;
-            }
-            if (!self.changeParams) {
-                self.page += 1;
-                self.busy = true;
-                self.params.taxonomies = slug;
-                self.params.isActive = 'True';
-                self.params.pageSize = 9;
-                self.params.ordering = '-createdAt';
-                self.params.page = self.page;
-                if (list !== '') {
-                    self.params.fields = 'id,attachments,description,name,price,slug,priceList';
-                    self.params.priceList = list;
-                }
-                else {
-                    self.params.fields = 'id,attachments,description,name,price,slug';
-                }
-            }
-
-            ProductSrv.get(self.params).$promise.then(function (results) {
-                console.log(results);
-                self.list = self.list.concat(results.results);
-                self.busy = false;
-                self.next = results.next;
-                //get featureImage
-                angular.forEach(self.list, function (obj, ind) {
-                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                });
-            });
-        };
-
         self.itemInCart = function (item) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
             return !!find_item;
@@ -633,13 +596,11 @@
 
 
         self.getProductsFilter = function (obj) {
-            console.log('getProductsFilter');
             self.changeParams = true;
             if (obj) {
                 if (typeof obj === 'object') {
                     var index = self.taxonomies.indexOf(obj.slug);
                     if (index < -1) {
-                        console.log('ya esta');
                     } else {
                         self.taxonomies.push(obj.slug);
                     }
@@ -662,7 +623,6 @@
                     }
 
                 } else if (typeof obj === 'string') {
-                    console.log(obj, 'es cadena');
                     if (obj === '1') {
                         self.params.ordering = 'name';
                     }
@@ -676,33 +636,7 @@
                     }
                 }
             }
-
-
-            if (self.taxonomies.length > 0) {
-                self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
-            }
-            else {
-                self.params.taxonomies = $stateParams.slug;
-            }
-            self.params.isActive = 'True';
-            self.params.pageSize = 9;
-            self.params.page = 1;
-            if (list !== '') {
-                self.params.fields = 'id,attachments,description,name,price,slug,priceList';
-                self.params.priceList = list;
-            }
-            else {
-                self.params.fields = 'id,attachments,description,name,price,slug';
-            }
-            ProductSrv.get(self.params).$promise.then(function (results) {
-                self.list = results.results;
-                self.busy = false;
-                //get featureImage
-                angular.forEach(self.list, function (obj, ind) {
-                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                });
-            });
-
+            self.tableParams.reload();
         };
 
         self.deleteFilter = function (obj, kind) {
@@ -719,6 +653,60 @@
             self.getProductsFilter(null);
 
         };
+
+        self.getData = function (params) {
+            var sorting = '-createdAt';
+            // parser for ordering params
+            angular.forEach(params.sorting(), function (value, key) {
+                sorting = value === 'desc' ? '-' + key : key;
+            });
+            self.params.page = params.page();
+            self.params.pageSize = params.count();
+            self.busy = true;
+            if (self.taxonomies.length > 0) {
+                self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+            }
+            else {
+                self.params.taxonomies = $stateParams.slug;
+            }
+            self.params.isActive = 'True';
+            self.params.pageSize = 9;
+            if (list !== '') {
+                self.params.fields = 'id,attachments,description,name,price,slug,priceList';
+                self.params.priceList = list;
+            }
+            else {
+                self.params.fields = 'id,attachments,description,name,price,slug';
+            }
+            return ProductSrv.get(self.params).$promise.then(function (data) {
+                params.total(data.count);
+                self.busy = false;
+                angular.forEach(data.results, function (obj, ind) {
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                });
+                return data.results;
+
+            }, function (error) {
+                angular.forEach(error, function (value, key) {
+                    NotificationSrv.error(value + '' + key);
+                    self.busy = false;
+                });
+            });
+        };
+
+        self.tableParams = new NgTableParams({
+            // default params
+            page: 1, // The page number to show
+            count: 10 // The number of items to show per page
+        }, {
+            // default settings
+            // page size buttons (right set of buttons in demo)
+            counts: [],
+            // determines the pager buttons (left set of buttons in demo)
+            paginationMaxBlocks: 13,
+            paginationMinBlocks: 2,
+            getData: self.getData
+        });
 
 
     }
@@ -837,6 +825,6 @@
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage'];
-    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter'];
+    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams', '$stateParams', '$rootScope', '$localStorage', '$filter'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'SweetAlert'];
 })();
