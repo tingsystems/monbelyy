@@ -28,7 +28,8 @@
     "angular-ui-select": "0.17.0",
     "ng-table": "^1.0.0",
     "font-awesome": "^4.7.0",
-    "angular-messages": "1.4.14"
+    "angular-messages": "1.4.14",
+    "angular-material": "^1.1.5"
   },
   "overrides": {
     "bootstrap": {
