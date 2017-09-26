@@ -27,11 +27,16 @@
             })
 
             .state('thanks', {
-                url: '/thanks',
+                url: '/thanks?kind',
                 data: { pageTitle: 'Gracias' },
+                params: {
+                    kind: null
+                },
                 views: {
                     'content': {
-                        templateUrl: '/templates/shop/thanks.html'
+                        templateUrl: '/templates/shop/thanks.html',
+                        controllerAs: 'Thanks',
+                        controller: 'PurchaseCompletedCtrl'
                     }
                 }
             })

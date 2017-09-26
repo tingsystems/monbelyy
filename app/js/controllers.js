@@ -260,7 +260,8 @@
             self.busy = true;
             NotificationTakiSrv.save(self.notification).$promise.then(function (data) {
                     self.contactInitialState();
-                    NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
+                    $state.go('thanks', {kind: 1});
+                    //NotificationSrv.success('Gracias,' + ' en breve nos comunicaremos contigo');
                     // enviar al estado de gracias
                     self.busy = false;
                 },

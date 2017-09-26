@@ -817,12 +817,18 @@
                 self.purchase = data;
                 self.purchase.items = aditionalKey(self.purchase.items);
 
+            }, function (e) {
+                NotificationSrv.error('No pudimos cargar su detalle de venta, le enviaremos un correo electronico');
+
             });
-        } else {
-            NotificationSrv.error('No pudimos cargar su detalle de venta, le enviaremos un correo electronico');
+        }
+        if ($stateParams.kind) {
+            self.title = '¡Gracias por escribirnos!';
+            self.message = 'Mensaje de gracias';
         }
 
     }
+
 
 // create the module and assign controllers
     angular.module('shop.controllers', ['shop.services'])

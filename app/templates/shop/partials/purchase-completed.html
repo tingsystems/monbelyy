@@ -5,11 +5,10 @@
             <hr>
             <div class="col-md-6">
                 <p class="text-left">Gracias por tu compra en Moon's Aquariums :),
-                    Te enviamos un correo a {{ Purchase.purchase.customerEmail }},
-                    con los datos para el deposito</p>
+                    Te hemos enviamos un correo a {{ Purchase.purchase.customerEmail }}.</p>
             </div>
             <div class="col-md-6">
-                <h4>Numero de pedido: <span>{{ Purchase.order.id }}</span></h4>
+                <h4>Numero de pedido: <span>{{ Purchase.purchase.id }}</span></h4>
                 <span>Realizado el {{ Purchase.purchase.createdAt | date: 'd/M/y' }}</span>
             </div>
         </div>
@@ -81,6 +80,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="thanks">
+            <img src="img/back.png" alt="¡Vuelve pronto!">
         </div>
     </div>
 </div>
