@@ -29,7 +29,7 @@
         var paramsProducts = {};
         paramsProducts.taxonomies = 'productos-inicio';
         paramsProducts.isActive = 'True';
-        paramsProducts.pageSize = 6;
+        paramsProducts.pageSize = 9;
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList';

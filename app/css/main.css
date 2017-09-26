@@ -14,6 +14,7 @@
   -ms-transition: all ease 0.5s;
   -o-transition: all ease 0.5s;
   transition: all ease 0.5s;
+  cursor: pointer;
 }
 #brands .brand:hover {
   opacity: 1;
@@ -1967,7 +1968,8 @@ footer .contact-sty .download-app > i:hover {
   border-radius: 2px;
 }
 .btn-orange:hover,
-.btn-orange:focus {
+.btn-orange:focus,
+.btn-orange:active {
   border: 1px solid #bc5508;
   background: #bc5508;
   display: inline-block;
@@ -2620,40 +2622,21 @@ footer .contact-sty .download-app > i:hover {
   height: 70px;
   background-position: center;
 }
-#carousel-thumbnail .thumbnail {
-  display: block;
-  padding: 4px;
-  margin-bottom: 20px;
-  line-height: 1.42857143;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-  border-radius: 0;
-  border: none;
-  background-color: none;
-}
-#carousel-thumbnail .carousel-control {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 15%;
-  opacity: 0.5;
-  font-size: 20px;
-  color: #fff;
+.thanks {
   text-align: center;
-  text-shadow: none;
 }
-#carousel-thumbnail .carousel-control.left {
-  background-image: none;
+.thanks h1 {
+  color: #ffa500;
 }
-#carousel-thumbnail .carousel-control.right {
-  left: auto;
-  right: 0;
-  background-image: none;
+.thanks p {
+  color: #555;
+  font-size: 18px;
 }
-#carousel-thumbnail .carousel-control {
-  padding-top: 10.25%;
-  width: 5%;
+.thanks p a {
+  color: #555;
+}
+.thanks img {
+  width: 400px;
 }
 @-moz-keyframes sk-circleBounceDelay {
   0%, 80%, 100% {

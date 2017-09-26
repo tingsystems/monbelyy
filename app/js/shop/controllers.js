@@ -348,6 +348,8 @@
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams) {
         var self = this;
         var user = $localStorage.appData.user;
+        self.showAdress = false;
+        self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
         self.formDataPay = {};

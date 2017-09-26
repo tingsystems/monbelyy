@@ -23,6 +23,7 @@ monsyellow = #ffa500
     -ms-transition: all ease .5s
     -o-transition: all ease .5s
     transition: all ease .5s
+    cursor pointer
     &:hover
       opacity 1
 
@@ -1648,7 +1649,7 @@ footer
   -o-transition all ease 0.1s
   transition all ease 0.1s
   border-radius 2px
-  &:hover, &:focus
+  &:hover, &:focus, &:active
     border 1px solid #BC5508
     background #BC5508
     display inline-block
@@ -2228,44 +2229,18 @@ footer
   background-size cover
   height 70px
   background-position center
-#carousel-thumbnail
-  .thumbnail {
-    display: block;
-    padding: 4px;
-    margin-bottom: 20px;
-    line-height: 1.42857143;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    border-radius: 0;
-    border: none;
-    background-color: none;
-  }
 
-  .carousel-control {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 15%;
-    opacity: .5;
-    font-size: 20px;
-    color: #fff;
-    text-align: center;
-    text-shadow: none;
-  }
-  .carousel-control.left {
-    background-image: none;
-  }
-  .carousel-control.right {
-    left: auto;
-    right: 0;
-    background-image: none;
-  }
-
-  .carousel-control {
-    padding-top:10.25%;
-    width:5%;
-  }
+.thanks
+  text-align center
+  h1
+    color orange
+  p
+    color #555
+    font-size 18px
+    a
+      color #555
+  img
+    width 400px
 
 
 

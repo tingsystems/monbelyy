@@ -25,6 +25,17 @@
                     }
                 }
             })
+
+            .state('thanks', {
+                url: '/thanks',
+                data: { pageTitle: 'Gracias' },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/thanks.html',
+                    }
+                }
+            })
+
             .state('checkout', {
                 url: '/shipping/checkout',
                 data: { pageTitle: 'Método de pago' },
