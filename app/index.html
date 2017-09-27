@@ -32,10 +32,11 @@
     <meta property="og:description" content="{{ post.excerpt }}" ng-if="post" />
     <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://moons.desarrollapps.com{{ $state.href($state.current.name) }}" />
+    <meta property="og:url" content="http://moons.mx{{ $state.href($state.current.name) }}" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" />
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.14/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.14/angular-aria.js"></script>
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/animate.css/animate.css" />
@@ -64,7 +65,7 @@
     }(document, 'script', 'facebook-jssdk'));</script>
 </head>
 
-<body>
+<body ng-cloak>
     <!--[if	lt	IE	8]>
 <p class="browsehappy">
     Estás usando un navegador <strong>desactualizado</strong>.
@@ -221,7 +222,6 @@
     <!-- build:js js/vendor.min.js -->
     <!-- bower:js -->
     <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-resource/angular-resource.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="lib/angular-sanitize/angular-sanitize.js"></script>
@@ -245,7 +245,6 @@
     <script src="lib/angular-ui-select/dist/select.js"></script>
     <script src="lib/ng-table/dist/ng-table.js"></script>
     <script src="lib/angular-messages/angular-messages.js"></script>
-    <script src="lib/angular-aria/angular-aria.js"></script>
     <script src="lib/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
