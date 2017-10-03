@@ -152,7 +152,7 @@
 
         self.setPassword = function () {
             self.busy = true;
-            if (self.formData.password2 != self.formData.password) {
+            if (self.formData.password2 !== self.formData.password) {
                 NotificationSrv.error('Las contraseñas no coinciden');
                 return;
             }
