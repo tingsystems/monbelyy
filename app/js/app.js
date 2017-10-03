@@ -177,8 +177,7 @@
             meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
-            //email: 'hola@moons.mx',
-            email: 'dante@tingsystems.com',
+            email: 'hola@moons.mx',
             phone: '01 (55) 55 58 98 99'
 
         };
