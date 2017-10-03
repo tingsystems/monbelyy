@@ -144,7 +144,7 @@
                 }
             })
             .state('new-password', {
-                url: '/account/new/password',
+                url: '/account/new/password/:token',
                 data: {
                     pageTitle: 'Reestablecer contraseña - Moons'
                 },
