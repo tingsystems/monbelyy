@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -140,7 +140,7 @@
         blockUIConfig.message = 'Cargando...';
 
         // Change the default delay to 100ms before the blocking is visible
-        blockUIConfig.delay = 100;
+        blockUIConfig.delay = 0;
 
         // Set interceptor
         $httpProvider.interceptors.push('HttpInterceptor');
@@ -161,7 +161,7 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         //$rootScope.host = 'http://api.moons.mx';
-        $rootScope.host = 'http://api.moons.mx';
+        $rootScope.host = 'http://192.168.1.79';
         $rootScope.hostAnnalise = 'http://api.moons.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';

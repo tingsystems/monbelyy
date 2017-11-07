@@ -104,9 +104,9 @@
                 return '#host#/api/{{apiShop}}/auth/';
             },
             shop: function () {
-                return '#host#/api/{{apiShop}}/'
+                return '#host#/api/{{apiShop}}/';
             }
-        }
+        };
     }
 
     function RegisterSrv($resource, BaseUrlAuth) {
