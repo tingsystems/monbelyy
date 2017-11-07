@@ -99,9 +99,9 @@
                         allowTransparency="true"></iframe>
             </div>
             <div id="twitter-styl" class="col-md-12">
-                <a class="twitter-timeline" data-height="400" href="https://twitter.com/MOONS_AQUARIUMS">Tweets by
+                <a class="twitter-timeline" data-height="400" href="https://twitter.com/MOONS_AQUARIUMS?ref_src=twsrc%5Etfw">Tweets by
                     MOONS_AQUARIUMS</a>
-                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             <div class="comments col-sm-12" ng-controller="ContactCtrl as Contact">
                 <h3>¿Tienes dudas?</h3>
@@ -166,7 +166,8 @@
 <div id="brands">
     <div class="container">
         <div ng-repeat="brand in Home.brands" class="item col-sm-2 col-xs-6">
-            <a target="_blank" href="{{ brand.link}}"><img class="brand" src="{{ brand.featuredImage.url }}" alt="{{ brand.title }}"></a>
+            <a target="_blank" href="{{ brand.link}}"><img class="brand" src="{{ brand.featuredImage.url }}"
+                                                           alt="{{ brand.title }}"></a>
         </div>
     </div>
 </div>
