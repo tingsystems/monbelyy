@@ -165,9 +165,9 @@
 <!-- Set up your HTML -->
 <div id="brands">
     <div class="container">
-        <div ng-repeat="brand in Home.brands" class="item col-sm-2 col-xs-6"><img class="brand"
-                                                                         src="{{ brand.featuredImage.url }}"
-                                                                         alt="{{ brand.title }}"></div>
+        <div ng-repeat="brand in Home.brands" class="item col-sm-2 col-xs-6">
+            <a target="_blank" href="{{ brand.link}}"><img class="brand" src="{{ brand.featuredImage.url }}" alt="{{ brand.title }}"></a>
+        </div>
     </div>
 </div>
 
