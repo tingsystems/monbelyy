@@ -8,7 +8,7 @@
                 return '#hostAnnalise#/api/{{apiV}}/';
             },
             shop: function(){
-                return '#host#/api/{{apiShop}}/public/'
+                return '#host#/api/{{apiShop}}/public/';
             }
 
         };
