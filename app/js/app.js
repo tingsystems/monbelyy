@@ -160,8 +160,8 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'http://api.moons.mx';
-        //$rootScope.host = 'http://192.168.1.79';
+        //$rootScope.host = 'http://api.moons.mx';
+        $rootScope.host = 'http://192.168.43.42';
         $rootScope.hostAnnalise = 'http://api.moons.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
