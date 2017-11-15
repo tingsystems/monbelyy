@@ -641,6 +641,7 @@ header {
 #content-area {
   margin: 0;
   padding: 50px 25px 70px;
+  background-color: #f5f5f5;
 }
 #content-area .title-category {
   text-align: left;
@@ -2640,6 +2641,34 @@ footer .contact-sty .download-app > i:hover {
 }
 .thanks img {
   width: 400px;
+}
+#purchase-payment {
+  background-color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#purchase-payment .purchase-head {
+  padding-bottom: 15px;
+}
+@media print {
+  header,
+  footer,
+  #footer-top,
+  .thanks,
+  button,
+  .btn,
+  .btn-blue,
+  .wh-widget-send-button-wrapper {
+    display: none;
+    margin: 0;
+  }
+  #wh-widget-send-button iframe,
+  .btn-inv {
+    display: none;
+  }
+  .content {
+    margin: 0;
+  }
 }
 @-moz-keyframes sk-circleBounceDelay {
   0%, 80%, 100% {
