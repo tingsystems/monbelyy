@@ -165,7 +165,7 @@
         $rootScope.hostAnnalise = 'http://api.moons.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
-        $rootScope.siteId = '622a3b57-c996-4b1a-aa98-d8474a9a6db3';
+        $rootScope.siteId = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
         $http.defaults.headers.common['PROJECT-ID'] = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
 
         $rootScope.$on('$locationChangeSuccess', function () {
@@ -331,7 +331,7 @@
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI',
         'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app',
-        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial', 'angulartics.google.analytics'])
+        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)

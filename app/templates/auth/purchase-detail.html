@@ -1,13 +1,13 @@
 <div class="content-dashboard">
     <div class="container">
-        
+
         <div class="col-md-3">
             <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
         </div>
         <div class="col-md-9">
             <h3 class="info2"><i class="ion-ios-list-outline"></i> Detalle de la compra</h3>
             <hr>
-             <div class="row label-status">
+            <div class="row label-status">
                 <div class="col-xs-2 col-md-1">
                     <h4>
                         <span ng-if="Purchase.purchase.paymentType == 3" class="label label-sm bg-paypal">
@@ -34,34 +34,19 @@
                         </span>
                     </h4>
                 </div>
-                <!--<div class="col-md-1">
-                    <h4>
-                        <span ng-if="Purchase.purchase.orderStatus == 0" class="label label-sm bg-primary">
-                            {{ Purchase.purchase.purchaseStatusName }}
-                    </span>
-                        <span ng-if="Purchase.purchase.orderStatus == 1" class="label label-sm bg-war">
-                            {{ Purchase.purchase.orderStatusName }}
-                    </span>
-                        <span ng-if="Purchase.purchase.orderStatus == 2" class="label label-sm bg-default">
-                            {{ Purchase.purchase.orderStatusName}}
-                    </span>
-                        <span ng-if="Purchase.purchase.orderStatus == 3" class="label label-sm bg-default">
-                            {{ Purchase.purchase.orderStatusName}}
-                    </span>
-                        <span ng-if="Purchase.purchase.orderStatus == 4" class="label label-sm bg-green">
-                            {{ Purchase.purchase.orderStatusName}}
-                    </span>
-                        <span ng-if="Purchase.purchase.orderStatus == 5" class="label label-sm bg-war">
-                            {{ Purchase.purchase.orderStatusName}}
-                    </span>
-                        <span ng-if="Purchase.purchase.orderStatus == 6" class="label label-sm bg-danger">
-                            {{ Purchase.purchase.orderStatusName}}
-                    </span>
-                        <span ng-if="Purchase.purchase.orderStatus == 8" class="label label-sm bg-orange">
-                            {{ Purchase.purchase.orderStatusName}}
-                    </span>
-                    </h4>
-                </div>-->
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <a ng-if="Purchase.voucher.url" href="{{Purchase.voucher.url}}" target="_blank">Ver comprobante de pago cargado</a>
+                    <input type="file" ngf-select="Purchase.uploadFile()" ng-model="Purchase.voucher" name="file"
+                           ngf-pattern="'.pdf,image/*'"
+                           ngf-accept="'image/*,.pdf'"
+                           ngf-max-size="20MB" style="margin-bottom: 15px; margin-top: 15px;"/>
+                    <i class="text-danger" ng-show="Entry.postForm.file.$error.maxSize">Tamaño maximo de archivo
+                        20MB</i>
+
+                </div>
+
             </div>
             <div class="col-md-12 text-center dash-footer">
                 <div class="col-md-3 item">
