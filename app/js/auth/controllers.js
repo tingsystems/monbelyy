@@ -97,7 +97,7 @@
         self.createAccount = function () {
             var account = angular.copy(self.formData);
             self.busy = true;
-            console.log(account);
+            account.email = account.contactPersonEmail;
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a Moon's Aquariums");
                 self.busy = false;

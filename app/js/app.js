@@ -161,7 +161,7 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'http://api.moons.mx';
-        //$rootScope.host = 'http://192.168.1.79';
+        //$rootScope.host = 'http://192.168.43.42';
         $rootScope.hostAnnalise = 'http://api.moons.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
@@ -177,8 +177,7 @@
             meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
-            //email: 'hola@moons.mx',
-            email: 'dante@tingsystems.com',
+            email: 'hola@moons.mx',
             phone: '01 (55) 55 58 98 99'
 
         };

@@ -560,7 +560,7 @@
                 params.coupon = coupon;
             }
             params.kind = 'order';
-            params.orderStatus = 1;
+            params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
             params.paymentType = parseInt(self.orderPaymentType);
             params.isPaid = 2;
             params.itemCount = self.itemCount;
@@ -579,18 +579,18 @@
             }
 
             if (params.paymentType === 8) {
-                params.orderStatus = 1;
+                params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
                 params.isPaid = 0;
                 params.token = token.id;
             }
 
             if (params.paymentType === 6) {
-                params.orderStatus = 1;
+                params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
                 params.isPaid = 2;
             }
 
             if (params.paymentType === 3) {
-                params.orderStatus = 1;
+                params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
                 params.isPaid = 2;
             }
 
@@ -657,7 +657,7 @@
         };
 
         if ($stateParams.paymentId && $stateParams.token && $stateParams.PayerID) {
-            if ($state.current.name == 'paypal-success') {
+            if ($state.current.name === 'paypal-success') {
                 self.paypalSuccess($stateParams.paymentId, $stateParams.token, $stateParams.PayerID);
             }
         }
@@ -712,7 +712,7 @@
             //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
             var params = {metadata: {taxInverse: false}};
             params.kind = 'order';
-            params.orderStatus = 0;
+            params.status = '412a2c2a-34a5-4986-9059-adafa9af5250';
             params.paymentType = 0;
             params.isPaid = 2;
             params.itemCount = self.itemCount;

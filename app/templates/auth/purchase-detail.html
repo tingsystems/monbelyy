@@ -35,7 +35,7 @@
                     </h4>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-if="Purchase.purchase.paymentType === 6">
                 <div class="col-md-6">
                     <a ng-if="Purchase.voucher.url" href="{{Purchase.voucher.url}}" target="_blank">Ver comprobante de pago cargado</a>
                     <input type="file" ngf-select="Purchase.uploadFile()" ng-model="Purchase.voucher" name="file"
@@ -46,7 +46,6 @@
                         20MB</i>
 
                 </div>
-
             </div>
             <div class="col-md-12 text-center dash-footer">
                 <div class="col-md-3 item">

@@ -26,7 +26,8 @@ monsyellow = #ffa500
     cursor pointer
     &:hover
       opacity 1
-
+.type-payment
+  padding-left 10px
 .comments
   border 1px solid #eee
   margin 25px 0
@@ -551,6 +552,7 @@ header
 #content-area
   margin 0
   padding 50px 25px 70px
+  background-color #f5f5f5
   .title-category
     text-align left
     color #746857
@@ -2242,5 +2244,19 @@ footer
   img
     width 400px
 
+#purchase-payment
+  background-color white
+  padding-top 20px
+  padding-bottom 20px
+  .purchase-head
+    padding-bottom 15px
 
+@media print
+  header, footer, #footer-top, .thanks, button, .btn, .btn-blue, .wh-widget-send-button-wrapper
+    display none
+    margin 0
+  #wh-widget-send-button iframe, .btn-inv
+    display none
+  .content
+    margin 0
 
