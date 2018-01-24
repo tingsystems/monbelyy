@@ -1,4 +1,4 @@
-<div id="section-prom">
+<div id="section-prom" class="container">
     <div id="carouse-principal" class="carousel slide">
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
@@ -13,128 +13,10 @@
         </div>
     </div>
 </div>
-<!-- sidebar float promo -->
-<div ng-class="{'sidebar-open' : visible }">
-    <div class="sidebar">
-        <button class="btn btn-primary btn-offers" ng-click="toggleSidebar()">%</button>
-        <div id="body-sidebar" class="container-fluid">
-            <div class="col-md-12 box-sidebar-promotions" ng-repeat="promo in Home.promoCoHome">
-                <div class="col-md-4">
-                    <a ui-sref="post_detail({slug:promo.slug})">
-                        <div class="img-promo-bg" style="background-image: url('{{ promo.featuredImage.url }}')"></div>
-                    </a>
-                </div>
-                <div class="col-md-8 no-pd-l">
-                    <a ui-sref="post_detail({slug:promo.slug})"><h5>{{ promo.title }}</h5></a>
-                    <a ui-sref="post_detail({slug:promo.slug})" href=""><p>{{ promo.excerpt }}</p></a>
-                    <a ui-sref="post_detail({slug:promo.slug})">
-                        <small>Ver más <i class="fa fa-angle-right"></i></small>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<section class="products">
-    <div class="container">
-        <div class="row text-center">
-            <div class="prod-title">
-                <h3>Conoce nuestros productos</h3>
-            </div>
-            <div class="prod-entry">
-                <p> Nosotros creamos un ambiente saludable, amigable, y funcional tanto en la industria <br> como
-                    en el hogar para nuestros animales de compañía.</p>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <div class="box-products" ng-controller="ShoppingCtrl as Shop">
-                <div class="row text-center">
-                    <div class="col-sm-6 col-md-4" ng-repeat="product in Home.products">
-                        <div class="box-prod" ng-controller="AccessCtrl as Access">
-                            <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
-                                <div class="bg-prod"
-                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
-                            </a>
-                            <div class="box-container no-padding container-fluid">
-                                <div class="col-sm-12 no-pd-l text-center">
-                                    <p>{{product.name}}</p>
-                                    <h4 ng-if="Access.isAuthenticated()">{{ product.price | currency }}</h4>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="container-fluid no-padding">
-                                <div class="no-pd-l" ng-class="Access.isAuthenticated() ? 'col-xs-6': 'col-xs-12'">
-                                    <a class="btn btn-gray-clear btn-block"
-                                       ui-sref="product-detail({slug:product.slug})">Ver más</a>
-                                </div>
-                                <div class="col-xs-6 no-pd-r">
-                                    <button class="btn btn-orange btn-block"
-                                            ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
-                                             name: product.name, price: product.price, qty: 1,
-                                             taxonomies : product.taxonomies}, 1)"
-                                            ng-disabled="Shop.itemInCart(product)" ng-if="Access.isAuthenticated()">
-                                        Comprar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-3">
-            <div class="col-md-12 no-padding">
-                <div class="alert-orange">
-                    <h3><i class="fa fa-dollar fa-4x pull-left"></i> En la compra de <strong>$2500</strong> o más el
-                        envío es gratuito
-                        en CDMX y área metropolitana.</h3>
-                </div>
-            </div>
-            <div id="facebook-styl" class="col-md-12 no-padding">
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMoonsCDMX%2F&tabs=timeline&width=300&height=400&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=510283729125304"
-                        width="250" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-                        allowTransparency="true"></iframe>
-            </div>
-            <div id="twitter-styl" class="col-md-12">
-                <a class="twitter-timeline" data-height="400" href="https://twitter.com/MOONS_AQUARIUMS?ref_src=twsrc%5Etfw">Tweets by
-                    MOONS_AQUARIUMS</a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-            <div class="comments col-sm-12" ng-controller="ContactCtrl as Contact">
-                <h3>¿Tienes dudas?</h3>
-                <form ng-submit="Contact.createNotification('CONTACT_FORM')">
-                    <div class="form-group">
-                        <label for="name"><i class="fa fa-user"></i> Nombre</label>
-                        <input type="text" id="name" class="form-control" placeholder="Nombre"
-                               ng-model="Contact.notification.name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="mobil"><i class="fa fa-whatsapp"></i> Whatsapp</label>
-                        <input type="text" name="mobil" id="mobil" class="form-control" placeholder="Whatsapp"
-                               ng-model="Contact.notification.phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="city"><i class="fa fa-map-marker"></i> Ciudad</label>
-                        <input type="text" name="city" id="city" class="form-control" placeholder="Ciudad" required
-                               ng-model="Contact.notification.city">
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" name="message" id="message" placeholder="Mensaje"
-                                  required ng-model="Contact.notification.message"></textarea>
-                    </div>
-                    <button class="btn-orange btn-block" type="submit"><i class="fa fa-envelope"></i> Enviar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
 
 <div id="section-promo">
     <div class="container">
-        <div class="col-sm-4 item-promo" ng-repeat="promo in Home.promoHome">
+        <div class="col-sm-6 item-promo" ng-repeat="promo in Home.promoHome">
             <div class="box-image-promo">
                 <a post-link="{ link: {url: promo.link, target: '_self'} }">
                     <img src="{{ promo.featuredImage.url }}" alt="Promotions">
@@ -143,34 +25,73 @@
         </div>
     </div>
 </div>
-<section id="news">
+
+<section class="products">
     <div class="container">
-        <h2 class="text-center">
-            Noticias
-        </h2>
-        <br>
-        <div class="col-sm-3" ng-repeat="news in Home.newsHome">
-            <div class="box-blog-home">
-                <div class="box-img-bg"
-                     style="background-image: url('{{news.featuredImage.url ? news.featuredImage.url : initConfig.img_default}}')"></div>
-                <div class="box-title">
-                    <h3>{{ news.title }}</h3>
+        <div class="row text-center">
+            <div class="prod-title">
+                <h1>Lo más nuevo</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="box-products" ng-controller="ShoppingCtrl as Shop">
+            <div class="row text-center">
+                <div class="col-sm-4 col-md-3" ng-repeat="product in Home.products">
+                    <div class="box-prod" ng-controller="AccessCtrl as Access">
+                        <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
+                            <div class="bg-prod"
+                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                        </a>
+                        <div class="box-container no-padding container-fluid">
+                            <div class="col-sm-12 no-pd-l text-center">
+                                <p>{{product.name}}</p>
+                                <h4>{{ product.price | currency }}</h4>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="container-fluid no-padding">
+                            <div class="no-pd-l col-xs-6">
+                                <a class="btn btn-gray-clear btn-block"
+                                   ui-sref="product-detail({slug:product.slug})">Ver más</a>
+                            </div>
+                            <div class="col-xs-6 no-pd-r">
+                                <button class="btn btn-orange btn-block"
+                                        ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
+                                             name: product.name, price: product.price, qty: 1,
+                                             taxonomies : product.taxonomies}, 1)"
+                                        ng-disabled="Shop.itemInCart(product)">
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <a ui-sref="post_detail({slug:news.slug})" class="btn-orange btn-block">Leer más <i
-                        class="fa fa-angle-right pull-right"></i></a>
             </div>
         </div>
     </div>
 </section>
-<!-- Set up your HTML -->
+
 <div id="brands">
-    <div class="container">
-        <div ng-repeat="brand in Home.brands" class="item col-sm-2 col-xs-6">
-            <a target="_blank" href="{{ brand.link}}"><img class="brand" src="{{ brand.featuredImage.url }}"
-                                                           alt="{{ brand.title }}"></a>
+    <div class="container text-center">
+        <div class="prod-title">
+            <h1>Patrocinadores</h1>
+            <hr>
         </div>
+        <div class="owl-carousel owl-theme">
+            <div class="brands" ng-repeat="brand in Home.brands" ng-repeat-owl-carousel
+                 carousel-init="Home.carouselInitializer" ng-if="brand">
+                <div class="item">
+                    <a ui-sref="post_detail({slug: brand.slug})">
+                        <img class="img-brand"src="{{ brand.featuredImage.url }}"alt="{{ brand.title }}">
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+
 
 
 

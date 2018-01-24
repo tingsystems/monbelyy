@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: 'Moons'},
+                data: {pageTitle: 'Guaumart'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Moons'},
+                data: {pageTitle: 'Guaumart'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -109,7 +109,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'Moons'},
+                data: {pageTitle: 'Guaumart'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Moons'},
+                data: {pageTitle: 'Guaumart'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -160,13 +160,13 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'http://api.moons.mx';
+        $rootScope.host = 'https://mercadomovil.com.mx';
         //$rootScope.host = 'http://192.168.43.42';
-        $rootScope.hostAnnalise = 'http://api.moons.mx';
-        $rootScope.apiV = 'v2';
-        $rootScope.apiShop = 'v1';
+        $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
+        $rootScope.apiV = 'v1';
+        $rootScope.apiShop = 'v3';
         $rootScope.siteId = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
-        $http.defaults.headers.common['PROJECT-ID'] = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
+        $http.defaults.headers.common['PROJECT-ID'] = 'bcfad72f-9e31-47d4-9dbd-c419907224fe';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -189,7 +189,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Moons',
+                'title': 'Guaumart',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -198,7 +198,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Moons';
+        $rootScope.pageTitle = 'Guaumart';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -213,7 +213,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'ac3a5d0e-9faa-475b-adbe-9f91be15b92f',
+                parent: 'daa177e5-d3e9-48ec-b8a0-764b3ff5dd8b',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -221,6 +221,7 @@
             }, function (error) {
             });
         }
+        /*
 
         if (!$rootScope.NavMenuSocial) {
             TaxonomySrv.query({
@@ -233,13 +234,13 @@
             });
         }
 
-        if (!$rootScope.footerNavMenuConact) {
+        if (!$rootScope.information) {
             TaxonomySrv.query({
                 parent: 'a0734bc0-6325-4f4a-b6cf-f8181db71e12',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
-                $rootScope.footerNavMenuConact = response;
+                $rootScope.information = response;
             }, function (error) {
             });
         }
@@ -253,10 +254,11 @@
             }, function (error) {
             });
         }
+        */
 
         if (!$rootScope.contactMenuData) {
             EntrySrv.get({
-                taxonomies: 'contactanos',
+                taxonomies: 'datos-de-contacto1516809822',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: '-createdAt',
@@ -265,6 +267,31 @@
                 $rootScope.contactMenuData = results.results;
             });
         }
+
+        if (!$rootScope.information) {
+            EntrySrv.get({
+                taxonomies: 'informacion1516811553',
+                isActive: 'True',
+                pageSize: 5,
+                ordering: '-createdAt',
+                fields: 'title,link,excerpt,content,slug'
+            }).$promise.then(function (results) {
+                $rootScope.information = results.results;
+            });
+        }
+
+        if (!$rootScope.socialMedia) {
+            EntrySrv.get({
+                taxonomies: 'redes-sociales1516810771',
+                isActive: 'True',
+                pageSize: 5,
+                ordering: '-createdAt',
+                fields: 'title,link,excerpt,content'
+            }).$promise.then(function (results) {
+                $rootScope.socialMedia = results.results;
+            });
+        }
+
 
         $rootScope.ecommerce = true;
 
@@ -330,7 +357,7 @@
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI',
         'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app',
-        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload'])
+        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'angular-elevate-zoom', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)

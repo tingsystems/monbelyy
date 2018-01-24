@@ -5,7 +5,7 @@
         $stateProvider
             .state('register', {
                 url: '/login',
-                data: {pageTitle: 'Moons'},
+                data: {pageTitle: 'Guaumart'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
@@ -16,7 +16,7 @@
             })
             .state('success', {
                 url: '/account/success',
-                data: {pageTitle: 'Moons'},
+                data: {pageTitle: 'Guaumart'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/validate_account.html'
@@ -25,7 +25,7 @@
             })
             .state('validate', {
                 url: '/validate/:token',
-                data: {pageTitle: 'Moons'},
+                data: {pageTitle: 'Guaumart'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/account_activated.html',
@@ -38,7 +38,7 @@
                 url: '/account/dashboard',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Moons'
+                    pageTitle: 'Guaumart'
                 },
                 views: {
                     'content': {
@@ -78,7 +78,7 @@
                 url: '/account/profile',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Perfil - Moons'
+                    pageTitle: 'Perfil - Guaumart'
                 },
                 views: {
                     'content': {
@@ -92,7 +92,7 @@
                 url: '/account/addresses',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Moons'
+                    pageTitle: 'Direcciones - Guaumart'
                 },
                 views: {
                     'content': {
@@ -106,7 +106,7 @@
                 url: '/account/address',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Moons'
+                    pageTitle: 'Direcciones - Guaumart'
                 },
                 views: {
                     'content': {
@@ -120,7 +120,7 @@
                 url: '/account/address/update/:id',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Moons'
+                    pageTitle: 'Direcciones - Guaumart'
                 },
                 views: {
                     'content': {
@@ -133,7 +133,7 @@
             .state('recovery-password', {
                 url: '/account/recovery/password',
                 data: {
-                    pageTitle: 'Recuperar contraseña - Moons'
+                    pageTitle: 'Recuperar contraseña - Guaumart'
                 },
                 views: {
                     'content': {
@@ -146,7 +146,7 @@
             .state('new-password', {
                 url: '/account/new/password/:token',
                 data: {
-                    pageTitle: 'Reestablecer contraseña - Moons'
+                    pageTitle: 'Reestablecer contraseña - Guaumart'
                 },
                 views: {
                     'content': {

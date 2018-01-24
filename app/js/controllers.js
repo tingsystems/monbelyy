@@ -4,7 +4,7 @@
     function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Moons Aquariums';
+        $rootScope.pageTitle = 'Guaumart';
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
 
@@ -13,7 +13,7 @@
         };
 
         EntrySrv.get({
-            taxonomies: 'slider1497888818',
+            taxonomies: 'slider1516747949',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -49,9 +49,9 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'promocion',
+            taxonomies: 'promociones1516750451',
             isActive: 'True',
-            pageSize: 20,
+            pageSize: 2,
             ordering: 'createdAt',
             fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
@@ -63,11 +63,11 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'marcas',
+            taxonomies: 'patrocinadores',
             isActive: 'True',
-            pageSize: 20,
-            ordering: 'createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
+            pageSize: 8,
+            ordering: '-createdAt',
+            fields: 'title,content,attachments,slug,excerpt'
         }).$promise.then(function (results) {
             self.brands = results.results;
             //get featureImage
@@ -76,20 +76,38 @@
             });
         });
 
-        EntrySrv.get({
-            taxonomies: 'promociones-y-cupones',
-            isActive: 'True',
-            pageSize: 20,
-            ordering: 'createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.promoCoHome = results.results;
-            //get featureImage
-            angular.forEach(self.promoCoHome, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+        /* Carousel */
+        self.carouselInitializer = function () {
+            $(".owl-carousel").owlCarousel({
+                //get items to proportionate num of items
+                //items: 4,
+                navigation: true,
+                //pagination: false,
+                autoplay: true,
+                items: 2,
+                loop: true,
+                margin: 10,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 3,
+                        nav: false
+                    },
+                    1000: {
+                        items: 4,
+                        nav: true,
+                        loop: false
+                    }
+                }
             });
-        });
+        }
 
+
+        /*
         EntrySrv.get({
             taxonomies: 'ultimas-noticias',
             isActive: 'True',
@@ -102,7 +120,7 @@
             angular.forEach(self.newsHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
-        });
+        });*/
 
     }
 
@@ -124,7 +142,7 @@
             }).$promise.then(function (results) {
                 if (results.results) {
                     self.categoryName = results.results[0].name;
-                    $rootScope.pageTitle = self.categoryName + ' - Moons';
+                    $rootScope.pageTitle = self.categoryName + ' - Guaumart';
                 }
             });
         }
@@ -198,12 +216,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Moons';
+        $rootScope.pageTitle = 'Blog - Guaumart';
     }
 
     function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Moons';
+        $rootScope.pageTitle = 'Guaumart';
 
         self.busy = true;
         EntrySrv.get({
@@ -223,7 +241,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.title + ' - Moons';
+            $rootScope.pageTitle = results.title + ' - Guaumart';
             self.busy = false;
         });
     }
@@ -231,9 +249,9 @@
     function ContactCtrl(NotificationTakiSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name === 'home') {
-            $rootScope.pageTitle = 'Moons';
+            $rootScope.pageTitle = 'Guaumart';
         } else if ($state.current.name === 'contact') {
-            $rootScope.pageTitle = 'Contacto - Moons';
+            $rootScope.pageTitle = 'Contacto - Guaumart';
         }
 
         self.contactInitialState = function () {
@@ -476,7 +494,7 @@
 
     function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage) {
         var self = this;
-        $rootScope.pageTitle = 'Moons';
+        $rootScope.pageTitle = 'Guaumart';
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         var paramsProducts = {};
@@ -503,7 +521,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.name + ' - Moons';
+            $rootScope.pageTitle = results.name + ' - Guaumart';
             self.busy = false;
         });
 
@@ -542,7 +560,7 @@
                     self.categoryName = results.name;
                     self.categoryId = results.id;
                     self.category = results;
-                    $rootScope.pageTitle = self.categoryName + ' - Moons';
+                    $rootScope.pageTitle = self.categoryName + ' - Guaumart';
                 }
                 ProductTaxonomySrv.query({
                     parent: results.id,
