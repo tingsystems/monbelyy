@@ -8,14 +8,16 @@ from fabric.contrib.files import exists
 # config ssh
 
 env.use_ssh_config = True
-env.hosts = ['ts-21']
-remote_user = 'moons-www'
+env.hosts = ['ts-24']
+remote_user = 'guaumart'
 remote_path = '/home/' + remote_user + '/www/'
 dist_dir = 'dist/'
 tar_file = 'dist.tar.gz'
 path_file_local = os.getcwd() + '/' + tar_file
 path_upload_file_server = remote_path + 'dist'
 remote_tar_file = remote_path + tar_file
+delete_old_js_path = remote_path + 'dist/js/*'
+delete_old_css_path = remote_path + 'dist/css/*'
 
 
 def update():
@@ -35,4 +37,8 @@ def update():
         run('chown -R %s:%s %s' % (remote_user, remote_user, path_upload_file_server))
         # remove dist.tar.gz
         run('rm %s%s ' % (remote_path, tar_file))
+        run('find %s -mtime +1  ' % delete_old_js_path)
+        run('find %s -mtime +1  ' % delete_old_css_path)
+        run("find %s -mtime +1  -exec rm {} \\;" % delete_old_js_path, shell=True)
+        run("find %s -mtime +1  -exec rm {} \\;" % delete_old_css_path, shell=True)
         local('rm %s' % tar_file)
