@@ -8,7 +8,7 @@ from fabric.contrib.files import exists
 # config ssh
 
 env.use_ssh_config = True
-env.hosts = ['ts-21']
+env.hosts = ['ts-24']
 remote_user = 'guaumart'
 remote_path = '/home/' + remote_user + '/www/'
 dist_dir = 'dist/'
