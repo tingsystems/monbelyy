@@ -4,7 +4,7 @@
     function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Guaumart';
+        $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
 
@@ -27,7 +27,7 @@
         });
 
         var paramsProducts = {};
-        paramsProducts.taxonomies = 'productos-inicio';
+        paramsProducts.taxonomies = 'destacados1517273140';
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
         paramsProducts.ordering = '-createdAt';
@@ -221,7 +221,7 @@
 
     function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Guaumart';
+        $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
 
         self.busy = true;
         EntrySrv.get({
@@ -249,7 +249,7 @@
     function ContactCtrl(NotificationTakiSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name === 'home') {
-            $rootScope.pageTitle = 'Guaumart';
+            $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
         } else if ($state.current.name === 'contact') {
             $rootScope.pageTitle = 'Contacto - Guaumart';
         }
