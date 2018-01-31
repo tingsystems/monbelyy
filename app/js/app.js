@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: 'Guaumart'},
+                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Guaumart'},
+                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -109,7 +109,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'Guaumart'},
+                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Guaumart'},
+                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -189,7 +189,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Guaumart',
+                'title': 'Guaumart - ¡El Súper para los MVZ!',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -198,7 +198,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Guaumart';
+        $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -357,8 +357,7 @@
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'ocNgRepeat', 'blockUI',
         'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app',
-        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial',
-        'angulartics.google.analytics', 'ngFileUpload'])
+        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
