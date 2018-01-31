@@ -84,7 +84,7 @@
                         $localStorage.priceList = '';
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name !== 'register') {
-                            NotificationSrv.success("Te esperamos pronto", "Moon's Aquariums");
+                            NotificationSrv.success("Te esperamos pronto", "Guaumart ");
                             $state.go('home');
                         }
                     })
@@ -99,7 +99,7 @@
             self.busy = true;
             account.email = account.contactPersonEmail;
             RegisterSrv.save(account).$promise.then(function (data) {
-                NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a Moon's Aquariums");
+                NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a Guaumart ");
                 self.busy = false;
                 self.formData = {};
                 $state.go('success');
