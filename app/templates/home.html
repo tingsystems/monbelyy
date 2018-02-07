@@ -2,8 +2,8 @@
     <div id="carouse-principal" class="carousel slide">
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            <div uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-                <div uib-slide ng-repeat="slide in Home.mainSlider"  active="active" index="$index">
+            <div uib-carousel active="active" template-url="/templates/partials/carousel.html">
+                <div uib-slide ng-repeat="slide in Home.mainSlider"  index="$index">
                     <a post-link="{ link: {url: slide.link, target: '_self'} }">
                         <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
                     </a>
