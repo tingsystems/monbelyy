@@ -1,0 +1,33 @@
+/*------------------------
+-------- MIXINS -------
+-- THEME BY TINGSYSTEMS --
+--------- V1.0 -----------
+-------------------------*/
+
+/* buttons mixin */
+button(color, bg, radio, pd, border)
+  color color
+  background bg
+  border-radius radio
+  padding pd
+  border border
+
+box(pd, shadow, border, radio)
+  padding pd
+  box-shadow shadow
+  border border
+  border-radius radio
+
+
+widget(bg, radio, pd, border, shadow)
+  background-color bg
+  border-radius radio
+  padding pd
+  border border
+  box-shadow shadow
+
+transition(transition)
+  -moz-transition   transition
+  -o-transition     transition
+  -webkit-transition transition
+  transition         transition

@@ -33,7 +33,7 @@
     <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://guaumart.com{{ $state.href($state.current.name) }}"/>
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,400,600,700" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
     <!-- build:css css/style.min.css -->
     <!-- bower:css -->
@@ -46,8 +46,8 @@
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="lib/ng-table/dist/ng-table.css" />
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="lib/sweetalert/dist/sweetalert.css" />
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/main.css">
@@ -71,164 +71,100 @@
     Para mejorar la experiencia..
 </p>
 <![endif]-->
-<header class="header">
-    <div class="navbar-info">
+<header class="header three-rows-nav">
+    <div class="first-row">
         <div class="container">
-            <div class="col-sm-4 nav-info ca-phone">
-                <ul class="list list-social list-social-media">
-                    <li ng-repeat="post in contactMenuData">
-                        <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
-                                ng-bind-html="post.content | trustHtml"></span></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-5 nav-info xs-hide" ng-controller="GetQuerySearchCtrl as Search">
-                <form name="search" class="search-prd" role="search" class="search-prd"
-                      ng-submit="Search.globalSearch('product')">
-                    <div class="form-group">
-                        <input type="text" class="form-search" id="search" placeholder="Buscar"
-                               ng-model="Search.searchTerm" required>
-                        <i class="ion-ios-search"></i>
-                    </div>
-                </form>
-            </div>
-            <div class="col-sm-4 hide-tablet">
-                <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">
-                    <li>
-                        <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce"
-                           ng-controller="AccessCtrl as Access">
-                            <span class="qty-cart">{{ items.length }}</span>
-                            <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a ui-sref="register" class="my-account btn-blue btn-sm" ng-if="!Access.isAuthenticated()">
-                            <i class="ion-ios-person"></i> Iniciar sesión
-                        </a>
-                    </li>
-                    <li>
-                        <div class="dropdown ">
-                            <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue btn-sm" type="button"
-                               id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <i class="ion-ios-person"></i> {{user.username}}
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a ui-sref="dashboard">Mi cuenta</a></li>
-                                <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-4 hide-desk">
-                <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">
-                    <li class="col-xs-6 col-sm-6">
-                        <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce"
-                           ng-controller="AccessCtrl as Access">
-                            <span class="qty-cart">{{ items.length }}</span>
-                            <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
-                        </a>
-                    </li>
-                    <li class="col-xs-6 col-sm-6">
-                        <a ui-sref="register" class="my-account btn-blue-clear" ng-if="!Access.isAuthenticated()">
-                            <i class="ion-ios-person"></i> Iniciar sesión
-                        </a>
-                    </li>
-                    <div class="col-xs-6 col-sm-6">
-                        <div class="dropdown ">
-                            <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue-clear" type="button"
-                               id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <i class="ion-ios-person"></i> {{user.username}}
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a ui-sref="dashboard">Mi cuenta</a></li>
-                                <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-            <div class="col-sm-3 ca-auth">
-                <ul class="list-social-media">
-                    <li ng-repeat="post in socialMedia">
-                        <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
-                                ng-bind-html="post.content | trustHtml"></span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container login-content">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="col-sm-4 no-padding">
-            <a ui-sref="home">
-                <img src="img/guaumart-logo.png" class="logo" alt="Moons Aquariums"><br>
-                <span class="slogan">¡El Súper para los MVZ!</span>
-            </a>
-        </div>
-        <div class="col-sm-8">
-            <ul class="nav navbar-nav nav-user navbar-right" ng-controller="AccessCtrl as Access">
-                <li>
-                    <a ui-sref="shopcart" class="text-right shopping-cart" ng-if="ecommerce"
-                       ng-controller="AccessCtrl as Access">
-                        <span class="qty-cart">{{ items.length }}</span>
-                        <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
-                    </a>
-                </li>
-                <li>
-                    <a ui-sref="register" class="my-account btn-blue" ng-if="!Access.isAuthenticated()">
-                        <i class="ion-ios-person"></i> Iniciar sesión
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-blue" type="button"
-                       id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="ion-ios-person"></i> {{user.username}}
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a ui-sref="dashboard">Mi cuenta</a></li>
-                        <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul class="nav list-icons-add">
+                        <li class="nav-item" ng-repeat="post in contactData">
+                            <a class="nav-link" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
+                                    ng-bind-html="post.content | trustHtml"></span></a>
+                        </li>
                     </ul>
-                </li>
-            </ul>
+                </div>
+                <div class="col-sm-6" ng-controller="GetQuerySearchCtrl as Search">
+                    <form name="search" role="search" class="input-search"
+                          ng-submit="Search.globalSearch('product')">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="validationServerUsername" placeholder="Buscar"
+                                   aria-describedby="inputGroupPrepend3" ng-model="Search.searchTerm" required>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend3"><i
+                                        class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-3 social">
+                    <div class="list-icons-add" ng-repeat="social in socialMedia">
+                        <a class="nav-link" href="{{ social.excerpt }}"><i class="{{ social.title }}"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <nav class="navbar navbar-default" ng-controller="NavBarCtrl as nav">
-        <div class="container container-tab">
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-mainMenu"
-                        aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+    <div class="second-row">
+        <div class="container">
+            <div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="col-sm-4 text-left">
+                    <a ui-sref="home">
+                        <img src="img/logo.png" class="logo" alt="Sydgroup">
+                    </a>
+                </div>
+                <div class="col-sm-8">
+                    <ul class="nav navbar-expand-lg justify-content-end" ng-controller="AccessCtrl as Access">
+                        <li>
+                            <a ui-sref="shopcart" class="shopping-cart" ng-if="ecommerce"
+                               ng-controller="AccessCtrl as Access">
+                                <span class="qty-cart">{{ items.length }}</span>
+                                <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="register" class="btn btn-outline-danger"
+                               ng-if="!Access.isAuthenticated()">
+                                <i class="ion-ios-person"></i> Iniciar sesión
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-danger" type="button"
+                               id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="ion-ios-person"></i> {{user.username}}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ui-sref="dashboard">Mi cuenta</a></li>
+                                <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="header-mainMenu">
-                <ul class="nav navbar-nav nav-main navbar-left">
-                    <!--<li ng-repeat="item in mainNavMenu">-->
-                    <li ng-repeat="item in mainNavMenu">
-                        <a href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
+        </div>
+    </div>
 
+    <nav class="navbar navbar-expand-lg navbar-light nav-theme justify-content-end">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto justify-content-center">
+                    <li class="nav-item" ng-repeat="item in mainNavMenu">
+                        <a class="nav-link" href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
 </header>
 <!-- end header top area -->
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container-pages" ui-view="content"></div>
-        </div>
-    </div>
+<div class="content-area-web">
+    <div ui-view="content"></div>
 </div>
 
 <footer id="footer_area">
@@ -251,7 +187,6 @@
 <script src="lib/owl.carousel/dist/owl.carousel.js"></script>
 <script src="lib/angular-deckgrid/angular-deckgrid.js"></script>
 <script src="lib/lightbox2/dist/js/lightbox.js"></script>
-<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="lib/ng-repeat-owl-carousel/dist/ngRepeatOwlCarousel.min.js"></script>
 <script src="lib/angular-block-ui/dist/angular-block-ui.js"></script>
 <script src="lib/angular-scroll/angular-scroll.js"></script>
@@ -263,9 +198,10 @@
 <script src="lib/ng-file-upload/ng-file-upload.js"></script>
 <script src="lib/angular-ui-select/dist/select.js"></script>
 <script src="lib/ng-table/dist/ng-table.js"></script>
-<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/sweetalert/dist/sweetalert.min.js"></script>
 <script src="lib/ngSweetAlert/SweetAlert.js"></script>
+<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js js/annalise.min.js -->

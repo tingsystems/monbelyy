@@ -1,142 +1,109 @@
-<div id="breadcrumb">
-    <div class="container">
-        <ol class="breadcrumb">
-            <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
-            <li ng-if="Product.detail.taxonomies.length"><a
-                    ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{ Product.taxonomies[0].name }}</a>
-            </li>
-            <li class="active">{{ Product.categoryName }}</li>
-        </ol>
-    </div>
-</div>
-<hr class="no-margin">
-<section id="content-area" class="content-blog">
-    <div class="content-pages" loading-container="Product.tableParams.settings().$loading">
-        <div class="container" ng-table="Product.tableParams" show-filter="false">
-            <div class="col-sm-3">
-                <div class="box-widget-white ng-scope">
-                    <h4 class="widget-title-first">Filtrar por</h4>
-                    <div class="box-widget-container">
-                        <select name="" id="price" class="form-control" ng-model="Product.selectFilter"
-                                ng-change="Product.getProductsFilter(Product.selectFilter)">
-                            <option value="1">Alfabeticamente de A-Z</option>
-                            <option value="2">Precio menor</option>
-                            <option value="3">Precio mayor</option>
-                        </select>
-                    </div>
-                    <h4 class="widget-title">Marcas</h4>
-                    <div class="box-widget-container" style="padding-bottom: 5px;">
-                        <div ng-if="Product.brandSelected">
-                            <p>{{Product.brandSelected.name}}
-                                <a ng-click="Product.deleteFilter(Product.brandSelected, 'brand')">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                            </p>
-                        </div>
-                        <ul class="list" ng-if="!Product.brandSelected">
-                            <md-radio-group ng-model="Product.brandSelected"
-                                            ng-change="Product.getProductsFilter(Product.brandSelected)">
-                                <md-radio-button ng-repeat="children in Product.brands " ng-value="children"
-                                                 aria-label="{{ children.name }}" class="md-primary">
-                                    {{children.name}}
-                                </md-radio-button>
-                            </md-radio-group>
-                        </ul>
-                    </div>
-                    <h4 class="widget-title">Medidas</h4>
-                    <div class="box-widget-container" style="padding-bottom: 5px;">
-                        <div ng-if="Product.sizeSelected">
-                            <p>{{Product.sizeSelected.name}}
-                                <a ng-click="Product.deleteFilter(Product.sizeSelected, 'size')">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
-                            </p>
-                        </div>
-                        <ul class="list" ng-if="!Product.sizeSelected">
-                            <md-radio-group ng-model="Product.sizeSelected"
-                                            ng-change="Product.getProductsFilter(Product.sizeSelected)">
-                                <md-radio-button ng-repeat="children in Product.sizes " ng-value="children"
-                                                 aria-label="{{ children.name }}" class="md-primary">
-                                    {{children.name}}
-                                </md-radio-button>
-                            </md-radio-group>
-                        </ul>
-                    </div>
-                    <h4 class="widget-title">Tipos</h4>
-                    <div class="box-widget-container" style="padding-bottom: 5px;">
-                        <ul class="list">
-                            <li ng-repeat="children in Product.lines">
-                                <a href="#" target="_blank"><input type="radio" ng-model="children.id"
-                                                                   ng-change="Product.getProductsFilter(children.slug)">
-                                    {{children.name}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-9 no-padding" ng-controller="AccessCtrl as Access">
-                <h2 class="title">{{Product.categoryName}}</h2>
-                <hr>
-                <div class="col-sm-6 col-md-4" ng-repeat="product in $data">
-                    <div class="box-prod" ng-if="!Product.isPost">
-                        <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
-                            <div class="bg-prod"
-                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
-                        </a>
-                        <div class="box-container no-padding container-fluid">
-                            <div class="col-sm-12 no-pd-l text-center">
-                                <p>{{product.name}}</p>
-                                <h4 ng-if="Access.isAuthenticated ()">{{ product.price | currency }}</h4>
-
+<div class="temp-categories">
+    <section id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a>
+                    </li>
+                    <li class="breadcrumb-item" ng-if="Product.detail.taxonomies.length"><a
+                            ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{ Product.taxonomies[0].name
+                        }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ Product.categoryName }}</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section class="content-area">
+        <div class="container" loading-container="Product.tableParams.settings().$loading">
+            <div class="row" ng-table="Product.tableParams" show-filter="false">
+                <div ng-controller="AccessCtrl as Access">
+                    <div class="title-primary">
+                        <div class="container">
+                            <div class="row justify-content-between">
+                                <div class="col-4">
+                                    <h1 class=text-uppercase>{{Product.categoryName}}</h1>
+                                </div>
+                                <div class="col-4">
+                                    <form>
+                                        <div class="form-group row">
+                                            <label for="price" class="col-sm-4 col-form-label">Filtrar por</label>
+                                            <div class="col-sm-8">
+                                                <select name="" placeholder="Filtrar por" id="price" class="form-control" ng-model="Product.selectFilter"
+                                                        ng-change="Product.getProductsFilter(Product.selectFilter)">
+                                                    <option value="1">Alfabeticamente de A-Z</option>
+                                                    <option value="2">Precio menor</option>
+                                                    <option value="3">Precio mayor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+                            <hr>
                         </div>
-                        <hr>
-                        <div class="container-fluid no-padding">
-                            <div class="no-pd-l" ng-class="Access.isAuthenticated() ? 'col-xs-6': 'col-xs-12'">
-                                <a class="btn btn-gray-clear btn-block" ui-sref="product-detail({slug:product.slug})">Ver
-                                    más</a>
-                            </div>
-                            <div class="col-xs-6 no-pd-r">
-                                <button class="btn btn-orange btn-block"
-                                        ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4 col-md-3" ng-repeat="product in $data">
+                                <div class="box-simple" ng-if="!Product.isPost">
+                                    <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
+                                        <div class="box-header">
+                                            <div class="box-bg-img"
+                                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                                        </div>
+                                        <div class="box-container">
+                                            <p>{{ product.name }}</p>
+                                            <h4 class="text-warning">{{ product.price | currency }}</h4>
+                                        </div>
+                                    </a>
+                                    <div class="box-footer">
+                                        <a class="btn btn-outline-default" ui-sref="product-detail({slug:product.slug})">
+                                            Ver más
+                                        </a>
+                                        <button class="btn btn-danger"
+                                                ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
                                             name: product.name, price: product.price, qty: 1,
                                             taxonomies : product.taxonomies}, 1)"
-                                        ng-disabled="Product.itemInCart(product)" ng-if="Access.isAuthenticated()">
-                                    Agregar
-                                </button>
+                                                ng-disabled="Product.itemInCart(product)">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="box-prod" ng-if="Product.isPost">
+                                    <a ui-sref="post_detail({slug:product.slug})">
+                                        <div class="bg-prod"
+                                             style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
+                                        <h3 class="prod-descrip">{{product.title}}</h3>
+                                    </a>
+                                    <a ui-sref="post_detail({slug: product.slug})" class="btn btn-success btn-cart">Ver
+                                        más</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- <div class="col-sm-12" ng-show="Product.busy">
+                         <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
+                     </div>
+                     <div class="col-sm-12" ng-show="!Product.busy">
+                         <h2 class="text-center no-content" ng-show="!$data.length">Lo sentimos no contamos con
+                             contenido disponible</h2>
+                     </div>-->
 
-                    <div class="box-prod" ng-if="Product.isPost">
-                        <a ui-sref="post_detail({slug:product.slug})">
-                            <div class="bg-prod"
-                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
-                            <h3 class="prod-descrip">{{product.title}}</h3>
-                        </a>
-                        <a ui-sref="post_detail({slug: product.slug})" class="btn btn-success btn-cart">Ver más</a>
+                    <div class="hide">
+                        <table>
+                            <tbody>
+                            <tr ng-repeat="order in $data">
+                                <td>{{ order.name }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-               <!-- <div class="col-sm-12" ng-show="Product.busy">
-                    <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
-                </div>
-                <div class="col-sm-12" ng-show="!Product.busy">
-                    <h2 class="text-center no-content" ng-show="!$data.length">Lo sentimos no contamos con
-                        contenido disponible</h2>
-                </div>-->
 
-                <div class="hide">
-                    <table>
-                        <tbody>
-                        <tr ng-repeat="order in $data">
-                            <td>{{ order.name }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
-
             </div>
+            <!--post list -->
         </div>
-        <!--post list -->
-    </div>
-</section>
+    </section>
+</div>

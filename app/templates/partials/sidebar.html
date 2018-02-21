@@ -2,20 +2,17 @@
     <h4 class="widget-title">Contáctanos</h4>
     <hr class="dividerw">
     <div class="box-widget-container">
-        <ul class="list list-sidebar">
-            <li ng-repeat="post in contactMenuData">
-                 <a class="contact-foo-side" href="{{ post.excerpt }}" ><i class="{{ post.title }}"></i> <span ng-bind-html="post.content | trustHtml"></span></a>
-            </li>
-        </ul>
+        <div class="list-icons-add" ng-repeat="post in contactData">
+            <a class="nav-link" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i>
+                <span ng-bind-html="post.content | trustHtml"></span></a>
+        </div>
     </div>
     <hr class="dividerw">
     <h4 class="widget-title">Síguenos en</h4>
     <div class="box-widget-container" style="padding-bottom: 50px;">
-        <ul class="list list-sidebar">
-            <li ng-repeat="post in socialMedia">
-                <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
-                        ng-bind-html="post.content | trustHtml"></span></a>
-            </li>
-        </ul>
+        <div class="list-icons-add" ng-repeat="social in socialMedia">
+            <a class="nav-link" href="{{ social.excerpt }}"><i class="{{ social.title }}"></i> <span
+                    ng-bind-html="social.content | trustHtml"></span></a>
+        </div>
     </div>
 </div>

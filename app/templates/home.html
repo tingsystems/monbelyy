@@ -1,98 +1,148 @@
-<div id="section-prom" class="container">
-    <div id="carouse-principal" class="carousel slide">
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div uib-carousel active="active" template-url="/templates/partials/carousel.html">
-                <div uib-slide ng-repeat="slide in Home.mainSlider"  index="$index">
+<div id="home">
+    <section class="slider-box">
+        <div class="owl-carousel owl-theme owl-theme-slider">
+            <div class="slider" ng-repeat="slide in Home.mainSlider" ng-repeat-owl-carousel
+                 carousel-init="Home.carouselInitializerSlider">
+                <div class="item" style="width: 100%;">
                     <a post-link="{ link: {url: slide.link, target: '_self'} }">
                         <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
                     </a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div id="section-promo">
-    <div class="container">
-        <div class="col-sm-6 item-promo" ng-repeat="promo in Home.promoHome">
-            <div class="box-image-promo">
-                <a post-link="{ link: {url: promo.link, target: '_self'} }">
-                    <img src="{{ promo.featuredImage.url }}" alt="Promotions">
-                </a>
+    </section>
+    <section class="section-one">
+        <article class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1>{{ Home.aboutUs.title }}</h1>
+                    <p>{{ Home.aboutUs.excerpt }}..</p>
+                    <a href="{{Home.aboutUs.link}}" target="_self">
+                        Más información
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="col-sm-4">
+                    <img class="rounded-circle" src="{{ Home.aboutUs.featuredImage.url }}" alt="Sydgroup">
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<section class="products">
-    <div class="container">
-        <div class="row text-center">
-            <div class="prod-title">
-                <h1>Lo más nuevo</h1>
-                <hr>
+        </article>
+    </section>
+    <section class="section-two" ng-controller="ShoppingCtrl as Shop">
+        <div class="container">
+            <div class="title-primary">
+                <h1 class="text-uppercase">PRODUCTOS</h1>
             </div>
-        </div>
-        <div class="box-products" ng-controller="ShoppingCtrl as Shop">
-            <div class="row text-center">
-                <div class="col-sm-4 col-md-3" ng-repeat="product in Home.products">
-                    <div class="box-prod" ng-controller="AccessCtrl as Access">
-                        <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
-                            <div class="bg-prod"
-                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
-                        </a>
-                        <div class="box-container no-padding container-fluid">
-                            <div class="col-sm-12 no-pd-l text-center">
-                                <p>{{product.name}}</p>
-                                <h4>{{ product.price | currency }}</h4>
-                            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-4" ng-repeat="product in Home.products">
+                    <div class="box-simple" ng-controller="AccessCtrl as Access">
+                        <div class="box-header">
+                            <a ui-sref="product-detail({slug:product.slug})" title="Ver más">
+                                <div class="box-bg-img"
+                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                            </a>
                         </div>
-                        <hr>
-                        <div class="container-fluid no-padding">
-                            <div class="no-pd-l col-xs-6">
-                                <a class="btn btn-gray-clear btn-block"
-                                   ui-sref="product-detail({slug:product.slug})">Ver más</a>
-                            </div>
-                            <div class="col-xs-6 no-pd-r">
-                                <button class="btn btn-orange btn-block"
-                                        ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
-                                             name: product.name, price: product.price, qty: 1,
-                                             taxonomies : product.taxonomies}, 1)"
-                                        ng-disabled="Shop.itemInCart(product)">
-                                    Comprar
-                                </button>
-                            </div>
+                        <div class="box-container">
+                            <p>{{ product.name }}</p>
+                            <h4 class="text-warning">{{ product.price | currency }}</h4>
+                        </div>
+                        <div class="box-footer">
+                            <a ui-sref="product-detail({slug:product.slug})" class="btn btn-outline-default">Ver más</a>
+                            <button class="btn btn-danger"
+                                    ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
+                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies}, 1)"
+                                    ng-disabled="Shop.itemInCart(product)">Ver más
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<div id="brands">
-    <div class="container text-center">
-        <div class="prod-title">
-            <h1>Patrocinadores</h1>
-            <hr>
+    </section>
+    <section class="section-three">
+        <div class="container">
+            <h1 class="text-uppercase">{{ Home.history.title }}</h1>
+            <p>{{ Home.history.excerpt }}..</p>
+            <br>
+            <img class="img-fluid" src="{{ Home.history.featuredImage.url }}" alt="Sydgroup">
         </div>
-        <div class="owl-carousel owl-theme">
-            <div class="brands" ng-repeat="brand in Home.brands" ng-repeat-owl-carousel
-                 carousel-init="Home.carouselInitializer" ng-if="brand">
-                <div class="item">
-                    <a ui-sref="post_detail({slug: brand.slug})">
-                        <img class="img-brand"src="{{ brand.featuredImage.url }}"alt="{{ brand.title }}">
-                    </a>
+    </section>
+    <section class="section-four">
+        <div class="container">
+            <div class="title-primary">
+                <h1 class="text-uppercase">Preguntas frecuentes</h1>
+            </div>
+            <div class="list-group" ng-repeat="item in Home.ask">
+                <a href="{{item.link}}" class="list-group-item list-group-item-action">
+                    {{item.title}}
+                </a>
+                <a href="{{item.link}}" class="list-group-item list-group-item-action">{{item.excerpt}}</a>
+            </div>
+            <div class="text-center">
+                <a href="http://www.sydgroup.mx/page/preguntas-frecuentes1518806582" class="btn btn-outline-danger">Más
+                    información</a>
+            </div>
+        </div>
+    </section>
+    <section class="section-five">
+        <div class="container">
+            <div class="title-primary">
+                <h1 class="text-uppercase">¡Cuidado! estos son los productos <strong class="text-danger">FALSOS</strong>
+                    que están circulando</h1>
+            </div>
+            <article class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img class="img-fluid" src="{{ Home.fake.featuredImage.url }}" alt="Sydgroup">
+                    </div>
+
+                    <div class="text-center">
+                        <a class="btn btn-danger" href="{{Home.fake.link}}" target="_self">
+                            Más información
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    <div class="section-six">
+        <div class="container">
+            <div class="title-primary">
+                <h1 class="text-uppercase">Noticias</h1>
+            </div>
+            <div class="row">
+                <div class="col-sm-3" ng-repeat="news in Home.blogHome">
+                    <div class="box-simple">
+                        <a ui-sref="post_detail({slug:news.slug})">
+                            <div class="box-header">
+                                <div class="box-bg-img"
+                                     style="background-image: url('{{news.featuredImage.url ? news.featuredImage.url : initConfig.img_default}}')"></div>
+                            </div>
+                            <div class="box-container">
+                                <p class="box-title">{{ news.title }}</p>
+                            </div>
+                            <div class="box-footer">
+                                <a ui-sref="post_detail({slug:news.slug})" class="btn btn-danger">Ver más</a>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-
+    </div>
+    <div class="section-seven">
+        <div class="container">
+            <div class="title-primary">
+                <h3 class="text-uppercase">Sigue a SYDGROUP y entérate de las últimas novedades.</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 list-icons-add" ng-repeat="social in Home.socialMedia">
+                    <a class="nav-link" href="{{ social.excerpt }}"><i class="{{ social
+                    .title }}"></i> <span
+                            ng-bind-html="social.content | trustHtml"></span></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-
-
-
-

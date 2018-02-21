@@ -1,0 +1,342 @@
+/*------------------------
+-------- COMPONENTS -------
+-- THEME BY TINGSYSTEMS --
+-------------------------*/
+
+/* Buttons full color */
+.btn-primary
+  button(white, primary, 3px, 5px 10px, 1px solid primary)
+  &:hover, &:focus
+    background-color primary
+    border 1px solid primary
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-info
+  button(white, info, 3px, 5px 10px, 1px solid info)
+  &:hover, &:focus
+    background-color info
+    border 1px solid info
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-success
+  button(white, success, 3px, 5px 10px, 1px solid success)
+  &:hover, &:focus
+    background-color success
+    border 1px solid success
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-warning
+  button(white, warning, 3px, 5px 10px, 1px solid warning)
+  &:hover, &:focus
+    background-color warning
+    border 1px solid warning
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-danger
+  button(white, danger, 3px, 5px 10px, 1px solid danger)
+  &:hover, &:focus
+    background-color danger
+    border 1px solid danger
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+.btn-default
+  button(fontClr, default, 3px, 5px 10px, 1px solid default)
+  &:hover, &:focus
+    background-color default
+    border 1px solid default
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-dark
+  button(white, dark, 3px, 5px 10px, 1px solid dark)
+  &:hover, &:focus
+    background-color dark
+    border 1px solid dark
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+/* Buttons outline color */
+.btn-outline-primary
+  button(primary, transparent, 3px, 5px 10px, 1px solid primary)
+  &:hover, &:focus
+    background-color primary
+    border 1px solid primary
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-outline-info
+  button(info, transparent, 3px, 5px 10px, 1px solid info)
+  &:hover, &:focus
+    background-color info
+    border 1px solid info
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-outline-success
+  button(success, transparent, 3px, 5px 10px, 1px solid success)
+  &:hover, &:focus
+    background-color success
+    border 1px solid success
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-outline-warning
+  button(warning, transparent, 3px, 5px 10px, 1px solid warning)
+  &:hover, &:focus
+    background-color warning
+    border 1px solid warning
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-outline-danger
+  button(danger, transparent, 3px, 5px 10px, 1px solid danger)
+  &:hover, &:focus
+    background-color danger
+    border 1px solid danger
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+  &:disabled
+    button(danger, transparent, 3px, 5px 10px, 1px solid danger)
+    opacity 0.5
+    cursor no-drop
+
+.btn-outline-default
+  button(fontClr, transparent, 3px, 5px 10px, 1px solid fontClr)
+  &:hover, &:focus
+    background-color default
+    border 1px solid fontClr
+    color fontClr
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+.btn-outline-dark
+  button(dark, transparent, 3px, 5px 10px, 1px solid dark)
+  &:hover, &:focus
+    background-color dark
+    border 1px solid dark
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
+
+//buttons bordered
+.bordered //add this class in your button to bordered
+  border-radius 30px
+.unbordered //add this class in your button to unbordered
+  border-radius 0
+
+/*------- Boxes -------*/
+.box
+  box(15px, none, 1px solid #f5f5f5, 3px)
+
+.box-simple
+  @extend .box
+  background-color white
+  margin-bottom 15px
+  transition(all 1s )
+  a
+    .box-title
+      color fontClr
+  .box-header
+    .box-bg-img
+      background-position center
+      background-size cover
+      height 200px
+  .box-container
+    p
+      height 50px
+      padding 10px
+  .box-footer
+    text-align center
+  &:hover
+    box(15px, 0 4px 20px rgba(0,0,0,0.1), 1px solid #f5f5f5, 3px)
+
+/*--- BOX CONTACT ---*/
+.box-contact
+  h3
+    color white
+    margin-bottom 5px
+    padding-bottom 5px
+    border-bottom 1px solid #ddd
+  .list-icons-add
+    .nav-link
+      color white
+      p
+        margin 0
+
+
+/*----- Titles ------*/
+.title
+  padding 15px 0 25px
+.title-primary
+  @extend .title
+  text-align center
+.header-title-large
+  @extend .title
+  background-color #f5f5f5
+  color fontClr
+
+/*------- List -------*/
+// List icon add
+.list-icons-add
+  .nav-link
+    display inline-flex
+    color fontClr
+    i
+      margin-top 3px
+      padding-right 2px
+
+/*----- SLIDER --------*/
+//.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span
+
+/* CAROUSEL FOR PAGES OR PRODUCTS */
+.owl-theme-page
+  .owl-nav [class*='owl-']
+    background-color transparent
+    font-size 36px
+    &:hover
+      background-color transparent
+      color danger
+  .slider-page
+    height hSmallSlider
+    background-position top
+    background-size wSmallSlider
+    background-repeat no-repeat
+  .owl-nav
+    position absolute
+    top 50%
+    left 0
+    right 0
+    .owl-prev
+      left 25px
+      position absolute
+      padding 5px 20px
+    .owl-next
+      right 25px
+      position absolute
+      padding 5px 20px
+  .owl-dots
+    position absolute
+    bottom 15px
+    left 0
+    right 0
+    .owl-dot.active span,
+    .owl-dot:hover span
+      background-color white
+      &:hover
+        background-color white
+    .owl-dot span
+      background-color transparent
+      border 1px solid white
+      &:hover
+        background-color white
+
+/* WIDTH 100% CAROUSEL HOME */
+.owl-theme-slider
+  .owl-dots
+    position absolute
+    bottom 15px
+    left 0
+    right 0
+    .owl-dot.active span,
+    .owl-dot:hover span
+      background-color white
+      &:hover
+        background-color white
+    .owl-dot span
+      background-color transparent
+      border 1px solid white
+      &:hover
+        background-color white
+  .owl-nav [class*='owl-']
+    background-color rgba(0,0,0,0.6)
+    font-size 28px
+    border-radius 30px
+    color white
+    opacity 0.5
+    &:hover
+      background-color black
+  .owl-nav
+    position absolute
+    top 50%
+    left 0
+    right 0
+    .owl-prev
+      left 35px
+      position absolute
+      padding 5px 20px
+    .owl-next
+      right 35px
+      position absolute
+      padding 5px 20px
+
+.slider-box
+  padding-top 0 !important
+  padding-bottom 0
+  .slider-img
+    background-position top
+    background-size wSlider
+    background-repeat no-repeat
+    height hSlider
+
+/* --- STYLE TABS --- */
+
+/* tab simple */
+.tab-simple
+  .tab-pane
+    border none !important
+    padding 15px
+    background-color transparent
+  .nav-item.active
+    color danger
+    background-color transparent
+    border-bottom 1px solid danger
+  .nav-tabs .nav-link.active
+    color danger
+  .nav-tabs .nav-link
+    border-top none
+    border-left none
+    border-right none
+    color fontClr
+    &:hover, &:focus,.active
+      border-color transparent
+      border-top none
+      border-left none
+      border-right none
+      color danger
+      background-color transparent
+
+/* --- WIDGETS  ---  */
+.box-widget-default
+  widget(transparent, 2px, 20px, none, none)
+
+.box-widget-white
+  background-color #f9f9f9
+  border none
+  border-radius 3px
+  box-shadow 0 0 10px rgba(0,0,0,0.05)
+  padding 15px
+  .widget-title-first
+    background transparent
+    padding 10px 5px
+    color #555 !important
+    border-bottom 1px solid #eee
+  ul
+    li > a
+      color #555555
+      text-decoration none
+      &:hover
+        color #ff7300
+.box-widget
+  widget(white, 2px, 15px, 1px solid #ddd, none)
+  .widget-title
+    padding-left 10px
+    font-weight bold
+    padding 20px 10px
+    margin 0
+  .box-widget-header
+    padding 10px
+    border-bottom 1px solid #ddd
+    font-size 22px
+    background-color transparent
+    color #746857
+  .box-widget-container
+    padding 5px
+    h3>a, h2>a
+      font-size 14px
+      color catext
+      font-weight 300
+      &:hover
+        color cagreen
+    h2
+      font-size 18px
+      color #6a5c5d

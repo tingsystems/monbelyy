@@ -4,16 +4,16 @@
     function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
-        $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
+        self.active = 0;
+        $rootScope.pageTitle = 'Sydgroup';
         var list = $localStorage.priceList ? $localStorage.priceList : '';
-
 
         $rootScope.toggleSidebar = function () {
             $rootScope.visible = !$rootScope.visible;
         };
 
         EntrySrv.get({
-            taxonomies: 'slider1516747949',
+            taxonomies: 'slider1518736513',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -27,7 +27,7 @@
         });
 
         var paramsProducts = {};
-        paramsProducts.taxonomies = 'destacados1517273140';
+        paramsProducts.taxonomies = 'anabolics';
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
         paramsProducts.ordering = '-createdAt';
@@ -49,38 +49,131 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'promociones1516750451',
+            slug: 'acerca-de-nosotros1518737862',
             isActive: 'True',
-            pageSize: 2,
+            ordering: '-createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.aboutUs = results;
+            //get featureImage
+            self.aboutUs.featuredImage = $filter('filter')(self.aboutUs.attachments, {kind: 'featuredImage'})[0];
+        });
+
+        EntrySrv.get({
+            slug: 'historia',
+            isActive: 'True',
+            ordering: '-createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.history = results;
+            //get featureImage
+            self.history.featuredImage = $filter('filter')(self.history.attachments, {kind: 'featuredImage'})[0];
+        });
+
+
+        EntrySrv.get({
+            taxonomies: 'preguntas-frecuentes1518736316',
+            isActive: 'True',
+            pageSize: 3,
             ordering: 'createdAt',
             fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
-            self.promoHome = results.results;
+            self.ask = results.results;
             //get featureImage
-            angular.forEach(self.promoHome, function (obj, ind) {
+            angular.forEach(self.ask, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
 
         EntrySrv.get({
-            taxonomies: 'patrocinadores',
+            slug: 'productos-falsos',
             isActive: 'True',
-            pageSize: 8,
             ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
+            fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
-            self.brands = results.results;
+            self.fake = results;
             //get featureImage
-            angular.forEach(self.brands, function (obj, ind) {
+            self.fake.featuredImage = $filter('filter')(self.fake.attachments, {kind: 'featuredImage'})[0];
+        });
+
+        EntrySrv.get({
+            taxonomies: 'noticias1518736444',
+            isActive: 'True',
+            pageSize: 4,
+            ordering: 'createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.blogHome = results.results;
+            //get featureImage
+            angular.forEach(self.blogHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
 
-        /* Carousel */
+        EntrySrv.get({
+            taxonomies: 'redes-sociales1519072192',
+            isActive: 'True',
+            pageSize: 8,
+            ordering: 'createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.socialMedia = results.results;
+            //get featureImage
+            angular.forEach(self.socialMedia, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+            });
+        });
+
+        /*
+                EntrySrv.get({
+                    taxonomies: 'patrocinadores',
+                    isActive: 'True',
+                    pageSize: 8,
+                    ordering: '-createdAt',
+                    fields: 'title,content,attachments,slug,excerpt'
+                }).$promise.then(function (results) {
+                    self.brands = results.results;
+                    //get featureImage
+                    angular.forEach(self.brands, function (obj, ind) {
+                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    });
+                });
+                */
+        /* Carousel slider */
+        self.carouselInitializerSlider = function () {
+            $(".owl-carousel").owlCarousel({
+                //get items to proportionate num of items
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                navigation: true,
+                //pagination: false,
+                autoplay: true,
+                items: 2,
+                loop: true,
+                margin: 0,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 1,
+                        nav: false
+                    },
+                    1000: {
+                        items: 1,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            });
+        }
+
+        /* Carousel brands */
         self.carouselInitializer = function () {
             $(".owl-carousel").owlCarousel({
                 //get items to proportionate num of items
-                //items: 4,
+                navText: ['<', '>'],
                 navigation: true,
                 //pagination: false,
                 autoplay: true,
@@ -198,7 +291,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'blog',
+                taxonomies: 'noticias1518736444',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,
@@ -216,12 +309,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Blog - Guaumart';
+        $rootScope.pageTitle = 'Noticias - Sydgroup';
     }
 
     function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
+        $rootScope.pageTitle = 'Sydgroup';
 
         self.busy = true;
         EntrySrv.get({
@@ -525,6 +618,36 @@
             self.busy = false;
         });
 
+        /* Carousel slider */
+        self.carouselDetailProduct = function () {
+            $(".owl-carousel").owlCarousel({
+                //get items to proportionate num of items
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                navigation: true,
+                //pagination: false,
+                autoplay: true,
+                items: 2,
+                loop: true,
+                margin: 0,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    600: {
+                        items: 1,
+                        nav: false
+                    },
+                    1000: {
+                        items: 1,
+                        nav: true,
+                        loop: false
+                    }
+                }
+            });
+        }
+
     }
 
     function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter) {
@@ -540,14 +663,14 @@
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
-        self.selectFilter = '';
+        self.selectFilter = '1';
         self.slugItem = $stateParams.slug;
         self.lines = [];
         self.brands = [];
         self.sizes = [];
         self.ready = false;
         self.taxonomies = [];
-        self.params = {};
+        self.params = {ordering:'name'};
         self.changeParams = false;
 
         // get post by category

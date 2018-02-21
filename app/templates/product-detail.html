@@ -1,53 +1,70 @@
-<div id="breadcrumb">
-    <div class="container">
-        <ol class="breadcrumb">
-            <li><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a></li>
-            <li ng-if="Product.detail.taxonomies.length"><a
-                    ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{ Product.detail.taxonomies[0].name }}</a>
-            </li>
-            <li class="active">{{ Product.detail.name }}</li>
-        </ol>
-    </div>
-</div>
-<hr class="no-margin">
-<section id="content-area" class="product-detail container" ng-controller="ShoppingCtrl as Shop">
-    <div class="col-sm-4">
-         <div id="carouse-principal" class="carousel slide" style="margin-bottom: 25px">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                <uib-carousel interval="5000" template-url="/templates/partials/carousel.html">
-                    <uib-slide ng-repeat="slide in Product.detail.attachments">
-                        <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                            <div class="detail-img" style="background-image:url('{{slide.url ? slide.url : initConfig.img_default}} ');"></div>
-                        </a>
-                    </uib-slide>
-                </uib-carousel>
-            </div>
+<div class="temp-product-detail">
+    <section id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a
+                    </li>
+                    <li class="breadcrumb-item" ng-if="Product.detail.taxonomies.length"><a
+                            ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{
+                        Product.detail.taxonomies[0].name }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ Product.detail.name }}</li>
+                </ol>
+            </nav>
         </div>
-    </div>
-    <div class="col-sm-8">
-        <h3 class="detail-title">{{Product.detail.name}}</h3>
-        <hr>
-        <div class="container-fluid text-left" ng-controller="AccessCtrl as Access">
-            <h3 class="detail-price">{{ Product.detail.price | currency}}</h3>
-            <div class="detail-qty">
-                <small>Cantidad</small>
-                <input type="number" placeholder="0" ng-model="Product.detail.qty" class="form-control cart-qty" min="1" required>
-            </div>
-            <div class="btn-product-detail">
-                <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+    </section>
+    <section class="article-content" ng-controller="ShoppingCtrl as Shop">
+        <div class="container">
+            <article class="row">
+                <div class="col-sm-4">
+                    <div class="owl-carousel owl-theme owl-theme-page">
+                        <div class="slider" ng-repeat="slide in Product.detail.attachments" ng-repeat-owl-carousel
+                             carousel-init="Product.carouselDetailProduct">
+                            <div class="item" style="width: 100%;">
+                                <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                                    <div class="slider-page" style="background-image:url('{{ slide.url }}');"></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <a href="http://www.sydgroup.mx/page/como-comprobar-la-autenticidad-del-producto"
+                           class="btn btn-dark">Como comprobar la autenticidad</a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="article-description">
+                        <h3>{{Product.detail.name}}</h3>
+                        <hr>
+                        <h3 class="text-warning">{{ Product.detail.price | currency}}</h3>
+                        <div class="detail-qty">
+                            <small>Cantidad</small>
+                            <input type="number" placeholder="0" ng-model="Product.detail.qty"
+                                   class="form-control cart-qty" min="1" required>
+                        </div>
+                        <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies}, Product.detail.qty)"
-                        ng-disabled="Shop.itemInCart(Product.detail.id)"
-                        class="btn btn-orange">Agregar a carrito</button>
-            </div>
-        </div>
+                                ng-disabled="Shop.itemInCart(Product.detail.id)"
+                                class="btn btn-danger">Agregar a carrito
+                        </button>
+                        <hr>
+                        <h4>Descripción</h4>
+                        <hr>
+                        <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
+                            {{Product.detail.description}}</h4>
+                        <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                                        price: Product.detail.price, image: Product.detail.featuredImage.url,
+                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies}, Product.detail.qty)"
+                                ng-disabled="Shop.itemInCart(Product.detail.id)"
+                                class="btn btn-danger">Agregar a carrito
+                        </button>
 
-        <div class="container-fluid">
-            <hr>
-            <h4>Descripción</h4>
-            <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
-                {{Product.detail.description}}</h4>
+                    </div>
+                </div>
+            </article>
         </div>
-    </div>
-</section>
+    </section>
+</div>

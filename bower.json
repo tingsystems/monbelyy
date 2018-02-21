@@ -17,7 +17,6 @@
     "owl.carousel": "^2.2.1",
     "angular-deckgrid": "^0.5.0",
     "lightbox2": "^2.10.0",
-    "angular-bootstrap": "^2.5.0",
     "ng-repeat-owl-carousel": "*",
     "angular-block-ui": "^0.2.2",
     "angular-scroll": "^1.0.2",
@@ -28,8 +27,9 @@
     "ng-file-upload": "^12.2.13",
     "angular-ui-select": "^0.19.8",
     "ng-table": "1.0.0",
-    "bootstrap": "3.3.6",
-    "ngSweetAlert": "angular-sweetalert#^1.1.2"
+    "ngSweetAlert": "angular-sweetalert#^1.1.2",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap": "^4.0.0"
   },
   "overrides": {
     "bootstrap": {

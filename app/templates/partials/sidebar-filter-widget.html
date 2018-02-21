@@ -1,0 +1,59 @@
+<div class="box-widget-default">
+    <h4 class="widget-title-first">Filtrar por</h4>
+    <div class="box-widget-container">
+        <select name="" id="price" class="form-control" ng-model="Product.selectFilter"
+                ng-change="Product.getProductsFilter(Product.selectFilter)">
+            <option value="1">Alfabeticamente de A-Z</option>
+            <option value="2">Precio menor</option>
+            <option value="3">Precio mayor</option>
+        </select>
+    </div>
+    <h4 class="widget-title">Marcas</h4>
+    <div class="box-widget-container" style="padding-bottom: 5px;">
+        <div ng-if="Product.brandSelected">
+            <p>{{Product.brandSelected.name}}
+                <a ng-click="Product.deleteFilter(Product.brandSelected, 'brand')">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </p>
+        </div>
+        <ul class="list" ng-if="!Product.brandSelected">
+            <md-radio-group ng-model="Product.brandSelected"
+                            ng-change="Product.getProductsFilter(Product.brandSelected)">
+                <md-radio-button ng-repeat="children in Product.brands " ng-value="children"
+                                 aria-label="{{ children.name }}" class="md-primary">
+                    {{children.name}}
+                </md-radio-button>
+            </md-radio-group>
+        </ul>
+    </div>
+    <h4 class="widget-title">Medidas</h4>
+    <div class="box-widget-container" style="padding-bottom: 5px;">
+        <div ng-if="Product.sizeSelected">
+            <p>{{Product.sizeSelected.name}}
+                <a ng-click="Product.deleteFilter(Product.sizeSelected, 'size')">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </p>
+        </div>
+        <ul class="list" ng-if="!Product.sizeSelected">
+            <md-radio-group ng-model="Product.sizeSelected"
+                            ng-change="Product.getProductsFilter(Product.sizeSelected)">
+                <md-radio-button ng-repeat="children in Product.sizes " ng-value="children"
+                                 aria-label="{{ children.name }}" class="md-primary">
+                    {{children.name}}
+                </md-radio-button>
+            </md-radio-group>
+        </ul>
+    </div>
+    <h4 class="widget-title">Tipos</h4>
+    <div class="box-widget-container" style="padding-bottom: 5px;">
+        <ul class="list">
+            <li ng-repeat="children in Product.lines">
+                <a href="#" target="_blank"><input type="radio" ng-model="children.id"
+                                                   ng-change="Product.getProductsFilter(children.slug)">
+                    {{children.name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

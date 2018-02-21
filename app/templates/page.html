@@ -1,13 +1,12 @@
-<div class="header-title-page">
+<div class="header-title-large">
     <div class="container">
-        <h1 class="prod-title col-md-12">{{ Page.detail.title }}</h1>
+        <h1 class="text-uppercase">{{ Page.detail.title }}</h1>
     </div>
 </div>
-<section id="content-area">
+<section class="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
-
+            <div class="col-md-9 col-sm-8">
                 <img ng-src="{{ Page.detail.urlImages.medium }}" alt="{{ Page.detail.title }}"/>
 
                 <div ng-bind-html="Page.detail.content | trustHtml"></div>
@@ -23,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 widgets">
+            <div class="col-md-3 col-sm-4 widgets">
                 <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
             </div>
         </div>

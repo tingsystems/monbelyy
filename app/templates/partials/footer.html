@@ -1,43 +1,40 @@
 <div id="footer-top">
     <div class="container">
-        <div class="col-sm-4 contact-sty">
-            <h3>
-                Información
-            </h3>
-            <ul class="list">
-                <li ng-repeat="post in information">
-                    <a class="contact-foo-side" ui-sref="post_detail({slug: post.slug})">
-                        <span>{{ post.title }}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-4 contact-sty">
-            <h3>Contáctanos</h3>
-            <ul class="list">
-                <li ng-repeat="post in contactMenuData">
-                    <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
-                            ng-bind-html="post.content | trustHtml"></span></a>
-                </li>
-            </ul>
-            <ul class="list-social-media text-left">
-                <li ng-repeat="post in socialMedia">
-                    <a class="contact-foo-side" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i> <span
-                            ng-bind-html="post.content | trustHtml"></span></a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-4 contact-sty payment-type">
-            <h3>Formas de pago</h3>
-            <i><img src="img/paypal-1.png" alt="Paypal"></i>
-            <i><img src="img/master-card.png" alt="Master card"></i>
-            <i><img src="img/american.png" alt="American express"></i>
-            <i><img src="img/visa.png" alt="Visa"></i>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="box-contact">
+                    <h3>
+                        Información
+                    </h3>
+                    <div class="list-icons-add" ng-repeat="post in information">
+                        <a class="nav-link" href="{{ post.link }}"> {{ post.title }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box-contact">
+                    <h3>Contáctanos</h3>
+                    <div class="list-icons-add" ng-repeat="post in contactData">
+                        <a class="nav-link" href="{{ post.excerpt }}"><i class="{{ post
+                    .title }}"></i> <span
+                                ng-bind-html="post.content | trustHtml"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box-contact">
+                    <h3>Formas de pago</h3>
+                    <i><img src="img/paypal-1.png" alt="Paypal"></i>
+                    <i><img src="img/master-card.png" alt="Master card"></i>
+                    <i><img src="img/american.png" alt="American express"></i>
+                    <i><img src="img/visa.png" alt="Visa"></i>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="text-center bottom-footer">
-    <p class="white">© 2018 Guaumart S.A de C.V. , Todos los Derechos Reservados.</p>
+    <p class="white">© 2018 Sydgroup , Todos los Derechos Reservados.</p>
 </div>
 
     

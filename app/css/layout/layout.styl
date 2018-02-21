@@ -1,11 +1,111 @@
-catext = #565656
-catext2 = #676767
-catext3 = #717171
-cablack = #323232
-cagreen = #1887ce
-cagreenh = #7e1a1d
-primary = #555555
-monsyellow = #ffa500
+/*------------------------
+-------- LAYOUT -------
+-- THEME BY TINGSYSTEMS --
+-------------------------*/
+body
+  background-color white
+  color fontClr
+  font font-size 'Poppins', sans-serif
+  .content-area-web
+    background-color white
+
+h1,h2,h3,h4,h5, h6
+  margin 0
+  font-weight 700
+
+strong
+  font-weight 700
+
+p, span
+  font-weight 400
+  font font-size 'Poppins', sans-serif
+
+.content-area
+  padding 30px 0
+
+.article-content
+  padding 60px 0
+
+/* - HEADER STYLES LAYOUT - */
+.three-rows-nav
+  .social
+    text-align right
+    .list-icons-add
+      display none
+      &:nth-child(2), &:nth-child(6)
+        display inline !important
+
+
+
+/* ------ HOME STYLE ----- */
+#home
+  /* sections in home page */
+  .section-one, .section-two,
+  .section-three, .section-four,
+  .section-five, .section-six,
+  .section-seven
+    padding 80px 0
+
+  /* SECTION 0NE */
+  .section-one
+    background-color #f1f1f1
+    a
+      color danger
+    p
+      font-size 18px
+      padding-right 15px
+    img
+      padding 0 30px 30px
+
+  /* SECTION TWO */
+
+  // silence is golg ..
+
+  /* SECTION THREE */
+  .section-three
+    text-align center
+    background-color #f1f1f1
+    p
+      font-size 18px
+
+  /* SECTION FOUR */
+  .section-four
+    .list-group
+      margin-bottom 15px
+
+  /* SECTION FIVE */
+  .section-five
+    background-color #f1f1f1
+    .text-center
+      margin 0 auto
+      padding-top 20px
+
+  /* SECTION SIX */
+  .section-six
+    .box-simple
+      background-color transparent
+      box-shadow none
+      border none
+
+  /* SECTION SEVEN */
+  .section-seven
+    background-color danger
+    .title-primary
+      h3
+        color white
+    a
+      color white
+
+/* ------ CATEGORIES STYLE ----- */
+.temp-categories
+  .title-primary
+    text-align left
+
+.temp-product-detail
+  h3
+    color fontClr
+  h4
+    color fontClr
 
 .text-left
   text-align left !important
@@ -84,28 +184,9 @@ img
   overflow hidden
 text-right
   text-align right
-h1,
-h2,
-h3,
-h4,
-h5,
-h6
-  margin 0 0 15px
-  font-weight 500
-  font-family 'Poppins', sans-serif
 
 .section_padding
   padding: 80px 0
-
-p
-  font-family 'Poppins', sans-serif
-  font-weight 300
-  font-size 16px
-
-body
-  font-family 'Poppins', sans-serif
-  background white
-  color #555
 
 .white
   color white !important
@@ -225,26 +306,7 @@ i
 .log-section-mobile
   display none
 
-.navbar-info
-  .list-social li i
-    margin-top 10px
 
-  .list-social li:nth-last-child(1)
-    display none
-  .dropdown-menu
-    z-index 99999
-  .shopping-cart
-    font-size 18px
-    padding-left 20px 
-    margin-top 3px
-    a
-      font-size 24px
-      font-weight 100
-      &:hover
-        text-decoration none
-    .ion-ios-cart-outline
-      font-size 36px
-      vertical-align middle
 .shopping-cart a > i
   font-size 32px  !important
 ​
@@ -313,7 +375,7 @@ header
   text-align center
 
   .navbar-default
-    background-color #ff9039
+    background-color mainColor
     left 0
     right 0
     height 70px
@@ -997,49 +1059,7 @@ header
 
 .see-more
   padding 25px
-.box-widget-white
-  background-color #f9f9f9
-  border none 
-  border-radius 3px
-  box-shadow 0 0 10px rgba(0,0,0,0.05)
-  padding 15px
-  .widget-title-first
-    background transparent
-    padding 10px 5px
-    color #555 !important
-    border-bottom 1px solid #eee
-  ul 
-    li > a
-      color #555555
-      text-decoration none
-      &:hover
-        color #ff7300
-.box-widget
-  padding: 5px 0;
-  border: 1px solid #eee;
-  border-radius: 5px;
-  .widget-title
-    padding-left 10px
-    font-weight bold
-    padding 20px 10px
-    margin 0
-  .box-widget-header
-    padding 10px
-    border-bottom 1px solid #ddd
-    font-size 22px
-    background-color transparent
-    color #746857
-  .box-widget-container
-    padding 5px
-    h3>a, h2>a
-      font-size 14px
-      color catext
-      font-weight 300
-      &:hover
-        color cagreen
-    h2
-      font-size 18px
-      color #6a5c5d
+
 .box-doc
   margin 5px 60px !important
   padding 0
@@ -1130,7 +1150,6 @@ header
     background-repeat no-repeat
     background-position right
 .box-simple
-  margin 25px
   .box-header
     .img-box
       background-size cover
@@ -1986,54 +2005,9 @@ footer
   text-align center
   a
     color #1b449c
-.owl-nav
-  display none
 
 /*transition tabs*/
-.tab-pane
-  border none !important
-.nav-tabs.nav-justified > li > a
-  border-bottom 1px solid #ccc
-.nav-tabs.nav-justified > .active > a
-  border-bottom 2px solid monsyellow !important
-.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus
-  color monsyellow
-  background whitesmoke
-  border-right none
-  border-left none
-  border-top none
-.nav-tabs.nav-justified > li > a
-  font-size 18px
-  color #555
-  text-align left
-.tab-pane
-  padding 15px
-  background-color transparent
-#products
-  padding 0
-  text-aling center
-  h2
-    color #38270f
-.tabs-left
-  border-bottom none
-  border-top 1px solid #ccc
-.tabs-left > li
-  float none
-  text-align left
-.tab-animation
-  & > .tab-content
-    position relative
-    & > .tab-pane
-      transition 0.3s linear opacity
-      &.active-remove
-        position absolute
-        top 0
-        width 100%
-        display block
-      &.active-remove-active
-        opacity 0
-      &.active-add
-        opacity 0
+
 
 .margin10
   margin-bottom 15px
@@ -2047,8 +2021,6 @@ footer
   background-size cover
   background-position center center
 
-.box-footer
-  padding-top 35px
 .height-title
   height auto
 
@@ -2299,16 +2271,4 @@ footer
 .login-content
   padding 15px 0
 
-.owl-carousel
-  text-align center
-  .owl-item
-    padding 15px
-    text-align center
 
-.owl-carousel .owl-item img
-  width auto
-  height 100px
-  margin 0 auto
-  opacity 0.6
-  &:hover
-    opacity 1

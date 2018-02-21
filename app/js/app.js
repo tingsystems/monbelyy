@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
+                data: {pageTitle: 'Sydgroup'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
+                data: {pageTitle: 'Sydgroup'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -109,7 +109,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
+                data: {pageTitle: 'Sydgroup'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Guaumart - ¡El Súper para los MVZ!'},
+                data: {pageTitle: 'Sydgroup'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -166,7 +166,7 @@
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
         $rootScope.siteId = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
-        $http.defaults.headers.common['PROJECT-ID'] = 'bcfad72f-9e31-47d4-9dbd-c419907224fe';
+        $http.defaults.headers.common['PROJECT-ID'] = '6eeafae0-527d-4983-a4ae-3efca37c777d';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -189,7 +189,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Guaumart - ¡El Súper para los MVZ!',
+                'title': 'Sydgroup',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -198,7 +198,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
+        $rootScope.pageTitle = 'Sydgroup';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -213,7 +213,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'daa177e5-d3e9-48ec-b8a0-764b3ff5dd8b',
+                parent: 'cb683254-9fa5-4107-8410-314434534ab5',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -221,59 +221,26 @@
             }, function (error) {
             });
         }
-        /*
 
-        if (!$rootScope.NavMenuSocial) {
-            TaxonomySrv.query({
-                parent: '61265a3d-c57f-41a1-9a92-7db5458a3cde',
-                isActive: 'True',
-                ordering: 'order'
-            }).$promise.then(function (response) {
-                $rootScope.NavMenuSocial = response;
-            }, function (error) {
-            });
-        }
-
-        if (!$rootScope.information) {
-            TaxonomySrv.query({
-                parent: 'a0734bc0-6325-4f4a-b6cf-f8181db71e12',
-                isActive: 'True',
-                ordering: 'order'
-            }).$promise.then(function (response) {
-                $rootScope.information = response;
-            }, function (error) {
-            });
-        }
-        if (!$rootScope.contactHelp) {
-            TaxonomySrv.query({
-                parent: 'f2d48db9-e7ac-4dfc-aeeb-da6ca4aaec19',
-                isActive: 'True',
-                ordering: 'order'
-            }).$promise.then(function (response) {
-                $rootScope.contactHelp = response;
-            }, function (error) {
-            });
-        }
-        */
-
-        if (!$rootScope.contactMenuData) {
+        if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1516809822',
+                taxonomies: 'datos-de-contacto1519171485',
                 isActive: 'True',
                 pageSize: 5,
-                ordering: '-createdAt',
+                ordering: 'createdAt',
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
-                $rootScope.contactMenuData = results.results;
+                $rootScope.contactData = results.results;
             });
+
         }
 
         if (!$rootScope.information) {
             EntrySrv.get({
-                taxonomies: 'informacion1516811553',
+                taxonomies: 'informacion1519171615',
                 isActive: 'True',
                 pageSize: 5,
-                ordering: '-createdAt',
+                ordering: 'createdAt',
                 fields: 'title,link,excerpt,content,slug'
             }).$promise.then(function (results) {
                 $rootScope.information = results.results;
@@ -282,16 +249,15 @@
 
         if (!$rootScope.socialMedia) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1516810771',
+                taxonomies: 'redes-sociales1519072192',
                 isActive: 'True',
-                pageSize: 5,
-                ordering: '-createdAt',
-                fields: 'title,link,excerpt,content'
+                pageSize: 6,
+                ordering: 'createdAt',
+                fields: 'title,content,attachments,slug,excerpt,link'
             }).$promise.then(function (results) {
                 $rootScope.socialMedia = results.results;
             });
         }
-
 
         $rootScope.ecommerce = true;
 
