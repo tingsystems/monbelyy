@@ -3,23 +3,14 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 detail-payment-shop">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-item">
+                    <md-input-container md-no-float >
                         <label for="address1">Selecciona una direccion de envio</label>
-                        <ui-select on-select="Payment.selectedAddress($model)"
-                                   ng-model="Payment.address" id="address1" name="address1"
-                                   title="Direccion"
-                                   ng-disabled="!Payment.addresses.length"
-                                   required>
-                            <ui-select-match placeholder="Selecciona una dirección de envio *..."
-                                             allow-clear="true">
-                                {{$select.selected.address}}
-                            </ui-select-match>
-                            <ui-select-choices
-                                    repeat="address.id as address in Payment.addresses | filter: {address: $select.search}">
-                                <div ng-bind-html="address.address | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
+                        <md-select ng-model="Payment.address" id="address1" name="address1" title="Direccion" required>
+                            <md-option ng-repeat="address in Payment.addresses"  ng-value="address">
+                                {{ address.address }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
                 </div>
             </div>
         </div>

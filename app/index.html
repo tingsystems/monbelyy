@@ -86,14 +86,11 @@
                 <div class="col-sm-6" ng-controller="GetQuerySearchCtrl as Search">
                     <form name="search" role="search" class="input-search"
                           ng-submit="Search.globalSearch('product')">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="validationServerUsername" placeholder="Buscar"
+                        <md-input-container  md-no-float>
+                            <input id="validationServerUsername" placeholder="Buscar"
                                    aria-describedby="inputGroupPrepend3" ng-model="Search.searchTerm" required>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend3"><i
-                                        class="fa fa-search"></i></span>
-                            </div>
-                        </div>
+                            <md-icon class="fa fa-search"></md-icon>
+                        </md-input-container>
                     </form>
                 </div>
                 <div class="col-sm-3 social">
@@ -129,15 +126,15 @@
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a ng-if="Access.isAuthenticated()" class="dropdown-toggle btn-danger" type="button"
+                            <button ng-if="Access.isAuthenticated()" class="dropdown-toggle btn btn-dark" type="button"
                                id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <i class="ion-ios-person"></i> {{user.username}}
                                 <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a ui-sref="dashboard">Mi cuenta</a></li>
-                                <li><a href="" ng-click="Access.logout()">Cerrar sesión</a></li>
-                            </ul>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <a ui-sref="dashboard" class="dropdown-item">Mi cuenta</a>
+                                <a href="" ng-click="Access.logout()" class="dropdown-item"> Cerrar sesión</a>
+                            </div>
                         </li>
                     </ul>
                 </div>

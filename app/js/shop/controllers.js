@@ -273,6 +273,7 @@
         $rootScope.items = $localStorage.items;
         self.params.customer = self.customer;
         self.sendOptions = "0";
+
         AddressSrv.query({customer: self.customer}).$promise.then(function (data) {
             self.addresses = data;
         }, function (error) {
@@ -285,7 +286,7 @@
             if (!self.address) {
                 newShippingAddress();
             } else {
-                $localStorage.appData.user.address = self.address;
+                $localStorage.appData.user.address = self.address.id;
                 $state.go('checkout', {shipping: self.sendOptions});
             }
         };
@@ -305,6 +306,8 @@
                 }
             });
             address.customer = self.customer;
+            address.state = self.state.id;
+            address.city = self.city.id;
             self.busy = true;
             AddressSrv.save(address).$promise.then(function (data) {
                 $localStorage.appData.user.address = data.id;
@@ -328,27 +331,45 @@
 
         // get all the states
         self.busyState = true;
-        StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
-            self.states = data;
-            self.busyState = false;
-        }, function (error) {
-            self.busyState = false;
-        });
 
-        self.getCitiesByState = function (state_id) {
-            if (!state_id) {
-                self.city = null;
-                self.cities = [];
+        self.getStates = function () {
+            if (!self.states) {
+                StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+                    self.states = data;
+                    self.busyState = false;
+                    self.disableCity = false;
+                }, function (error) {
+                    self.busyState = false;
+                });
+            }
+
+        };
+
+        self.clearCities = function () {
+            self.cities = [];
+        };
+
+        // get the cities by state
+        self.getCitiesByState = function () {
+            console.log('lalalalal');
+            if (!self.state) {
                 return
             }
             self.busyCity = true;
-            StateSrv.getCities({state: state_id, ordering: 'name'}).$promise.then(function (response) {
-                self.cities = response;
+            if (self.cities.length < 1) {
+                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                    self.cities = response;
+                    self.busyCity = false;
+                }, function (error) {
+                    self.busyCity = false;
+                });
+            }
+            else {
                 self.busyCity = false;
-            }, function (error) {
-                self.busyCity = false;
-            });
+            }
+
         };
+
     }
 
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams) {
@@ -667,6 +688,8 @@
                 self.paypalCancel($stateParams.token);
             }
         }
+
+
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {

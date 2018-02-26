@@ -1,174 +1,204 @@
 <div id="content-area">
     <div class="container">
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <h4>Seleccione el método de pago</h4>
-                <div class="panel-group" id="accordion">
-                    <!--<div class="panel panel-default">
-                        <div class="panel-heading panel-white">
-                            <h4 class="panel-title">
-                                <input type="radio" value="8" name="paymentType" id="creditCard"
-                                       ng-click="Payment.creditCard=!Payment.creditCard"
-                                       ng-model="Payment.orderPaymentType">
-                                <span class="fa fa-credit-card-alt">
-                                    <label for="creditCard">Tarjeta de crédito</label>
+        <div class="row">
+            <div class="col-md-6">
+                <md-radio-group ng-model="Payment.orderPaymentType">
+                    <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard">Mercado pago</md-radio-button>
+                    <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal"> Pago con paypal </md-radio-button>
+                    <md-radio-button value="6" ng-click="Payment.depositBank=!Payment.depositBank">Depósito bancario</md-radio-button>
+                </md-radio-group>
+                <div class="col-md-12">
+                    <h4><i class="fa fa-money"></i> Seleccione el método de pago</h4>
+
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading panel-white">
+                                <h4 class="panel-title">
+                                    <input type="radio" value="8" name="paymentType" id="creditCard"
+                                           ng-click="Payment.creditCard=!Payment.creditCard"
+                                           ng-model="Payment.orderPaymentType">
+                                    <span class="fa fa-credit-card-alt">
+                                    <label for="creditCard">Mercado pago</label>
                                 </span>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" ng-if="Payment.creditCard" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-12">
-                                        <div class="panel-default credit-card-box">
-                                            <div class="panel-heading display-table">
-                                                <div class="row display-tr">
-                                                    <div class="display-td">
-                                                        <img class="img-responsive pull-right"
-                                                             src="http://i76.imgup.net/accepted_c22e0.png">
+                                </h4>
+                            </div>
+                            <div ng-if="Payment.creditCard">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                            <div class="panel-default credit-card-box">
+                                                <div class="panel-heading display-table">
+                                                    <div class="row display-tr">
+                                                        <div class="display-td">
+                                                            <img class="img-responsive pull-right"
+                                                                 src="http://i76.imgup.net/accepted_c22e0.png">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="panel-body">
-                                                <form role="form" name="Form" id="payment-form" ng-submit="Payment.processPayment()" novalidate>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group" ng-class="{ 'has-error': Form.name.$touched && Form.name.$invalid }">
-                                                                <label for="name">TITULAR</label>
-                                                                <input type="text" class="form-control"
-                                                                       ng-model="Payment.payment.card.name"
-                                                                       name="name"
-                                                                       placeholder="Nombre del titular"
-                                                                       id="name" data-conekta="card[name]" required/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <div class="form-group" ng-class="{ 'has-error': Form.cardNumber.$touched && Form.cardNumber.$invalid }">
-                                                                <label for="cardNumber">NÚMERO DE TARJETA</label>
-                                                                <div class="input-group">
+                                                <div class="panel-body">
+                                                    <form role="form" name="Form" id="payment-form"
+                                                          ng-submit="Payment.processPayment()" novalidate>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class="form-group"
+                                                                     ng-class="{ 'has-error': Form.name.$touched && Form.name.$invalid }">
+                                                                    <label for="name">TITULAR</label>
                                                                     <input type="text" class="form-control"
-                                                                           ng-model="Payment.payment.card.number"
-                                                                           name="cardNumber"
-                                                                           id="cardNumber" maxlength="20"
-                                                                           placeholder="Número de tarjeta"
-                                                                           data-conekta="card[number]" required/>
-                                                                    <span  ng-if="Payment.payment.card.number == undefined" class="input-group-addon"><i
-                                                                            class="fa fa-credit-card"></i></span>
-                                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='4'" class="input-group-addon"><i
-                                                                            class="fa fa-cc-visa"></i></span>
-                                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='5'" class="input-group-addon"><i
-                                                                            class="fa fa-cc-mastercard"></i></span>
+                                                                           ng-model="Payment.payment.card.name"
+                                                                           name="name"
+                                                                           placeholder="Nombre del titular"
+                                                                           id="name" data-conekta="card[name]"
+                                                                           required/>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12 col-md-7">
-                                                            <div class="form-group">
-                                                                <label><span class="hidden-xs">FECHA DE EXPIRACIÓN</span>
-                                                                    <span class="visible-xs-inline">EXP</span></label>
-                                                                <div class="col-md-6" ng-class="{ 'has-error': Form.cardExpiryM.$touched && Form.cardExpiryM.$invalid }">
-                                                                    <input type="text" class="form-control"
-                                                                           ng-model="Payment.payment.card.exp_month"
-                                                                           name="cardExpiryM" maxlength="2"
-                                                                           id="monthExpiry" placeholder="MM"
-                                                                           data-conekta="card[exp_month]" required>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class="form-group"
+                                                                     ng-class="{ 'has-error': Form.cardNumber.$touched && Form.cardNumber.$invalid }">
+                                                                    <label for="cardNumber">NÚMERO DE TARJETA</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" class="form-control"
+                                                                               ng-model="Payment.payment.card.number"
+                                                                               name="cardNumber"
+                                                                               id="cardNumber" maxlength="20"
+                                                                               placeholder="Número de tarjeta"
+                                                                               data-conekta="card[number]" required/>
+                                                                        <span ng-if="Payment.payment.card.number == undefined"
+                                                                              class="input-group-addon"><i
+                                                                                class="fa fa-credit-card"></i></span>
+                                                                        <span ng-if="Payment.payment.card.number.substr(0,1)=='4'"
+                                                                              class="input-group-addon"><i
+                                                                                class="fa fa-cc-visa"></i></span>
+                                                                        <span ng-if="Payment.payment.card.number.substr(0,1)=='5'"
+                                                                              class="input-group-addon"><i
+                                                                                class="fa fa-cc-mastercard"></i></span>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-6" ng-class="{ 'has-error': Form.cardExpiryY.$touched && Form.cardExpiryY.$invalid }">
-                                                                    <input type="text" class="form-control"
-                                                                           ng-model="Payment.payment.card.exp_year"
-                                                                           name="cardExpiryY" maxlength="4"
-                                                                           id="yearExpiry" placeholder="AAAA"
-                                                                           required data-conekta="card[exp_year]">
-                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-md-7">
+                                                                <div class="form-group">
+                                                                    <label><span
+                                                                            class="hidden-xs">FECHA DE EXPIRACIÓN</span>
+                                                                        <span class="visible-xs-inline">EXP</span></label>
+                                                                    <div class="col-md-6"
+                                                                         ng-class="{ 'has-error': Form.cardExpiryM.$touched && Form.cardExpiryM.$invalid }">
+                                                                        <input type="text" class="form-control"
+                                                                               ng-model="Payment.payment.card.exp_month"
+                                                                               name="cardExpiryM" maxlength="2"
+                                                                               id="monthExpiry" placeholder="MM"
+                                                                               data-conekta="card[exp_month]" required>
+                                                                    </div>
+                                                                    <div class="col-md-6"
+                                                                         ng-class="{ 'has-error': Form.cardExpiryY.$touched && Form.cardExpiryY.$invalid }">
+                                                                        <input type="text" class="form-control"
+                                                                               ng-model="Payment.payment.card.exp_year"
+                                                                               name="cardExpiryY" maxlength="4"
+                                                                               id="yearExpiry" placeholder="AAAA"
+                                                                               required data-conekta="card[exp_year]">
+                                                                    </div>
 
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-12 col-md-5 pull-right">
+                                                                <div class="form-group"
+                                                                     ng-class="{ 'has-error': Form.cardCVC.$touched && Form.cardCVC.$invalid }">
+                                                                    <label for="cardCVC">CÓDIGO CV</label>
+                                                                    <input type="text" class="form-control"
+                                                                           name="cardCVC"
+                                                                           ng-model="Payment.payment.card.cvc"
+                                                                           id="cardCVC" placeholder="CVC" maxlength="5"
+                                                                           required data-conekta="card[cvc]">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-xs-12 col-md-5 pull-right">
-                                                            <div class="form-group" ng-class="{ 'has-error': Form.cardCVC.$touched && Form.cardCVC.$invalid }">
-                                                                <label for="cardCVC">CÓDIGO CV</label>
-                                                                <input type="text" class="form-control" name="cardCVC"
-                                                                       ng-model="Payment.payment.card.cvc"
-                                                                       id="cardCVC" placeholder="CVC" maxlength="5"
-                                                                       required data-conekta="card[cvc]">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <button ng-disabled="Form.$invalid"
+                                                                        class="subscribe btn btn-blue btn-lg btn-block"
+                                                                        type="submit">Procesar Pago
+                                                                </button>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <button ng-disabled="Form.$invalid" class="subscribe btn btn-blue btn-lg btn-block"
-                                                                    type="submit">Procesar Pago
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>-->
-                    <div class="panel panel-default">
-                        <div class="panel-heading panel-white">
-                            <h4 class="panel-title">
-                                <input type="radio" value="3" id="paypal" ng-click="Payment.paypal=!Payment.paypal"
-                                       name="paymentType" ng-model="Payment.orderPaymentType">
-                                <span class="fa fa-paypal type-payment">
+                        <div class="panel panel-default">
+                            <div class="panel-heading panel-white">
+                                <h4 class="panel-title">
+                                    <input type="radio" value="3" id="paypal" ng-click="Payment.paypal=!Payment.paypal"
+                                           name="paymentType" ng-model="Payment.orderPaymentType">
+                                    <span class="fa fa-paypal type-payment">
                                     <label for="paypal"> Pago con paypal</label>
                                 </span>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" ng-if="Payment.paypal" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="row text-center">
-                                    <div class="col-md-12">
-                                        <!--<p>Luego de hacer clic en "Finalizar el pedido", serás
-                                            redirigido a PayPal para completar tu compra de forma segura.</p>-->
-                                        <img src="../../img/paypall.png" alt="" width="200">
-                                        <p>Realice su pago, con la facilidad de Paypal.</p>
-                                    </div>
-                                    <button ng-if="Payment.paypal" class="btn btn-blue" ng-click="Payment.createOrder()">{{Payment.paypalBtn}}<span ng-show="Payment.busyPaypal"><i class="fa fa-spinner fa-spin"></i>
+                                </h4>
+                            </div>
+                            <div ng-if="Payment.paypal">
+                                <div class="panel-body">
+                                    <div class="row text-center">
+                                        <div class="col-md-12">
+                                            <!--<p>Luego de hacer clic en "Finalizar el pedido", serás
+                                                redirigido a PayPal para completar tu compra de forma segura.</p>-->
+                                            <img src="../../img/paypall.png" alt="" width="200">
+                                            <p>Realice su pago, con la facilidad de Paypal.</p>
+                                        </div>
+                                        <button ng-if="Payment.paypal" class="btn btn-blue"
+                                                ng-click="Payment.createOrder()">{{Payment.paypalBtn}}<span
+                                                ng-show="Payment.busyPaypal"><i class="fa fa-spinner fa-spin"></i>
                                     </span>
-                                        <div class="md-ripple-container"></div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading panel-white">
-                            <h4 class="panel-title">
-                                <input type="radio" id="depositBank" ng-click="Payment.depositBank=!Payment.depositBank" value="6" name="paymentType" ng-model="Payment.orderPaymentType">
-                                <span class="fa fa-university type-payment">
-                                    <label for="depositBank"> Depósito bancario</label></span>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" ng-if="Payment.depositBank" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <div class="row text-center">
-                                    <div class="col-md-12">
-                                        <p>Haz click en el boton "Finalizar compra", para obtener el número de cuenta.
-                                            Después de realizar el depósito, por favor ponte en contacto
-                                            con Moons Aquariums para finalizar su compra y realizar el envío.</p>
+                                            <div class="md-ripple-container"></div>
+                                        </button>
                                     </div>
-                                    <button ng-if="Payment.depositBank" class="btn btn-blue" ng-click="Payment.createOrder()">Finalizar compra</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading panel-white">
+                                <h4 class="panel-title">
+                                    <input type="radio" id="depositBank"
+                                           ng-click="Payment.depositBank=!Payment.depositBank" value="6"
+                                           name="paymentType" ng-model="Payment.orderPaymentType">
+                                    <span class="fa fa-university type-payment">
+                                    <label for="depositBank"> Depósito bancario</label></span>
+                                </h4>
+                            </div>
+                            <div ng-if="Payment.depositBank">
+                                <div class="panel-body">
+                                    <div class="row text-center">
+                                        <div class="col-md-12">
+                                            <p>Haz click en el boton "Finalizar compra", para obtener el número de
+                                                cuenta.
+                                                Después de realizar el depósito, por favor ponte en contacto
+                                                con Moons Aquariums para finalizar su compra y realizar el envío.</p>
+                                        </div>
+                                        <button ng-if="Payment.depositBank" class="btn btn-blue"
+                                                ng-click="Payment.createOrder()">Finalizar compra
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 text-center" style="margin-top: 20px">
-                <div class="col-md-6"><button ui-sref="shipping-address" class="btn btn-blue">Volver a dirección de envío</button></div>
-                <div class="col-md-6">
-                    <!--<button ng-if="Payment.depositBank" class="btn btn-cart" ui-sref="checkout">Finalizar compra</button>-->
+                <div class="col-md-12 text-center" style="margin-top: 20px">
+                    <div class="col-md-6">
+                        <button ui-sref="shipping-address" class="btn btn-blue">Volver a dirección de envío</button>
+                    </div>
+                    <div class="col-md-6">
+                        <!--<button ng-if="Payment.depositBank" class="btn btn-cart" ui-sref="checkout">Finalizar compra</button>-->
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 cart-detail-ship">
-            <ng-include src="'/templates/shop/partials/cart-details.html'"></ng-include>
+            <div class="col-md-6 cart-detail-ship">
+                <ng-include src="'/templates/shop/partials/cart-details.html'"></ng-include>
+            </div>
         </div>
     </div>
 </div>

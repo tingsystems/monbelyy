@@ -1,20 +1,26 @@
-<div class="col-md-12 text-center">
-    <h3><i class="ion-ios-cart-outline"></i> Resumen de tu pedido</h3>
+<div class="col-md-12">
+    <h3><i class="ion-ios-cart"></i> Resumen de tu pedido</h3>
+    <br>
 </div>
 <div class="col-md-12 text-center" ng-repeat="item in Payment.items">
-    <div class="col-md-6">
-        <img ng-src="{{item.image}}" alt="" width="100">
-    </div>
-    <div class="col-md-6 pull-rigth list-inline items-incart">
-        <div class="col-md-6"><span>{{ item.name | characters: 30 }}</span></div>
-        <div class="col-md-6"><span class="pull-right">{{item.price | currency}}</span></div>
+    <div class="row">
+        <div class="col-md-4">
+            <img ng-src="{{item.image}}" alt="" width="100">
+        </div>
+        <div class="col-md-8 list-inline items-incart text-right">
+            <div class="row">
+                <div class="col-md-5"><span>{{ item.name | characters: 30 }}</span></div>
+                <div class="col-md-3"><span class="pull-right">{{ item.price | currency }}</span></div>
+                <div class="col-md-4 no-padding"><span class="pull-right"> <strong>{{item.qty}}</strong> x  {{ item.qty * item.price | currency }}</span></div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="col-sm-12 col-md-12" ng-controller="ShopCartCtrl as ShopCart">
-    <div class="details-prodpay">
+    <div class="row details-prodpay">
         <!--<h4 class="text-center">Resumen de pedido</h4>-->
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped text-right">
                 <tbody>
                 <tr>
                     <td>Subtotal</td>
@@ -48,8 +54,12 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <button ng-click="ShopCart.validCoupon()" class="btn btn-blue" style="margin-top: 7%" ng-if="!ShopCart.codeUsed">Aplicar</button>
-                <button ng-click="ShopCart.removeCoupon()" class="btn btn-blue" style="margin-top: 7%" ng-if="ShopCart.codeUsed">Eliminar</button>
+                <button ng-click="ShopCart.validCoupon()" class="btn btn-blue" style="margin-top: 7%"
+                        ng-if="!ShopCart.codeUsed">Aplicar
+                </button>
+                <button ng-click="ShopCart.removeCoupon()" class="btn btn-blue" style="margin-top: 7%"
+                        ng-if="ShopCart.codeUsed">Eliminar
+                </button>
             </div>
         </div>
     </div>
@@ -82,4 +92,4 @@
             </div>
         </div>
     </div>
-
+</div>

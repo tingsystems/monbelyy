@@ -1,108 +1,123 @@
-<section class="content-dashboard">
-    <div class="container">
-        <div class="col-md-3">
-            <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
-        </div>
-        <div class="col-md-9">
-            <section id="content-contact">
-                <div class="contact-section">
-                    <div class="col-md-12 title-post">
-                        <h3 class="info2"><i class="ion-person"></i> Información personal</h3>
-                        <hr/>
-                    </div>
-                    <div class="col-md-12">
-                        <form class="padding form-horizontal" ng-submit="Profile.submitForm()">
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-item">
-                                    <label for="name">Nombre Completo</label>
-                                    <input ng-model="Profile.profileData.businessName" type="text"
-                                           class="form-control" id="name" name="name"
-                                           placeholder="Nombre"
-                                           required>
+<div class="temp-dashboard">
+    <section class="content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
+                </div>
+                <div class="col-md-9">
+                    <div class="items-dashboard">
+                        <div class="col-md-12">
+                            <h4><i class="ion-person"></i> Información personal</h4>
+                            <hr/>
+                        </div>
+                        <div class="col-md-12">
+                            <form class="padding form-horizontal" ng-submit="Profile.submitForm()">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name">Nombre Completo</label>
+                                            <input ng-model="Profile.profileData.businessName" type="text"
+                                                   class="form-control" id="name" name="name"
+                                                   placeholder="Nombre"
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="user">Usuario</label>
+                                            <input ng-model="Profile.profileData.username" type="text"
+                                                   class="form-control"
+                                                   id="user" name="user"
+                                                   placeholder="Usuario" disabled
+                                                   required>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-item">
-                                    <label for="user">Usuario</label>
-                                    <input ng-model="Profile.profileData.username" type="text" class="form-control"
-                                           id="user" name="user"
-                                           placeholder="Usuario" disabled
-                                           required>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-item">
-                                    <label for="email">Correo electrónico</label>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Correo electrónico</label>
 
-                                    <input ng-model="Profile.profileData.email" type="email" class="form-control"
-                                           id="email" name="email"
-                                           placeholder="Correo electrónico" required>
+                                            <input ng-model="Profile.profileData.email" type="email"
+                                                   class="form-control"
+                                                   id="email" name="email"
+                                                   placeholder="Correo electrónico" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="state">Estado</label>
+                                            <ui-select on-select="Profile.getCitiesByState($model)"
+                                                       title="Estado" ng-model="Profile.profileData.state"
+                                                       name="states"
+                                                       id="state" required>
+                                                <ui-select-match placeholder="Selecciona un Estado *..."
+                                                                 allow-clear="true">
+                                                    {{$select.selected.name}}
+                                                </ui-select-match>
+                                                <ui-select-choices
+                                                        repeat="state.id as state in Profile.states | filter: {name: $select.search}">
+                                                    <div ng-bind-html="state.name | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-item">
-                                    <label for="state">Estado</label>
-                                    <ui-select on-select="Profile.getCitiesByState($model)"
-                                               title="Estado" ng-model="Profile.profileData.state"
-                                               name="states"
-                                               id="state" required>
-                                        <ui-select-match placeholder="Selecciona un Estado *..."
-                                                         allow-clear="true">
-                                            {{$select.selected.name}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                                repeat="state.id as state in Profile.states | filter: {name: $select.search}">
-                                            <div ng-bind-html="state.name | highlight: $select.search"></div>
-                                        </ui-select-choices>
-                                    </ui-select>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="city">Ciudad</label>
+                                            <ui-select ng-model="Profile.profileData.city" id="city" name="cities"
+                                                       ng-required="Profile.profileData.state"
+                                                       ng-disabled="Profile.busyCity"
+                                                       title="Ciudad" required>
+                                                <ui-select-match placeholder="Selecciona una Ciudad *..."
+                                                                 allow-clear="true">
+                                                    {{$select.selected.name}}
+                                                </ui-select-match>
+                                                <ui-select-choices
+                                                        repeat="city.id as city in Profile.cities | filter: {name: $select.search}">
+                                                    <div ng-bind-html="city.name | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">Teléfono</label>
+                                            <input ng-model="Profile.profileData.phone" type="text" class="form-control"
+                                                   id="phone"
+                                                   name="phone"
+                                                   placeholder="Teléfono" required>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-item">
-                                    <label for="city">Ciudad</label>
-                                    <ui-select ng-model="Profile.profileData.city" id="city" name="cities"
-                                               ng-required="Profile.profileData.state" ng-disabled="Profile.busyCity"
-                                               title="Ciudad" required>
-                                        <ui-select-match placeholder="Selecciona una Ciudad *..." allow-clear="true">
-                                            {{$select.selected.name}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                                repeat="city.id as city in Profile.cities | filter: {name: $select.search}">
-                                            <div ng-bind-html="city.name | highlight: $select.search"></div>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-item">
-                                    <label for="phone">Teléfono</label>
-                                    <input ng-model="Profile.profileData.phone" type="text" class="form-control"
-                                           id="phone"
-                                           name="phone"
-                                           placeholder="Teléfono" required>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <div class="form-item">
-                                    <label for="mobile">Celular</label>
-                                    <input ng-model="Profile.profileData.mobile" type="text" class="form-control"
-                                           id="mobile"
-                                           name="password"
-                                           placeholder="Celular">
-                                </div>
-                            </div>
 
-                            <div class="col-sm-6 text-right" style="padding-top: 30px;">
-                                <button type="submit" class="btn btn-blue"
-                                        ng-disabled="Profile.busy">
-                                    Guardar cambios <span ng-if="Profile.busy"><i
-                                        class="fa fa-spinner fa-spin"></i></span>
-                                </button>
-                            </div>
-                        </form>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="mobile">Celular</label>
+                                            <input ng-model="Profile.profileData.mobile" type="text"
+                                                   class="form-control"
+                                                   id="mobile"
+                                                   name="password"
+                                                   placeholder="Celular">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 text-right" style="padding-top: 35px;">
+                                        <button type="submit" class="btn btn-danger"
+                                                ng-disabled="Profile.busy">
+                                            Guardar cambios <span ng-if="Profile.busy"><i
+                                                class="fa fa-spinner fa-spin"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

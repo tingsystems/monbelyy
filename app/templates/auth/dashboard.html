@@ -1,116 +1,128 @@
-<!--content-->
-<section class="content-dashboard">
-    <div class="container">
-        <div class="col-md-3">
-            <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
-        </div>
-        <div class="col-md-9">
-            <div class="title-section">
-                <h3 class="info2 pull-left"><i class="ion-person"></i> Mi cuenta: {{user.username}}</h3>
-                <div class="go-to-shop pull-right">
-                    <a ui-sref="home" class="btn-gray-clear"> Ir a comprar!</a>
+<div class="temp-dashboard">
+    <section class="content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
                 </div>
-                <hr class="clearfix">
-                <div class="container-fluid text-center dash-footer">
-                    <div class="col-md-3 item">
-                        <p class="item-number">{{ Panel.purchasesCount }}</p>
-                        <p class="item-name"><a ui-sref="sales" title="Ver mis compras">Mis compras</a></p>
+                <div class="col-md-9">
+                    <div class="row justify-content-between">
+                        <div class="col-5">
+                            <h5><i class="ion-person"></i> Mi cuenta: {{user.username}}</h5>
+                        </div>
+                        <div class="col-3 text-right">
+                            <a ui-sref="home" class="btn-outline-dark"> Ir a comprar!</a>
+                        </div>
                     </div>
-                    <div class="col-md-3 item">
-                        <p class="item-number">{{ Panel.pending }}</p>
-                        <p class="item-name">Pagos pendientes</p>
+                    <hr class="clearfix">
+                    <div class="container text-center items-dashboard">
+                        <div class="row">
+                            <div class="col-md-3 item">
+                                <p class="item-number">{{ Panel.purchasesCount }}</p>
+                                <p class="item-name"><a ui-sref="sales" title="Ver mis compras">Mis compras</a></p>
+                            </div>
+                            <div class="col-md-3 item">
+                                <p class="item-number">{{ Panel.pending }}</p>
+                                <p class="item-name">Pagos pendientes</p>
+                            </div>
+                            <div class="col-md-3 item">
+                                <p class="item-number">{{ Panel.processing }}</p>
+                                <p class="item-name">En proceso</p>
+                            </div>
+                            <div class="col-md-3 item">
+                                <p class="item-number">{{ Panel.shipped }}</p>
+                                <p class="item-name">Enviados</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3 item">
-                        <p class="item-number">{{ Panel.processing }}</p>
-                        <p class="item-name">En proceso</p>
-                    </div>
-                    <div class="col-md-3 item">
-                        <p class="item-number">{{ Panel.shipped }}</p>
-                        <p class="item-name">Enviados</p>
-                    </div>
-                </div>
-                <br/>
-                <div class="container-fluid dash-footer">
-                    <!--TODO: Mostrar últimas 3 compras realizadas-->
-                    <div class="col-md-12">
-                        <h4>Mis compras recientes</h4>
-                    </div>
-                    <div class="table-responsive col-md-12" loading-container="Panel.tableParams.settings().$loading">
-                        <table class="table table-bordered bg-white table-striped" ng-table="Panel.tableParams"
-                               show-filter="false">
-                            <tbody>
-                            <tr ng-repeat="purchase in Panel.purchaseRecent" datasource="purchase" ref="Panel">
-                                <td data-title="'Folio'" sortable="'id'">#{{ purchase.id }}</td>
-                                <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date: 'd/M/y' }}</td>
-                                <td data-title="'Cliente'" sortable="'price'">{{ purchase.customerName }}</td>
-                                <td data-title="'Tipo'">
+                    <br/>
+                    <div class="container-fluid items-dashboard">
+                        <!--TODO: Mostrar últimas 3 compras realizadas-->
+                        <div class="col-md-12">
+                            <h4>Mis compras recientes</h4>
+                            <br>
+                        </div>
+                        <div class="table-responsive col-md-12"
+                             loading-container="Panel.tableParams.settings().$loading">
+                            <table class="table table-bordered bg-white table-striped" ng-table="Panel.tableParams"
+                                   show-filter="false">
+                                <tbody>
+                                <tr ng-repeat="purchase in Panel.purchaseRecent" datasource="purchase" ref="Panel">
+                                    <td data-title="'Folio'" sortable="'id'">#{{ purchase.id }}</td>
+                                    <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date: 'd/M/y'
+                                        }}
+                                    </td>
+                                    <td data-title="'Cliente'" sortable="'price'">{{ purchase.customerName }}</td>
+                                    <td data-title="'Tipo'">
                                     <span ng-if="purchase.paymentType == 3" class="label label-sm bg-paypal">
                                         {{ purchase.paymentTypeName }}
                                 </span>
-                                    <span ng-if="purchase.paymentType == 6" class="label label-sm bg-green">
+                                        <span ng-if="purchase.paymentType == 6" class="label label-sm bg-green">
                                         {{ purchase.paymentTypeName }}
                                 </span>
-                                    <span ng-if="purchase.paymentType == 8" class="label label-sm bg-green">
+                                        <span ng-if="purchase.paymentType == 8" class="label label-sm bg-green">
                                         {{ purchase.paymentTypeName }}
                                 </span>
-                                </td>
-                                <td data-title="'Pago'">
+                                    </td>
+                                    <td data-title="'Pago'">
                                     <span ng-if="purchase.isPaid == 0" class="label label-sm bg-success">
                                                 {{ purchase.isPaidName }}
                                         </span>
-                                    <span ng-if="purchase.isPaid == 1" class="label label-sm bg-war">
+                                        <span ng-if="purchase.isPaid == 1" class="label label-sm bg-war">
                                                 {{ purchase.isPaidName }}
                                         </span>
-                                    <span ng-if="purchase.isPaid == 2" class="label label-sm bg-notpaid">
+                                        <span ng-if="purchase.isPaid == 2" class="label label-sm bg-notpaid">
                                                 {{ purchase.isPaidName}}
                                         </span>
-                                </td>
-                                <td data-title="'Compra'">
+                                    </td>
+                                    <td data-title="'Compra'">
                             <span ng-if="purchase.orderStatus == 0" class="label label-sm bg-primary">
                                         {{ purchase.orderStatusName }}
                                 </span>
-                                    <span ng-if="purchase.orderStatus == 1" class="label label-sm bg-war">
+                                        <span ng-if="purchase.orderStatus == 1" class="label label-sm bg-war">
                                         {{ purchase.orderStatusName }}
                                 </span>
-                                    <span ng-if="purchase.orderStatus == 2" class="label label-sm bg-gray">
+                                        <span ng-if="purchase.orderStatus == 2" class="label label-sm bg-gray">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                    <span ng-if="purchase.orderStatus == 3" class="label label-sm bg-gray">
+                                        <span ng-if="purchase.orderStatus == 3" class="label label-sm bg-gray">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                    <span ng-if="purchase.orderStatus == 4" class="label label-sm bg-green">
+                                        <span ng-if="purchase.orderStatus == 4" class="label label-sm bg-green">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                    <span ng-if="purchase.orderStatus == 5" class="label label-sm bg-war">
+                                        <span ng-if="purchase.orderStatus == 5" class="label label-sm bg-war">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                    <span ng-if="purchase.orderStatus == 6" class="label label-sm bg-danger">
+                                        <span ng-if="purchase.orderStatus == 6" class="label label-sm bg-danger">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                    <span ng-if="purchase.orderStatus == 7" class="label label-sm bg-success">
+                                        <span ng-if="purchase.orderStatus == 7" class="label label-sm bg-success">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                </td>
-                                <td data-title="'Total'"><strong class="text-success">{{ purchase.total | currency
-                                    }}</strong></td>
-                                <td data-title="'Acciones'">
-                                    <button title="Ver detalle de la compra" class="btn btn-primary gray btn-xs indicators"
-                                            ui-sref="purchase-detail({id: purchase.id})" data-title="Edit">
-                                        <span class="ion-ios-eye"></span></button>
-                            </tr>
-                            </tbody>
-                            <tfooter>
-                                <tr ng-hide="Panel.purchases.length">
-                                    <td colspan="7" class="text-center">Aun no haz realizado una compra</td>
+                                    </td>
+                                    <td data-title="'Total'"><strong class="text-success">{{ purchase.total |
+                                        currency
+                                        }}</strong></td>
+                                    <td data-title="'Acciones'">
+                                        <button title="Ver detalle de la compra"
+                                                class="btn btn-primary gray btn-xs indicators"
+                                                ui-sref="purchase-detail({id: purchase.id})" data-title="Edit">
+                                            <span class="ion-ios-eye"></span></button>
                                 </tr>
-                            </tfooter>
-                        </table>
+                                </tbody>
+                                <tfooter>
+                                    <tr ng-hide="Panel.purchases.length">
+                                        <td colspan="7" class="text-center">Aun no haz realizado una compra</td>
+                                    </tr>
+                                </tfooter>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
+</div>
 </section>
-
-
+</div>

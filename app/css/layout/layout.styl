@@ -20,14 +20,26 @@ p, span
   font-weight 400
   font font-size 'Poppins', sans-serif
 
+md-input-container
+  width 100%
+
 .content-area
-  padding 30px 0
+  padding 50px 0
 
 .article-content
   padding 60px 0
 
 /* - HEADER STYLES LAYOUT - */
 .three-rows-nav
+  .first-row
+    .nav-link
+      padding 5px 0 0
+    .input-search
+      md-input-container.md-icon-right
+        width 100%
+        margin 0
+        padding 2px 0 0
+        height 30px
   .social
     text-align right
     .list-icons-add
@@ -96,19 +108,63 @@ p, span
     a
       color white
 
-/* ------ CATEGORIES STYLE ----- */
+/* ------ TEMP CATEGORIES STYLE ----- */
 .temp-categories
   .title-primary
     text-align left
 
+/* ------ TEMP PRODUCT DETAIL STYLE ----- */
 .temp-product-detail
   h3
     color fontClr
   h4
     color fontClr
 
+/* ------ TEMP ACTIVATE ACCOUNT STYLE ----- */
+.temp-validate-account
+  padding 50px 0
+  p
+    font-size 20px
+
+/* ------ TEMP DASHBOARD STYLE ----- */
+.temp-dashboard
+  padding 50px 0
+  .items-dashboard
+    border 1px solid #eee
+    padding 25px 0 15px
+    .item
+      border-right 1px solid #eee
+      &:last-child
+        border-right none
+  .list-group
+    .list-group-item
+      color fontClr
+    .list-group-item.active
+      color white
+      background-color dark
+      border-color dark
+      &:focus, &:hover
+        color white
+        background-color dark
+        border-color dark
+
+/* ------ TEMP SHOPPING CART STYLE ----- */
+.temp-shopcart
+  .shopcart-delete-lg
+    margin-top 15px
+    padding 0
+    a
+      font-size 36px
+      cursor pointer
+  .shopcart-qty
+    margin-top 25px
+  .shopcart-description
+    text-align center
+    margin-top 25px
 .text-left
   text-align left !important
+
+
 #facebook-styl
   iframe
     width 100%
