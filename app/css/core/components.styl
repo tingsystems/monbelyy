@@ -140,6 +140,9 @@
   &:hover
     box(15px, 0 4px 20px rgba(0,0,0,0.1), 1px solid #f5f5f5, 3px)
 
+.box-default
+  @extend .box
+  background-color #f5f5f5
 /*--- BOX CONTACT ---*/
 .box-contact
   h3
@@ -164,6 +167,11 @@
   @extend .title
   background-color #f5f5f5
   color fontClr
+
+/*------- CONTENTS BORDERED -------*/
+.items-dashboard
+  border 1px solid #ddd
+  padding 15px
 
 /*------- List -------*/
 // List icon add
@@ -272,6 +280,10 @@
 
 /* tab simple */
 .tab-simple
+  border 1px solid #ddd
+  background white
+  border-radius 5px
+  box-shadow 0 6px 21px rgba(0,0,0,0.1)
   .tab-pane
     border none !important
     padding 15px

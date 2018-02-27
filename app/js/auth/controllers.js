@@ -437,6 +437,47 @@
         };
         self.getCustomer();
 
+        // get all the states
+        self.busyState = true;
+
+        self.getStates = function () {
+            if (!self.states) {
+                StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+                    self.states = data;
+                    self.busyState = false;
+                    self.disableCity = false;
+                }, function (error) {
+                    self.busyState = false;
+                });
+            }
+
+        };
+
+        self.clearCities = function () {
+            self.cities = [];
+        };
+
+        // get the cities by state
+        self.getCitiesByState = function () {
+            console.log('lalalalal');
+            if (!self.state) {
+                return
+            }
+            self.busyCity = true;
+            if (self.cities.length < 1) {
+                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                    self.cities = response;
+                    self.busyCity = false;
+                }, function (error) {
+                    self.busyCity = false;
+                });
+            }
+            else {
+                self.busyCity = false;
+            }
+
+        };
+
     }
 
     function PurchaseListCtrl(OrderSrv, NotificationSrv, NgTableParams, $timeout, $rootScope, $localStorage) {

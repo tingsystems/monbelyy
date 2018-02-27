@@ -178,7 +178,8 @@
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
             email: 'hola@moons.mx',
-            phone: '01 (55) 55 58 98 99'
+            phone: '01 (55) 55 58 98 99',
+            branchOffice: 'Sydgroup'
 
         };
         // initialise google analytics

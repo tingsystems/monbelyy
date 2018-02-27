@@ -388,12 +388,12 @@
         self.email = $localStorage.appData.user.email;
         self.address = $localStorage.appData.user.address;
         self.phone = ''; //$localStorage.appData.user.phone;
-        self.orderPaymentType = '';
+        self.orderPaymentType = '8';
         self.shiping = true;
         self.busyPaypal = false;
         self.paypalBtn = 'Realizar pago';
         self.shipping = angular.copy($stateParams.shipping);
-
+        self.creditCard = true;
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
