@@ -114,6 +114,10 @@
 .unbordered //add this class in your button to unbordered
   border-radius 0
 
+/*------- Dropdown -------*/
+.dropdown-menu
+  top 38px
+
 /*------- Boxes -------*/
 .box
   box(15px, none, 1px solid #f5f5f5, 3px)
@@ -124,14 +128,18 @@
   margin-bottom 15px
   transition(all 1s )
   a
+    &:hover
+      text-decoration none
     .box-title
-      color fontClr
+      color fontClr !important
   .box-header
     .box-bg-img
       background-position center
       background-size cover
       height 200px
   .box-container
+    text-align center
+    margin-bottom 15px
     p
       height 50px
       padding 10px
@@ -143,6 +151,7 @@
 .box-default
   @extend .box
   background-color #f5f5f5
+
 /*--- BOX CONTACT ---*/
 .box-contact
   h3
@@ -352,3 +361,22 @@
     h2
       font-size 18px
       color #6a5c5d
+
+/* SHOPCART */
+
+.shopcart-img
+  background-size 100%
+  background-repeat no-repeat
+  height 100px
+
+/* BREADCRUMP */
+
+#breadcrumb
+  background-color breadcrumbClr
+  a
+    color fontClr
+
+/* -- SELECT -- */
+.demo-select-header
+  .demo-header-searchbox
+    width 100%
