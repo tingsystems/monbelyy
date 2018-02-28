@@ -133,7 +133,7 @@
 
     // get all the states
     function StateSrv($resource) {
-        var BaseUrl = 'http://geo.tingsystems.com/api/v1/';
+        var BaseUrl = 'https://www.tingsystems.com/api/v1/geo/';
         return $resource(BaseUrl + 'states', null, {
             // get cities, if state param get city by state id, returns an Array
             'getCities': { method: 'GET', url: BaseUrl + 'cities', isArray: true },
