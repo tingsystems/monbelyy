@@ -544,7 +544,6 @@
             data.preOrder = self.params;
             data.payment_method_id = self.params.paymentMethodId;
             OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
-                console.log(response);
                 $state.go('purchase-completed', {orderId: response.id});
             }, function (error) {
                 console.log(error);
