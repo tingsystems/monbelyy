@@ -380,7 +380,7 @@
         self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
-        self.subTotal = $localStorage.subTotal;
+        self.subTotal = $localStorage.subTtotal;
         self.formDataPay = {};
         self.customer = [];
         self.addresses = [];
@@ -475,7 +475,7 @@
             });
         };
 
-        var initialOrder = function() {
+        var initialOrder = function () {
             var coupon = '';
             if ('coupon' in $localStorage.globalDiscount) {
                 coupon = $localStorage.globalDiscount.coupon;
@@ -524,7 +524,7 @@
         };
 
 
-        var publishKey =  self.defaultbranchOffice.metadata.mp.publicKey;
+        var publishKey = self.defaultbranchOffice.metadata.mp.publicKey;
         var setPublishableKey = function () {
             Mercadopago.setPublishableKey(publishKey);
         };
@@ -546,7 +546,7 @@
             OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
                 console.log(response);
                 $state.go('purchase-completed', {orderId: response.id});
-            }, function(error) {
+            }, function (error) {
                 console.log(error);
                 NotificationSrv.error('Error al procesar su pago');
             });
@@ -560,11 +560,11 @@
             deferred.resolve(error);
         };
 
-        var setPaymentMethodInfo =  function (status, response) {
+        var setPaymentMethodInfo = function (status, response) {
             self.params.paymentMethodId = response[0].id;
         }
 
-        var getBin = function() {
+        var getBin = function () {
             Mercadopago.getPaymentMethod({
                 bin: self.params.cardNumber
             }, setPaymentMethodInfo);
@@ -581,7 +581,6 @@
             //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
 
             initialOrder();
-
             OrderSrv.save(self.params).$promise.then(function (data) {
                 clearCart();
                 if (data.paymentType === 3) {
