@@ -1,7 +1,7 @@
 <div class="temp-product-detail">
     <section id="breadcrumb">
-        <div class="container">
-            <nav aria-label="breadcrumb">
+        <nav aria-label="breadcrumb">
+            <div class="container">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a
                     </li>
@@ -11,8 +11,8 @@
                     </li>
                     <li class="breadcrumb-item active">{{ Product.detail.name }}</li>
                 </ol>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </section>
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
@@ -38,12 +38,12 @@
                     <div class="article-description">
                         <h3>{{Product.detail.name}}</h3>
                         <hr>
-                        <h3 class="text-warning">{{ Product.detail.price | currency}}</h3>
-                        <div class="detail-qty">
-                            <small>Cantidad</small>
-                            <input type="number" placeholder="0" ng-model="Product.detail.qty"
-                                   class="form-control cart-qty" min="1" required>
-                        </div>
+                        <h3 class="article-price">{{ Product.detail.price | currency}}</h3>
+                        <br>
+                        <md-input-container class="md-block">
+                            <label>Cantidad</label>
+                            <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1" required/>
+                        </md-input-container>
                         <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies}, Product.detail.qty)"
@@ -61,7 +61,6 @@
                                 ng-disabled="Shop.itemInCart(Product.detail.id)"
                                 class="btn btn-danger">Agregar a carrito
                         </button>
-
                     </div>
                 </div>
             </article>

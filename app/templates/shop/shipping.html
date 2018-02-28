@@ -1,44 +1,33 @@
-<div class="content-dashboard">
+<div class="content-area">
     <div class="container">
         <div class="row">
             <div class="col-md-6 address-form">
                 <div class="col-md-12">
-                    <h3><i class="fa fa-truck"></i> Selecciona la forma de envio</h3>{{ Payment.showAddress }}
-                    <br>
+                    <h4><i class="fa fa-truck"></i> Selecciona la forma de envio</h4>{{ Payment.showAddress }}
+                    <hr>
                     <md-radio-group ng-model="Payment.sendOptions">
-                        <div class="panel panel-default">
-                            <div class="panel-heading panel-white">
-                                <h4 class="panel-title">
-                                    <md-radio-button value="0" class="md-primary"> <span class="fa fa-credit-card-alt">
+                        <md-radio-button value="0" class="md-primary">
+                            <span class="fa fa-truck">
                                     Envío a domicilio
-                                </span></md-radio-button>
+                                </span>
+                        </md-radio-button>
 
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading panel-white">
-                                <h4 class="panel-title">
-                                    <md-radio-button value="1"> <span class="fa fa-credit-card-alt">
+                        <md-radio-button value="1"> <span class="fa fa-building">
                                     Recoger en tienda
                                 </span></md-radio-button>
-
-                                </h4>
-                            </div>
-                        </div>
                     </md-radio-group>
+                    <br>
                 </div>
-
-                <div class="container-fluid" ng-if="Payment.sendOptions === '0'">
+                <div class="col-md-12" ng-if="Payment.sendOptions === '0'">
+                    <h4><i class="fa fa-map-marker"></i> Seleccionar dirección existente</h4>
                     <hr>
-                    <div class="col-md-12 select-address no-padding" style="margin-bottom: 20px">
-                        <h3><i class="fa fa-map-marker"></i> Seleccionar dirección existente</h3>
-                        <br>
-                        <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
-                    </div>
-                    <div class="col-md-12 no-padding">
-                        <h3><i class="fa fa-plus-circle"></i> Nueva direccíon de envío</h3>
-                        <br>
+                    <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
+                    <br>
+                </div>
+                <div>
+                    <div class="col-md-12" ng-if="Payment.sendOptions === '0'">
+                        <h4><i class="fa fa-plus-circle"></i> Nueva direccíon de envío</h4>
+                        <hr>
                         <form class="form-horizontal" name="Form" novalidate>
                             <div class="row">
                                 <div class="col-md-6">
@@ -101,8 +90,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <md-input-container md-no-float ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
-                                        <input ng-model="Payment.formData.address" type="text" id="address" name="address"
+                                    <md-input-container md-no-float
+                                                        ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
+                                        <input ng-model="Payment.formData.address" type="text" id="address"
+                                               name="address"
                                                placeholder="Dirección"
                                                required>
                                         <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
@@ -112,7 +103,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <md-input-container md-no-float ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
+                                    <md-input-container md-no-float
+                                                        ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
                                         <input ng-model="Payment.formData.neighborhood" type="text" id="neighborhood"
                                                name="neighborhood"
                                                placeholder="Colonia"
@@ -122,7 +114,8 @@
                                     </md-input-container>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <md-input-container md-no-float ng-class="{ 'has-error': Form.zip.$touched && Form.zip.$invalid }">
+                                    <md-input-container md-no-float
+                                                        ng-class="{ 'has-error': Form.zip.$touched && Form.zip.$invalid }">
                                         <input ng-model="Payment.formData.zip" ng-pattern="/^[0-9]{5}$/"
                                                maxlength="5" id="zip" name="zip"
                                                placeholder="Código Postal"
@@ -132,7 +125,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <md-input-container md-no-float ng-class="{ 'has-error': Form.phone.$touched && Form.phone.$invalid }">
+                                    <md-input-container md-no-float
+                                                        ng-class="{ 'has-error': Form.phone.$touched && Form.phone.$invalid }">
                                         <input ng-model="Payment.formData.phone" type="text" maxlength="20"
                                                id="phone"
                                                name="phone"
@@ -140,7 +134,8 @@
                                     </md-input-container>
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <md-input-container md-no-float ng-class="{ 'has-error': Form.mobile.$touched && Form.mobile.$invalid }">
+                                    <md-input-container md-no-float
+                                                        ng-class="{ 'has-error': Form.mobile.$touched && Form.mobile.$invalid }">
                                         <input ng-model="Payment.formData.mobile" type="text" ng-maxlength="20"
                                                id="mobile"
                                                name="mobile"
@@ -152,17 +147,20 @@
                                 <input type="checkbox"><span>Guardar mi información para la aproxima ocasión</span>
                                 {{Shipping.saveAddressNew}}
                             </div>-->
+                            <div class="col-md-12 text-right" style="margin-top: 30px;" ng-if="Payment.sendOptions === '0'">
+                                <a href="" class="btn btn-outline-dark" ui-sref="shopcart"><i class="fa fa-angle-left"></i>
+                                    Regresar al carrito
+                                </a>
+                                <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
+                                <button ng-if="Payment.address" class="btn btn-danger" type="submit"
+                                        ng-disabled="!Payment.address"
+                                        ng-click="Payment.saveShippingAddress()">Continuar
+                                </button>
+                                <button ng-if="!Form.$invalid && !Payment.address" class="btn btn-danger" type="submit"
+                                        ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar
+                                </button>
+                            </div>
                         </form>
-                    </div>
-                    <div class="col-md-12 text-right" style="margin-top: 30px;">
-                        <a href="" class="btn btn-outline-dark" ui-sref="shopcart"><i class="fa fa-angle-left"></i>
-                            Regresar al carrito
-                        </a>
-                        <!--<button class="btn btn-cart" ng-disabled="Form.$invalid" ng-click="Order.createOrder()">Continuar</button>-->
-                        <button ng-if="Payment.address" class="btn btn-danger" type="submit" ng-disabled="!Payment.address"
-                           ng-click="Payment.saveShippingAddress()">Continuar</button>
-                        <button ng-if="!Form.$invalid && !Payment.address" class="btn btn-danger" type="submit"
-                           ng-disabled="Form.$invalid" ng-click="Payment.newShippingAddress()">Continuar</button>
                     </div>
                 </div>
 
