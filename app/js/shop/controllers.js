@@ -163,6 +163,7 @@
             }
             self.shipmentTotal = $localStorage.shipmentTotal;
             $localStorage.total = self.total;
+            $localStorage.subTtotal = self.subTotal;
             $localStorage.promoTotal = self.promoTotal;
         };
         getTotal();
@@ -372,12 +373,14 @@
 
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element) {
         var self = this;
         var user = $localStorage.appData.user;
+        self.params = {metadata: {taxInverse: 0, shipping: self.shipping}};
         self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
+        self.subTotal = $localStorage.subTotal;
         self.formDataPay = {};
         self.customer = [];
         self.addresses = [];
@@ -394,24 +397,9 @@
         self.paypalBtn = 'Realizar pago';
         self.shipping = angular.copy($stateParams.shipping);
         self.creditCard = true;
-        $localStorage.items = self.items;
-        $localStorage.total = self.total;
-        $rootScope.items = $localStorage.items;
+        $rootScope.items = self.items;
         $rootScope.idUser = self.idUser;
         self.busyCard = false;
-        self.payment = {
-            'card': {
-                number: null,
-                name: '',
-                exp_year: '',
-                exp_month: '',
-                cvc: null
-            },
-            email: self.email,
-            //phone: self.customer.phone,
-            amount: $localStorage.total,
-            items: $localStorage.items
-        };
         // get default branch office
         self.getDefaulBranchOffice = function () {
             if (!user.branchOffices)
@@ -435,88 +423,6 @@
             delete $localStorage.appData.user.address;
             self.promoTotal = 0;
             self.typeTax = false;
-        };
-
-        var publishKey = 'key_B34Yd1rcLM2Pyxpg';
-        //var publishKey = $rootScope.currentKey;
-        var setPublishableKey = function () {
-            Conekta.setLanguage('es');
-            Conekta.setPublishableKey(publishKey);
-        };
-
-        var initialGateway = function () {
-            var deferred = $q.defer();
-            $.getScript("https://conektaapi.s3.amazonaws.com/v0.3.2/js/conekta.js")
-                .done(function (script, textStatus) {
-                    deferred.promise.then(function (response) {
-                        // Conekta Public Key
-                        setPublishableKey();
-                    });
-                    deferred.resolve(textStatus);
-                })
-                .fail(function (jqxhr, settings, exception) {
-                    console.log("Triggered ajaxError handler.");
-                });
-        };
-
-        initialGateway();
-        var successResponseHandler = function (token) {
-            var coupon = '';
-            var params = {
-                brand: Conekta.card.getBrand(self.payment.card.number),
-                cardholder: self.payment.card.name,
-                token: token.id,
-                email: self.email,
-                items: $localStorage.items,
-                total: $localStorage.total,
-                shop: self.store,
-                promoTotal: $localStorage.promoTotal,
-                shipmentTotal: $localStorage.shipmentTotal
-            };
-            if ('coupon' in $localStorage.globalDiscount) {
-                params.coupon = $localStorage.globalDiscount.coupon;
-            }
-            params.kind = 'order';
-            params.paymentType = parseInt(self.orderPaymentType);
-            params.itemCount = self.itemCount;
-            if (!self.customer.phone) {
-                if (self.addresship.phone) {
-                    self.customer.phone = self.addresship.phone
-                }
-            }
-            params.customer = self.customer;
-            params.cartId = $localStorage.cart.id;
-            params.warehouse = self.defaultWarehouse.id;
-            params.employee = $localStorage.appData.user.id;
-            params.destination = self.addresship.id;
-            params.orderStatus = 1;
-            params.isPaid = 0;
-            params.token = token.id;
-            params.phone = self.phone;
-
-
-            OrderSrv.save(params).$promise.then(function (data) {
-                clearCart();
-                $state.go('purchase-completed', {orderId: data.id});
-            }, function (data) {
-                ErrorSrv.error(data);
-            });
-
-
-        };
-
-        var errorResponseHandler = function (error) {
-            var deferred = $q.defer();
-            deferred.promise.then(function (error) {
-                self.busyCard = false;
-                NotificationSrv.error(error.message_to_purchaser);
-            });
-            deferred.resolve(error);
-        };
-
-        self.processPayment = function () {
-            self.busyCard = true;
-            Conekta.token.create(self.payment, successResponseHandler, errorResponseHandler);
         };
 
         self.cancelPayment = function () {
@@ -559,7 +465,6 @@
         };
         shippingAddress();
 
-
         self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
             CustomerSrv.save(purchase).$promise.then(function (data) {
@@ -570,74 +475,113 @@
             });
         };
 
-        self.createOrder = function () {
-            //self.promoTotal = $localStorage.promoTotal;
-            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
+        var initialOrder = function() {
             var coupon = '';
-            var params = {metadata: {taxInverse: false, shipping: self.shipping}};
             if ('coupon' in $localStorage.globalDiscount) {
                 coupon = $localStorage.globalDiscount.coupon;
-
-                params.coupon = coupon;
+                self.params.coupon = coupon;
             }
-            params.kind = 'order';
-            params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
-            params.paymentType = parseInt(self.orderPaymentType);
-            params.isPaid = 2;
-            params.itemCount = self.itemCount;
-            params.store = self.defaultbranchOffice.id;
+            self.params.kind = 'order';
+            self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
+            self.params.paymentType = parseInt(self.orderPaymentType);
+            self.params.isPaid = 2;
+            self.params.itemCount = self.itemCount;
+            self.params.total = self.total;
+            self.params.subTotal = self.subTotal;
+            self.params.store = self.defaultbranchOffice.id;
             if (!self.customer.phone) {
                 if (self.addresship.phone) {
                     self.customer.phone = self.addresship.phone;
                 }
             }
-            params.customer = self.customer;
-            params.cartId = $localStorage.cart.id;
-            params.warehouse = self.defaultWarehouse.id;
-            params.employee = $localStorage.appData.user.id;
+            self.params.customer = self.customer;
+            self.params.cartId = $localStorage.cart.id;
+            self.params.warehouse = self.defaultWarehouse.id;
+            self.params.employee = $localStorage.appData.user.id;
             if (self.addresship) {
-                params.destination = self.addresship.id;
+                self.params.destination = self.addresship.id;
             }
 
-            if (params.paymentType === 8) {
-                params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
-                params.isPaid = 0;
-                params.token = token.id;
+            if (self.params.paymentType === 8) {
+                self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
+                self.params.isPaid = 0;
             }
 
-            if (params.paymentType === 6) {
-                params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
+            if (self.params.paymentType === 6) {
+                self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
                 params.isPaid = 2;
             }
 
-            if (params.paymentType === 3) {
-                params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
-                params.isPaid = 2;
+            if (self.params.paymentType === 3) {
+                self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
+                self.params.isPaid = 2;
             }
+            self.params.items = self.items;
+            self.params.itemCount = self.items.length;
+            self.params.promoTotal = $localStorage.promoTotal;
+            self.params.shipmentTotal = $localStorage.shipmentTotal;
+        }
 
-            if (self.taxInverse) {
-                params.taxTotal = self.taxTotal2;
-            }
-            else {
-                params.taxTotal = self.taxTotal;
-            }
-            if (self.taxInverse) {
-                params.subTotal = self.subTotal3;
-            }
-            else {
-                params.subTotal = self.subTotal2;
-                params.metadata.taxInverse = false;
-            }
-            if (self.taxInverse) {
-                params.total = self.total2;
-            }
-            else {
-                params.total = self.total;
-            }
-            params.promoTotal = $localStorage.promoTotal;
-            params.shipmentTotal = $localStorage.shipmentTotal;
 
-            OrderSrv.save(params).$promise.then(function (data) {
+        var publishKey =  self.defaultbranchOffice.metadata.mp.publicKey;
+        var setPublishableKey = function () {
+            Mercadopago.setPublishableKey(publishKey);
+        };
+
+        var successResponseHandler = function (status, response) {
+            var data = response;
+            initialOrder();
+            data.payment_method_id = self.params.paymentMethodId;
+            delete self.params.year
+            delete self.params.month
+            delete self.params.cardNumber
+            delete self.params.cvc
+            self.params.store = self.defaultbranchOffice;
+            self.params.customerName = self.params.customer.businessName;
+            self.params.customerEmail = self.params.customer.contactPersonEmail;
+            self.params.customer = self.params.customer.id;
+            data.preOrder = self.params;
+            data.payment_method_id = self.params.paymentMethodId;
+            OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
+                console.log(response);
+                $state.go('purchase-completed', {orderId: response.id});
+            }, function(error) {
+                console.log(error);
+                NotificationSrv.error('Error al procesar su pago');
+            });
+        };
+
+        var errorResponseHandler = function (error) {
+            var deferred = $q.defer();
+            deferred.promise.then(function (error) {
+                NotificationSrv.error(error.message_to_purchaser);
+            });
+            deferred.resolve(error);
+        };
+
+        var setPaymentMethodInfo =  function (status, response) {
+            self.params.paymentMethodId = response[0].id;
+        }
+
+        var getBin = function() {
+            Mercadopago.getPaymentMethod({
+                bin: self.params.cardNumber
+            }, setPaymentMethodInfo);
+        }
+
+        self.processPaymentCard = function () {
+            setPublishableKey();
+            getBin();
+            Mercadopago.createToken($element.find('#payment-form'), successResponseHandler, errorResponseHandler);
+        };
+
+        self.createOrder = function () {
+            //self.promoTotal = $localStorage.promoTotal;
+            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
+
+            initialOrder();
+
+            OrderSrv.save(self.params).$promise.then(function (data) {
                 clearCart();
                 if (data.paymentType === 3) {
                     self.busyPaypal = true;
@@ -865,6 +809,6 @@
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
 })();

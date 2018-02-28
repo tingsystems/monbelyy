@@ -53,6 +53,10 @@
             'patch': {
                 method: 'PATCH',
                 url: BaseUrlShop.get() + 'orders/:id'
+            },
+            'paidMP': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'mp/paid'
             }
         });
     }

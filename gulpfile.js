@@ -24,7 +24,7 @@ gulp.task('server', function () {
         root: './app',
         hostname: '0.0.0.0',
         port: 8080,
-        livereload: true
+        livereload: false
     });
 });
 
@@ -33,7 +33,7 @@ gulp.task('server-dist', function () {
         root: './dist',
         hostname: '0.0.0.0',
         port: 8080,
-        livereload: true
+        livereload: false
     });
 });
 

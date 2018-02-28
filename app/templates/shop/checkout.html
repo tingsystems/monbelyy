@@ -31,14 +31,14 @@
                     <h4><i class="fa fa-money"></i> Seleccione el método de pago</h4>
                     <hr>
                     <md-radio-group layout="row" ng-model="Payment.orderPaymentType">
-                        <md-radio-button value="8" class="md-primary"
-                                         ng-click="Payment.creditCard=!Payment.creditCard">Mercado pago
+                        <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard">
+                            Tarjeta
                         </md-radio-button>
-                        <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal"
-                                         class="md-primary"> Pago con paypal
+                        <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal" class="md-primary"> 
+                            Pago con paypal
                         </md-radio-button>
-                        <md-radio-button value="6" ng-click="Payment.depositBank=!Payment.depositBank"
-                                         class="md-primary">Depósito bancario
+                        <md-radio-button value="6" ng-click="Payment.depositBank=!Payment.depositBank" class="md-primary">
+                            Depósito bancario
                         </md-radio-button>
                     </md-radio-group>
 
@@ -46,36 +46,24 @@
                         <div class="container">
                             <div class="row">
                                 <form style="width: 100%;" role="form" name="Form" id="payment-form"
-                                      ng-submit="Payment.processPayment()" novalidate>
+                                      ng-submit="Payment.processPaymentCard()" novalidate>
                                     <div class="col-xs-12">
-                                        <md-input-container md-no-float class="md-block"
-                                                            ng-class="{ 'has-error': Form.name.$touched && Form.name.$invalid }">
-                                            <input type="text" ng-model="Payment.payment.card.name"
-                                                   name="name" placeholder="Nombre del titular"
-                                                   id="name" data-conekta="card[name]"
-                                                   required>
+                                        <md-input-container md-no-float class="md-block" ng-class="{ 'has-error': Form.name.$touched && Form.name.$invalid }">
+                                            <input type="text" ng-model="Payment.params.name"  placeholder="Nombre del titular" id="cardholderName" 
+                                                data-checkout="cardholderName" required
+                                            >
                                         </md-input-container>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-
-                                            <md-input-container md-no-float class="md-block"
-                                                                ng-class="{ 'has-error': Form.cardNumber.$touched && Form.cardNumber.$invalid }">
-                                                <input type="text" ng-model="Payment.payment.card.number"
-                                                       name="cardNumber" id="cardNumber"
+                                            <md-input-container md-no-float class="md-block" ng-class="{ 'has-error': Form.cardNumber.$touched && Form.cardNumber.$invalid }">
+                                                <input type="text" ng-model="Payment.params.cardNumber" id="cardNumber"
                                                        maxlength="20" placeholder="Número de tarjeta"
-                                                       data-conekta="card[number]" required>
-                                                <div class="help-block" ng-messages="Form.cardNumber.$error"
-                                                     ng-if="Form.cardNumber.$touched">
-                                                    <span ng-if="Payment.payment.card.number == undefined"
-                                                          class="input-group-addon"><i
-                                                            class="fa fa-credit-card"></i></span>
-                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='4'"
-                                                          class="input-group-addon"><i
-                                                            class="fa fa-cc-visa"></i></span>
-                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='5'"
-                                                          class="input-group-addon"><i
-                                                            class="fa fa-cc-mastercard"></i></span>
+                                                       data-checkout="cardNumber" required>
+                                                <div class="help-block" ng-messages="Form.cardNumber.$error" ng-if="Form.cardNumber.$touched">
+                                                    <span ng-if="Payment.payment.card.number == undefined" class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='4'" class="input-group-addon"><i class="fa fa-cc-visa"></i></span>
+                                                    <span ng-if="Payment.payment.card.number.substr(0,1)=='5'" class="input-group-addon"><i class="fa fa-cc-mastercard"></i></span>
                                                 </div>
                                             </md-input-container>
                                         </div>
@@ -84,29 +72,21 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <md-input-container md-no-float class="md-block"
-                                                                            ng-class="{ 'has-error': Form.cardExpiryM.$touched && Form.cardExpiryM.$invalid }">
-                                                            <input type="text" ng-model="Payment.payment.card.exp_month"
-                                                                   name="cardExpiryM" maxlength="2"
-                                                                   id="monthExpiry" placeholder="MM"
-                                                                   data-conekta="card[exp_month]" required>
-                                                            <div class="help-block"
-                                                                 ng-messages="Form.cardExpiryM.$error"
-                                                                 ng-if="Form.cardExpiryM.$touched">
+                                                        <md-input-container md-no-float class="md-block" ng-class="{ 'has-error': Form.cardExpiryM.$touched && Form.cardExpiryM.$invalid }">
+                                                            <input type="text" ng-model="Payment.parms.month" maxlength="2"
+                                                                   id="cardExpirationMonth" placeholder="MM"
+                                                                   data-checkout="cardExpirationMonth" required>
+                                                            <div class="help-block" ng-messages="Form.cardExpiryM.$error" ng-if="Form.cardExpiryM.$touched">
                                                                 <span> Mes expiración</span>
                                                             </div>
                                                         </md-input-container>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <md-input-container md-no-float class="md-block"
-                                                                            ng-class="{ 'has-error': Form.cardExpiryY.$touched && Form.cardExpiryY.$invalid }">
-                                                            <input type="text" ng-model="Payment.payment.card.exp_year"
-                                                                   name="cardExpiryY" maxlength="4"
-                                                                   id="yearExpiry" placeholder="AAAA"
-                                                                   required data-conekta="card[exp_year]">
-                                                            <div class="help-block"
-                                                                 ng-messages="Form.cardExpiryY.$error"
-                                                                 ng-if="Form.cardExpiryY.$touched">
+                                                        <md-input-container md-no-float class="md-block" ng-class="{ 'has-error': Form.cardExpiryY.$touched && Form.cardExpiryY.$invalid }">
+                                                            <input type="text" ng-model="Payment.params.year"
+                                                                maxlength="4" id="cardExpirationYear" placeholder="AAAA"
+                                                                required data-checkout="cardExpirationYear">
+                                                            <div class="help-block" ng-messages="Form.cardExpiryY.$error" ng-if="Form.cardExpiryY.$touched">
                                                                 <span> Año expiración</span>
                                                             </div>
                                                         </md-input-container>
@@ -118,15 +98,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
-
-                                            <md-input-container md-no-float class="md-block"
-                                                                ng-class="{ 'has-error': Form.cardCVC.$touched && Form.cardCVC.$invalid }">
-                                                <input type="text" name="cardCVC"
-                                                       ng-model="Payment.payment.card.cvc"
-                                                       id="cardCVC" placeholder="CVC" maxlength="5"
-                                                       required data-conekta="card[cvc]">
+                                            <md-input-container md-no-float class="md-block" ng-class="{ 'has-error': Form.cardCVC.$touched && Form.cardCVC.$invalid }">
+                                                <input type="text" ng-model="Payment.params.cvc"
+                                                    id="securityCode" placeholder="CVC" maxlength="5"
+                                                    required data-checkout="securityCode">
                                             </md-input-container>
                                         </div>
+                                        <input type="hidden" id="paymentMethodId" data-checkout="paymentMethodId" ng-model="Payment.params.paymentMethodId" />
                                         <div class="col-xs-12 col-md-6 text-right">
                                             <div style="margin-top: 30px;">
                                                 <img class="img-fluid"
@@ -134,20 +112,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                                <div class="container">
-                                    <div class="row justify-content-md-end">
-                                        <div class="">
-                                            <button ui-sref="shipping-address" class="btn btn-outline-default">Volver a
-                                                dirección de
-                                                envío
-                                            </button>
-                                            <button ng-disabled="Form.$invalid" class="btn btn-danger"
-                                                    type="submit">Procesar Pago
-                                            </button>
+                                    <div class="container">
+                                        <div class="row justify-content-md-end">
+                                            <div class="">
+                                                <button ui-sref="shipping-address" class="btn btn-outline-default">Volver a dirección de envío</button>
+                                                <button ng-disabled="Form.$invalid" class="btn btn-danger" type="submit">Procesar Pago</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
