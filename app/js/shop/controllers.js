@@ -482,7 +482,8 @@
                 self.params.coupon = coupon;
             }
             self.params.kind = 'order';
-            self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
+            // status pendiente
+            self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
             self.params.paymentType = parseInt(self.orderPaymentType);
             self.params.isPaid = 2;
             self.params.itemCount = self.itemCount;
@@ -503,24 +504,24 @@
             }
 
             if (self.params.paymentType === 8) {
-                self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
+                self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
                 self.params.isPaid = 0;
             }
 
             if (self.params.paymentType === 6) {
-                self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
-                params.isPaid = 2;
+                self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
+                self.params.isPaid = 2;
             }
 
             if (self.params.paymentType === 3) {
-                self.params.status = '2097aa47-ea22-45cc-aaf6-e2d248d75709';
+                self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
                 self.params.isPaid = 2;
             }
             self.params.items = self.items;
             self.params.itemCount = self.items.length;
             self.params.promoTotal = $localStorage.promoTotal;
             self.params.shipmentTotal = $localStorage.shipmentTotal;
-        }
+        };
 
 
         var publishKey =  self.defaultbranchOffice.metadata.mp.publicKey;
