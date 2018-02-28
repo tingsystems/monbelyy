@@ -102,6 +102,7 @@
             self.total = 0;
             $localStorage.items = [];
             $localStorage.total = 0;
+            $localStorage.subTtotal = 0;
             $localStorage.globalDiscount = {amount: 0};
             $localStorage.promoTotal = 0;
             $localStorage.shipmentTotal = 0;
@@ -150,6 +151,7 @@
                 self.import = parseFloat(value.price) * value.qty;
                 self.total += parseFloat(value.price) * value.qty;
                 self.subTotal += self.import;
+                self.shipmentPrice += parseFloat(value.shipmentPrice);
             });
             if ($localStorage.globalDiscount.isPercentage === 1) {
                 applyDiscountPercentage();
@@ -161,10 +163,10 @@
                 $localStorage.shipmentTotal = 0;
 
             }
-            self.shipmentTotal = $localStorage.shipmentTotal;
             $localStorage.total = self.total;
             $localStorage.subTtotal = self.subTotal;
             $localStorage.promoTotal = self.promoTotal;
+            $localStorage.shipmentTotal = self.shipmentPrice;
         };
         getTotal();
 
