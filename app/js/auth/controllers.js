@@ -84,7 +84,7 @@
                         $localStorage.priceList = '';
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name !== 'register') {
-                            NotificationSrv.success("Te esperamos pronto", "Guaumart ");
+                            NotificationSrv.success("Te esperamos pronto", $rootScope.initConfig.branchOffice);
                             $state.go('home');
                         }
                     })
