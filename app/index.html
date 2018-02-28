@@ -217,5 +217,20 @@
     ga('create', 'UA-53555832-10', {'cookieDomain': 'none'});
 </script>
 <!-- /WhatsHelp.io widget -->
+<script type="text/javascript">
+    (function () {
+        var options = {
+            whatsapp: "+52 1 33 2257 3971", // WhatsApp number
+            company_logo_url: "//static.whatshelp.io/img/flag.png", // URL of company logo (png, jpg, gif)
+            greeting_message: "Hola, estamos listos para atenderte, tienes alguna pregunta?", // Text of greeting message
+            call_to_action: "Contáctanos", // Call to action
+            position: "right", // Position may be 'right' or 'left'
+        };
+        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+</script>
 </body>
 </html>

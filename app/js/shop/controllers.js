@@ -166,7 +166,7 @@
             $localStorage.total = self.total;
             $localStorage.subTtotal = self.subTotal;
             $localStorage.promoTotal = self.promoTotal;
-            $localStorage.shipmentTotal = self.shipmentPrice;
+            //$localStorage.shipmentTotal = self.shipmentPrice;
         };
         getTotal();
 
