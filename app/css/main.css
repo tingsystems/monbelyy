@@ -874,13 +874,6 @@ audio:not([controls]),
     margin: 0;
   }
 }
-input[type="reset"][disabled],
-input[type="submit"][disabled],
-html input[type="button"][disabled],
-button[disabled],
-.btn[disabled] {
-  cursor: not-allowed;
-}
 body {
   background-color: #fff;
   color: #777;
@@ -905,6 +898,16 @@ p,
 span {
   font-weight: 400;
   font: 16px 'Poppins', sans-serif;
+}
+.xs-hidde {
+  display: none;
+}
+input[type="reset"][disabled],
+input[type="submit"][disabled],
+html input[type="button"][disabled],
+button[disabled],
+.btn[disabled] {
+  cursor: not-allowed;
 }
 .sweet-alert p {
   font-weight: 400;
@@ -1500,6 +1503,17 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .three-rows-nav .navbar {
+    padding: 10px 0;
+  }
+  .three-rows-nav .navbar .container {
+    padding: 0;
+  }
+  .three-rows-nav .navbar .container .navbar-collapse {
+    border-top: 1px solid #f5f5f5;
+    padding: 15px;
+    margin-top: 10px;
+  }
   .three-rows-nav .navbar-light .navbar-toggler {
     color: #fff;
     border-color: #fff;
@@ -1521,6 +1535,9 @@ footer .contact-sty .download-app > i:hover {
     top: -10px;
     z-index: 999;
   }
+  .three-rows-nav .second-row .nav > li > .shopping-cart {
+    top: 5px;
+  }
   .three-rows-nav .second-row .nav > li > .shopping-cart i {
     color: #fff;
     font-size: 38px;
@@ -1533,6 +1550,39 @@ footer .contact-sty .download-app > i:hover {
   .three-rows-nav .second-row .nav .btn-dark {
     background-color: transparent;
     border-color: transparent;
+  }
+  .slider-box .slider-img {
+    height: 100px;
+  }
+  .slider-box .owl-nav {
+    display: none;
+  }
+  .section-one .rounded-cicle {
+    margin-top: 15px;
+  }
+  .section-one p {
+    text-align: justify;
+    padding-right: 0;
+  }
+  .temp-shopcart .shopcart-description {
+    font-size: 14px;
+  }
+  .temp-shopcart .shopcart-img {
+    height: 100px;
+    background-size: 50%;
+    background-position: center;
+  }
+  .temp-shopcart h4 {
+    margin-bottom: 15px;
+  }
+  #temp-cart-details .details-prodpay {
+    margin-bottom: 15px;
+  }
+  .temp-dashboard {
+    padding: 0;
+  }
+  .temp-dashboard .list-group {
+    margin-bottom: 25px;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {

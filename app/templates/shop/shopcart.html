@@ -11,15 +11,15 @@
                 </div>
             </div>
             <div class="row justify-content-between" ng-if="ShopCart.items.length>0">
-                <div class="col-4">
-                    <h3><i class="fa fa-shopping-cart"></i> Carrito de compras</h3>
+                <div class="col-12 co-md-5 ">
+                    <h4><i class="fa fa-shopping-cart"></i> Carrito de compras</h4>
                 </div>
-                <div class="col-4 text-right" ng-if="ShopCart.items.length>0">
+                <div class="col-12 col-md-3" ng-if="ShopCart.items.length>0">
                     <button class="btn btn-outline-dark" ng-click="ShopCart.clearCart()">Vaciar Carrito</button>
                 </div>
             </div>
             <hr>
-            <div class="container-fluid" ng-if="ShopCart.items.length>0">
+            <div class="container-fluid xs-hidde" ng-if="ShopCart.items.length>0">
                 <div class="row">
                     <div class="col-md-9 text-center">
                         <div class="col-sm-6 col-md-12">
@@ -46,17 +46,17 @@
                     <div class="col-md-9 text-center">
                         <div class="col-sm-6 col-md-12" ng-repeat="product in ShopCart.items">
                             <div class="row">
-                                <div class="col-sm-12 col-md-2">
+                                <div class="col-sm-2 col-md-2">
                                     <div class="shopcart-img"
                                          style="background-image: url('{{product.image ? product.image : initConfig.img_default}}')"></div>
                                 </div>
-                                <div class="col-sm-12 col-md-5">
+                                <div class="col-sm-5 col-md-5">
                                     <div class="shopcart-description">
                                         <h4>{{ product.name }}</h4>
                                         <h3>{{ product.price | currency }}</h3>
                                     </div>
                                 </div>
-                                <div class="col-sm-12 col-md-2">
+                                <div class="col-sm-2 col-md-2">
 
                                     <div class="shopcart-qty">
                                         <input type="number" min="0" id="qty" ng-model="product.qty"
@@ -65,7 +65,7 @@
                                                class="form-control cart-qty" placeholder="{{ product.qty }}">
                                     </div>
                                 </div>
-                                <div class="col-md-1 visible-lg">
+                                <div class="col-md-1 col-sm-1 visible-lg">
                                     <div class="shopcart-delete-lg">
                                         <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)"
                                            title="Eliminar producto"></a>

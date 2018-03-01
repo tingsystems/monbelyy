@@ -1,45 +1,61 @@
-<section id="content-area" class="content-blog">
-    <div class="content-pages" infinite-scroll='Search.getMorePosts()'
-         infinite-scroll-disabled='Search.busy || !Search.next || Search.loadPosts'>
-        <div class="container" ng-controller="AccessCtrl as Access">
-            <h2 class="title">Resultados de la busqueda: {{ Search.searchTerm }}</h2>
-            <hr>
-            <div class="col-sm-3" ng-repeat="item in Search.listSearch">
-                <div class="box-prod" ng-if="!Search.isPost">
-                    <a ui-sref="product-detail({slug:item.slug})" title="Ver detalles del producto">
-                        <div class="bg-prod" style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}')"></div>
-                    </a>
-                    <div class="box-container no-padding container-fluid">
-                        <div class="col-sm-12 no-pd-l text-center">
-                            <p>{{item.name}}</p>
-                            <h4 ng-if="Access.isAuthenticated()">{{ item.price | currency }}</h4>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="container-fluid no-padding">
-                        <div class="col-12">
-                            <a class="btn btn-gray-clear btn-block"  ui-sref="product-detail({slug:item.slug})">Ver más</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="box-prod" ng-if="Search.isPost">
-                    <a ui-sref="post_detail({slug:item.slug})">
-                        <div class="bg-prod"
-                             style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default }}')"></div>
-                        <h3 class="prod-descrip">{{item.title}}</h3>
-                    </a>
-                    <a ui-sref="post_detail({slug: item.slug})" class="btn btn-success btn-cart">Ver más</a>
-                </div>
-            </div>
-            <div class="col-sm-12" ng-show="Search.busy">
-                <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
-            </div>
-            <div class="col-sm-12" ng-show="!Search.busy">
-                <h2 class="text-center no-content" ng-show="!Search.listSearch.length">Lo sentimos no contamos con
-                    contenido disponible</h2>
-            </div>
+<div class="temp-search">
+    <div class="header-title-large">
+        <div class="container">
+            <h1 class="text-uppercase">Resultados de la busqueda: {{ Search.searchTerm }}</h1>
         </div>
-        <!--post list -->
     </div>
-</section>
+    <section class="content-area">
+        <div infinite-scroll='Search.getMorePosts()'
+             infinite-scroll-disabled='Search.busy || !Search.next || Search.loadPosts'>
+            <div class="container" ng-controller="AccessCtrl as Access">
+                <div class="row">
+                    <div class="col-sm-3" ng-repeat="item in Search.listSearch">
+                        <div class="box-simple">
+                            <a ui-sref="product-detail({slug:item.slug})" title="Ver detalles del producto">
+                                <div class="box-header">
+                                    <div class="box-bg-img"
+                                         style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}')"></div>
+                                </div>
+                                <div class="box-container">
+                                    <p class="box-title">{{ item.name }}</p>
+                                    <h4 class="text-warning">{{ item.price | currency }}</h4>
+                                </div>
+                            </a>
+                            <div class="box-footer">
+                                <a class="btn btn-outline-dark" ui-sref="product-detail({slug:product.slug})">
+                                    Ver más
+                                </a>
+                                <button class="btn btn-danger"
+                                        ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
+                                            name: product.name, price: product.price, qty: 1,
+                                            taxonomies : product.taxonomies}, 1)"
+                                        ng-disabled="Product.itemInCart(product)">
+                                    Agregar
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="box-prod" ng-if="Search.isPost">
+                            <a ui-sref="post_detail({slug:item.slug})">
+                                <div class="bg-prod"
+                                     style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default }}')"></div>
+                                <h3 class="prod-descrip">{{item.title}}</h3>
+                            </a>
+                            <a ui-sref="post_detail({slug: item.slug})" class="btn btn-success btn-cart">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12" ng-show="Search.busy">
+                    <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
+                </div>
+                <div class="col-sm-12" ng-show="!Search.busy">
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="text-center no-content" ng-show="!Search.listSearch.length">Lo sentimos no contamos con
+                            contenido disponible</h4>
+                    </div>
+                </div>
+            </div>
+            <!--post list -->
+        </div>
+    </section>
+</div>

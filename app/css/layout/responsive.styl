@@ -258,7 +258,16 @@
 
 @media only screen and (max-width: 767px)
 
+/* NAVBAR TRHEE ROWS */
   .three-rows-nav
+    .navbar
+      padding 10px 0
+      .container
+        padding 0
+        .navbar-collapse
+          border-top 1px solid #f5f5f5
+          padding 15px
+          margin-top 10px
     .navbar-light .navbar-toggler
       color white
       border-color white
@@ -276,6 +285,7 @@
         top -10px
         z-index 999
         > li > .shopping-cart
+          top 5px
           i
             color white
             font-size 38px
@@ -286,8 +296,36 @@
         .btn-dark
           background-color transparent
           border-color transparent
-      
-  
+  /* SLIDER */
+  .slider-box
+    .slider-img
+      height 100px
+    .owl-nav
+      display none
+  /* SECTION ONE */
+  .section-one
+    .rounded-cicle
+      margin-top 15px
+    p
+      text-align justify
+      padding-right 0
+  .temp-shopcart
+    .shopcart-description
+      font-size 14px
+    .shopcart-img
+      height 100px
+      background-size 50%
+      background-position center
+    h4
+      margin-bottom 15px
+
+  #temp-cart-details
+    .details-prodpay
+      margin-bottom 15px 
+  .temp-dashboard
+    padding 0
+    .list-group
+      margin-bottom 25px
 /* Wide Mobile Layout: 480px. */
 
 @media only screen and (min-width: 480px) and (max-width: 767px)
