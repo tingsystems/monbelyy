@@ -99,7 +99,7 @@
             self.busy = true;
             account.email = account.contactPersonEmail;
             RegisterSrv.save(account).$promise.then(function (data) {
-                NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a Guaumart ");
+                NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;
                 self.formData = {};
                 $state.go('success');

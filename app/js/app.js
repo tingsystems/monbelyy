@@ -109,7 +109,7 @@
             })
             .state('products', {
                 url: '/products',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: '$rootScope.initConfig.branchOffice'},
                 views: {
                     'content': {
                         templateUrl: '/templates/products.html',
@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -177,7 +177,7 @@
             meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
-            email: 'hola@moons.mx',
+            email: 'info@sydgroup.mx',
             phone: '33 2257 3971',
             branchOffice: 'Sydgroup'
 
