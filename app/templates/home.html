@@ -47,10 +47,10 @@
                             <h4 class="text-warning">{{ product.price | currency }}</h4>
                         </div>
                         <div class="box-footer">
-                            <a ui-sref="product-detail({slug:product.slug})" class="btn btn-outline-default">Ver más</a>
+                            <a ui-sref="product-detail({slug:product.slug})" class="btn btn-outline-dark">Ver más</a>
                             <button class="btn btn-danger"
                                     ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
-                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies}, 1)"
+                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice}, 1)"
                                     ng-disabled="Shop.itemInCart(product)">Comprar
                             </button>
                         </div>

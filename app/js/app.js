@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig($httpProvider, blockUIConfig) {
@@ -160,11 +160,11 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        // $rootScope.host = 'https://mercadomovil.com.mx';
-        $rootScope.host = 'http://192.168.1.67';
+        $rootScope.host = 'https://mercadomovil.com.mx';
+        //$rootScope.host = 'http://192.168.1.67';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
-        $rootScope.apiShop = 'v1';
+        $rootScope.apiShop = 'v3';
         $rootScope.siteId = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
         $http.defaults.headers.common['PROJECT-ID'] = '6eeafae0-527d-4983-a4ae-3efca37c777d';
 
@@ -178,7 +178,7 @@
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
             email: 'hola@moons.mx',
-            phone: '01 (55) 55 58 98 99',
+            phone: '33 2257 3971',
             branchOffice: 'Sydgroup'
 
         };

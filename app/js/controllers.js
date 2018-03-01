@@ -32,11 +32,11 @@
         paramsProducts.pageSize = 9;
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice';
         }
 
 
@@ -427,11 +427,11 @@
                     paramsProducts.page = self.page;
                     paramsProducts.search = self.searchTerm;
                     if (list !== '') {
-                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceList';
+                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice';
                         paramsProducts.priceList = list;
                     }
                     else {
-                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceListd';
+                        paramsProducts.fields = 'id,attachments,description,name,price,slug,shipmentPrice';
                     }
                     ProductSrv.get(paramsProducts).$promise.then(function (results) {
                         self.listSearch = self.listSearch.concat(results.results);
@@ -594,11 +594,11 @@
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice';
         }
 
         self.busy = true;
@@ -814,11 +814,11 @@
             self.params.isActive = 'True';
             self.params.pageSize = 9;
             if (list !== '') {
-                self.params.fields = 'id,attachments,description,name,price,slug,priceList';
+                self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice';
                 self.params.priceList = list;
             }
             else {
-                self.params.fields = 'id,attachments,description,name,price,slug';
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice';
             }
             return ProductSrv.get(self.params).$promise.then(function (data) {
                 params.total(data.count);
@@ -857,6 +857,7 @@
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
+
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
@@ -880,9 +881,11 @@
                 // first Time calcule
                 value.import = parseFloat(value.price) * value.qty;
                 self.total += parseFloat(value.price) * value.qty;
+                self.shipmentPrice += parseFloat(value.shipmentPrice);
                 // afected discount global in self.total
             });
             $localStorage.total = self.total;
+            $localStorage.shipmentTotal = self.shipmentPrice;
         };
         self.setItem = function (item, qty) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];

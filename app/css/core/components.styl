@@ -152,6 +152,22 @@
   @extend .box
   background-color #f5f5f5
 
+.box-bordered
+  border-bottom 1px solid #ddd
+  padding 15px
+  a
+    &:hover
+      text-decoration none
+  .box-header
+    .img-box
+      background-size cover
+      background-repeat no-repeat
+      background-position center
+      height 300px
+  .box-article
+    color fontClr
+
+
 /*--- BOX CONTACT ---*/
 .box-contact
   h3
@@ -168,7 +184,7 @@
 
 /*----- Titles ------*/
 .title
-  padding 15px 0 25px
+  padding 25px 0
 .title-primary
   @extend .title
   text-align center
@@ -176,6 +192,8 @@
   @extend .title
   background-color #f5f5f5
   color fontClr
+  h1
+    font-size 28px
 
 /*------- CONTENTS BORDERED -------*/
 .items-dashboard

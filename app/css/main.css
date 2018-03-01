@@ -23,10 +23,9 @@ audio:not([controls]),
   text-align: center;
   border-radius: 30px;
   background-color: #ff9039;
-  font-size: 16px;
-  top: -15px;
-  right: 0;
   font-size: 13px;
+  top: -20px;
+  left: 15px;
   width: 20px;
   height: 20px;
 }
@@ -53,6 +52,9 @@ audio:not([controls]),
 }
 .three-rows-nav .second-row {
   padding: 15px 0 0;
+}
+.three-rows-nav .second-row .btn-outline-danger {
+  margin-top: 10px;
 }
 .three-rows-nav .second-row .dropdown {
   margin-top: 10px;
@@ -326,6 +328,22 @@ audio:not([controls]),
 .box-default {
   background-color: #f5f5f5;
 }
+.box-bordered {
+  border-bottom: 1px solid #ddd;
+  padding: 15px;
+}
+.box-bordered a:hover {
+  text-decoration: none;
+}
+.box-bordered .box-header .img-box {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 300px;
+}
+.box-bordered .box-article {
+  color: #777;
+}
 .box-contact h3 {
   color: #fff;
   margin-bottom: 5px;
@@ -341,7 +359,7 @@ audio:not([controls]),
 .title,
 .title-primary,
 .header-title-large {
-  padding: 15px 0 25px;
+  padding: 25px 0;
 }
 .title-primary {
   text-align: center;
@@ -349,6 +367,9 @@ audio:not([controls]),
 .header-title-large {
   background-color: #f5f5f5;
   color: #777;
+}
+.header-title-large h1 {
+  font-size: 28px;
 }
 .items-dashboard {
   border: 1px solid #ddd;
@@ -885,6 +906,9 @@ span {
   font-weight: 400;
   font: 16px 'Poppins', sans-serif;
 }
+.sweet-alert p {
+  font-weight: 400;
+}
 md-input-container {
   width: 100%;
 }
@@ -1049,6 +1073,9 @@ md-input-container {
   border-top: 0 solid #ddd;
   border-bottom: 0 solid #ddd;
 }
+#temp-blog .box-article {
+  color: #777;
+}
 #footer-top {
   padding: 80px 0;
   background-color: #444;
@@ -1121,6 +1148,21 @@ footer .contact-sty .download-app > i:hover {
 }
 .deckgrid .column.size-1-1 {
   width: 100%;
+}
+.deckgrid[deckgrid]::before {
+/* Specifies that the grid should have a maximum of 4 columns. Each column will have the classes 'column' and 'column-1-4' */
+  content: '4 .column.column-1-4';
+  font-size: 0; /* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
+  visibility: hidden;
+}
+.deckgrid .column {
+  float: left;
+}
+.deckgrid .column-1-4 {
+  width: 25%;
+}
+.a-card {
+  margin: 10px;
 }
 @media screen and (max-width: 840px) {
   .deckgrid[deckgrid]::before {

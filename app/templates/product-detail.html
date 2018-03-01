@@ -46,7 +46,7 @@
                         </md-input-container>
                         <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies}, Product.detail.qty)"
+                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice}, Product.detail.qty)"
                                 ng-disabled="Shop.itemInCart(Product.detail.id)"
                                 class="btn btn-danger">Agregar a carrito
                         </button>
@@ -57,7 +57,7 @@
                             {{Product.detail.description}}</h4>
                         <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies}, Product.detail.qty)"
+                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice}, Product.detail.qty)"
                                 ng-disabled="Shop.itemInCart(Product.detail.id)"
                                 class="btn btn-danger">Agregar a carrito
                         </button>

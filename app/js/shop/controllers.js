@@ -102,6 +102,7 @@
             self.total = 0;
             $localStorage.items = [];
             $localStorage.total = 0;
+            $localStorage.subTtotal = 0;
             $localStorage.globalDiscount = {amount: 0};
             $localStorage.promoTotal = 0;
             $localStorage.shipmentTotal = 0;
@@ -150,6 +151,7 @@
                 self.import = parseFloat(value.price) * value.qty;
                 self.total += parseFloat(value.price) * value.qty;
                 self.subTotal += self.import;
+                self.shipmentPrice += parseFloat(value.shipmentPrice);
             });
             if ($localStorage.globalDiscount.isPercentage === 1) {
                 applyDiscountPercentage();
@@ -161,10 +163,10 @@
                 $localStorage.shipmentTotal = 0;
 
             }
-            self.shipmentTotal = $localStorage.shipmentTotal;
             $localStorage.total = self.total;
             $localStorage.subTtotal = self.subTotal;
             $localStorage.promoTotal = self.promoTotal;
+            //$localStorage.shipmentTotal = self.shipmentPrice;
         };
         getTotal();
 
@@ -380,7 +382,7 @@
         self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
-        self.subTotal = $localStorage.subTotal;
+        self.subTotal = $localStorage.subTtotal;
         self.formDataPay = {};
         self.customer = [];
         self.addresses = [];
@@ -475,7 +477,7 @@
             });
         };
 
-        var initialOrder = function() {
+        var initialOrder = function () {
             var coupon = '';
             if ('coupon' in $localStorage.globalDiscount) {
                 coupon = $localStorage.globalDiscount.coupon;
@@ -524,7 +526,7 @@
         };
 
 
-        var publishKey =  self.defaultbranchOffice.metadata.mp.publicKey;
+        var publishKey = self.defaultbranchOffice.metadata.mp.publicKey;
         var setPublishableKey = function () {
             Mercadopago.setPublishableKey(publishKey);
         };
@@ -545,7 +547,7 @@
             data.payment_method_id = self.params.paymentMethodId;
             OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
                 $state.go('purchase-completed', {orderId: response.id});
-            }, function(error) {
+            }, function (error) {
                 console.log(error);
                 NotificationSrv.error('Error al procesar su pago');
             });
@@ -561,11 +563,11 @@
             deferred.resolve(error);
         };
 
-        var setPaymentMethodInfo =  function (status, response) {
+        var setPaymentMethodInfo = function (status, response) {
             self.params.paymentMethodId = response[0].id;
         }
 
-        var getBin = function() {
+        var getBin = function () {
             Mercadopago.getPaymentMethod({
                 bin: self.params.cardNumber
             }, setPaymentMethodInfo);
@@ -582,7 +584,6 @@
             //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
 
             initialOrder();
-
             OrderSrv.save(self.params).$promise.then(function (data) {
                 clearCart();
                 if (data.paymentType === 3) {
