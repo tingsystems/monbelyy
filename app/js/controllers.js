@@ -32,11 +32,11 @@
         paramsProducts.pageSize = 9;
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax';
         }
 
 
@@ -427,11 +427,11 @@
                     paramsProducts.page = self.page;
                     paramsProducts.search = self.searchTerm;
                     if (list !== '') {
-                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice';
+                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax';
                         paramsProducts.priceList = list;
                     }
                     else {
-                        paramsProducts.fields = 'id,attachments,description,name,price,slug,shipmentPrice';
+                        paramsProducts.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
                     }
                     ProductSrv.get(paramsProducts).$promise.then(function (results) {
                         self.listSearch = self.listSearch.concat(results.results);
@@ -594,11 +594,11 @@
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax';
         }
 
         self.busy = true;

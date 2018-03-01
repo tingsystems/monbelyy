@@ -50,7 +50,7 @@
                             <a ui-sref="product-detail({slug:product.slug})" class="btn btn-outline-dark">Ver más</a>
                             <button class="btn btn-danger"
                                     ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
-                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice}, 1)"
+                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
                                     ng-disabled="Shop.itemInCart(product)">Comprar
                             </button>
                         </div>

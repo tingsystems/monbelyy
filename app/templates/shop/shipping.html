@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <h4><i class="fa fa-truck"></i> Selecciona la forma de envio</h4>{{ Payment.showAddress }}
                     <hr>
-                    <md-radio-group ng-model="Payment.sendOptions">
+                    <md-radio-group ng-model="Payment.sendOptions" ng-change="Payment.changeShippingOptions()">
                         <md-radio-button value="0" class="md-primary">
                             <span class="fa fa-truck">
                                     Envío a domicilio
