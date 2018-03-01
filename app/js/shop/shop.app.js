@@ -59,7 +59,7 @@
                 url: '/history/sales',
                 data: {
                     requiredLogin : true,
-                    pageTitle: 'Compras - Moons'
+                    pageTitle: 'Compras - Sydgroup'
                 },
                 views: {
                     'content': {
