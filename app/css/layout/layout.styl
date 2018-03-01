@@ -191,7 +191,9 @@ md-input-container
   .table, .table th, .table td
     border-top 0 solid #ddd
     border-bottom 0 solid #ddd
-
+#temp-blog
+  .box-article
+    color fontClr
 #footer-top
   padding 80px 0
   background-color #444444
@@ -250,6 +252,24 @@ footer
       width 50%
     &.size-1-1
       width 100%
+
+.deckgrid[deckgrid]::before {
+  /* Specifies that the grid should have a maximum of 4 columns. Each column will have the classes 'column' and 'column-1-4' */
+  content: '4 .column.column-1-4';
+  font-size: 0; /* See https://github.com/akoenig/angular-deckgrid/issues/14#issuecomment-35728861 */
+  visibility: hidden;
+}
+
+.deckgrid .column {
+  float: left;
+}
+
+.deckgrid .column-1-4 {
+  width: 25%;
+}
+
+.a-card
+  margin 10px
 
 @media screen and (max-width: 840px)
   .deckgrid[deckgrid]::before
