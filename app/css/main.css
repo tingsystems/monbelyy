@@ -874,13 +874,6 @@ audio:not([controls]),
     margin: 0;
   }
 }
-input[type="reset"][disabled],
-input[type="submit"][disabled],
-html input[type="button"][disabled],
-button[disabled],
-.btn[disabled] {
-  cursor: not-allowed;
-}
 body {
   background-color: #fff;
   color: #777;
@@ -905,6 +898,16 @@ p,
 span {
   font-weight: 400;
   font: 16px 'Poppins', sans-serif;
+}
+.xs-hidde {
+  display: none;
+}
+input[type="reset"][disabled],
+input[type="submit"][disabled],
+html input[type="button"][disabled],
+button[disabled],
+.btn[disabled] {
+  cursor: not-allowed;
 }
 .sweet-alert p {
   font-weight: 400;
@@ -1560,6 +1563,26 @@ footer .contact-sty .download-app > i:hover {
   .section-one p {
     text-align: justify;
     padding-right: 0;
+  }
+  .temp-shopcart .shopcart-description {
+    font-size: 14px;
+  }
+  .temp-shopcart .shopcart-img {
+    height: 100px;
+    background-size: 50%;
+    background-position: center;
+  }
+  .temp-shopcart h4 {
+    margin-bottom: 15px;
+  }
+  #temp-cart-details .details-prodpay {
+    margin-bottom: 15px;
+  }
+  .temp-dashboard {
+    padding: 0;
+  }
+  .temp-dashboard .list-group {
+    margin-bottom: 25px;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
