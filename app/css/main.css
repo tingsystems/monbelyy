@@ -900,7 +900,7 @@ span {
   font: 16px 'Poppins', sans-serif;
 }
 .xs-hidde {
-  display: none;
+  display: inline;
 }
 input[type="reset"][disabled],
 input[type="submit"][disabled],
@@ -908,6 +908,9 @@ html input[type="button"][disabled],
 button[disabled],
 .btn[disabled] {
   cursor: not-allowed;
+}
+.no-padding {
+  padding: 0 !important;
 }
 .sweet-alert p {
   font-weight: 400;
@@ -1503,6 +1506,9 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .xs-hidde {
+    display: none;
+  }
   .three-rows-nav .navbar {
     padding: 10px 0;
   }

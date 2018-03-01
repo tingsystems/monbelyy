@@ -1,134 +1,146 @@
-<div class="content-dashboard">
-    <div class="container">
-
-        <div class="col-md-3">
-            <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
-        </div>
-        <div class="col-md-9">
-            <h3 class="info2"><i class="ion-ios-list-outline"></i> Detalle de la compra</h3>
-            <hr>
-            <div class="row label-status">
-                <div class="col-xs-2 col-md-1">
-                    <h4>
-                        <span ng-if="Purchase.purchase.paymentType == 3" class="label label-sm bg-paypal">
+<div class="temp-dashboard">
+    <section class="content-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
+                </div>
+                <div class="col-md-9 items-dashboard">
+                    <div class="container">
+                        <h3><i class="ion-ios-list-outline"></i> Detalle de la compra</h3>
+                        <hr>
+                        <div class="row label-status">
+                            <div class="col-2 col-md-3">
+                                <h6>
+                                    Tipo de pago:
+                                    <span ng-if="Purchase.purchase.paymentType == 3" class="badge badge-info">
                             {{ Purchase.purchase.paymentTypeName }}
                         </span>
-                        <span ng-if="Purchase.purchase.paymentType == 6" class="label label-sm bg-green">
+                                    <span ng-if="Purchase.purchase.paymentType == 6" class="badge badge-success">
                             {{ Purchase.purchase.paymentTypeName }}
                         </span>
-                        <span ng-if="Purchase.purchase.paymentType == 8" class="label label-sm bg-war">
-                            {{ Purchase.purchase.paymentTypeName }}
+                                    <span ng-if="Purchase.purchase.paymentType == 8" class="badge badge-danger">
+                             {{ Purchase.purchase.paymentTypeName }}
                         </span>
-                    </h4>
-                </div>
-                <div class="col-xs-2 col-md-1">
-                    <h4>
-                        <span ng-if="Purchase.purchase.isPaid == 0" class="label label-sm bg-success">
+                                </h6>
+                            </div>
+                            <div class="col-2 col-md-3">
+                                <h6>
+                                    Estatus:
+                                    <span ng-if="Purchase.purchase.isPaid == 0" class="badge badge-success">
                             {{ Purchase.purchase.isPaidName }}
                         </span>
-                        <span ng-if="Purchase.purchase.isPaid == 1" class="label label-sm bg-warning">
+                                    <span ng-if="Purchase.purchase.isPaid == 1" class="badge badge-warning">
                             {{ Purchase.purchase.isPaidName }}
                         </span>
-                        <span ng-if="Purchase.purchase.isPaid == 2" class="label label-sm bg-notpaid">
+                                    <span ng-if="Purchase.purchase.isPaid == 2" class="badge badge-danger">
                             {{ Purchase.purchase.isPaidName }}
                         </span>
-                    </h4>
-                </div>
-            </div>
-            <div class="row" ng-if="Purchase.purchase.paymentType === 6">
-                <div class="col-md-6">
-                    <a ng-if="Purchase.voucher.url" href="{{Purchase.voucher.url}}" target="_blank">Ver comprobante de pago cargado</a>
-                    <input type="file" ngf-select="Purchase.uploadFile()" ng-model="Purchase.voucher" name="file"
-                           ngf-pattern="'.pdf,image/*'"
-                           ngf-accept="'image/*,.pdf'"
-                           ngf-max-size="20MB" style="margin-bottom: 15px; margin-top: 15px;"/>
-                    <i class="text-danger" ng-show="Entry.postForm.file.$error.maxSize">Tamaño maximo de archivo
-                        20MB</i>
-
-                </div>
-            </div>
-            <div class="col-md-12 text-center dash-footer">
-                <div class="col-md-3 item">
-                    <p class="item-number">Folio</p>
-                    <p class="item-name">#{{Purchase.purchase.id}}</p>
-                </div>
-                <div class="col-md-3 item">
-                    <p class="item-number">Tipo de pago</p>
-                    <p class="item-name">{{ Purchase.purchase.paymentTypeName }}</p>
-                </div>
-                <div class="col-md-3 item">
-                    <p class="item-number">Estado del pago</p>
-                    <p class="item-name">{{ Purchase.purchase.isPaidName }}</p>
-                </div>
-                <div class="col-md-3 item">
-                    <p class="item-number">Fecha</p>
-                    <p class="item-name">{{ Purchase.purchase.createdAt | date:'short'}}</p>
-                </div>
-            </div>
-            <div class="col-md-12" style="margin-top: 10px">
-                <div class="payment-sidebar">
-                    <div class="row">
-                        <div class="">
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th width="5%">Cantidad</th>
-                                        <th width="50%">Descripción</th>
-                                        <th>Precio unitario</th>
-                                        <th>Importe</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="item in Purchase.purchase.items">
-                                        <th scope="row">{{item.qty}}</th>
-                                        <td>{{item.itemId}} - {{item.name}}</td>
-                                        <td>{{item.price | currency}}</td>
-                                        <td ng-if="item.subtotalDiscount">{{item.subtotalDiscount | currency}}
-                                            <span class="glyphicon  glyphicon-exclamation-sign">
-                                            <md-tooltip md-direction="right">Este producto tuvo {{item.promotion | currency}} de descuento.</md-tooltip></span></p>
-                                        </td>
-                                        <td ng-if="!item.subtotalDiscount">{{item.subtotal | currency}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="text-align: right;" colspan="3">Descuento</th>
-                                        <td>{{Purchase.purchase.promoTotal | currency}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th style="text-align: right;" colspan="3">Subtotal</th>
-                                        <td>{{Purchase.purchase.subTotal | currency}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: right;">IVA</th>
-                                        <td>{{Purchase.purchase.taxTotal | currency}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="3" style="text-align: right;">TOTAL</th>
-                                        <td>{{Purchase.purchase.total | currency}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                </h6>
                             </div>
                         </div>
-                    </div>
-                    <div class="payment-footer">
+                        <hr>
+                        <div class="row" ng-if="Purchase.purchase.paymentType === 6">
+                            <div class="col-md-6">
+                                <a ng-if="Purchase.voucher.url" href="{{Purchase.voucher.url}}" target="_blank">Ver
+                                    comprobante
+                                    de pago cargado</a>
+                                <input type="file" ngf-select="Purchase.uploadFile()" ng-model="Purchase.voucher"
+                                       name="file"
+                                       ngf-pattern="'.pdf,image/*'"
+                                       ngf-accept="'image/*,.pdf'"
+                                       ngf-max-size="20MB" style="margin-bottom: 15px; margin-top: 15px;"/>
+                                <i class="text-danger" ng-show="Entry.postForm.file.$error.maxSize">Tamaño maximo de archivo
+                                    20MB</i>
+
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-md-8" ng-if="Purchase.purchase.comments">
-                                <h4><strong>Nota:</strong> {{ Purchase.purchase.comments}}</h4>
+                            <div class="col-md-3 item">
+                                <p class="item-number">Folio</p>
+                                <p class="item-name">#{{Purchase.purchase.id}}</p>
+                            </div>
+                            <div class="col-md-3 item">
+                                <p class="item-number">Tipo de pago</p>
+                                <p class="item-name">{{ Purchase.purchase.paymentTypeName }}</p>
+                            </div>
+                            <div class="col-md-3 item">
+                                <p class="item-number">Estado del pago</p>
+                                <p class="item-name">{{ Purchase.purchase.isPaidName }}</p>
+                            </div>
+                            <div class="col-md-3 item">
+                                <p class="item-number">Fecha</p>
+                                <p class="item-name">{{ Purchase.purchase.createdAt | date:'short'}}</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="payment-mount">
-                        <div class="pull-right btn-inv">
-                            <button title="Regresar a mis compras" class="btn btn-md btn-gray-clear"
-                                    ui-sref="sales">
-                                <i class="fa fa-angle-left"></i> Regresar
-                            </button>
+                        <div class="col-md-12" style="margin-top: 10px">
+                            <div class="payment-sidebar">
+                                <div class="row">
+                                    <div class="">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th width="5%">Cantidad</th>
+                                                    <th width="50%">Descripción</th>
+                                                    <th>Precio unitario</th>
+                                                    <th>Importe</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in Purchase.purchase.items">
+                                                    <th scope="row">{{item.qty}}</th>
+                                                    <td>{{item.itemId}} - {{item.name}}</td>
+                                                    <td>{{item.price | currency}}</td>
+                                                    <td ng-if="item.subtotalDiscount">{{item.subtotalDiscount | currency}}
+                                                        <span class="glyphicon  glyphicon-exclamation-sign">
+                                            <md-tooltip md-direction="right">Este producto tuvo {{item.promotion | currency}} de descuento.</md-tooltip></span></p>
+                                                    </td>
+                                                    <td ng-if="!item.subtotalDiscount">{{item.subtotal | currency}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="text-align: right;" colspan="3">Descuento</th>
+                                                    <td>{{Purchase.purchase.promoTotal | currency}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="text-align: right;" colspan="3">Subtotal</th>
+                                                    <td>{{Purchase.purchase.subTotal | currency}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="3" style="text-align: right;">IVA</th>
+                                                    <td>{{Purchase.purchase.taxTotal | currency}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="3" style="text-align: right;">TOTAL</th>
+                                                    <td>{{Purchase.purchase.total | currency}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment-footer">
+                                    <div class="row">
+                                        <div class="col-md-8" ng-if="Purchase.purchase.comments">
+                                            <h4><strong>Nota:</strong> {{ Purchase.purchase.comments}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment-mount">
+                                    <div class="pull-right btn-inv">
+                                        <button title="Regresar a mis compras" class="btn btn-md btn-danger"
+                                                ui-sref="sales">
+                                            <i class="fa fa-angle-left"></i> Regresar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
+
 
