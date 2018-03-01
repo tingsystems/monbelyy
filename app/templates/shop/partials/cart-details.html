@@ -25,8 +25,12 @@
                 <table class="table table-striped text-right">
                     <tbody>
                     <tr>
-                        <td>Subtotal</td>
+                        <td>Subtotal({{ ShopCart.items.length }})</td>
                         <td>{{ ShopCart.subTotal | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Impuestos</td>
+                        <td>{{ ShopCart.taxTotal | currency}}</td>
                     </tr>
                     <tr>
                         <td>Envío</td>
@@ -34,7 +38,7 @@
                     </tr>
                     <tr>
                         <td>Total</td>
-                        <td><h3><span class="mxn">MXN</span>{{ ShopCart.total | currency }}</h3></td>
+                        <td>{{ ShopCart.total | currency}}</td>
                     </tr>
                     <tr ng-if="ShopCart.promoTotal">
                         <td>Descuento</td>
@@ -53,10 +57,12 @@
                         </md-input-container>
                     </div>
                     <div class="col-md-3 no-padding">
-                        <button ng-click="ShopCart.validCoupon()" class="btn btn-danger btn-block" style="margin-top: 7%"
+                        <button ng-click="ShopCart.validCoupon()" class="btn btn-danger btn-block"
+                                style="margin-top: 7%"
                                 ng-if="!ShopCart.codeUsed">Aplicar
                         </button>
-                        <button ng-click="ShopCart.removeCoupon()" class="btn btn-danger btn-block" style="margin-top: 7%"
+                        <button ng-click="ShopCart.removeCoupon()" class="btn btn-danger btn-block"
+                                style="margin-top: 7%"
                                 ng-if="ShopCart.codeUsed">Eliminar
                         </button>
                     </div>

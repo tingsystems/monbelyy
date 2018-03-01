@@ -165,7 +165,7 @@
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v1';
-        $rootScope.siteId = '37ef6c92-5fba-4688-845b-2cd938a9f2fc';
+        $rootScope.projectId = '6eeafae0-527d-4983-a4ae-3efca37c777d';
         $http.defaults.headers.common['PROJECT-ID'] = '6eeafae0-527d-4983-a4ae-3efca37c777d';
 
         $rootScope.$on('$locationChangeSuccess', function () {

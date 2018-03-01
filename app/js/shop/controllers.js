@@ -18,7 +18,7 @@
         self.tax = false;
         self.taxInverse = false;
         $localStorage.globalDiscount = {amount: 0};
-        $localStorage.shipmentTotal = 0;
+        self.shipmentTotal = $localStorage.shipmentTotal ? $localStorage.shipmentTotal : 0;
         $localStorage.ship = false;
 
         if ($auth.isAuthenticated()) {
@@ -146,12 +146,29 @@
             self.import = 0;
             self.subTotal = 0;
             self.promoTotal = 0;
+            self.shipmentPrice = 0;
+            self.taxTotal = 0;
             angular.forEach(self.items, function (value, key) {
                 //first Time calcule
-                self.import = parseFloat(value.price) * value.qty;
-                self.total += parseFloat(value.price) * value.qty;
-                self.subTotal += self.import;
+                if (value.typeTax === 0) {
+                    var price = (parseFloat(value.price) / 1.16);
+                    value.import = (parseFloat(price) * value.qty);
+                    value.tax = (parseFloat(value.import) * 0.16);
+
+                } else if (value.typeTax === 1) {
+                    value.import = (parseFloat(value.price) * value.qty);
+                    value.tax = (parseFloat(value.import) * 0.16);
+
+                }
+                else if (value.typeTax === 2) {
+                    value.import = (parseFloat(value.price) * value.qty);
+                    value.tax = 0;
+
+                }
+                self.import += parseFloat(value.import);
+                self.taxTotal += parseFloat(value.tax);
                 self.shipmentPrice += parseFloat(value.shipmentPrice);
+
             });
             if ($localStorage.globalDiscount.isPercentage === 1) {
                 applyDiscountPercentage();
@@ -161,12 +178,16 @@
             }
             if ($localStorage.ship) {
                 $localStorage.shipmentTotal = 0;
+                self.shipmentPrice = 0;
 
             }
+            self.subTotal = self.import;
+            self.total = parseFloat(self.import) + parseFloat(self.taxTotal) + parseFloat(self.shipmentPrice);
             $localStorage.total = self.total;
             $localStorage.subTtotal = self.subTotal;
             $localStorage.promoTotal = self.promoTotal;
-            //$localStorage.shipmentTotal = self.shipmentPrice;
+            $localStorage.shipmentTotal = self.shipmentPrice;
+            self.shipmentTotal = self.shipmentPrice;
         };
         getTotal();
 
@@ -253,6 +274,11 @@
 
 
         };
+
+        $rootScope.$on('newTotals', function (event, data) {
+            $localStorage.ship = data.data;
+            getTotal()
+        });
 
     }
 
@@ -354,7 +380,6 @@
 
         // get the cities by state
         self.getCitiesByState = function () {
-            console.log('lalalalal');
             if (!self.state) {
                 return
             }
@@ -372,6 +397,16 @@
             }
 
         };
+
+        self.changeShippingOptions = function () {
+            if (self.sendOptions === '1') {
+                $rootScope.$emit('newTotals', {data: true});
+            }
+            else {
+                $rootScope.$emit('newTotals', {data: false});
+
+            }
+        }
 
     }
 
@@ -394,7 +429,6 @@
         self.address = $localStorage.appData.user.address;
         self.phone = ''; //$localStorage.appData.user.phone;
         self.orderPaymentType = '8';
-        self.shiping = true;
         self.busyPaypal = false;
         self.paypalBtn = 'Realizar pago';
         self.shipping = angular.copy($stateParams.shipping);
@@ -402,6 +436,8 @@
         $rootScope.items = self.items;
         $rootScope.idUser = self.idUser;
         self.busyCard = false;
+        self.shippingOption = angular.copy($stateParams.shipping);
+
         // get default branch office
         self.getDefaulBranchOffice = function () {
             if (!user.branchOffices)
@@ -433,22 +469,18 @@
             $state.go('app.dashboard');
         };
 
-        var getTotal = function () {
-            self.total = 0;
-            angular.forEach(self.items, function (value, key) {
-                //first Time calcule
-                //value.import = parseFloat(value.price) * value.qty;
-                self.total += parseFloat(value.price) * value.qty;
-            });
-            $localStorage.total = self.total;
-        };
-        getTotal();
-
 
         self.getCustomer = function () {
             CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
                 self.customer = data;
                 self.phone = data.phone;
+                if (self.shippingOption === '1') {
+                    $rootScope.$emit('newTotals', {data: true});
+                }
+                else {
+                    $rootScope.$emit('newTotals', {data: false});
+
+                }
             });
 
         };

@@ -82,11 +82,15 @@
                                     <tbody>
                                     <tr>
                                         <td>Subtotal({{ items.length }})</td>
-                                        <td>{{ ShopCart.total | currency}}</td>
+                                        <td>{{ ShopCart.subTotal | currency}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Impuestos</td>
+                                        <td>{{ ShopCart.taxTotal | currency}}</td>
                                     </tr>
                                     <tr>
                                         <td>Envío</td>
-                                        <td>$0</td>
+                                        <td>{{ShopCart.shipmentTotal | currency}}</td>
                                     </tr>
                                     <tr>
                                         <td>Total</td>
@@ -96,7 +100,8 @@
                                 </table>
                             </div>
                             <button class="btn btn-danger btn-block" ng-click="ShopCart.processPurchase()"><i
-                                    class="fa fa-credit-card"></i> Procesar compra</button>
+                                    class="fa fa-credit-card"></i> Procesar compra
+                            </button>
                         </div>
                     </div>
                 </div>
