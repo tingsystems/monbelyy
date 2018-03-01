@@ -552,8 +552,10 @@
         };
 
         var errorResponseHandler = function (error) {
+            console.log(error);
             var deferred = $q.defer();
             deferred.promise.then(function (error) {
+                console.log(error);
                 NotificationSrv.error(error.message_to_purchaser);
             });
             deferred.resolve(error);
