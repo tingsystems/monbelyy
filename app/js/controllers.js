@@ -5,7 +5,7 @@
         var self = this; // save reference of the scope
         self.mainSlider = [];
         self.active = 0;
-        $rootScope.pageTitle = 'Sydgroup';
+        $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         $rootScope.toggleSidebar = function () {
@@ -235,7 +235,7 @@
             }).$promise.then(function (results) {
                 if (results.results) {
                     self.categoryName = results.results[0].name;
-                    $rootScope.pageTitle = self.categoryName + ' - Guaumart';
+                    $rootScope.pageTitle = self.categoryName + ' - ' + $rootScope.initConfig.branchOffice;
                 }
             });
         }
@@ -309,12 +309,12 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Noticias - Sydgroup';
+        $rootScope.pageTitle = 'Noticias' + ' - ' + $rootScope.initConfig.branchOffice;
     }
 
     function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
         var self = this;
-        $rootScope.pageTitle = 'Sydgroup';
+        $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
 
         self.busy = true;
         EntrySrv.get({
@@ -334,7 +334,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.title + ' - Guaumart';
+            $rootScope.pageTitle = results.title + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
         });
     }
@@ -342,9 +342,9 @@
     function ContactCtrl(NotificationTakiSrv, NotificationSrv, $rootScope, $state) {
         var self = this;
         if ($state.current.name === 'home') {
-            $rootScope.pageTitle = 'Guaumart - ¡El Súper para los MVZ!';
+            $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         } else if ($state.current.name === 'contact') {
-            $rootScope.pageTitle = 'Contacto - Guaumart';
+            $rootScope.pageTitle = 'Contacto' + ' - ' + $rootScope.initConfig.branchOffice;
         }
 
         self.contactInitialState = function () {
@@ -587,7 +587,7 @@
 
     function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage) {
         var self = this;
-        $rootScope.pageTitle = 'Guaumart';
+        $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         var paramsProducts = {};
@@ -614,7 +614,7 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             $rootScope.post = self.detail;
-            $rootScope.pageTitle = results.name + ' - Guaumart';
+            $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
         });
 
@@ -683,7 +683,7 @@
                     self.categoryName = results.name;
                     self.categoryId = results.id;
                     self.category = results;
-                    $rootScope.pageTitle = self.categoryName + ' - Guaumart';
+                    $rootScope.pageTitle = self.categoryName + ' - ' + $rootScope.initConfig.branchOffice;
                 }
                 ProductTaxonomySrv.query({
                     parent: results.id,

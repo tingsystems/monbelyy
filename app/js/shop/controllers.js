@@ -432,7 +432,7 @@
         self.busyPaypal = false;
         self.paypalBtn = 'Realizar pago';
         self.shipping = angular.copy($stateParams.shipping);
-        self.creditCard = true;
+        self.creditCard = false;
         $rootScope.items = self.items;
         $rootScope.idUser = self.idUser;
         self.busyCard = false;
@@ -578,18 +578,18 @@
             data.preOrder = self.params;
             data.payment_method_id = self.params.paymentMethodId;
             OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
+                self.creditCard = false;
+                clearCart();
+                NotificationSrv.success('Compra completada correctamente');
                 $state.go('purchase-completed', {orderId: response.id});
             }, function (error) {
-                console.log(error);
                 NotificationSrv.error('Error al procesar su pago');
             });
         };
 
         var errorResponseHandler = function (error) {
-            console.log(error);
             var deferred = $q.defer();
             deferred.promise.then(function (error) {
-                console.log(error);
                 NotificationSrv.error(error.message_to_purchaser);
             });
             deferred.resolve(error);
@@ -604,11 +604,11 @@
                 bin: self.params.cardNumber
             }, setPaymentMethodInfo);
         }
-
         self.processPaymentCard = function () {
+            self.creditCard = true;
             setPublishableKey();
             getBin();
-            Mercadopago.createToken($element.find('#payment-form'), successResponseHandler, errorResponseHandler);
+            Mercadopago.createToken(document.getElementById('pay'), successResponseHandler, errorResponseHandler);
         };
 
         self.createOrder = function () {
