@@ -82,6 +82,10 @@
                         $localStorage.cart = {};
                         $localStorage.appData.user = self.branchDefault;
                         $localStorage.priceList = '';
+                        $localStorage.priceList = '';
+                        $localStorage.shipmentTotal = 0;
+                        $localStorage.ship = false;
+                        $localStorage.subTtotal = 0;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name !== 'register') {
                             NotificationSrv.success("Te esperamos pronto", $rootScope.initConfig.branchOffice);

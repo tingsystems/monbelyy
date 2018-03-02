@@ -123,12 +123,14 @@
             if ($localStorage.globalDiscount.amount === 0)
                 return;
             // get fraction value discount
-            $localStorage.globalDiscount.discount = (parseFloat($localStorage.globalDiscount.amount) / 100) * self.total;
+            $localStorage.globalDiscount.discount = (parseFloat(self.code.amount) / 100) * self.total;
             // subtract import and discount
             self.total = self.total - $localStorage.globalDiscount.discount;
             self.promoTotal += parseFloat($localStorage.globalDiscount.discount);
             $localStorage.total = self.total;
             $localStorage.promoTotal = self.promoTotal;
+            console.log(self.promoTotal);
+            console.log(self.total);
         };
         // calculate discount cash global
         var applyDiscountCash = function () {
@@ -170,10 +172,23 @@
                 self.shipmentPrice += parseFloat(value.shipmentPrice);
 
             });
-            if ($localStorage.globalDiscount.isPercentage === 1) {
+
+            self.subTotal = self.import;
+            self.subTotal = (Math.round(self.subTotal * 100) / 100);
+            self.taxTotal = (Math.round(self.taxTotal * 100) / 100);
+            self.shipmentTotal = (Math.round(self.shipmentPrice * 100) / 100);
+            self.total = parseFloat(self.import) + parseFloat(self.taxTotal) + parseFloat(self.shipmentPrice);
+            self.total = (Math.round(self.total * 100) / 100);
+            $localStorage.total = self.total;
+            $localStorage.subTtotal = self.subTotal;
+            $localStorage.promoTotal = self.promoTotal;
+            $localStorage.shipmentTotal = self.shipmentPrice;
+            $localStorage.taxTotal = self.taxTotal;
+
+            if ($localStorage.globalDiscount.isPercentage === 0) {
                 applyDiscountPercentage();
             }
-            else if ($localStorage.globalDiscount.isPercentage === 0) {
+            else if ($localStorage.globalDiscount.isPercentage === 1) {
                 applyDiscountCash();
             }
             if ($localStorage.ship) {
@@ -181,13 +196,7 @@
                 self.shipmentPrice = 0;
 
             }
-            self.subTotal = self.import;
-            self.total = parseFloat(self.import) + parseFloat(self.taxTotal) + parseFloat(self.shipmentPrice);
-            $localStorage.total = self.total;
-            $localStorage.subTtotal = self.subTotal;
-            $localStorage.promoTotal = self.promoTotal;
-            $localStorage.shipmentTotal = self.shipmentPrice;
-            self.shipmentTotal = self.shipmentPrice;
+
         };
         getTotal();
 
@@ -243,6 +252,7 @@
                     self.code = data;
                     if (self.code.isValid) {
                         if (!self.code.shipmentFree) {
+                            console.log(self.code.discountType);
                             $localStorage.globalDiscount.isPercentage = self.code.discountType;
                             $localStorage.globalDiscount.amount = self.code.amount;
                             $localStorage.globalDiscount.coupon = self.code.id;
@@ -437,6 +447,7 @@
         $rootScope.idUser = self.idUser;
         self.busyCard = false;
         self.shippingOption = angular.copy($stateParams.shipping);
+        self.shiping = true;
 
         // get default branch office
         self.getDefaulBranchOffice = function () {
@@ -555,6 +566,7 @@
             self.params.itemCount = self.items.length;
             self.params.promoTotal = $localStorage.promoTotal;
             self.params.shipmentTotal = $localStorage.shipmentTotal;
+            self.params.taxTotal = $localStorage.taxTotal;
         };
 
 
@@ -567,10 +579,10 @@
             var data = response;
             initialOrder();
             data.payment_method_id = self.params.paymentMethodId;
-            delete self.params.year
-            delete self.params.month
-            delete self.params.cardNumber
-            delete self.params.cvc
+            delete self.params.year;
+            delete self.params.month;
+            delete self.params.cardNumber;
+            delete self.params.cvc;
             self.params.store = self.defaultbranchOffice;
             self.params.customerName = self.params.customer.businessName;
             self.params.customerEmail = self.params.customer.contactPersonEmail;
@@ -584,6 +596,7 @@
                 $state.go('purchase-completed', {orderId: response.id});
             }, function (error) {
                 NotificationSrv.error('Error al procesar su pago');
+                self.creditCard = false;
             });
         };
 
@@ -597,13 +610,14 @@
 
         var setPaymentMethodInfo = function (status, response) {
             self.params.paymentMethodId = response[0].id;
-        }
+        };
 
         var getBin = function () {
             Mercadopago.getPaymentMethod({
                 bin: self.params.cardNumber
             }, setPaymentMethodInfo);
-        }
+        };
+
         self.processPaymentCard = function () {
             self.creditCard = true;
             setPublishableKey();
