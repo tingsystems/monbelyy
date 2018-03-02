@@ -25,6 +25,17 @@
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
+                $localStorage.items = [];
+                $localStorage.total = 0;
+                $localStorage.cart = {};
+                $localStorage.appData.user = self.branchDefault;
+                $localStorage.priceList = '';
+                $localStorage.shipmentTotal = 0;
+                $localStorage.ship = false;
+                $localStorage.subTtotal = 0;
+                $localStorage.taxTotal = 0;
+                $localStorage.promoTotal = 0;
+                $localStorage.shipmentTotal = 0;
                 self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
                 PriceListSrv.customer({customers: $localStorage.appData.user.customer}).$promise.then(function (data) {
                     $localStorage.priceList = data[0].slug;
@@ -82,10 +93,12 @@
                         $localStorage.cart = {};
                         $localStorage.appData.user = self.branchDefault;
                         $localStorage.priceList = '';
-                        $localStorage.priceList = '';
                         $localStorage.shipmentTotal = 0;
                         $localStorage.ship = false;
                         $localStorage.subTtotal = 0;
+                        $localStorage.taxTotal = 0;
+                        $localStorage.promoTotal = 0;
+                        $localStorage.shipmentTotal = 0;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name !== 'register') {
                             NotificationSrv.success("Te esperamos pronto", $rootScope.initConfig.branchOffice);
