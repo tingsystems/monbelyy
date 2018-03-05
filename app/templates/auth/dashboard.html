@@ -49,55 +49,53 @@
                                 <tbody>
                                 <tr ng-repeat="purchase in Panel.purchaseRecent" datasource="purchase" ref="Panel">
                                     <td data-title="'Folio'" sortable="'id'">#{{ purchase.id }}</td>
-                                    <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date: 'd/M/y'
-                                        }}
+                                    <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date: 'd/M/y'}}
                                     </td>
-                                    <td data-title="'Cliente'" sortable="'price'">{{ purchase.customerName }}</td>
                                     <td data-title="'Tipo'">
-                                    <span ng-if="purchase.paymentType == 3" class="label label-sm bg-paypal">
+                                    <span ng-if="purchase.paymentType == 3" class="badge badge-info">
                                         {{ purchase.paymentTypeName }}
                                 </span>
-                                        <span ng-if="purchase.paymentType == 6" class="label label-sm bg-green">
+                                        <span ng-if="purchase.paymentType == 6" class="badge badge-success">
                                         {{ purchase.paymentTypeName }}
                                 </span>
-                                        <span ng-if="purchase.paymentType == 8" class="label label-sm bg-green">
+                                        <span ng-if="purchase.paymentType == 8" class="badge badge-success">
                                         {{ purchase.paymentTypeName }}
                                 </span>
                                     </td>
                                     <td data-title="'Pago'">
-                                    <span ng-if="purchase.isPaid == 0" class="label label-sm bg-success">
+                                    <span ng-if="purchase.isPaid == 0" class="badge badge-success">
                                                 {{ purchase.isPaidName }}
                                         </span>
-                                        <span ng-if="purchase.isPaid == 1" class="label label-sm bg-war">
+                                        <span ng-if="purchase.isPaid == 1" class="badge badge-warning">
                                                 {{ purchase.isPaidName }}
                                         </span>
-                                        <span ng-if="purchase.isPaid == 2" class="label label-sm bg-notpaid">
+                                        <span ng-if="purchase.isPaid == 2" class="badge badge-danger">
                                                 {{ purchase.isPaidName}}
                                         </span>
                                     </td>
                                     <td data-title="'Compra'">
-                            <span ng-if="purchase.orderStatus == 0" class="label label-sm bg-primary">
+                            <span ng-if="purchase.orderStatus == 0" class="badge badge-info">
                                         {{ purchase.orderStatusName }}
                                 </span>
-                                        <span ng-if="purchase.orderStatus == 1" class="label label-sm bg-war">
+                                        <span ng-if="purchase.orderStatus == 1" class="badge badge-warning">
                                         {{ purchase.orderStatusName }}
                                 </span>
-                                        <span ng-if="purchase.orderStatus == 2" class="label label-sm bg-gray">
+                                        <span ng-if="purchase.orderStatus == 2" class="badge badge-success">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                        <span ng-if="purchase.orderStatus == 3" class="label label-sm bg-gray">
+                                        <span ng-if="purchase.orderStatus == 3" class="badge badge-secondary">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                        <span ng-if="purchase.orderStatus == 4" class="label label-sm bg-green">
+                                        <span ng-if="purchase.orderStatus == 4" class="badge badge-success">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                        <span ng-if="purchase.orderStatus == 5" class="label label-sm bg-war">
+                                        <span ng-if="purchase.orderStatus == 5" class="badge badge-warning">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                        <span ng-if="purchase.orderStatus == 6" class="label label-sm bg-danger">
+                                        <span ng-if="purchase.orderStatus == 6" class="badge badge-danger">
                                         {{ purchase.orderStatusName}}
                                 </span>
-                                        <span ng-if="purchase.orderStatus == 7" class="label label-sm bg-success">
+                                        <span ng-if="purchase.orderStatus == 7" class="badge badge-success">
                                         {{ purchase.orderStatusName}}
                                 </span>
                                     </td>
