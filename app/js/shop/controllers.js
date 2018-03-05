@@ -662,16 +662,8 @@
             self.params.id = $localStorage.orderPaypal;
             self.params.fields = 'id,customerName,metadata';
 
-            OrderSrv.get(self.params).$promise.then(function (data) {
-                var metadata = data.metadata;
-                metadata.payerID = PayerID;
-                self.updateParams.isPaid = 0;
-                self.updateParams.metadata = metadata;
-                OrderSrv.update({id: data.id}, self.updateParams).$promise.then(function (data) {
-                    //NotificationSrv.success("Actualizado");
-                }, function (error) {
-                    ErrorSrv.error(error);
-                })
+            OrderSrv.paidPaypal({paymentId: paymentId, payerId: PayerID}).$promise.then(function (data) {
+                $state.go('purchase-completed', {orderId: data.id});
             }, function (error) {
                 ErrorSrv.error(error);
             });
