@@ -4,11 +4,15 @@
             <div class="col-md-8 offset-md-2">
                 <h2 class="text-center">{{ Purchase.purchase.customerName }}</h2>
                 <hr>
-                <h3 class="text-center"><i class="fa fa-smile-o"></i> Gracias por tu compra en {{initConfig.branchOffice}}.</h3>
+                <h3 class="text-center"><i class="fa fa-smile-o"></i> Gracias por tu compra en
+                    {{initConfig.branchOffice}}.</h3>
                 <br>
-                <p> Hemos enviado a tu correo <strong> {{ Purchase.purchase.customerEmail}}</strong> toda la información referente
-                    a tu compra, si tienes dudas o algo adicional que comentar comunicate con nosotros al teléfono <a href="tel:{{initConfig.phone}}"> <i
-                            class="fa fa-phone"></i> {{initConfig.phone}} </a> un asesor de {{initConfig.branchOffice}} te atenderá.</p>
+                <p> Hemos enviado a tu correo <strong> {{ Purchase.purchase.customerEmail}}</strong> toda la información
+                    referente
+                    a tu compra, si tienes dudas o algo adicional que comentar comunicate con nosotros al teléfono <a
+                            href="tel:{{initConfig.phone}}"> <i
+                            class="fa fa-phone"></i> {{initConfig.phone}} </a> un asesor de {{initConfig.branchOffice}}
+                    te atenderá.</p>
                 <hr>
                 <div id="purchase-payment">
                     <div class="container">
@@ -16,7 +20,8 @@
                             <div class="col-md-4 text-left no-padding">
                                 <span>Estatus: {{Purchase.purchase.orderStatusName}}</span>
                             </div>
-                            <div class="col-md-4 text-center no-padding"><span>Pago: {{Purchase.purchase.paymentTypeName}}</span></div>
+                            <div class="col-md-4 text-center no-padding"><span>Pago: {{Purchase.purchase.paymentTypeName}}</span>
+                            </div>
                             <div class="col-md-4 text-right no-padding"><span>Pedido: #{{ Purchase.purchase.id }}</span>
                             </div>
                         </div>
@@ -24,7 +29,7 @@
                     <hr>
                     <div class="container">
                         <div class="row">
-                                <span>Realizado el {{ Purchase.purchase.createdAt | date: 'd/M/y' }}</span><br>
+                            <span>Realizado el {{ Purchase.purchase.createdAt | date: 'd/M/y' }}</span><br>
                         </div>
                     </div>
                     <br>
@@ -50,20 +55,28 @@
                                     </td>
                                     <td ng-if="!item.subtotalDiscount">{{item.subtotal | currency}}</td>
                                 </tr>
-                                <tr>
-                                    <th style="text-align: right;" colspan="3">Descuento</th>
-                                    <td>{{Purchase.purchase.promoTotal | currency}}</td>
-                                </tr>
+
                                 <tr>
                                     <th style="text-align: right;" colspan="3">Subtotal</th>
                                     <td>{{Purchase.purchase.subTotal | currency}}</td>
                                 </tr>
                                 <tr>
-                                    <th colspan="3" style="text-align: right;">IVA</th>
+                                    <th colspan="3" style="text-align: right;">Impuestos</th>
                                     <td>{{Purchase.purchase.taxTotal | currency}}</td>
                                 </tr>
+
                                 <tr>
-                                    <th colspan="3" style="text-align: right;">TOTAL</th>
+                                    <th colspan="3" style="text-align: right;">Envio</th>
+                                    <td>{{Purchase.purchase.shipmentTotal | currency}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th style="text-align: right;" colspan="3">Descuento</th>
+                                    <td>-{{Purchase.purchase.promoTotal | currency}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="3" style="text-align: right;">Total</th>
                                     <td>{{Purchase.purchase.total | currency}}</td>
                                 </tr>
                                 </tbody>

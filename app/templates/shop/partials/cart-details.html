@@ -36,14 +36,16 @@
                         <td>Envío</td>
                         <td>{{ShopCart.shipmentTotal | currency}}</td>
                     </tr>
-                    <tr>
-                        <td>Total</td>
-                        <td>{{ ShopCart.total | currency}}</td>
-                    </tr>
+
                     <tr ng-if="ShopCart.promoTotal">
                         <td>Descuento</td>
                         <td>{{ShopCart.promoTotal | currency}}</td>
                     </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{ ShopCart.total | currency}}</td>
+                    </tr>
+
                     </tbody>
                 </table>
             </div>

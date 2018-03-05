@@ -431,6 +431,7 @@
         self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
+        console.log(self.total, 'init total');
         self.subTotal = $localStorage.subTtotal;
         self.formDataPay = {};
         self.customer = [];
@@ -540,9 +541,9 @@
             self.params.paymentType = parseInt(self.orderPaymentType);
             self.params.isPaid = 2;
             self.params.itemCount = self.itemCount;
-            self.params.total = self.total;
+            self.params.total = $localStorage.total;
             console.log(self.total);
-            self.params.subTotal = self.subTotal;
+            self.params.subTotal = $localStorage.subTtotal;
             self.params.store = self.defaultbranchOffice.id;
             if (!self.customer.phone) {
                 if (self.addresship.phone) {
