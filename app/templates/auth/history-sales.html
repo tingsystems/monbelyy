@@ -34,7 +34,6 @@
                                 <tr ng-repeat="sale in Sale.sales" datasource="sale" ref="Sale">
                                     <td data-title="'Folio'" sortable="'id'">#{{ sale.id }}</td>
                                     <td data-title="'Fecha'" sortable="'name'">{{ sale.createdAt | date: 'd/M/y' }}</td>
-                                    <td data-title="'Cliente'" sortable="'price'">{{ sale.address }}</td>
                                     <td data-title="'Tipo'">
                             <span ng-if="sale.paymentType == 3" class="badge badge-info">
                                         {{ sale.paymentTypeName }}

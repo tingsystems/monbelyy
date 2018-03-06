@@ -57,6 +57,10 @@
             'paidMP': {
                 method: 'POST',
                 url: BaseUrlShop.get() + 'mp/paid'
+            },
+            'paidPaypal': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'paypal/paid'
             }
         });
     }

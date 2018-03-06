@@ -107,6 +107,8 @@
             $localStorage.promoTotal = 0;
             $localStorage.shipmentTotal = 0;
             $localStorage.ship = false;
+            $localStorage.taxInverse = 0;
+
         };
 
         self.removeItem = function (item) {
@@ -129,8 +131,6 @@
             self.promoTotal += parseFloat($localStorage.globalDiscount.discount);
             $localStorage.total = self.total;
             $localStorage.promoTotal = self.promoTotal;
-            console.log(self.promoTotal);
-            console.log(self.total);
         };
         // calculate discount cash global
         var applyDiscountCash = function () {
@@ -156,15 +156,19 @@
                     var price = (parseFloat(value.price) / 1.16);
                     value.import = (parseFloat(price) * value.qty);
                     value.tax = (parseFloat(value.import) * 0.16);
+                    $localStorage.taxInverse = 0;
 
                 } else if (value.typeTax === 1) {
                     value.import = (parseFloat(value.price) * value.qty);
                     value.tax = (parseFloat(value.import) * 0.16);
+                    $localStorage.taxInverse = 1;
 
                 }
                 else if (value.typeTax === 2) {
                     value.import = (parseFloat(value.price) * value.qty);
                     value.tax = 0;
+                    $localStorage.taxInverse = 2;
+
 
                 }
                 self.import += parseFloat(value.import);
@@ -172,6 +176,10 @@
                 self.shipmentPrice += parseFloat(value.shipmentPrice);
 
             });
+            if ($localStorage.ship) {
+                $localStorage.shipmentTotal = 0;
+                self.shipmentPrice = 0;
+            }
 
             self.subTotal = self.import;
             self.subTotal = (Math.round(self.subTotal * 100) / 100);
@@ -190,11 +198,6 @@
             }
             else if ($localStorage.globalDiscount.isPercentage === 1) {
                 applyDiscountCash();
-            }
-            if ($localStorage.ship) {
-                $localStorage.shipmentTotal = 0;
-                self.shipmentPrice = 0;
-
             }
 
         };
@@ -423,10 +426,12 @@
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element) {
         var self = this;
         var user = $localStorage.appData.user;
-        self.params = {metadata: {taxInverse: 0, shipping: self.shipping}};
+        var taxInverse = $localStorage.taxInverse ? $localStorage.taxInverse : 0;
+        self.params = {metadata: {taxInverse: taxInverse, shipping: self.shipping}};
         self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
+        console.log(self.total, 'init total');
         self.subTotal = $localStorage.subTtotal;
         self.formDataPay = {};
         self.customer = [];
@@ -469,9 +474,13 @@
             $localStorage.cart = [];
             $localStorage.total = 0;
             $localStorage.promoTotal = 0;
+            $localStorage.shipmentTotal = 0;
+            $localStorage.subTtotal = 0;
+            $localStorage.ship = false;
             delete $localStorage.appData.user.address;
             self.promoTotal = 0;
             self.typeTax = false;
+            $localStorage.taxInverse = 0;
         };
 
         self.cancelPayment = function () {
@@ -532,8 +541,9 @@
             self.params.paymentType = parseInt(self.orderPaymentType);
             self.params.isPaid = 2;
             self.params.itemCount = self.itemCount;
-            self.params.total = self.total;
-            self.params.subTotal = self.subTotal;
+            self.params.total = $localStorage.total;
+            console.log(self.total);
+            self.params.subTotal = $localStorage.subTtotal;
             self.params.store = self.defaultbranchOffice.id;
             if (!self.customer.phone) {
                 if (self.addresship.phone) {
@@ -630,6 +640,7 @@
             //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
 
             initialOrder();
+            console.log(self.params);
             OrderSrv.save(self.params).$promise.then(function (data) {
                 clearCart();
                 if (data.paymentType === 3) {
@@ -651,16 +662,8 @@
             self.params.id = $localStorage.orderPaypal;
             self.params.fields = 'id,customerName,metadata';
 
-            OrderSrv.get(self.params).$promise.then(function (data) {
-                var metadata = data.metadata;
-                metadata.payerID = PayerID;
-                self.updateParams.isPaid = 0;
-                self.updateParams.metadata = metadata;
-                OrderSrv.update({id: data.id}, self.updateParams).$promise.then(function (data) {
-                    //NotificationSrv.success("Actualizado");
-                }, function (error) {
-                    ErrorSrv.error(error);
-                })
+            OrderSrv.paidPaypal({paymentId: paymentId, payerId: PayerID}).$promise.then(function (data) {
+                $state.go('purchase-completed', {orderId: data.id});
             }, function (error) {
                 ErrorSrv.error(error);
             });
