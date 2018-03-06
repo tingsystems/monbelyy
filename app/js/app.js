@@ -134,7 +134,7 @@
         $locationProvider.html5Mode(false);
     }
 
-    function AppConfig($httpProvider, blockUIConfig) {
+    function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
         blockUIConfig.templateUrl = '/templates/partials/block-ui.html';
         // Change the default overlay message
         blockUIConfig.message = 'Cargando...';
@@ -144,6 +144,7 @@
 
         // Set interceptor
         $httpProvider.interceptors.push('HttpInterceptor');
+        $uiViewScrollProvider.useAnchorScroll();
 
     }
 
@@ -170,6 +171,7 @@
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
+
         });
         //various config
         $rootScope.initConfig = {
@@ -333,6 +335,6 @@
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
         'EntrySrv', '$auth', '$localStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
+    AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider'];
     AuthProvider.$inject = ['$authProvider'];
 })();
