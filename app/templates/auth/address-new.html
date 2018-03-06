@@ -16,41 +16,126 @@
                             <form class="padding form-horizontal" name="Form"
                                   ng-submit="Address.submitForm()" novalidate>
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <div class="form-group">
+                                    <div class="col-xs-12 col-sm-6" ng-if="Address.create">
+                                        <md-input-container class="md-block">
                                             <label for="state">Estado</label>
-                                            <ui-select on-select="Address.getCitiesByState($model)"
-                                                       title="Estado" ng-model="Address.formData.state"
-                                                       name="states"
-                                                       id="state" required>
-                                                <ui-select-match placeholder="Selecciona un Estado *..."
-                                                                 allow-clear="true">
-                                                    {{$select.selected.name}}
-                                                </ui-select-match>
-                                                <ui-select-choices
-                                                        repeat="state.id as state in Address.states | filter: {name: $select.search}">
-                                                    <div ng-bind-html="state.name | highlight: $select.search"></div>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
+                                            <md-select ng-model="Address.state" md-on-open="Address.getStates()"
+                                                       data-md-container-class="selectdemoSelectHeader"
+                                                       md-on-close="searchState='';Address.clearCities()" name="state"
+                                                       required id="state">
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="searchState" type="search"
+                                                           placeholder="Busca un estado..."
+                                                           class="demo-header-searchbox md-text"
+                                                           ng-keydown="$event.stopPropagation()">
+                                                </md-select-header>
+                                                <div layout="row" layout-align="center center"
+                                                     ng-if="Address.busyState">
+                                                    <md-progress-circular md-mode="indeterminate"
+                                                                          class="md-warn md-default-theme"
+                                                                          style="transform: scale(1);"></md-progress-circular>
+                                                </div>
+                                                <md-option ng-repeat="state in Address.states | filter:searchState"
+                                                           ng-value="state">
+                                                    {{state.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
-                                    <div class="col-xs-12 col-ms-6">
-                                        <div class="form-item">
+                                    <div class="col-xs-12 col-sm-6" ng-if="Address.create">
+                                        <md-input-container class="md-block">
                                             <label for="city">Ciudad</label>
-                                            <ui-select ng-model="Address.formData.city" id="city" name="cities"
-                                                       ng-required="Address.formData.state"
-                                                       ng-disabled="Address.busyCity"
-                                                       title="Ciudad" required>
-                                                <ui-select-match placeholder="Selecciona una Ciudad *..."
-                                                                 allow-clear="true">
-                                                    {{$select.selected.name}}
-                                                </ui-select-match>
-                                                <ui-select-choices
-                                                        repeat="city.id as city in Address.cities | filter: {name: $select.search}">
-                                                    <div ng-bind-html="city.name | highlight: $select.search"></div>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
+                                            <md-select ng-model="Address.city" md-on-open="Address.getCitiesByState()"
+                                                       data-md-container-class="selectdemoSelectHeader"
+                                                       md-on-close="searchCity=''"
+                                                       ng-disabled="Address.disableCity" name="city" id="city" required>
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="searchCity" type="search"
+                                                           placeholder="Busca una ciudad de {{Address.state.name}}"
+                                                           class="demo-header-searchbox md-text"
+                                                           ng-keydown="$event.stopPropagation()">
+                                                </md-select-header>
+                                                <div layout="row" layout-align="center center" ng-if="Address.busyCity">
+                                                    <md-progress-circular md-mode="indeterminate"
+                                                                          class="md-warn md-default-theme"
+                                                                          style="transform: scale(1);"></md-progress-circular>
+                                                </div>
+                                                <md-option ng-repeat="city in Address.cities | filter:searchCity"
+                                                           ng-value="city">
+                                                    {{city.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6" ng-if="!Address.editCityForm">
+                                        <label ng-if="!Address.editCityForm">Ciudad</label>
+                                        <p ng-if="!Address.editCityForm">{{Address.formData.cityName}} <i
+                                                class="ion-compose"
+                                                title="Cambiar ciudad"
+                                                ng-click="Address.editCity()"></i>
+                                        </p>
+
+                                    </div>
+                                    <div class="col-xs-12 col-md-12" ng-if="Address.editCityForm">
+                                        <label ng-if="Address.editCityForm">Ciudad</label>
+                                        <p ng-if="Address.editCityForm">Cancelar acción<i class="ion-close" title="Cancelar acción"
+                                                             ng-click="Address.editCity()"></i></p>
+
+                                    </div>
+                                    <div class="col-xs-12 col-md-6" ng-if="Address.editCityForm">
+                                        <md-input-container class="md-block">
+                                            <label for="stateEdit">Estado</label>
+                                            <md-select ng-model="Address.state" md-on-open="Address.getStates()"
+                                                       data-md-container-class="selectdemoSelectHeader"
+                                                       md-on-close="searchState='';Address.clearCities()"
+                                                       name="state"
+                                                       required id="stateEdit">
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="searchState" type="search"
+                                                           placeholder="Busca un estado..."
+                                                           class="demo-header-searchbox md-text"
+                                                           ng-keydown="$event.stopPropagation()">
+                                                </md-select-header>
+                                                <div layout="row" layout-align="center center"
+                                                     ng-if="Address.busyState">
+                                                    <md-progress-circular md-mode="indeterminate"
+                                                                          class="md-warn md-default-theme"
+                                                                          style="transform: scale(1);"></md-progress-circular>
+                                                </div>
+                                                <md-option ng-repeat="state in Address.states | filter:searchState"
+                                                           ng-value="state">
+                                                    {{state.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6" ng-if="Address.editCityForm">
+                                        <md-input-container class="md-block">
+                                            <label for="cityEdit">Ciudad</label>
+                                            <md-select ng-model="Address.city"
+                                                       md-on-open="Address.getCitiesByState()"
+                                                       data-md-container-class="selectdemoSelectHeader"
+                                                       md-on-close="searchCity=''"
+                                                       ng-disabled="Address.disableCity" name="city" id="cityEdit"
+                                                       required>
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="searchCity" type="search"
+                                                           placeholder="Busca una ciudad de {{Address.state.name}}"
+                                                           class="demo-header-searchbox md-text"
+                                                           ng-keydown="$event.stopPropagation()">
+                                                </md-select-header>
+                                                <div layout="row" layout-align="center center"
+                                                     ng-if="Address.busyCity">
+                                                    <md-progress-circular md-mode="indeterminate"
+                                                                          class="md-warn md-default-theme"
+                                                                          style="transform: scale(1);"></md-progress-circular>
+                                                </div>
+                                                <md-option ng-repeat="city in Address.cities | filter:searchCity"
+                                                           ng-value="city">
+                                                    {{city.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
                                     </div>
                                 </div>
                                 <div class="row">

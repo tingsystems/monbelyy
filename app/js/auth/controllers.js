@@ -215,25 +215,12 @@
             self.busyState = false;
         });
 
-        self.getCitiesByState = function (state_id) {
-            if (!state_id) {
-                self.city = null;
-                self.cities = [];
-                return
-            }
-            self.busyCity = true;
-            StateSrv.getCities({state: state_id, ordering: 'name'}).$promise.then(function (response) {
-                self.cities = response;
-                self.busyCity = false;
-            }, function (error) {
-                self.busyCity = false;
-            });
-        };
-
         var createAddress = function () {
             var address = angular.copy(self.formData);
             address.customer = self.idUser;
             self.busy = true;
+            address.city = self.city.id;
+            address.state = self.state.id;
             AddressSrv.save(address).$promise.then(function (data) {
                 NotificationSrv.success('Domicilio agregado correctamente');
                 self.busy = false;
@@ -250,6 +237,8 @@
         var updateAddress = function () {
             var formData = angular.copy(self.formData);
             var id = formData.id ? formData.id : $stateParams.id;
+            formData.city = self.city.id;
+            formData.state = self.state.id;
             self.busy = true;
             AddressSrv.update({id: id}, formData).$promise.then(function (response) {
                 self.busy = false;
@@ -286,6 +275,51 @@
             }
         };
         self.getAddresses();
+
+        // get all the states
+        self.busyState = true;
+
+        self.getStates = function () {
+            if (!self.states) {
+                StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+                    self.states = data;
+                    self.busyState = false;
+                    self.disableCity = false;
+                }, function (error) {
+                    self.busyState = false;
+                });
+            }
+
+        };
+
+        self.clearCities = function () {
+            self.cities = [];
+        };
+
+        // get the cities by state
+        self.getCitiesByState = function () {
+            if (!self.state) {
+                return
+            }
+            self.busyCity = true;
+            if (self.cities.length < 1) {
+                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                    self.cities = response;
+                    self.busyCity = false;
+                }, function (error) {
+                    self.busyCity = false;
+                });
+            }
+            else {
+                self.busyCity = false;
+            }
+
+        };
+
+        self.editCity = function () {
+            self.editCityForm = !self.editCityForm;
+
+        }
 
     }
 
