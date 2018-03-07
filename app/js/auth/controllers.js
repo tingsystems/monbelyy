@@ -116,6 +116,7 @@
             var account = angular.copy(self.formData);
             self.busy = true;
             account.email = account.contactPersonEmail;
+            account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;

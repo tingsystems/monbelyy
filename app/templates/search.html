@@ -22,16 +22,9 @@
                                 </div>
                             </a>
                             <div class="box-footer">
-                                <a class="btn btn-outline-dark" ui-sref="product-detail({slug:product.slug})">
+                                <a class="btn btn-outline-dark" ui-sref="product-detail({slug:item.slug})">
                                     Ver más
                                 </a>
-                                <button class="btn btn-danger"
-                                        ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
-                                            name: product.name, price: product.price, qty: 1,
-                                            taxonomies : product.taxonomies}, 1)"
-                                        ng-disabled="Product.itemInCart(product)">
-                                    Agregar
-                                </button>
                             </div>
                         </div>
 
