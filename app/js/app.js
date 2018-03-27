@@ -169,6 +169,7 @@
         $rootScope.projectId = '6eeafae0-527d-4983-a4ae-3efca37c777d';
         $http.defaults.headers.common['PROJECT-ID'] = '6eeafae0-527d-4983-a4ae-3efca37c777d';
         $rootScope.hidePriceLogin = true;
+        $rootScope.registerExtend = true;
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
