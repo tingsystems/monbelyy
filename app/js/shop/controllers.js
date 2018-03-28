@@ -291,6 +291,7 @@
 
         $rootScope.$on('newTotals', function (event, data) {
             $localStorage.ship = data.data;
+            console.log(data);
             getTotal()
         });
 
@@ -556,23 +557,30 @@
                     $rootScope.$emit('newTotals', {data: false});
 
                 }
+                shippingAddress();
             });
 
         };
         self.getCustomer();
 
         var shippingAddress = function () {
-            var fieldship = 'id,address,phone,zip,cityName,neighborhood,phone,stateName';
+            var fieldship = 'id,address,phone,zip,cityName,neighborhood,phone,stateName,metadata';
             if (self.address) {
                 AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
                     self.addresship = data;
+                    if ('metadata' in self.addresship) {
+                        if ('codeFreeShip' in self.addresship.metadata) {
+                            if (self.addresship.metadata.codeFreeShip === true) {
+                                $rootScope.$emit('newTotals', {data: true});
+                            }
+                        }
+                    }
                 }, function (error) {
                     NotificationSrv.error("Error");
                 });
             }
 
         };
-        shippingAddress();
 
         self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
