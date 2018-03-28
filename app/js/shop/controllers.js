@@ -291,7 +291,6 @@
 
         $rootScope.$on('newTotals', function (event, data) {
             $localStorage.ship = data.data;
-            console.log(data);
             getTotal()
         });
 
