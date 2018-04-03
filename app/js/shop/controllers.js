@@ -21,6 +21,20 @@
         $localStorage.globalDiscount = {amount: 0};
         self.shipmentTotal = $localStorage.shipmentTotal ? $localStorage.shipmentTotal : 0;
         $localStorage.ship = false;
+        try {
+            self.minimumPurchase = $localStorage.appData.user.branchOffices[0].metadata.minusMount;
+            if (self.minimumPurchase === undefined) {
+                self.minimumPurchase = 0;
+
+
+            }
+        }
+        catch (err) {
+            self.minimumPurchase = 0;
+            console.log(err);
+        }
+
+        console.log(self.minimumPurchase);
 
         if ($auth.isAuthenticated()) {
             var user = $localStorage.appData.user;

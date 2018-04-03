@@ -20,9 +20,7 @@
         // Logic for save the session
         self.saveSession = function (response) {
             // save user info to local storage
-            console.log(response);
             $localStorage.appData = {user: angular.copy(response.data.user)};
-            console.log($localStorage.appData);
             $rootScope.user = $localStorage.appData.user;
             self.idUser = $localStorage.appData.user.id;
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
