@@ -2,7 +2,7 @@
     'use strict';
 
     function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
-                        PriceListSrv) {
+                        PriceListSrv, StateSrv, AddressSrv) {
         var self = this;
         self.busy = false;
         self.formData = {};
@@ -10,6 +10,7 @@
         if ($localStorage.appData) {
             $rootScope.user = $localStorage.appData.user;
         }
+        self.cities = [];
 
         self.items = $localStorage.items ? $localStorage.items : [];
         self.itemCount = self.items.length;
@@ -19,9 +20,7 @@
         // Logic for save the session
         self.saveSession = function (response) {
             // save user info to local storage
-            console.log(response);
             $localStorage.appData = {user: angular.copy(response.data.user)};
-            console.log($localStorage.appData);
             $rootScope.user = $localStorage.appData.user;
             self.idUser = $localStorage.appData.user.id;
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
@@ -114,6 +113,7 @@
 
         self.createAccount = function () {
             var account = angular.copy(self.formData);
+            var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
             //account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
@@ -128,6 +128,45 @@
                     self.busy = false;
                 })
             });
+        };
+
+        // get all the states
+        self.busyState = true;
+
+        self.getStates = function () {
+            StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+                self.states = data;
+                self.busyState = false;
+                self.disableCity = false;
+                self.cities = [];
+            }, function (error) {
+                self.busyState = false;
+            });
+
+        };
+
+        self.clearCities = function () {
+            self.cities = [];
+        };
+
+        // get the cities by state
+        self.getCitiesByState = function () {
+            if (!self.state) {
+                return
+            }
+            self.busyCity = true;
+            if (self.cities.length < 1) {
+                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                    self.cities = response;
+                    self.busyCity = false;
+                }, function (error) {
+                    self.busyCity = false;
+                });
+            }
+            else {
+                self.busyCity = false;
+            }
+
         };
 
 
@@ -772,7 +811,7 @@
 
 
     // inject dependencies to controllers
-    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv'];
+    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv', 'StateSrv', 'AddressSrv'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];

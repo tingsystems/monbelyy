@@ -99,9 +99,12 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-danger btn-block" ng-click="ShopCart.processPurchase()"><i
+                            <button class="btn btn-danger btn-block" ng-click="ShopCart.processPurchase()"
+                                    ng-if="ShopCart.total >= ShopCart.minimumPurchase"><i
                                     class="fa fa-credit-card"></i> Procesar compra
                             </button>
+                            <p ng-if="ShopCart.total <= ShopCart.minimumPurchase"> El monto mínimo para completar la
+                                compra y poder continuar es de {{ShopCart.minimumPurchase | currency}}</p>
                         </div>
                     </div>
                 </div>
