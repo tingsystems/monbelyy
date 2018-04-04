@@ -113,6 +113,9 @@
 
         self.createAccount = function () {
             var account = angular.copy(self.formData);
+            if ($rootScope.createCustomerActive) {
+                account.isActive = false;
+            }
             var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
@@ -123,7 +126,8 @@
             address.city = self.city.id;
             address.state = self.state.id;
             address.address = self.address.address;
-            account.address = address;
+            account.address = self.address.address;
+            account.dataAddress = address;
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;
