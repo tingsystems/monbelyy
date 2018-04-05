@@ -17,9 +17,9 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">
-                <div class="col-sm-4">
-                    <div class="owl-carousel owl-theme owl-theme-page">
-                        <div class="slider" ng-repeat="slide in Product.detail.attachments" ng-repeat-owl-carousel
+                <div class="col-md-4">
+                    <div class="owl-carousel owl-theme owl-theme-page" ng-if="Product.detail.galleryImages.length > 0">
+                        <div class="slider" ng-repeat="slide in Product.detail.galleryImages" ng-repeat-owl-carousel
                              carousel-init="Product.carouselDetailProduct">
                             <div class="item" style="width: 100%;">
                                 <a post-link="{ link: {url: slide.link, target: '_self'} }">
@@ -28,6 +28,9 @@
                             </div>
                         </div>
                     </div>
+                    <img ng-src="{{Product.detail.featuredImage.url}}" alt="{{Product.detail.name}}"
+                         ng-if="Product.detail.galleryImages.length < 1" style="height: 250px;width: 100%;margin-bottom: 15px;">
+                    {{Product.detail.featuredImage.url}}
                     <br>
                     <div class="text-center">
                         <a href="http://www.sydgroup.mx/page/como-comprobar-la-autenticidad-del-producto"
