@@ -277,7 +277,7 @@
             // if yes and if this user is not logged in, redirect him to login page
             if (requiredLogin && !$auth.isAuthenticated()) {
                 event.preventDefault();
-                if ($state.current.name != '500' && $state.current.name != '400') {
+                if ($state.current.name !== '500' && $state.current.name !== '400') {
                     $state.go('register');
                 }
             }

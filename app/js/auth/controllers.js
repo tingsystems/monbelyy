@@ -2,7 +2,8 @@
     'use strict';
 
     function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
-                        PriceListSrv, StateSrv, AddressSrv) {
+                        PriceListSrv, StateSrv, $anchorScroll) {
+        $anchorScroll();
         var self = this;
         self.busy = false;
         self.formData = {};
@@ -822,7 +823,7 @@
 
 
     // inject dependencies to controllers
-    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv', 'StateSrv', 'AddressSrv'];
+    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv', 'StateSrv', '$anchorScroll'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
