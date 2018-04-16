@@ -134,7 +134,7 @@
         $locationProvider.html5Mode(false);
     }
 
-    function AppConfig($httpProvider, blockUIConfig) {
+    function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
         blockUIConfig.templateUrl = '/templates/partials/block-ui.html';
         // Change the default overlay message
         blockUIConfig.message = 'Cargando...';
@@ -144,6 +144,7 @@
 
         // Set interceptor
         $httpProvider.interceptors.push('HttpInterceptor');
+        $uiViewScrollProvider.useAnchorScroll();
 
     }
 
@@ -164,12 +165,17 @@
         $rootScope.host = 'http://192.168.1.67';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
+        // $rootScope.apiShop = 'v3';
         $rootScope.apiShop = 'v1';
         $rootScope.projectId = '6eeafae0-527d-4983-a4ae-3efca37c777d';
         $http.defaults.headers.common['PROJECT-ID'] = '6eeafae0-527d-4983-a4ae-3efca37c777d';
+        $rootScope.hidePriceLogin = false;
+        $rootScope.createCustomerActive = true;
+        $rootScope.registerExtend = true;
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
+
         });
         //various config
         $rootScope.initConfig = {
@@ -271,7 +277,7 @@
             // if yes and if this user is not logged in, redirect him to login page
             if (requiredLogin && !$auth.isAuthenticated()) {
                 event.preventDefault();
-                if ($state.current.name != '500' && $state.current.name != '400') {
+                if ($state.current.name !== '500' && $state.current.name !== '400') {
                     $state.go('register');
                 }
             }
@@ -333,6 +339,6 @@
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
         'EntrySrv', '$auth', '$localStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    AppConfig.$inject = ['$httpProvider', 'blockUIConfig'];
+    AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider'];
     AuthProvider.$inject = ['$authProvider'];
 })();

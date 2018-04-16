@@ -84,13 +84,17 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="destination">
+                    <div class="destination" ng-if="!Purchase.purchase.metadata.getShop">
                         <h4>Direccion de entrega:</h4>
                         <p>{{ Purchase.purchase.destination.address}}, Col:
                             {{Purchase.purchase.destination.neighborhood}},
                             CP: {{ Purchase.purchase.destination.zip }}, {{ Purchase.purchase.destination.cityName }},
                             {{
                             Purchase.purchase.destination.stateName }}</p>
+                    </div>
+                    <div class="destination" ng-if="Purchase.purchase.metadata.getShop">
+                        <h4>Direccion para recoger en tienda:</h4>
+                        <p>{{ Purchase.purchase.metadata.getShop}}</p>
                     </div>
                     <hr>
                     <div class="instructionPayment" ng-if="Purchase.purchase.paymentType==6">

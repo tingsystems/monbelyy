@@ -4,9 +4,10 @@
 (function () {
     'use strict';
 
-    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, ValidCouponSrv) {
+    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, ValidCouponSrv, $window) {
         var self = this;
         self.total = $localStorage.total;
+        $window.scrollTo(0, 0);
         self.params = {};
         var items = [];
         self.items = $localStorage.items ? $localStorage.items : [];
@@ -20,6 +21,20 @@
         $localStorage.globalDiscount = {amount: 0};
         self.shipmentTotal = $localStorage.shipmentTotal ? $localStorage.shipmentTotal : 0;
         $localStorage.ship = false;
+        try {
+            self.minimumPurchase = $localStorage.appData.user.branchOffices[0].metadata.minusMount;
+            if (self.minimumPurchase === undefined) {
+                self.minimumPurchase = 0;
+
+
+            }
+        }
+        catch (err) {
+            self.minimumPurchase = 0;
+            console.log(err);
+        }
+
+        console.log(self.minimumPurchase);
 
         if ($auth.isAuthenticated()) {
             var user = $localStorage.appData.user;
@@ -295,7 +310,7 @@
 
     }
 
-    function ShippingAddressCtrl(AddressSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state) {
+    function ShippingAddressCtrl(AddressSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter) {
         var self = this;
         var user = $localStorage.appData.user;
         self.branchOffice = '';
@@ -306,7 +321,7 @@
         self.busy = false;
         self.addAddress = false;
         self.items = $localStorage.items ? $localStorage.items : [];
-        self.defaultbranchOffice = '';
+        self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
         self.customer = $localStorage.appData.user.customer;
         self.total = $localStorage.total;
         $localStorage.items = self.items;
@@ -315,14 +330,24 @@
         $rootScope.items = $localStorage.items;
         self.params.customer = self.customer;
         self.sendOptions = "0";
+        self.busyAddresses = true;
 
-        AddressSrv.query({customer: self.customer}).$promise.then(function (data) {
-            self.addresses = data;
-        }, function (error) {
-            angular.forEach(error, function (key, value) {
-                NotificationSrv.error("Error", value);
+        self.getAddresses = function () {
+            self.busyAddresses = true;
+            AddressSrv.query({customer: self.customer}).$promise.then(function (data) {
+                self.addresses = data;
+                self.busyAddresses = false;
+                if (self.addresses.length === 0) {
+                    NotificationSrv.confirm("Error", "Aun no tienes una direccion de envio, por favor agrega una para continuar")
+                }
+            }, function (error) {
+                self.busyAddresses = false;
+                angular.forEach(error, function (key, value) {
+                    NotificationSrv.error("Error", value);
+                });
             });
-        });
+
+        };
 
         self.saveShippingAddress = function () {
             if (!self.address) {
@@ -357,6 +382,7 @@
                 self.busy = false;
                 self.formData = {};
                 $state.go('checkout', {shipping: self.sendOptions});
+
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
                     NotificationSrv.error(key, value);
@@ -366,6 +392,8 @@
         };
 
         self.retriveInStore = function () {
+            $localStorage.appData.user.address = self.address.id;
+            $localStorage.appData.getShop = self.shop;
             $state.go('checkout', {shipping: self.sendOptions});
 
         };
@@ -419,6 +447,48 @@
                 $rootScope.$emit('newTotals', {data: false});
 
             }
+        };
+
+        self.saveShippingAddressValidate = function () {
+            var address = angular.copy(self.formData);
+            var customer = {};
+            self.addresses = [];
+            CustomerSrv.get({id: self.customer}).$promise.then(function (data) {
+                customer = data;
+                //if user has not phone add the shipmet phone
+                if (!customer.phone || !customer.state || !customer.city) {
+                    customer.phone = address.phone;
+                    customer.state = address.state;
+                    customer.city = address.city;
+                    CustomerSrv.update({id: customer.id}, customer).$promise.then(function (data) {
+                    });
+                }
+            });
+            address.customer = self.customer;
+            address.state = self.state.id;
+            address.city = self.city.id;
+            self.busy = true;
+            AddressSrv.save(address).$promise.then(function (data) {
+                $localStorage.appData.user.address = data.id;
+                NotificationSrv.success('Domicilio agregado correctamente');
+                self.busy = false;
+                self.formData = {};
+                self.addresses[0] = data;
+                self.address = data;
+                self.addAddress = false;
+                self.state = null;
+                self.city = null;
+
+            }, function (error) {
+                angular.forEach(error.data, function (key, value) {
+                    NotificationSrv.error(key, value);
+                    self.busy = false;
+                });
+            });
+        };
+
+        self.showAddress = function () {
+            self.addAddress = !self.addAddress;
         }
 
     }
@@ -431,7 +501,6 @@
         self.showNext = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
-        console.log(self.total, 'init total');
         self.subTotal = $localStorage.subTtotal;
         self.formDataPay = {};
         self.customer = [];
@@ -501,23 +570,30 @@
                     $rootScope.$emit('newTotals', {data: false});
 
                 }
+                shippingAddress();
             });
 
         };
         self.getCustomer();
 
         var shippingAddress = function () {
-            var fieldship = 'id,address,phone,zip,cityName,neighborhood,phone,stateName';
+            var fieldship = 'id,address,phone,zip,cityName,neighborhood,phone,stateName,metadata';
             if (self.address) {
                 AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
                     self.addresship = data;
+                    if ('metadata' in self.addresship) {
+                        if ('codeFreeShip' in self.addresship.metadata) {
+                            if (self.addresship.metadata.codeFreeShip === true) {
+                                $rootScope.$emit('newTotals', {data: true});
+                            }
+                        }
+                    }
                 }, function (error) {
                     NotificationSrv.error("Error");
                 });
             }
 
         };
-        shippingAddress();
 
         self.processPurchase = function () {
             var purchase = angular.copy(self.formData);
@@ -542,7 +618,6 @@
             self.params.isPaid = 2;
             self.params.itemCount = self.itemCount;
             self.params.total = $localStorage.total;
-            console.log(self.total);
             self.params.subTotal = $localStorage.subTtotal;
             self.params.store = self.defaultbranchOffice.id;
             if (!self.customer.phone) {
@@ -577,6 +652,9 @@
             self.params.promoTotal = $localStorage.promoTotal;
             self.params.shipmentTotal = $localStorage.shipmentTotal;
             self.params.taxTotal = $localStorage.taxTotal;
+            if ($localStorage.appData.getShop) {
+                self.params.metadata.getShop = $localStorage.appData.getShop
+            }
         };
 
 
@@ -636,9 +714,6 @@
         };
 
         self.createOrder = function () {
-            //self.promoTotal = $localStorage.promoTotal;
-            //self.promoTotal = (Math.round(self.promoTotal * 100) / 100);
-
             initialOrder();
             console.log(self.params);
             OrderSrv.save(self.params).$promise.then(function (data) {
@@ -858,8 +933,8 @@
         .controller('PurchaseCompletedCtrl', PurchaseCompletedCtrl);
 
     // inject dependencies to controllers
-    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv'];
-    ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state'];
+    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
+    ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];

@@ -3,11 +3,17 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 detail-payment-shop">
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <md-input-container md-no-float >
-                        <label for="address1">Selecciona una direccion de envio</label>
-                        <md-select ng-model="Payment.address" id="address1" name="address1" title="Direccion" required>
-                            <md-option ng-repeat="address in Payment.addresses"  ng-value="address">
-                                {{ address.address }}
+                    <md-input-container>
+                        <label for="address1">Selecciona tu dirección</label>
+                        <md-select ng-model="Payment.address" id="address1" name="address1" title="Direccion"
+                                   md-on-open="Payment.getAddresses()" required ng-change="">
+                            <div layout="row" layout-align="center center" ng-if="Payment.busyAddresses">
+                                <md-progress-circular md-mode="indeterminate"
+                                                      class="md-warn md-default-theme"
+                                                      style="transform: scale(1);"></md-progress-circular>
+                            </div>
+                            <md-option ng-repeat="address in Payment.addresses" ng-value="address">
+                                {{ address.address }} - {{address.zip}}
                             </md-option>
                         </md-select>
                     </md-input-container>

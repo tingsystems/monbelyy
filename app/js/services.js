@@ -57,6 +57,15 @@
                     timer: 2500,
                     showConfirmButton: false
                 });
+            },
+            confirm: function (title, msg) {
+                SweetAlert.swal({
+                    title: !title ? 'Mensaje' : title,
+                    text: msg,
+                    type: "error",
+                    showConfirmButton: true
+                });
+
             }
 
         };
