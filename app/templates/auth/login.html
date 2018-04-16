@@ -62,13 +62,18 @@
 
                             <md-input-container md-no-float ng-class="{ 'has-error': registerForm.phone.$touched && registerForm.phone.$invalid }">
                                 <input type="text" ng-model="Access.formData.contactPersonPhone" class="form-control" id="phone" name="phone"
-                                       placeholder="Whatspp" required>
+                                       placeholder="Celular" required>
                                 <div class="help-block" ng-messages="registerForm.phone.$error" ng-if="registerForm.phone.$touched">
                                     <div class="text-danger" ng-message="required">Este campo es requerido.</div>
                                 </div>
                             </md-input-container>
 
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        <i class="fa fa-warning"></i> La contraseña debe de tener mínimo 8 caracteres.
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <md-input-container md-no-float ng-class="{ 'has-error': registerForm.password.$touched && registerForm.password.$invalid }">
                                         <input type="password" ng-minlength="8" ng-model="Access.formData.password" class="form-control" name="password"
