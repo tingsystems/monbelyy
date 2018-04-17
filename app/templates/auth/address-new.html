@@ -166,6 +166,37 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-sm-12">
+                                        <br>
+                                        <p>Entre calles</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 clearfix">
+                                        <div class="form-item"
+                                             ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
+                                            <input ng-model="Address.formData.address" type="text"
+                                                   class="form-control" id="addressBetween1" name="addressBetween1"
+                                                   placeholder="Calle 1"
+                                                   required>
+                                            <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
+                                                    <a ng-message="required" data-toggle="tooltip" title="Holiis"></a>
+                                                </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="form-item"
+                                             ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
+                                            <input ng-model="Address.formData.neighborhood" type="text"
+                                                   class="form-control"
+                                                   id="addressBetween2"
+                                                   name="addressBetween2"
+                                                   placeholder="Calle 2"
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row space-between">
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="form-item"
                                              ng-class="{ 'has-error': Form.zip.$touched && Form.zip.$invalid }">
@@ -189,7 +220,7 @@
 
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row space-between">
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="form-item"
                                              ng-class="{ 'has-error': Form.mobile.$touched && Form.mobile.$invalid }">

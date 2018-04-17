@@ -238,18 +238,18 @@
                             </div>
 
                             <div class="row" ng-if="registerExtend" ng-init="isCustomer=0">
-                                <div class="col-md-4">
-                                    <label>¿Ya es cliente de Moons?</label>
+                                <div class="col-md-6">
+                                    <label>¿Ya es cliente de {{ initConfig.branchOffice }}?</label>
                                     <md-radio-group layout="row" ng-model="isCustomer">
                                         <md-radio-button value="0" class="md-primary">No</md-radio-button>
                                         <md-radio-button value="1">Si</md-radio-button>
                                     </md-radio-group>
                                 </div>
-                                <div class="col-md-8" ng-if="isCustomer==='1'">
+                                <div class="col-md-6" ng-if="isCustomer==='1'">
                                     <md-input-container>
+                                        <label for="">¿Quién lo atendía?</label>
                                         <input type="text" ng-model="Access.formData.metadata.sellerRegister"
-                                               id="sellerRegister" name="sellerRegister"
-                                               placeholder="¿Quien lo etendia?" required>
+                                               id="sellerRegister" name="sellerRegister" required>
                                         <div class="help-block" ng-messages="registerForm.sellerRegister.$error"
                                              ng-if="registerForm.sellerRegister.$touched">
                                             <div class="text-danger" ng-message="required">El campo nombre es

@@ -912,6 +912,10 @@ button[disabled],
 .no-padding {
   padding: 0 !important;
 }
+.space-between {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 .sweet-alert p {
   font-weight: 400;
 }
@@ -1020,6 +1024,9 @@ md-input-container {
 }
 .temp-dashboard {
   padding: 50px 0;
+}
+.temp-dashboard .search-bar {
+  margin-bottom: 20px;
 }
 .temp-dashboard .items-dashboard {
   border: 1px solid #eee;
