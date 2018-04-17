@@ -16,8 +16,8 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6">
                                         <md-input-container md-no-float class="md-block">
-                                            <input ng-model="Profile.profileData.businessName" type="text"
-                                                   id="name" name="name"
+                                            <input ng-model="Profile.profileData.contactPersonName" type="text"
+                                                   id="contactPersonName" name="contactPersonName"
                                                    placeholder="Nombre completo" required>
                                         </md-input-container>
                                     </div>
@@ -34,13 +34,32 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6">
                                         <md-input-container md-no-float class="md-block">
-                                            <input ng-model="Profile.profileData.email" type="email"
-                                                   id="email" name="email"
+                                            <input ng-model="Profile.profileData.contactPersonEmail" type="email"
+                                                   id="contactPersonEmail" name="contactPersonEmail"
                                                    placeholder="Correo electrónico" required>
                                         </md-input-container>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
-                                        <md-input-container class="md-block">
+                                        <md-input-container md-no-float class="md-block">
+                                            <input ng-model="Profile.profileData.contactPersonPhone" type="text"
+                                                   ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" id="contactPersonPhone"
+                                                   name="contactPersonPhone"
+                                                   placeholder="Teléfono" required>
+                                        </md-input-container>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <md-input-container md-no-float class="md-block">
+                                            <input ng-model="Profile.profileData.mobile" type="text"
+                                                   ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" id="mobile"
+                                                   name="mobile"
+                                                   placeholder="Celular">
+                                        </md-input-container>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block" ng-if="!registerInvoiced">
                                             <label>Estado</label>
                                             <md-select ng-model="Profile.state" md-on-open="Profile.getStates()"
                                                        data-md-container-class="selectdemoSelectHeader"
@@ -68,10 +87,8 @@
                                             </div>
                                         </md-input-container>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <md-input-container class="md-block">
+                                    <div class="col-md-6">
+                                        <md-input-container class="md-block" ng-if="!registerInvoiced">
                                             <label>Ciudad</label>
                                             <md-select ng-model="Profile.city" md-on-open="Profile.getCitiesByState()"
                                                        data-md-container-class="selectdemoSelectHeader"
@@ -98,25 +115,118 @@
                                             </div>
                                         </md-input-container>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6">
-                                        <md-input-container md-no-float class="md-block">
-                                            <input g-model="Profile.profileData.phone" type="text"
-                                                   ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" id="phone"
-                                                   name="phone"
-                                                   placeholder="Teléfono" required>
-                                        </md-input-container>
+                                </div>
+
+                                <div ng-if="registerInvoiced">
+                                    <div class="col-md-12">
+                                        <h4><i class="ion-document"></i> Datos de facturación</h4>
+                                        <hr/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <md-input-container md-no-float class="md-block">
+                                                <input ng-model="Profile.profileData.businessName" type="text"
+                                                       id="businessName" name="businessName"
+                                                       placeholder="Razón social" required>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <md-input-container md-no-float class="md-block">
+                                                <input ng-model="Profile.profileData.rfc" type="text"
+                                                       class="form-control"
+                                                       id="rfc" name="rfc"
+                                                       placeholder="RFC"
+                                                       required>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <md-input-container md-no-float class="md-block">
+                                                <input ng-model="Profile.profileData.email" type="text"
+                                                       class="form-control"
+                                                       id="email" name="email"
+                                                       placeholder="Email para envio de facturas"
+                                                       required>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-xs-12">
+                                            <md-input-container class="md-block" ng-if="registerInvoiced">
+                                                <label>Estado</label>
+                                                <md-select ng-model="Profile.state" md-on-open="Profile.getStates()"
+                                                           data-md-container-class="selectdemoSelectHeader"
+                                                           md-on-close="searchState='';Profile.clearCities()"
+                                                           name="state"
+                                                           required>
+                                                    <md-select-header class="demo-select-header">
+                                                        <input ng-model="searchState" type="search"
+                                                               placeholder="Busca un estado..."
+                                                               class="demo-header-searchbox md-text"
+                                                               ng-keydown="$event.stopPropagation()">
+                                                    </md-select-header>
+                                                    <div layout="row" layout-align="center center"
+                                                         ng-if="Profile.busyState">
+                                                        <md-progress-circular md-mode="indeterminate"
+                                                                              class="md-warn md-default-theme"
+                                                                              style="transform: scale(1);"></md-progress-circular>
+                                                    </div>
+                                                    <md-option ng-repeat="state in Profile.states | filter:searchState"
+                                                               ng-value="state">
+                                                        {{state.name}}
+                                                    </md-option>
+                                                </md-select>
+                                                <div class="errors" ng-messages="Profile.form.state.$error">
+                                                    <div ng-message="required">Requerido</div>
+                                                </div>
+                                            </md-input-container>
+
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <md-input-container class="md-block" ng-if="registerInvoiced">
+                                                <label>Ciudad</label>
+                                                <md-select ng-model="Profile.city"
+                                                           md-on-open="Profile.getCitiesByState()"
+                                                           data-md-container-class="selectdemoSelectHeader"
+                                                           md-on-close="searchCity=''"
+                                                           ng-disabled="Profile.disableCity" name="city" required>
+                                                    <md-select-header class="demo-select-header">
+                                                        <input ng-model="searchCity" type="search"
+                                                               placeholder="Busca una ciudad de {{Profile.state.name}}"
+                                                               class="demo-header-searchbox md-text"
+                                                               ng-keydown="$event.stopPropagation()">
+                                                    </md-select-header>
+                                                    <div layout="row" layout-align="center center"
+                                                         ng-if="Profile.busyCity">
+                                                        <md-progress-circular md-mode="indeterminate"
+                                                                              class="md-warn md-default-theme"
+                                                                              style="transform: scale(1);"></md-progress-circular>
+                                                    </div>
+                                                    <md-option ng-repeat="city in Profile.cities | filter:searchCity"
+                                                               ng-value="city">
+                                                        {{city.name}}
+                                                    </md-option>
+                                                </md-select>
+                                                <div class="errors" ng-messages="Profile.form.city.$error">
+                                                    <div ng-message="required">Requerido</div>
+                                                </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12">
+                                            <md-input-container md-no-float class="md-block">
+                                                <input ng-model="Profile.profileData.metadata.location" type="text"
+                                                       class="form-control"
+                                                       id="location" name="location"
+                                                       placeholder="Localidad"
+                                                       required>
+                                            </md-input-container>
+
+                                        </div>
+
                                     </div>
                                 </div>
 
+
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-6">
-                                        <md-input-container md-no-float class="md-block">
-                                            <input ng-model="Profile.profileData.mobile" type="text"
-                                                   ng-pattern="/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}$/" id="mobile"
-                                                   name="password"
-                                                   placeholder="Celular">
-                                        </md-input-container>
-                                    </div>
                                     <div class="col-sm-6 text-right" style="padding-top: 35px;">
                                         <button type="submit" class="btn btn-danger"
                                                 ng-disabled="Profile.busy">
@@ -125,8 +235,12 @@
                                         </button>
                                     </div>
                                 </div>
+
+
                             </form>
                         </div>
+
+
                     </div>
                 </div>
             </div>
