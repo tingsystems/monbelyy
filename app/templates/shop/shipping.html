@@ -20,7 +20,8 @@
                     <br>
                 </div>
                 <div class="col-md-12">
-                    <h4><i class="fa fa-map-marker"></i>{{Payment.sendOptions === "0" ? ' Seleccionar dirección existente' : ' Dinos cual es tu direccion y mostrar las tiendas más cercanas a ti'}} </h4>
+                    <h4><i class="fa fa-map-marker"></i>{{Payment.sendOptions === "0" ? ' Seleccionar dirección
+                        existente' : ' Dinos cual es tu direccion y mostrar las tiendas más cercanas a ti'}} </h4>
                     <hr>
                     <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
                     <button ng-if="Payment.address && Payment.sendOptions === '0'" class="btn btn-danger" type="submit"
@@ -29,9 +30,12 @@
                     </button>
                     <br>
 
-                    <p ng-if="Payment.address && Payment.sendOptions === '1'">{{Payment.address.metadata.codeGetShop === true ? 'Puedes recorger tu pedido en estas tiendas': 'Lo sentimos pero por tu ubucación no es posible recoger en tienda, por favor selecciona otra forma de envio '}}</p>
+                    <p ng-if="Payment.address && Payment.sendOptions === '1'">{{Payment.address.metadata.codeGetShop ===
+                        true ? 'Puedes recorger tu pedido en estas tiendas': 'Lo sentimos pero por tu ubucación no es
+                        posible recoger en tienda, por favor selecciona otra forma de envio '}}</p>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12" ng-if="Payment.address && Payment.sendOptions === '1' && Payment.address.metadata.codeGetShop === true">
+                    <div class="col-xs-12 col-sm-12 col-md-12"
+                         ng-if="Payment.address && Payment.sendOptions === '1' && Payment.address.metadata.codeGetShop === true">
                         <md-input-container>
                             <label for="shop">Selecciona la tienda para recoger tu pedido</label>
                             <md-select ng-model="Payment.shop" id="shop" name="shop" title="Direccion">
@@ -115,17 +119,48 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <md-input-container md-no-float
-                                                        ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
-                                        <input ng-model="Payment.formData.address" type="text" id="address"
-                                               name="address"
-                                               placeholder="Calle y número"
-                                               required>
-                                        <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <md-input-container md-no-float
+                                                            ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
+                                            <input ng-model="Payment.formData.address" type="text" id="address"
+                                                   name="address"
+                                                   placeholder="Calle y número"
+                                                   required>
+                                            <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
                                         <a ng-message="required" data-toggle="tooltip" title="Holiis"></a></span>
-                                    </md-input-container>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p>Entre las calles*</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <md-input-container md-no-float
+                                                            ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
+                                            <input ng-model="Payment.formData.address" type="text" id="addressBetween1"
+                                                   name="addressBetween1"
+                                                   placeholder="Calle 1"
+                                                   required>
+                                            <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
+                                        <a ng-message="required" data-toggle="tooltip" title="Holiis"></a></span>
+                                        </md-input-container>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <md-input-container md-no-float
+                                                            ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
+                                            <input ng-model="Payment.formData.address" type="text" id="addressBetween2"
+                                                   name="addressBetween2"
+                                                   placeholder="Calle 2"
+                                                   required>
+                                            <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
+                                        <a ng-message="required" data-toggle="tooltip" title="Holiis"></a></span>
+                                        </md-input-container>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
