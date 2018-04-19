@@ -469,7 +469,7 @@
         };
     }
 
-    function ProfileCtrl(CustomerSrv, StateSrv, NotificationSrv, $localStorage, $rootScope, $stateParams, $state) {
+    function ProfileCtrl(CustomerSrv, StateSrv, NotificationSrv, $localStorage, $rootScope, $stateParams, $state, $filter) {
         var self = this;
 
         self.formData = {};
@@ -507,6 +507,9 @@
         var updateCustomer = function () {
             var profileData = angular.copy(self.profileData);
             self.busy = true;
+            profileData.state = self.state.id;
+            profileData.city = self.city.id;
+            console.log(profileData);
             CustomerSrv.update({id: self.idUser}, profileData).$promise.then(function (response) {
                 self.busy = false;
                 NotificationSrv.success('Información personal actualizada correctamente');
@@ -533,6 +536,8 @@
                         ordering: 'name'
                     }).$promise.then(function (response) {
                         self.cities = response;
+                        self.city = $filter('filter')(self.cities, {id: self.profileData.city})[0];
+                        self.state = $filter('filter')(self.states, {id: self.profileData.state})[0];
                         self.busyCity = false;
                     }, function (error) {
                         self.busyCity = false;
@@ -563,7 +568,6 @@
 
         // get the cities by state
         self.getCitiesByState = function () {
-            console.log('lalalalal');
             if (!self.state) {
                 return
             }
@@ -828,7 +832,7 @@
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
-    ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state'];
+    ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
     PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', '$filter'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage'];

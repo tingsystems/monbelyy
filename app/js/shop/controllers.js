@@ -493,7 +493,7 @@
 
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element, StateSrv) {
         var self = this;
         var user = $localStorage.appData.user;
         var taxInverse = $localStorage.taxInverse ? $localStorage.taxInverse : 0;
@@ -563,6 +563,20 @@
             CustomerSrv.customerByUser({id: self.user.id}).$promise.then(function (data) {
                 self.customer = data;
                 self.phone = data.phone;
+                if (self.customer.state) {
+                    StateSrv.getCities({
+                        state: self.customer.state,
+                        ordering: 'name'
+                    }).$promise.then(function (response) {
+                        self.cities = response;
+                        self.city = $filter('filter')(self.cities, {id: self.customer.city})[0];
+                        self.state = $filter('filter')(self.states, {id: self.customer.state})[0];
+                        self.busyCity = false;
+                    }, function (error) {
+                        self.busyCity = false;
+                    });
+                }
+
                 if (self.shippingOption === '1') {
                     $rootScope.$emit('newTotals', {data: true});
                 }
@@ -574,6 +588,7 @@
             });
 
         };
+
         self.getCustomer();
 
         var shippingAddress = function () {
@@ -655,6 +670,7 @@
             if ($localStorage.appData.getShop) {
                 self.params.metadata.getShop = $localStorage.appData.getShop
             }
+            self.params.metadata.sendInvoice = self.isInvoiced;
         };
 
 
@@ -758,6 +774,54 @@
             if ($state.current.name === 'paypal-cancel') {
                 self.paypalCancel($stateParams.token);
             }
+        }
+
+
+        // get all the states
+        self.busyState = true;
+
+        StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+            self.states = data;
+            self.busyState = false;
+            self.disableCity = false;
+        }, function (error) {
+            self.busyState = false;
+        });
+
+        self.clearCities = function () {
+            self.cities = [];
+        };
+
+        // get the cities by state
+        self.getCitiesByState = function () {
+            if (!self.state) {
+                return
+            }
+            self.busyCity = true;
+            if (self.cities.length < 1) {
+                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                    self.cities = response;
+                    self.busyCity = false;
+                }, function (error) {
+                    self.busyCity = false;
+                });
+            }
+            else {
+                self.busyCity = false;
+            }
+
+        };
+
+        // update customer
+        self.updateCustomer = function () {
+            var customerInvoice = angular.copy(self.customer);
+            self.busy = true;
+            CustomerSrv.update({id: self.customer.id}, customerInvoice).$promise.then(function (data) {
+                self.customer = data;
+                NotificationSrv.success('Informacion actualizada correctamente');
+                self.busy = false;
+            })
+
         }
 
 
@@ -936,6 +1000,6 @@
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
 })();
