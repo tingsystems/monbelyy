@@ -123,31 +123,25 @@
 
                             <md-input-container>
                                 <label>Tipo de negocio</label>
-                                <md-select ng-model="">
-                                    <md-option ng-value="businessType">Veterinaria</md-option>
-                                    <md-option ng-value="businessType">Hospital Veterinario</md-option>
-                                    <md-option ng-value="businessType">Clínica Veterinaria</md-option>
-                                    <md-option ng-value="businessType">Tienda</md-option>
-                                    <md-option ng-value="businessType">Pet Shop</md-option>
-                                    <md-option ng-value="businessType">Venta de alimentos</md-option>
-                                    <md-option ng-value="businessType">Acuario</md-option>
-                                    <md-option ng-value="businessType">Entrenador</md-option>
-                                    <md-option ng-value="businessType">Distribuidor</md-option>
-                                    <md-option ng-value="businessType">Estética canina</md-option>
-                                    <md-option ng-value="businessType">Estética canina móvil</md-option>
-                                    <md-option ng-value="businessType">Comerciante independiente</md-option>
-                                    <md-option ng-value="businessType">Otro..</md-option>
+                                <md-select ng-model="Access.formData.metadata.businessType" required name="giro">
+                                    <md-option ng-value="option" ng-repeat="option in Access.optionsForbusinessType">
+                                        {{option.name}}
+                                    </md-option>
                                 </md-select>
+                                <div class="help-block" ng-messages="registerForm.businessType.$error"
+                                     ng-if="registerForm.businessType.$touched">
+                                    <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                </div>
                             </md-input-container>
                             <!--!!Si se lecciona otro en el select aparece este input para que se especifique que negocio es-->
-                            <md-input-container md-no-float">
-                            <input type="text" ng-model="" class="form-control"
-                                   name="address"
-                                   placeholder="Indique que tipo de negocio" required>
-                            <div class="help-block" ng-messages="registerForm.address.$error"
-                                 ng-if="registerForm.address.$touched">
-                                <div class="text-danger" ng-message="required">Este campo es requerido.</div>
-                            </div>
+                            <md-input-container md-no-float ng-if="Access.formData.metadata.businessType === '13'">
+                                <input type="text" ng-model="Access.formData.metadata.other" class="form-control"
+                                       name="other"
+                                       placeholder="Indique que tipo de negocio" required>
+                                <div class="help-block" ng-messages="registerForm.other.$error"
+                                     ng-if="registerForm.other.$touched">
+                                    <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                </div>
                             </md-input-container>
                             <div class="row" ng-if="registerExtend">
                                 <div class="col-md-6">
@@ -268,76 +262,26 @@
                                 </div>
                                 <div class="col-md-6" ng-if="isCustomer==='1'">
                                     <md-input-container>
-                                        <label for="">¿Quién lo atendía?</label>
-                                        <input type="text" ng-model="Access.formData.metadata.sellerRegister"
-                                               id="sellerRegister" name="sellerRegister" required>
+                                        <label>¿Quién lo atendía?</label>
+                                        <md-select ng-model="Access.formData.metadata.sellerRegister" required
+                                                   name="giro">
+                                            <md-option ng-value="option" ng-repeat="option in Access.peopleServe">
+                                                {{option.name}}
+                                            </md-option>
+                                        </md-select>
                                         <div class="help-block" ng-messages="registerForm.sellerRegister.$error"
                                              ng-if="registerForm.sellerRegister.$touched">
-                                            <div class="text-danger" ng-message="required">El campo nombre es
-                                                requerido
-                                            </div>
-                                        </div>
-                                    </md-input-container>
-                                </div>
-                            </div>
-
-
-                            <div class="row" ng-if="registerInvoiced" ng-init="isInvoiced=0">
-                                <div class="col-md-4">
-                                    <label>¿Vas a requerir facturas?</label>
-                                    <md-radio-group layout="row" ng-model="isInvoiced">
-                                        <md-radio-button value="0" class="md-primary">No</md-radio-button>
-                                        <md-radio-button value="1">Si</md-radio-button>
-                                    </md-radio-group>
-                                </div>
-                                <div class="col-md-12" ng-if="isInvoiced==='1'">
-                                    <md-input-container>
-                                        <input type="text" ng-model="Access.formData.businessName"
-                                               id="businessName" name="businessName"
-                                               placeholder="Razon Social" required>
-                                        <div class="help-block" ng-messages="registerForm.businessName.$error"
-                                             ng-if="registerForm.businessName.$touched">
-                                            <div class="text-danger" ng-message="required">El campo nombre es
-                                                requerido
-                                            </div>
-                                        </div>
-                                    </md-input-container>
-                                </div>
-                                <div class="col-md-12" ng-if="isInvoiced==='1'">
-                                    <md-input-container>
-                                        <input type="text" ng-model="Access.formData.rfc"
-                                               id="rfc" name="rfc"
-                                               placeholder="RFC" required>
-                                        <div class="help-block" ng-messages="registerForm.rfc.$error"
-                                             ng-if="registerForm.rfc.$touched">
-                                            <div class="text-danger" ng-message="required">El campo nombre es
-                                                requerido
-                                            </div>
-                                        </div>
-                                    </md-input-container>
-                                </div>
-                                <div class="col-md-12" ng-if="isInvoiced==='1'">
-                                    <md-input-container>
-                                        <input type="email" ng-model="Access.formData.email" class="form-control"
-                                               id="email" name="email"
-                                               placeholder="Correo electrónico para envio de facturas" required>
-                                        <div class="help-block" ng-messages="registerForm.email.$error"
-                                             ng-if="registerForm.email.$touched">
                                             <div class="text-danger" ng-message="required">Este campo es requerido.
                                             </div>
-                                            <div class="text-danger" ng-message="email">Correo electrónico no válido.
-                                            </div>
                                         </div>
                                     </md-input-container>
-                                </div>
 
-                                <div class="col-md-12" ng-if="isInvoiced==='1'">
-                                    <md-input-container>
-                                        <input type="text" ng-model="Access.formData.metadata.location"
-                                               id="location" name="location"
-                                               placeholder="Localidad" required>
-                                        <div class="help-block" ng-messages="registerForm.location.$error"
-                                             ng-if="registerForm.location.$touched">
+                                    <md-input-container ng-if="Access.formData.metadata.sellerRegister === '14'">
+                                        <label for="sellerRegisterOther">¿Quién lo atendía?</label>
+                                        <input type="text" ng-model="Access.formData.metadata.sellerRegisterOther"
+                                               id="sellerRegisterOther" name="sellerRegisterOther" required>
+                                        <div class="help-block" ng-messages="registerForm.sellerRegisterOther.$error"
+                                             ng-if="registerForm.sellerRegisterOther.$touched">
                                             <div class="text-danger" ng-message="required">El campo nombre es
                                                 requerido
                                             </div>
@@ -345,6 +289,7 @@
                                     </md-input-container>
                                 </div>
                             </div>
+
 
                             <div class="text-center" style="padding-top: 15px;">
                                 <button type="submit" class="btn btn-outline-danger"

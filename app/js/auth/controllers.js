@@ -181,6 +181,24 @@
 
         };
 
+        //
+        self.optionsForbusinessType = [{'name': 'Veterinaria', 'id': '1'}, {'name': 'Hospital Veterinario', 'id': '2'},
+            {'name': 'Clínica Veterinaria', 'id': '3'}, {'name': 'Tienda', 'id': '4'}, {'name': 'Pet Shop', 'id': '5'},
+            {'name': 'Venta de alimentos', 'id': '6'}, {'name': 'Acuario', 'id': '7'},
+            {'name': 'Entrenador', 'id': '8'},
+            {'name': 'Distribuidor', 'id': '9'}, {'name': 'Estética canina', 'id': '10'},
+            {'name': 'Estética canina móvil', 'id': '11'}, {'name': 'Comerciante independiente', 'id': '12'},
+            {'name': 'Otro', 'id': '13'}];
+
+        self.peopleServe = [{'name': 'Alejandra Mercado', 'id': '1'}, {'name': 'Alejandro Casas', 'id': '2'},
+            {'name': 'Angel Rodriguez', 'id': '3'}, {'name': 'Argenis Ríos', 'id': '4'},
+            {'name': 'Ariadna Sanchez de Tagle', 'id': '5'},
+            {'name': 'Donovan Diaz', 'id': '6'}, {'name': 'Erica Merlos', 'id': '7'},
+            {'name': 'Israel Covarrubias', 'id': '8'},
+            {'name': 'Ivette Rojo', 'id': '9'}, {'name': 'Mario Aupart', 'id': '10'}, {'name': 'Oscar Luna', 'id': '11'},
+            {'name': 'Roberto Sanchez de Tagle', 'id': '12'}, {'name': 'Samanda Santos', 'id': '13'},
+            {'name': 'Otro', 'id': '14'}];
+
 
     }
 
