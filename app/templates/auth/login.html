@@ -119,15 +119,34 @@
                                 </div>
                             </div>
 
-                            <md-input-container md-no-float ng-if="registerExtend">
-                                <input type="text" ng-model="Access.formData.metadata.giro" id="giro" name="giro"
-                                       placeholder="Tipo de negocio" required>
-                                <div class="help-block" ng-messages="registerForm.giro.$error"
-                                     ng-if="registerForm.giro.$touched">
-                                    <div class="text-danger" ng-message="required">El campo nombre es requerido</div>
-                                </div>
+                            <md-input-container>
+                                <label>Tipo de negocio</label>
+                                <md-select ng-model="">
+                                    <md-option ng-value="businessType">Veterinaria</md-option>
+                                    <md-option ng-value="businessType">Hospital Veterinario</md-option>
+                                    <md-option ng-value="businessType">Clínica Veterinaria</md-option>
+                                    <md-option ng-value="businessType">Tienda</md-option>
+                                    <md-option ng-value="businessType">Pet Shop</md-option>
+                                    <md-option ng-value="businessType">Venta de alimentos</md-option>
+                                    <md-option ng-value="businessType">Acuario</md-option>
+                                    <md-option ng-value="businessType">Entrenador</md-option>
+                                    <md-option ng-value="businessType">Distribuidor</md-option>
+                                    <md-option ng-value="businessType">Estética canina</md-option>
+                                    <md-option ng-value="businessType">Estética canina móvil</md-option>
+                                    <md-option ng-value="businessType">Comerciante independiente</md-option>
+                                    <md-option ng-value="businessType">Otro..</md-option>
+                                </md-select>
                             </md-input-container>
-
+                            <!--!!Si se lecciona otro en el select aparece este input para que se especifique que negocio es-->
+                            <md-input-container md-no-float">
+                            <input type="text" ng-model="" class="form-control"
+                                   name="address"
+                                   placeholder="Indique que tipo de negocio" required>
+                            <div class="help-block" ng-messages="registerForm.address.$error"
+                                 ng-if="registerForm.address.$touched">
+                                <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                            </div>
+                            </md-input-container>
                             <div class="row" ng-if="registerExtend">
                                 <div class="col-md-6">
                                     <md-input-container class="md-block">
