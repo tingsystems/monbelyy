@@ -230,7 +230,7 @@
             EntrySrv.get({
                 taxonomies: 'enlaces-rapidos',
                 isActive: 'True',
-                pageSize: 5,
+                pageSize: 6,
                 ordering: 'createdAt',
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
@@ -239,9 +239,22 @@
 
         }
 
+        if (!$rootScope.branchOffices) {
+            EntrySrv.get({
+                taxonomies: 'sucursales1524609885',
+                isActive: 'True',
+                pageSize: 5,
+                ordering: 'createdAt',
+                fields: 'title,link,excerpt,content'
+            }).$promise.then(function (results) {
+                $rootScope.branchOffices = results.results;
+            });
+
+        }
+
         if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1519171485',
+                taxonomies: 'datos-de-contacto1524609897',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -254,7 +267,7 @@
 
         if (!$rootScope.information) {
             EntrySrv.get({
-                taxonomies: 'informacion1519171615',
+                taxonomies: 'informacion1524609853',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -266,7 +279,7 @@
 
         if (!$rootScope.socialMedia) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1519072192',
+                taxonomies: 'redes-sociales1524609908',
                 isActive: 'True',
                 pageSize: 6,
                 ordering: 'createdAt',

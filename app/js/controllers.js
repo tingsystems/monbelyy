@@ -49,15 +49,15 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'noticias1518736444',
+            taxonomies: 'home-categorias',
             isActive: 'True',
-            pageSize: 4,
+            pageSize: 6,
             ordering: 'createdAt',
             fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
-            self.blogHome = results.results;
+            self.categoryProd = results.results;
             //get featureImage
-            angular.forEach(self.blogHome, function (obj, ind) {
+            angular.forEach(self.categoryProd, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
@@ -133,7 +133,7 @@
                 autoplay: true,
                 items: 2,
                 loop: true,
-                margin: 10,
+                margin: 20,
                 responsiveClass: true,
                 responsive: {
                     0: {

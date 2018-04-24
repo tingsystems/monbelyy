@@ -24,13 +24,40 @@
             </div>
         </div>
     </section>
+    <section class="section-three">
+        <div class="container">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h1 class="font-type">Siempre bella</h1>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="item in Home.categoryProd">
+                    <figure class="effect-sadie">
+                        <div class="img-bg-caption" style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}');"></div>
+                        <div class="bg-color-caption"></div>
+                        <div class="divider"></div>
+                        <figcaption class="text-caption">
+                            <h2>{{ item.title }}</h2>
+                            <p>{{item.excerpt}}</p>
+                            <a post-link="{ link: {url: item.link, target: '_self'} }" class="btn btn-white">Ver productos</a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="section-two" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
-            <div class="title-primary">
-                <h1>Lo más vendido</h1>
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h1 class="font-type">Lo más vendido</h1>
+                </div>
+                <hr>
             </div>
 
-            <div class="owl-carousel owl-theme owl-carousel">
+            <div class="owl-carousel owl-theme owl-carousel-products">
                 <div class="box-simple" ng-repeat="product in Home.products" ng-repeat-owl-carousel
                      carousel-init="Home.carouselInitializer">
                     <div class="item">
@@ -43,105 +70,18 @@
                     </div>
                     <div class="box-container">
                         <p>{{ product.name }}</p>
-                        <h4 class="text-warning">{{ product.price | currency }}</h4>
+                        <h4>{{ product.price | currency }}</h4>
                     </div>
                     <div class="box-footer">
-                        <a ui-sref="product-detail({slug:product.slug})" class="btn btn-outline-dark">Ver más</a>
-                        <button class="btn btn-danger"
+                        <!--<a ui-sref="product-detail({slug:product.slug})" class="btn btn-outline-dark">Ver más</a>-->
+                        <button class="btn btn-black"
                                 ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
                            name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
-                                ng-disabled="Shop.itemInCart(product)">Comprar
+                                ng-disabled="Shop.itemInCart(product)">Agregar al carrito
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <section class="section-three">
-        <div class="container">
-            <h1 class="text-uppercase">{{ Home.history.title }}</h1>
-            <p>{{ Home.history.excerpt }}..</p>
-            <br>
-            <img class="img-fluid" src="{{ Home.history.featuredImage.url }}" alt="Sydgroup">
-        </div>
-    </section>
-    <section class="section-four">
-        <div class="container">
-            <div class="title-primary">
-                <h1 class="text-uppercase">Preguntas frecuentes</h1>
-            </div>
-            <div class="list-group" ng-repeat="item in Home.ask">
-                <a href="{{item.link}}" class="list-group-item list-group-item-action">
-                    {{item.title}}
-                </a>
-                <a href="{{item.link}}" class="list-group-item list-group-item-action">{{item.excerpt}}</a>
-            </div>
-            <div class="text-center">
-                <a href="http://www.sydgroup.mx/page/preguntas-frecuentes1518806582" class="btn btn-outline-danger">Más
-                    información</a>
-            </div>
-        </div>
-    </section>
-    <section class="section-five">
-        <div class="container">
-            <div class="title-primary">
-                <h1 class="text-uppercase">¡Cuidado! estos son los productos <strong class="text-danger">FALSOS</strong>
-                    que están circulando</h1>
-            </div>
-            <article class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <img class="img-fluid" src="{{ Home.fake.featuredImage.url }}" alt="Sydgroup">
-                    </div>
-
-                    <div class="text-center">
-                        <a class="btn btn-danger" href="{{Home.fake.link}}" target="_self">
-                            Más información
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
-    <div class="section-six">
-        <div class="container">
-            <div class="title-primary">
-                <h1 class="text-uppercase">Noticias</h1>
-            </div>
-            <div class="row">
-                <div class="col-sm-3" ng-repeat="news in Home.blogHome">
-                    <div class="box-simple">
-                        <a ui-sref="post_detail({slug:news.slug})">
-                            <div class="box-header">
-                                <div class="box-bg-img"
-                                     style="background-image: url('{{news.featuredImage.url ? news.featuredImage.url : initConfig.img_default}}')"></div>
-                            </div>
-                            <div class="box-container">
-                                <p class="box-title">{{ news.title }}</p>
-                            </div>
-                            <div class="box-footer">
-                                <a ui-sref="post_detail({slug:news.slug})" class="btn btn-danger">Ver más</a>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section-seven">
-        <div class="container">
-            <div class="title-primary">
-                <h3 class="text-uppercase">Sigue a SYDGROUP y entérate de las últimas novedades.</h3>
-            </div>
-            <div class="row">
-                <div class="col-sm-2 list-icons-add" ng-repeat="social in Home.socialMedia">
-                    <a class="nav-link" href="{{ social.excerpt }}"><i class="{{ social
-                    .title }}"></i> <span
-                            ng-bind-html="social.content | trustHtml"></span></a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

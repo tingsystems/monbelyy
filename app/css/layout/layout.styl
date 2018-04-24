@@ -11,6 +11,7 @@ body
     background-color white
 
 h1,h2,h3,h4,h5, h6
+  font-family fontTitles
   margin 0
   font-weight 400
 
@@ -23,6 +24,8 @@ p, span
 
 .xs-hidde
   display inline
+input, button, a
+  outline 0 !important
 
 input[type="reset"][disabled], input[type="submit"][disabled],
 html input[type="button"][disabled], button[disabled], .btn[disabled]
@@ -36,7 +39,8 @@ html input[type="button"][disabled], button[disabled], .btn[disabled]
 
 .sweet-alert p
   font-weight 400
-
+.font-type
+  font-family fontTitles
 md-input-container
   width 100%
 
@@ -69,8 +73,7 @@ md-input-container
 /* ------ HOME STYLE ----- */
 #home
   /* sections in home page */
-  .section-one, .section-two,
-  .section-three, .section-four,
+  .section-one, .section-two, .section-four,
   .section-five, .section-six,
   .section-seven
     padding 80px 0
@@ -96,7 +99,8 @@ md-input-container
   /* SECTION THREE */
   .section-three
     text-align center
-    background-color #f1f1f1
+    background-color white
+    padding 40px 0
     p
       font-size 18px
 
@@ -206,13 +210,31 @@ md-input-container
 #temp-blog
   .box-article
     color fontClr
+.top-footer
+  padding 20px 0
+  background-color optional
+  border-bottom 1px solid rgba(255, 255, 255, 0.5)
+  color white
+  h3
+    border-right 1px solid white
+  i
+    height 30px
+    padding-right 30px
+  p
+    margin-bottom 0
+  .nav-link
+    padding 0
+    color white
+    font-size 18px
+    p
+      font-size 18px
 #footer-top
-  padding 80px 0
-  background-color #444444
+  padding 40px 0
+  background-color optional
   background-size cover
   background-position center
 .bottom-footer
-  background-color #5A5A5A
+  background-color black
   padding 30px 0
 footer
   .white
