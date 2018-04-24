@@ -13,7 +13,7 @@
         };
 
         EntrySrv.get({
-            taxonomies: 'slider1518736513',
+            taxonomies: 'slider1524522786',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -27,7 +27,7 @@
         });
 
         var paramsProducts = {};
-        paramsProducts.taxonomies = 'anabolics';
+        paramsProducts.taxonomies = 'sombras-hanny';
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
         paramsProducts.ordering = '-createdAt';
@@ -46,54 +46,6 @@
             angular.forEach(self.products, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
-        });
-
-        EntrySrv.get({
-            slug: 'acerca-de-nosotros1518737862',
-            isActive: 'True',
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.aboutUs = results;
-            //get featureImage
-            self.aboutUs.featuredImage = $filter('filter')(self.aboutUs.attachments, {kind: 'featuredImage'})[0];
-        });
-
-        EntrySrv.get({
-            slug: 'historia',
-            isActive: 'True',
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.history = results;
-            //get featureImage
-            self.history.featuredImage = $filter('filter')(self.history.attachments, {kind: 'featuredImage'})[0];
-        });
-
-
-        EntrySrv.get({
-            taxonomies: 'preguntas-frecuentes1518736316',
-            isActive: 'True',
-            pageSize: 3,
-            ordering: 'createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.ask = results.results;
-            //get featureImage
-            angular.forEach(self.ask, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-            });
-        });
-
-        EntrySrv.get({
-            slug: 'productos-falsos',
-            isActive: 'True',
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.fake = results;
-            //get featureImage
-            self.fake.featuredImage = $filter('filter')(self.fake.attachments, {kind: 'featuredImage'})[0];
         });
 
         EntrySrv.get({
@@ -141,7 +93,7 @@
                 */
         /* Carousel slider */
         self.carouselInitializerSlider = function () {
-            $(".owl-carousel").owlCarousel({
+            $(".owl-theme-slider").owlCarousel({
                 //get items to proportionate num of items
                 navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
                 navigation: true,
@@ -150,6 +102,7 @@
                 items: 2,
                 loop: true,
                 margin: 0,
+                center: true,
                 responsiveClass: true,
                 responsive: {
                     0: {
@@ -166,6 +119,7 @@
                         loop: false
                     }
                 }
+
             });
         }
 

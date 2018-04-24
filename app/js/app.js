@@ -165,8 +165,8 @@
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
-        $rootScope.projectId = '6eeafae0-527d-4983-a4ae-3efca37c777d';
-        $http.defaults.headers.common['PROJECT-ID'] = '6eeafae0-527d-4983-a4ae-3efca37c777d';
+        $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
+        $http.defaults.headers.common['PROJECT-ID'] = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $rootScope.hidePriceLogin = false;
         $rootScope.registerExtend = false;
 
@@ -202,7 +202,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Sydgroup';
+        $rootScope.pageTitle = 'Hanny Pulido Cosméticos';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -217,13 +217,26 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'cb683254-9fa5-4107-8410-314434534ab5',
+                parent: '135876e2-073c-4b78-ba70-ced68dd0bc4c',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
                 $rootScope.mainNavMenu = response;
             }, function (error) {
             });
+        }
+
+        if (!$rootScope.fastLink) {
+            EntrySrv.get({
+                taxonomies: 'enlaces-rapidos',
+                isActive: 'True',
+                pageSize: 5,
+                ordering: 'createdAt',
+                fields: 'title,link,excerpt,content'
+            }).$promise.then(function (results) {
+                $rootScope.fastLink = results.results;
+            });
+
         }
 
         if (!$rootScope.contactData) {

@@ -12,22 +12,67 @@ audio:not([controls]),
 .shopping-cart {
   position: relative;
   margin-top: -5px;
+  margin-left: 30px;
 }
 .shopping-cart i {
   font-size: 40px;
-  color: #777;
+  color: #fff;
 }
 .shopping-cart .qty-cart {
   position: absolute;
   color: #fff;
   text-align: center;
   border-radius: 30px;
-  background-color: #ff9039;
+  background-color: #f387c7;
   font-size: 13px;
   top: -20px;
   left: 15px;
   width: 20px;
   height: 20px;
+}
+.navbar-side-slider .nav-item:nth-child(5) a {
+  color: #f387c7;
+}
+.navbar-side-slider li a {
+  color: #000;
+  font-size: 18px;
+}
+.navbar-side-slider li a:nth-child(5) {
+  color: #f387c7;
+}
+.one-rows-nav .first-row {
+  background-color: #fff;
+}
+.one-rows-nav .first-row md-input-container.md-default-theme .md-input,
+.one-rows-nav .first-row md-input-container .md-input,
+.one-rows-nav .first-row md-input-container.md-default-theme>md-icon,
+.one-rows-nav .first-row md-input-container>md-icon {
+  border-color: #000;
+}
+.one-rows-nav .first-row .btn-link {
+  color: #000;
+}
+.one-rows-nav md-input-container {
+  margin: 6px 0 15px;
+}
+.one-rows-nav md-input-container .md-errors-spacer {
+  min-height: 0;
+}
+.one-rows-nav .nav-theme {
+  background-color: #000;
+}
+.one-rows-nav .nav-theme .navbar-nav .nav-link {
+  color: #fff;
+  font-size: 18px;
+}
+.one-rows-nav .nav {
+  margin-top: 10px;
+}
+.one-rows-nav .nav > li > .shopping-cart {
+  padding-right: 45px;
+}
+.one-rows-nav .navbar-brand .logo {
+  width: 250px;
 }
 .three-rows-nav .first-row {
   padding: 15px 0;
@@ -74,7 +119,7 @@ audio:not([controls]),
   padding-right: 45px;
 }
 .three-rows-nav .nav-theme {
-  background-color: #ff5849;
+  background-color: #000;
 }
 .three-rows-nav .nav-theme .navbar-nav .nav-link {
   color: #fff;
@@ -146,7 +191,7 @@ audio:not([controls]),
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-default {
-  color: #777;
+  color: #000;
   background: #ddd;
   border-radius: 3px;
   padding: 5px 10px;
@@ -246,17 +291,17 @@ audio:not([controls]),
   cursor: no-drop;
 }
 .btn-outline-default {
-  color: #777;
+  color: #000;
   background: transparent;
   border-radius: 3px;
   padding: 5px 10px;
-  border: 1px solid #777;
+  border: 1px solid #000;
 }
 .btn-outline-default:hover,
 .btn-outline-default:focus {
   background-color: #ddd;
-  border: 1px solid #777;
-  color: #777;
+  border: 1px solid #000;
+  color: #000;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-outline-dark {
@@ -301,7 +346,7 @@ audio:not([controls]),
   text-decoration: none;
 }
 .box-simple a .box-title {
-  color: #777 !important;
+  color: #000 !important;
 }
 .box-simple .box-header .box-bg-img {
   background-position: center;
@@ -342,7 +387,7 @@ audio:not([controls]),
   height: 300px;
 }
 .box-bordered .box-article {
-  color: #777;
+  color: #000;
 }
 .box-contact h3 {
   color: #fff;
@@ -366,7 +411,7 @@ audio:not([controls]),
 }
 .header-title-large {
   background-color: #f5f5f5;
-  color: #777;
+  color: #000;
 }
 .header-title-large h1 {
   font-size: 28px;
@@ -377,7 +422,7 @@ audio:not([controls]),
 }
 .list-icons-add .nav-link {
   display: inline-flex;
-  color: #777;
+  color: #000;
 }
 .list-icons-add .nav-link i {
   margin-top: 3px;
@@ -481,6 +526,57 @@ audio:not([controls]),
   position: absolute;
   padding: 5px 20px;
 }
+.slider-small {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.owl-theme-slider .owl-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+}
+.owl-theme-slider .owl-dots .owl-dot.active span,
+.owl-theme-slider .owl-dots .owl-dot:hover span {
+  background-color: #fff;
+}
+.owl-theme-slider .owl-dots .owl-dot.active span:hover,
+.owl-theme-slider .owl-dots .owl-dot:hover span:hover {
+  background-color: #fff;
+}
+.owl-theme-slider .owl-dots .owl-dot span {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+.owl-theme-slider .owl-dots .owl-dot span:hover {
+  background-color: #fff;
+}
+.owl-theme-slider .owl-nav [class*='owl-'] {
+  background-color: rgba(0,0,0,0.6);
+  font-size: 28px;
+  border-radius: 30px;
+  color: #fff;
+  opacity: 0.5;
+}
+.owl-theme-slider .owl-nav [class*='owl-']:hover {
+  background-color: #000;
+}
+.owl-theme-slider .owl-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+}
+.owl-theme-slider .owl-nav .owl-prev {
+  left: 35px;
+  position: absolute;
+  padding: 5px 20px;
+}
+.owl-theme-slider .owl-nav .owl-next {
+  right: 35px;
+  position: absolute;
+  padding: 5px 20px;
+}
 .slider-box {
   padding-top: 0 !important;
   padding-bottom: 0;
@@ -514,7 +610,7 @@ audio:not([controls]),
   border-top: none;
   border-left: none;
   border-right: none;
-  color: #777;
+  color: #000;
 }
 .tab-simple .nav-tabs .nav-link:hover,
 .tab-simple .nav-tabs .nav-link:focus,
@@ -599,7 +695,7 @@ audio:not([controls]),
   background-color: #e9ecef;
 }
 #breadcrumb a {
-  color: #777;
+  color: #000;
 }
 .demo-select-header .demo-header-searchbox {
   width: 100%;
@@ -876,7 +972,7 @@ audio:not([controls]),
 }
 body {
   background-color: #fff;
-  color: #777;
+  color: #000;
   font: 16px 'Poppins', sans-serif;
 }
 body .content-area-web {
@@ -889,7 +985,7 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-weight: 700;
+  font-weight: 400;
 }
 strong {
   font-weight: 700;
@@ -908,6 +1004,9 @@ html input[type="button"][disabled],
 button[disabled],
 .btn[disabled] {
   cursor: not-allowed;
+}
+.optional {
+  color: #f387c7 !important;
 }
 .no-padding {
   padding: 0 !important;
@@ -965,6 +1064,9 @@ md-input-container {
 #home .section-one img {
   width: 100%;
 }
+#home .section-two {
+  padding: 30px 0 !important;
+}
 #home .section-three {
   text-align: center;
   background-color: #f1f1f1;
@@ -1007,10 +1109,10 @@ md-input-container {
   margin-bottom: 15px;
 }
 .temp-product-detail h3 {
-  color: #777;
+  color: #000;
 }
 .temp-product-detail h4 {
-  color: #777;
+  color: #000;
 }
 .temp-validate-account {
   padding: 50px 0;
@@ -1032,7 +1134,7 @@ md-input-container {
   border-right: none;
 }
 .temp-dashboard .list-group .list-group-item {
-  color: #777;
+  color: #000;
 }
 .temp-dashboard .list-group .list-group-item.active {
   color: #fff;
@@ -1080,7 +1182,7 @@ md-input-container {
   border-bottom: 0 solid #ddd;
 }
 #temp-blog .box-article {
-  color: #777;
+  color: #000;
 }
 #footer-top {
   padding: 80px 0;
