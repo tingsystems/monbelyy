@@ -21,7 +21,7 @@
                     <div class="title-primary">
                         <div class="container">
                             <div class="row justify-content-between">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <h1 class=text-uppercase>{{Product.categoryName}}</h1>
                                 </div>
                                 <div class="col-4">
@@ -57,16 +57,13 @@
                                             <h4 class="text-warning">{{ product.price | currency }}</h4>
                                         </div>
                                     </a>
-                                    <div class="box-footer">
-                                        <a class="btn btn-outline-dark" ui-sref="product-detail({slug:product.slug})">
-                                            Ver más
-                                        </a>
-                                        <button class="btn btn-danger"
+                                    <div class="box-footer text-center">
+                                        <button class="btn btn-black"
                                                 ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
                                             name: product.name, price: product.price, qty: 1,
                                             taxonomies : product.taxonomies}, 1)"
                                                 ng-disabled="Product.itemInCart(product)">
-                                            Agregar
+                                            Agregar al carrito
                                         </button>
                                     </div>
                                 </div>

@@ -17,52 +17,58 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <div class="owl-carousel owl-theme owl-theme-page">
                         <div class="slider" ng-repeat="slide in Product.detail.attachments" ng-repeat-owl-carousel
                              carousel-init="Product.carouselDetailProduct">
                             <div class="item" style="width: 100%;">
                                 <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                                    <div class="slider-page" style="background-image:url('{{ slide.url }}');"></div>
+                                    <div class="slider-page"
+                                         style="background-image:url('{{ slide.url ? slide.url : initConfig.img_default }}');"></div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="text-center">
-                        <a href="http://www.sydgroup.mx/page/como-comprobar-la-autenticidad-del-producto"
-                           class="btn btn-dark">Como comprobar la autenticidad</a>
-                    </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <div class="article-description">
-                        <h3>{{Product.detail.name}}</h3>
-                        <hr>
-                        <h3 class="article-price">{{ Product.detail.price | currency}}</h3>
-                        <br>
-                        <md-input-container class="md-block">
-                            <label>Cantidad</label>
-                            <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1" required/>
-                        </md-input-container>
-                        <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3>{{Product.detail.name}}</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <md-input-container class="md-block">
+                                        <label>Cantidad</label>
+                                        <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"
+                                               required/>
+                                    </md-input-container>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3>{{ Product.detail.price | currency}}</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax}, Product.detail.qty)"
-                                ng-disabled="Shop.itemInCart(Product.detail.id)"
-                                class="btn btn-danger">Agregar a carrito
-                        </button>
-                        <hr>
-                        <h4>Descripción</h4>
-                        <hr>
-                        <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
-                            {{Product.detail.description}}</h4>
-                        <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
-                                        price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
-                                        shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax},
-                                        Product.detail.qty)"
-                                ng-disabled="Shop.itemInCart(Product.detail.id)"
-                                class="btn btn-danger">Agregar a carrito
-                        </button>
+                                            ng-disabled="Shop.itemInCart(Product.detail.id)"
+                                            class="btn btn-danger">Agregar al carrito
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <hr>
+                                    <h4>Descripción</h4>
+                                    <hr>
+                                    <p class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
+                                        {{Product.detail.description}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </article>
