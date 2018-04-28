@@ -17,47 +17,84 @@
     <section class="content-area">
         <div class="container" loading-container="Product.tableParams.settings().$loading">
             <div class="row" ng-table="Product.tableParams" show-filter="false">
-                <div ng-controller="AccessCtrl as Access">
+                <div class="col-sm-3">
+                    <div class="box-widget-white ng-scope">
+                        <div class="box-widget-container">
+                            <h6>{{Product.categoryName}}</h6>
+                            <hr>
+                            <div class="box-widget-container" style="padding-bottom: 5px;">
+                                <ul class="list">
+                                    <li ng-repeat="children in Product.lines">
+                                        <a href="#" target="_blank"><input type="radio" ng-model="children.id"
+                                                                           ng-change="Product.getProductsFilter(children.slug)">
+                                            {{children.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4 class="widget-title">Marcas</h4>
+                        <hr>
+                        <div class="box-widget-container" style="padding-bottom: 5px;">
+                            <div ng-if="Product.brandSelected">
+                                <p>{{Product.brandSelected.name}}
+                                    <a ng-click="Product.deleteFilter(Product.brandSelected, 'brand')">
+                                        <span class="fa fa-times-circle"></span>
+                                    </a>
+                                </p>
+                            </div>
+                            <ul class="nav" ng-if="!Product.brandSelected">
+                                <md-radio-group ng-model="Product.brandSelected"
+                                                ng-change="Product.getProductsFilter(Product.brandSelected)">
+                                    <md-radio-button ng-repeat="children in Product.brands " ng-value="children"
+                                                     aria-label="{{ children.name }}" class="md-primary">
+                                        {{children.name}}
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </ul>
+                        </div>
+                        <hr>
+                        <h4 class="widget-title">Ordenar por</h4>
+                        <hr>
+                        <div class="box-widget-container">
+                            <form>
+                                <div class="form-group">
+                                    <select name="" placeholder="Filtrar por" id="price" class="form-control" ng-model="Product.selectFilter"
+                                            ng-change="Product.getProductsFilter(Product.selectFilter)">
+                                        <option value="1">Alfabeticamente de A-Z</option>
+                                        <option value="2">Precio menor</option>
+                                        <option value="3">Precio mayor</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9" ng-controller="AccessCtrl as Access">
                     <div class="title-primary">
                         <div class="container">
                             <div class="row justify-content-between">
-                                <div class="col-6">
+                                <div class="col-12">
                                     <h1 class=text-uppercase>{{Product.categoryName}}</h1>
                                 </div>
-                                <div class="col-4">
-                                    <form>
-                                        <div class="form-group row">
-                                            <label for="price" class="col-sm-4 col-form-label">Filtrar por</label>
-                                            <div class="col-sm-8">
-                                                <select name="" placeholder="Filtrar por" id="price" class="form-control" ng-model="Product.selectFilter"
-                                                        ng-change="Product.getProductsFilter(Product.selectFilter)">
-                                                    <option value="1">Alfabeticamente de A-Z</option>
-                                                    <option value="2">Precio menor</option>
-                                                    <option value="3">Precio mayor</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
-                            <hr>
                         </div>
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-4 col-md-3" ng-repeat="product in $data">
-                                <div class="box-simple" ng-if="!Product.isPost">
+                            <div class="col-sm-4" ng-repeat="product in $data">
+                                <div class="box-simple" ng-if="!Product.isPost" ng-controller="AccessCtrl as Access">
                                     <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
                                         <div class="box-header">
                                             <div class="box-bg-img"
                                                  style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
                                         </div>
                                         <div class="box-container">
-                                            <p class="box-title">{{ product.name }}</p>
-                                            <h4 class="text-warning">{{ product.price | currency }}</h4>
+                                            <p class="box-title">{{ product.name | limitTo: 30 }}</p>
+                                            <h4>{{ product.price | currency }}</h4>
                                         </div>
                                     </a>
-                                    <div class="box-footer text-center">
+                                    <div class="box-footer">
                                         <button class="btn btn-black"
                                                 ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
                                             name: product.name, price: product.price, qty: 1,
@@ -74,7 +111,7 @@
                                              style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
                                         <h3 class="prod-descrip">{{product.title}}</h3>
                                     </a>
-                                    <a ui-sref="post_detail({slug: product.slug})" class="btn btn-success btn-cart">Ver
+                                    <a ui-sref="post_detail({slug: product.slug})" class="btn btn-primary">Ver
                                         más</a>
                                 </div>
                             </div>

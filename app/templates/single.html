@@ -15,9 +15,13 @@
 <section class="content-area">
      <div class="container">
         <div class="row">
-            <div class="col-md-9 col-sm-8">
-                <h3>{{ Post.detail.title }}</h3>
-                <hr>
+            <div class="col-md-8 col-sm-8">
+                <div class="title-middle-line">
+                    <div class="text-content">
+                        <h4 class="text-uppercase">{{ Post.detail.title }}</h4>
+                    </div>
+                    <hr>
+                </div>
 
                 <div class="content-post">
                     <div ng-if="!Post.isService">
@@ -39,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-4 widgets">
+            <div class="col-md-4 col-sm-4 widgets">
                 <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
             </div>
         </div>

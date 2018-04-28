@@ -5,7 +5,7 @@
         $stateProvider
             .state('register', {
                 url: '/login',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
@@ -16,7 +16,7 @@
             })
             .state('success', {
                 url: '/account/success',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/validate_account.html'
@@ -25,7 +25,7 @@
             })
             .state('validate', {
                 url: '/validate/:token',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/account_activated.html',
@@ -38,7 +38,7 @@
                 url: '/account/dashboard',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Sydgroup'
+                    pageTitle: 'Hanny Pulido Cosméticos'
                 },
                 views: {
                     'content': {
@@ -78,7 +78,7 @@
                 url: '/account/profile',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Perfil - Sydgroup'
+                    pageTitle: 'Perfil - Hanny Pulido Cosméticos'
                 },
                 views: {
                     'content': {
@@ -92,7 +92,7 @@
                 url: '/account/addresses',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Sydgroup'
+                    pageTitle: 'Direcciones - Hanny Pulido Cosméticos'
                 },
                 views: {
                     'content': {
@@ -106,7 +106,7 @@
                 url: '/account/address',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Sydgroup'
+                    pageTitle: 'Direcciones - Hanny Pulido Cosméticos'
                 },
                 views: {
                     'content': {
@@ -120,7 +120,7 @@
                 url: '/account/address/update/:id',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Sydgroup'
+                    pageTitle: 'Direcciones - Hanny Pulido Cosméticos'
                 },
                 views: {
                     'content': {
@@ -133,7 +133,7 @@
             .state('recovery-password', {
                 url: '/account/recovery/password',
                 data: {
-                    pageTitle: 'Recuperar contraseña - Sydgroup'
+                    pageTitle: 'Recuperar contraseña - Hanny Pulido Cosméticos'
                 },
                 views: {
                     'content': {
@@ -146,7 +146,7 @@
             .state('new-password', {
                 url: '/account/new/password/:token',
                 data: {
-                    pageTitle: 'Reestablecer contraseña - Sydgroup'
+                    pageTitle: 'Reestablecer contraseña - Hanny Pulido Cosméticos'
                 },
                 views: {
                     'content': {

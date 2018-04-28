@@ -34,10 +34,10 @@
                     <div class="article-description">
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-7">
                                     <h3>{{Product.detail.name}}</h3>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-5">
                                     <md-input-container class="md-block">
                                         <label>Cantidad</label>
                                         <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"
@@ -45,10 +45,10 @@
                                     </md-input-container>
 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-7">
                                     <h3>{{ Product.detail.price | currency}}</h3>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-5">
                                     <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax}, Product.detail.qty)"

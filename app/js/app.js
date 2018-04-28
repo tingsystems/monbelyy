@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -180,9 +180,9 @@
             meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
-            email: 'info@sydgroup.mx',
+            email: 'ventas@hannypulidocosméticos.com.mx',
             phone: '33 2257 3971',
-            branchOffice: 'Sydgroup'
+            branchOffice: 'Hanny Pulido Cosméticos'
 
         };
         // initialise google analytics
@@ -193,7 +193,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Sydgroup',
+                'title': 'Hanny Pulido Cosméticos',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default

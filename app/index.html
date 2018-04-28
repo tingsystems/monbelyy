@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title ng-bind="pageTitle">Sydgroup</title>
+    <title ng-bind="pageTitle">Hanny Pulido Cosméticos</title>
     <meta name="description" content="{{ post.excerpt }}">
     <meta name="keywords" content="">
     <meta name="theme-color" content="{{ initConfig.meta_color }}">
@@ -76,9 +76,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
-                    <ul class="nav navbar-expand-lg">
+                    <ul class="nav navbar-expand-lg mobile-hidde">
                         <li>
-                            <a href="" class="btn btn-link"><i class="fa fa-building"></i> Tiendas</a>
+                            <a style="margin-top: 10px;" href="http://hannypulido.com.mx/page/sucursales1524857728" class="btn btn-link"><i class="fa fa-building"></i> Sucursales</a>
                         </li>
                     </ul>
                 </div>
@@ -111,6 +111,15 @@
                                 <a href="" ng-click="Access.logout()" class="dropdown-item"> Cerrar sesión</a>
                             </div>
                         </li>
+                        <ul class="nav navbar-expand-lg desk-hidde" ng-controller="AccessCtrl as Access">
+                            <li>
+                                <a ui-sref="shopcart" class="shopping-cart" ng-if="ecommerce"
+                                   ng-controller="AccessCtrl as Access">
+                                    <span class="qty-cart">{{ items.length }}</span>
+                                    <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
+                                </a>
+                            </li>
+                        </ul>
                     </ul>
                 </div>
             </div>
@@ -131,7 +140,7 @@
                         <a class="nav-link" href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
                     </li>
                 </ul>
-                <ul class="nav navbar-expand-lg" ng-controller="AccessCtrl as Access">
+                <ul class="nav navbar-expand-lg mobile-hidde" ng-controller="AccessCtrl as Access">
                     <li>
                         <a ui-sref="shopcart" class="shopping-cart" ng-if="ecommerce"
                            ng-controller="AccessCtrl as Access">
@@ -195,13 +204,13 @@
 <script src="/js/services.js"></script>
 <script src="/js/templates.js"></script>
 <script src="/js/translate.js"></script>
-<script src="/js/shop/controllers.js"></script>
-<script src="/js/shop/services.js"></script>
-<script src="/js/shop/shop.app.js"></script>
 <script src="/js/auth/auth.app.js"></script>
 <script src="/js/auth/controllers.js"></script>
 <script src="/js/auth/directives.js"></script>
 <script src="/js/auth/services.js"></script>
+<script src="/js/shop/controllers.js"></script>
+<script src="/js/shop/services.js"></script>
+<script src="/js/shop/shop.app.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>

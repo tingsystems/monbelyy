@@ -162,7 +162,7 @@
     font-size 16px
     height 40px
   .slider-img
-    height 350px
+    height 185px
     background-size 100%
     background-position left
   header .navbar-default .navbar-nav .dropdown .dropdown-menu > li > a
@@ -257,6 +257,24 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  .owl-carousel-products
+    .owl-nav
+      button.owl-prev
+        left 0
+        &:hover
+          color optional
+          background-color transparent
+      button.owl-next
+        right 0
+  .first-row
+    .nav
+      -ms-flex-pack center !important
+      justify-content center !important
+
+  .shopping-cart
+    top -25px
+    i
+      color black
   .xs-hidde
     display none
 
@@ -298,12 +316,23 @@
         .btn-dark
           background-color transparent
           border-color transparent
+
+  .mobile-hidde
+    display none!important
+  .desk-hidde
+    display inline!important
   /* SLIDER */
   .slider-box
     .slider-img
-      height 100px
+      height 185px
     .owl-nav
       display none
+  .slider-small
+    .col-sm-3
+      border 1px solid black
+      margin 35px
+      padding-top 10px
+      padding-bottom 10px
   /* SECTION ONE */
   .section-one
     .rounded-cicle

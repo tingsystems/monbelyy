@@ -27,10 +27,10 @@
         });
 
         var paramsProducts = {};
-        paramsProducts.taxonomies = 'sombras-hanny';
+        paramsProducts.taxonomies = 'web1523988132';
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
-        paramsProducts.ordering = '-createdAt';
+        paramsProducts.ordering = 'createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax';
             paramsProducts.priceList = list;
@@ -245,7 +245,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'noticias1518736444',
+                taxonomies: 'blog1524869264',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,
@@ -263,7 +263,7 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Noticias' + ' - ' + $rootScope.initConfig.branchOffice;
+        $rootScope.pageTitle = 'Blog' + ' - ' + $rootScope.initConfig.branchOffice;
     }
 
     function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
