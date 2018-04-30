@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -180,7 +180,6 @@
         $rootScope.initConfig = {
             googleKey: 'UA-101539944-1',
             meta_color: '#337ab7',
-            //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
             email: 'ventas@hannypulidocosméticos.com.mx',
             phone: '33 2257 3971',
