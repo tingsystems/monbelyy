@@ -2,7 +2,8 @@
     'use strict';
 
     function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
-                        PriceListSrv, StateSrv, AddressSrv) {
+                        PriceListSrv, StateSrv, $anchorScroll) {
+        $anchorScroll();
         var self = this;
         self.busy = false;
         self.formData = {};
@@ -113,10 +114,21 @@
 
         self.createAccount = function () {
             var account = angular.copy(self.formData);
+            if ($rootScope.createCustomerActive) {
+                account.isActive = false;
+            }
             var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
-            //account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
+            // account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
+            // address.zip = self.address.zip;
+            // address.neighborhood = self.address.neighborhood;
+            // address.phone = account.contactPersonPhone;
+            // address.city = self.city.id;
+            // address.state = self.state.id;
+            // address.address = self.address.address;
+            // account.address = self.address.address;
+            // account.dataAddress = address;
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;
@@ -168,6 +180,24 @@
             }
 
         };
+
+        //
+        self.optionsForbusinessType = [{'name': 'Veterinaria', 'id': '1'}, {'name': 'Hospital Veterinario', 'id': '2'},
+            {'name': 'Clínica Veterinaria', 'id': '3'}, {'name': 'Tienda', 'id': '4'}, {'name': 'Pet Shop', 'id': '5'},
+            {'name': 'Venta de alimentos', 'id': '6'}, {'name': 'Acuario', 'id': '7'},
+            {'name': 'Entrenador', 'id': '8'},
+            {'name': 'Distribuidor', 'id': '9'}, {'name': 'Estética canina', 'id': '10'},
+            {'name': 'Estética canina móvil', 'id': '11'}, {'name': 'Comerciante independiente', 'id': '12'},
+            {'name': 'Otro', 'id': '13'}];
+
+        self.peopleServe = [{'name': 'Alejandra Mercado', 'id': '1'}, {'name': 'Alejandro Casas', 'id': '2'},
+            {'name': 'Angel Rodriguez', 'id': '3'}, {'name': 'Argenis Ríos', 'id': '4'},
+            {'name': 'Ariadna Sanchez de Tagle', 'id': '5'},
+            {'name': 'Donovan Diaz', 'id': '6'}, {'name': 'Erica Merlos', 'id': '7'},
+            {'name': 'Israel Covarrubias', 'id': '8'},
+            {'name': 'Ivette Rojo', 'id': '9'}, {'name': 'Mario Aupart', 'id': '10'}, {'name': 'Oscar Luna', 'id': '11'},
+            {'name': 'Roberto Sanchez de Tagle', 'id': '12'}, {'name': 'Samanda Santos', 'id': '13'},
+            {'name': 'Otro', 'id': '14'}];
 
 
     }
@@ -457,7 +487,7 @@
         };
     }
 
-    function ProfileCtrl(CustomerSrv, StateSrv, NotificationSrv, $localStorage, $rootScope, $stateParams, $state) {
+    function ProfileCtrl(CustomerSrv, StateSrv, NotificationSrv, $localStorage, $rootScope, $stateParams, $state, $filter) {
         var self = this;
 
         self.formData = {};
@@ -495,6 +525,9 @@
         var updateCustomer = function () {
             var profileData = angular.copy(self.profileData);
             self.busy = true;
+            profileData.state = self.state.id;
+            profileData.city = self.city.id;
+            console.log(profileData);
             CustomerSrv.update({id: self.idUser}, profileData).$promise.then(function (response) {
                 self.busy = false;
                 NotificationSrv.success('Información personal actualizada correctamente');
@@ -521,6 +554,8 @@
                         ordering: 'name'
                     }).$promise.then(function (response) {
                         self.cities = response;
+                        self.city = $filter('filter')(self.cities, {id: self.profileData.city})[0];
+                        self.state = $filter('filter')(self.states, {id: self.profileData.state})[0];
                         self.busyCity = false;
                     }, function (error) {
                         self.busyCity = false;
@@ -551,7 +586,6 @@
 
         // get the cities by state
         self.getCitiesByState = function () {
-            console.log('lalalalal');
             if (!self.state) {
                 return
             }
@@ -811,12 +845,12 @@
 
 
     // inject dependencies to controllers
-    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv', 'StateSrv', 'AddressSrv'];
+    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv', 'StateSrv', '$anchorScroll'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
-    ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state'];
+    ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
     PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', '$filter'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage'];

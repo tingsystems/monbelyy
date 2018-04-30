@@ -6,8 +6,8 @@
                     <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a
                     </li>
                     <li class="breadcrumb-item" ng-if="Product.detail.taxonomies.length"><a
-                            ui-sref="category({slug: Product.detail.taxonomies[0].slug })">{{
-                        Product.detail.taxonomies[0].name }}</a>
+                            ui-sref="category({slug: Product.detail.taxonomies[0].slug })">
+                        {{ Product.detail.taxonomies[0].name }}</a>
                     </li>
                     <li class="breadcrumb-item active">{{ Product.detail.name }}</li>
                 </ol>
@@ -19,7 +19,7 @@
             <article class="row">
                 <div class="col-sm-4">
                     <div class="owl-carousel owl-theme owl-theme-page">
-                        <div class="slider" ng-repeat="slide in Product.detail.attachments" ng-repeat-owl-carousel
+                        <div class="slider" ng-repeat="slide in Product.detail.galleryImages" ng-repeat-owl-carousel
                              carousel-init="Product.carouselDetailProduct">
                             <div class="item" style="width: 100%;">
                                 <a post-link="{ link: {url: slide.link, target: '_self'} }">

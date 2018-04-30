@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -168,7 +168,9 @@
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $http.defaults.headers.common['PROJECT-ID'] = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $rootScope.hidePriceLogin = false;
+        $rootScope.createCustomerActive = false;
         $rootScope.registerExtend = false;
+        $rootScope.registerInvoiced = false;
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -178,7 +180,6 @@
         $rootScope.initConfig = {
             googleKey: 'UA-101539944-1',
             meta_color: '#337ab7',
-            //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
             email: 'ventas@hannypulidocosméticos.com.mx',
             phone: '33 2257 3971',
@@ -300,7 +301,7 @@
             // if yes and if this user is not logged in, redirect him to login page
             if (requiredLogin && !$auth.isAuthenticated()) {
                 event.preventDefault();
-                if ($state.current.name != '500' && $state.current.name != '400') {
+                if ($state.current.name !== '500' && $state.current.name !== '400') {
                     $state.go('register');
                 }
             }

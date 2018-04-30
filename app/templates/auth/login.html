@@ -6,23 +6,29 @@
                     <uib-tab index="0" heading="Iniciar sesión">
                         <form class="padding" name="loginForm" novalidate ng-submit="Access.login()">
 
-                            <md-input-container md-no-float ng-class="{ 'has-error': loginForm.username.$touched && loginForm.username.$invalid }">
+                            <md-input-container md-no-float
+                                                ng-class="{ 'has-error': loginForm.username.$touched && loginForm.username.$invalid }">
                                 <label for="user">Nombre de usuario</label>
                                 <input type="text" ng-model="Access.formDataLogin.username" id="user" name="username"
                                        required>
-                                <div class="help-block" ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched">
+                                <div class="help-block" ng-messages="loginForm.username.$error"
+                                     ng-if="loginForm.username.$touched">
                                     <div class="text-danger" ng-message="required">Ingrese el nombre de usuario</div>
                                 </div>
                             </md-input-container>
-                            <md-input-container md-no-float ng-class="{ 'has-error': loginForm.password.$touched && loginForm.password.$invalid }">
+                            <md-input-container md-no-float
+                                                ng-class="{ 'has-error': loginForm.password.$touched && loginForm.password.$invalid }">
                                 <label for="password">Contraseña</label>
-                                <input type="password" ng-model="Access.formDataLogin.password" id="password" name="password"
+                                <input type="password" ng-model="Access.formDataLogin.password" id="password"
+                                       name="password"
                                        required>
-                                    <div class="help-block" ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
-                                        <div class="text-danger" ng-message="required">Ingrese la contraseña.</div>
-                                    </div>
+                                <div class="help-block" ng-messages="loginForm.password.$error"
+                                     ng-if="loginForm.password.$touched">
+                                    <div class="text-danger" ng-message="required">Ingrese la contraseña.</div>
+                                </div>
                             </md-input-container>
-                            <p class="text-center"><a class="text-dark" ui-sref="recovery-password">¿Olvidaste la contraseña?</a></p>
+                            <p class="text-center"><a class="text-dark" ui-sref="recovery-password">¿Olvidaste la
+                                contraseña?</a></p>
                             <div class="text-center" style="padding-top: 40px;">
                                 <button type="submit" class="btn btn-black" ng-disabled="loginForm.$invalid">
                                     Iniciar sesión <span ng-if="Contact.busy"><i
@@ -34,72 +40,109 @@
                     <uib-tab index="1" heading="Registrarme">
                         <form class="padding" name="registerForm" ng-submit="Access.createAccount()" novalidate>
                             <md-input-container>
-                                <input type="text" ng-model="Access.formData.contactPersonName" id="businessName" name="businessName"
+                                <input type="text" ng-model="Access.formData.contactPersonName" id="contactPersonName"
+                                       name="contactPersonName"
                                        placeholder="Nombre" required>
-                                <div class="help-block" ng-messages="registerForm.businessName.$error" ng-if="registerForm.businessName.$touched">
+                                <div class="help-block" ng-messages="registerForm.businessName.$error"
+                                     ng-if="registerForm.contactPersonName.$touched">
                                     <div class="text-danger" ng-message="required">El campo nombre es requerido</div>
                                 </div>
                             </md-input-container>
 
-                            <md-input-container md-no-float">
-                                <input type="text" ng-minlength="5" ng-maxlength="10" ng-model="Access.formData.username" id="username" name="username"
+                            <md-input-container md-no-float>
+                                <input type="text" ng-minlength="5" ng-maxlength="10"
+                                       ng-model="Access.formData.username"
+                                       id="username" name="username"
                                        placeholder="Usuario" required>
-                                <div class="help-block" ng-messages="registerForm.username.$error" ng-if="registerForm.username.$touched">
+                                <div class="help-block" ng-messages="registerForm.username.$error"
+                                     ng-if="registerForm.username.$touched">
                                     <div class="text-danger" ng-message="required">Este campo es requerido.</div>
                                     <div class="text-danger" ng-message="minlength">Mínimo 6 caracteres.</div>
                                     <div class="text-danger" ng-message="maxlength">Máximo 10 caracteres.</div>
                                 </div>
                             </md-input-container>
 
-                            <md-input-container md-no-float">
-                                <input type="email" ng-model="Access.formData.contactPersonEmail" class="form-control" id="email" name="email"
+                            <md-input-container md-no-float>
+                                <input type="email" ng-model="Access.formData.contactPersonEmail" class="form-control"
+                                       id="contactPersonEmail" name="contactPersonEmail"
                                        placeholder="Correo electrónico" required>
-                                <div class="help-block" ng-messages="registerForm.email.$error" ng-if="registerForm.email.$touched">
+                                <div class="help-block" ng-messages="registerForm.contactPersonEmail.$error"
+                                     ng-if="registerForm.contactPersonEmail.$touched">
                                     <div class="text-danger" ng-message="required">Este campo es requerido.</div>
                                     <div class="text-danger" ng-message="email">Correo electrónico no válido.</div>
                                 </div>
                             </md-input-container>
 
-                            <md-input-container md-no-float">
-                                <input type="text" ng-model="Access.formData.contactPersonPhone" class="form-control" id="phone" name="phone"
-                                       placeholder="Whatspp" required>
-                                <div class="help-block" ng-messages="registerForm.phone.$error" ng-if="registerForm.phone.$touched">
+                            <md-input-container md-no-float
+                                                ng-class="{ 'has-error': registerForm.phone.$touched && registerForm.phone.$invalid }">
+                                <input type="text" ng-model="Access.formData.contactPersonPhone" class="form-control"
+                                       id="phone" name="phone"
+                                       placeholder="Celular" required>
+                                <div class="help-block" ng-messages="registerForm.phone.$error"
+                                     ng-if="registerForm.phone.$touched">
                                     <div class="text-danger" ng-message="required">Este campo es requerido.</div>
                                 </div>
                             </md-input-container>
 
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        <i class="fa fa-warning"></i> La contraseña debe de tener mínimo 8 caracteres.
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <md-input-container>
-                                        <input type="password" ng-minlength="8" ng-model="Access.formData.password" class="form-control" name="password"
+                                        <input type="password" ng-minlength="8" ng-model="Access.formData.password"
+                                               class="form-control" name="password"
                                                placeholder="Contraseña" required="Access.formData.password2">
-                                        <div class="help-block" ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched">
-                                            <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                        <div class="help-block" ng-messages="registerForm.password.$error"
+                                             ng-if="registerForm.password.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
                                             <div class="text-danger" ng-message="minlength">Mínimo 8 caracteres.</div>
                                         </div>
                                     </md-input-container>
                                 </div>
                                 <div class="col-md-6">
                                     <md-input-container>
-                                        <input type="password" ng-model="Access.formData.password2" class="form-control" id="password2" name="password2"
+                                        <input type="password" ng-model="Access.formData.password2" class="form-control"
+                                               id="password2" name="password2"
                                                placeholder="Confirmar contraseña"
-                                               compare-to="Access.formData.password" ng-required="Access.formData.password">
-                                        <div class="help-block" ng-messages="registerForm.password2.$error" ng-if="registerForm.password2.$touched">
+                                               compare-to="Access.formData.password"
+                                               ng-required="Access.formData.password">
+                                        <div class="help-block" ng-messages="registerForm.password2.$error"
+                                             ng-if="registerForm.password2.$touched">
                                             <div class="text-danger" ng-message="required">Confirmar contraseña.</div>
-                                            <div class="text-danger" ng-message="compareTo">Las contraseñas no coinciden.</div>
+                                            <div class="text-danger" ng-message="compareTo">Las contraseñas no
+                                                coinciden.
+                                            </div>
                                         </div>
                                     </md-input-container>
                                 </div>
                             </div>
 
-                            <md-input-container md-no-float">
-                                <input type="text" ng-model="Access.formData.metadata.giro" id="giro" name="giro"
-                                       placeholder="Tipo de negocio" required>
-                                <div class="help-block" ng-messages="registerForm.giro.$error" ng-if="registerForm.giro.$touched">
-                                    <div class="text-danger" ng-message="required">El campo nombre es requerido</div>
+                            <md-input-container>
+                                <label>Tipo de negocio</label>
+                                <md-select ng-model="Access.formData.metadata.businessType" required name="giro">
+                                    <md-option ng-value="option" ng-repeat="option in Access.optionsForbusinessType">
+                                        {{option.name}}
+                                    </md-option>
+                                </md-select>
+                                <div class="help-block" ng-messages="registerForm.businessType.$error"
+                                     ng-if="registerForm.businessType.$touched">
+                                    <div class="text-danger" ng-message="required">Este campo es requerido.</div>
                                 </div>
                             </md-input-container>
-
+                            <!--!!Si se lecciona otro en el select aparece este input para que se especifique que negocio es-->
+                            <md-input-container md-no-float ng-if="Access.formData.metadata.businessType === '13'">
+                                <input type="text" ng-model="Access.formData.metadata.other" class="form-control"
+                                       name="other"
+                                       placeholder="Indique que tipo de negocio" required>
+                                <div class="help-block" ng-messages="registerForm.other.$error"
+                                     ng-if="registerForm.other.$touched">
+                                    <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                </div>
+                            </md-input-container>
                             <div class="row" ng-if="registerExtend">
                                 <div class="col-md-6">
                                     <md-input-container class="md-block">
@@ -128,7 +171,8 @@
                                             </md-option>
                                         </md-select>
                                         <div class="help-block" ng-messages="registerForm.name.$error">
-                                            <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
                                         </div>
                                     </md-input-container>
                                 </div>
@@ -159,7 +203,8 @@
                                             </md-option>
                                         </md-select>
                                         <div class="help-block" ng-messages="registerForm.name.$error">
-                                            <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
                                         </div>
                                     </md-input-container>
                                 </div>
@@ -167,11 +212,14 @@
 
                             <div class="row" ng-if="registerExtend">
                                 <div class="col-md-4">
-                                    <md-input-container md-no-float">
-                                        <input type="text" ng-model="Access.address.address" class="form-control" name="address"
+                                    <md-input-container md-no-float>
+                                        <input type="text" ng-model="Access.address.address" class="form-control"
+                                               name="address"
                                                placeholder="Dirección" required>
-                                        <div class="help-block" ng-messages="registerForm.address.$error" ng-if="registerForm.address.$touched">
-                                            <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                        <div class="help-block" ng-messages="registerForm.address.$error"
+                                             ng-if="registerForm.address.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
                                         </div>
                                     </md-input-container>
                                 </div>
@@ -182,8 +230,10 @@
                                                id="neighborhood" name="neighborhood"
                                                placeholder="Colonia"
                                                required>
-                                        <div class="help-block" ng-messages="registerForm.neighborhood.$error" ng-if="registerForm.neighborhood.$touched">
-                                            <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                        <div class="help-block" ng-messages="registerForm.neighborhood.$error"
+                                             ng-if="registerForm.neighborhood.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
                                         </div>
                                     </md-input-container>
                                 </div>
@@ -192,13 +242,54 @@
                                         <input type="text" ng-model="Access.address.zip" class="form-control" name="zip"
                                                placeholder="Código postal" ng-pattern="/^[0-9]{5}$/"
                                                maxlength="5" required>
-                                        <div class="help-block" ng-messages="registerForm.zip.$error" ng-if="registerForm.zip.$touched">
-                                            <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                        <div class="help-block" ng-messages="registerForm.zip.$error"
+                                             ng-if="registerForm.zip.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
                                             <div class="text-danger" ng-message="pattern">Formato no válido</div>
                                         </div>
                                     </md-input-container>
                                 </div>
                             </div>
+
+                            <div class="row" ng-if="registerExtend" ng-init="isCustomer=0">
+                                <div class="col-md-6">
+                                    <label>¿Ya es cliente de {{ initConfig.branchOffice }}?</label>
+                                    <md-radio-group layout="row" ng-model="isCustomer">
+                                        <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                                        <md-radio-button value="1">Si</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                                <div class="col-md-6" ng-if="isCustomer==='1'">
+                                    <md-input-container>
+                                        <label>¿Quién lo atendía?</label>
+                                        <md-select ng-model="Access.formData.metadata.sellerRegister" required
+                                                   name="giro">
+                                            <md-option ng-value="option" ng-repeat="option in Access.peopleServe">
+                                                {{option.name}}
+                                            </md-option>
+                                        </md-select>
+                                        <div class="help-block" ng-messages="registerForm.sellerRegister.$error"
+                                             ng-if="registerForm.sellerRegister.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container ng-if="Access.formData.metadata.sellerRegister === '14'">
+                                        <label for="sellerRegisterOther">¿Quién lo atendía?</label>
+                                        <input type="text" ng-model="Access.formData.metadata.sellerRegisterOther"
+                                               id="sellerRegisterOther" name="sellerRegisterOther" required>
+                                        <div class="help-block" ng-messages="registerForm.sellerRegisterOther.$error"
+                                             ng-if="registerForm.sellerRegisterOther.$touched">
+                                            <div class="text-danger" ng-message="required">El campo nombre es
+                                                requerido
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+
 
                             <div class="text-center" style="padding-top: 15px;">
                                 <button type="submit" class="btn btn-black"

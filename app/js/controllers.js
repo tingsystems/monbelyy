@@ -624,7 +624,7 @@
         self.sizes = [];
         self.ready = false;
         self.taxonomies = [];
-        self.params = {ordering:'name'};
+        self.params = {ordering: 'name'};
         self.changeParams = false;
 
         // get post by category
