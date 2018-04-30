@@ -1,13 +1,14 @@
 <div class="temp-search">
-    <div class="header-title-large">
-        <div class="container">
-            <h1 class="text-uppercase">Resultados de la busqueda: {{ Search.searchTerm }}</h1>
-        </div>
-    </div>
     <section class="content-area">
         <div infinite-scroll='Search.getMorePosts()'
              infinite-scroll-disabled='Search.busy || !Search.next || Search.loadPosts'>
             <div class="container" ng-controller="AccessCtrl as Access">
+                <div class="title-middle-line">
+                    <div class="text-content">
+                        <h3 class="font-type">Resultados de la busqueda: {{ Search.searchTerm }}</h3>
+                    </div>
+                    <hr>
+                </div>
                 <div class="row">
                     <div class="col-sm-3" ng-repeat="item in Search.listSearch">
                         <div class="box-simple">
@@ -18,13 +19,11 @@
                                 </div>
                                 <div class="box-container">
                                     <p class="box-title">{{ item.name }}</p>
-                                    <h4 class="text-warning">{{ item.price | currency }}</h4>
+                                    <h4>{{ item.price | currency }}</h4>
                                 </div>
                             </a>
                             <div class="box-footer">
-                                <a class="btn btn-outline-dark" ui-sref="product-detail({slug:item.slug})">
-                                    Ver más
-                                </a>
+
                             </div>
                         </div>
 
@@ -34,7 +33,7 @@
                                      style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default }}')"></div>
                                 <h3 class="prod-descrip">{{item.title}}</h3>
                             </a>
-                            <a ui-sref="post_detail({slug: item.slug})" class="btn btn-success btn-cart">Ver más</a>
+                            <a ui-sref="post_detail({slug: item.slug})" class="btn btn-black">Ver más</a>
                         </div>
                     </div>
                 </div>

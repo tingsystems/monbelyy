@@ -17,20 +17,20 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                     <div class="owl-carousel owl-theme owl-theme-page">
                         <div class="slider" ng-repeat="slide in Product.detail.attachments" ng-repeat-owl-carousel
                              carousel-init="Product.carouselDetailProduct">
                             <div class="item" style="width: 100%;">
                                 <a post-link="{ link: {url: slide.link, target: '_self'} }">
                                     <div class="slider-page"
-                                         style="background-image:url('{{ slide.url ? slide.url : initConfig.img_default }}');"></div>
+                                         style="background-image:url('{{ slide.attached_file ? slide.attached_file : initConfig.img_default }}');"></div>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-8">
                     <div class="article-description">
                         <div class="container">
                             <div class="row">

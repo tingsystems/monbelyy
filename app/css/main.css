@@ -517,7 +517,7 @@ audio:not([controls]),
 }
 .owl-theme-page .slider-page {
   height: 400px;
-  background-position: top;
+  background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -1480,7 +1480,7 @@ figure.effect-sadie:hover a {
 body {
   background-color: #fff;
   color: #000;
-  font: 16px 'Poppins', sans-serif;
+  font: 15px 'Poppins', sans-serif;
 }
 body .content-area-web {
   background-color: #fff;
@@ -1501,7 +1501,7 @@ strong {
 p,
 span {
   font-weight: 400;
-  font: 16px 'Poppins', sans-serif;
+  font: 15px 'Poppins', sans-serif;
 }
 .xs-hidde {
   display: inline;

@@ -23,13 +23,16 @@
                             <h6>{{Product.categoryName}}</h6>
                             <hr>
                             <div class="box-widget-container" style="padding-bottom: 5px;">
-                                <ul class="list">
-                                    <li ng-repeat="children in Product.lines">
-                                        <a href="#" target="_blank"><input type="radio" ng-model="children.id"
-                                                                           ng-change="Product.getProductsFilter(children.slug)">
-                                            {{children.name}}</a>
-                                    </li>
+                                <ul class="nav">
+                                    <md-radio-group ng-model="children.id"
+                                                    ng-change="Product.getProductsFilter(children.slug)">
+                                        <md-radio-button ng-repeat="children in Product.lines" ng-value="children"
+                                                         aria-label="{{ children.name }}">
+                                            {{children.name}}
+                                        </md-radio-button>
+                                    </md-radio-group>
                                 </ul>
+
                             </div>
                         </div>
                         <hr>
