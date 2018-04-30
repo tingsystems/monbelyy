@@ -1,12 +1,14 @@
-<div class="header-title-large">
-    <div class="container">
-        <h1 class="text-uppercase">{{ Page.detail.title }}</h1>
-    </div>
-</div>
 <section class="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-sm-8">
+            <div class="col-md-8 col-sm-8">
+                <div class="title-middle-line">
+                    <div class="text-content">
+                        <h3 class="text-uppercase">{{ Page.detail.title }}</h3>
+                    </div>
+                    <hr>
+                </div>
+
                 <img ng-src="{{ Page.detail.urlImages.medium }}" alt="{{ Page.detail.title }}"/>
 
                 <div ng-bind-html="Page.detail.content | trustHtml"></div>
@@ -22,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-4 widgets">
+            <div class="col-md-4 col-sm-4 widgets">
                 <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
             </div>
         </div>

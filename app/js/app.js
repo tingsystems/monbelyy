@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Sydgroup'},
+                data: {pageTitle: 'Hanny Pulido Cosméticos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -162,17 +162,15 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://mercadomovil.com.mx';
-        // $rootScope.host = 'http://192.168.1.67';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
-        // $rootScope.apiShop = 'v1';
-        $rootScope.projectId = '6eeafae0-527d-4983-a4ae-3efca37c777d';
-        $http.defaults.headers.common['PROJECT-ID'] = '6eeafae0-527d-4983-a4ae-3efca37c777d';
+        $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
+        $http.defaults.headers.common['PROJECT-ID'] = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $rootScope.hidePriceLogin = false;
-        $rootScope.createCustomerActive = true;
-        $rootScope.registerExtend = true;
-        $rootScope.registerInvoiced = true;
+        $rootScope.createCustomerActive = false;
+        $rootScope.registerExtend = false;
+        $rootScope.registerInvoiced = false;
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
@@ -184,9 +182,9 @@
             meta_color: '#337ab7',
             //img_default: ' http://www.corriente-alterna.com/img/img-default-ca.png',
             img_default: '../../img/img-default.jpg',
-            email: 'info@sydgroup.mx',
+            email: 'ventas@hannypulidocosméticos.com.mx',
             phone: '33 2257 3971',
-            branchOffice: 'Sydgroup'
+            branchOffice: 'Hanny Pulido Cosméticos'
 
         };
         // initialise google analytics
@@ -197,7 +195,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Sydgroup',
+                'title': 'Hanny Pulido Cosméticos',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -206,7 +204,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Sydgroup';
+        $rootScope.pageTitle = 'Hanny Pulido Cosméticos';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -221,7 +219,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: 'cb683254-9fa5-4107-8410-314434534ab5',
+                parent: '135876e2-073c-4b78-ba70-ced68dd0bc4c',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -230,9 +228,35 @@
             });
         }
 
+        if (!$rootScope.fastLink) {
+            EntrySrv.get({
+                taxonomies: 'enlaces-rapidos',
+                isActive: 'True',
+                pageSize: 6,
+                ordering: 'createdAt',
+                fields: 'title,link,excerpt,content'
+            }).$promise.then(function (results) {
+                $rootScope.fastLink = results.results;
+            });
+
+        }
+
+        if (!$rootScope.branchOffices) {
+            EntrySrv.get({
+                taxonomies: 'sucursales1524609885',
+                isActive: 'True',
+                pageSize: 5,
+                ordering: 'createdAt',
+                fields: 'title,link,excerpt,content'
+            }).$promise.then(function (results) {
+                $rootScope.branchOffices = results.results;
+            });
+
+        }
+
         if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1519171485',
+                taxonomies: 'datos-de-contacto1524609897',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -245,7 +269,7 @@
 
         if (!$rootScope.information) {
             EntrySrv.get({
-                taxonomies: 'informacion1519171615',
+                taxonomies: 'informacion1524609853',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -257,7 +281,7 @@
 
         if (!$rootScope.socialMedia) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1519072192',
+                taxonomies: 'redes-sociales1524609908',
                 isActive: 'True',
                 pageSize: 6,
                 ordering: 'createdAt',

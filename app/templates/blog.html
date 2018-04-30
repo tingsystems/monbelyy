@@ -1,13 +1,14 @@
 <div id="temp-blog">
-    <div class="header-title-large">
-        <div class="container">
-            <h1 class="text-uppercase">Noticias</h1>
-        </div>
-    </div>
     <section class="content-area">
         <div class="container">
             <div class="row">
-                <div class="col-md-9 col-sm-9">
+                <div class="col-md-8 col-sm-8">
+                    <div class="title-middle-line">
+                        <div class="text-content">
+                            <h4 class="text-uppercase">Bienvenid@ a nuestro blog</h4>
+                        </div>
+                        <hr>
+                    </div>
                     <div class="content-pages" infinite-scroll='Post.getMorePosts()'
                          infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
                         <div class="row">
@@ -20,10 +21,10 @@
                                                  style="background-image: url('{{ entry.featuredImage.url ? entry.featuredImage.url : initConfig.img_default}}')"></div>
                                         </div>
                                         <div class="box-article col-md-8 col-sm-8">
-                                            <div class="height-title"><h4>{{ entry.title }}</h4></div>
+                                            <div class="text-uppercase"><h4>{{ entry.title }}</h4></div>
                                             <div class="height-summary"><p>{{ entry.excerpt| characters:200 }}</p></div>
                                             <div class="box-footer">
-                                                <button class="btn btn-outline-danger">Ver más <i class="fa fa-angle-right"></i>
+                                                <button class="btn btn-black">Ver más <i class="fa fa-angle-right"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -42,7 +43,7 @@
                         <!--post list -->
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3 widgets">
+                <div class="col-md-4 col-sm-4 widgets">
                     <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
                 </div>
             </div>

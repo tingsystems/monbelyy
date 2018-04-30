@@ -44,7 +44,7 @@
             <div class="container-fluid" ng-if="ShopCart.items.length>0">
                 <div class="row">
                     <div class="col-md-9 text-center">
-                        <div class="col-sm-6 col-md-12" ng-repeat="product in ShopCart.items">
+                        <div class="col-sm-6 col-md-12 list-item-shoppingcart" ng-repeat="product in ShopCart.items">
                             <div class="row">
                                 <div class="col-sm-2 col-md-2">
                                     <div class="shopcart-img"
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-sm-5 col-md-5">
                                     <div class="shopcart-description">
-                                        <h4>{{ product.name }}</h4>
+                                        <h6>{{ product.name }}</h6>
                                         <h3>{{ product.price | currency }}</h3>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-danger btn-block" ng-click="ShopCart.processPurchase()"
+                            <button class="btn btn-black btn-block" ng-click="ShopCart.processPurchase()"
                                     ng-if="ShopCart.total >= ShopCart.minimumPurchase"><i
                                     class="fa fa-credit-card"></i> Procesar compra
                             </button>

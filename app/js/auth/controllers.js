@@ -120,15 +120,15 @@
             var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
-            account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
-            address.zip = self.address.zip;
-            address.neighborhood = self.address.neighborhood;
-            address.phone = account.contactPersonPhone;
-            address.city = self.city.id;
-            address.state = self.state.id;
-            address.address = self.address.address;
-            account.address = self.address.address;
-            account.dataAddress = address;
+            // account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
+            // address.zip = self.address.zip;
+            // address.neighborhood = self.address.neighborhood;
+            // address.phone = account.contactPersonPhone;
+            // address.city = self.city.id;
+            // address.state = self.state.id;
+            // address.address = self.address.address;
+            // account.address = self.address.address;
+            // account.dataAddress = address;
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;

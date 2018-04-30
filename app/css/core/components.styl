@@ -52,6 +52,13 @@
     border 1px solid dark
     box-shadow 0 3px 10px rgba(0,0,0,0.3)
 
+.btn-black
+  button(white, black, 3px, 5px 10px, 1px solid black)
+  &:hover, &:focus
+    background-color optional
+    border 1px solid optional
+    box-shadow 0 3px 10px rgba(0,0,0,0.3)
+
 /* Buttons outline color */
 .btn-outline-primary
   button(primary, transparent, 3px, 5px 10px, 1px solid primary)
@@ -128,6 +135,7 @@
   margin-bottom 15px
   transition(all 1s )
   a
+    color fontClr
     &:hover
       text-decoration none
     .box-title
@@ -151,7 +159,22 @@
 .box-default
   @extend .box
   background-color #f5f5f5
-
+.box-caption
+  .img-bg-caption
+    background-size cover
+    height 300px
+    background-position center
+  .text-caption
+    margin-left 15px
+    margin-right 15px
+    display none
+    background-color pink
+    position absolute
+    top 0
+    height 100%
+    left 0
+  &:hover .text-caption
+    display inline
 .box-bordered
   border-bottom 1px solid #ddd
   padding 15px
@@ -163,7 +186,7 @@
       background-size cover
       background-repeat no-repeat
       background-position center
-      height 300px
+      height 200px
   .box-article
     color fontClr
 
@@ -174,15 +197,33 @@
     color white
     margin-bottom 5px
     padding-bottom 5px
-    border-bottom 1px solid #ddd
   .list-icons-add
     .nav-link
       color white
       p
         margin 0
+        fon-size 18px
 
 
 /*----- Titles ------*/
+.title-middle-line
+  height 100px
+  text-align center
+  position relative
+  color black
+  .text-content
+    position absolute
+    left 0
+    right 0
+    z-index: 999
+    background white
+    width 50%
+    margin 0 auto
+  hr
+    position absolute
+    border 1px solid black
+    width 100%
+
 .title
   padding 25px 0
 .title-primary
@@ -214,6 +255,28 @@
 //.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span
 
 /* CAROUSEL FOR PAGES OR PRODUCTS */
+
+.owl-carousel-products
+  .owl-nav
+    color black
+    button.owl-prev
+      position absolute
+      left -30px
+      top 30%
+      background-color transparent
+      font-size 80px
+      &:hover
+        color optional
+        background-color transparent
+    button.owl-next
+      position absolute
+      right -30px
+      top 30%
+      background-color transparent
+      font-size 80px
+      &:hover
+        color optional
+        background-color transparent
 .owl-theme-page
   .owl-nav [class*='owl-']
     background-color transparent
@@ -254,6 +317,48 @@
       border 1px solid white
       &:hover
         background-color white
+
+/* WIDTH 100% CAROUSEL HOME */
+.owl-theme-slider
+  .owl-dots
+    position absolute
+    bottom 15px
+    left 0
+    right 0
+    .owl-dot.active span,
+    .owl-dot:hover span
+      background-color white
+      &:hover
+        background-color white
+    .owl-dot span
+      background-color transparent
+      border 1px solid white
+      &:hover
+        background-color white
+  .owl-nav [class*='owl-']
+    background-color rgba(0,0,0,0.6)
+    font-size 28px
+    border-radius 30px
+    color white
+    opacity 0.5
+    &:hover
+      background-color black
+  .owl-nav
+    position absolute
+    top 50%
+    left 0
+    right 0
+    .owl-prev
+      left 35px
+      position absolute
+      padding 5px 20px
+    .owl-next
+      right 35px
+      position absolute
+      padding 5px 20px
+.slider-small
+  margin-top 30px
+  margin-bottom 30px
 
 /* WIDTH 100% CAROUSEL HOME */
 .owl-theme-slider
@@ -339,11 +444,13 @@
   widget(transparent, 2px, 20px, none, none)
 
 .box-widget-white
-  background-color #f9f9f9
+  background-color transparent
   border none
   border-radius 3px
-  box-shadow 0 0 10px rgba(0,0,0,0.05)
   padding 15px
+  margin 25px 0
+  hr
+    border-color black
   .widget-title-first
     background transparent
     padding 10px 5px
@@ -391,10 +498,143 @@
 
 #breadcrumb
   background-color breadcrumbClr
+  border-bottom 1px solid black
   a
     color fontClr
+  .breadcrumb
+    margin-bottom 0
+    background-color breadcrumbClr
 
 /* -- SELECT -- */
 .demo-select-header
   .demo-header-searchbox
     width 100%
+
+/*---------------*/
+/***** Caption effect *****/
+/*---------------*/
+figure
+  -webkit-backface-visibility hidden
+  backface-visibility hidden
+  position relative
+  float left
+  overflow hidden
+  margin 10px 1%
+  min-width 100%
+  max-width 100%
+  max-height 360px
+  width 48%
+  background pink
+  text-align center
+  cursor pointer
+
+.bg-color-caption
+  background-color rgba(0,0,0,0.2)
+  position absolute
+  width 100%
+  height 100%
+  top 0
+figure.effect-sadie
+  .divider
+    border 1px solid #ffffff8c
+    height 90%
+    width 90%
+    position absolute
+    top 15px
+    left 0
+    right 0
+    margin 0 auto
+  .img-bg-caption
+    background-size cover
+    height 300px
+    background-position center
+
+figure.effect-sadie figcaption::before
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background: -moz-linear-gradient(top, rgba(237,68,109,0) 0%, rgba(237,68,109,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(237,68,109,0) 0%,rgba(237,68,109,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(237,68,109,0) 0%,rgba(237,68,109,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  content ''
+  opacity 0
+  -webkit-transform translate3d(0,50%,0)
+  transform translate3d(0,50%,0)
+
+figure.effect-sadie h2
+  text-shadow 0 2px 1px rgba(0,0,0,0.5)
+  position absolute
+  top 50%
+  left 0
+  width 100%
+  color white
+  -webkit-transition -webkit-transform 0.35s, color 0.35s
+  transition transform 0.35s, color 0.35s
+  -webkit-transform translate3d(0,-50%,0)
+  transform translate3d(0,-50%,0)
+
+figure.effect-sadie figcaption::before,
+figure.effect-sadie p, figure.effect-sadie a
+  -webkit-transition opacity 0.35s, -webkit-transform 0.35s
+  transition opacity 0.35s, transform 0.35s
+
+figure.effect-sadie p
+  color white
+  position absolute
+  bottom 0
+  left 0
+  padding 48px 25px
+  width 100%
+  opacity 0
+  -webkit-transform translate3d(0,10px,0)
+  transform translate3d(0,10px,0)
+
+figure.effect-sadie a
+  color white !important
+  position absolute
+  bottom 0
+  left 0
+  right 0
+  margin 20px 25px
+  border 1px solid white
+  border-radius 0
+  opacity 0
+  -webkit-transform translate3d(0,10px,0)
+  transform translate3d(0,10px,0)
+
+figure.effect-sadie:hover h2
+  color #fff
+  -webkit-transform translate3d(0,-50%,0) translate3d(0,-40px,0)
+  transform translate3d(0,-50%,0) translate3d(0,-40px,0)
+
+figure.effect-sadie:hover figcaption::before ,
+figure.effect-sadie:hover p, figure.effect-sadie:hover a
+  opacity 1
+  -webkit-transform translate3d(0,0,0)
+  transform translate3d(0,0,0)
+
+/* paginator */
+.ng-table-pager
+  padding 20px 0
+.pagination
+  padding 0 10px 30px
+  float right
+  li
+    a
+      color fontClr
+      padding 0 15px
+      border 1px solid black
+      font-weigh bold
+  li.active a
+    background-color black
+    padding 0 15px
+    color white
+    border 1px solid black
+    &:hover
+      border 1px solid black
+      background-color black
+      font-weight bold
+      padding 0 15px
+      color white

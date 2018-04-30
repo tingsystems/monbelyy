@@ -13,7 +13,7 @@
         };
 
         EntrySrv.get({
-            taxonomies: 'slider1518736513',
+            taxonomies: 'slider1524522786',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -27,10 +27,10 @@
         });
 
         var paramsProducts = {};
-        paramsProducts.taxonomies = 'anabolics';
+        paramsProducts.taxonomies = 'web1523988132';
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
-        paramsProducts.ordering = '-createdAt';
+        paramsProducts.ordering = 'createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax';
             paramsProducts.priceList = list;
@@ -49,63 +49,15 @@
         });
 
         EntrySrv.get({
-            slug: 'acerca-de-nosotros1518737862',
+            taxonomies: 'home-categorias',
             isActive: 'True',
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.aboutUs = results;
-            //get featureImage
-            self.aboutUs.featuredImage = $filter('filter')(self.aboutUs.attachments, {kind: 'featuredImage'})[0];
-        });
-
-        EntrySrv.get({
-            slug: 'historia',
-            isActive: 'True',
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.history = results;
-            //get featureImage
-            self.history.featuredImage = $filter('filter')(self.history.attachments, {kind: 'featuredImage'})[0];
-        });
-
-
-        EntrySrv.get({
-            taxonomies: 'preguntas-frecuentes1518736316',
-            isActive: 'True',
-            pageSize: 3,
+            pageSize: 6,
             ordering: 'createdAt',
             fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
-            self.ask = results.results;
+            self.categoryProd = results.results;
             //get featureImage
-            angular.forEach(self.ask, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-            });
-        });
-
-        EntrySrv.get({
-            slug: 'productos-falsos',
-            isActive: 'True',
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.fake = results;
-            //get featureImage
-            self.fake.featuredImage = $filter('filter')(self.fake.attachments, {kind: 'featuredImage'})[0];
-        });
-
-        EntrySrv.get({
-            taxonomies: 'noticias1518736444',
-            isActive: 'True',
-            pageSize: 4,
-            ordering: 'createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.blogHome = results.results;
-            //get featureImage
-            angular.forEach(self.blogHome, function (obj, ind) {
+            angular.forEach(self.categoryProd, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
@@ -141,7 +93,7 @@
                 */
         /* Carousel slider */
         self.carouselInitializerSlider = function () {
-            $(".owl-carousel").owlCarousel({
+            $(".owl-theme-slider").owlCarousel({
                 //get items to proportionate num of items
                 navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
                 navigation: true,
@@ -150,6 +102,7 @@
                 items: 2,
                 loop: true,
                 margin: 0,
+                center: true,
                 responsiveClass: true,
                 responsive: {
                     0: {
@@ -166,6 +119,7 @@
                         loop: false
                     }
                 }
+
             });
         }
 
@@ -179,7 +133,7 @@
                 autoplay: true,
                 items: 2,
                 loop: true,
-                margin: 10,
+                margin: 20,
                 responsiveClass: true,
                 responsive: {
                     0: {
@@ -291,7 +245,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'noticias1518736444',
+                taxonomies: 'blog1524869264',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,
@@ -309,7 +263,7 @@
         };
 
         self.getMorePosts();
-        $rootScope.pageTitle = 'Noticias' + ' - ' + $rootScope.initConfig.branchOffice;
+        $rootScope.pageTitle = 'Blog' + ' - ' + $rootScope.initConfig.branchOffice;
     }
 
     function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
