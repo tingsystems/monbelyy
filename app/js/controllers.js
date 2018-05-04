@@ -392,7 +392,7 @@
         };
     }
 
-    function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage) {
+    function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage, $rootScope) {
         var self = this;
 
         self.listSearch = [];
@@ -432,6 +432,9 @@
                     }
                     else {
                         paramsProducts.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
+                    }
+                    if($rootScope.taxnomySearch){
+                        paramsProducts.taxonomies = $rootScope.taxnomySearch;
                     }
                     ProductSrv.get(paramsProducts).$promise.then(function (results) {
                         self.listSearch = self.listSearch.concat(results.results);
@@ -965,7 +968,7 @@
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
     ContactCtrl.$inject = ['NotificationTakiSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$state'];
-    SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage'];
+    SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage', '$rootScope'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];

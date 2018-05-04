@@ -173,6 +173,7 @@
         $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;
         $rootScope.registerInvoiced = true;
+        $rootScope.taxnomySearch = false;
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
