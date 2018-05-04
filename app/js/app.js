@@ -171,7 +171,7 @@
         $rootScope.createCustomerActive = false;
         $rootScope.registerExtend = false;
         $rootScope.registerInvoiced = false;
-        $rootScope.taxnomySearch = false;
+        $rootScope.taxnomySearch = 'web1523988132';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
