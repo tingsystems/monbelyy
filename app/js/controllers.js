@@ -817,11 +817,11 @@
             self.params.isActive = 'True';
             self.params.pageSize = 9;
             if (list !== '') {
-                self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice';
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax';
                 self.params.priceList = list;
             }
             else {
-                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice';
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
             }
             return ProductSrv.get(self.params).$promise.then(function (data) {
                 params.total(data.count);
