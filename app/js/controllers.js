@@ -433,7 +433,7 @@
                     else {
                         paramsProducts.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
                     }
-                    if($rootScope.taxnomySearch){
+                    if ($rootScope.taxnomySearch) {
                         paramsProducts.taxonomies = $rootScope.taxnomySearch;
                     }
                     ProductSrv.get(paramsProducts).$promise.then(function (results) {
@@ -653,7 +653,7 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter) {
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter, $timeout) {
         var self = this;
 
         self.list = [];
@@ -671,10 +671,19 @@
         self.lines = [];
         self.brands = [];
         self.sizes = [];
+        self.categories = [];
         self.ready = false;
         self.taxonomies = [];
+        self.taxBrand = [];
+        self.taxSize = [];
+        self.taxType = [];
         self.params = {ordering: 'name'};
         self.changeParams = false;
+        self.filterType = $rootScope.filterType ? $rootScope.filterType : 'Tipo';
+        self.filterBrand = $rootScope.filterBrand ? $rootScope.filterBrand : 'Marca';
+        self.filterSize = $rootScope.filterSize ? $rootScope.filterSize : 'MEDIDA';
+        self.filterCategory = $rootScope.filterCategory ? $rootScope.filterCategory : 'Tipo';
+        var timeout = $timeout;
 
         // get post by category
         if ($stateParams.slug) {
@@ -694,14 +703,18 @@
                 }).$promise.then(function (data) {
                     self.childrens = data;
                     angular.forEach(self.childrens, function (obj, ind) {
-                        if (obj.kind === 'Tipo') {
+                        if (obj.kind === self.filterType) {
                             self.lines.push(obj);
+                            console.log(obj.kind);
                         }
-                        else if (obj.kind === 'Marca') {
+                        else if (obj.kind === self.filterBrand) {
                             self.brands.push(obj);
                         }
-                        else if (obj.kind === 'MEDIDA') {
+                        else if (obj.kind === self.filterSize) {
                             self.sizes.push(obj);
+                        }
+                        else if (obj.kind === self.filterCategory) {
+                            self.categories.push(obj);
                         }
                     });
                     self.ready = true;
@@ -709,6 +722,104 @@
                 });
             });
         }
+        self.busyBrands = false;
+        self.searchBrands = function (open) {
+            if (open) {
+                var indexTax = self.taxonomies.indexOf(self.taxBrand[0]);
+                if (indexTax > -1) {
+                    self.taxonomies.splice(indexTax, 1);
+                }
+            }
+            self.brands = [];
+            ProductTaxonomySrv.get({
+                page: 1,
+                pageSize: 10,
+                fields: 'id,slug,name',
+                search: self.searchTerBrand,
+                kind: self.filterBrand
+            }).$promise.then(function (data) {
+                self.brands = data.results;
+                self.busyBrands = false;
+            })
+        };
+        self.clearBrands = function () {
+            self.searchTerBrand = '';
+            self.busyBrands = true;
+        };
+        self.timeOutBrand = function () {
+            $timeout.cancel(timeout);
+            // Get the elements after half second
+            timeout = $timeout(function () {
+                self.searchBrands(false);
+            }, 1000);
+
+        };
+
+        self.busySize = true;
+        self.searchSizes = function (open) {
+            if (open) {
+                var indexSize = self.taxonomies.indexOf(self.taxSize[0]);
+                if (indexSize > -1) {
+                    self.taxonomies.splice(indexSize, 1);
+                }
+            }
+            self.sizes = [];
+            ProductTaxonomySrv.get({
+                page: 1,
+                pageSize: 10,
+                fields: 'id,slug,name',
+                search: self.searchTerSize,
+                kind: self.filterSize
+            }).$promise.then(function (data) {
+                self.sizes = data.results;
+                self.busySize = false;
+            })
+        };
+        self.clearSizes = function () {
+            self.searchTerSize = '';
+            self.busySize = true;
+        };
+        self.timeOutSize = function () {
+            $timeout.cancel(timeout);
+            // Get the elements after half second
+            timeout = $timeout(function () {
+                self.searchSizes(false);
+            }, 1000);
+
+        };
+
+        self.busyType = true;
+        self.searchTypes = function (open) {
+            if (open) {
+                var indexType = self.taxonomies.indexOf(self.taxType[0]);
+                if (indexType > -1) {
+                    self.taxonomies.splice(indexType, 1);
+                }
+            }
+            self.types = [];
+            ProductTaxonomySrv.get({
+                page: 1,
+                pageSize: 10,
+                fields: 'id,slug,name',
+                search: self.searchTerType,
+                kind: self.filterType
+            }).$promise.then(function (data) {
+                self.types = data.results;
+                self.busyType = false;
+            })
+        };
+        self.clearTypes = function () {
+            self.searchTerType = '';
+            self.busyType = true;
+        };
+        self.timeOutType = function () {
+            $timeout.cancel(timeout);
+            // Get the elements after half second
+            timeout = $timeout(function () {
+                self.searchType(false);
+            }, 1000);
+
+        };
 
         self.itemInCart = function (item) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
@@ -740,14 +851,19 @@
         };
 
 
-        self.getProductsFilter = function (obj) {
+        self.getProductsFilter = function () {
             self.changeParams = true;
-            if (obj) {
-                if (typeof obj === 'object') {
-                    var index = self.taxonomies.indexOf(obj.slug);
-                    if (index < -1) {
+            var index = null;
+            if (self.brandSelected) {
+                if (typeof self.brandSelected === 'object') {
+                    index = self.taxBrand.indexOf(self.brandSelected.slug);
+
+                    if (index > -1) {
+                        self.taxBrand.splice(index, 1);
+
                     } else {
-                        self.taxonomies.push(obj.slug);
+                        self.taxBrand = [];
+                        self.taxBrand.push(self.brandSelected.slug);
                     }
                     if (self.selectFilter) {
                         if (self.selectFilter === '1') {
@@ -781,6 +897,126 @@
                     }
                 }
             }
+
+            if (self.taxBrand[0]) {
+                var indexTax = self.taxonomies.indexOf(self.brandSelected.slug);
+                if (indexTax > -1) {
+                    console.log('ya esta tax');
+                    self.taxonomies.splice(indexTax, 1);
+                    console.log(self.taxonomies);
+                } else {
+                    self.taxonomies.push(self.taxBrand[0])
+                }
+            }
+
+            if (self.sizeSelected) {
+                if (typeof self.sizeSelected === 'object') {
+                    index = self.taxSize.indexOf(self.sizeSelected.slug);
+
+                    if (index > -1) {
+                        self.taxSize.splice(index, 1);
+
+                    } else {
+                        self.taxSize = [];
+                        self.taxSize.push(self.sizeSelected.slug);
+                    }
+                    if (self.selectFilter) {
+                        if (self.selectFilter === '1') {
+                            self.params.ordering = 'name';
+                        }
+
+                        else if (self.selectFilter === '2') {
+                            self.params.ordering = 'price';
+                        }
+
+                        else if (self.selectFilter === '3') {
+                            self.params.ordering = '-price';
+                        }
+
+                    } else {
+                        self.params.ordering = '-createdAt';
+
+                    }
+
+                } else if (typeof obj === 'string') {
+                    if (obj === '1') {
+                        self.params.ordering = 'name';
+                    }
+
+                    else if (obj === '2') {
+                        self.params.ordering = 'price';
+                    }
+
+                    else if (obj === '3') {
+                        self.params.ordering = '-price';
+                    }
+                }
+            }
+
+            if (self.taxSize[0]) {
+                var indexSize = self.taxonomies.indexOf(self.sizeSelected.slug);
+                if (indexSize > -1) {
+                    self.taxonomies.splice(indexSize, 1);
+
+                } else {
+                    self.taxonomies.push(self.taxSize[0])
+                }
+            }
+
+            if (self.typeSelected) {
+                if (typeof self.typeSelected === 'object') {
+                    index = self.taxSize.indexOf(self.typeSelected.slug);
+
+                    if (index > -1) {
+                        self.taxType.splice(index, 1);
+
+                    } else {
+                        self.taxType = [];
+                        self.taxType.push(self.typeSelected.slug);
+                    }
+                    if (self.selectFilter) {
+                        if (self.selectFilter === '1') {
+                            self.params.ordering = 'name';
+                        }
+
+                        else if (self.selectFilter === '2') {
+                            self.params.ordering = 'price';
+                        }
+
+                        else if (self.selectFilter === '3') {
+                            self.params.ordering = '-price';
+                        }
+
+                    } else {
+                        self.params.ordering = '-createdAt';
+
+                    }
+
+                } else if (typeof obj === 'string') {
+                    if (obj === '1') {
+                        self.params.ordering = 'name';
+                    }
+
+                    else if (obj === '2') {
+                        self.params.ordering = 'price';
+                    }
+
+                    else if (obj === '3') {
+                        self.params.ordering = '-price';
+                    }
+                }
+            }
+
+            if (self.taxType[0]) {
+                var indexType = self.taxonomies.indexOf(self.typeSelected.slug);
+                if (indexType > -1) {
+                    self.taxonomies.splice(indexType, 1);
+
+                } else {
+                    self.taxonomies.push(self.taxType[0])
+                }
+            }
+
             self.tableParams.reload();
         };
 
@@ -798,6 +1034,7 @@
             self.getProductsFilter(null);
 
         };
+
 
         self.getData = function (params) {
             var sorting = '-createdAt';
@@ -973,6 +1210,8 @@
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage'];
-    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams', '$stateParams', '$rootScope', '$localStorage', '$filter'];
-    ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'SweetAlert'];
+    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
+        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout'];
+    ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
+        'SweetAlert'];
 })();
