@@ -29,7 +29,8 @@
                         </div>
                     </div>
                     <img ng-src="{{Product.detail.featuredImage.url}}" alt="{{Product.detail.name}}"
-                         ng-if="Product.detail.galleryImages.length < 1" style="height: 250px;width: 100%;margin-bottom: 15px;">
+                         ng-if="Product.detail.galleryImages.length < 1"
+                         style="height: 250px;width: 100%;margin-bottom: 15px;">
                     <br>
                     <div class="text-center">
                         <a href="http://www.sydgroup.mx/page/como-comprobar-la-autenticidad-del-producto"
@@ -42,14 +43,22 @@
                         <hr>
                         <h3 class="article-price">{{ Product.detail.price | currency}}</h3>
                         <br>
-                        <md-input-container class="md-block">
-                            <label>Cantidad</label>
-                            <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1" required/>
-                        </md-input-container>
+                        <form name="FormQty">
+                            <md-input-container class="md-block">
+                                <label>Cantidad</label>
+                                <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"
+                                       ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
+                                <div class="errors" ng-messages="FormQty.qty.$error">
+                                    <div ng-message="required">Requiredo</div>
+                                    <div ng-message="pattern">Cantidad no valida</div>
+                                </div>
+                            </md-input-container>
+
+                        </form>
                         <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax}, Product.detail.qty)"
-                                ng-disabled="Shop.itemInCart(Product.detail.id)"
+                                ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid"
                                 class="btn btn-danger">Agregar a carrito
                         </button>
                         <hr>
