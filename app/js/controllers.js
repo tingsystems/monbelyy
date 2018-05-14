@@ -706,22 +706,9 @@
                 }).$promise.then(function (data) {
                     self.childrens = data;
                     angular.forEach(self.childrens, function (obj, ind) {
-                        if (obj.kind === self.filterType) {
-                            self.lines.push(obj);
-                            console.log(obj.kind);
-                        }
-                        else if (obj.kind === self.filterBrand) {
-                            self.brands.push(obj);
-                        }
-                        else if (obj.kind === self.filterSize) {
-                            self.sizes.push(obj);
-                        }
-                        else if (obj.kind === self.filterCategory) {
-                            self.categories.push(obj);
-                        }
+                        self.categories.push(obj);
                     });
                     self.ready = true;
-                    //self.getMorePosts($stateParams.slug);
                 });
             });
         }
@@ -874,11 +861,8 @@
 
             if (self.taxBrand[0]) {
                 var indexTax = self.taxonomies.indexOf(self.brandSelected.slug);
-                console.log(self.taxonomies);
                 if (indexTax > -1) {
-                    console.log('ya esta tax');
                     self.taxonomies.splice(indexTax, 1);
-                    console.log(self.taxonomies);
                 } else {
                     self.taxonomies.push(self.taxBrand[0])
                 }
