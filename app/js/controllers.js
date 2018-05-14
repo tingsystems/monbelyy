@@ -631,6 +631,7 @@
         self.taxBrand = [];
         self.taxSize = [];
         self.taxType = [];
+        self.taxCat = [];
         self.params = {ordering: 'name'};
         self.changeParams = false;
         self.filterType = $rootScope.filterType ? $rootScope.filterType : 'Tipo';
@@ -638,6 +639,8 @@
         self.filterSize = $rootScope.filterSize ? $rootScope.filterSize : 'MEDIDA';
         self.filterCategory = $rootScope.filterCategory ? $rootScope.filterCategory : 'Tipo';
         var timeout = $timeout;
+        self.filterOrderingOptions = [{'option': 'name', 'name': 'Alfabeticamente de A-Z'},
+            {'option': 'price', 'name': 'Precio menor'}, {'option': '-price', 'name': 'Precio mayor'}];
 
         // get post by category
         if ($stateParams.slug) {
@@ -805,7 +808,7 @@
         };
 
 
-        self.getProductsFilter = function () {
+        self.getProductsBrand = function () {
             self.changeParams = true;
             var index = null;
             if (self.brandSelected) {
@@ -819,41 +822,13 @@
                         self.taxBrand = [];
                         self.taxBrand.push(self.brandSelected.slug);
                     }
-                    if (self.selectFilter) {
-                        if (self.selectFilter === '1') {
-                            self.params.ordering = 'name';
-                        }
 
-                        else if (self.selectFilter === '2') {
-                            self.params.ordering = 'price';
-                        }
-
-                        else if (self.selectFilter === '3') {
-                            self.params.ordering = '-price';
-                        }
-
-                    } else {
-                        self.params.ordering = '-createdAt';
-
-                    }
-
-                } else if (typeof obj === 'string') {
-                    if (obj === '1') {
-                        self.params.ordering = 'name';
-                    }
-
-                    else if (obj === '2') {
-                        self.params.ordering = 'price';
-                    }
-
-                    else if (obj === '3') {
-                        self.params.ordering = '-price';
-                    }
                 }
             }
 
             if (self.taxBrand[0]) {
                 var indexTax = self.taxonomies.indexOf(self.brandSelected.slug);
+                console.log(self.taxonomies);
                 if (indexTax > -1) {
                     console.log('ya esta tax');
                     self.taxonomies.splice(indexTax, 1);
@@ -863,6 +838,11 @@
                 }
             }
 
+            self.tableParams.reload();
+        };
+
+        self.getProductsSize = function () {
+            var index = null;
             if (self.sizeSelected) {
                 if (typeof self.sizeSelected === 'object') {
                     index = self.taxSize.indexOf(self.sizeSelected.slug);
@@ -874,36 +854,7 @@
                         self.taxSize = [];
                         self.taxSize.push(self.sizeSelected.slug);
                     }
-                    if (self.selectFilter) {
-                        if (self.selectFilter === '1') {
-                            self.params.ordering = 'name';
-                        }
 
-                        else if (self.selectFilter === '2') {
-                            self.params.ordering = 'price';
-                        }
-
-                        else if (self.selectFilter === '3') {
-                            self.params.ordering = '-price';
-                        }
-
-                    } else {
-                        self.params.ordering = '-createdAt';
-
-                    }
-
-                } else if (typeof obj === 'string') {
-                    if (obj === '1') {
-                        self.params.ordering = 'name';
-                    }
-
-                    else if (obj === '2') {
-                        self.params.ordering = 'price';
-                    }
-
-                    else if (obj === '3') {
-                        self.params.ordering = '-price';
-                    }
                 }
             }
 
@@ -917,6 +868,12 @@
                 }
             }
 
+            self.tableParams.reload();
+
+        };
+
+        self.getProductsType = function () {
+            var index = null;
             if (self.typeSelected) {
                 if (typeof self.typeSelected === 'object') {
                     index = self.taxSize.indexOf(self.typeSelected.slug);
@@ -928,36 +885,7 @@
                         self.taxType = [];
                         self.taxType.push(self.typeSelected.slug);
                     }
-                    if (self.selectFilter) {
-                        if (self.selectFilter === '1') {
-                            self.params.ordering = 'name';
-                        }
 
-                        else if (self.selectFilter === '2') {
-                            self.params.ordering = 'price';
-                        }
-
-                        else if (self.selectFilter === '3') {
-                            self.params.ordering = '-price';
-                        }
-
-                    } else {
-                        self.params.ordering = '-createdAt';
-
-                    }
-
-                } else if (typeof obj === 'string') {
-                    if (obj === '1') {
-                        self.params.ordering = 'name';
-                    }
-
-                    else if (obj === '2') {
-                        self.params.ordering = 'price';
-                    }
-
-                    else if (obj === '3') {
-                        self.params.ordering = '-price';
-                    }
                 }
             }
 
@@ -972,20 +900,39 @@
             }
 
             self.tableParams.reload();
+
+
         };
 
-        self.deleteFilter = function (obj, kind) {
+        self.getProductsCategory = function () {
+            self.taxCat.push(self.catSelected.slug);
+            if (self.catSelected) {
+                if (typeof self.catSelected === 'object') {
+                    for (var i = 0; i < self.taxCat.length; i++) {
+                        var indexCat = self.taxonomies.indexOf(self.taxCat[i]);
+                        if (indexCat > -1) {
+                            self.taxonomies.splice(indexCat, 1);
+                        } else {
+                            self.taxonomies.push(self.taxCat[i]);
+                        }
+                    }
+
+                }
+            }
+
+            self.tableParams.reload();
+
+
+        };
+
+        self.deleteFilter = function (obj) {
             var idx = self.taxonomies.indexOf(obj.slug);
             if (idx > -1) {
                 self.taxonomies.splice(idx, 1);
             }
-            if (kind === 'brand') {
-                self.brandSelected = null;
-            }
-            else if (kind === 'size') {
-                self.sizeSelected = null;
-            }
-            self.getProductsFilter(null);
+            self.catSelected = null;
+            self.taxCat = [];
+            self.tableParams.reload();
 
         };
 
@@ -1013,6 +960,12 @@
             }
             else {
                 self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
+            }
+            if (self.optionSelected) {
+                self.params.ordering = self.optionSelected.option;
+            }
+            else {
+                self.params.ordering = '-createdAt';
             }
             return ProductSrv.get(self.params).$promise.then(function (data) {
                 params.total(data.count);
@@ -1043,6 +996,18 @@
             paginationMinBlocks: 2,
             getData: self.getData
         });
+
+        self.deleteFilters = function () {
+            self.catSelected = false;
+            self.optionSelected = false;
+            self.brandSelected = false;
+            self.brandSelected = false;
+            self.sizeSelected = false;
+            self.typeSelected = false;
+            self.taxonomies = [];
+            self.tableParams.reload();
+
+        }
 
 
     }
