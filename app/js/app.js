@@ -172,6 +172,10 @@
         $rootScope.registerExtend = false;
         $rootScope.registerInvoiced = false;
         $rootScope.taxnomySearch = 'web1523988132';
+        $rootScope.filterBrand = 'Marca';
+        $rootScope.filterSize = false;
+        $rootScope.filterType = false;
+        $rootScope.filterCategory = 'category';
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');

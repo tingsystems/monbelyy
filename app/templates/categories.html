@@ -20,56 +20,128 @@
                 <div class="col-sm-3">
                     <div class="box-widget-white ng-scope">
                         <div class="box-widget-container">
+                            <h4 class="widget-title-first">Filtrar por
+                                <div class="pull-right">
+                                    <a ng-click="Product.deleteFilters()">
+                                        <i class="fa fa-trash" title="Eliminar filtros"></i>
+                                    </a>
+                                </div>
+                            </h4>
+
+                            <md-input-container class="md-block">
+                                <md-select ng-model="Product.optionSelected"
+                                           data-md-container-class="selectdemoSelectHeader"
+                                           name="options"
+                                           ng-change="Product.tableParams.reload()"
+                                           aria-label="Opciones de ordenamiento">
+                                    <md-option ng-value="option"
+                                               ng-repeat="option in Product.filterOrderingOptions">
+                                        {{option.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div class="box-widget-container" ng-if="filterCategory">
                             <h6>{{Product.categoryName}}</h6>
-                            <hr>
                             <div class="box-widget-container" style="padding-bottom: 5px;">
-                                <ul class="nav">
-                                    <md-radio-group ng-model="children.id"
-                                                    ng-change="Product.getProductsFilter(children.slug)">
-                                        <md-radio-button ng-repeat="children in Product.lines" ng-value="children"
+                                <div ng-if="Product.catSelected">
+                                    <p>{{Product.catSelected.name}}
+                                        <a ng-click="Product.deleteFilter(Product.catSelected)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </p>
+                                </div>
+                                <ul class="nav" ng-if="!Product.catSelected">
+                                    <md-radio-group ng-model="Product.catSelected"
+                                                    ng-change="Product.getProductsCategory()">
+                                        <md-radio-button ng-repeat="children in Product.categories" ng-value="children"
                                                          aria-label="{{ children.name }}">
                                             {{children.name}}
                                         </md-radio-button>
                                     </md-radio-group>
                                 </ul>
-
                             </div>
                         </div>
-                        <hr>
-                        <h4 class="widget-title">Marcas</h4>
-                        <hr>
-                        <div class="box-widget-container" style="padding-bottom: 5px;">
-                            <div ng-if="Product.brandSelected">
-                                <p>{{Product.brandSelected.name}}
-                                    <a ng-click="Product.deleteFilter(Product.brandSelected, 'brand')">
-                                        <span class="fa fa-times-circle"></span>
-                                    </a>
-                                </p>
-                            </div>
-                            <ul class="nav" ng-if="!Product.brandSelected">
-                                <md-radio-group ng-model="Product.brandSelected"
-                                                ng-change="Product.getProductsFilter(Product.brandSelected)">
-                                    <md-radio-button ng-repeat="children in Product.brands " ng-value="children"
-                                                     aria-label="{{ children.name }}" class="md-primary">
-                                        {{children.name}}
-                                    </md-radio-button>
-                                </md-radio-group>
-                            </ul>
+                        <h4 class="widget-title" ng-if="filterBrand">Marcas</h4>
+                        <div class="box-widget-container" style="padding-bottom: 5px;" ng-if="filterBrand">
+                            <md-input-container md-no-float>
+                                <md-select ng-model="Product.brandSelected"
+                                           data-md-container-class="selectdemoSelectHeader"
+                                           name="brand" md-on-open="Product.searchBrands(true)"
+                                           md-on-close="Product.clearBrands()"
+                                           ng-change="Product.getProductsBrand()" aria-label="Marcas">
+                                    <md-select-header class="demo-select-header">
+                                        <input ng-model="Product.searchTerBrand"
+                                               type="search"
+                                               placeholder="Busca una marca .."
+                                               class="demo-header-searchbox md-text"
+                                               ng-keydown="$event.stopPropagation()"
+                                               ng-change="Product.timeOutBrand()">
+                                    </md-select-header>
+                                    <div layout="row" layout-align="center center" ng-if="Product.busyBrands">
+                                        <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
+                                                              style="transform: scale(1);"></md-progress-circular>
+                                    </div>
+                                    <md-option ng-value="brand"
+                                               ng-repeat="brand in Product.brands">
+                                        {{brand.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
                         </div>
-                        <hr>
-                        <h4 class="widget-title">Ordenar por</h4>
-                        <hr>
-                        <div class="box-widget-container">
-                            <form>
-                                <div class="form-group">
-                                    <select name="" placeholder="Filtrar por" id="price" class="form-control" ng-model="Product.selectFilter"
-                                            ng-change="Product.getProductsFilter(Product.selectFilter)">
-                                        <option value="1">Alfabeticamente de A-Z</option>
-                                        <option value="2">Precio menor</option>
-                                        <option value="3">Precio mayor</option>
-                                    </select>
-                                </div>
-                            </form>
+                        <h4 class="widget-title" ng-if="filterSize">Medidas</h4>
+                        <div class="box-widget-container" style="padding-bottom: 5px;" ng-if="filterSize">
+                            <md-input-container md-no-float>
+                                <md-select ng-model="Product.sizeSelected"
+                                           data-md-container-class="selectdemoSelectHeader"
+                                           name="brand" md-on-open="Product.searchSizes(true)"
+                                           md-on-close="Product.clearSizes()"
+                                           ng-change="Product.getProductsSize()" aria-label="Medidas">
+                                    <md-select-header class="demo-select-header">
+                                        <input ng-model="Product.searchTerSize"
+                                               type="search"
+                                               placeholder="Busca una medida .."
+                                               class="demo-header-searchbox md-text"
+                                               ng-keydown="$event.stopPropagation()"
+                                               ng-change="Product.timeOutSize()">
+                                    </md-select-header>
+                                    <div layout="row" layout-align="center center" ng-if="Product.busySize">
+                                        <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
+                                                              style="transform: scale(1);"></md-progress-circular>
+                                    </div>
+                                    <md-option ng-value="item"
+                                               ng-repeat="item in Product.sizes">
+                                        {{item.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <h4 class="widget-title" ng-if="filterType">Tipos</h4>
+                        <div class="box-widget-container" style="padding-bottom: 5px;" ng-if="filterType">
+                            <md-input-container md-no-float>
+                                <md-select ng-model="Product.typeSelected"
+                                           data-md-container-class="selectdemoSelectHeader"
+                                           name="brand" md-on-open="Product.searchTypes(true)"
+                                           md-on-close="Product.clearTypes()"
+                                           ng-change="Product.getProductsType()" aria-label="Tipos">
+                                    <md-select-header class="demo-select-header">
+                                        <input ng-model="Product.searchTerSize"
+                                               type="search"
+                                               placeholder="Busca un tipo .."
+                                               class="demo-header-searchbox md-text"
+                                               ng-keydown="$event.stopPropagation()"
+                                               ng-change="Product.timeOutType()">
+                                    </md-select-header>
+                                    <div layout="row" layout-align="center center" ng-if="Product.busyType">
+                                        <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
+                                                              style="transform: scale(1);"></md-progress-circular>
+                                    </div>
+                                    <md-option ng-value="item"
+                                               ng-repeat="item in Product.types">
+                                        {{item.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
                         </div>
                     </div>
                 </div>
@@ -83,10 +155,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container">
+                    <div class="container" ng-controller="ShoppingCtrl as Shop">
                         <div class="row">
                             <div class="col-sm-4" ng-repeat="product in $data">
-                                <div class="box-simple" ng-if="!Product.isPost" ng-controller="AccessCtrl as Access">
+                                <div class="box-simple" ng-if="!Product.isPost">
                                     <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
                                         <div class="box-header">
                                             <div class="box-bg-img"
@@ -98,10 +170,12 @@
                                         </div>
                                     </a>
                                     <div class="box-footer">
+                                        <a class="btn btn-outline-dark" ui-sref="product-detail({slug:product.slug})">
+                                            Ver más
+                                        </a>
                                         <button class="btn btn-black"
-                                                ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
-                                            name: product.name, price: product.price, qty: 1,
-                                            taxonomies : product.taxonomies}, 1)"
+                                                ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
+                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
                                                 ng-disabled="Product.itemInCart(product)">
                                             Agregar al carrito
                                         </button>
@@ -120,24 +194,23 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-12" ng-show="Product.busy">
-                         <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
-                     </div>
-                     <div class="col-sm-12" ng-show="!Product.busy">
-                         <h2 class="text-center no-content" ng-show="!$data.length">Lo sentimos no contamos con
-                             contenido disponible</h2>
-                     </div>-->
+                </div>
 
-                    <div class="hide">
-                        <table>
-                            <tbody>
-                            <tr ng-repeat="order in $data">
-                                <td>{{ order.name }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                <!-- <div class="col-sm-12" ng-show="Product.busy">
+                     <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
+                 </div>
+                 <div class="col-sm-12" ng-show="!Product.busy">
+                     <h2 class="text-center no-content" ng-show="!$data.length">Lo sentimos no contamos con
+                         contenido disponible</h2>
+                 </div>-->
+                <div class="hide">
+                    <table>
+                        <tbody>
+                        <tr ng-repeat="order in $data">
+                            <td>{{ order.name }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!--post list -->

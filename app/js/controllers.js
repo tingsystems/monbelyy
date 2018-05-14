@@ -387,7 +387,7 @@
                     else {
                         paramsProducts.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
                     }
-                    if($rootScope.taxnomySearch){
+                    if ($rootScope.taxnomySearch) {
                         paramsProducts.taxonomies = $rootScope.taxnomySearch;
                     }
                     ProductSrv.get(paramsProducts).$promise.then(function (results) {
@@ -573,6 +573,7 @@
             $rootScope.post = self.detail;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
+            self.detail.qty = 1;
         });
 
         /* Carousel slider */
@@ -607,7 +608,7 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter) {
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter, $timeout) {
         var self = this;
 
         self.list = [];
@@ -625,10 +626,22 @@
         self.lines = [];
         self.brands = [];
         self.sizes = [];
+        self.categories = [];
         self.ready = false;
         self.taxonomies = [];
+        self.taxBrand = [];
+        self.taxSize = [];
+        self.taxType = [];
+        self.taxCat = [];
         self.params = {ordering: 'name'};
         self.changeParams = false;
+        self.filterType = $rootScope.filterType ? $rootScope.filterType : 'Tipo';
+        self.filterBrand = $rootScope.filterBrand ? $rootScope.filterBrand : 'Marca';
+        self.filterSize = $rootScope.filterSize ? $rootScope.filterSize : 'MEDIDA';
+        self.filterCategory = $rootScope.filterCategory ? $rootScope.filterCategory : 'Tipo';
+        var timeout = $timeout;
+        self.filterOrderingOptions = [{'option': 'name', 'name': 'Alfabeticamente de A-Z'},
+            {'option': 'price', 'name': 'Precio menor'}, {'option': '-price', 'name': 'Precio mayor'}];
 
         // get post by category
         if ($stateParams.slug) {
@@ -648,21 +661,110 @@
                 }).$promise.then(function (data) {
                     self.childrens = data;
                     angular.forEach(self.childrens, function (obj, ind) {
-                        if (obj.kind === 'Tipo') {
-                            self.lines.push(obj);
-                        }
-                        else if (obj.kind === 'Marca') {
-                            self.brands.push(obj);
-                        }
-                        else if (obj.kind === 'MEDIDA') {
-                            self.sizes.push(obj);
-                        }
+                        self.categories.push(obj);
                     });
                     self.ready = true;
-                    //self.getMorePosts($stateParams.slug);
                 });
             });
         }
+        self.busyBrands = false;
+        self.searchBrands = function (open) {
+            if (open) {
+                var indexTax = self.taxonomies.indexOf(self.taxBrand[0]);
+                if (indexTax > -1) {
+                    self.taxonomies.splice(indexTax, 1);
+                }
+            }
+            self.brands = [];
+            ProductTaxonomySrv.get({
+                page: 1,
+                pageSize: 10,
+                fields: 'id,slug,name',
+                search: self.searchTerBrand,
+                kind: self.filterBrand
+            }).$promise.then(function (data) {
+                self.brands = data.results;
+                self.busyBrands = false;
+            })
+        };
+        self.clearBrands = function () {
+            self.searchTerBrand = '';
+            self.busyBrands = true;
+        };
+        self.timeOutBrand = function () {
+            $timeout.cancel(timeout);
+            // Get the elements after half second
+            timeout = $timeout(function () {
+                self.searchBrands(false);
+            }, 1000);
+
+        };
+
+        self.busySize = true;
+        self.searchSizes = function (open) {
+            if (open) {
+                var indexSize = self.taxonomies.indexOf(self.taxSize[0]);
+                if (indexSize > -1) {
+                    self.taxonomies.splice(indexSize, 1);
+                }
+            }
+            self.sizes = [];
+            ProductTaxonomySrv.get({
+                page: 1,
+                pageSize: 10,
+                fields: 'id,slug,name',
+                search: self.searchTerSize,
+                kind: self.filterSize
+            }).$promise.then(function (data) {
+                self.sizes = data.results;
+                self.busySize = false;
+            })
+        };
+        self.clearSizes = function () {
+            self.searchTerSize = '';
+            self.busySize = true;
+        };
+        self.timeOutSize = function () {
+            $timeout.cancel(timeout);
+            // Get the elements after half second
+            timeout = $timeout(function () {
+                self.searchSizes(false);
+            }, 1000);
+
+        };
+
+        self.busyType = true;
+        self.searchTypes = function (open) {
+            if (open) {
+                var indexType = self.taxonomies.indexOf(self.taxType[0]);
+                if (indexType > -1) {
+                    self.taxonomies.splice(indexType, 1);
+                }
+            }
+            self.types = [];
+            ProductTaxonomySrv.get({
+                page: 1,
+                pageSize: 10,
+                fields: 'id,slug,name',
+                search: self.searchTerType,
+                kind: self.filterType
+            }).$promise.then(function (data) {
+                self.types = data.results;
+                self.busyType = false;
+            })
+        };
+        self.clearTypes = function () {
+            self.searchTerType = '';
+            self.busyType = true;
+        };
+        self.timeOutType = function () {
+            $timeout.cancel(timeout);
+            // Get the elements after half second
+            timeout = $timeout(function () {
+                self.searchType(false);
+            }, 1000);
+
+        };
 
         self.itemInCart = function (item) {
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
@@ -694,64 +796,131 @@
         };
 
 
-        self.getProductsFilter = function (obj) {
+        self.getProductsBrand = function () {
             self.changeParams = true;
-            if (obj) {
-                if (typeof obj === 'object') {
-                    var index = self.taxonomies.indexOf(obj.slug);
-                    if (index < -1) {
-                    } else {
-                        self.taxonomies.push(obj.slug);
-                    }
-                    if (self.selectFilter) {
-                        if (self.selectFilter === '1') {
-                            self.params.ordering = 'name';
-                        }
+            var index = null;
+            if (self.brandSelected) {
+                if (typeof self.brandSelected === 'object') {
+                    index = self.taxBrand.indexOf(self.brandSelected.slug);
 
-                        else if (self.selectFilter === '2') {
-                            self.params.ordering = 'price';
-                        }
-
-                        else if (self.selectFilter === '3') {
-                            self.params.ordering = '-price';
-                        }
+                    if (index > -1) {
+                        self.taxBrand.splice(index, 1);
 
                     } else {
-                        self.params.ordering = '-createdAt';
-
+                        self.taxBrand = [];
+                        self.taxBrand.push(self.brandSelected.slug);
                     }
 
-                } else if (typeof obj === 'string') {
-                    if (obj === '1') {
-                        self.params.ordering = 'name';
-                    }
-
-                    else if (obj === '2') {
-                        self.params.ordering = 'price';
-                    }
-
-                    else if (obj === '3') {
-                        self.params.ordering = '-price';
-                    }
                 }
             }
+
+            if (self.taxBrand[0]) {
+                var indexTax = self.taxonomies.indexOf(self.brandSelected.slug);
+                if (indexTax > -1) {
+                    self.taxonomies.splice(indexTax, 1);
+                } else {
+                    self.taxonomies.push(self.taxBrand[0])
+                }
+            }
+
             self.tableParams.reload();
         };
 
-        self.deleteFilter = function (obj, kind) {
+        self.getProductsSize = function () {
+            var index = null;
+            if (self.sizeSelected) {
+                if (typeof self.sizeSelected === 'object') {
+                    index = self.taxSize.indexOf(self.sizeSelected.slug);
+
+                    if (index > -1) {
+                        self.taxSize.splice(index, 1);
+
+                    } else {
+                        self.taxSize = [];
+                        self.taxSize.push(self.sizeSelected.slug);
+                    }
+
+                }
+            }
+
+            if (self.taxSize[0]) {
+                var indexSize = self.taxonomies.indexOf(self.sizeSelected.slug);
+                if (indexSize > -1) {
+                    self.taxonomies.splice(indexSize, 1);
+
+                } else {
+                    self.taxonomies.push(self.taxSize[0])
+                }
+            }
+
+            self.tableParams.reload();
+
+        };
+
+        self.getProductsType = function () {
+            var index = null;
+            if (self.typeSelected) {
+                if (typeof self.typeSelected === 'object') {
+                    index = self.taxSize.indexOf(self.typeSelected.slug);
+
+                    if (index > -1) {
+                        self.taxType.splice(index, 1);
+
+                    } else {
+                        self.taxType = [];
+                        self.taxType.push(self.typeSelected.slug);
+                    }
+
+                }
+            }
+
+            if (self.taxType[0]) {
+                var indexType = self.taxonomies.indexOf(self.typeSelected.slug);
+                if (indexType > -1) {
+                    self.taxonomies.splice(indexType, 1);
+
+                } else {
+                    self.taxonomies.push(self.taxType[0])
+                }
+            }
+
+            self.tableParams.reload();
+
+
+        };
+
+        self.getProductsCategory = function () {
+            self.taxCat.push(self.catSelected.slug);
+            if (self.catSelected) {
+                if (typeof self.catSelected === 'object') {
+                    for (var i = 0; i < self.taxCat.length; i++) {
+                        var indexCat = self.taxonomies.indexOf(self.taxCat[i]);
+                        if (indexCat > -1) {
+                            self.taxonomies.splice(indexCat, 1);
+                        } else {
+                            self.taxonomies.push(self.taxCat[i]);
+                        }
+                    }
+
+                }
+            }
+
+            self.tableParams.reload();
+
+
+        };
+
+        self.deleteFilter = function (obj) {
             var idx = self.taxonomies.indexOf(obj.slug);
             if (idx > -1) {
                 self.taxonomies.splice(idx, 1);
             }
-            if (kind === 'brand') {
-                self.brandSelected = null;
-            }
-            else if (kind === 'size') {
-                self.sizeSelected = null;
-            }
-            self.getProductsFilter(null);
+            self.catSelected = null;
+            self.taxCat = [];
+            self.tableParams.reload();
 
         };
+
 
         self.getData = function (params) {
             var sorting = '-createdAt';
@@ -771,11 +940,17 @@
             self.params.isActive = 'True';
             self.params.pageSize = 9;
             if (list !== '') {
-                self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice';
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax';
                 self.params.priceList = list;
             }
             else {
-                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice';
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
+            }
+            if (self.optionSelected) {
+                self.params.ordering = self.optionSelected.option;
+            }
+            else {
+                self.params.ordering = '-createdAt';
             }
             return ProductSrv.get(self.params).$promise.then(function (data) {
                 params.total(data.count);
@@ -806,6 +981,18 @@
             paginationMinBlocks: 2,
             getData: self.getData
         });
+
+        self.deleteFilters = function () {
+            self.catSelected = false;
+            self.optionSelected = false;
+            self.brandSelected = false;
+            self.brandSelected = false;
+            self.sizeSelected = false;
+            self.typeSelected = false;
+            self.taxonomies = [];
+            self.tableParams.reload();
+
+        }
 
 
     }
@@ -927,6 +1114,8 @@
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage'];
-    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams', '$stateParams', '$rootScope', '$localStorage', '$filter'];
-    ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'SweetAlert'];
+    ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
+        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout'];
+    ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
+        'SweetAlert'];
 })();
