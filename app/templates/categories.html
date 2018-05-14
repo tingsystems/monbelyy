@@ -155,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container">
+                    <div class="container" ng-controller="ShoppingCtrl as Shop">
                         <div class="row">
                             <div class="col-sm-4" ng-repeat="product in $data">
                                 <div class="box-simple" ng-if="!Product.isPost">
@@ -170,10 +170,12 @@
                                         </div>
                                     </a>
                                     <div class="box-footer">
+                                        <a class="btn btn-outline-dark" ui-sref="product-detail({slug:product.slug})">
+                                            Ver más
+                                        </a>
                                         <button class="btn btn-black"
-                                                ng-click="Product.setItem({id: product.id, image: product.featuredImage.url,
-                                            name: product.name, price: product.price, qty: 1,
-                                            taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
+                                                ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
+                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
                                                 ng-disabled="Product.itemInCart(product)">
                                             Agregar al carrito
                                         </button>
