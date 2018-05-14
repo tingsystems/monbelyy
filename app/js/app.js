@@ -162,7 +162,6 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://mercadomovil.com.mx';
-<<<<<<< HEAD
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
@@ -174,8 +173,8 @@
         $rootScope.registerInvoiced = false;
         $rootScope.taxnomySearch = 'web1523988132';
         $rootScope.filterBrand = 'Marca';
-        $rootScope.filterSize = 'MEDIDA';
-        $rootScope.filterType = 'Tipo';
+        $rootScope.filterSize = false;
+        $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
 
         $rootScope.$on('$locationChangeSuccess', function () {
