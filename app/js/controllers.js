@@ -619,6 +619,7 @@
             $rootScope.post = self.detail;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
+            self.detail.qty = 1;
         });
 
         /* Carousel slider */
