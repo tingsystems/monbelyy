@@ -350,10 +350,10 @@ audio:not([controls]),
 .box-simple {
   background-color: #fff;
   margin-bottom: 15px;
-  -moz-transition: all 1s;
-  -o-transition: all 1s;
-  -webkit-transition: all 1s;
-  transition: all 1s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 .box-simple a {
   color: #000;
@@ -382,7 +382,7 @@ audio:not([controls]),
 }
 .box-simple:hover {
   padding: 15px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   border: 1px solid #f5f5f5;
   border-radius: 3px;
 }
@@ -522,6 +522,7 @@ audio:not([controls]),
   background-repeat: no-repeat;
 }
 .owl-theme-page .owl-nav {
+  font-size: 36px;
   position: absolute;
   top: 50%;
   left: 0;
@@ -533,6 +534,7 @@ audio:not([controls]),
   padding: 5px 20px;
 }
 .owl-theme-page .owl-nav .owl-next {
+  font-size: 36px;
   right: 25px;
   position: absolute;
   padding: 5px 20px;
@@ -594,6 +596,7 @@ audio:not([controls]),
   top: 50%;
   left: 0;
   right: 0;
+  font-size: 36px;
 }
 .owl-theme-slider .owl-nav .owl-prev {
   left: 35px;
@@ -721,7 +724,7 @@ audio:not([controls]),
 .box-widget-white .widget-title-first {
   background: transparent;
   padding: 10px 5px;
-  color: #555 !important;
+  color: #000 !important;
   border-bottom: 1px solid #eee;
 }
 .box-widget-white ul li > a {
@@ -730,6 +733,11 @@ audio:not([controls]),
 }
 .box-widget-white ul li > a:hover {
   color: #ff7300;
+}
+.delete-filter {
+  cursor: pointer;
+  color: #555;
+  float: right;
 }
 .box-widget {
   background-color: #fff;
@@ -1530,7 +1538,7 @@ h5,
 h6 {
   font-family: 'Josefin Sans', sans-serif;
   margin: 0;
-  font-weight: 400;
+  font-weight: 700;
 }
 strong {
   font-weight: 700;
@@ -1668,7 +1676,7 @@ md-input-container {
   width: 50%;
 }
 .temp-product-detail .article-description .article-price {
-  color: #ff9039;
+  color: #000;
   margin-bottom: 15px;
 }
 .temp-product-detail h3 {

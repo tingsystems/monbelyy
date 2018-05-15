@@ -23,31 +23,20 @@
                             <h4 class="widget-title-first">Filtrar por
                                 <div class="pull-right">
                                     <a ng-click="Product.deleteFilters()">
-                                        <i class="fa fa-trash" title="Eliminar filtros"></i>
+                                        <i class="fa fa-trash delete-filter" title="Eliminar filtros"></i>
                                     </a>
                                 </div>
                             </h4>
-
-                            <md-input-container class="md-block">
-                                <md-select ng-model="Product.optionSelected"
-                                           data-md-container-class="selectdemoSelectHeader"
-                                           name="options"
-                                           ng-change="Product.tableParams.reload()"
-                                           aria-label="Opciones de ordenamiento">
-                                    <md-option ng-value="option"
-                                               ng-repeat="option in Product.filterOrderingOptions">
-                                        {{option.name}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
+                            <br>
                         </div>
                         <div class="box-widget-container" ng-if="filterCategory">
-                            <h6>{{Product.categoryName}}</h6>
+                            <h6>{{Product.categoryName}} ></h6>
+                            <br>
                             <div class="box-widget-container" style="padding-bottom: 5px;">
                                 <div ng-if="Product.catSelected">
                                     <p>{{Product.catSelected.name}}
-                                        <a ng-click="Product.deleteFilter(Product.catSelected)">
-                                            <i class="fa fa-trash"></i>
+                                        <a ng-click="Product.deleteFilter(Product.catSelected)" title="Eliminar filtro">
+                                            <i class="fa fa-times delete-filter"></i>
                                         </a>
                                     </p>
                                 </div>
@@ -65,7 +54,7 @@
                         <h4 class="widget-title" ng-if="filterBrand">Marcas</h4>
                         <div class="box-widget-container" style="padding-bottom: 5px;" ng-if="filterBrand">
                             <md-input-container md-no-float>
-                                <md-select ng-model="Product.brandSelected"
+                                <md-select placeholder="Selecciona una marca .." ng-model="Product.brandSelected"
                                            data-md-container-class="selectdemoSelectHeader"
                                            name="brand" md-on-open="Product.searchBrands(true)"
                                            md-on-close="Product.clearBrands()"
@@ -149,8 +138,22 @@
                     <div class="title-primary">
                         <div class="container">
                             <div class="row justify-content-between">
-                                <div class="col-12">
+                                <div class="col-sm-4">
                                     <h1 class=text-uppercase>{{Product.categoryName}}</h1>
+                                </div>
+                                <div class="col-sm-4">
+                                    <md-input-container class="md-block">
+                                        <md-select placeholder="Opciones de ordenamiento" ng-model="Product.optionSelected"
+                                                   data-md-container-class="selectdemoSelectHeader"
+                                                   name="options"
+                                                   ng-change="Product.tableParams.reload(Product.selectFilter   )"
+                                                   aria-label="Opciones de ordenamiento">
+                                            <md-option ng-value="option"
+                                                       ng-repeat="option in Product.filterOrderingOptions">
+                                                {{option.name}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
                                 </div>
                             </div>
                         </div>
@@ -170,9 +173,6 @@
                                         </div>
                                     </a>
                                     <div class="box-footer">
-                                        <a class="btn btn-outline-dark" ui-sref="product-detail({slug:product.slug})">
-                                            Ver más
-                                        </a>
                                         <button class="btn btn-black"
                                                 ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
                            name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"

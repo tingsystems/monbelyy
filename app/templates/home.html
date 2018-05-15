@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="box-container">
-                        <p>{{ product.name }}</p>
+                        <p>{{ product.name | limitTo:40}}</p>
                         <h4>{{ product.price | currency }}</h4>
                     </div>
                     <div class="box-footer">
