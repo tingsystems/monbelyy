@@ -74,7 +74,7 @@
 <header class="header one-rows-nav">
     <div class="first-row">
         <div class="container">
-            <div class="row">
+            <div class="row"> 
                 <div class="col-sm-2">
                     <ul class="nav navbar-expand-lg mobile-hidde">
                         <li>
@@ -82,7 +82,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-sm-8" ng-controller="GetQuerySearchCtrl as Search">
+                <div class="col-sm-6" ng-controller="GetQuerySearchCtrl as Search">
                     <form name="search" role="search" class="input-search"
                           ng-submit="Search.globalSearch('product')">
                         <md-input-container  md-no-float>
@@ -92,12 +92,18 @@
                         </md-input-container>
                     </form>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <ul class="nav navbar-expand-lg justify-content-end">
                         <li>
                             <a ui-sref="register" class="btn btn-link"
                                ng-if="!Access.isAuthenticated()">
                                 <i class="ion-ios-person"></i> Iniciar sesión
+                            </a>
+                        </li>
+                        <li>
+                            <a ui-sref="register" class="btn btn-optional"
+                               ng-if="!Access.isAuthenticated()">
+                                <i class="ion-ios-star"></i> Mayoristas
                             </a>
                         </li>
                         <li class="dropdown">
