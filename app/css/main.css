@@ -1744,9 +1744,16 @@ md-input-container {
   text-align: left !important;
 }
 #login {
+  padding: 0;
   background-image: url("../img/bg-login.jpg");
   background-size: cover;
   background-position: center;
+}
+#login .bg-login {
+  background: -moz-linear-gradient(top, rgba(243,135,200,0) 0%, rgba(243,135,200,0.5) 54%, #f387c8 100%) /* FF3.6-15 */;
+  background: -webkit-linear-gradient(top, rgba(243,135,200,0) 0%, rgba(243,135,200,0.5) 54%, #f387c8 100%) /* Chrome10-25,Safari5.1-6 */;
+  background: linear-gradient(to bottom, rgba(243,135,200,0) 0%, rgba(243,135,200,0.5) 54%, #f387c8 100%) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */;
+  padding: 50px 0 160px;
 }
 #temp-checkout .items-dashboard {
   margin-top: 20px;
