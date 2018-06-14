@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <uib-tabset class="tab-simple" active="activeJustified" justified="true">
+                    <uib-tabset class="tab-simple" active="Access.activeTab" justified="true">
                         <uib-tab index="0" heading="Iniciar sesión">
                             <form class="padding" name="loginForm" novalidate ng-submit="Access.login()">
 
@@ -300,7 +300,7 @@
                                 </div>
                             </form>
                         </uib-tab>
-                        <uib-tab index="2" heading="Mayoristas">
+                        <uib-tab index="2" heading="Mayoristas" md-active="Access.wholesale">
                             <form class="padding" name="registerForm" ng-submit="Access.createAccount()" novalidate>
                                 <md-input-container>
                                     <input type="text" ng-model="Access.formData.contactPersonName" id="contactPersonName"

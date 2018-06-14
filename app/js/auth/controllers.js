@@ -2,7 +2,7 @@
     'use strict';
 
     function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
-                        PriceListSrv, StateSrv, $anchorScroll) {
+                        PriceListSrv, StateSrv, $anchorScroll, $stateParams) {
         $anchorScroll();
         var self = this;
         self.busy = false;
@@ -12,6 +12,17 @@
             $rootScope.user = $localStorage.appData.user;
         }
         self.cities = [];
+        console.log($stateParams.user);
+        console.log($stateParams.wholesale);
+        self.user = $stateParams.user;
+        self.wholesale = $stateParams.wholesale;
+        self.activeTab = 0;
+        if ($stateParams.wholesale === true) {
+            self.activeTab = 2;
+        }
+        if ($stateParams.user === true) {
+            self.activeTab = 1;
+        }
 
         self.items = $localStorage.items ? $localStorage.items : [];
         self.itemCount = self.items.length;
@@ -195,7 +206,10 @@
             {'name': 'Ariadna Sanchez de Tagle', 'id': '5'},
             {'name': 'Donovan Diaz', 'id': '6'}, {'name': 'Erica Merlos', 'id': '7'},
             {'name': 'Israel Covarrubias', 'id': '8'},
-            {'name': 'Ivette Rojo', 'id': '9'}, {'name': 'Mario Aupart', 'id': '10'}, {'name': 'Oscar Luna', 'id': '11'},
+            {'name': 'Ivette Rojo', 'id': '9'}, {'name': 'Mario Aupart', 'id': '10'}, {
+                'name': 'Oscar Luna',
+                'id': '11'
+            },
             {'name': 'Roberto Sanchez de Tagle', 'id': '12'}, {'name': 'Samanda Santos', 'id': '13'},
             {'name': 'Otro', 'id': '14'}];
 
@@ -845,7 +859,8 @@
 
 
     // inject dependencies to controllers
-    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope', 'NotificationSrv', 'PriceListSrv', 'StateSrv', '$anchorScroll'];
+    AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope',
+        'NotificationSrv', 'PriceListSrv', 'StateSrv', '$anchorScroll', '$stateParams'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];

@@ -12,7 +12,8 @@
                         controllerAs: 'Access',
                         controller: 'AccessCtrl'
                     }
-                }
+                },
+                params: {user: null, wholesale: null}
             })
             .state('success', {
                 url: '/account/success',

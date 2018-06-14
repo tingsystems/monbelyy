@@ -47,6 +47,7 @@
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="lib/ng-table/dist/ng-table.css" />
+    <link rel="stylesheet" href="lib/sweetalert/dist/sweetalert.css" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- inject:css -->
@@ -74,18 +75,19 @@
 <header class="header one-rows-nav">
     <div class="first-row">
         <div class="container">
-            <div class="row"> 
+            <div class="row">
                 <div class="col-sm-2">
                     <ul class="nav navbar-expand-lg mobile-hidde">
                         <li>
-                            <a style="margin-top: 10px;" href="http://hannypulido.com.mx/page/sucursales1524857728" class="btn btn-link"><i class="fa fa-building"></i> Sucursales</a>
+                            <a style="margin-top: 10px;" href="http://hannypulido.com.mx/page/sucursales1524857728"
+                               class="btn btn-link"><i class="fa fa-building"></i> Sucursales</a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-sm-6" ng-controller="GetQuerySearchCtrl as Search">
                     <form name="search" role="search" class="input-search"
                           ng-submit="Search.globalSearch('product')">
-                        <md-input-container  md-no-float>
+                        <md-input-container md-no-float>
                             <input id="validationServerUsername" placeholder="Buscar"
                                    aria-describedby="inputGroupPrepend3" ng-model="Search.searchTerm" required>
                             <md-icon class="fa fa-search"></md-icon>
@@ -95,13 +97,13 @@
                 <div class="col-sm-4">
                     <ul class="nav navbar-expand-lg justify-content-end">
                         <li>
-                            <a ui-sref="register" class="btn btn-link"
+                            <a ui-sref="register({user:true, wholesale:false})" class="btn btn-link"
                                ng-if="!Access.isAuthenticated()">
                                 <i class="ion-ios-person"></i> Iniciar sesión
                             </a>
                         </li>
                         <li>
-                            <a ui-sref="register" class="btn btn-optional"
+                            <a ui-sref="register({user:false, wholesale:true})" class="btn btn-optional"
                                ng-if="!Access.isAuthenticated()">
                                 <i class="ion-ios-star"></i> Mayoristas
                             </a>
@@ -196,6 +198,7 @@
 <script src="lib/ng-file-upload/ng-file-upload.js"></script>
 <script src="lib/angular-ui-select/dist/select.js"></script>
 <script src="lib/ng-table/dist/ng-table.js"></script>
+<script src="lib/sweetalert/dist/sweetalert.min.js"></script>
 <script src="lib/ngSweetAlert/SweetAlert.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
