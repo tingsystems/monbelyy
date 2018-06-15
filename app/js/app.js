@@ -161,15 +161,16 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://mercadomovil.com.mx';
+        // $rootScope.host = 'https://mercadomovil.com.mx';
+        $rootScope.host = 'http://' + $location.host();
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
-        $rootScope.apiShop = 'v3';
+        $rootScope.apiShop = 'v1';
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $http.defaults.headers.common['PROJECT-ID'] = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = false;
-        $rootScope.registerExtend = false;
+        $rootScope.registerExtend = true;
         $rootScope.registerInvoiced = false;
         $rootScope.taxnomySearch = 'web1523988132';
         $rootScope.filterBrand = 'Marca';

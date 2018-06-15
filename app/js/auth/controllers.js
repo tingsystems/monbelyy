@@ -131,15 +131,21 @@
             var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
+            console.log(self.activeTab);
+            if (self.activeTab === 2) {
+                account.priceListId = '560d7b10-b1c3-4e79-bd15-36e2966f6564'
+            }
             // account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
-            // address.zip = self.address.zip;
-            // address.neighborhood = self.address.neighborhood;
-            // address.phone = account.contactPersonPhone;
-            // address.city = self.city.id;
-            // address.state = self.state.id;
-            // address.address = self.address.address;
-            // account.address = self.address.address;
-            // account.dataAddress = address;
+            address.zip = self.address.zip;
+            address.neighborhood = self.address.neighborhood;
+            address.phone = account.contactPersonPhone;
+            address.city = self.city.id;
+            address.state = self.state.id;
+            address.address = self.address.address;
+            account.address = self.address.address;
+            account.dataAddress = address;
+            account.city = self.city.id;
+            account.state = self.state.id;
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;
