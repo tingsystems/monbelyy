@@ -129,6 +129,8 @@
             address.address = self.address.address;
             account.address = self.address.address;
             account.dataAddress = address;
+            account.city = self.city.id;
+            account.state = self.state.id;
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;
