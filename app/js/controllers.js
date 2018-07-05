@@ -561,15 +561,26 @@
         self.busy = true;
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.detail = results;
+            self.detail.galleryImages = [];
             // get featureImage
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
+            // add gallery image and featured image
+            self.detail.galleryImages.push(self.detail.featuredImage);
+            console.log(self.detail.galleryImages);
+            console.log(self.detail.featuredImage);
             //get galeries
-            self.detail.galleryImages = $filter('filter')(self.detail.attachments, {kind: 'gallery_image'});
+            angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}),function (value) {
+                self.detail.galleryImages.push(value);
+            });
+
+            console.log(self.detail.galleryImages);
+
 
             if (!self.detail.featuredImage) {
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
+
             $rootScope.post = self.detail;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
@@ -585,7 +596,8 @@
                 //pagination: false,
                 autoplay: true,
                 items: 2,
-                loop: true,
+                autoplayHoverPause:true,
+                autoplayTimeout:1000,
                 margin: 0,
                 responsiveClass: true,
                 responsive: {
