@@ -597,11 +597,14 @@
                 AddressSrv.get({fields: fieldship, id: self.address}).$promise.then(function (data) {
                     self.addresship = data;
                     if ('metadata' in self.addresship) {
-                        if ('codeFreeShip' in self.addresship.metadata) {
-                            if (self.addresship.metadata.codeFreeShip === true) {
-                                $rootScope.$emit('newTotals', {data: true});
+                        if(self.addresship.metadata !== null){
+                            if ('codeFreeShip' in self.addresship.metadata) {
+                                if (self.addresship.metadata.codeFreeShip === true) {
+                                    $rootScope.$emit('newTotals', {data: true});
+                                }
                             }
                         }
+
                     }
                 }, function (error) {
                     NotificationSrv.error("Error");
