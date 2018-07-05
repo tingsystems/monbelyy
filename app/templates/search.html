@@ -1,53 +1,69 @@
 <div class="temp-search">
     <section class="content-area">
-        <div infinite-scroll='Search.getMorePosts()'
-             infinite-scroll-disabled='Search.busy || !Search.next || Search.loadPosts'>
-            <div class="container" ng-controller="AccessCtrl as Access">
-                <div class="title-middle-line">
-                    <div class="text-content">
-                        <h3 class="font-type">Resultados de la busqueda: {{ Search.searchTerm }}</h3>
-                    </div>
-                    <hr>
+        <div class="container">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h3 class="font-type">Resultados de la busqueda: {{ Search.searchTerm }}</h3>
                 </div>
-                <div class="row">
-                    <div class="col-sm-3" ng-repeat="item in Search.listSearch">
-                        <div class="box-simple">
-                            <a ui-sref="product-detail({slug:item.slug})" title="Ver detalles del producto">
-                                <div class="box-header">
-                                    <div class="box-bg-img"
-                                         style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}')"></div>
-                                </div>
-                                <div class="box-container">
-                                    <p class="box-title">{{ item.name }}</p>
-                                    <h4>{{ item.price | currency }}</h4>
-                                </div>
-                            </a>
-                            <div class="box-footer">
+                <hr>
+            </div>
+            <div class="container" loading-container="tableParams.settings().$loading" id="top">
+                <div class="row" ng-table="tableParams" show-filter="false">
+                    <div class="col-sm-12" ng-controller="AccessCtrl as Access">
+                        <div class="container" ng-controller="ShoppingCtrl as Shop">
+                            <div class="row">
+                                <div class="col-sm-4" ng-repeat="product in $data">
+                                    <div class="box-simple" ng-if="!Product.isPost">
+                                        <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
+                                            <div class="box-header">
+                                                <div class="box-bg-img"
+                                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                                            </div>
+                                            <div class="box-container">
+                                                <p class="box-title">{{ product.name | limitTo: 30 }}</p>
+                                                <h4>{{ product.price | currency }}</h4>
+                                            </div>
+                                        </a>
+                                        <div class="box-footer">
+                                            <button class="btn btn-black"
+                                                    ng-click="Shop.setItem({id: product.id,
+                                                         image: product.featuredImage.url,
+                                                         name: product.name,
+                                                         price: product.price, qty: 1,
+                                                         taxonomies : product.taxonomies,
+                                                         shipmentPrice: product.shipmentPrice,
+                                                         typeTax: product.typeTax}, 1)"
+                                                    ng-disabled="Product.itemInCart(product)">
+                                                Agregar al carrito
+                                            </button>
+                                        </div>
+                                    </div>
 
+                                    <div class="box-prod" ng-if="Search.isPost">
+                                        <a ui-sref="post_detail({slug:product.slug})">
+                                            <div class="bg-prod"
+                                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
+                                            <h3 class="prod-descrip">{{product.title}}</h3>
+                                        </a>
+                                        <a ui-sref="post_detail({slug: product.slug})" class="btn btn-primary">Ver
+                                            más</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="box-prod" ng-if="Search.isPost">
-                            <a ui-sref="post_detail({slug:item.slug})">
-                                <div class="bg-prod"
-                                     style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default }}')"></div>
-                                <h3 class="prod-descrip">{{item.title}}</h3>
-                            </a>
-                            <a ui-sref="post_detail({slug: item.slug})" class="btn btn-black">Ver más</a>
-                        </div>
+                    </div>
+                    <div class="hide">
+                        <table>
+                            <tbody>
+                            <tr ng-repeat="order in $data">
+                                <td>{{ order.name }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="col-sm-12" ng-show="Search.busy">
-                    <h3 class="text-center">Cargando<i class="fa fa-spinner fa-spin"></i></h3>
-                </div>
-                <div class="col-sm-12" ng-show="!Search.busy">
-                    <div class="alert alert-warning" role="alert">
-                        <h4 class="text-center no-content" ng-show="!Search.listSearch.length">Lo sentimos no contamos con
-                            contenido disponible</h4>
-                    </div>
-                </div>
+                <!--post list -->
             </div>
-            <!--post list -->
         </div>
     </section>
 </div>

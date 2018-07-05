@@ -346,63 +346,61 @@
         };
     }
 
-    function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage, $rootScope) {
+    function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage, $rootScope, NgTableParams, $scope,
+                        ngTableEventsChannel, $location, $anchorScroll) {
         var self = this;
 
         self.listSearch = [];
-        self.page = 0;
+        self.page = 1;
         self.next = true;
         self.busy = false;
         self.searchTerm = angular.copy($stateParams.q);
         self.kindTerm = angular.copy($stateParams.kind);
         self.isPost = true;
+        self.params = {ordering: 'name'};
 
-        self.errorRecovery = function () {
-            self.page -= 1;
-            self.next = true;
-            self.busy = false;
-            self.loadPostError = false;
-            self.getMorePosts();
-        };
-
-        self.getMorePosts = function () {
-            if (self.busy || !self.next) return;
-            self.page += 1;
+        self.getData = function (params) {
+            var sorting = '-createdAt';
+            // parser for ordering params
+            angular.forEach(params.sorting(), function (value, key) {
+                sorting = value === 'desc' ? '-' + key : key;
+            });
+            self.params.page = params.page();
+            self.params.pageSize = params.count();
             self.busy = true;
 
             if ($stateParams.q) {
                 if (self.kindTerm === 'product') {
                     self.isPost = false;
                     var list = $localStorage.priceList ? $localStorage.priceList : '';
-                    var paramsProducts = {};
-                    paramsProducts.isActive = 'True';
-                    paramsProducts.pageSize = 9;
-                    paramsProducts.ordering = '-createdAt';
-                    paramsProducts.page = self.page;
-                    paramsProducts.search = self.searchTerm;
+                    self.params.isActive = 'True';
+                    self.params.pageSize = 9;
+                    self.params.ordering = '-createdAt';
+                    self.params.page = self.page;
+                    self.params.search = self.searchTerm;
                     if (list !== '') {
-                        paramsProducts.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax';
-                        paramsProducts.priceList = list;
+                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax';
+                        self.params.priceList = list;
                     }
                     else {
-                        paramsProducts.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
+                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
                     }
-                    if ($rootScope.taxnomySearch) {
-                        paramsProducts.taxonomies = $rootScope.taxnomySearch;
-                    }
-                    ProductSrv.get(paramsProducts).$promise.then(function (results) {
-                        self.listSearch = self.listSearch.concat(results.results);
+
+                    return ProductSrv.get(self.params).$promise.then(function (results) {
+                        self.listSearch = results.results;
+                        console.log(self.listSearch);
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                         });
+                        params.total(results.count);
                         self.busy = false;
-                        self.next = results.next;
+                        return results.results
                     });
 
                 }
                 else {
-                    EntrySrv.get({
+                    return EntrySrv.get({
                         kind: 'post',
                         isActive: 'True',
                         fields: 'attachments,title,link,slug,excerpt',
@@ -411,21 +409,59 @@
                         search: self.searchTerm,
                         page: self.page
                     }).$promise.then(function (results) {
-                        self.listSearch = self.listSearch.concat(results.results);
+                        self.listSearch = results.results;
                         self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                         });
+                        params.total(results.count);
                         self.busy = false;
-                        self.next = results.next;
+                        return results.results;
                     });
 
                 }
             }
         };
 
-        self.getMorePosts();
+        var tableEvents = [];
+
+        function subscribeToTable(tableParams) {
+            var logAfterCreatedEvent = logEvent(tableEvents, "afterCreated");
+            ngTableEventsChannel.onAfterCreated(logAfterCreatedEvent, $scope, $scope.tableParams);
+            var logAfterReloadDataEvent = logEvent(tableEvents, "afterReloadData");
+            ngTableEventsChannel.onAfterReloadData(logAfterReloadDataEvent, $scope, $scope.tableParams);
+        }
+
+        function logEvent(list, name) {
+            var listLocal = list;
+            var nameLocal = name;
+            return function () {
+                console.log(">>>>>>> " + nameLocal);
+
+                $location.hash('top');
+
+                // call $anchorScroll()
+                $anchorScroll();
+
+            };
+        }
+
+        $scope.$watch("tableParams", subscribeToTable);
+
+        $scope.tableParams = new NgTableParams({
+            // default params
+            page: 1, // The page number to show
+            count: 10 // The number of items to show per page
+        }, {
+            // default settings
+            // page size buttons (right set of buttons in demo)
+            counts: [],
+            // determines the pager buttons (left set of buttons in demo)
+            paginationMaxBlocks: 13,
+            paginationMinBlocks: 2,
+            getData: self.getData
+        });
 
 
     }
@@ -1109,7 +1145,8 @@
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
     ContactCtrl.$inject = ['NotificationTakiSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$state'];
-    SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage', '$rootScope'];
+    SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage', '$rootScope',
+        'NgTableParams', '$scope', 'ngTableEventsChannel', '$location', '$anchorScroll'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
