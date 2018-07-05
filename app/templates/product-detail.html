@@ -29,9 +29,8 @@
                             </div>
                         </div>
                     </div>
-                    <img ng-src="{{Product.detail.featuredImage.url}}" alt="{{Product.detail.name}}"
-                         ng-if="Product.detail.galleryImages.length < 1"
-                         style="height: 250px;width: 100%;margin-bottom: 15px;">
+                    <div class="bg-image-single" ng-if="Product.detail.galleryImages.length < 1"
+                         style="background-image:url('{{ Product.detail.featuredImage.url }}');"></div>
                 </div>
                 <div class="col-sm-8">
                     <div class="article-description">

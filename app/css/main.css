@@ -1686,6 +1686,11 @@ md-input-container {
 .temp-categories .title-primary {
   text-align: left;
 }
+.temp-product-detail .bg-image-single {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+}
 .temp-product-detail .article-description md-input-container {
   width: 50%;
 }
