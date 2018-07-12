@@ -6,7 +6,7 @@
     <div class="col-md-12 text-center" ng-repeat="item in Payment.items">
         <div class="row">
             <div class="col-md-3">
-                <img ng-src="{{item.image}}" alt="" width="100">
+                <img ng-src="{{item.image ? item.image : initConfig.img_default}}" alt="" width="100">
             </div>
             <div class="col-md-9 list-inline items-incart text-right">
                 <div class="row">
