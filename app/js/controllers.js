@@ -351,9 +351,6 @@
         var self = this;
 
         self.listSearch = [];
-        self.page = 1;
-        self.next = true;
-        self.busy = false;
         self.searchTerm = angular.copy($stateParams.q);
         self.kindTerm = angular.copy($stateParams.kind);
         self.isPost = true;
@@ -365,8 +362,6 @@
             angular.forEach(params.sorting(), function (value, key) {
                 sorting = value === 'desc' ? '-' + key : key;
             });
-            self.params.page = params.page();
-            self.params.pageSize = params.count();
             self.busy = true;
 
             if ($stateParams.q) {
@@ -374,9 +369,9 @@
                     self.isPost = false;
                     var list = $localStorage.priceList ? $localStorage.priceList : '';
                     self.params.isActive = 'True';
-                    self.params.pageSize = 9;
                     self.params.ordering = '-createdAt';
-                    self.params.page = self.page;
+                    self.params.page = params.page();
+                    self.params.pageSize = params.count();
                     self.params.search = self.searchTerm;
                     if (list !== '') {
                         self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax';
@@ -452,7 +447,7 @@
         $scope.tableParams = new NgTableParams({
             // default params
             page: 1, // The page number to show
-            count: 10 // The number of items to show per page
+            count: 9 // The number of items to show per page
         }, {
             // default settings
             // page size buttons (right set of buttons in demo)
