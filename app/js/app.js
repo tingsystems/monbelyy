@@ -169,7 +169,7 @@
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $http.defaults.headers.common['PROJECT-ID'] = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $rootScope.hidePriceLogin = false;
-        $rootScope.createCustomerActive = false;
+        $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;
         $rootScope.registerInvoiced = false;
         $rootScope.taxnomySearch = 'web1523988132';
