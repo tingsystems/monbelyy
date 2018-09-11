@@ -131,11 +131,13 @@
             var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
-            console.log(self.activeTab);
             if (self.activeTab === 2) {
                 account.priceListId = '560d7b10-b1c3-4e79-bd15-36e2966f6564'
             }
-            // account.priceListId = '28a01637-35ed-4802-be01-df8c98d637b2';
+            else {
+                account.isActive = true;
+            }
+
             address.zip = self.address.zip;
             address.neighborhood = self.address.neighborhood;
             address.phone = account.contactPersonPhone;
