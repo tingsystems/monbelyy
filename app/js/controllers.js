@@ -721,10 +721,10 @@
             self.brands = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 10,
+                pageSize: 30,
                 fields: 'id,slug,name',
                 search: self.searchTerBrand,
-                kind: self.filterBrand
+                parent: '4106'
             }).$promise.then(function (data) {
                 self.brands = data.results;
                 self.busyBrands = false;
