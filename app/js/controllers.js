@@ -610,7 +610,7 @@
             }
 
             $rootScope.post.title = self.detail.name;
-            $rootScope.post.urlImages = self.detail.self.detail.featuredImage.url;
+            $rootScope.post.urlImages = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
             self.detail.qty = 1;
