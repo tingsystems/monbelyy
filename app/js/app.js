@@ -192,6 +192,14 @@
             branchOffice: 'Hanny Pulido Cosméticos'
 
         };
+
+        $rootScope.post = {
+            'title': 'Hanny Pulido Cosméticos',
+            'excerpt': '',
+            'urlImages': {
+                'original': "http://www.hannypulido.com.mx/img/img-default.jpg"
+            }
+        };
         // initialise google analytics
         $window.ga('create', $rootScope.initConfig.googleKey, '');
         // do something when change state
