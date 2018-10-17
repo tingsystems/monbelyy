@@ -597,14 +597,11 @@
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
             // add gallery image and featured image
             self.detail.galleryImages.push(self.detail.featuredImage);
-            console.log(self.detail.galleryImages);
-            console.log(self.detail.featuredImage);
             //get galeries
             angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}),function (value) {
                 self.detail.galleryImages.push(value);
             });
 
-            console.log(self.detail.galleryImages);
 
 
             if (!self.detail.featuredImage) {
@@ -612,7 +609,8 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
 
-            $rootScope.post = self.detail;
+            $rootScope.post.title = self.detail.name;
+            $rootScope.post.urlImages = self.detail.self.detail.featuredImage.url;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
             self.detail.qty = 1;
