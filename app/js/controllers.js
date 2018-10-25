@@ -981,7 +981,7 @@
             self.params.isActive = 'True';
             self.params.pageSize = 9;
             if (list !== '') {
-                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax';
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,priceList';
                 self.params.priceList = list;
             }
             else {
