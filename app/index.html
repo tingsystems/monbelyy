@@ -75,15 +75,15 @@
     <div class="first-row">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
-                    <ul class="nav navbar-expand-lg mobile-hidde">
+                <div class="col-sm-4 data-social-media">
+                    <ul class="navbar-nav navbar-expand-lg mobile-hidde">
                         <li class="nav-item" ng-repeat="social in socialMedia">
-                            <a class="nav-link" href="{{ social.excerpt }}"><i class="{{ social.title }}"></i> <span
+                            <a class="nav-link" href="{{ social.excerpt }}"><span
                                 ng-bind-html="social.content | trustHtml"></span></a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-sm-4" ng-controller="GetQuerySearchCtrl as Search">
+                <div class="col-sm-4 mobile-hidde" ng-controller="GetQuerySearchCtrl as Search">
                     <form name="search" role="search" class="input-search"
                           ng-submit="Search.globalSearch('product')">
                         <md-input-container md-no-float>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-sm-4" ng-controller="AccessCtrl as Access">
                     <ul class="navbar-nav navbar-expand-lg justify-content-end ">
-                        <li class="nav-item" ng-repeat="item in mainNavMenuHelp">
+                        <li class="nav-item mobile-hidde" ng-repeat="item in mainNavMenuHelp">
                             <a class="nav-link" href="{{ item.link }}">{{item.name}}</a>
                         </li>
                         <li class="nav-item desk-hidde">
@@ -120,15 +120,13 @@
                                 <a href="" ng-click="Access.logout()" class="dropdown-item"> Cerrar sesión</a>
                             </div>
                         </li>
-                        <ul class="nav navbar-expand-lg desk-hidde">
-                            <li>
-                                <a ui-sref="shopcart" class="shopping-cart" ng-if="ecommerce"
-                                   ng-controller="AccessCtrl as Access">
-                                    <span class="qty-cart">{{ items.length }}</span>
-                                    <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
-                                </a>
-                            </li>
-                        </ul>
+                        <li class="nav-item desk-hidde">
+                            <a ui-sref="shopcart" class="shopping-cart nav-link" ng-if="ecommerce"
+                                ng-controller="AccessCtrl as Access">
+                                <span class="qty-cart">{{ items.length }}</span>
+                                <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -141,7 +139,7 @@
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="fa fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                 <ul class="navbar-nav justify-content-center">

@@ -13,19 +13,18 @@
             </div>
             <div class="col-sm-4">
                 <div class="box-contact">
-                    <h3>Nuestras sucursales</h3>
-                    <div class="list-icons-add" ng-repeat="post in branchOffices">
+                    <h3>Servicio al cliente</h3>
+                    <div class="list-icons-add" ng-repeat="post in clientService">
                         <a class="nav-link" href="{{ post.link }}"> {{ post.title }}</a>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="box-contact">
-                    <h3>Contáctanos en</h3>
+                    <h3>Contacto</h3>
                     <div class="list-icons-add" ng-repeat="post in contactData">
-                        <a class="nav-link" href="{{ post.excerpt }}"><i class="{{ post
-                    .title }}"></i> <span
-                                ng-bind-html="post.content | trustHtml"></span></a>
+                        <a class="nav-link" href="{{ post.excerpt }}">
+                            <span ng-bind-html="post.content | trustHtml"></span></a>
                     </div>
                 </div>
             </div>

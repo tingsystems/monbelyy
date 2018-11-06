@@ -58,7 +58,7 @@ audio:not([controls]),
   padding: 15px 8px;
 }
 .one-rows-nav md-input-container {
-  margin: 6px 0 15px;
+  margin: 8px 0 8px;
 }
 .one-rows-nav md-input-container .md-errors-spacer {
   min-height: 0;
@@ -1650,6 +1650,12 @@ md-input-container {
 .desk-hidde {
   display: none;
 }
+.data-social-media .navbar-nav li a {
+  font-size: 18px;
+}
+.data-social-media .navbar-nav li a p {
+  margin: 0;
+}
 .three-rows-nav .first-row .nav-link {
   padding: 5px 0 0;
 }
@@ -1678,7 +1684,7 @@ md-input-container {
   padding: 80px 0;
 }
 #home .section-one {
-  background-color: #f1f1f1;
+  background-color: #fff;
 }
 #home .section-one a {
   color: #ff4b7d;
@@ -2301,6 +2307,36 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  #home .section-one,
+  #home .section-two,
+  #home .section-four,
+  #home .section-five,
+  #home .section-six,
+  #home .section-seven {
+    padding: 30px 0;
+  }
+  .section-three {
+    padding: 0 !important;
+  }
+  .section-one p {
+    text-align: center;
+  }
+  .section-one .snip1190 {
+    margin: 10px auto;
+  }
+  figure.snip1190 {
+    margin: 10px auto;
+  }
+  .navbar-toggler span {
+    color: #555;
+  }
+  .one-rows-nav .first-row {
+    background-color: #f5f5f5;
+  }
+  .one-rows-nav .navbar-nav {
+    flex-direction: row;
+    justify-content: center !important;
+  }
   .owl-carousel-products .owl-nav button.owl-prev {
     left: 0;
   }
@@ -2316,7 +2352,14 @@ footer .contact-sty .download-app > i:hover {
     justify-content: center !important;
   }
   .shopping-cart {
-    top: -25px;
+    padding: 0 5px !important;
+    margin-left: 0;
+    top: 5px;
+  }
+  .shopping-cart .qty-cart {
+    background-color: #f5f5f5;
+    top: 0;
+    left: 10px;
   }
   .shopping-cart i {
     color: #000;
@@ -2379,7 +2422,8 @@ footer .contact-sty .download-app > i:hover {
     display: inline !important;
   }
   .slider-box .slider-img {
-    height: 185px;
+    height: 300px;
+    background-size: cover;
   }
   .slider-box .owl-nav {
     display: none;
@@ -2389,6 +2433,20 @@ footer .contact-sty .download-app > i:hover {
     margin: 35px;
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+  .section-three h3 {
+    font-size: 18px;
+  }
+  .section-three p {
+    font-size: 14px;
+  }
+  .section-three .box-post-blog .box-container-post {
+    padding: 15px 0;
+  }
+  .section-two .title-middle-line .text-content .font-type {
+    text-transform: uppercase;
+    font-size: 24px;
+    margin-top: 6px;
   }
   .section-one .rounded-cicle {
     margin-top: 15px;

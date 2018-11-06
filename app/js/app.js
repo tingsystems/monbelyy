@@ -244,35 +244,22 @@
             });
         }
 
-        if (!$rootScope.fastLink) {
+        if (!$rootScope.clientService) {
             EntrySrv.get({
-                taxonomies: 'enlaces-rapidos',
-                isActive: 'True',
-                pageSize: 6,
-                ordering: 'createdAt',
-                fields: 'title,link,excerpt,content'
-            }).$promise.then(function (results) {
-                $rootScope.fastLink = results.results;
-            });
-
-        }
-
-        if (!$rootScope.branchOffices) {
-            EntrySrv.get({
-                taxonomies: 'sucursales1524609885',
+                taxonomies: 'servicio-al-cliente1541463310',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
-                $rootScope.branchOffices = results.results;
+                $rootScope.clientService = results.results;
             });
 
         }
 
         if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'servicio-al-cliente1541463310',
+                taxonomies: 'datos-de-contacto1541529854',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -297,7 +284,7 @@
 
         if (!$rootScope.socialMedia) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1524609908',
+                taxonomies: 'redes-sociales1541463691',
                 isActive: 'True',
                 pageSize: 6,
                 ordering: 'createdAt',
