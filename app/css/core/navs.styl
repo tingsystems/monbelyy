@@ -9,22 +9,22 @@
 /* Shopping cart */
 .shopping-cart
   position relative
-  margin-top -5px
+  top 0
   margin-left 30px
   i
-    font-size 40px
+    font-size 28px
     color shoppingCart
   .qty-cart
     position absolute
-    color white
+    color fontClr
     text-align center
     border-radius 30px
-    background-color optional
+    background-color white
     font-size 13px
-    top -20px
-    left 15px
-    width 20px
-    height 20px
+    top -15px
+    left 5px
+    width 15px
+    height 15px
 
 .navbar-side-slider
   .nav-item
@@ -40,26 +40,38 @@
 .one-rows-nav
   .first-row
     background-color white
-    md-input-container.md-default-theme .md-input, md-input-container .md-input,
-    md-input-container.md-default-theme>md-icon, md-input-container>md-icon
-      border-color black
-    .btn-link
-      color black
+    md-input-container.md-default-theme .md-input,
+    md-input-container.md-default-theme>md-icon
+      border-color #ccc
+    md-input-container .md-input
+      border 1px solid #ccc 
+      padding 5px  
+    .nav-link
+      font-size 14px
+      color fontClr
+      text-transform uppercase
+      padding 15px 8px
   md-input-container
     margin 6px 0 15px
   md-input-container .md-errors-spacer
     min-height 0
   .nav-theme
     background-color mainColor
+    border-top 1px solid #ddd
+    box-shadow 0 10px 10px rgba(0,0,0,0.1)
+    z-index 999
+    .navbar-brand
+      padding-right 30px
     .navbar-nav .nav-link
-      color white
-      font-size 18px
+      color fontClr
+      font-size 16px
+      text-transform uppercase
   .nav
     margin-top 10px
     > li > .shopping-cart
       padding-right 0
   .navbar-brand .logo
-    width 250px
+    width 200px
 
 /* header three rows style */
 .three-rows-nav

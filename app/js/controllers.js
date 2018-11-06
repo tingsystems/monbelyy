@@ -13,7 +13,7 @@
         };
 
         EntrySrv.get({
-            taxonomies: 'slider1524522786',
+            taxonomies: 'slider1541463701',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -49,7 +49,7 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'home-categorias',
+            taxonomies: 'lo-nuevo',
             isActive: 'True',
             pageSize: 6,
             ordering: 'createdAt',
@@ -63,15 +63,15 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'redes-sociales1519072192',
+            taxonomies: 'blog1541459822',
             isActive: 'True',
-            pageSize: 8,
-            ordering: 'createdAt',
+            pageSize: 1,
+            ordering: '-createdAt',
             fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
-            self.socialMedia = results.results;
+            self.blogHome = results.results;
             //get featureImage
-            angular.forEach(self.socialMedia, function (obj, ind) {
+            angular.forEach(self.blogHome, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
@@ -245,7 +245,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'blog1524869264',
+                taxonomies: 'blog1541459822',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,

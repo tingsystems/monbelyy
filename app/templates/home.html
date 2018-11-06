@@ -1,58 +1,41 @@
 <div id="home">
-    <section class="container slider-box slider-small">
-        <div class="row">
-            <div class="col-sm-9">
-                <div class="owl-carousel owl-theme owl-theme-slider">
-                    <div class="slider" ng-repeat="slide in Home.mainSlider" ng-repeat-owl-carousel
-                         carousel-init="Home.carouselInitializerSlider">
-                        <div class="item" style="width: 100%;">
-                            <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                                <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
-                            </a>
-                        </div>
-                    </div>
+    <section class="slider-box">
+        <div class="owl-carousel owl-theme owl-theme-slider">
+            <div class="slider" ng-repeat="slide in Home.mainSlider" ng-repeat-owl-carousel
+                    carousel-init="Home.carouselInitializerSlider">
+                <div class="item" style="width: 100%;">
+                    <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                        <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
+                    </a>
                 </div>
-            </div>
-            <div class="col-sm-3">
-                <h4>Enlaces rápidos</h4>
-                <hr>
-                <ul class="nav flex-column navbar-side-slider">
-                    <li class="nav-item" ng-repeat="item in fastLink">
-                        <a class="nav-link" href="{{ item.link }}"> <i class="{{item.excerpt}}"></i> {{ item.title }}</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </section>
     <section class="section-three">
         <div class="container">
-            <div class="title-middle-line">
-                <div class="text-content">
-                    <h1 class="font-type">Siempre bella</h1>
-                </div>
-                <hr>
-            </div>
             <div class="row">
-                <div class="col-sm-4" ng-repeat="item in Home.categoryProd">
-                    <figure class="effect-sadie">
-                        <div class="img-bg-caption" style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}');"></div>
-                        <div class="bg-color-caption"></div>
-                        <div class="divider"></div>
-                        <figcaption class="text-caption">
+                <div class="col-sm-6" ng-repeat="item in Home.categoryProd">
+                    <figure class="snip1190">
+                        <div class="img-caption" style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}');"></div>
+                        <figcaption>
+                            <div class="square">
+                                <div></div>
+                            </div>
                             <h2>{{ item.title }}</h2>
                             <p>{{item.excerpt}}</p>
-                            <a post-link="{ link: {url: item.link, target: '_self'} }" class="btn btn-white">Ver productos</a>
                         </figcaption>
+                        <a post-link="{ link: {url: item.link, target: '_self'} }"></a>
                     </figure>
                 </div>
             </div>
         </div>
     </section>
+    
     <section class="section-two" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <div class="title-middle-line">
                 <div class="text-content">
-                    <h1 class="font-type">Lo más vendido</h1>
+                    <h1 class="font-type">Lo nuevo</h1>
                 </div>
                 <hr>
             </div>
@@ -69,17 +52,46 @@
                         </div>
                     </div>
                     <div class="box-container">
-                        <p>{{ product.name | limitTo:40}}</p>
-                        <h4>{{ product.price | currency }}</h4>
+                        <div class="row align-items-center">
+                            <div class="col-sm-6">
+                                <h6>{{ product.name | limitTo:40}}</h6>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>{{ product.price | currency }}</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="box-footer">
-                        <!--<a ui-sref="product-detail({slug:product.slug})" class="btn btn-outline-dark">Ver más</a>-->
-                        <button class="btn btn-black"
+                        <div class="row"> 
+                            <div class="col-sm-8 no-pd-r">
+                                <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-default">Ver más</a>
+                            </div>
+                            <div class="col-sm-4">
+                                <button class="btn btn-optional btn-block"
                                 ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
-                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
-                                ng-disabled="Shop.itemInCart(product)">Agregar al carrito
-                        </button>
+                                name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
+                                    ng-disabled="Shop.itemInCart(product)"><i class="fa fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section-three">
+        <div class="container">
+            <div class="row box-post-blog align-items-center" ng-repeat="post in Home.blogHome">
+                <div class="col-sm-6 col-6">
+                    <article class="box-container-post">
+                        <h3 class="text-uppercase">{{post.title}}</h3>
+                        <p>{{post.excerpt}}</p>
+                        <a href="{{post.link}}">Ver más <i class="fa fa-angle-right"></i></a>
+                    </article>
+                </div>
+                <div class="col-sm-6 col-6 no-padding">
+                    <div class="img-post" style="background-image: url('{{post.featuredImage.url}}')"></div>
                 </div>
             </div>
         </div>

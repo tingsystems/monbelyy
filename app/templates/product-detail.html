@@ -3,7 +3,7 @@
         <nav aria-label="breadcrumb">
             <div class="container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a
+                    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a>
                     </li>
                     <li class="breadcrumb-item" ng-if="Product.detail.taxonomies.length"><a
                             ui-sref="category({slug: Product.detail.taxonomies[0].slug })">
@@ -17,7 +17,7 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-8">
                     <div class="owl-carousel owl-theme owl-theme-page">
                         <div class="slider" ng-repeat="slide in Product.detail.galleryImages" ng-repeat-owl-carousel
                              carousel-init="Product.carouselDetailProduct">
@@ -32,17 +32,17 @@
                     <div class="bg-image-single" ng-if="Product.detail.galleryImages.length < 1"
                          style="background-image:url('{{ Product.detail.featuredImage.url }}');"></div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-4">
                     <div class="article-description">
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <h4>{{Product.detail.name}}..</h4>
                                     <br>
                                     <h2 class="article-price">{{ Product.detail.price | currency}}</h2>
                                     <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <form name="FormQty">
                                         <md-input-container class="md-block">
                                             <label>Cantidad</label>
@@ -59,17 +59,20 @@
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax}, Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid"
-                                            class="btn btn-danger">Agregar a carrito
+                                            class="btn btn-optional"> <i class="fa fa-shopping-cart"></i> Agregar a carrito
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <hr>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <article class="box-description-detail-product">
                         <h4>Descripción</h4>
                         <hr>
-                        <h4 class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
-                            {{Product.detail.description}}</h4>
-                    </div>
+                        <p class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
+                            {{Product.detail.description}}</p>
+                    </article>
                 </div>
             </article>
         </div>
