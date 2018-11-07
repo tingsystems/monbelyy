@@ -27,9 +27,10 @@
         });
 
         var paramsProducts = {};
-        paramsProducts.taxonomies = 'web1523988132';
+        paramsProducts.taxonomies = 'lo-nuevo1541605828';
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
+        paramsProducts.kind = 'group';
         paramsProducts.ordering = 'createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax';
