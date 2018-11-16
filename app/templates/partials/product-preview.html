@@ -1,0 +1,60 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <md-toolbar>
+        <div class="md-toolbar-tools bg-white">
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="owl-carousel owl-theme owl-theme-page">
+                        <div class="slider" ng-repeat="slide in Shop.detail.galleryImages" ng-repeat-owl-carousel
+                             carousel-init="Product.carouselDetailProduct">
+                            <div class="item" style="width: 100%;">
+                                <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                                    <div class="slider-page"
+                                         style="background-image:url('{{ slide.attached_file ? slide.attached_file : initConfig.img_default }}');"></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-image-single" ng-if="Shop.detail.galleryImages.length < 1"
+                         style="background-image:url('{{ Shop.detail.featuredImage.url }}');"></div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>{{Shop.detail.name}}..</h4>
+                    <br>
+                    <h2 class="article-price">{{ Shop.detail.price | currency}}</h2>
+                    <br>
+                    <form name="FormQty">
+                        <div class="row">
+                            <ng-include src="'/templates/partials/options-group-preview.html'"></ng-include>
+                            <div class="col">
+                                <md-input-container class="md-block">
+                                    <label>Cantidad</label>
+                                    <input type="number" placeholder="0" ng-model="Shop.detail.qty" min="1"
+                                           ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
+                                    <div class="errors" ng-messages="FormQty.qty.$error">
+                                        <div ng-message="required">Requiredo</div>
+                                        <div ng-message="pattern">Cantidad no valida</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                    </form>
+                    <button ng-click="Shop.setItem({id: Shop.detail.id, name: Shop.detail.name,
+                                        price: Shop.detail.price, image: Shop.detail.featuredImage.url,
+                                        qty: Shop.detail.qty, taxonomies : Shop.detail.taxonomies, shipmentPrice: Shop.detail.shipmentPrice, typeTax: Shop.detail.typeTax}, Shop.detail.qty)"
+                            ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid"
+                            class="btn btn-optional btn-block"><i class="fa fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

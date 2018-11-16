@@ -44,22 +44,28 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <form name="FormQty">
-                                        <md-input-container class="md-block">
-                                            <label>Cantidad</label>
-                                            <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"
-                                                   ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
-                                            <div class="errors" ng-messages="FormQty.qty.$error">
-                                                <div ng-message="required">Requiredo</div>
-                                                <div ng-message="pattern">Cantidad no valida</div>
+                                        <div class="row">
+                                            <ng-include src="'/templates/partials/options-group.html'"></ng-include>
+                                            <div class="col">
+                                                <md-input-container class="md-block">
+                                                    <label>Cantidad</label>
+                                                    <input type="number" placeholder="0" ng-model="Product.detail.qty"
+                                                           min="1"
+                                                           ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
+                                                    <div class="errors" ng-messages="FormQty.qty.$error">
+                                                        <div ng-message="required">Requiredo</div>
+                                                        <div ng-message="pattern">Cantidad no valida</div>
+                                                    </div>
+                                                </md-input-container>
                                             </div>
-                                        </md-input-container>
-
+                                        </div>
                                     </form>
                                     <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax}, Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid"
-                                            class="btn btn-optional"> <i class="fa fa-shopping-cart"></i> Agregar a carrito
+                                            class="btn btn-optional"><i class="fa fa-shopping-cart"></i> Agregar a
+                                        carrito
                                     </button>
                                 </div>
                             </div>

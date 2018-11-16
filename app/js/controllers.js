@@ -33,14 +33,13 @@
         paramsProducts.kind = 'group';
         paramsProducts.ordering = 'createdAt';
         if (list !== '') {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
         }
-
-
+        paramsProducts.kind = 'group';
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
@@ -375,16 +374,15 @@
                     self.params.pageSize = params.count();
                     self.params.search = self.searchTerm;
                     if (list !== '') {
-                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax';
+                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code';
                         self.params.priceList = list;
                     }
                     else {
-                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
+                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code';
                     }
-
+                    self.params.kind = 'group';
                     return ProductSrv.get(self.params).$promise.then(function (results) {
                         self.listSearch = results.results;
-                        console.log(self.listSearch);
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
@@ -583,11 +581,11 @@
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata';
         }
 
         self.busy = true;
@@ -598,16 +596,10 @@
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
             // add gallery image and featured image
             self.detail.galleryImages.push(self.detail.featuredImage);
-            console.log(self.detail.galleryImages);
-            console.log(self.detail.featuredImage);
             //get galeries
-            angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}),function (value) {
+            angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
                 self.detail.galleryImages.push(value);
             });
-
-            console.log(self.detail.galleryImages);
-
-
             if (!self.detail.featuredImage) {
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
@@ -628,8 +620,8 @@
                 //pagination: false,
                 autoplay: true,
                 items: 2,
-                autoplayHoverPause:true,
-                autoplayTimeout:1000,
+                autoplayHoverPause: true,
+                autoplayTimeout: 1000,
                 margin: 0,
                 responsiveClass: true,
                 responsive: {
@@ -648,7 +640,47 @@
                     }
                 }
             });
-        }
+        };
+
+        self.getProductFromGroup = function () {
+            var taxonomies = [];
+            angular.forEach(self.optionSelected, function (obj) {
+                taxonomies.push(obj.slug)
+            });
+            var taxonomiesJoin = taxonomies.join();
+            var paramsItemGroup = {
+                parent: self.parent,
+                taxonomies: taxonomiesJoin,
+                fields: paramsProducts.fields,
+                priceList: list
+
+            };
+            ProductSrv.group(paramsItemGroup).$promise.then(function (results) {
+                self.itemFromGroup = results[0];
+                self.detail.stock = self.itemFromGroup.stock;
+                self.detail.price = self.itemFromGroup.price;
+                self.detail.id = self.itemFromGroup.id;
+                self.detail.name = self.itemFromGroup.name;
+                self.detail.shipmentPrice = self.itemFromGroup.shipmentPrice;
+                self.detail.typeTax = self.itemFromGroup.typeTax;
+                self.detail.code = self.itemFromGroup.code;
+                self.detail.kind = self.itemFromGroup.kind;
+                // get featureImage
+                self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
+                //get galeries
+                self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
+
+                if (!self.detail.featuredImage) {
+                    self.detail.featuredImage = {};
+                    self.detail.featuredImage.url = $rootScope.initConfig.img_default;
+                }
+
+                $rootScope.post = self.itemFromGroup;
+                $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
+                self.busy = false;
+                self.detail.qty = 1;
+            });
+        };
 
     }
 
@@ -1041,10 +1073,20 @@
 
     }
 
-    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert) {
+    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert, ProductSrv, $mdDialog, $scope) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
+        var list = $localStorage.priceList ? $localStorage.priceList : '';
+        var paramsProducts = {};
+        paramsProducts.isActive = 'True';
+        if (list !== '') {
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.priceList = list;
+        }
+        else {
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata';
+        }
 
         $localStorage.items = self.items;
         $localStorage.total = self.total;
@@ -1118,6 +1160,7 @@
                 }
             }
             getTotal();
+            $mdDialog.hide();
         };
         // remove item from cart
         self.removeItem = function (item) {
@@ -1126,6 +1169,63 @@
                 self.items.splice([self.items.indexOf(find_item)], 1)
             }
             getTotal();
+        };
+
+        self.showPreviewItem = function (ev, item) {
+            self.parentId = item.id;
+            self.detail = angular.copy(item);
+            $mdDialog.show({
+                templateUrl: '/templates/partials/product-preview.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true,
+                scope: $scope,        // use parent scope in template
+                preserveScope: true,  // do not forget this if use parent scope
+                controllerAs: 'Shop'
+            }).then(function (response) {
+                if (response === 'cancel') return;
+            }, function (error) {
+                console.log(error);
+            });
+        };
+
+        self.getProductFromGroup = function () {
+            var taxonomies = [];
+            angular.forEach(self.optionSelected, function (obj) {
+                taxonomies.push(obj.slug)
+            });
+            var taxonomiesJoin = taxonomies.join();
+            var paramsItemGroup = {
+                parent: self.parentId,
+                taxonomies: taxonomiesJoin,
+                fields: paramsProducts.fields,
+                priceList: list
+
+            };
+            ProductSrv.group(paramsItemGroup).$promise.then(function (results) {
+                self.itemFromGroup = results[0];
+                self.detail.stock = self.itemFromGroup.stock;
+                self.detail.price = self.itemFromGroup.price;
+                self.detail.id = self.itemFromGroup.id;
+                self.detail.name = self.itemFromGroup.name;
+                self.detail.shipmentPrice = self.itemFromGroup.shipmentPrice;
+                self.detail.typeTax = self.itemFromGroup.typeTax;
+                self.detail.code = self.itemFromGroup.code;
+                // get featureImage
+                self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
+                //get galeries
+                self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
+
+                if (!self.detail.featuredImage) {
+                    self.detail.featuredImage = {};
+                    self.detail.featuredImage.url = $rootScope.initConfig.img_default;
+                }
+
+                $rootScope.post = self.itemFromGroup;
+                $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
+                self.busy = false;
+                self.detail.qty = 1;
+            });
         };
     }
 
@@ -1162,5 +1262,5 @@
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
         '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
-        'SweetAlert'];
+        'SweetAlert', 'ProductSrv', '$mdDialog', '$scope'];
 })();

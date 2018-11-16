@@ -12,8 +12,6 @@
             $rootScope.user = $localStorage.appData.user;
         }
         self.cities = [];
-        console.log($stateParams.user);
-        console.log($stateParams.wholesale);
         self.user = $stateParams.user;
         self.wholesale = $stateParams.wholesale;
         self.activeTab = 0;

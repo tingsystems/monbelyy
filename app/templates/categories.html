@@ -179,17 +179,14 @@
                                         </div>
                                         <div class="box-footer">
                                             <div class="row"> 
-                                                <div class="col-sm-8 no-pd-r">
+                                                <div class="col-sm-12">
                                                     <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-default">Ver más</a>
                                                 </div>
-                                                <div class="col-sm-4">
-                                                    <button class="btn btn-optional"
-                                                            ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
-                                                            name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
-                                                            ng-disabled="Product.itemInCart(product)">
-                                                            <i class="fa fa-shopping-cart"></i>
+                                                <!--<div class="col-sm-4">
+                                                    <button ng-click="Shop.showPreviewItem($event, product)"
+                                                            class="btn btn-optional btn-block"><i class="fa fa-shopping-cart"></i>
                                                     </button>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </a>
