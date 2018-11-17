@@ -27,7 +27,13 @@
     }
 
     function ProductSrv($resource, BaseUrl) {
-        return $resource(BaseUrl.shop() + 'items/:slug', null, {});
+        return $resource(BaseUrl.shop() + 'items/:slug', null, {
+            'group': {
+                method: 'GET',
+                isArray: true,
+                url: BaseUrl.shop() + 'items'
+            }
+        });
     }
 
     function ProductTaxonomySrv($resource, BaseUrl) {

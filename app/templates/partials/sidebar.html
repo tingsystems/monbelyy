@@ -11,8 +11,8 @@
     <h4 class="widget-title">Síguenos en</h4>
     <div class="box-widget-container" style="padding-bottom: 50px;">
         <div class="list-icons-add" ng-repeat="social in socialMedia">
-            <a class="nav-link" href="{{ social.excerpt }}"><i class="{{ social.title }}"></i> <span
-                    ng-bind-html="social.content | trustHtml"></span></a>
+            <a class="nav-link" href="{{ social.excerpt }}">
+                <span ng-bind-html="social.content | trustHtml"></span></a>
         </div>
     </div>
 </div>

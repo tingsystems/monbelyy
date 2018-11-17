@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: 'Hanny Pulido Cosméticos'},
+                data: {pageTitle: 'Monna Vintage'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: 'Hanny Pulido Cosméticos'},
+                data: {pageTitle: ' Monna Vintage'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Hanny Pulido Cosméticos'},
+                data: {pageTitle: 'Monna Vintage'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -167,7 +167,7 @@
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
-        $http.defaults.headers.common['PROJECT-ID'] = '5d951cfe-9a49-4b05-8708-c680e205d246';
+        $http.defaults.headers.common['PROJECT-ID'] = '77376fb3-d267-4886-91c6-c2c0ff23f002';
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;
@@ -187,9 +187,9 @@
             googleKey: 'UA-101539944-1',
             meta_color: '#337ab7',
             img_default: '../../img/img-default.jpg',
-            email: 'ventas@hannypulidocosméticos.com.mx',
+            email: 'ventas@monnavintage.com',
             phone: '33 2257 3971',
-            branchOffice: 'Hanny Pulido Cosméticos'
+            branchOffice: 'Monna Vintage'
 
         };
 
@@ -208,7 +208,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Hanny Pulido Cosméticos',
+                'title': 'Monna Vintage',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -217,7 +217,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Hanny Pulido Cosméticos';
+        $rootScope.pageTitle = 'Monna Vintage';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -232,7 +232,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: '135876e2-073c-4b78-ba70-ced68dd0bc4c',
+                parent: '11acea36-8ed3-41a3-b167-2b3dff306f10',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -241,35 +241,33 @@
             });
         }
 
-        if (!$rootScope.fastLink) {
-            EntrySrv.get({
-                taxonomies: 'enlaces-rapidos',
+        if (!$rootScope.mainNavMenuHelp) {
+            TaxonomySrv.query({
+                parent: 'db0a79d5-b467-47ac-aa8a-d574e33945de',
                 isActive: 'True',
-                pageSize: 6,
-                ordering: 'createdAt',
-                fields: 'title,link,excerpt,content'
-            }).$promise.then(function (results) {
-                $rootScope.fastLink = results.results;
+                ordering: 'order'
+            }).$promise.then(function (response) {
+                $rootScope.mainNavMenuHelp = response;
+            }, function (error) {
             });
-
         }
 
-        if (!$rootScope.branchOffices) {
+        if (!$rootScope.clientService) {
             EntrySrv.get({
-                taxonomies: 'sucursales1524609885',
+                taxonomies: 'servicio-al-cliente1541463310',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
-                $rootScope.branchOffices = results.results;
+                $rootScope.clientService = results.results;
             });
 
         }
 
         if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1524609897',
+                taxonomies: 'datos-de-contacto1541529854',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -282,7 +280,7 @@
 
         if (!$rootScope.information) {
             EntrySrv.get({
-                taxonomies: 'informacion1524609853',
+                taxonomies: 'informacion1541463284',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -294,7 +292,7 @@
 
         if (!$rootScope.socialMedia) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1524609908',
+                taxonomies: 'redes-sociales1541463691',
                 isActive: 'True',
                 pageSize: 6,
                 ordering: 'createdAt',
