@@ -600,12 +600,6 @@
             angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
                 self.detail.galleryImages.push(value);
             });
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> development
             if (!self.detail.featuredImage) {
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
