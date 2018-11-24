@@ -10,9 +10,11 @@
     <hr class="dividerw">
     <h4 class="widget-title">Síguenos en</h4>
     <div class="box-widget-container" style="padding-bottom: 50px;">
-        <div class="list-icons-add" ng-repeat="social in socialMedia">
-            <a class="nav-link" href="{{ social.excerpt }}">
-                <span ng-bind-html="social.content | trustHtml"></span></a>
-        </div>
+        <ul class="nav">
+            <li class="nav-item" ng-repeat="social in socialMedia">
+                <a class="nav-link" href="{{ social.excerpt }}"><span
+                    ng-bind-html="social.content | trustHtml"></span></a>
+            </li>
+        </ul>
     </div>
 </div>

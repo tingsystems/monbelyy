@@ -27,24 +27,24 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <h4>{{Shop.detail.name}}..</h4>
+                    <h4 class="text-uppercase">{{Shop.detail.name}}..</h4>
                     <br>
                     <h2 class="article-price">{{ Shop.detail.price | currency}}</h2>
                     <br>
                     <form name="FormQty">
                         <div class="row">
                             <ng-include src="'/templates/partials/options-group-preview.html'"></ng-include>
-                            <div class="col">
-                                <md-input-container class="md-block">
-                                    <label>Cantidad</label>
-                                    <input type="number" placeholder="0" ng-model="Shop.detail.qty" min="1"
-                                           ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
-                                    <div class="errors" ng-messages="FormQty.qty.$error">
-                                        <div ng-message="required">Requiredo</div>
-                                        <div ng-message="pattern">Cantidad no valida</div>
-                                    </div>
-                                </md-input-container>
-                            </div>
+                        </div>
+                        <div class="row">
+                            <md-input-container class="md-block">
+                                <label>Cantidad</label>
+                                <input type="number" placeholder="0" ng-model="Shop.detail.qty" min="1"
+                                        ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
+                                <div class="errors" ng-messages="FormQty.qty.$error">
+                                    <div ng-message="required">Requiredo</div>
+                                    <div ng-message="pattern">Cantidad no valida</div>
+                                </div>
+                            </md-input-container>
                         </div>
                     </form>
                     <button ng-click="Shop.setItem({id: Shop.detail.id, name: Shop.detail.name,

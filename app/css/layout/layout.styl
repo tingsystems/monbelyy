@@ -150,7 +150,16 @@ md-input-container
     text-align left
 
 /* ------ TEMP PRODUCT DETAIL STYLE ----- */
-.temp-product-detail
+.temp-product-detail, .md-dialog-content
+  .md-select-value      
+    padding 2px 8px 1px !important
+    md-input-container > md-select
+      border 1px solid #ddd
+    md-input-container .md-input
+      border 1px solid #ddd
+      padding 0 10px  
+    md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input, md-input-container:not(.md-input-invalid).md-input-focused .md-input, md-input-container.md-default-theme:not(.md-input-invalid).md-input-resized .md-input, md-input-container:not(.md-input-invalid).md-input-resized .md-input
+      border 1px solid black  
   .bg-image-single
     background-size cover
     background-position center
@@ -220,12 +229,21 @@ md-input-container
 .text-left
   text-align left !important
 
+.temp-contact
+  background-image url('../img/pattern-white.png')
+  background-repeat repeat
+  background-color white
+  h1
+    margin-bottom 20px
+
 /* ------ TEMP login CART STYLE ----- */
 #login
   padding 0
-  background-color #f5f5f5
+  
   .bg-login
-    background-color #f5f5f5
+    background-color white
+    background-image url('../img/pattern-white.png')
+    background-repeat repeat
     padding 50px 0 160px
 
 #temp-checkout
@@ -395,12 +413,3 @@ footer
   md-content
     &._md
       max-height 240px
-.md-select-value      
-  padding 2px 8px 1px !important
-md-input-container > md-select
-  border 1px solid #ddd
-md-input-container .md-input
-  border 1px solid #ddd
-  padding 0 10px  
-md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input, md-input-container:not(.md-input-invalid).md-input-focused .md-input, md-input-container.md-default-theme:not(.md-input-invalid).md-input-resized .md-input, md-input-container:not(.md-input-invalid).md-input-resized .md-input
-  border 1px solid black  

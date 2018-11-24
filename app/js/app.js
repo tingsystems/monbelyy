@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: 'Monna Vintage'},
+                data: {pageTitle: ' Moneek'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: ' Monna Vintage'},
+                data: {pageTitle: ' Moneek'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Monna Vintage'},
+                data: {pageTitle: 'Moneek'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -187,17 +187,17 @@
             googleKey: 'UA-101539944-1',
             meta_color: '#337ab7',
             img_default: '../../img/img-default.jpg',
-            email: 'ventas@monnavintage.com',
-            phone: '33 2257 3971',
-            branchOffice: 'Monna Vintage'
+            email: 'ventas@moneek.mx',
+            phone: '4531076764',
+            branchOffice: 'Moneek'
 
         };
 
         $rootScope.post = {
-            'title': 'Hanny Pulido Cosméticos',
+            'title': 'Moneek - Venta de ropa, calzado y accesorios para Dama',
             'excerpt': '',
             'urlImages': {
-                'original': "http://www.hannypulido.com.mx/img/img-default.jpg"
+                'original': "../img/img-default.jpg"
             }
         };
         // initialise google analytics
@@ -208,7 +208,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Monna Vintage',
+                'title': 'Moneek',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -217,7 +217,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Monna Vintage';
+        $rootScope.pageTitle = 'Moneek';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
