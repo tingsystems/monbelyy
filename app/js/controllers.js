@@ -13,7 +13,7 @@
         };
 
         EntrySrv.get({
-            taxonomies: 'slider1541463701',
+            taxonomies: 'slider1535244046',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -27,11 +27,10 @@
         });
 
         var paramsProducts = {};
-        paramsProducts.taxonomies = 'lo-nuevo1541605828';
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
         paramsProducts.kind = 'group';
-        paramsProducts.ordering = 'createdAt';
+        paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
             paramsProducts.priceList = list;
@@ -49,7 +48,7 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'lo-nuevo',
+            taxonomies: 'categorias-del-home',
             isActive: 'True',
             pageSize: 6,
             ordering: 'createdAt',
@@ -63,7 +62,21 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'blog1541459822',
+            taxonomies: 'temporadas',
+            isActive: 'True',
+            pageSize: 1,
+            ordering: 'createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.seasonsSell = results.results;
+            //get featureImage
+            angular.forEach(self.seasonsSell, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+            });
+        });
+
+        EntrySrv.get({
+            taxonomies: 'blog1543005663',
             isActive: 'True',
             pageSize: 1,
             ordering: '-createdAt',
@@ -245,7 +258,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'blog1541459822',
+                taxonomies: 'blog1543005663',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,

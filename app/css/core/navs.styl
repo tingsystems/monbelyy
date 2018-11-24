@@ -39,16 +39,30 @@
 /* header three rows style */
 .one-rows-nav
   .first-row
-    background-color white
+    background-color #222
+    background-image url(../img/pattern.png)
+    background-repeat repeat
+    .text-danger
+      padding 3px 10px !important
+      margin 10px 0 0 10px
+      background-color red
+      color white !important
+    md-input-container.md-icon-right > md-icon:last-of-type
+      color white
+    md-input-container.md-default-theme .md-input::-webkit-input-placeholder, 
+    md-input-container .md-input::-webkit-input-placeholder
+      color white  
     md-input-container.md-default-theme .md-input,
     md-input-container.md-default-theme>md-icon
       border-color #ccc
+      color white
     md-input-container .md-input
       border 1px solid #ccc 
       padding 5px  
+      color white
     .nav-link
       font-size 14px
-      color fontClr
+      color white
       text-transform uppercase
       padding 15px 8px
   md-input-container
@@ -60,6 +74,7 @@
     border-top 1px solid #ddd
     box-shadow 0 10px 10px rgba(0,0,0,0.1)
     z-index 999
+    padding 0
     .navbar-brand
       padding-right 30px
     .navbar-nav .nav-link
@@ -77,7 +92,7 @@
 .three-rows-nav
   .first-row
     padding 15px 0
-    background-color transparent
+    background-color black
     border-bottom 1px solid #ddd
     .dropdown-menu
       margin-top -10px

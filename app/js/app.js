@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -167,7 +167,7 @@
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
-        $http.defaults.headers.common['PROJECT-ID'] = '77376fb3-d267-4886-91c6-c2c0ff23f002';
+        $http.defaults.headers.common['PROJECT-ID'] = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;
@@ -232,7 +232,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: '11acea36-8ed3-41a3-b167-2b3dff306f10',
+                parent: '2673f16e-a4b4-4313-a012-8cf5c7473e36',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -254,7 +254,7 @@
 
         if (!$rootScope.clientService) {
             EntrySrv.get({
-                taxonomies: 'servicio-al-cliente1541463310',
+                taxonomies: 'servicio-al-cliente1543003314',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -267,7 +267,7 @@
 
         if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1541529854',
+                taxonomies: 'datos-de-contacto1543003298',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -280,7 +280,7 @@
 
         if (!$rootScope.information) {
             EntrySrv.get({
-                taxonomies: 'informacion1541463284',
+                taxonomies: 'informacion1543003263',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -292,7 +292,7 @@
 
         if (!$rootScope.socialMedia) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1541463691',
+                taxonomies: 'redes-sociales1542933122',
                 isActive: 'True',
                 pageSize: 6,
                 ordering: 'createdAt',

@@ -47,7 +47,6 @@
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="lib/ng-table/dist/ng-table.css" />
-    <link rel="stylesheet" href="lib/sweetalert/dist/sweetalert.css" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- inject:css -->
@@ -76,7 +75,7 @@
     <div class="first-row">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-2 col-sm-2 data-social-media">
+                <div class="col-lg-3 col-md-2 col-sm-2 data-social-media">
                     <ul class="navbar-nav navbar-expand-lg mobile-hidde">
                         <li class="nav-item" ng-repeat="social in socialMedia">
                             <a class="nav-link" href="{{ social.excerpt }}"><span
@@ -84,7 +83,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-4 col-sm-4 mobile-hidde" ng-controller="GetQuerySearchCtrl as Search">
+                <div class="col-md-6 col-sm-4 mobile-hidde" ng-controller="GetQuerySearchCtrl as Search">
                     <form name="search" role="search" class="input-search"
                           ng-submit="Search.globalSearch('product')">
                         <md-input-container md-no-float>
@@ -94,12 +93,9 @@
                         </md-input-container>
                     </form>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6" ng-controller="AccessCtrl as Access">
+                <div class="col-lg-3 col-md-6 col-sm-6" ng-controller="AccessCtrl as Access">
                     <ul class="navbar-nav navbar-expand-lg justify-content-end ">
-                        <li class="nav-item mobile-hidde" ng-repeat="item in mainNavMenuHelp">
-                            <a class="nav-link" href="{{ item.link }}">{{item.name}}</a>
-                        </li>
-                        <li class="nav-item desk-hidde">
+                        <li class="nav-item">
                             <a ui-sref="register({user:true, wholesale:false})" class="nav-link"
                                ng-if="!Access.isAuthenticated()">
                                 <i class="fa fa-user-circle"></i> Iniciar sesión
@@ -107,7 +103,7 @@
                         </li>
                         <li class="nav-item">
                             <a ui-sref="register({user:false, wholesale:true})" class="nav-link text-danger"
-                               ng-if="!Access.isAuthenticated()"> Mayoristas
+                               ng-if="!Access.isAuthenticated()"> <i class="fa fa-gift"></i> Ofertas
                             </a>
                         </li>
                         <li class="dropdown">
@@ -149,23 +145,6 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav navbar-expand-lg mobile-hidde" ng-controller="AccessCtrl as Access">
-                    <li class="nav-item">
-                        <a ui-sref="register({user:true, wholesale:false})" class="nav-link"
-                           ng-if="!Access.isAuthenticated()">
-                            <i class="fa fa-user-circle"></i> Iniciar sesión
-                        </a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a ng-if="Access.isAuthenticated()" class="dropdown-toggle nav-link" type="button"
-                                id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <i class="fa fa-user-circle"></i> {{user.username}}
-                            <span class="caret"></span>
-                    </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <a ui-sref="dashboard" class="dropdown-item">Mi cuenta </a>
-                            <a href="" ng-click="Access.logout()" class="dropdown-item"> Cerrar sesión</a>
-                        </div>
-                    </li>
                     <li>
                         <a ui-sref="shopcart" class="shopping-cart" ng-if="ecommerce"
                            ng-controller="AccessCtrl as Access">
@@ -214,7 +193,6 @@
 <script src="lib/ng-file-upload/ng-file-upload.js"></script>
 <script src="lib/angular-ui-select/dist/select.js"></script>
 <script src="lib/ng-table/dist/ng-table.js"></script>
-<script src="lib/sweetalert/dist/sweetalert.min.js"></script>
 <script src="lib/ngSweetAlert/SweetAlert.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>

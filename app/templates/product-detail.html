@@ -17,7 +17,7 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <div class="owl-carousel owl-theme owl-theme-page">
                         <div class="slider" ng-repeat="slide in Product.detail.galleryImages" ng-repeat-owl-carousel
                              carousel-init="Product.carouselDetailProduct">
@@ -32,12 +32,12 @@
                     <div class="bg-image-single" ng-if="Product.detail.galleryImages.length < 1"
                          style="background-image:url('{{ Product.detail.featuredImage.url }}');"></div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <div class="article-description">
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4>{{Product.detail.name}}..</h4>
+                                    <h1 class="text-uppercase">{{Product.detail.name}}</h1>
                                     <br>
                                     <h2 class="article-price">{{ Product.detail.price | currency}}</h2>
                                     <br>
@@ -45,13 +45,15 @@
                                 <div class="col-sm-12">
                                     <form name="FormQty">
                                         <div class="row">
-                                            <ng-include src="'/templates/partials/options-group.html'"></ng-include>
-                                            <div class="col">
+                                            <ng-include style="width:100%" src="'/templates/partials/options-group.html'"></ng-include>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <md-input-container class="md-block">
                                                     <label>Cantidad</label>
                                                     <input type="number" placeholder="0" ng-model="Product.detail.qty"
-                                                           min="1"
-                                                           ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
+                                                            min="1"
+                                                            ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
                                                     <div class="errors" ng-messages="FormQty.qty.$error">
                                                         <div ng-message="required">Requiredo</div>
                                                         <div ng-message="pattern">Cantidad no valida</div>
