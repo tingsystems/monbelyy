@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "taki-c0b1c"
+  },
+  "targets": {
+    "taki-c0b1c": {
+      "hosting": {
+        "moneek": [
+          "moneek"
+        ]
+      }
+    }
+  }
+}

@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -184,12 +184,12 @@
         });
         //various config
         $rootScope.initConfig = {
-            googleKey: 'UA-101539944-1',
+            googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
             img_default: '../../img/img-default.jpg',
             email: 'ventas@moneek.mx',
             phone: '4531076764',
-            branchOffice: 'Moneek'
+            branchOffice: 'Moneek - Venta de ropa, calzado y accesorios para Dama'
 
         };
 
