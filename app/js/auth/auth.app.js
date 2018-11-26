@@ -5,7 +5,7 @@
         $stateProvider
             .state('register', {
                 url: '/login',
-                data: {pageTitle: 'Monna Vintage'},
+                data: {pageTitle: 'Moneek'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
@@ -17,7 +17,7 @@
             })
             .state('success', {
                 url: '/account/success',
-                data: {pageTitle: 'Monna Vintage'},
+                data: {pageTitle: 'Moneek'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/validate_account.html'
@@ -26,7 +26,7 @@
             })
             .state('validate', {
                 url: '/validate/:token',
-                data: {pageTitle: 'Monna Vintage'},
+                data: {pageTitle: 'Moneek'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/account_activated.html',
@@ -39,7 +39,7 @@
                 url: '/account/dashboard',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Monna Vintage'
+                    pageTitle: 'Moneek'
                 },
                 views: {
                     'content': {
@@ -79,7 +79,7 @@
                 url: '/account/profile',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Perfil - Monna Vintage'
+                    pageTitle: 'Perfil - Moneek'
                 },
                 views: {
                     'content': {
@@ -93,7 +93,7 @@
                 url: '/account/addresses',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Monna Vintage'
+                    pageTitle: 'Direcciones - Moneek'
                 },
                 views: {
                     'content': {
@@ -107,7 +107,7 @@
                 url: '/account/address',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Monna Vintage'
+                    pageTitle: 'Direcciones - Moneek'
                 },
                 views: {
                     'content': {
@@ -121,7 +121,7 @@
                 url: '/account/address/update/:id',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Monna Vintage'
+                    pageTitle: 'Direcciones - Moneek'
                 },
                 views: {
                     'content': {
@@ -134,7 +134,7 @@
             .state('recovery-password', {
                 url: '/account/recovery/password',
                 data: {
-                    pageTitle: 'Recuperar contraseña - Monna Vintage'
+                    pageTitle: 'Recuperar contraseña - Moneek'
                 },
                 views: {
                     'content': {
@@ -147,7 +147,7 @@
             .state('new-password', {
                 url: '/account/new/password/:token',
                 data: {
-                    pageTitle: 'Reestablecer contraseña - Monna Vintage'
+                    pageTitle: 'Reestablecer contraseña - Moneek'
                 },
                 views: {
                     'content': {

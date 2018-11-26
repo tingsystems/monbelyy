@@ -4,5 +4,7 @@
     </a>
     <a class="list-group-item" ng-class="{'active': sales}"  ng-click="sales = !sales" ui-sref="sales"><i class="ion-bag"></i> Mis compras</a>
     <a class="list-group-item" ui-sref="address" ng-class="{'active': address}"  ng-click="address = !address"><i class="ion-ios-location-outline"></i> Mis direcciones</a>
-    <a class="list-group-item"  ui-sref="profile"  ng-class="{'active': profile}"  ng-click="profile = !profile"><i class="ion-ios-gear-outline"></i> Configuración</a>
+    <a class="list-group-item" ui-sref="profile"  ng-class="{'active': profile}"  ng-click="profile = !profile"><i class="ion-ios-gear-outline"></i> Configuración</a>
+    <a class="list-group-item" ng-controller="AccessCtrl as Access" ng-click="Access.logout()" style="cursor:pointer;"><i class="ion-ios-gear-outline"></i> Cerrar sesión</a>
+
 </div> 
