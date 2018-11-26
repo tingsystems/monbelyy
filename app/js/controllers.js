@@ -603,6 +603,7 @@
 
         self.busy = true;
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
+            self.parent = results.id;
             self.detail = results;
             self.detail.galleryImages = [];
             // get featureImage
@@ -768,10 +769,10 @@
             self.brands = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 30,
+                pageSize: 10,
                 fields: 'id,slug,name',
                 search: self.searchTerBrand,
-                parent: '4106'
+                kind: self.filterBrand
             }).$promise.then(function (data) {
                 self.brands = data.results;
                 self.busyBrands = false;
@@ -1030,11 +1031,11 @@
             self.params.isActive = 'True';
             self.params.pageSize = 9;
             if (list !== '') {
-                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,priceList';
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo';
                 self.params.priceList = list;
             }
             else {
-                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo';
             }
             if (self.optionSelected) {
                 self.params.ordering = self.optionSelected.option;
@@ -1042,6 +1043,7 @@
             else {
                 self.params.ordering = '-createdAt';
             }
+            self.params.kind = 'group';
             return ProductSrv.get(self.params).$promise.then(function (data) {
                 params.kind = 'group';
                 params.total(data.count);
@@ -1084,8 +1086,6 @@
             self.tableParams.reload();
 
         }
-
-
     }
 
     function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert, ProductSrv, $mdDialog, $scope) {

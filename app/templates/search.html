@@ -32,19 +32,21 @@
                                         </a>
                                         <div class="box-footer">
                                             <div class="row"> 
-                                                <div class="col-sm-8">
-                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Ver más</a>
+                                                <div class="col-sm-12">
+                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Comprar</a>
                                                 </div>
+                                                <!--
                                                 <div class="col-sm-4">
                                                     <button ng-click="Shop.showPreviewItem($event, product)"
                                                             class="btn btn-dark"><i class="fa fa-shopping-cart"></i>
                                                     </button>
                                                 </div>
+                                                -->
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="box-prod" ng-if="Search.isPost">
+    
+                                    <div class="box-prod" ng-if="Product.isPost">
                                         <a ui-sref="post_detail({slug:product.slug})">
                                             <div class="bg-prod"
                                                  style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
