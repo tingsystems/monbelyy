@@ -1,19 +1,4 @@
 <div class="temp-product-detail">
-    <section id="breadcrumb">
-        <nav aria-label="breadcrumb">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a>
-                    </li>
-                    <li class="breadcrumb-item" ng-if="Product.detail.taxonomies.length"><a
-                            ui-sref="category({slug: Product.detail.taxonomies[0].slug })">
-                        {{ Product.detail.taxonomies[0].name }}</a>
-                    </li>
-                    <li class="breadcrumb-item active">{{ Product.detail.name }}</li>
-                </ol>
-            </div>
-        </nav>
-    </section>
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">

@@ -96,10 +96,6 @@
                 <div class="col-lg-3 col-md-6 col-sm-6" ng-controller="AccessCtrl as Access">
                     <ul class="navbar-nav navbar-expand-lg justify-content-end ">
                         <li class="nav-item">
-                            <a href="https://moneek.mx/category/ofertas" class="nav-link text-danger"> <i class="fa fa-gift"></i> Ofertas
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a ui-sref="register({user:true, wholesale:false})" class="nav-link"
                                ng-if="!Access.isAuthenticated()">
                                 <i class="fa fa-user-circle"></i> Iniciar sesión
@@ -108,6 +104,10 @@
                         <li class="nav-item">
                             <a ng-if="Access.isAuthenticated()" class="nav-link" ui-sref="dashboard">
                                 <i class="fa fa-user-circle"></i> {{user.username}}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://moneek.mx/category/ofertas" class="nav-link text-danger"> <i class="fa fa-gift"></i> Ofertas
                             </a>
                         </li>
                         <li class="nav-item desk-hidde">
@@ -202,13 +202,13 @@
 <script src="/js/services.js"></script>
 <script src="/js/templates.js"></script>
 <script src="/js/translate.js"></script>
+<script src="/js/shop/controllers.js"></script>
+<script src="/js/shop/services.js"></script>
+<script src="/js/shop/shop.app.js"></script>
 <script src="/js/auth/auth.app.js"></script>
 <script src="/js/auth/controllers.js"></script>
 <script src="/js/auth/directives.js"></script>
 <script src="/js/auth/services.js"></script>
-<script src="/js/shop/controllers.js"></script>
-<script src="/js/shop/services.js"></script>
-<script src="/js/shop/shop.app.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
 <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>

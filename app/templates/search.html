@@ -20,13 +20,27 @@
                                                      style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
                                             </div>
                                             <div class="box-container">
-                                                <p class="box-title">{{ product.name | limitTo: 30 }}</p>
-                                                <h4>{{ product.price | currency }}</h4>
+                                                <div class="row align-items-center">
+                                                    <div class="col-sm-8">
+                                                        <p>{{ product.name }}</p>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <p>{{ product.price | currency }}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </a>
                                         <div class="box-footer">
-                                            <a ui-sref="product-detail({slug:product.slug})">Ver
-                                                más</a>
+                                            <div class="row"> 
+                                                <div class="col-sm-8">
+                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Ver más</a>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <button ng-click="Shop.showPreviewItem($event, product)"
+                                                            class="btn btn-dark"><i class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
