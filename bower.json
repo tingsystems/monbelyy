@@ -29,7 +29,8 @@
     "ng-table": "1.0.0",
     "ngSweetAlert": "angular-sweetalert#^1.1.2",
     "angular-bootstrap": "^2.5.0",
-    "bootstrap": "^4.0.0"
+    "bootstrap": "^4.0.0",
+    "popper.js": "^1.14.5"
   },
   "overrides": {
     "bootstrap": {

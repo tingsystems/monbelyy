@@ -74,7 +74,7 @@
 <header class="header one-rows-nav">
     <div class="first-row">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-lg-3 col-md-2 col-sm-2 data-social-media">
                     <ul class="navbar-nav navbar-expand-lg mobile-hidde">
                         <li class="nav-item" ng-repeat="social in socialMedia">
@@ -105,16 +105,10 @@
                             <a ui-sref="register({user:false, wholesale:true})" class="nav-link text-danger"> <i class="fa fa-gift"></i> Ofertas
                             </a>
                         </li>
-                        <li class="dropdown">
-                            <button ng-if="Access.isAuthenticated()" class="dropdown-toggle btn btn-link" type="button"
-                                    id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <i class="ion-ios-person"></i> {{user.username}}
-                                <span class="caret"></span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <a ui-sref="dashboard" class="dropdown-item">Mi cuenta </a>
-                                <a href="" ng-click="Access.logout()" class="dropdown-item"> Cerrar sesión</a>
-                            </div>
+                        <li class="nav-item">
+                            <a ng-if="Access.isAuthenticated()" class="nav-link" ui-sref="dashboard">
+                                <i class="fa fa-user-circle"></i> {{user.username}}
+                            </a>
                         </li>
                         <li class="nav-item desk-hidde">
                             <a ui-sref="shopcart" class="shopping-cart nav-link" ng-if="ecommerce"
@@ -195,6 +189,7 @@
 <script src="lib/ngSweetAlert/SweetAlert.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/popper.js/dist/umd/popper.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js js/annalise.min.js -->

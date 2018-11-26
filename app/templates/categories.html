@@ -169,24 +169,24 @@
                                         </div>
                                         <div class="box-container">
                                             <div class="row align-items-center">
-                                                <div class="col-sm-6">
-                                                    <h6>{{ product.name | limitTo:40}}</h6>
+                                                <div class="col-sm-8">
+                                                    <p>{{ product.name | limitTo:40}}</p>
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-4">
                                                     <p>{{ product.price | currency }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="box-footer">
                                             <div class="row"> 
-                                                <div class="col-sm-12">
-                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-default">Ver más</a>
+                                                <div class="col-sm-8">
+                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Ver más</a>
                                                 </div>
-                                                <!--<div class="col-sm-4">
+                                                <div class="col-sm-4">
                                                     <button ng-click="Shop.showPreviewItem($event, product)"
-                                                            class="btn btn-optional btn-block"><i class="fa fa-shopping-cart"></i>
+                                                            class="btn btn-dark"><i class="fa fa-shopping-cart"></i>
                                                     </button>
-                                                </div>-->
+                                                </div>
                                             </div>
                                         </div>
                                     </a>

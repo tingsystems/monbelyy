@@ -45,9 +45,14 @@ audio:not([controls]),
   background-image: url("../img/pattern.png");
   background-repeat: repeat;
 }
+.one-rows-nav .first-row .btn-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 5px 0;
+}
 .one-rows-nav .first-row .text-danger {
   padding: 3px 10px !important;
-  margin: 10px 0 0 10px;
+  margin: 10px 0;
   background-color: #f00;
   color: #fff !important;
 }
@@ -457,10 +462,11 @@ audio:not([controls]),
 }
 .box-simple .box-container .box-title {
   font-weight: bold;
+  font-size: 12px;
 }
 .box-simple .box-container p {
   height: 50px;
-  padding: 10px;
+  padding: 10px 0;
 }
 .box-simple .box-footer {
   text-align: center;
@@ -2449,6 +2455,34 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  .one-rows-nav .first-row .nav-item {
+    margin: 0 8px;
+  }
+  .navbar-collapse {
+    position: absolute;
+    top: 75px;
+    background: #fff;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    box-shadow: rgba(0,0,0,0.3) 0px 6px 10px;
+  }
+  .box-post-blog .img-post {
+    height: 200px;
+  }
+  .box-post-blog h3 {
+    font-size: 14px;
+  }
+  .box-post-blog .btn-dark {
+    font-size: 12px;
+  }
+  .box-post-blog p {
+    display: none;
+  }
+  figure.snip1190 h2 {
+    font-size: 28px;
+  }
   #home .section-one,
   #home .section-two,
   #home .section-four,
@@ -2471,9 +2505,6 @@ footer .contact-sty .download-app > i:hover {
   }
   .navbar-toggler span {
     color: #555;
-  }
-  .one-rows-nav .first-row {
-    background-color: #f5f5f5;
   }
   .one-rows-nav .first-row .navbar-nav {
     flex-direction: row;
@@ -2499,12 +2530,13 @@ footer .contact-sty .download-app > i:hover {
     top: 5px;
   }
   .shopping-cart .qty-cart {
-    background-color: #f5f5f5;
+    background-color: #000;
     top: 0;
     left: 10px;
+    color: #fff;
   }
   .shopping-cart i {
-    color: #000;
+    color: #fff;
   }
   .xs-hidde {
     display: none;
@@ -2575,12 +2607,6 @@ footer .contact-sty .download-app > i:hover {
     margin: 35px;
     padding-top: 10px;
     padding-bottom: 10px;
-  }
-  .section-three h3 {
-    font-size: 18px;
-  }
-  .section-three p {
-    font-size: 14px;
   }
   .section-three .box-post-blog .box-container-post {
     padding: 15px 0;

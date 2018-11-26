@@ -591,6 +591,7 @@
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         var paramsProducts = {};
+        paramsProducts.kind = 'group';
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
