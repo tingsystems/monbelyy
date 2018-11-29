@@ -48,13 +48,35 @@
         }
     }
 
+    function compareGreaterF() {
+        return {
+            require: "ngModel",
+            scope: {
+                otherModelValue: "=compareGreater"
+            },
+            link: function (scope, element, attributes, ngModel) {
+                ngModel.$validators.compareGreater = function (modelValue) {
+                    if (parseInt(modelValue) <= 0) {
+                        return false;
+                    }
+                    return parseInt(modelValue) <= parseInt(scope.otherModelValue);
+                };
+                scope.$watch("otherModelValue", function () {
+                    ngModel.$validate();
+                });
+
+            }
+        };
+
+    }
+
     // create the module and assign controllers
     angular.module('ts.directives', [])
         .directive('postLink', postLink)
         .directive('postImage', postImage)
+        .directive('compareGreater', compareGreaterF)
         .directive('myEnter', function () {
             return function (scope, element, attrs) {
-                console.log("lsldldld");
                 element.bind("keydown keypress", function (event) {
                     if (event.which === 13) {
                         scope.$apply(function () {
@@ -70,4 +92,5 @@
     // inject dependencies to controllers
     postLink.$inject = [];
     postImage.$inject = ['$rootScope'];
+    compareGreaterF.$inject = [];
 })();

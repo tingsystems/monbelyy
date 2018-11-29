@@ -34,8 +34,6 @@
             console.log(err);
         }
 
-        console.log(self.minimumPurchase);
-
         if ($auth.isAuthenticated()) {
             var user = $localStorage.appData.user;
             self.branchOffice = '';

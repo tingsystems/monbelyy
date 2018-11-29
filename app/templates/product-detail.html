@@ -40,27 +40,32 @@
                                     <h4>{{Product.detail.name}}..</h4>
                                     <br>
                                     <h2 class="article-price">{{ Product.detail.price | currency}}</h2>
+                                    <span ng-if="Product.detail.inventory <= 0" style="font-size: 13px;"> Producto agotado</span>
                                     <br>
+
                                 </div>
                                 <div class="col-sm-6">
                                     <form name="FormQty">
                                         <md-input-container class="md-block">
                                             <label>Cantidad</label>
                                             <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"
-                                                   ng-pattern="/^-?[0-9][^\.]*$/" name="qty" required/>
+                                                   ng-pattern="/^-?[0-9][^\.]*$/" name="qty"
+                                                   compare-greater="Product.detail.inventory" required/>
                                             <div class="errors" ng-messages="FormQty.qty.$error">
                                                 <div ng-message="required">Requiredo</div>
                                                 <div ng-message="pattern">Cantidad no valida</div>
+                                                <div ng-message="compareGreater">Cantidad de producto no disponible</div>
                                             </div>
                                         </md-input-container>
 
                                     </form>
                                     <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax}, Product.detail.qty)"
-                                            ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid"
+                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax, stock: Product.detail.inventory}, Product.detail.qty)"
+                                            ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
                                             class="btn btn-danger">Agregar a carrito
                                     </button>
+
                                 </div>
                             </div>
                         </div>

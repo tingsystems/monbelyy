@@ -12,8 +12,6 @@
             $rootScope.user = $localStorage.appData.user;
         }
         self.cities = [];
-        console.log($stateParams.user);
-        console.log($stateParams.wholesale);
         self.user = $stateParams.user;
         self.wholesale = $stateParams.wholesale;
         self.activeTab = 0;
@@ -694,7 +692,8 @@
 
     }
 
-    function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv, $filter) {
+    function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
+                                HistoryOrdersSrv, $filter) {
         var self = this;
         self.busy = false;
 
@@ -731,6 +730,7 @@
                 self.purchase = data;
                 self.purchase.items = aditionalKey(self.purchase.items);
                 getVoucher();
+                getComments(self.purchase);
             });
         }
 
@@ -771,6 +771,15 @@
                 console.log(error)
             });
 
+        };
+
+        var getComments = function (order) {
+            self.busy = true;
+            HistoryOrdersSrv.query({order: order.id, kind: 'comment', isActive: true}).$promise.then(function (resp) {
+                self.comments = resp;
+            }, function (error) {
+                self.busy = false;
+            });
         };
     }
 
@@ -875,6 +884,6 @@
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
-    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', '$filter'];
+    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage'];
 })();

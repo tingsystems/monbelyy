@@ -143,7 +143,8 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <md-input-container class="md-block">
-                                        <md-select placeholder="Opciones de ordenamiento" ng-model="Product.optionSelected"
+                                        <md-select placeholder="Opciones de ordenamiento"
+                                                   ng-model="Product.optionSelected"
                                                    data-md-container-class="selectdemoSelectHeader"
                                                    name="options"
                                                    ng-change="Product.tableParams.reload(Product.selectFilter   )"
@@ -175,10 +176,11 @@
                                     <div class="box-footer">
                                         <button class="btn btn-black"
                                                 ng-click="Shop.setItem({id: product.id, image: product.featuredImage.url,
-                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax}, 1)"
-                                                ng-disabled="Product.itemInCart(product)">
+                           name: product.name, price: product.price, qty: 1,taxonomies : product.taxonomies, shipmentPrice: product.shipmentPrice, typeTax: product.typeTax, stock: product.inventory}, 1)"
+                                                ng-disabled="Product.itemInCart(product) || product.inventory <= 0 ">
                                             Agregar al carrito
                                         </button>
+                                        <span ng-if="product.inventory <= 0" style="font-size: 13px;"> Producto agotado</span>
                                     </div>
                                 </div>
 
