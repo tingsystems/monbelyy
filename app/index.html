@@ -47,7 +47,6 @@
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="lib/ng-table/dist/ng-table.css" />
-    <link rel="stylesheet" href="lib/sweetalert/dist/sweetalert.css" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- inject:css -->
@@ -97,10 +96,6 @@
                 <div class="col-lg-3 col-md-6 col-sm-6" ng-controller="AccessCtrl as Access">
                     <ul class="navbar-nav navbar-expand-lg justify-content-end ">
                         <li class="nav-item">
-                            <a href="https://moneek.mx/category/ofertas" class="nav-link text-danger"> <i class="fa fa-gift"></i> Ofertas
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a ui-sref="register({user:true, wholesale:false})" class="nav-link"
                                ng-if="!Access.isAuthenticated()">
                                 <i class="fa fa-user-circle"></i> Iniciar sesión
@@ -109,6 +104,10 @@
                         <li class="nav-item">
                             <a ng-if="Access.isAuthenticated()" class="nav-link" ui-sref="dashboard">
                                 <i class="fa fa-user-circle"></i> {{user.username}}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="https://moneek.mx/category/ofertas" class="nav-link text-danger"> <i class="fa fa-gift"></i> Ofertas
                             </a>
                         </li>
                         <li class="nav-item desk-hidde">
@@ -187,7 +186,6 @@
 <script src="lib/ng-file-upload/ng-file-upload.js"></script>
 <script src="lib/angular-ui-select/dist/select.js"></script>
 <script src="lib/ng-table/dist/ng-table.js"></script>
-<script src="lib/sweetalert/dist/sweetalert.min.js"></script>
 <script src="lib/ngSweetAlert/SweetAlert.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>

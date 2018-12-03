@@ -22,21 +22,28 @@
                                             <div class="box-container">
                                                 <div class="row align-items-center">
                                                     <div class="col-sm-8">
-                                                        <p>{{ product.name | limitTo:40}}</p>
+                                                        <p>{{ product.name }}</p>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <p>{{ product.price | currency }}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="box-footer">
-                                                <div class="row"> 
-                                                    <div class="col-sm-12">
-                                                        <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Comprar</a>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </a>
+                                        <div class="box-footer">
+                                            <div class="row"> 
+                                                <div class="col-sm-12">
+                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Comprar</a>
+                                                </div>
+                                                <!--
+                                                <div class="col-sm-4">
+                                                    <button ng-click="Shop.showPreviewItem($event, product)"
+                                                            class="btn btn-dark"><i class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                </div>
+                                                -->
+                                            </div>
+                                        </div>
                                     </div>
     
                                     <div class="box-prod" ng-if="Product.isPost">

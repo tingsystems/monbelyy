@@ -591,7 +591,6 @@
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
         var paramsProducts = {};
-        paramsProducts.kind = 'group';
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
@@ -1046,6 +1045,7 @@
             }
             self.params.kind = 'group';
             return ProductSrv.get(self.params).$promise.then(function (data) {
+                params.kind = 'group';
                 params.total(data.count);
                 self.busy = false;
                 angular.forEach(data.results, function (obj, ind) {
