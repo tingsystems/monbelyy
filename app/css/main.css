@@ -878,6 +878,9 @@ audio:not([controls]),
 .box-widget .box-widget-container {
   padding: 5px;
 }
+.box-widget .box-widget-container .nav-link {
+  color: #555;
+}
 .box-widget .box-widget-container h3>a,
 .box-widget .box-widget-container h2>a {
   font-size: 14px;
@@ -2455,14 +2458,21 @@ footer .contact-sty .download-app > i:hover {
   }
 }
 @media only screen and (max-width: 767px) {
+  body .content-area-web {
+    padding-top: 120px;
+  }
   .one-rows-nav .first-row .nav-item {
     margin: 0 8px;
   }
-  .navbar-collapse {
+  .one-rows-nav .navbar-brand .logo {
+    padding-left: 15px;
+  }
+  .header {
     position: absolute;
-    top: 75px;
-    background: #fff;
     width: 100%;
+    z-index: 99999;
+  }
+  .navbar-collapse {
     border-top: 1px solid #ddd;
     padding: 20px;
     border-bottom: 1px solid #ddd;

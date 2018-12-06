@@ -127,13 +127,17 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  body .content-area-web
+    padding-top 120px
   .one-rows-nav .first-row .nav-item
     margin 0 8px
-  .navbar-collapse 
-    position absolute
-    top 75px
-    background white
+  .one-rows-nav .navbar-brand .logo
+    padding-left 15px  
+  .header 
+    position absolute  
     width 100%
+    z-index 99999
+  .navbar-collapse 
     border-top 1px solid rgb(221, 221, 221)
     padding 20px
     border-bottom 1px solid rgb(221, 221, 221)
