@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -162,7 +162,7 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://mercadomovil.com.mx';
-        //$rootScope.host = 'http://' + $location.host();
+        // $rootScope.host = 'http://' + $location.host();
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';

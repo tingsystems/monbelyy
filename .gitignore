@@ -5,3 +5,5 @@ dist/
 temp/
 templates.js
 *.log
+.firebase/
+package-lock.json
