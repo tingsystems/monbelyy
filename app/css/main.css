@@ -392,6 +392,10 @@ audio:not([controls]),
   border: 1px solid #777;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
+.btn-xs.indicators {
+  border-radius: 50%;
+  padding: 0 5px;
+}
 .bordered {
   border-radius: 30px;
 }
