@@ -161,12 +161,12 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
-        // $rootScope.host = 'https://mercadomovil.com.mx';
-        $rootScope.host = 'http://192.168.1.66';
+        $rootScope.host = 'https://mercadomovil.com.mx';
+        // $rootScope.host = 'http://192.168.1.66';
         // $rootScope.host = 'http://' + $location.host();
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
-        $rootScope.apiShop = 'v1';
+        $rootScope.apiShop = 'v3';
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $http.defaults.headers.common['PROJECT-ID'] = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $rootScope.hidePriceLogin = false;

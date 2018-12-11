@@ -381,6 +381,9 @@
                         self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax';
                     }
 
+                    if($rootScope.taxnomySearch){
+                        self.params.taxonomies = $rootScope.taxnomySearch
+                    }
                     return ProductSrv.get(self.params).$promise.then(function (results) {
                         self.listSearch = results.results;
                         console.log(self.listSearch);
@@ -970,10 +973,22 @@
             self.params.pageSize = params.count();
             self.busy = true;
             if (self.taxonomies.length > 0) {
-                self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug + ',' + self.taxonomies.join();
+
+                }else {
+                    self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+                }
+
             }
             else {
-                self.params.taxonomies = $stateParams.slug;
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug
+                }
+                else {
+                    self.params.taxonomies = $stateParams.slug;
+                }
+
             }
             self.params.isActive = 'True';
             self.params.pageSize = 9;
