@@ -680,6 +680,7 @@
                 self.detail.typeTax = self.itemFromGroup.typeTax;
                 self.detail.code = self.itemFromGroup.code;
                 self.detail.kind = self.itemFromGroup.kind;
+                self.detail.inventory = self.itemFromGroup.inventory;
                 // get featureImage
                 self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
                 //get galeries
@@ -1023,10 +1024,22 @@
             self.params.pageSize = params.count();
             self.busy = true;
             if (self.taxonomies.length > 0) {
-                self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug + ',' + self.taxonomies.join();
+
+                }else {
+                    self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+                }
+
             }
             else {
-                self.params.taxonomies = $stateParams.slug;
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug
+                }
+                else {
+                    self.params.taxonomies = $stateParams.slug;
+                }
+
             }
             self.params.isActive = 'True';
             self.params.pageSize = 9;

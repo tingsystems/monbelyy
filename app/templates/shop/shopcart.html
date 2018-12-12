@@ -42,7 +42,8 @@
             </div>
             <hr>
             <div class="container-fluid" ng-if="ShopCart.items.length>0">
-                <div class="row">
+                <form name="itemsForm">
+                    <div class="row">
                     <div class="col-md-9 text-center">
                         <div class="col-sm-6 col-md-12 list-item-shoppingcart" ng-repeat="product in ShopCart.items">
                             <div class="row">
@@ -59,10 +60,22 @@
                                 <div class="col-sm-2 col-md-2">
 
                                     <div class="shopcart-qty">
-                                        <input type="number" min="0" id="qty" ng-model="product.qty"
-                                               ng-click="ShopCart.setItem({id: product.id, name: product.name, price: product.price, qty: product.qty},
+                                        <md-input-container md-no-float>
+                                            <input type="text" id="qty" ng-model="product.qty"
+                                                   ng-change="ShopCart.setItem({id: product.id, name: product.name,
+                                                price: product.price, qty: product.qty},
                                                product.qty)"
-                                               class="form-control cart-qty" placeholder="{{ product.qty }}">
+                                                   class="form-control cart-qty" compare-greater="product.stock"
+                                                   name="product_{{$index}}"
+                                                   ng-pattern="/^-?[0-9][^\.]*$/">
+                                            <div class="errors" ng-messages="itemsForm['product_' + $index].$error">
+                                                <div ng-message="required">Requiredo</div>
+                                                <div ng-message="pattern">Cantidad no válida</div>
+                                                <div ng-message="compareGreater">Cantidad de producto no
+                                                    disponible
+                                                </div>
+                                            </div>
+                                        </md-input-container>
                                     </div>
                                 </div>
                                 <div class="col-md-1 col-sm-1 visible-lg">
@@ -108,6 +121,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </section>
