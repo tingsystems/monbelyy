@@ -186,7 +186,6 @@
                 }
                 self.import += parseFloat(value.import);
                 self.taxTotal += parseFloat(value.tax);
-                self.shipmentPrice += parseFloat(value.shipmentPrice);
 
             });
             if ($localStorage.ship) {
@@ -197,13 +196,15 @@
             self.subTotal = self.import;
             self.subTotal = (Math.round(self.subTotal * 100) / 100);
             self.taxTotal = (Math.round(self.taxTotal * 100) / 100);
-            self.shipmentTotal = (Math.round(self.shipmentPrice * 100) / 100);
-            self.total = parseFloat(self.import) + parseFloat(self.taxTotal) + parseFloat(self.shipmentPrice);
+            self.shipmentTotal = $localStorage.shipmentTotal;
+            self.total = parseFloat(self.import) + parseFloat(self.taxTotal);
+            if (self.shipmentTotal) {
+                self.total = parseFloat(self.import) + parseFloat(self.taxTotal) + parseFloat(self.shipmentTotal);
+            }
             self.total = (Math.round(self.total * 100) / 100);
             $localStorage.total = self.total;
             $localStorage.subTtotal = self.subTotal;
             $localStorage.promoTotal = self.promoTotal;
-            $localStorage.shipmentTotal = self.shipmentPrice;
             $localStorage.taxTotal = self.taxTotal;
 
             if ($localStorage.globalDiscount.isPercentage === 0) {
@@ -302,13 +303,14 @@
         };
 
         $rootScope.$on('newTotals', function (event, data) {
+            console.log('aassa');
             $localStorage.ship = data.data;
             getTotal()
         });
 
     }
 
-    function ShippingAddressCtrl(AddressSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter) {
+    function ShippingAddressCtrl(AddressSrv, ShipmentSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter) {
         var self = this;
         var user = $localStorage.appData.user;
         self.branchOffice = '';
@@ -316,6 +318,7 @@
         self.formDataShip = {};
         self.formData = {};
         self.address = '';
+        self.cart = $localStorage.cart;
         self.busy = false;
         self.addAddress = false;
         self.items = $localStorage.items ? $localStorage.items : [];
@@ -489,6 +492,26 @@
             self.addAddress = !self.addAddress;
         }
 
+        self.quoteShipment =  function() {
+            ShipmentSrv.quote({
+                cartId: $localStorage.cart.id, 
+                addressId: self.address.id, 
+            }).$promise.then(function (data) {
+            
+                self.busyAddresses = false;
+                $localStorage.cart = data;
+                self.cart = data;
+                self.total = data.total;
+                $localStorage.shipmentTotal = data.shipmentCost;
+                $localStorage.total = data.total;
+                $rootScope.$emit('newTotals', {data: false});
+            }, function (error) {
+                self.busyAddresses = false;
+                angular.forEach(error, function (key, value) {
+                    NotificationSrv.error("Error", value);
+                });
+            });
+        }
     }
 
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element, StateSrv) {
@@ -821,11 +844,8 @@
                 self.customer = data;
                 NotificationSrv.success('Informacion actualizada correctamente');
                 self.busy = false;
-            })
-
+            });
         }
-
-
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
@@ -999,7 +1019,7 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
-    ShippingAddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter'];
+    ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];

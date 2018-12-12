@@ -24,6 +24,12 @@
                         existente' : ' Dinos cual es tu direccion y mostrar las tiendas más cercanas a ti'}} </h4>
                     <hr>
                     <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
+                    
+                    <div ng-if="Payment.cart.metadata.shipment">
+                        <h6>Detalles del envío</h6>
+                        <p>Envío {{ Payment.cart.metadata.shipment.servicelevel}} por <strong>{{Payment.cart.metadata.shipment.provider}}</strong> de {{Payment.cart.metadata.shipment.duration_terms}}</p>
+                    </div>
+
                     <button ng-if="Payment.address && Payment.sendOptions === '0'" class="btn btn-danger" type="submit"
                             ng-disabled="!Payment.address"
                             ng-click="Payment.saveShippingAddress()">Continuar
@@ -52,10 +58,9 @@
                 <form name="Form">
                     <div>
                         <div class="col-md-12">
-                            <h4 title="Presiona"><i class="fa"
-                                                    ng-class="Payment.addAddress ? 'fa-minus-circle': 'fa-plus-circle'"
-                                                    ng-click="Payment.showAddress()"></i> Agregar direccíon de
-                                envío</h4>
+                            <h4 title="Presiona">
+                                <i class="fa" ng-class="Payment.addAddress ? 'fa-minus-circle': 'fa-plus-circle'" ng-click="Payment.showAddress()"></i> Agregar direccíon de envío
+                            </h4>
                             <hr>
                             <div class="form-horizontal" ng-if="Payment.addAddress">
                                 <div class="row">

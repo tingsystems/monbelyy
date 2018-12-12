@@ -44,6 +44,19 @@
         });
     }
 
+    function ShipmentSrv($resource, BaseUrlShop) {
+        return $resource(BaseUrlShop.get() + 'utils/', null, {
+            'quote': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'utils/shipments/quote'
+            },
+            'purchase': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'utils/shipments/purchase'
+            }
+        });
+    }
+
     function OrderSrv($resource, BaseUrlShop) {
         return $resource(BaseUrlShop.get() + 'orders/:id', null, {
             'update': {
@@ -109,6 +122,7 @@
         .factory('ValidCouponSrv', ValidCouponSrv)
         .factory('PriceListSrv', PriceListSrv)
         .factory('NotificationTakiSrv', NotificationTakiSrv)
+        .factory('ShipmentSrv', ShipmentSrv)
         .factory('HistoryOrdersSrv', HistoryOrdersSrv);
 
     // Inject factory the dependencies
@@ -119,6 +133,7 @@
     ValidCouponSrv.$inject = ['$resource', 'BaseUrlShop'];
     PriceListSrv.$inject = ['$resource', 'BaseUrlShop'];
     NotificationTakiSrv.$inject = ['$resource', 'BaseUrlShop'];
+    ShipmentSrv.$inject = ['$resource', 'BaseUrlShop'];
     HistoryOrdersSrv.$inject = ['$resource', 'BaseUrlShop'];
 
 })();

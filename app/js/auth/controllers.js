@@ -22,7 +22,7 @@
             self.activeTab = 1;
         }
 
-        self.items = $localStorage.items ? $localStorage.items : [];
+        self.items = $localStorage.items.length ? $localStorage.items : [];
         self.itemCount = self.items.length;
 
         self.processing = false;
@@ -36,25 +36,16 @@
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
-                $localStorage.items = [];
-                $localStorage.total = 0;
-                $localStorage.cart = {};
-                $localStorage.priceList = '';
-                $localStorage.shipmentTotal = 0;
-                $localStorage.ship = false;
-                $localStorage.subTtotal = 0;
-                $localStorage.taxTotal = 0;
-                $localStorage.promoTotal = 0;
-                $localStorage.shipmentTotal = 0;
                 self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
                 PriceListSrv.customer({customers: $localStorage.appData.user.customer}).$promise.then(function (data) {
                     $localStorage.priceList = data[0].slug;
                 });
                 // Redirect user here after a successful log in.
+                if (self.itemCount > 0) {
+                    $state.go('shopcart');
+                }
                 $state.go('dashboard');
             });
-
-
         };
 
         // Social auth

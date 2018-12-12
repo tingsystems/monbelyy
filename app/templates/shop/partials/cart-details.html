@@ -32,11 +32,14 @@
                         <td>Impuestos</td>
                         <td>{{ ShopCart.taxTotal | currency}}</td>
                     </tr>
-                    <tr>
+                    <tr ng-if="!Payment.address">
                         <td>Envío</td>
-                        <td>{{ShopCart.shipmentTotal | currency}}</td>
+                        <td class="text-warning">Pendiente</td>
                     </tr>
-
+                    <tr ng-if="Payment.address">
+                            <td>Envío</td>
+                            <td>{{ShopCart.shipmentTotal | currency}}</td>
+                    </tr>
                     <tr ng-if="ShopCart.promoTotal">
                         <td>Descuento</td>
                         <td>{{ShopCart.promoTotal | currency}}</td>
