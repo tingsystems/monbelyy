@@ -234,16 +234,43 @@
                     };
 
                 });
-                CartsSrv.save({
-                    items: items, store: self.defaultbranchOffice.id, customer: self.customer,
-                    customerName: self.customerName,
-                    customerEmail: self.email,
-                    itemCount: self.itemCount
-                }).$promise.then(function (data) {
-                    self.cart = data;
-                    $localStorage.cart = self.cart;
-                    $rootScope.items = 0;
-                });
+
+                var update = false;
+                if ( 'cart' in  $localStorage) {
+                    if ('id' in $localStorage.cart) {
+                        update = true;
+                    } 
+                } 
+
+                if (update) {
+                    CartsSrv.update({id: $localStorage.cart.id}, {
+                        items: items, 
+                        store: self.defaultbranchOffice.id, 
+                        customer: self.customer,
+                        customerName: self.customerName,
+                        customerEmail: self.email,
+                        itemCount: self.itemCount,
+                        fromWeb: true
+                    }).$promise.then(function (data) {
+                        self.cart = data;
+                        $localStorage.cart = self.cart;
+                        $rootScope.items = 0;
+                    });
+                } else {
+                    CartsSrv.save({
+                        items: items, 
+                        store: self.defaultbranchOffice.id, 
+                        customer: self.customer,
+                        customerName: self.customerName,
+                        customerEmail: self.email,
+                        itemCount: self.itemCount,
+                        fromWeb: true
+                    }).$promise.then(function (data) {
+                        self.cart = data;
+                        $localStorage.cart = self.cart;
+                        $rootScope.items = 0;
+                    });
+                }
                 $state.go('shipping-address');
             }
         };
@@ -303,7 +330,6 @@
         };
 
         $rootScope.$on('newTotals', function (event, data) {
-            console.log('aassa');
             $localStorage.ship = data.data;
             getTotal()
         });
@@ -755,7 +781,6 @@
 
         self.createOrder = function () {
             initialOrder();
-            console.log(self.params);
             OrderSrv.save(self.params).$promise.then(function (data) {
                 clearCart();
                 if (data.paymentType === 3) {
