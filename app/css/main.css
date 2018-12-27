@@ -42,8 +42,6 @@ audio:not([controls]),
 }
 .one-rows-nav .first-row {
   background-color: #222;
-  background-image: url("../img/pattern.png");
-  background-repeat: repeat;
 }
 .one-rows-nav .first-row .btn-link {
   color: #fff;
@@ -107,7 +105,7 @@ audio:not([controls]),
   padding-right: 0;
 }
 .one-rows-nav .navbar-brand .logo {
-  width: 200px;
+  width: 120px;
 }
 .three-rows-nav .first-row {
   padding: 15px 0;
@@ -532,7 +530,7 @@ audio:not([controls]),
   height: 100px;
   text-align: center;
   position: relative;
-  color: #000;
+  color: #555;
 }
 .title-middle-line .text-content {
   position: absolute;
@@ -1959,7 +1957,7 @@ md-input-container {
 }
 #home .section-three {
   text-align: center;
-  background-color: #fff;
+  background-color: #afb1f9;
   padding: 40px 0;
 }
 #home .section-three p {
@@ -2700,28 +2698,29 @@ figure.snip1190 * {
   transition: all 0.3s ease-in-out;
 }
 figure.snip1190 .img-caption {
-  opacity: 0.8;
+  opacity: 1;
   width: 100%;
 }
 figure.snip1190 figcaption {
-  bottom: 0;
+  bottom: 10%;
   display: block;
   left: 0;
   position: absolute;
   right: 0;
-  top: 0;
 }
 figure.snip1190 h2 {
   font-weight: 400;
   left: 0;
   right: 0;
+  font-size: 20px;
   letter-spacing: -1px;
   margin: 0 auto;
   position: absolute;
   text-transform: uppercase;
-  bottom: 50%;
-  -webkit-transform: translateY(50%);
-  transform: translateY(50%);
+  bottom: -31px;
+  background-color: #000;
+  vertical-align: center;
+  padding: 28px;
 }
 figure.snip1190 h2 span {
   font-weight: 800;
@@ -2798,8 +2797,6 @@ figure.snip1190.hover .img-caption {
 figure.snip1190:hover h2,
 figure.snip1190.hover h2 {
   opacity: 1;
-  -webkit-transform: translateY(0px);
-  transform: translateY(0px);
 }
 figure.snip1190:hover p,
 figure.snip1190.hover p {

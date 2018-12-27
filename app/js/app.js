@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: ' Moneek'},
+                data: {pageTitle: ' Lady Paola'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: ' Moneek'},
+                data: {pageTitle: ' Lady Paola'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Moneek'},
+                data: {pageTitle: 'Lady Paola'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -131,7 +131,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -187,14 +187,14 @@
             googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
             img_default: '../../img/img-default.jpg',
-            email: 'ventas@moneek.mx',
-            phone: '4531076764',
-            branchOffice: 'Moneek - Venta de ropa, calzado y accesorios para Dama'
+            email: 'ventas@ladypaolamayoreo.com.mx',
+            phone: '353 105 02 63',
+            branchOffice: 'Lady Paola - Venta de calzado a mayoreo'
 
         };
 
         $rootScope.post = {
-            'title': 'Moneek - Venta de ropa, calzado y accesorios para Dama',
+            'title': 'Lady Paola - Venta de calzado a mayoreo',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -208,7 +208,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Moneek',
+                'title': 'Lady Paola',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -217,7 +217,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Moneek';
+        $rootScope.pageTitle = 'Lady Paola';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
