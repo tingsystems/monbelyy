@@ -13,7 +13,7 @@
         };
 
         EntrySrv.get({
-            taxonomies: 'slider1535244046',
+            taxonomies: 'slider1545956166',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -29,7 +29,7 @@
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 9;
-        paramsProducts.kind = 'group';
+        paramsProducts.kind = 'product';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
@@ -38,7 +38,7 @@
         else {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
         }
-        paramsProducts.kind = 'group';
+        paramsProducts.kind = 'product';
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
@@ -48,7 +48,7 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'categorias-del-home',
+            taxonomies: 'home-categories1545957608',
             isActive: 'True',
             pageSize: 6,
             ordering: 'createdAt',
