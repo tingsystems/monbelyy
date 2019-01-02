@@ -3,12 +3,10 @@
         <div class="row">
             <div class="col-md-8 col-sm-8">
                 <div class="title-middle-line">
-                    <div class="text-content">
+                    <div class="text-left">
                         <h3 class="text-uppercase">{{ Page.detail.title }}</h3>
                     </div>
-                    <hr>
                 </div>
-
                 <img ng-src="{{ Page.detail.urlImages.medium }}" alt="{{ Page.detail.title }}"/>
 
                 <div ng-bind-html="Page.detail.content | trustHtml"></div>

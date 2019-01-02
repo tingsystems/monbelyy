@@ -169,18 +169,8 @@
                                         </div>
                                         <div class="box-container">
                                             <div class="row align-items-center">
-                                                <div class="col-sm-8">
-                                                    <p>{{ product.name | limitTo:40}}</p>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <p>{{ product.price | currency }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="box-footer">
-                                            <div class="row"> 
-                                                <div class="col-sm-12">
-                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Comprar</a>
+                                                <div class="col-sm-12 text-center">
+                                                    <h3 class="box-title">{{ product.name | limitTo:40}}</h3>
                                                 </div>
                                             </div>
                                         </div>

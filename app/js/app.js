@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: ' Moneek'},
+                data: {pageTitle: ' Lady Paola'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: ' Moneek'},
+                data: {pageTitle: ' Lady Paola'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Moneek'},
+                data: {pageTitle: 'Lady Paola'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -167,7 +167,7 @@
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
-        $http.defaults.headers.common['PROJECT-ID'] = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
+        $http.defaults.headers.common['PROJECT-ID'] = 'c04c7086-92c1-4478-864e-afa080dfa672';
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;
@@ -187,14 +187,14 @@
             googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
             img_default: '../../img/img-default.jpg',
-            email: 'ventas@moneek.mx',
-            phone: '4531076764',
-            branchOffice: 'Moneek - Venta de ropa, calzado y accesorios para Dama'
+            email: 'ventas@ladypaolamayoreo.com.mx',
+            phone: '353 105 02 63',
+            branchOffice: 'Lady Paola - Venta de calzado a mayoreo'
 
         };
 
         $rootScope.post = {
-            'title': 'Moneek - Venta de ropa, calzado y accesorios para Dama',
+            'title': 'Lady Paola - Venta de calzado a mayoreo',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -208,7 +208,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Moneek',
+                'title': 'Lady Paola',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -217,7 +217,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Moneek';
+        $rootScope.pageTitle = 'Lady Paola';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -232,7 +232,7 @@
 
         if (!$rootScope.mainNavMenu) {
             TaxonomySrv.query({
-                parent: '2673f16e-a4b4-4313-a012-8cf5c7473e36',
+                parent: '67cc088a-76d4-42f6-8036-6758b6e6e52c',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
@@ -254,7 +254,7 @@
 
         if (!$rootScope.clientService) {
             EntrySrv.get({
-                taxonomies: 'servicio-al-cliente1543003314',
+                taxonomies: 'servicio-al-cliente1546028817',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -280,7 +280,7 @@
 
         if (!$rootScope.information) {
             EntrySrv.get({
-                taxonomies: 'informacion1543003263',
+                taxonomies: 'informacion1546028802',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -292,7 +292,7 @@
 
         if (!$rootScope.socialMedia) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1542933122',
+                taxonomies: 'redes-sociales1546028780',
                 isActive: 'True',
                 pageSize: 6,
                 ordering: 'createdAt',

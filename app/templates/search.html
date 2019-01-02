@@ -2,10 +2,9 @@
     <section class="content-area">
         <div class="container">
             <div class="title-middle-line">
-                <div class="text-content">
-                    <h3 class="font-type">Resultados de la busqueda: {{ Search.searchTerm }}</h3>
+                <div class="text-left">
+                    <h3 class="text-uppercase">Resultados de la busqueda: {{ Search.searchTerm }}</h3>
                 </div>
-                <hr>
             </div>
             <div class="container" loading-container="tableParams.settings().$loading" id="top">
                 <div class="row" ng-table="tableParams" show-filter="false">
