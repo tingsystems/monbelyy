@@ -258,7 +258,7 @@
 
             EntrySrv.get({
                 kind: 'post',
-                taxonomies: 'blog1543005663',
+                taxonomies: 'blog1546023742',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: 9,
