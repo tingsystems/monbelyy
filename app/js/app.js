@@ -267,7 +267,7 @@
 
         if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1543003298',
+                taxonomies: 'datos-de-contacto1546882036',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
