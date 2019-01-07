@@ -162,7 +162,7 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://mercadomovil.com.mx';
-        //$rootScope.host = 'http://' + $location.host();
+        // $rootScope.host = 'http://' + $location.host();
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
@@ -267,7 +267,7 @@
 
         if (!$rootScope.contactData) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1543003298',
+                taxonomies: 'datos-de-contacto1546882036',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',

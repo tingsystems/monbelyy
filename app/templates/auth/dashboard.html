@@ -74,35 +74,35 @@
                                         </span>
                                     </td>
                                     <td data-title="'Compra'">
-                            <span ng-if="purchase.orderStatus == 0" class="badge badge-info">
-                                        {{ purchase.orderStatusName }}
-                                </span>
-                                        <span ng-if="purchase.orderStatus == 1" class="badge badge-warning">
-                                        {{ purchase.orderStatusName }}
-                                </span>
-                                        <span ng-if="purchase.orderStatus == 2" class="badge badge-success">
-                                        {{ purchase.orderStatusName}}
-                                </span>
-                                        <span ng-if="purchase.orderStatus == 3" class="badge badge-secondary">
-                                        {{ purchase.orderStatusName}}
-                                </span>
-                                        <span ng-if="purchase.orderStatus == 4" class="badge badge-success">
-                                        {{ purchase.orderStatusName}}
-                                </span>
-                                        <span ng-if="purchase.orderStatus == 5" class="badge badge-warning">
-                                        {{ purchase.orderStatusName}}
-                                </span>
-                                        <span ng-if="purchase.orderStatus == 6" class="badge badge-danger">
-                                        {{ purchase.orderStatusName}}
-                                </span>
-                                        <span ng-if="purchase.orderStatus == 7" class="badge badge-success">
-                                        {{ purchase.orderStatusName}}
-                                </span>
+                                        <span ng-if="purchase.orderStatus == 0" class="badge badge-danger">
+                                                {{ purchase.orderStatusName }} 
+                                        </span>
+                                                <span ng-if="purchase.orderStatus == 1" class="badge badge-warning">
+                                                {{ purchase.orderStatusName }}
+                                        </span>
+                                                <span ng-if="purchase.orderStatus == 2" class="badge badge-success">
+                                                {{ purchase.orderStatusName}}
+                                        </span>
+                                                <span ng-if="purchase.orderStatus == 3" class="badge badge-secondary">
+                                                {{ purchase.orderStatusName}}
+                                        </span>
+                                                <span ng-if="purchase.orderStatus == 4" class="badge badge-success">
+                                                {{ purchase.orderStatusName}}
+                                        </span>
+                                                <span ng-if="purchase.orderStatus == 5" class="badge badge-warning">
+                                                {{ purchase.orderStatusName}}
+                                        </span>
+                                                <span ng-if="purchase.orderStatus == 6" class="badge badge-danger">
+                                                {{ purchase.orderStatusName}}
+                                        </span>
+                                                <span ng-if="purchase.orderStatus == 7" class="badge badge-success">
+                                                {{ purchase.orderStatusName}}
+                                        </span>
                                     </td>
                                     <td data-title="'Total'"><strong class="text-success">{{ purchase.total |
                                         currency
                                         }}</strong></td>
-                                    <td data-title="'Acciones'">
+                                    <td style="text-align: center;" data-title="'Acciones'">
                                         <button title="Ver detalle de la compra"
                                                 class="btn btn-primary gray btn-xs indicators"
                                                 ui-sref="purchase-detail({id: purchase.id})" data-title="Edit">
