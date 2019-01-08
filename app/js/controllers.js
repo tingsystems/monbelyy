@@ -719,7 +719,7 @@
             self.brands = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 30,
+                pageSize: 150,
                 fields: 'id,slug,name',
                 search: self.searchTerBrand,
                 parent: '4106'
