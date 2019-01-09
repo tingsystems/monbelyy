@@ -93,14 +93,15 @@
                 */
         /* Carousel slider */
         self.carouselInitializerSlider = function () {
-            $(".owl-theme-slider").owlCarousel({
+            $("#carouselSlider").owlCarousel({
                 //get items to proportionate num of items
+                loop: true,
+                smartSpeed: 1500,
                 navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
                 navigation: true,
-                //pagination: false,
+                pagination: true,
                 autoplay: true,
-                items: 2,
-                loop: true,
+                items: self.mainSlider.length,
                 margin: 0,
                 center: true,
                 responsiveClass: true,
@@ -121,18 +122,18 @@
                 }
 
             });
-        }
+        };
 
         /* Carousel brands */
         self.carouselInitializer = function () {
-            $(".owl-carousel").owlCarousel({
+            $("#carouselProducts").owlCarousel({
                 //get items to proportionate num of items
+                loop: true,
                 navText: ['<', '>'],
                 navigation: true,
-                //pagination: false,
+                pagination: true,
                 autoplay: true,
-                items: 2,
-                loop: true,
+                items: 9,
                 margin: 20,
                 responsiveClass: true,
                 responsive: {
@@ -168,6 +169,28 @@
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });*/
+
+        self.owlOptionsSlider = {
+            items:1,
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            animateOut: 'slideOutDown',
+            animateIn: 'flipInX'
+
+        };
+
+        self.owlOptionsProducts = {
+            items:4,
+            loop:true,
+            margin:0,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true
+
+        }
 
     }
 
@@ -402,7 +425,7 @@
                         kind: 'post',
                         isActive: 'True',
                         fields: 'attachments,title,link,slug,excerpt',
-                        pageSize: 10,
+                        pageSize: 9,
                         ordering: '-createdAt',
                         search: self.searchTerm,
                         page: self.page
@@ -609,7 +632,6 @@
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
-
             $rootScope.post = self.detail;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
@@ -645,7 +667,34 @@
                     }
                 }
             });
-        }
+        };
+
+        self.owlOptionProduct = {
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navigation: true,
+            //pagination: false,
+            autoplay: true,
+            items: 1,
+            autoplayHoverPause:true,
+            autoplayTimeout:5000,
+            margin: 0,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 1,
+                    nav: false
+                },
+                1000: {
+                    items: 1,
+                    nav: true,
+                    loop: false
+                }
+            }
+        };
 
     }
 
@@ -1024,7 +1073,7 @@
         self.tableParams = new NgTableParams({
             // default params
             page: 1, // The page number to show
-            count: 10 // The number of items to show per page
+            count: 9 // The number of items to show per page
         }, {
             // default settings
             // page size buttons (right set of buttons in demo)

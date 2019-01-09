@@ -2,16 +2,15 @@
     <section class="container slider-box slider-small">
         <div class="row">
             <div class="col-sm-9">
-                <div class="owl-carousel owl-theme owl-theme-slider">
-                    <div class="slider" ng-repeat="slide in Home.mainSlider" ng-repeat-owl-carousel
-                         carousel-init="Home.carouselInitializerSlider">
+                <data-owl-carousel class="owl-carousel owl-theme owl-theme-slider" data-options="Home.owlOptionsSlider">
+                    <div owl-carousel-item="" ng-repeat="slide in Home.mainSlider" class="item">
                         <div class="item" style="width: 100%;">
                             <a post-link="{ link: {url: slide.link, target: '_self'} }">
                                 <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
                             </a>
                         </div>
                     </div>
-                </div>
+                </data-owl-carousel>
             </div>
             <div class="col-sm-3">
                 <h4>Enlaces rápidos</h4>
@@ -56,10 +55,8 @@
                 </div>
                 <hr>
             </div>
-
-            <div class="owl-carousel owl-theme owl-carousel-products">
-                <div class="box-simple" ng-repeat="product in Home.products" ng-repeat-owl-carousel
-                     carousel-init="Home.carouselInitializer">
+            <data-owl-carousel class="owl-carousel owl-theme owl-carousel-products" data-options="Home.owlOptionsProducts">
+                <div owl-carousel-item ng-cloak class="box-simple" ng-repeat="product in Home.products">
                     <div class="item">
                         <div class="box-header">
                             <a ui-sref="product-detail({slug:product.slug})" title="Ver más">
@@ -82,7 +79,7 @@
                         <span ng-if="product.inventory <= 0" style="font-size: 13px;"> Producto agotado</span>
                     </div>
                 </div>
-            </div>
+            </data-owl-carousel>
         </div>
     </section>
 </div>
