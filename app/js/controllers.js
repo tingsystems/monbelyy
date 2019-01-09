@@ -76,99 +76,7 @@
             });
         });
 
-        /*
-                EntrySrv.get({
-                    taxonomies: 'patrocinadores',
-                    isActive: 'True',
-                    pageSize: 8,
-                    ordering: '-createdAt',
-                    fields: 'title,content,attachments,slug,excerpt'
-                }).$promise.then(function (results) {
-                    self.brands = results.results;
-                    //get featureImage
-                    angular.forEach(self.brands, function (obj, ind) {
-                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                    });
-                });
-                */
         /* Carousel slider */
-        self.carouselInitializerSlider = function () {
-            $("#carouselSlider").owlCarousel({
-                //get items to proportionate num of items
-                loop: true,
-                smartSpeed: 1500,
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                navigation: true,
-                pagination: true,
-                autoplay: true,
-                items: self.mainSlider.length,
-                margin: 0,
-                center: true,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 1,
-                        nav: false
-                    },
-                    1000: {
-                        items: 1,
-                        nav: true,
-                        loop: false
-                    }
-                }
-
-            });
-        };
-
-        /* Carousel brands */
-        self.carouselInitializer = function () {
-            $("#carouselProducts").owlCarousel({
-                //get items to proportionate num of items
-                loop: true,
-                navText: ['<', '>'],
-                navigation: true,
-                pagination: true,
-                autoplay: true,
-                items: 9,
-                margin: 20,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 3,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: true,
-                        loop: false
-                    }
-                }
-            });
-        }
-
-
-        /*
-        EntrySrv.get({
-            taxonomies: 'ultimas-noticias',
-            isActive: 'True',
-            pageSize: 4,
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
-        }).$promise.then(function (results) {
-            self.newsHome = results.results;
-            //get featureImage
-            angular.forEach(self.newsHome, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-            });
-        });*/
 
         self.owlOptionsSlider = {
             items:1,
@@ -639,36 +547,6 @@
         });
 
         /* Carousel slider */
-        self.carouselDetailProduct = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                autoplayHoverPause:true,
-                autoplayTimeout:1000,
-                margin: 0,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 1,
-                        nav: false
-                    },
-                    1000: {
-                        items: 1,
-                        nav: true,
-                        loop: false
-                    }
-                }
-            });
-        };
-
         self.owlOptionProduct = {
             navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
             navigation: true,
