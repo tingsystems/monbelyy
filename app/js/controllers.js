@@ -218,7 +218,8 @@
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
-            $rootScope.post = self.detail;
+            $rootScope.post.title = self.detail.name;
+            $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.title + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
         });
@@ -540,7 +541,8 @@
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
-            $rootScope.post = self.detail;
+            $rootScope.post.title = self.detail.name;
+            $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
             self.detail.qty = 1;
