@@ -140,6 +140,10 @@
                                             <div class="col-md-8" ng-if="Purchase.purchase.comments">
                                                 <h4><strong>Nota:</strong> {{ Purchase.purchase.comments}}</h4>
                                             </div>
+                                            <div class="col-md-8" ng-if="Purchase.purchase.metadata.getShop">
+                                                <h4><strong>Tu compra la debes de recoger en:</strong></h4>
+                                                <p>{{ Purchase.purchase.storeInfo.businessName }} - {{ Purchase.purchase.storeInfo.address}}, Tel. {{Purchase.purchase.storeInfo.phone}} </p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="payment-mount text-right">
