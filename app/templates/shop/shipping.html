@@ -19,9 +19,9 @@
                     </md-radio-group>
                     <br>
                 </div>
-                <div class="col-md-12">
-                    <h4><i class="fa fa-map-marker"></i>{{Payment.sendOptions === "0" ? ' Seleccionar dirección
-                        existente' : ' Dinos cual es tu direccion y mostrar las tiendas más cercanas a ti'}} </h4>
+                <div class="col-md-12" ng-if="Payment.sendOptions === '0'">
+                    <h4><i class="fa fa-map-marker"></i>Seleccionar dirección
+                        existente </h4>
                     <hr>
                     <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
                     
@@ -55,7 +55,12 @@
 
                     <br>
                 </div>
-                <form name="Form">
+                <div class="col-md-12" ng-if="Payment.sendOptions === '1'">
+                    <button class="btn btn-danger" type="submit"
+                            ng-click="Payment.retriveInStore()">Continuar y recoger en tienda
+                    </button>
+                </div>
+                <form name="Form" ng-if="Payment.sendOptions === '0'">
                     <div>
                         <div class="col-md-12">
                             <h4 title="Presiona">

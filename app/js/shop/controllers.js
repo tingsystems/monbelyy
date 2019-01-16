@@ -296,7 +296,6 @@
                     self.code = data;
                     if (self.code.isValid) {
                         if (!self.code.shipmentFree) {
-                            console.log(self.code.discountType);
                             $localStorage.globalDiscount.isPercentage = self.code.discountType;
                             $localStorage.globalDiscount.amount = self.code.amount;
                             $localStorage.globalDiscount.coupon = self.code.id;
@@ -420,9 +419,8 @@
 
         self.retriveInStore = function () {
             $localStorage.appData.user.address = self.address.id;
-            $localStorage.appData.getShop = self.shop;
+            $localStorage.appData.getShop = true;
             $state.go('checkout', {shipping: self.sendOptions});
-
         };
 
 
@@ -472,7 +470,6 @@
             }
             else {
                 $rootScope.$emit('newTotals', {data: false});
-
             }
         };
 
@@ -516,27 +513,33 @@
 
         self.showAddress = function () {
             self.addAddress = !self.addAddress;
-        }
+        };
 
         self.quoteShipment =  function() {
-            ShipmentSrv.quote({
-                cartId: $localStorage.cart.id, 
-                addressId: self.address.id, 
-            }).$promise.then(function (data) {
-            
-                self.busyAddresses = false;
-                $localStorage.cart = data;
-                self.cart = data;
-                self.total = data.total;
-                $localStorage.shipmentTotal = data.shipmentCost;
-                $localStorage.total = data.total;
-                $rootScope.$emit('newTotals', {data: false});
-            }, function (error) {
-                self.busyAddresses = false;
-                angular.forEach(error, function (key, value) {
-                    NotificationSrv.error("Error", value);
-                });
-            });
+            var branchOffice = $localStorage.appData.user.branchOffices[0];
+            if('metadata' in branchOffice){
+                if('mienvio' in branchOffice.metadata){
+                    ShipmentSrv.quote({
+                        cartId: $localStorage.cart.id,
+                        addressId: self.address.id,
+                    }).$promise.then(function (data) {
+
+                        self.busyAddresses = false;
+                        $localStorage.cart = data;
+                        self.cart = data;
+                        self.total = data.total;
+                        $localStorage.shipmentTotal = data.shipmentCost;
+                        $localStorage.total = data.total;
+                        $rootScope.$emit('newTotals', {data: false});
+                    }, function (error) {
+                        self.busyAddresses = false;
+                        angular.forEach(error, function (key, value) {
+                            NotificationSrv.error("Error", value);
+                        });
+                    });
+                }
+            }
+
         }
     }
 

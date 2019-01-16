@@ -609,6 +609,7 @@
                 self.detail.code = self.itemFromGroup.code;
                 self.detail.kind = self.itemFromGroup.kind;
                 self.detail.inventory = self.itemFromGroup.inventory;
+                self.detail.description = self.itemFromGroup.description;
                 // get featureImage
                 self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
                 //get galeries
@@ -620,7 +621,7 @@
                 }
 
                 $rootScope.post = self.itemFromGroup;
-                $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
+                $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                 self.busy = false;
                 self.detail.qty = 1;
             });
