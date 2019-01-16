@@ -15,29 +15,41 @@
                                     <h6>
                                         Tipo de pago:
                                         <span ng-if="Purchase.purchase.paymentType == 3" class="badge badge-info">
-                            {{ Purchase.purchase.paymentTypeName }}
-                        </span>
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
                                         <span ng-if="Purchase.purchase.paymentType == 6" class="badge badge-success">
-                            {{ Purchase.purchase.paymentTypeName }}
-                        </span>
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
                                         <span ng-if="Purchase.purchase.paymentType == 8" class="badge badge-danger">
-                             {{ Purchase.purchase.paymentTypeName }}
-                        </span>
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
                                     </h6>
+
                                 </div>
                                 <div class="col-2 col-md-3">
                                     <h6>
                                         Estatus:
                                         <span ng-if="Purchase.purchase.isPaid == 0" class="badge badge-success">
-                            {{ Purchase.purchase.isPaidName }}
-                        </span>
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
                                         <span ng-if="Purchase.purchase.isPaid == 1" class="badge badge-warning">
-                            {{ Purchase.purchase.isPaidName }}
-                        </span>
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
                                         <span ng-if="Purchase.purchase.isPaid == 2" class="badge badge-danger">
-                            {{ Purchase.purchase.isPaidName }}
-                        </span>
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
                                     </h6>
+                                </div>
+                                <div ng-Hide="!Purchase.isPaypal" class="col-4 col-md-6 text-right">
+                                    <h6>
+                                        <span>
+                                            <a title="Pagar con paypal" href="{{Purchase.PaypalUrl}}" target="_" class="btn btn-sm btn-transparent">
+                                                <img src="../../img/paypall.png" alt=""  width="100">
+                                            </a>
+                                        </span>
+
+                                    </h6>
+
                                 </div>
                             </div>
                             <hr>
@@ -47,11 +59,10 @@
                                         comprobante
                                         de pago cargado</a>
                                     <input type="file" ngf-select="Purchase.uploadFile()" ng-model="Purchase.voucher"
-                                           name="file"
-                                           ngf-pattern="'.pdf,image/*'"
-                                           ngf-accept="'image/*,.pdf'"
-                                           ngf-max-size="20MB" style="margin-bottom: 15px; margin-top: 15px;"/>
-                                    <i class="text-danger" ng-show="Entry.postForm.file.$error.maxSize">Tamaño maximo de archivo
+                                        name="file" ngf-pattern="'.pdf,image/*'" ngf-accept="'image/*,.pdf'"
+                                        ngf-max-size="20MB" style="margin-bottom: 15px; margin-top: 15px;" />
+                                    <i class="text-danger" ng-show="Entry.postForm.file.$error.maxSize">Tamaño maximo
+                                        de archivo
                                         20MB</i>
 
                                 </div>
@@ -81,40 +92,44 @@
                                             <div class="table-responsive">
                                                 <table class="table table-bordered">
                                                     <thead>
-                                                    <tr>
-                                                        <th width="5%">Cantidad</th>
-                                                        <th width="50%">Descripción</th>
-                                                        <th>Precio unitario</th>
-                                                        <th>Importe</th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th width="5%">Cantidad</th>
+                                                            <th width="50%">Descripción</th>
+                                                            <th>Precio unitario</th>
+                                                            <th>Importe</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr ng-repeat="item in Purchase.purchase.items">
-                                                        <th scope="row">{{item.qty}}</th>
-                                                        <td>{{item.itemId}} - {{item.name}}</td>
-                                                        <td>{{item.price | currency}}</td>
-                                                        <td ng-if="item.subtotalDiscount">{{item.subtotalDiscount | currency}}
-                                                            <span class="glyphicon  glyphicon-exclamation-sign">
-                                            <md-tooltip md-direction="right">Este producto tuvo {{item.promotion | currency}} de descuento.</md-tooltip></span></p>
-                                                        </td>
-                                                        <td ng-if="!item.subtotalDiscount">{{item.subtotal | currency}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th style="text-align: right;" colspan="3">Descuento</th>
-                                                        <td>{{Purchase.purchase.promoTotal | currency}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th style="text-align: right;" colspan="3">Subtotal</th>
-                                                        <td>{{Purchase.purchase.subTotal | currency}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th colspan="3" style="text-align: right;">IVA</th>
-                                                        <td>{{Purchase.purchase.taxTotal | currency}}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th colspan="3" style="text-align: right;">TOTAL</th>
-                                                        <td>{{Purchase.purchase.total | currency}}</td>
-                                                    </tr>
+                                                        <tr ng-repeat="item in Purchase.purchase.items">
+                                                            <th scope="row">{{item.qty}}</th>
+                                                            <td>{{item.itemId}} - {{item.name}}</td>
+                                                            <td>{{item.price | currency}}</td>
+                                                            <td ng-if="item.subtotalDiscount">{{item.subtotalDiscount |
+                                                                currency}}
+                                                                <span class="glyphicon  glyphicon-exclamation-sign">
+                                                                    <md-tooltip md-direction="right">Este producto tuvo
+                                                                        {{item.promotion | currency}} de descuento.</md-tooltip>
+                                                                </span></p>
+                                                            </td>
+                                                            <td ng-if="!item.subtotalDiscount">{{item.subtotal |
+                                                                currency}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="text-align: right;" colspan="3">Descuento</th>
+                                                            <td>{{Purchase.purchase.promoTotal | currency}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="text-align: right;" colspan="3">Subtotal</th>
+                                                            <td>{{Purchase.purchase.subTotal | currency}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: right;">IVA</th>
+                                                            <td>{{Purchase.purchase.taxTotal | currency}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: right;">TOTAL</th>
+                                                            <td>{{Purchase.purchase.total | currency}}</td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -130,7 +145,7 @@
                                     <div class="payment-mount text-right">
                                         <div class="btn-inv">
                                             <button title="Regresar a mis compras" class="btn btn-md btn-danger"
-                                                    ui-sref="sales">
+                                                ui-sref="sales">
                                                 <i class="fa fa-angle-left"></i> Regresar
                                             </button>
                                         </div>
@@ -163,5 +178,3 @@
         </div>
     </section>
 </div>
-
-

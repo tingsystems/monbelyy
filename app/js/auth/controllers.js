@@ -687,7 +687,8 @@
                                 HistoryOrdersSrv, $filter) {
         var self = this;
         self.busy = false;
-
+        self.isPaypal = false;
+        self.PaypalUrl = '';
         //aditional keys
         var aditionalKey = function (array) {
             if (self.purchase.metadata) {
@@ -719,6 +720,10 @@
         if ($stateParams.id) {
             OrderSrv.get({id: $stateParams.id}).$promise.then(function (data) {
                 self.purchase = data;
+                if(self.purchase.isPaid == 2 && self.purchase.paymentType == 3){
+                    self.isPaypal = true
+                    self.PaypalUrl = self.purchase.metadata.approvalUrl
+                }
                 self.purchase.items = aditionalKey(self.purchase.items);
                 getVoucher();
                 getComments(self.purchase);
