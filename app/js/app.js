@@ -163,7 +163,7 @@
         $rootScope.$state = $state;
         // $rootScope.host = 'https://mercadomovil.com.mx';
         //$rootScope.host = 'http://' + $location.host();
-        $rootScope.host = 'http://192.168.2.105';
+        $rootScope.host = 'http://192.168.2.101';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v1';
