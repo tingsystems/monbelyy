@@ -22,7 +22,7 @@
             self.activeTab = 1;
         }
 
-        self.items = $localStorage.items.length ? $localStorage.items : [];
+        self.items = $localStorage.items ? $localStorage.items.length : [];
         self.itemCount = self.items.length;
 
         self.processing = false;

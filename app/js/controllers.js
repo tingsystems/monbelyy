@@ -89,98 +89,29 @@
             });
         });
 
-        /*
-                EntrySrv.get({
-                    taxonomies: 'patrocinadores',
-                    isActive: 'True',
-                    pageSize: 8,
-                    ordering: '-createdAt',
-                    fields: 'title,content,attachments,slug,excerpt'
-                }).$promise.then(function (results) {
-                    self.brands = results.results;
-                    //get featureImage
-                    angular.forEach(self.brands, function (obj, ind) {
-                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                    });
-                });
-                */
         /* Carousel slider */
-        self.carouselInitializerSlider = function () {
-            $(".owl-theme-slider").owlCarousel({
-                //get items to proportionate num of items
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                loop: true,
-                margin: 0,
-                center: true,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 1,
-                        nav: false
-                    },
-                    1000: {
-                        items: 1,
-                        nav: true,
-                        loop: false
-                    }
-                }
 
-            });
+        self.owlOptionsSlider = {
+            items:1,
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            animateOut: 'slideOutDown',
+            animateIn: 'flipInX'
+
+        };
+
+        self.owlOptionsProducts = {
+            items:4,
+            loop:true,
+            margin:0,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true
+
         }
-
-        /* Carousel brands */
-        self.carouselInitializer = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                navText: ['<', '>'],
-                navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                loop: true,
-                margin: 20,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 3,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: true,
-                        loop: false
-                    }
-                }
-            });
-        }
-
-
-        /*
-        EntrySrv.get({
-            taxonomies: 'ultimas-noticias',
-            isActive: 'True',
-            pageSize: 4,
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
-        }).$promise.then(function (results) {
-            self.newsHome = results.results;
-            //get featureImage
-            angular.forEach(self.newsHome, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-            });
-        });*/
 
     }
 
@@ -300,7 +231,8 @@
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
-            $rootScope.post = self.detail;
+            $rootScope.post.title = self.detail.name;
+            $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.title + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
         });
@@ -411,7 +343,7 @@
                         kind: 'post',
                         isActive: 'True',
                         fields: 'attachments,title,link,slug,excerpt',
-                        pageSize: 10,
+                        pageSize: 9,
                         ordering: '-createdAt',
                         search: self.searchTerm,
                         page: self.page
@@ -618,7 +550,6 @@
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
-
             $rootScope.post.title = self.detail.name;
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
@@ -627,34 +558,31 @@
         });
 
         /* Carousel slider */
-        self.carouselDetailProduct = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                autoplayHoverPause: true,
-                autoplayTimeout: 1000,
-                margin: 0,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 1,
-                        nav: false
-                    },
-                    1000: {
-                        items: 1,
-                        nav: true,
-                        loop: false
-                    }
+        self.owlOptionProduct = {
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navigation: true,
+            //pagination: false,
+            autoplay: true,
+            items: 1,
+            autoplayHoverPause:true,
+            autoplayTimeout:5000,
+            margin: 0,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 1,
+                    nav: false
+                },
+                1000: {
+                    items: 1,
+                    nav: true,
+                    loop: false
                 }
-            });
+            }
         };
 
         self.getProductFromGroup = function () {
@@ -770,7 +698,7 @@
             self.brands = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 10,
+                pageSize: 150,
                 fields: 'id,slug,name',
                 search: self.searchTerBrand,
                 kind: self.filterBrand
@@ -1077,7 +1005,7 @@
         self.tableParams = new NgTableParams({
             // default params
             page: 1, // The page number to show
-            count: 10 // The number of items to show per page
+            count: 9 // The number of items to show per page
         }, {
             // default settings
             // page size buttons (right set of buttons in demo)
