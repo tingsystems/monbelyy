@@ -14,13 +14,31 @@
                                 <div class="col-2 col-md-3">
                                     <h6>
                                         Tipo de pago:
-                                        <span ng-if="Purchase.purchase.paymentType == 3" class="badge badge-info">
+                                        <span ng-if="Purchase.purchase.paymentType == 0" class="badge badge-primary">
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.paymentType == 1" class="badge badge-info">
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.paymentType == 2" class="badge badge-warning">
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.paymentType == 3" class="badge badge-success">
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.paymentType == 4" class="badge badge-primary">
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.paymentType == 5" class="badge badge-info">
                                             {{ Purchase.purchase.paymentTypeName }}
                                         </span>
                                         <span ng-if="Purchase.purchase.paymentType == 6" class="badge badge-success">
                                             {{ Purchase.purchase.paymentTypeName }}
                                         </span>
-                                        <span ng-if="Purchase.purchase.paymentType == 8" class="badge badge-danger">
+                                        <span ng-if="Purchase.purchase.paymentType == 7" class="badge badge-warning">
+                                            {{ Purchase.purchase.paymentTypeName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.paymentType == 8" class="badge badge-info">
                                             {{ Purchase.purchase.paymentTypeName }}
                                         </span>
                                     </h6>
@@ -38,13 +56,31 @@
                                         <span ng-if="Purchase.purchase.isPaid == 2" class="badge badge-danger">
                                             {{ Purchase.purchase.isPaidName }}
                                         </span>
+                                        <span ng-if="Purchase.purchase.isPaid == 3" class="badge badge-success">
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.isPaid == 4" class="badge badge-primary">
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.isPaid == 5" class="badge badge-info">
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.isPaid == 6" class="badge badge-success">
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.isPaid == 7" class="badge badge-warning">
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
+                                        <span ng-if="Purchase.purchase.isPaid == 8" class="badge badge-info">
+                                            {{ Purchase.purchase.isPaidName }}
+                                        </span>
                                     </h6>
                                 </div>
                                 <div ng-Hide="!Purchase.isPaypal" class="col-4 col-md-6 text-right">
                                     <h6>
-                                        <span>
+                                        <span>Pagar con Paypal
                                             <a title="Pagar con paypal" href="{{Purchase.PaypalUrl}}" target="_" class="btn btn-sm btn-transparent">
-                                                <img src="../../img/paypall.png" alt=""  width="100">
+                                                <img src="../../img/paypall.png" alt="" width="100">
                                             </a>
                                         </span>
 
@@ -142,7 +178,9 @@
                                             </div>
                                             <div class="col-md-8" ng-if="Purchase.purchase.metadata.getShop">
                                                 <h4><strong>Tu compra la debes de recoger en:</strong></h4>
-                                                <p>{{ Purchase.purchase.storeInfo.businessName }} - {{ Purchase.purchase.storeInfo.address}}, Tel. {{Purchase.purchase.storeInfo.phone}} </p>
+                                                <p>{{ Purchase.purchase.storeInfo.businessName }} - {{
+                                                    Purchase.purchase.storeInfo.address}}, Tel.
+                                                    {{Purchase.purchase.storeInfo.phone}} </p>
                                             </div>
                                         </div>
                                     </div>
