@@ -517,7 +517,7 @@
         };
     }
 
-    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage) {
+    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage, $timeout) {
         var self = this;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
@@ -541,7 +541,7 @@
             // get featureImage
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
             // add gallery image and featured image
-            self.detail.galleryImages.push(self.detail.featuredImage);
+            // self.detail.galleryImages.push(self.detail.featuredImage);
             //get galeries
             angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
                 self.detail.galleryImages.push(value);
@@ -587,6 +587,7 @@
 
         self.getProductFromGroup = function () {
             var taxonomies = [];
+            self.detail.galleryImages = [];
             angular.forEach(self.optionSelected, function (obj) {
                 taxonomies.push(obj.slug)
             });
@@ -624,6 +625,12 @@
                 $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                 self.busy = false;
                 self.detail.qty = 1;
+                $rootScope.$broadcast('owlCarousel.changeStart');
+                $timeout(function(){
+                    self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
+                    // notify the carousel that data is changed
+                    $rootScope.$broadcast('owlCarousel.changeEnd');
+                });
             });
         };
 
@@ -1215,7 +1222,7 @@
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
-    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage'];
+    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
         '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',

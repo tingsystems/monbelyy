@@ -75,7 +75,7 @@
         .directive('postLink', postLink)
         .directive('postImage', postImage)
         .directive('compareGreater', compareGreaterF)
-        .directive('owlCarousel', function() {
+        .directive('owlCarousel', function($timeout) {
             return {
                 restrict: 'E',
                 transclude: false,
@@ -95,6 +95,16 @@
                             $(element).owlCarousel(defaultOptions);
                         }
                         scope.cnt++;
+                        // Event to remove the carousel on data change start
+                        scope.$on('owlCarousel.changeStart', function(data) {
+                            $(element).owlCarousel('destroy');
+                        });
+                        // Event to create the carousel back when data change is completed
+                        scope.$on('owlCarousel.changeEnd', function(data) {
+                            $timeout(function() {
+                                $(element).owlCarousel(defaultOptions);
+                            });
+                        });
                     };
                 }
             };
