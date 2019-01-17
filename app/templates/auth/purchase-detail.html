@@ -47,13 +47,13 @@
                                 <div class="col-2 col-md-3">
                                     <h6>
                                         Estatus:
-                                        <span ng-if="Purchase.purchase.isPaid == 0" class="badge badge-primary">
+                                        <span ng-if="Purchase.purchase.isPaid == 0" class="badge badge-success">
                                             {{ Purchase.purchase.isPaidName }}
                                         </span>
-                                        <span ng-if="Purchase.purchase.isPaid == 1" class="badge badge-info">
+                                        <span ng-if="Purchase.purchase.isPaid == 1" class="badge badge-warning">
                                             {{ Purchase.purchase.isPaidName }}
                                         </span>
-                                        <span ng-if="Purchase.purchase.isPaid == 2" class="badge badge-warning">
+                                        <span ng-if="Purchase.purchase.isPaid == 2" class="badge badge-danger">
                                             {{ Purchase.purchase.isPaidName }}
                                         </span>
                                         <span ng-if="Purchase.purchase.isPaid == 3" class="badge badge-success">
