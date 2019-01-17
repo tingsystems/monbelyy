@@ -35,79 +35,96 @@
                             </div>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div class="container-fluid items-dashboard">
                         <!--TODO: Mostrar últimas 3 compras realizadas-->
                         <div class="col-md-12">
                             <h4>Mis compras recientes</h4>
                             <br>
                         </div>
-                        <div class="table-responsive col-md-12"
-                             loading-container="Panel.tableParams.settings().$loading">
+                        <div class="table-responsive col-md-12" loading-container="Panel.tableParams.settings().$loading">
                             <table class="table table-bordered bg-white table-striped" ng-table="Panel.tableParams"
-                                   show-filter="false">
+                                show-filter="false">
                                 <tbody>
-                                <tr ng-repeat="purchase in Panel.purchaseRecent" datasource="purchase" ref="Panel">
-                                    <td data-title="'Folio'" sortable="'id'">#{{ purchase.id }}</td>
-                                    <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date: 'd/M/y'}}
-                                    </td>
-                                    <td data-title="'Tipo'">
-                                    <span ng-if="purchase.paymentType == 3" class="badge badge-info">
-                                        {{ purchase.paymentTypeName }}
-                                </span>
-                                        <span ng-if="purchase.paymentType == 6" class="badge badge-success">
-                                        {{ purchase.paymentTypeName }}
-                                </span>
-                                        <span ng-if="purchase.paymentType == 8" class="badge badge-success">
-                                        {{ purchase.paymentTypeName }}
-                                </span>
-                                    </td>
-                                    <td data-title="'Pago'">
-                                    <span ng-if="purchase.isPaid == 0" class="badge badge-success">
+                                    <tr ng-repeat="purchase in Panel.purchaseRecent" datasource="purchase" ref="Panel">
+                                        <td data-title="'Folio'" sortable="'id'">#{{ purchase.id }}</td>
+                                        <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date:
+                                            'd/M/y'}}
+                                        </td>
+                                        <td data-title="'Tipo'">
+                                            <span ng-if="purchase.paymentType == 0" class="badge badge-primary">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 1" class="badge badge-info">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 2" class="badge badge-warning">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 3" class="badge badge-success">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 4" class="badge badge-primary">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 5" class="badge badge-info">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 6" class="badge badge-success">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 7" class="badge badge-warning">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                            <span ng-if="purchase.paymentType == 8" class="badge badge-info">
+                                                {{ purchase.paymentTypeName }}
+                                            </span>
+                                        </td>
+                                        <td data-title="'Pago'">
+                                            <span ng-if="purchase.isPaid == 0" class="badge badge-success">
                                                 {{ purchase.isPaidName }}
-                                        </span>
-                                        <span ng-if="purchase.isPaid == 1" class="badge badge-warning">
+                                            </span>
+                                            <span ng-if="purchase.isPaid == 1" class="badge badge-warning">
                                                 {{ purchase.isPaidName }}
-                                        </span>
-                                        <span ng-if="purchase.isPaid == 2" class="badge badge-danger">
+                                            </span>
+                                            <span ng-if="purchase.isPaid == 2" class="badge badge-danger">
                                                 {{ purchase.isPaidName}}
-                                        </span>
-                                    </td>
-                                    <td data-title="'Compra'">
-                                        <span ng-if="purchase.orderStatus == 0" class="badge badge-danger">
-                                                {{ purchase.orderStatusName }} 
-                                        </span>
-                                                <span ng-if="purchase.orderStatus == 1" class="badge badge-warning">
+                                            </span>
+                                        </td>
+                                        <td data-title="'Compra'">
+                                            <span ng-if="purchase.orderStatus == 0" class="badge badge-danger">
                                                 {{ purchase.orderStatusName }}
-                                        </span>
-                                                <span ng-if="purchase.orderStatus == 2" class="badge badge-success">
+                                            </span>
+                                            <span ng-if="purchase.orderStatus == 1" class="badge badge-warning">
+                                                {{ purchase.orderStatusName }}
+                                            </span>
+                                            <span ng-if="purchase.orderStatus == 2" class="badge badge-success">
                                                 {{ purchase.orderStatusName}}
-                                        </span>
-                                                <span ng-if="purchase.orderStatus == 3" class="badge badge-secondary">
+                                            </span>
+                                            <span ng-if="purchase.orderStatus == 3" class="badge badge-secondary">
                                                 {{ purchase.orderStatusName}}
-                                        </span>
-                                                <span ng-if="purchase.orderStatus == 4" class="badge badge-success">
+                                            </span>
+                                            <span ng-if="purchase.orderStatus == 4" class="badge badge-success">
                                                 {{ purchase.orderStatusName}}
-                                        </span>
-                                                <span ng-if="purchase.orderStatus == 5" class="badge badge-warning">
+                                            </span>
+                                            <span ng-if="purchase.orderStatus == 5" class="badge badge-warning">
                                                 {{ purchase.orderStatusName}}
-                                        </span>
-                                                <span ng-if="purchase.orderStatus == 6" class="badge badge-danger">
+                                            </span>
+                                            <span ng-if="purchase.orderStatus == 6" class="badge badge-danger">
                                                 {{ purchase.orderStatusName}}
-                                        </span>
-                                                <span ng-if="purchase.orderStatus == 7" class="badge badge-success">
+                                            </span>
+                                            <span ng-if="purchase.orderStatus == 7" class="badge badge-success">
                                                 {{ purchase.orderStatusName}}
-                                        </span>
-                                    </td>
-                                    <td data-title="'Total'"><strong class="text-success">{{ purchase.total |
-                                        currency
-                                        }}</strong></td>
-                                    <td style="text-align: center;" data-title="'Acciones'">
-                                        <button title="Ver detalle de la compra"
-                                                class="btn btn-primary gray btn-xs indicators"
+                                            </span>
+                                        </td>
+                                        <td data-title="'Total'"><strong class="text-success">{{ purchase.total |
+                                                currency
+                                                }}</strong></td>
+                                        <td style="text-align: center;" data-title="'Acciones'">
+                                            <button title="Ver detalle de la compra" class="btn btn-primary gray btn-xs indicators"
                                                 ui-sref="purchase-detail({id: purchase.id})" data-title="Edit">
-                                            <span class="ion-ios-eye"></span></button>
-                                </tr>
+                                                <span class="ion-ios-eye"></span></button>
+                                    </tr>
                                 </tbody>
                                 <tfooter>
                                     <tr ng-hide="Panel.purchases.length">
@@ -121,5 +138,5 @@
                 </div>
             </div>
         </div>
-</section>
+    </section>
 </div>

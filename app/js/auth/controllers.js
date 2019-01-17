@@ -821,6 +821,7 @@
                 self.purchases = data.results;
                 self.purchasesCount = self.purchases.length;
                 self.purchaseRecent = self.purchases.slice(0, 3);
+                console.log(self.purchaseRecent)
 
                 angular.forEach(self.purchases, function (value, key) {
                     if (value.paymentType === 9) {
