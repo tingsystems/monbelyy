@@ -162,7 +162,7 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://mercadomovil.com.mx';
-        //$rootScope.host = 'http://' + $location.host();
+        // $rootScope.host = 'http://' + $location.host() + ':8000';
         $rootScope.host = 'http://192.168.2.101';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';

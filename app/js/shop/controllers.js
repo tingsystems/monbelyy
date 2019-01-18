@@ -521,7 +521,7 @@
                 if('mienvio' in branchOffice.metadata){
                     ShipmentSrv.quote({
                         cartId: $localStorage.cart.id,
-                        addressId: self.address.id,
+                        addressId: self.address.id
                     }).$promise.then(function (data) {
 
                         self.busyAddresses = false;
@@ -537,6 +537,11 @@
                             NotificationSrv.error("Error", value);
                         });
                     });
+                }
+                else if('shipmentCost' in  branchOffice.metadata) {
+                    $localStorage.shipmentTotal = $localStorage.cart.shipmentCost;
+                    $localStorage.total = $localStorage.cart.total;
+                    $rootScope.$emit('newTotals', {data: false});
                 }
             }
 
