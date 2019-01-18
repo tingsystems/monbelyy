@@ -720,8 +720,8 @@
         if ($stateParams.id) {
             OrderSrv.get({id: $stateParams.id}).$promise.then(function (data) {
                 self.purchase = data;
-                if(self.purchase.isPaid == 2 && self.purchase.paymentType == 3 && self.purchase.orderStatus == 0 && self.purchase.statusInfo.code != 6){
-                    self.isPaypal = true
+                if(self.purchase.isPaid === 2 && self.purchase.paymentType === 3 && self.purchase.orderStatus === 0 && self.purchase.statusInfo.code !== 6){
+                    self.isPaypal = true;
                     self.PaypalUrl = self.purchase.metadata.approvalUrl
                 }
                 self.purchase.items = aditionalKey(self.purchase.items);
