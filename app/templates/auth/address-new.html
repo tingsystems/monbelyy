@@ -35,7 +35,7 @@
                                                 </md-option>
                                             </md-select>
                                             <div ng-messages="Form.state.$error" md-auto-hide="false">
-                                                <div ng-message="required">Required</div>
+                                                <div ng-message="required">Requerido</div>
                                             </div>
                                         </md-input-container>
                                     </div>
@@ -59,7 +59,7 @@
                                                 </md-option>
                                             </md-select>
                                             <div ng-messages="Form.city.$error" md-auto-hide="false">
-                                                <div ng-message="required">Required</div>
+                                                <div ng-message="required">Requerido</div>
                                             </div>
                                         </md-input-container>
                                     </div>
@@ -145,9 +145,9 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6 clearfix">
                                         <div class="form-item" ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
-                                            <input ng-model="Address.formData.address" type="text" class="form-control"
+                                            <input ng-model="Address.formData.addressBetween1" type="text" class="form-control"
                                                 id="addressBetween1" name="addressBetween1" placeholder="Calle 1"
-                                                required />
+                                                 />
                                             <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
                                                 <a ng-message="required" data-toggle="tooltip" title="Holiis"></a>
                                             </span>
@@ -155,9 +155,9 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="form-item" ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
-                                            <input ng-model="Address.formData.neighborhood" type="text" class="form-control"
+                                            <input ng-model="Address.formData.addressBetween2" type="text" class="form-control"
                                                 id="addressBetween2" name="addressBetween2" placeholder="Calle 2"
-                                                required />
+                                                 />
                                         </div>
                                     </div>
                                 </div>
