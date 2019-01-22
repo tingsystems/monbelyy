@@ -309,6 +309,12 @@
             var address = angular.copy(self.formData);
             address.customer = self.idUser;
             self.busy = true;
+            if(!self.city || !self.state)
+            {
+                NotificationSrv.error('Por favor llena todos los campos');
+                self.busy = false;
+                return;
+            }
             address.city = self.city.id;
             address.state = self.state.id;
             AddressSrv.save(address).$promise.then(function (data) {

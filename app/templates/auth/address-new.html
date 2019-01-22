@@ -23,7 +23,7 @@
                                                 name="state" required id="state">
                                                 <md-select-header class="demo-select-header">
                                                     <input ng-model="searchState" type="search" placeholder="Busca un estado..."
-                                                        class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()"/>
+                                                        class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()" />
                                                 </md-select-header>
                                                 <div layout="row" layout-align="center center" ng-if="Address.busyState">
                                                     <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
@@ -34,6 +34,9 @@
                                                     {{state.name}}
                                                 </md-option>
                                             </md-select>
+                                            <div ng-messages="Form.state.$error" md-auto-hide="false">
+                                                <div ng-message="required">Required</div>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="col-xs-12 col-sm-6" ng-if="Address.create">
@@ -44,7 +47,7 @@
                                                 ng-disabled="Address.disableCity" name="city" id="city" required>
                                                 <md-select-header class="demo-select-header">
                                                     <input ng-model="searchCity" type="search" placeholder="Busca una ciudad de {{Address.state.name}}"
-                                                        class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()"/>
+                                                        class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()" />
                                                 </md-select-header>
                                                 <div layout="row" layout-align="center center" ng-if="Address.busyCity">
                                                     <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
@@ -55,6 +58,9 @@
                                                     {{city.name}}
                                                 </md-option>
                                             </md-select>
+                                            <div ng-messages="Form.city.$error" md-auto-hide="false">
+                                                <div ng-message="required">Required</div>
+                                            </div>
                                         </md-input-container>
                                     </div>
                                     <div class="col-xs-12 col-sm-6" ng-if="!Address.create">
@@ -74,19 +80,19 @@
                                             <label for="stateEdit">Estado</label>
                                             <md-select ng-model="Address.state" md-on-open="Address.getStates()"
                                                 data-md-container-class="selectdemoSelectHeader" md-on-close="searchState='';Address.clearCities()"
-                                                name="state" required id="stateEdit"/>
-                                                <md-select-header class="demo-select-header">
-                                                    <input ng-model="searchState" type="search" placeholder="Busca un estado..."
-                                                        class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()"/>
-                                                </md-select-header>
-                                                <div layout="row" layout-align="center center" ng-if="Address.busyState">
-                                                    <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
-                                                        style="transform: scale(1);"></md-progress-circular>
-                                                </div>
-                                                <md-option ng-repeat="state in Address.states | filter:searchState"
-                                                    ng-value="state">
-                                                    {{state.name}}
-                                                </md-option>
+                                                name="state" required id="stateEdit" />
+                                            <md-select-header class="demo-select-header">
+                                                <input ng-model="searchState" type="search" placeholder="Busca un estado..."
+                                                    class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()" />
+                                            </md-select-header>
+                                            <div layout="row" layout-align="center center" ng-if="Address.busyState">
+                                                <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
+                                                    style="transform: scale(1);"></md-progress-circular>
+                                            </div>
+                                            <md-option ng-repeat="state in Address.states | filter:searchState"
+                                                ng-value="state">
+                                                {{state.name}}
+                                            </md-option>
                                             </md-select>
                                         </md-input-container>
                                     </div>
@@ -95,19 +101,18 @@
                                             <label for="cityEdit">Ciudad</label>
                                             <md-select ng-model="Address.city" md-on-open="Address.getCitiesByState()"
                                                 data-md-container-class="selectdemoSelectHeader" md-on-close="searchCity=''"
-                                                ng-disabled="Address.disableCity" name="city" id="cityEdit" required/>
-                                                <md-select-header class="demo-select-header">
-                                                    <input ng-model="searchCity" type="search" placeholder="Busca una ciudad de {{Address.state.name}}"
-                                                        class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()">
-                                                </md-select-header>
-                                                <div layout="row" layout-align="center center" ng-if="Address.busyCity">
-                                                    <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
-                                                        style="transform: scale(1);"></md-progress-circular>
-                                                </div>
-                                                <md-option ng-repeat="city in Address.cities | filter:searchCity"
-                                                    ng-value="city">
-                                                    {{city.name}}
-                                                </md-option>
+                                                ng-disabled="Address.disableCity" name="city" id="cityEdit" required />
+                                            <md-select-header class="demo-select-header">
+                                                <input ng-model="searchCity" type="search" placeholder="Busca una ciudad de {{Address.state.name}}"
+                                                    class="demo-header-searchbox md-text" ng-keydown="$event.stopPropagation()">
+                                            </md-select-header>
+                                            <div layout="row" layout-align="center center" ng-if="Address.busyCity">
+                                                <md-progress-circular md-mode="indeterminate" class="md-warn md-default-theme"
+                                                    style="transform: scale(1);"></md-progress-circular>
+                                            </div>
+                                            <md-option ng-repeat="city in Address.cities | filter:searchCity" ng-value="city">
+                                                {{city.name}}
+                                            </md-option>
                                             </md-select>
                                         </md-input-container>
                                     </div>
@@ -117,7 +122,7 @@
                                         <div class="form-item" ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
                                             <label for="address">Calle y número</label>
                                             <input ng-model="Address.formData.address" type="text" class="form-control"
-                                                id="address" name="address" placeholder="Dirección" required/>
+                                                id="address" name="address" placeholder="Dirección" required />
                                             <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
                                                 <a ng-message="required" data-toggle="tooltip" title="Holiis"></a>
                                             </span>
@@ -127,7 +132,7 @@
                                         <div class="form-item" ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
                                             <label for="neighborhood">Colonia</label>
                                             <input ng-model="Address.formData.neighborhood" type="text" class="form-control"
-                                                id="neighborhood" name="neighborhood" placeholder="Colonia" required/>
+                                                id="neighborhood" name="neighborhood" placeholder="Colonia" required />
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +147,7 @@
                                         <div class="form-item" ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
                                             <input ng-model="Address.formData.address" type="text" class="form-control"
                                                 id="addressBetween1" name="addressBetween1" placeholder="Calle 1"
-                                                required/>
+                                                required />
                                             <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
                                                 <a ng-message="required" data-toggle="tooltip" title="Holiis"></a>
                                             </span>
@@ -152,7 +157,7 @@
                                         <div class="form-item" ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
                                             <input ng-model="Address.formData.neighborhood" type="text" class="form-control"
                                                 id="addressBetween2" name="addressBetween2" placeholder="Calle 2"
-                                                required/>
+                                                required />
                                         </div>
                                     </div>
                                 </div>
@@ -162,14 +167,14 @@
                                             <label for="zip">Código Postal</label>
                                             <input ng-model="Address.formData.zip" type="text" ng-pattern="/^[0-9]{5}$/"
                                                 maxlength="5" class="form-control" id="zip" name="zip" placeholder="Código Postal"
-                                                required/>
+                                                required />
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="form-item" ng-class="{ 'has-error': Form.phone.$touched && Form.phone.$invalid }">
                                             <label for="phone">Teléfono</label>
                                             <input ng-model="Address.formData.phone" type="text" maxlength="20" class="form-control"
-                                                id="phone" name="phone" placeholder="Teléfono" required/>
+                                                id="phone" name="phone" placeholder="Teléfono" required />
                                         </div>
 
                                     </div>
@@ -179,8 +184,7 @@
                                         <div class="form-item" ng-class="{ 'has-error': Form.mobile.$touched && Form.mobile.$invalid }">
                                             <label for="mobile">Celular</label>
                                             <input ng-model="Address.formData.mobile" type="text" ng-maxlength="20"
-                                                class="form-control" id="mobile" name="mobile" placeholder="Celular"
-                                                />
+                                                class="form-control" id="mobile" name="mobile" placeholder="Celular" />
                                         </div>
 
                                     </div>
