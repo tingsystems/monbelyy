@@ -145,7 +145,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-6 clearfix">
                                         <div class="form-item" ng-class="{ 'has-error': Form.address.$touched && Form.address.$invalid }">
-                                            <input ng-model="Address.formData.addressBetween1" type="text" class="form-control"
+                                            <input ng-model="Address.formData.metadata.addressBetween1" type="text" class="form-control"
                                                 id="addressBetween1" name="addressBetween1" placeholder="Calle 1"
                                                  />
                                             <span ng-messages="Form.address.$error" ng-if="Form.address.$touched">
@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="form-item" ng-class="{ 'has-error': Form.neighborhood.$touched && Form.neighborhood.$invalid }">
-                                            <input ng-model="Address.formData.addressBetween2" type="text" class="form-control"
+                                            <input ng-model="Address.formData.metadata.addressBetween2" type="text" class="form-control"
                                                 id="addressBetween2" name="addressBetween2" placeholder="Calle 2"
                                                  />
                                         </div>
