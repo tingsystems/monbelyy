@@ -327,8 +327,12 @@
         var updateAddress = function () {
             var formData = angular.copy(self.formData);
             var id = formData.id ? formData.id : $stateParams.id;
-            formData.city = self.city.id;
-            formData.state = self.state.id;
+            if(self.city){
+                formData.city = self.city.id;
+            }
+            if(self.state){
+                formData.state = self.state.id;
+            }
             self.busy = true;
             AddressSrv.update({id: id}, formData).$promise.then(function (response) {
                 self.busy = false;
