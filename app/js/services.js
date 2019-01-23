@@ -80,6 +80,19 @@
         return $resource(BaseUrl.get() + 'notifications/:id', null, {});
     }
 
+    // service for status project in MMCB
+    function MMOrderSrv($resource) {
+        // var BaseUrl = 'https://mercadomovil.com.mx/api/v3/reports/project/';
+        var BaseUrl = 'http://192.168.2.101/api/v1/reports/project/';
+        return $resource(BaseUrl + 'status', null, {
+            'status': {
+                method: 'POST',
+                url: BaseUrl + 'status',
+                isArray: true
+            }
+        });
+    }
+
 
 
     // Add interceptor
@@ -119,17 +132,17 @@
                 // console.log(rejection); // Contains the data about the error.
 
                 // net::ERR_CONNECTION_REFUSED
-                if (rejection.status == -1) {
+                if (rejection.status === -1) {
                     NotificationSrv.error('Por favor intenta de nuevo hay problemas para establecer la conexión.');
                 }
                 // FORBIDDEN, UNAUTHORIZED
-                if (rejection.status == 403 || rejection.status == 401) {
+                if (rejection.status === 403 || rejection.status === 401) {
                     // logout the current user and delete the local storage
                     $rootScope.$emit('UNAUTHORIZED');
                 }
 
                 // 404, 500 error
-                if (rejection.status == 404) {
+                if (rejection.status === 404) {
                     $rootScope.$emit('HTTP_ERROR', { error: '404' });
                 }
 
@@ -196,7 +209,8 @@
         .factory('AccessSrv', AccessSrv)
         .factory('AttachmentCmsSrv', AttachmentCmsSrv)
         .factory('urlAttachment', urlAttachment)
-        .factory('ErrorSrv', ErrorSrv);
+        .factory('ErrorSrv', ErrorSrv)
+        .factory('MMOrderSrv', MMOrderSrv);
 
     // Inject factory the dependencies
     BaseUrl.$inject = [];
@@ -212,4 +226,5 @@
     AttachmentCmsSrv.$inject = ['$resource', 'urlAttachment'];
     urlAttachment.$inject = [];
     ErrorSrv.$inject = ['NotificationSrv'];
+    MMOrderSrv.$inject = ['$resource'];
 })();

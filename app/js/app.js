@@ -128,6 +128,22 @@
                         controller: 'ProductDetailCtrl'
                     }
                 }
+            })
+            .state('suspended', {
+                url: '/suspended',
+                views: {
+                    'suspended': {
+                        templateUrl: '/templates/suspended.html'
+                    }
+                }
+            })
+            .state('building', {
+                url: '/building',
+                views: {
+                    'building': {
+                        templateUrl: '/templates/building.html'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');
@@ -159,36 +175,56 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://mercadomovil.com.mx';
         // $rootScope.host = 'http://' + $location.host() + ':8000';
-        $rootScope.host = 'http://192.168.2.105';
+        $rootScope.host = 'http://192.168.2.101';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v1';
         // $rootScope.apiShop = 'v3';
-        $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
-        $http.defaults.headers.common['PROJECT-ID'] = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
+        var projectId = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
+        $http.defaults.headers.common['PROJECT-ID'] = projectId;
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;
         $rootScope.registerInvoiced = false;
-        $rootScope.taxnomySearch = 'web1523988132';
+        $rootScope.taxnomySearch = false;
         $rootScope.filterBrand = 'Marca';
         $rootScope.filterSize = false;
         $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
 
+        var checkStatus = function(){
+            MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {
+                $rootScope.hideIndex = false;
+                if(error.status === 402){
+                    $state.go('suspended');
+                    $rootScope.hideIndex = true;
+                }
+                else if(error.status === 307){
+                    $state.go('building');
+                    $rootScope.hideIndex = true;
+                }
+                else {
+                    $rootScope.hideIndex = false;
+                }
+            });
+
+        };
+        //checkStatus();
+
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
-
+            checkStatus();
         });
         //various config
         $rootScope.initConfig = {
             googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
             img_default: '../../img/img-default.jpg',
+            logo: '../../img/logo.png',
             email: 'ventas@moneek.mx',
             phone: '4531076764',
             branchOffice: 'Moneek - Venta de ropa, calzado y accesorios para Dama'
@@ -202,8 +238,9 @@
                 'original': "../img/img-default.jpg"
             }
         };
-        // initialise google analytics
-        $window.ga('create', $rootScope.initConfig.googleKey, '');
+        // always we must do a request on init app to know current status of project
+        // can be two status 307 && 402
+
         // do something when change state
         $rootScope.$on('$stateChangeSuccess', function (event) {
             $window.ga('send', 'pageview', $location.path());
@@ -375,7 +412,7 @@
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'EntrySrv', '$auth', '$localStorage'];
+        'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider'];
     AuthProvider.$inject = ['$authProvider'];
