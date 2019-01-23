@@ -48,13 +48,81 @@
         }
     }
 
+    function compareGreaterF() {
+        return {
+            require: "ngModel",
+            scope: {
+                otherModelValue: "=compareGreater"
+            },
+            link: function (scope, element, attributes, ngModel) {
+                ngModel.$validators.compareGreater = function (modelValue) {
+                    if (parseInt(modelValue) <= 0) {
+                        return false;
+                    }
+                    return parseInt(modelValue) <= parseInt(scope.otherModelValue);
+                };
+                scope.$watch("otherModelValue", function () {
+                    ngModel.$validate();
+                });
+
+            }
+        };
+
+    }
+
     // create the module and assign controllers
     angular.module('ts.directives', [])
         .directive('postLink', postLink)
         .directive('postImage', postImage)
+        .directive('compareGreater', compareGreaterF)
+        .directive('owlCarousel', function($timeout) {
+            return {
+                restrict: 'E',
+                transclude: false,
+                link: function(scope) {
+                    scope.initCarousel = function(element) {
+
+                        // provide any default options you want
+                        var defaultOptions = {};
+                        var customOptions = scope.$eval($(element).attr('data-options'));
+                        // combine the two options objects
+                        for (var key in customOptions) {
+                            defaultOptions[key] = customOptions[key];
+                        }
+                        // init carousel
+                        var curOwl = $(element).data('owlCarousel');
+                        if (!angular.isDefined(curOwl)) {
+                            $(element).owlCarousel(defaultOptions);
+                        }
+                        scope.cnt++;
+                        // Event to remove the carousel on data change start
+                        scope.$on('owlCarousel.changeStart', function(data) {
+                            $(element).owlCarousel('destroy');
+                        });
+                        // Event to create the carousel back when data change is completed
+                        scope.$on('owlCarousel.changeEnd', function(data) {
+                            $timeout(function() {
+                                $(element).owlCarousel(defaultOptions);
+                            });
+                        });
+                    };
+                }
+            };
+        })
+        .directive('owlCarouselItem', [function() {
+            return {
+                restrict: 'A',
+                transclude: false,
+                link: function(scope, element) {
+                    // wait for the last item in the ng-repeat then call init
+                    if (scope.$last) {
+                        scope.initCarousel(element.parent());
+                    }
+                }
+            };
+        }])
         .directive('myEnter', function () {
             return function (scope, element, attrs) {
-                console.log("lsldldld");
                 element.bind("keydown keypress", function (event) {
                     if (event.which === 13) {
                         scope.$apply(function () {
@@ -70,4 +138,5 @@
     // inject dependencies to controllers
     postLink.$inject = [];
     postImage.$inject = ['$rootScope'];
+    compareGreaterF.$inject = [];
 })();

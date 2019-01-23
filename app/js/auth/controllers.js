@@ -22,7 +22,7 @@
             self.activeTab = 1;
         }
 
-        self.items = $localStorage.items ? $localStorage.items : [];
+        self.items = $localStorage.items ? $localStorage.items.length : [];
         self.itemCount = self.items.length;
 
         self.processing = false;
@@ -36,25 +36,16 @@
             CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
-                $localStorage.items = [];
-                $localStorage.total = 0;
-                $localStorage.cart = {};
-                $localStorage.priceList = '';
-                $localStorage.shipmentTotal = 0;
-                $localStorage.ship = false;
-                $localStorage.subTtotal = 0;
-                $localStorage.taxTotal = 0;
-                $localStorage.promoTotal = 0;
-                $localStorage.shipmentTotal = 0;
                 self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
                 PriceListSrv.customer({customers: $localStorage.appData.user.customer}).$promise.then(function (data) {
                     $localStorage.priceList = data[0].slug;
                 });
                 // Redirect user here after a successful log in.
+                if (self.itemCount > 0) {
+                    $state.go('shopcart');
+                }
                 $state.go('dashboard');
             });
-
-
         };
 
         // Social auth
@@ -702,10 +693,12 @@
 
     }
 
-    function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv, $filter) {
+    function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
+                                HistoryOrdersSrv, $filter) {
         var self = this;
         self.busy = false;
-
+        self.isPaypal = false;
+        self.PaypalUrl = '';
         //aditional keys
         var aditionalKey = function (array) {
             if (self.purchase.metadata) {
@@ -737,8 +730,13 @@
         if ($stateParams.id) {
             OrderSrv.get({id: $stateParams.id}).$promise.then(function (data) {
                 self.purchase = data;
+                if(self.purchase.isPaid === 2 && self.purchase.paymentType === 3 && self.purchase.orderStatus === 0 && self.purchase.statusInfo.code !== 6){
+                    self.isPaypal = true;
+                    self.PaypalUrl = self.purchase.metadata.approvalUrl
+                }
                 self.purchase.items = aditionalKey(self.purchase.items);
                 getVoucher();
+                getComments(self.purchase);
             });
         }
 
@@ -779,6 +777,15 @@
                 console.log(error)
             });
 
+        };
+
+        var getComments = function (order) {
+            self.busy = true;
+            HistoryOrdersSrv.query({order: order.id, kind: 'comment', isActive: true}).$promise.then(function (resp) {
+                self.comments = resp;
+            }, function (error) {
+                self.busy = false;
+            });
         };
     }
 
@@ -824,6 +831,7 @@
                 self.purchases = data.results;
                 self.purchasesCount = self.purchases.length;
                 self.purchaseRecent = self.purchases.slice(0, 3);
+                console.log(self.purchaseRecent)
 
                 angular.forEach(self.purchases, function (value, key) {
                     if (value.paymentType === 9) {
@@ -883,6 +891,6 @@
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
-    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', '$filter'];
+    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage'];
 })();
