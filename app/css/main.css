@@ -455,7 +455,7 @@ audio:not([controls]),
 .box-simple .box-header .box-bg-img {
   background-position: center;
   background-size: cover;
-  height: 200px;
+  height: 300px;
 }
 .box-simple .box-container {
   text-align: left;
