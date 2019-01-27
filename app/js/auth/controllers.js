@@ -481,6 +481,7 @@
                     text: 'Se eliminará esta dirección. ¿Está seguro que desea continuar?',
                     type: 'warning',
                     showCancelButton: true,
+                    showConfirmButton:true,
                     confirmButtonColor: '#DD6B55',
 
                     confirmButtonText: 'Si',
