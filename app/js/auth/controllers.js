@@ -839,7 +839,7 @@
                     if (value.isPaid === 2 || value.isPaid === 1 ) {
                         self.pending++;
                     }
-                    if (value.orderStatus === 2) {
+                    if (value.statusInfo.code !== 4 && value.statusInfo.code !== 6) {
                         self.processing++;
                     }
                     if (value.orderStatusName !== "Cancelada") {
