@@ -2,7 +2,7 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <data-owl-carousel class="owl-carousel owl-theme owl-theme-page" data-options="Product.owlOptionProduct" ng-if="Product.detail.galleryImages.length > 0">
                         <div owl-carousel-item class="slider" ng-repeat="slide in Product.detail.galleryImages">
                             <div class="item" style="width: 100%;">
@@ -16,11 +16,11 @@
                     <div class="bg-image-single" ng-if="Product.detail.galleryImages.length < 1"
                          style="background-image:url('{{ Product.detail.featuredImage.url }}');"></div>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     <div class="article-description">
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <h4>{{Product.detail.name}}..</h4>
                                     <br>
                                     <h2 class="article-price">{{ Product.detail.price | currency}}</h2>

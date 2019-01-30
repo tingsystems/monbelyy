@@ -2,7 +2,7 @@
     'use strict';
 
     function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
-                        PriceListSrv, StateSrv, $anchorScroll, $stateParams) {
+        PriceListSrv, StateSrv, $anchorScroll, $stateParams) {
         $anchorScroll();
         var self = this;
         self.busy = false;
@@ -30,14 +30,14 @@
         // Logic for save the session
         self.saveSession = function (response) {
             // save user info to local storage
-            $localStorage.appData = {user: angular.copy(response.data.user)};
+            $localStorage.appData = { user: angular.copy(response.data.user) };
             $rootScope.user = $localStorage.appData.user;
             self.idUser = $localStorage.appData.user.id;
-            CustomerSrv.customerByUser({id: self.idUser}).$promise.then(function (data) {
+            CustomerSrv.customerByUser({ id: self.idUser }).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
-                self.branchDefault = {branchOffices: [$localStorage.appData.user.branchOffices[0].id]};
-                PriceListSrv.customer({customers: $localStorage.appData.user.customer}).$promise.then(function (data) {
+                self.branchDefault = { branchOffices: [$localStorage.appData.user.branchOffices[0].id] };
+                PriceListSrv.customer({ customers: $localStorage.appData.user.customer }).$promise.then(function (data) {
                     $localStorage.priceList = data[0].slug;
                 });
                 // Redirect user here after a successful log in.
@@ -84,7 +84,7 @@
         };
 
         self.logout = function () {
-            AccessSrv.logout({token: $auth.getToken(), client_id: self.client_id}).$promise.then(function (data) {
+            AccessSrv.logout({ token: $auth.getToken(), client_id: self.client_id }).$promise.then(function (data) {
                 $auth.logout()
                     .then(function () {
                         // delete appData
@@ -154,7 +154,7 @@
         self.busyState = true;
 
         self.getStates = function () {
-            StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+            StateSrv.query({ country: '573fda4d5b0d6863743020d1', ordering: 'name' }).$promise.then(function (data) {
                 self.states = data;
                 self.busyState = false;
                 self.disableCity = false;
@@ -176,7 +176,7 @@
             }
             self.busyCity = true;
             if (self.cities.length < 1) {
-                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                StateSrv.getCities({ state: self.state.id, ordering: 'name' }).$promise.then(function (response) {
                     self.cities = response;
                     self.busyCity = false;
                 }, function (error) {
@@ -190,25 +190,25 @@
         };
 
         //
-        self.optionsForbusinessType = [{'name': 'Veterinaria', 'id': '1'}, {'name': 'Hospital Veterinario', 'id': '2'},
-            {'name': 'Clínica Veterinaria', 'id': '3'}, {'name': 'Tienda', 'id': '4'}, {'name': 'Pet Shop', 'id': '5'},
-            {'name': 'Venta de alimentos', 'id': '6'}, {'name': 'Acuario', 'id': '7'},
-            {'name': 'Entrenador', 'id': '8'},
-            {'name': 'Distribuidor', 'id': '9'}, {'name': 'Estética canina', 'id': '10'},
-            {'name': 'Estética canina móvil', 'id': '11'}, {'name': 'Comerciante independiente', 'id': '12'},
-            {'name': 'Otro', 'id': '13'}];
+        self.optionsForbusinessType = [{ 'name': 'Veterinaria', 'id': '1' }, { 'name': 'Hospital Veterinario', 'id': '2' },
+        { 'name': 'Clínica Veterinaria', 'id': '3' }, { 'name': 'Tienda', 'id': '4' }, { 'name': 'Pet Shop', 'id': '5' },
+        { 'name': 'Venta de alimentos', 'id': '6' }, { 'name': 'Acuario', 'id': '7' },
+        { 'name': 'Entrenador', 'id': '8' },
+        { 'name': 'Distribuidor', 'id': '9' }, { 'name': 'Estética canina', 'id': '10' },
+        { 'name': 'Estética canina móvil', 'id': '11' }, { 'name': 'Comerciante independiente', 'id': '12' },
+        { 'name': 'Otro', 'id': '13' }];
 
-        self.peopleServe = [{'name': 'Alejandra Mercado', 'id': '1'}, {'name': 'Alejandro Casas', 'id': '2'},
-            {'name': 'Angel Rodriguez', 'id': '3'}, {'name': 'Argenis Ríos', 'id': '4'},
-            {'name': 'Ariadna Sanchez de Tagle', 'id': '5'},
-            {'name': 'Donovan Diaz', 'id': '6'}, {'name': 'Erica Merlos', 'id': '7'},
-            {'name': 'Israel Covarrubias', 'id': '8'},
-            {'name': 'Ivette Rojo', 'id': '9'}, {'name': 'Mario Aupart', 'id': '10'}, {
-                'name': 'Oscar Luna',
-                'id': '11'
-            },
-            {'name': 'Roberto Sanchez de Tagle', 'id': '12'}, {'name': 'Samanda Santos', 'id': '13'},
-            {'name': 'Otro', 'id': '14'}];
+        self.peopleServe = [{ 'name': 'Alejandra Mercado', 'id': '1' }, { 'name': 'Alejandro Casas', 'id': '2' },
+        { 'name': 'Angel Rodriguez', 'id': '3' }, { 'name': 'Argenis Ríos', 'id': '4' },
+        { 'name': 'Ariadna Sanchez de Tagle', 'id': '5' },
+        { 'name': 'Donovan Diaz', 'id': '6' }, { 'name': 'Erica Merlos', 'id': '7' },
+        { 'name': 'Israel Covarrubias', 'id': '8' },
+        { 'name': 'Ivette Rojo', 'id': '9' }, { 'name': 'Mario Aupart', 'id': '10' }, {
+            'name': 'Oscar Luna',
+            'id': '11'
+        },
+        { 'name': 'Roberto Sanchez de Tagle', 'id': '12' }, { 'name': 'Samanda Santos', 'id': '13' },
+        { 'name': 'Otro', 'id': '14' }];
 
 
     }
@@ -240,7 +240,7 @@
 
         if ($stateParams.token) {
             self.busy = true;
-            RegisterSrv.getByToken({token: $stateParams.token}).$promise.then(function (data) {
+            RegisterSrv.getByToken({ token: $stateParams.token }).$promise.then(function (data) {
                 self.busy = false;
             }, function (error) {
                 self.busy = false;
@@ -256,7 +256,7 @@
                 NotificationSrv.error('Las contraseñas no coinciden');
                 return;
             }
-            RegisterSrv.set({token: $stateParams.token}, self.formData).$promise.then(function (data) {
+            RegisterSrv.set({ token: $stateParams.token }, self.formData).$promise.then(function (data) {
                 NotificationSrv.success("Contraseña actualizada correctamente");
                 self.busy = false;
                 $state.go('register');
@@ -270,7 +270,7 @@
     }
 
     function ValidAccountCtrl(UserSrv, NotificationSrv, $state, $stateParams) {
-        UserSrv.active({token: $stateParams.token}, {'is_active': true}).$promise.then(function (data) {
+        UserSrv.active({ token: $stateParams.token }, { 'is_active': true }).$promise.then(function (data) {
             NotificationSrv.success('Cuenta activada correctamente!');
         }, function (error) {
         });
@@ -289,7 +289,7 @@
 
         // get all the states
         self.busyState = true;
-        StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+        StateSrv.query({ country: '573fda4d5b0d6863743020d1', ordering: 'name' }).$promise.then(function (data) {
             self.states = data;
             self.busyState = false;
         }, function (error) {
@@ -300,8 +300,7 @@
             var address = angular.copy(self.formData);
             address.customer = self.idUser;
             self.busy = true;
-            if(!self.city || !self.state)
-            {
+            if (!self.city || !self.state) {
                 NotificationSrv.error('Por favor llena todos los campos');
                 self.busy = false;
                 return;
@@ -324,14 +323,14 @@
         var updateAddress = function () {
             var formData = angular.copy(self.formData);
             var id = formData.id ? formData.id : $stateParams.id;
-            if(self.city){
+            if (self.city) {
                 formData.city = self.city.id;
             }
-            if(self.state){
+            if (self.state) {
                 formData.state = self.state.id;
             }
             self.busy = true;
-            AddressSrv.update({id: id}, formData).$promise.then(function (response) {
+            AddressSrv.update({ id: id }, formData).$promise.then(function (response) {
                 self.busy = false;
                 NotificationSrv.success('Dirección actualizada correctamente');
                 $state.go('address');
@@ -349,7 +348,7 @@
 
         self.getAddresses = function () {
             if ($stateParams.id) {
-                AddressSrv.get({id: $stateParams.id}).$promise.then(function (data) {
+                AddressSrv.get({ id: $stateParams.id }).$promise.then(function (data) {
                     self.formData = data;
                     self.create = false;
                     if (self.formData.state)
@@ -372,7 +371,7 @@
 
         self.getStates = function () {
             if (!self.states) {
-                StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+                StateSrv.query({ country: '573fda4d5b0d6863743020d1', ordering: 'name' }).$promise.then(function (data) {
                     self.states = data;
                     self.busyState = false;
                     self.disableCity = false;
@@ -394,7 +393,7 @@
             }
             self.busyCity = true;
             if (self.cities.length < 1) {
-                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                StateSrv.getCities({ state: self.state.id, ordering: 'name' }).$promise.then(function (response) {
                     self.cities = response;
                     self.busyCity = false;
                 }, function (error) {
@@ -460,16 +459,16 @@
             page: 1, // The page number to show
             count: 10 // The number of items to show per page
         }, {
-            // default settings
-            // page size buttons (right set of buttons in demo)
-            //counts: [],
-            // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13,
-            paginationMinBlocks: 2,
-            getData: self.getData
-        });
+                // default settings
+                // page size buttons (right set of buttons in demo)
+                //counts: [],
+                // determines the pager buttons (left set of buttons in demo)
+                paginationMaxBlocks: 13,
+                paginationMinBlocks: 2,
+                getData: self.getData
+            });
         self.getAddresses = function () {
-            AddressSrv.query({customer: self.idUser}).$promise.then(function (data) {
+            AddressSrv.query({ customer: self.idUser }).$promise.then(function (data) {
                 self.addresses = data;
                 return self.addresses;
             });
@@ -477,20 +476,21 @@
 
         self.deleteAddress = function (id) {
             SweetAlert.swal({
-                    title: 'Confirmar',
-                    text: 'Se eliminará esta dirección. ¿Está seguro que desea continuar?',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#DD6B55',
+                title: 'Confirmar',
+                text: 'Se eliminará esta dirección. ¿Está seguro que desea continuar?',
+                type: 'warning',
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonColor: '#DD6B55',
 
-                    confirmButtonText: 'Si',
-                    cancelButtonText: 'Cancelar',
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
+                confirmButtonText: 'Si',
+                cancelButtonText: 'Cancelar',
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
                 function (isConfirm) {
                     if (isConfirm) {
-                        AddressSrv.delete({id: id}).$promise.then(function (data) {
+                        AddressSrv.delete({ id: id }).$promise.then(function (data) {
                             self.tableParams.page(1);
                             self.tableParams.reload();
                             NotificationSrv.success("Acción realizada correctamente");
@@ -521,7 +521,7 @@
 
         // get all the states
         self.busyState = true;
-        StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+        StateSrv.query({ country: '573fda4d5b0d6863743020d1', ordering: 'name' }).$promise.then(function (data) {
             self.states = data;
             self.busyState = false;
         }, function (error) {
@@ -535,7 +535,7 @@
                 return
             }
             self.busyCity = true;
-            StateSrv.getCities({state: state_id, ordering: 'name'}).$promise.then(function (response) {
+            StateSrv.getCities({ state: state_id, ordering: 'name' }).$promise.then(function (response) {
                 self.cities = response;
                 self.busyCity = false;
             }, function (error) {
@@ -549,7 +549,7 @@
             profileData.state = self.state.id;
             profileData.city = self.city.id;
             console.log(profileData);
-            CustomerSrv.update({id: self.idUser}, profileData).$promise.then(function (response) {
+            CustomerSrv.update({ id: self.idUser }, profileData).$promise.then(function (response) {
                 self.busy = false;
                 NotificationSrv.success('Información personal actualizada correctamente');
                 $state.go('dashboard');
@@ -566,7 +566,7 @@
         };
 
         self.getCustomer = function () {
-            CustomerSrv.get({id: self.idUser}).$promise.then(function (data) {
+            CustomerSrv.get({ id: self.idUser }).$promise.then(function (data) {
                 self.profileData = data;
                 self.create = false;
                 if (self.profileData.state)
@@ -575,8 +575,8 @@
                         ordering: 'name'
                     }).$promise.then(function (response) {
                         self.cities = response;
-                        self.city = $filter('filter')(self.cities, {id: self.profileData.city})[0];
-                        self.state = $filter('filter')(self.states, {id: self.profileData.state})[0];
+                        self.city = $filter('filter')(self.cities, { id: self.profileData.city })[0];
+                        self.state = $filter('filter')(self.states, { id: self.profileData.state })[0];
                         self.busyCity = false;
                     }, function (error) {
                         self.busyCity = false;
@@ -590,7 +590,7 @@
 
         self.getStates = function () {
             if (!self.states) {
-                StateSrv.query({country: '573fda4d5b0d6863743020d1', ordering: 'name'}).$promise.then(function (data) {
+                StateSrv.query({ country: '573fda4d5b0d6863743020d1', ordering: 'name' }).$promise.then(function (data) {
                     self.states = data;
                     self.busyState = false;
                     self.disableCity = false;
@@ -612,7 +612,7 @@
             }
             self.busyCity = true;
             if (self.cities.length < 1) {
-                StateSrv.getCities({state: self.state.id, ordering: 'name'}).$promise.then(function (response) {
+                StateSrv.getCities({ state: self.state.id, ordering: 'name' }).$promise.then(function (response) {
                     self.cities = response;
                     self.busyCity = false;
                 }, function (error) {
@@ -682,19 +682,19 @@
             page: 1, // The page number to show
             count: 10 // The number of items to show per page
         }, {
-            // default settings
-            // page size buttons (right set of buttons in demo)
-            //counts: [],
-            // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13,
-            paginationMinBlocks: 2,
-            getData: self.getData
-        });
+                // default settings
+                // page size buttons (right set of buttons in demo)
+                //counts: [],
+                // determines the pager buttons (left set of buttons in demo)
+                paginationMaxBlocks: 13,
+                paginationMinBlocks: 2,
+                getData: self.getData
+            });
 
     }
 
     function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
-                                HistoryOrdersSrv, $filter) {
+        HistoryOrdersSrv, $filter) {
         var self = this;
         self.busy = false;
         self.isPaypal = false;
@@ -728,9 +728,9 @@
         };
 
         if ($stateParams.id) {
-            OrderSrv.get({id: $stateParams.id}).$promise.then(function (data) {
+            OrderSrv.get({ id: $stateParams.id }).$promise.then(function (data) {
                 self.purchase = data;
-                if(self.purchase.isPaid === 2 && self.purchase.paymentType === 3 && self.purchase.orderStatus === 0 && self.purchase.statusInfo.code !== 6){
+                if (self.purchase.isPaid === 2 && self.purchase.paymentType === 3 && self.purchase.orderStatus === 0 && self.purchase.statusInfo.code !== 6) {
                     self.isPaypal = true;
                     self.PaypalUrl = self.purchase.metadata.approvalUrl
                 }
@@ -772,7 +772,7 @@
                 page: 1,
                 pageSize: 1
             }).$promise.then(function (response) {
-                self.voucher = $filter('filter')(response.results, {kind: 'voucher'})[0];
+                self.voucher = $filter('filter')(response.results, { kind: 'voucher' })[0];
             }, function (error) {
                 console.log(error)
             });
@@ -781,7 +781,7 @@
 
         var getComments = function (order) {
             self.busy = true;
-            HistoryOrdersSrv.query({order: order.id, kind: 'comment', isActive: true}).$promise.then(function (resp) {
+            HistoryOrdersSrv.query({ order: order.id, kind: 'comment', isActive: true }).$promise.then(function (resp) {
                 self.comments = resp;
             }, function (error) {
                 self.busy = false;
@@ -801,7 +801,7 @@
         self.pending = 0;
         self.processing = 0;
         self.shipped = 0;
-
+        self.purchasesCount = 0;
         self.idUser = $localStorage.appData.user.customer;
         self.globalSearch = function () {
             // Cancels a task associated with the promise
@@ -829,19 +829,21 @@
             OrderSrv.get(self.params).$promise.then(function (data) {
                 params.total(data.count);
                 self.purchases = data.results;
-                self.purchasesCount = self.purchases.length;
+                // self.purchasesCount = self.purchases.length;
                 self.purchaseRecent = self.purchases.slice(0, 3);
-                console.log(self.purchaseRecent)
 
                 angular.forEach(self.purchases, function (value, key) {
                     if (value.paymentType === 9) {
                         self.shipped++;
                     }
-                    if (value.paymentType === 1) {
+                    if (value.isPaid === 2 || value.isPaid === 1 ) {
                         self.pending++;
                     }
-                    if (value.paymentType === 2) {
+                    if (value.statusInfo.code !== 4 && value.statusInfo.code !== 6) {
                         self.processing++;
+                    }
+                    if (value.orderStatusName !== "Cancelada") {
+                        self.purchasesCount++;
                     }
                 });
 
@@ -857,14 +859,14 @@
             page: 1, // The page number to show
             count: 10 // The number of items to show per page
         }, {
-            // default settings
-            // page size buttons (right set of buttons in demo)
-            //counts: [],
-            // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13,
-            paginationMinBlocks: 2,
-            getData: self.getData
-        });
+                // default settings
+                // page size buttons (right set of buttons in demo)
+                //counts: [],
+                // determines the pager buttons (left set of buttons in demo)
+                paginationMaxBlocks: 13,
+                paginationMinBlocks: 2,
+                getData: self.getData
+            });
 
     }
 
