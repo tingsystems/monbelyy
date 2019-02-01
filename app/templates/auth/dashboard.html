@@ -44,7 +44,8 @@
                                 show-filter="false">
                                 <tbody>
                                     <tr ng-repeat="purchase in Panel.purchaseRecent" datasource="purchase" ref="Panel">
-                                        <td data-title="'Folio'" sortable="'id'">#{{ purchase.id }}</td>
+                                        <td data-title="'Folio'" ng-if="purchase.id" sortable="'id'">#{{ purchase.id }}</td>
+                                        <td data-title="'Folio'" ng-if="!purchase.id" sortable="'id'">#{{ purchase.idCode }}</td>
                                         <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date:
                                             'd/M/y'}}
                                         </td>
