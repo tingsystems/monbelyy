@@ -189,7 +189,6 @@ md-input-container
 
 /* ------ TEMP DASHBOARD STYLE ----- */
 .temp-dashboard
-  padding 50px 0
   .search-bar
     margin-bottom 20px
   .items-dashboard
@@ -200,8 +199,11 @@ md-input-container
       &:last-child
         border-right none
   .list-group
+    border-right 1px solid rgba(0, 0, 0, 0.125)
     .list-group-item
+      border none
       color fontClr
+      font-size 18px
     .list-group-item.active
       color white
       background-color dark
@@ -239,7 +241,7 @@ md-input-container
 
 /* ------ TEMP login CART STYLE ----- */
 #login
-  padding 0
+  padding 80px 0
   
   .bg-login
     background-color white

@@ -6,34 +6,19 @@
                     <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
                 </div>
                 <div class="col-md-9">
-                    <div class="row justify-content-between">
+                    <div class="row">
                         <div class="col-6 col-md-5">
-                            <h5><i class="ion-person"></i> Mi cuenta: {{user.username}}</h5>
+                            <h5><i class="fa fa-user"></i> {{user.username}}</h5>
                         </div>
-                        <div class="col-6 col-md-3 text-right">
-                            <a ui-sref="home" class="btn-outline-dark"> Ir a comprar!</a>
+                        <div class="col-6 text-right">
+                            <span>Mis compras ({{ Panel.purchasesCount }})</span>
+                            <span>Pagos pendientes ({{ Panel.pending }})</span>
+                            <span>En proceso ({{ Panel.processing }})</span>
                         </div>
                     </div>
                     <hr class="clearfix">
-                    <div class="container text-center items-dashboard">
-                        <div class="row">
-                            <div class="col-md-4 item">
-                                <p class="item-number">{{ Panel.purchasesCount }}</p>
-                                <p class="item-name"><a ui-sref="sales" title="Ver mis compras">Mis compras</a></p>
-                            </div>
-                            <div class="col-md-4 item">
-                                <p class="item-number">{{ Panel.pending }}</p>
-                                <p class="item-name">Pagos pendientes</p>
-                            </div>
-                            <div class="col-md-4 item">
-                                <p class="item-number">{{ Panel.processing }}</p>
-                                <p class="item-name">En proceso</p>
-                            </div>
-                            
-                        </div>
-                    </div>
                     <br />
-                    <div class="container-fluid items-dashboard">
+                    <div class="row">
                         <!--TODO: Mostrar últimas 3 compras realizadas-->
                         <div class="col-md-12">
                             <h4>Mis compras recientes</h4>
@@ -143,7 +128,10 @@
                                 </tbody>
                                 <tfooter>
                                     <tr ng-hide="Panel.purchases.length">
-                                        <td colspan="7" class="text-center">Aun no haz realizado una compra</td>
+                                        <td colspan="7" class="text-center">
+                                            Aun no haz realizado una compra
+                                            <a ui-sref="home" class="btn-danger"> Ir a comprar!</a>
+                                        </td>
                                     </tr>
                                 </tfooter>
                             </table>

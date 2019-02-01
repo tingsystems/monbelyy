@@ -2066,9 +2066,6 @@ md-input-container {
 .temp-validate-account p {
   font-size: 20px;
 }
-.temp-dashboard {
-  padding: 50px 0;
-}
 .temp-dashboard .search-bar {
   margin-bottom: 20px;
 }
@@ -2082,8 +2079,13 @@ md-input-container {
 .temp-dashboard .items-dashboard .item:last-child {
   border-right: none;
 }
+.temp-dashboard .list-group {
+  border-right: 1px solid rgba(0,0,0,0.125);
+}
 .temp-dashboard .list-group .list-group-item {
+  border: none;
   color: #555;
+  font-size: 18px;
 }
 .temp-dashboard .list-group .list-group-item.active {
   color: #fff;
@@ -2127,7 +2129,7 @@ md-input-container {
   margin-bottom: 20px;
 }
 #login {
-  padding: 0;
+  padding: 80px 0;
 }
 #login .bg-login {
   background-color: #fff;
