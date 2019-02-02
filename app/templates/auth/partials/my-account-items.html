@@ -1,10 +1,10 @@
 <div class="list-group">
     <a class="list-group-item" ng-class="{'active': dashboard}"  ng-click="dashboard = !dashboard" ui-sref="dashboard">
-        <i class="ion-ios-person-outline"></i> Mi cuenta
+        <i class="fa fa-user"></i> Mi cuenta
     </a>
-    <a class="list-group-item" ng-class="{'active': sales}"  ng-click="sales = !sales" ui-sref="sales"><i class="ion-bag"></i> Mis compras</a>
-    <a class="list-group-item" ui-sref="address" ng-class="{'active': address}"  ng-click="address = !address"><i class="ion-ios-location-outline"></i> Mis direcciones</a>
-    <a class="list-group-item" ui-sref="profile"  ng-class="{'active': profile}"  ng-click="profile = !profile"><i class="ion-ios-gear-outline"></i> Configuración</a>
-    <a class="list-group-item" ng-controller="AccessCtrl as Access" ng-click="Access.logout()" style="cursor:pointer;"><i class="ion-ios-gear-outline"></i> Cerrar sesión</a>
+    <a class="list-group-item" ng-class="{'active': sales}"  ng-click="sales = !sales" ui-sref="sales"><i class="fa fa-shopping-bag"></i> Mis compras</a>
+    <a class="list-group-item" ui-sref="address" ng-class="{'active': address}"  ng-click="address = !address"><i class="fa fa-map-marker"></i> Mis direcciones</a>
+    <a class="list-group-item" ui-sref="profile"  ng-class="{'active': profile}"  ng-click="profile = !profile"><i class="fa fa-cogs"></i> Configuración</a>
+    <a class="list-group-item" ng-controller="AccessCtrl as Access" ng-click="Access.logout()" style="cursor:pointer;"><i class="fa fa-close"></i> Cerrar sesión</a>
 
 </div> 

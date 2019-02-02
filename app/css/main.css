@@ -2066,6 +2066,18 @@ md-input-container {
 .temp-validate-account p {
   font-size: 20px;
 }
+.temp-dashboard .nav-link {
+  text-align: right;
+  padding: 0 10px;
+  color: #555;
+}
+.temp-dashboard .jumbotron {
+  background-color: #fff;
+  padding: 5px;
+}
+.temp-dashboard .jumbotron .text-right {
+  color: #ff4b4b;
+}
 .temp-dashboard .search-bar {
   margin-bottom: 20px;
 }
@@ -2081,6 +2093,7 @@ md-input-container {
 }
 .temp-dashboard .list-group {
   border-right: 1px solid rgba(0,0,0,0.125);
+  height: 100%;
 }
 .temp-dashboard .list-group .list-group-item {
   border: none;

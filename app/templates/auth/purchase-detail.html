@@ -6,11 +6,21 @@
                     <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
                 </div>
                 <div class="col-md-9">
-                    <div class="items-dashboard">
+                    <div class="">
                         <div class="container">
                             <h3><i class="ion-ios-list-outline"></i> Detalle de la compra</h3>
                             <hr>
                             <div class="row label-status">
+                                <div class="col-md-3">
+                                    <h6>
+                                        <span class="item-number"><strong>Folio: </strong>#{{Purchase.purchase.id}}</span>
+                                    </h6>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>
+                                        <span class="item-number"><strong>Fecha: </strong> {{ Purchase.purchase.createdAt | date:'short'}}</span>
+                                    </h6>
+                                </div>
                                 <div class="col-2 col-md-3">
                                     <h6>
                                         Tipo de pago:
@@ -103,28 +113,10 @@
 
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 item">
-                                    <p class="item-number">Folio</p>
-                                    <p class="item-name">#{{Purchase.purchase.id}}</p>
-                                </div>
-                                <div class="col-md-3 item">
-                                    <p class="item-number">Tipo de pago</p>
-                                    <p class="item-name">{{ Purchase.purchase.paymentTypeName }}</p>
-                                </div>
-                                <div class="col-md-3 item">
-                                    <p class="item-number">Estado del pago</p>
-                                    <p class="item-name">{{ Purchase.purchase.isPaidName }}</p>
-                                </div>
-                                <div class="col-md-3 item">
-                                    <p class="item-number">Fecha</p>
-                                    <p class="item-name">{{ Purchase.purchase.createdAt | date:'short'}}</p>
-                                </div>
-                            </div>
                             <div class="col-md-12" style="margin-top: 10px">
                                 <div class="payment-sidebar">
                                     <div class="row">
-                                        <div class="">
+                                        <div style="width: 100%">
                                             <div class="table-responsive">
                                                 <table class="table table-bordered">
                                                     <thead>

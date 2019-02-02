@@ -789,7 +789,7 @@
         };
     }
 
-    function ProfilePanelCtrl(OrderSrv, NotificationSrv, NgTableParams, PriceListSrv, $timeout, $localStorage) {
+    function ProfilePanelCtrl(OrderSrv, NotificationSrv, NgTableParams, PriceListSrv, $timeout, $localStorage, CustomerSrv) {
         var self = this;
         var timeout = $timeout;
         self.formData = {};
@@ -812,6 +812,10 @@
                 self.tableParams.reload();
             }, 500);
         };
+
+        CustomerSrv.customerByUser({ id: $localStorage.appData.user.id }).$promise.then(function (data) {
+           self.customer=data;
+        });
 
         self.getData = function (params) {
             var sorting = '-createdAt';
@@ -894,5 +898,5 @@
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
     PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter'];
-    ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage'];
+    ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage', 'CustomerSrv'];
 })();
