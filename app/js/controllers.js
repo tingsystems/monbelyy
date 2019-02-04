@@ -30,6 +30,7 @@
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 12;
         paramsProducts.kind = 'group';
+        paramsProducts.taxonomy = 'novedades';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
