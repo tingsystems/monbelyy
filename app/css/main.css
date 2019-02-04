@@ -452,10 +452,10 @@ audio:not([controls]),
 .box-simple .box-header .box-bg-img {
   background-position: center;
   background-size: cover;
-  height: 200px;
+  height: 300px;
 }
 .box-simple .box-container {
-  text-align: left;
+  text-align: center;
   margin-bottom: 15px;
   padding-top: 15px;
   margin-top: 15px;
@@ -465,10 +465,6 @@ audio:not([controls]),
 .box-simple .box-container .box-title {
   font-weight: bold;
   font-size: 16px;
-}
-.box-simple .box-container p {
-  height: 50px;
-  padding: 10px 0;
 }
 .box-simple .box-footer {
   text-align: center;
@@ -531,7 +527,8 @@ audio:not([controls]),
   fon-size: 18px;
 }
 .title-middle-line {
-  height: 100px;
+  padding: 20px 0;
+  height: auto;
   text-align: center;
   position: relative;
   color: #555;
@@ -542,7 +539,7 @@ audio:not([controls]),
   right: 0;
   z-index: 9;
   background: #fff;
-  width: 50%;
+  width: 40%;
   margin: 0 auto;
 }
 .title-middle-line .text-content:before {
@@ -781,7 +778,7 @@ audio:not([controls]),
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 500px;
+  height: 300px;
 }
 .tab-simple {
   border: 1px solid #ddd;
@@ -1083,6 +1080,14 @@ figure.effect-sadie:hover a {
 }
 .comments-user .branchoffice-comment small {
   float: right;
+}
+.label-danger {
+  position: absolute;
+  top: 15px;
+  background-color: #d84c4c;
+  padding: 5px;
+  color: #fff !important;
+  font-size: 12px;
 }
 .block-ui-overlay {
   width: 100%;
@@ -1961,7 +1966,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'poppins', sans-serif;
   margin: 0;
   font-weight: 700;
 }
@@ -2002,7 +2007,7 @@ button[disabled],
   font-weight: 400;
 }
 .font-type {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'poppins', sans-serif;
 }
 md-input-container {
   width: 100%;
@@ -2050,6 +2055,7 @@ md-input-container {
   padding: 80px 0;
 }
 #home .section-one {
+  padding: 80px 0 20px !important;
   background-color: #fff;
 }
 #home .section-one a {
@@ -2161,8 +2167,17 @@ md-input-container {
 .temp-validate-account p {
   font-size: 20px;
 }
-.temp-dashboard {
-  padding: 50px 0;
+.temp-dashboard .nav-link {
+  text-align: right;
+  padding: 0 10px;
+  color: #555;
+}
+.temp-dashboard .jumbotron {
+  background-color: #fff;
+  padding: 5px;
+}
+.temp-dashboard .jumbotron .text-right {
+  color: #ff4b4b;
 }
 .temp-dashboard .search-bar {
   margin-bottom: 20px;
@@ -2177,8 +2192,14 @@ md-input-container {
 .temp-dashboard .items-dashboard .item:last-child {
   border-right: none;
 }
+.temp-dashboard .list-group {
+  border-right: 1px solid rgba(0,0,0,0.125);
+  height: 100%;
+}
 .temp-dashboard .list-group .list-group-item {
+  border: none;
   color: #555;
+  font-size: 18px;
 }
 .temp-dashboard .list-group .list-group-item.active {
   color: #fff;
@@ -2222,7 +2243,7 @@ md-input-container {
   margin-bottom: 20px;
 }
 #login {
-  padding: 0;
+  padding: 80px 0;
 }
 #login .bg-login {
   background-color: #fff;
@@ -2422,6 +2443,9 @@ footer .contact-sty .download-app > i:hover {
 }
 .selectdemoSelectHeader md-content._md {
   max-height: 240px;
+}
+md-input-container > md-select {
+  border: 1px solid #ddd;
 }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .single_blog .comment-area {

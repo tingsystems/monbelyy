@@ -1,16 +1,48 @@
 <div id="home">
     <section class="slider-box">
-        <div class="owl-carousel owl-theme owl-theme-slider">
-            <div class="slider" ng-repeat="slide in Home.mainSlider" ng-repeat-owl-carousel
-                 carousel-init="Home.carouselInitializerSlider">
+        <data-owl-carousel class="owl-carousel owl-theme owl-theme-slider" data-options="Home.owlOptionsSlider">
+            <div owl-carousel-item="" ng-repeat="slide in Home.mainSlider" class="item">
                 <div class="item" style="width: 100%;">
                     <a post-link="{ link: {url: slide.link, target: '_self'} }">
                         <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
                     </a>
                 </div>
             </div>
+        </data-owl-carousel>
+    </section>
+    
+
+    <section class="section-two" ng-controller="ShoppingCtrl as Shop">
+        <div class="container">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h3 class="font-type">Arma tu pedido</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-3" ng-repeat="product in Home.products">
+                    <div class="box-simple">
+                        <div class="box-header">
+                            <a ui-sref="product-detail({slug:product.slug})" title="Ver más">
+                                <div class="box-bg-img"
+                                style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                            </a>
+                        </div>
+                        <div class="box-container">
+                            <div class="row align-items-center">
+                                <div class="col-sm-12">
+                                    <p>{{ product.name | limitTo:40}} </p>
+                                    <p><strong>{{ product.price | currency }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
     <section class="section-one">
         <div class="container">
             <div class="row">
@@ -31,52 +63,4 @@
         </div>
     </section>
 
-    <section class="section-two" ng-controller="ShoppingCtrl as Shop">
-        <div class="container">
-            <div class="title-middle-line">
-                <div class="text-content">
-                    <h3 class="font-type">¡Conoce nuestros modelos!</h3>
-                </div>
-                <hr>
-            </div>
-
-            <div class="owl-carousel owl-theme owl-carousel-products">
-                <div class="box-simple" ng-repeat="product in Home.products" ng-repeat-owl-carousel
-                     carousel-init="Home.carouselInitializer">
-                    <div class="item">
-                        <div class="box-header">
-                            <a ui-sref="product-detail({slug:product.slug})" title="Ver más">
-                                <div class="box-bg-img"
-                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="box-container">
-                        <div class="row align-items-center">
-                            <div class="col-sm-12 text-center">
-                                <h3 class="box-title">{{ product.name | limitTo:40}}</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-three">
-        <div class="container">
-            <div class="row newsletter align-items-center">
-               <div class="col-md-6 offset-md-3">
-                   <h3 class="white">Suscríbete a nuestro newsletter</h3>
-                   <br>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Escribe tu correo electrónico .." aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-default" type="button" id="button-addon2">Button</button>
-                    </div>
-                  </div>
-               </div>
-            </div>
-        </div>
-    </section>
 </div>
