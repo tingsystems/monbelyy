@@ -44,6 +44,19 @@
         });
     }
 
+    function ShipmentSrv($resource, BaseUrlShop) {
+        return $resource(BaseUrlShop.get() + 'utils/', null, {
+            'quote': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'utils/shipments/quote'
+            },
+            'purchase': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'utils/shipments/purchase'
+            }
+        });
+    }
+
     function OrderSrv($resource, BaseUrlShop) {
         return $resource(BaseUrlShop.get() + 'orders/:id', null, {
             'update': {
@@ -86,6 +99,19 @@
         return $resource(BaseUrlShop.get() + 'notifications/:id', null, {});
     }
 
+    function HistoryOrdersSrv($resource, BaseUrlShop) {
+        return $resource(BaseUrlShop.get() + 'history/orders/:id', null, {
+            'update': {
+                method: 'PUT',
+                url: BaseUrlShop.get() + 'history/orders/:id'
+            },
+            'patch': {
+                method: 'PATCH',
+                url: BaseUrlShop.get() + 'history/orders/:id'
+            }
+        });
+    }
+
 
     // Assign factory to module
     angular.module('shop.services', ['ngResource'])
@@ -95,7 +121,9 @@
         .factory('OrderSrv', OrderSrv)
         .factory('ValidCouponSrv', ValidCouponSrv)
         .factory('PriceListSrv', PriceListSrv)
-        .factory('NotificationTakiSrv', NotificationTakiSrv);
+        .factory('NotificationTakiSrv', NotificationTakiSrv)
+        .factory('ShipmentSrv', ShipmentSrv)
+        .factory('HistoryOrdersSrv', HistoryOrdersSrv);
 
     // Inject factory the dependencies
     BaseUrlShop.$inject = [];
@@ -105,5 +133,7 @@
     ValidCouponSrv.$inject = ['$resource', 'BaseUrlShop'];
     PriceListSrv.$inject = ['$resource', 'BaseUrlShop'];
     NotificationTakiSrv.$inject = ['$resource', 'BaseUrlShop'];
+    ShipmentSrv.$inject = ['$resource', 'BaseUrlShop'];
+    HistoryOrdersSrv.$inject = ['$resource', 'BaseUrlShop'];
 
 })();

@@ -28,8 +28,8 @@
 
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
-        paramsProducts.pageSize = 9;
-        paramsProducts.kind = 'product';
+        paramsProducts.pageSize = 12;
+        paramsProducts.kind = 'group';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
@@ -38,11 +38,33 @@
         else {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
         }
-        paramsProducts.kind = 'product';
+        paramsProducts.kind = 'group';
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
             angular.forEach(self.products, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+            });
+        });
+
+        var paramsItemProducts = {};
+        paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
+        paramsItemProducts.isActive = 'True';
+        paramsItemProducts.pageSize = 12;
+        paramsItemProducts.kind = 'group';
+        paramsItemProducts.ordering = '-createdAt';
+        if (list !== '') {
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsItemProducts.priceList = list;
+        }
+        else {
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
+        }
+        paramsItemProducts.kind = 'group';
+        ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
+            self.productsItem = results.results;
+            //get featureImage
+            angular.forEach(self.productsItem, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
@@ -89,98 +111,29 @@
             });
         });
 
-        /*
-                EntrySrv.get({
-                    taxonomies: 'patrocinadores',
-                    isActive: 'True',
-                    pageSize: 8,
-                    ordering: '-createdAt',
-                    fields: 'title,content,attachments,slug,excerpt'
-                }).$promise.then(function (results) {
-                    self.brands = results.results;
-                    //get featureImage
-                    angular.forEach(self.brands, function (obj, ind) {
-                        obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                    });
-                });
-                */
         /* Carousel slider */
-        self.carouselInitializerSlider = function () {
-            $(".owl-theme-slider").owlCarousel({
-                //get items to proportionate num of items
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                loop: true,
-                margin: 0,
-                center: true,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 1,
-                        nav: false
-                    },
-                    1000: {
-                        items: 1,
-                        nav: true,
-                        loop: false
-                    }
-                }
 
-            });
+        self.owlOptionsSlider = {
+            items:1,
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            animateOut: 'slideOutDown',
+            animateIn: 'flipInX'
+
+        };
+
+        self.owlOptionsProducts = {
+            items:4,
+            loop:true,
+            margin:0,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true
+
         }
-
-        /* Carousel brands */
-        self.carouselInitializer = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                navText: ['<', '>'],
-                navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                loop: true,
-                margin: 20,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 3,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: true,
-                        loop: false
-                    }
-                }
-            });
-        }
-
-
-        /*
-        EntrySrv.get({
-            taxonomies: 'ultimas-noticias',
-            isActive: 'True',
-            pageSize: 4,
-            ordering: '-createdAt',
-            fields: 'title,content,attachments,slug,excerpt'
-        }).$promise.then(function (results) {
-            self.newsHome = results.results;
-            //get featureImage
-            angular.forEach(self.newsHome, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-            });
-        });*/
 
     }
 
@@ -300,7 +253,8 @@
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
-            $rootScope.post = self.detail;
+            $rootScope.post.title = self.detail.name;
+            $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.title + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
         });
@@ -411,7 +365,7 @@
                         kind: 'post',
                         isActive: 'True',
                         fields: 'attachments,title,link,slug,excerpt',
-                        pageSize: 10,
+                        pageSize: 9,
                         ordering: '-createdAt',
                         search: self.searchTerm,
                         page: self.page
@@ -585,7 +539,7 @@
         };
     }
 
-    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage) {
+    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage, $timeout) {
         var self = this;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
@@ -609,7 +563,7 @@
             // get featureImage
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
             // add gallery image and featured image
-            self.detail.galleryImages.push(self.detail.featuredImage);
+            // self.detail.galleryImages.push(self.detail.featuredImage);
             //get galeries
             angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
                 self.detail.galleryImages.push(value);
@@ -618,7 +572,6 @@
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
-
             $rootScope.post.title = self.detail.name;
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
@@ -627,38 +580,36 @@
         });
 
         /* Carousel slider */
-        self.carouselDetailProduct = function () {
-            $(".owl-carousel").owlCarousel({
-                //get items to proportionate num of items
-                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-                navigation: true,
-                //pagination: false,
-                autoplay: true,
-                items: 2,
-                autoplayHoverPause: true,
-                autoplayTimeout: 1000,
-                margin: 0,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: true
-                    },
-                    600: {
-                        items: 1,
-                        nav: false
-                    },
-                    1000: {
-                        items: 1,
-                        nav: true,
-                        loop: false
-                    }
+        self.owlOptionProduct = {
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navigation: true,
+            //pagination: false,
+            autoplay: true,
+            items: 1,
+            autoplayHoverPause:true,
+            autoplayTimeout:5000,
+            margin: 0,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 1,
+                    nav: false
+                },
+                1000: {
+                    items: 1,
+                    nav: true,
+                    loop: true
                 }
-            });
+            }
         };
 
         self.getProductFromGroup = function () {
             var taxonomies = [];
+            self.detail.galleryImages = [];
             angular.forEach(self.optionSelected, function (obj) {
                 taxonomies.push(obj.slug)
             });
@@ -680,6 +631,8 @@
                 self.detail.typeTax = self.itemFromGroup.typeTax;
                 self.detail.code = self.itemFromGroup.code;
                 self.detail.kind = self.itemFromGroup.kind;
+                self.detail.inventory = self.itemFromGroup.inventory;
+                self.detail.description = self.itemFromGroup.description;
                 // get featureImage
                 self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
                 //get galeries
@@ -691,9 +644,15 @@
                 }
 
                 $rootScope.post = self.itemFromGroup;
-                $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
+                $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                 self.busy = false;
                 self.detail.qty = 1;
+                $rootScope.$broadcast('owlCarousel.changeStart');
+                $timeout(function(){
+                    self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
+                    // notify the carousel that data is changed
+                    $rootScope.$broadcast('owlCarousel.changeEnd');
+                });
             });
         };
 
@@ -769,7 +728,7 @@
             self.brands = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 10,
+                pageSize: 150,
                 fields: 'id,slug,name',
                 search: self.searchTerBrand,
                 kind: self.filterBrand
@@ -1023,10 +982,22 @@
             self.params.pageSize = params.count();
             self.busy = true;
             if (self.taxonomies.length > 0) {
-                self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug + ',' + self.taxonomies.join();
+
+                }else {
+                    self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+                }
+
             }
             else {
-                self.params.taxonomies = $stateParams.slug;
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug
+                }
+                else {
+                    self.params.taxonomies = $stateParams.slug;
+                }
+
             }
             self.params.isActive = 'True';
             self.params.pageSize = 9;
@@ -1064,7 +1035,7 @@
         self.tableParams = new NgTableParams({
             // default params
             page: 1, // The page number to show
-            count: 10 // The number of items to show per page
+            count: 9 // The number of items to show per page
         }, {
             // default settings
             // page size buttons (right set of buttons in demo)
@@ -1273,7 +1244,7 @@
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
-    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage'];
+    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
         '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',

@@ -6,7 +6,7 @@
                     <md-input-container>
                         <label for="address1">Selecciona tu dirección</label>
                         <md-select ng-model="Payment.address" id="address1" name="address1" title="Direccion"
-                                   md-on-open="Payment.getAddresses()" required ng-change="">
+                                   md-on-open="Payment.getAddresses()" required ng-change="Payment.quoteShipment()">
                             <div layout="row" layout-align="center center" ng-if="Payment.busyAddresses">
                                 <md-progress-circular md-mode="indeterminate"
                                                       class="md-warn md-default-theme"
