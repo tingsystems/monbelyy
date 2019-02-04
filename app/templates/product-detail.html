@@ -22,8 +22,9 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h2>{{Product.detail.name}}</h2>
-                                    <span ng-if="Product.detail.inventory <= 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Producto agotado</span>
-                                    <br>
+                                    <div class="unavailable">
+                                        <span ng-if="Product.detail.inventory <= 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Producto agotado</span>
+                                    </div>
                                     <h2 class="article-price">{{ Product.detail.price | currency}}</h2>
                                     <br>
 
