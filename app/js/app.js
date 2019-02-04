@@ -190,7 +190,7 @@
         $rootScope.registerExtend = true;
         $rootScope.registerInvoiced = false;
         $rootScope.taxnomySearch = false;
-        $rootScope.filterBrand = 'Marca';
+        $rootScope.filterBrand = 'brand';
         $rootScope.filterSize = false;
         $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
