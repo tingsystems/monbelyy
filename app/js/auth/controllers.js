@@ -699,6 +699,7 @@
         self.busy = false;
         self.isPaypal = false;
         self.PaypalUrl = '';
+        self.DoPayment = false;
         //aditional keys
         var aditionalKey = function (array) {
             if (self.purchase.metadata) {

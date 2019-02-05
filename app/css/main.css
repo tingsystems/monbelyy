@@ -1865,7 +1865,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'poppins', sans-serif;
   margin: 0;
   font-weight: 700;
 }
@@ -1906,7 +1906,7 @@ button[disabled],
   font-weight: 400;
 }
 .font-type {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'poppins', sans-serif;
 }
 md-input-container {
   width: 100%;
@@ -2342,6 +2342,11 @@ footer .contact-sty .download-app > i:hover {
 }
 .selectdemoSelectHeader md-content._md {
   max-height: 240px;
+}
+.purchase-payment-card {
+  padding: 15px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
 }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .single_blog .comment-area {
