@@ -6,48 +6,39 @@
                     <ng-include src="'/templates/auth/partials/my-account-items.html'"></ng-include>
                 </div>
                 <div class="col-md-9">
-                    <div class="row justify-content-between">
-                        <div class="col-6 col-md-5">
-                            <h5><i class="ion-person"></i> Mi cuenta: {{user.username}}</h5>
+                    <div class="row">
+                        <div class="col-4 col-md-5">
+                            <h5><i class="fa fa-user"></i> {{user.username}}</h5>
                         </div>
-                        <div class="col-6 col-md-3 text-right">
-                            <a ui-sref="home" class="btn-outline-dark"> Ir a comprar!</a>
+                        <div class="col-8 col-md-7 text-right">
+                            <ul class="nav justify-content-end">
+                                <li class="nav-item"><a class="nav-link" href="#"> Mis compras ({{ Panel.purchasesCount }})</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"> Pagos pendientes ({{ Panel.pending }})</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#"> En proceso ({{ Panel.processing }})</a></li>
+                            </ul>
                         </div>
                     </div>
                     <hr class="clearfix">
-                    <div class="container text-center items-dashboard">
-                        <div class="row">
-                            <div class="col-md-3 item">
-                                <p class="item-number">{{ Panel.purchasesCount }}</p>
-                                <p class="item-name"><a ui-sref="sales" title="Ver mis compras">Mis compras</a></p>
-                            </div>
-                            <div class="col-md-3 item">
-                                <p class="item-number">{{ Panel.pending }}</p>
-                                <p class="item-name">Pagos pendientes</p>
-                            </div>
-                            <div class="col-md-3 item">
-                                <p class="item-number">{{ Panel.processing }}</p>
-                                <p class="item-name">En proceso</p>
-                            </div>
-                            <div class="col-md-3 item">
-                                <p class="item-number">{{ Panel.shipped }}</p>
-                                <p class="item-name">Enviados</p>
-                            </div>
-                        </div>
-                    </div>
                     <br />
-                    <div class="container-fluid items-dashboard">
+                    <div class="row">
                         <!--TODO: Mostrar últimas 3 compras realizadas-->
                         <div class="col-md-12">
-                            <h4>Mis compras recientes</h4>
-                            <br>
+                            <div class="row jumbotron">
+                                <div class="col-sm-6">
+                                    <h4>Mis compras recientes</h4>
+                                </div>
+                                <div class="col-sm-6 text-right">
+                                    <h4>Balance: {{ Panel.customer.balance}}</h4>
+                                </div>
+                            </div>
                         </div>
                         <div class="table-responsive col-md-12" loading-container="Panel.tableParams.settings().$loading">
                             <table class="table table-bordered bg-white table-striped" ng-table="Panel.tableParams"
                                 show-filter="false">
                                 <tbody>
                                     <tr ng-repeat="purchase in Panel.purchaseRecent" datasource="purchase" ref="Panel">
-                                        <td data-title="'Folio'" sortable="'id'">#{{ purchase.id }}</td>
+                                        <td data-title="'Folio'" ng-if="purchase.code" sortable="'id'">#{{ purchase.code }}</td>
+                                        <td data-title="'Folio'" ng-if="!purchase.code" sortable="'id'">#{{ purchase.id }}</td>
                                         <td data-title="'Fecha'" sortable="'name'">{{ purchase.createdAt | date:
                                             'd/M/y'}}
                                         </td>
@@ -146,7 +137,10 @@
                                 </tbody>
                                 <tfooter>
                                     <tr ng-hide="Panel.purchases.length">
-                                        <td colspan="7" class="text-center">Aun no haz realizado una compra</td>
+                                        <td colspan="7" class="text-center">
+                                            Aun no haz realizado una compra
+                                            <a ui-sref="home" class="btn-danger"> Ir a comprar!</a>
+                                        </td>
                                     </tr>
                                 </tfooter>
                             </table>

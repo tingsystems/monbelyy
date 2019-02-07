@@ -28,7 +28,7 @@
 
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
-        paramsProducts.pageSize = 9;
+        paramsProducts.pageSize = 12;
         paramsProducts.kind = 'group';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
@@ -43,6 +43,28 @@
             self.products = results.results;
             //get featureImage
             angular.forEach(self.products, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+            });
+        });
+
+        var paramsItemProducts = {};
+        paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
+        paramsItemProducts.isActive = 'True';
+        paramsItemProducts.pageSize = 12;
+        paramsItemProducts.kind = 'group';
+        paramsItemProducts.ordering = '-createdAt';
+        if (list !== '') {
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsItemProducts.priceList = list;
+        }
+        else {
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
+        }
+        paramsItemProducts.kind = 'group';
+        ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
+            self.productsItem = results.results;
+            //get featureImage
+            angular.forEach(self.productsItem, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });

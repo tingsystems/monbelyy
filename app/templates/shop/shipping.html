@@ -13,15 +13,15 @@
                                 </span>
                         </md-radio-button>
 
-                        <md-radio-button value="1"> <span class="fa fa-building">
+                        <md-radio-button value="1" ng-if="Payment.defaultbranchOffice.metadata.codeGetShop"> <span class="fa fa-building">
                                     Recoger en tienda
                                 </span></md-radio-button>
                     </md-radio-group>
                     <br>
                 </div>
-                <div class="col-md-12" ng-if="Payment.sendOptions === '0'">
-                    <h4><i class="fa fa-map-marker"></i>Seleccionar dirección
-                        existente </h4>
+                <div class="col-md-12">
+                    <h4><i class="fa fa-map-marker"></i>{{Payment.sendOptions === "0" ? ' Seleccionar dirección existente' :
+                        ' Dinos cual es tu direccion y mostrar las tiendas más cercanas a ti'}}</h4>
                     <hr>
                     <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
                     
@@ -36,12 +36,11 @@
                     </button>
                     <br>
 
-                    <p ng-if="Payment.address && Payment.sendOptions === '1'">{{Payment.address.metadata.codeGetShop ===
-                        true ? 'Puedes recorger tu pedido en estas tiendas': 'Lo sentimos pero por tu ubucación no es
-                        posible recoger en tienda, por favor selecciona otra forma de envio '}}</p>
+                    <p ng-if="Payment.address && Payment.sendOptions === '1'">{{Payment.defaultbranchOffice.metadata.codeGetShop ? 'Puedes recorger tu pedido en estas tiendas':
+                        'Lo sentimos pero por tu ubucación no es posible recoger en tienda, por favor selecciona otra forma de envio '}}</p>
 
                     <div class="col-xs-12 col-sm-12 col-md-12"
-                         ng-if="Payment.address && Payment.sendOptions === '1' && Payment.address.metadata.codeGetShop === true">
+                         ng-if="Payment.address && Payment.sendOptions === '1' && Payment.defaultbranchOffice.metadata.codeGetShop">
                         <md-input-container>
                             <label for="shop">Selecciona la tienda para recoger tu pedido</label>
                             <md-select ng-model="Payment.shop" id="shop" name="shop" title="Direccion">
@@ -55,12 +54,7 @@
 
                     <br>
                 </div>
-                <div class="col-md-12" ng-if="Payment.sendOptions === '1'">
-                    <button class="btn btn-danger" type="submit"
-                            ng-click="Payment.retriveInStore()">Continuar y recoger en tienda
-                    </button>
-                </div>
-                <form name="Form" ng-if="Payment.sendOptions === '0'">
+                <form name="Form">
                     <div>
                         <div class="col-md-12">
                             <h4 title="Presiona">
@@ -236,7 +230,7 @@
                     </div>
 
                     <div class="col-md-12" style="margin-top: 30px;"
-                         ng-if="Payment.sendOptions === '1' && Payment.addresses.length > 0 && Payment.address.metadata.codeGetShop === true">
+                         ng-if="Payment.sendOptions === '1' && Payment.addresses.length > 0 && Payment.defaultbranchOffice.metadata.codeGetShop">
                         <button class="btn btn-danger" type="button"
                                 ng-disabled="Form.$invalid" ng-click="Payment.retriveInStore()">Continuar y recoger en
                             tienda

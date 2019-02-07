@@ -419,7 +419,7 @@
 
         self.retriveInStore = function () {
             $localStorage.appData.user.address = self.address.id;
-            $localStorage.appData.getShop = true;
+            $localStorage.appData.getShop = self.shop;
             $state.go('checkout', {shipping: self.sendOptions});
         };
 

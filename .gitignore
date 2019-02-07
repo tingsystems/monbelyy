@@ -8,3 +8,4 @@ templates.js
 *.log
 .firebase/
 package-lock.json
+*.pyc
