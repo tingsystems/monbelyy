@@ -1,5 +1,6 @@
 node_modules/
 .idea/
+./firebase
 lib/
 dist/
 temp/
@@ -7,3 +8,4 @@ templates.js
 *.log
 .firebase/
 package-lock.json
+*.pyc

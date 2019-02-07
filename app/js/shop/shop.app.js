@@ -59,7 +59,7 @@
                 url: '/history/sales',
                 data: {
                     requiredLogin : true,
-                    pageTitle: 'Compras - Sydgroup'
+                    pageTitle: 'Compras'
                 },
                 views: {
                     'content': {
