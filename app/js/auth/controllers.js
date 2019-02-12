@@ -696,6 +696,13 @@
     function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
         HistoryOrdersSrv, $filter) {
         var self = this;
+        self.purchase = {
+            amount: 0,
+            name: '',
+            email: '',
+            phone: '',
+            cardNumber: ''
+        };
         self.busy = false;
         self.isPaypal = false;
         self.PaypalUrl = '';
