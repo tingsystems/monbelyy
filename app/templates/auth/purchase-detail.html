@@ -171,7 +171,7 @@
                                             <div class="col-md-12 no-padding" ng-if="Purchase.DoPayment">
                                                 <div class="purchase-payment-card">
                                                     <div class="">
-                                                        <form id="pay" name="pay">
+                                                        <form id="pay" name="pay" novalidate>
                                                             <div class="form form-sharepay">
                                                                 
                                                                 <div class="row">
@@ -182,10 +182,12 @@
                                                                     <div class="col-sm-6">
                                                                         <md-input-container>
                                                                             <label>Especifique el monto que desea abonar</label>
-                                                                            <input type="text" id="cardholderName"  ng-model="Purchase.purchase.amount" required>
-                                                                            <div ng-messages="payForm.amount.$error" aria-live="assertive">
+                                                                            <input name="amount" type="number" min="1" max="{{Purchase.purchase.balance}}" id="cardholderName"  ng-model="Purchase.purchase.amount" required>
+                                                                            <div ng-messages="pay.amount.$error" aria-live="assertive">
                                                                                 <!-- ngMessage: required -->
                                                                                 <div ng-message="required">Este campo es requerido.</div>
+                                                                                <div ng-message="min">El monto debe ser mayor a 0.</div>
+                                                                                <div ng-message="max">El monto no puede ser mayor al balance.</div>
                                                                                 <!-- ngMessage: md-maxlength -->
                                                                             </div>
                                                                         </md-input-container>
@@ -193,8 +195,8 @@
                                                                     <div class="col-sm-6">
                                                                             <md-input-container>
                                                                                 <label>Nombre completo</label>
-                                                                                <input type="text" id="cardholderName" data-checkout="cardholderName" ng-model="Purchase.purchase.name" required>
-                                                                                <div ng-messages="payForm.name.$error" aria-live="assertive">
+                                                                                <input name="name" type="text" id="cardholderName" data-checkout="cardholderName" ng-model="Purchase.purchase.name" required>
+                                                                                <div ng-messages="pay.name.$error" aria-live="assertive">
                                                                                     <!-- ngMessage: required -->
                                                                                     <div ng-message="required">Este campo es requerido.</div>
                                                                                     <!-- ngMessage: md-maxlength -->
@@ -206,8 +208,8 @@
                                                                     <div class="col-md-6 no-pd-l">
                                                                         <md-input-container>
                                                                             <label id="email">Email</label>
-                                                                            <input type="email" name="email" ng-model="Purchase.purchase.email" required>
-                                                                            <div ng-messages="payForm.email.$error" aria-live="assertive">
+                                                                            <input  type="email" name="email" ng-model="Purchase.purchase.email" required>
+                                                                            <div ng-messages="pay.email.$error" aria-live="assertive">
                                                                                 <!-- ngMessage: required -->
                                                                                 <div ng-message="email">Se requiere de un email válido.</div>
                                                                                 <div ng-message="required">Este campo es requerido.</div>
@@ -220,7 +222,7 @@
                                                                             <label>Teléfono</label>
                                                                             <input type="text" name="phone" ng-pattern="/^[0-9]*$/"
                                                                                    md-maxlength="10" ng-model="Purchase.purchase.phone" required>
-                                                                            <div ng-messages="payForm.phone.$error" aria-live="assertive">
+                                                                            <div ng-messages="pay.phone.$error" aria-live="assertive">
                                                                                 <!-- ngMessage: required -->
                                                                                 <div ng-message="required">Este campo es requerido.</div>
                                                                                 <div ng-message="md-maxlength">Deben ser solo 10 dígitos.</div>
@@ -236,12 +238,12 @@
                                                                             <div class="col-sm-8">
                                                                                 <md-input-container>
                                                                                     <label>Número de tarjeta</label>
-                                                                                    <input type="text" ng-pattern="/^[0-9]*$/"
-                                                                                            md-maxlength="19" id="cardNumber" data-checkout="cardNumber" ng-model="Purchase.purchase.cardNumber" required>
-                                                                                    <div ng-messages="payForm.cardNumber.$error" aria-live="assertive">
+                                                                                    <input type="text" ng-pattern="/^[0-9]*$/" name="cardNumber"
+                                                                                            md-maxlength="16" id="cardNumber" data-checkout="cardNumber" ng-model="Purchase.purchase.cardNumber" required>
+                                                                                    <div ng-messages="pay.cardNumber.$error" aria-live="assertive">
                                                                                         <!-- ngMessage: required -->
                                                                                         <div ng-message="required">Este campo es requerido.</div>
-                                                                                        <div ng-message="md-maxlength">Deben ser solo 19 dígitos.</div>
+                                                                                        <div ng-message="md-maxlength">Deben ser solo 16 dígitos.</div>
                                                                                         <div ng-message="pattern">Formato no válido.</div>
                                                                                         <!-- ngMessage: md-maxlength -->
                                                                                     </div>
@@ -250,8 +252,8 @@
                                                                             <div class="col-md-4 no-pd-l">
                                                                                 <md-input-container md-no-float>
                                                                                     <label>Tarjeta</label>
-                                                                                    <input type="text" ng-if="SharePay.payment.cardNumber.substr(0,1)=='4'" placeholder="VISA" readonly>
-                                                                                    <input type="text" ng-if="SharePay.payment.cardNumber.substr(0,1)=='5'" placeholder="MasterCard" readonly>
+                                                                                    <input type="text" ng-if="Purchase.payment.cardNumber.substr(0,1)=='4'" placeholder="VISA" readonly>
+                                                                                    <input type="text" ng-if="Purchase.payment.cardNumber.substr(0,1)=='5'" placeholder="MasterCard" readonly>
                                                                                 </md-input-container>
                                                                             </div>
                                                                         </div>
@@ -261,9 +263,9 @@
                                                                             <div class="col-md-4">
                                                                                 <md-input-container>
                                                                                     <label>Mes</label>
-                                                                                    <input type="text" md-maxlength="2" ng-pattern="/^[0-9]*$/"
+                                                                                    <input type="text" md-maxlength="2" ng-pattern="/^[0-9]*$/" name="cardExpirationMonth"
                                                                                             ng-model="Purchase.purchase.month" id="cardExpirationMonth" data-checkout="cardExpirationMonth" required>
-                                                                                    <div ng-messages="payForm.purchase.$error" aria-live="assertive">
+                                                                                    <div ng-messages="pay.cardExpirationMonth.$error" aria-live="assertive">
                                                                                         <!-- ngMessage: required -->
                                                                                         <div ng-message="required">Este campo es requerido.</div>
                                                                                         <div ng-message="md-maxlength">Deben ser sólo dos dígitos.</div>
@@ -274,9 +276,9 @@
                                                                             <div class="col-md-4">
                                                                                 <md-input-container>
                                                                                     <label>Año</label>
-                                                                                    <input type="text" md-maxlength="4" ng-pattern="/^[0-9]*$/"
+                                                                                    <input type="text" md-maxlength="4" ng-pattern="/^[0-9]*$/" name="cardExpirationYear"
                                                                                             ng-model="Purchase.purchase.payment.year" id="cardExpirationYear" data-checkout="cardExpirationYear" required>
-                                                                                    <div ng-messages="payForm.year.$error" aria-live="assertive">
+                                                                                    <div ng-messages="pay.cardExpirationYear.$error" aria-live="assertive">
                                                                                         <!-- ngMessage: required -->
                                                                                         <div ng-message="required">Este campo es requerido.</div>
                                                                                         <div ng-message="md-maxlength">Deben ser sólo 4 dígitos.</div>
@@ -287,9 +289,9 @@
                                                                             <div class="col-md-4">
                                                                                 <md-input-container>
                                                                                     <label>CVC</label>
-                                                                                    <input type="text" md-maxlength="4" ng-pattern="/^[0-9]*$/"
+                                                                                    <input type="text" md-maxlength="4" ng-pattern="/^[0-9]*$/" name="securityCode"
                                                                                             ng-minlength="3" id="securityCode" data-checkout="securityCode" ng-model="SharePay.payment.cvc" required>
-                                                                                    <div ng-messages="payForm.cvc.$error" aria-live="assertive">
+                                                                                    <div ng-messages="pay.securityCode.$error" aria-live="assertive">
                                                                                         <!-- ngMessage: required -->
                                                                                         <div ng-message="required">Este campo es requerido.</div>
                                                                                         <div ng-message="md-maxlength">Deben ser sólo 3 o 4 dígitos.</div>
@@ -318,7 +320,7 @@
                                                                             <i class="fa fa-angle-left"></i> Regresar
                                                                         </button>
                                                                         <button title="Regresar a mis compras" class="btn btn-md btn-primary"
-                                                                            ng-click="Purchase.processPaymentCard()">
+                                                                            ng-click="Purchase.processPaymentCard = true">
                                                                             <i class="fa fa-cash"></i> Abonar
                                                                         </button>
                                                                     </div>

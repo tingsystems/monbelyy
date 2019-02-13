@@ -694,7 +694,7 @@
     }
 
     function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
-        HistoryOrdersSrv, $filter,$element) {
+        HistoryOrdersSrv, $filter, $element) {
         var self = this;
         self.purchase = {
             amount: 0,
@@ -705,9 +705,11 @@
         };
         self.busy = false;
         self.isPaypal = false;
+        self.error = false;
         self.PaypalUrl = '';
         self.DoPayment = false;
         self.params = {};
+        self.errorMessage = '';
         var publishKey = '';
         var setPublishableKey = function () {
             Mercadopago.setPublishableKey(publishKey);
@@ -717,11 +719,11 @@
             var data = response;
             data.payment_method_id = self.purchase.paymentMethodId;
             $http.defaults.headers.common['PROJECT-ID'] = $stateParams.project;
-            OrdersSrv.paidMP({dataPayment: data, orderId: self.order.id}).$promise.then(function (response) {
+            OrdersSrv.paidMP({ dataPayment: data, orderId: self.purchase.id }).$promise.then(function (response) {
                 self.busy = true;
-                $state.go('public.success', {data: response});
-            }, function(error) {
-                NotificationSrv.error('Error al procesar su pago, contacte a ' + self.order.storeInfo.businessName);
+                $state.go('public.success', { data: response });
+            }, function (error) {
+                NotificationSrv.error('Error al procesar su pago, contacte a ' + self.purchase.storeInfo.businessName);
                 self.busy = false;
             });
         };
@@ -734,11 +736,11 @@
             deferred.resolve(error);
         };
 
-        var setPaymentMethodInfo =  function (status, response) {
+        var setPaymentMethodInfo = function (status, response) {
             self.purchase.paymentMethodId = response[0].id;
         }
 
-        var getBin = function() {
+        var getBin = function () {
             Mercadopago.getPaymentMethod({
                 bin: self.purchase.cardNumber
             }, setPaymentMethodInfo);
@@ -867,7 +869,7 @@
         };
 
         CustomerSrv.customerByUser({ id: $localStorage.appData.user.id }).$promise.then(function (data) {
-           self.customer=data;
+            self.customer = data;
         });
 
         self.getData = function (params) {
@@ -893,7 +895,7 @@
                     if (value.paymentType === 9) {
                         self.shipped++;
                     }
-                    if (value.isPaid === 2 || value.isPaid === 1 ) {
+                    if (value.isPaid === 2 || value.isPaid === 1) {
                         self.pending++;
                     }
                     if (value.statusInfo.code !== 4 && value.statusInfo.code !== 6) {
@@ -950,6 +952,6 @@
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
-    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter','$element'];
+    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter', '$element'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage', 'CustomerSrv'];
 })();
