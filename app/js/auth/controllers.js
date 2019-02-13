@@ -719,7 +719,7 @@
             var data = response;
             data.payment_method_id = self.purchase.paymentMethodId;
             $http.defaults.headers.common['PROJECT-ID'] = $stateParams.project;
-            OrdersSrv.paidMP({ dataPayment: data, orderId: self.purchase.id }).$promise.then(function (response) {
+            OrdersSrv.paidMP({ dataPayment: data, orderId: self.purchase.id, amount: self.purchase.amount }).$promise.then(function (response) {
                 self.busy = true;
                 $state.go('public.success', { data: response });
             }, function (error) {
