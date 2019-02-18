@@ -357,6 +357,7 @@
         self.params.customer = self.customer;
         self.sendOptions = "0";
         self.busyAddresses = true;
+        self.addresses = [];
 
         self.getAddresses = function () {
             self.busyAddresses = true;
@@ -406,8 +407,15 @@
                 $localStorage.appData.user.address = data.id;
                 NotificationSrv.success('Domicilio agregado correctamente');
                 self.busy = false;
+                self.addAddress = false;
                 self.formData = {};
-                $state.go('checkout', {shipping: self.sendOptions});
+                self.addresses[0] = data;
+                self.address = data;
+                self.addAddress = false;
+                self.state = null;
+                self.city = null;
+                self.quoteShipment();
+
 
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
@@ -502,6 +510,7 @@
                 self.addAddress = false;
                 self.state = null;
                 self.city = null;
+                self.quoteShipment();
 
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
