@@ -2,7 +2,11 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <article class="row">
+                <div class="col-sm-12 desk-hidde">
+                    <h2>{{Product.detail.name}}</h2>
+                </div>
                 <div class="col-sm-6">
+                        
                     <data-owl-carousel class="owl-carousel owl-theme owl-theme-page" data-options="Product.owlOptionProduct" ng-if="Product.detail.galleryImages.length > 0">
                         <div owl-carousel-item class="slider" ng-repeat="slide in Product.detail.galleryImages">
                             <div class="item" style="width: 100%;">
