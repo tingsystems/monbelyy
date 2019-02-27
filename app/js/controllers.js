@@ -32,11 +32,11 @@
         paramsProducts.kind = 'group';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
         paramsProducts.kind = 'group';
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
@@ -54,11 +54,11 @@
         paramsItemProducts.kind = 'group';
         paramsItemProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
             paramsItemProducts.priceList = list;
         }
         else {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
         paramsItemProducts.kind = 'group';
         ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
@@ -341,11 +341,11 @@
                     self.params.pageSize = params.count();
                     self.params.search = self.searchTerm;
                     if (list !== '') {
-                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code';
+                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
                         self.params.priceList = list;
                     }
                     else {
-                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code';
+                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
                     }
                     self.params.kind = 'group';
                     return ProductSrv.get(self.params).$promise.then(function (results) {
@@ -548,11 +548,11 @@
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
 
         self.busy = true;
@@ -1002,11 +1002,11 @@
             self.params.isActive = 'True';
             self.params.pageSize = 9;
             if (list !== '') {
-                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo';
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
                 self.params.priceList = list;
             }
             else {
-                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo';
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo,offerPrice,expiredOffer';
             }
             if (self.optionSelected) {
                 self.params.ordering = self.optionSelected.option;
@@ -1067,11 +1067,11 @@
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
 
         $localStorage.items = self.items;
