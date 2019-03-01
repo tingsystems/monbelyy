@@ -68,8 +68,8 @@
                 data: {pageTitle: ' Moneek'},
                 views: {
                     'content': {
-                        templateUrl: '/templates/categories.html',
-                        controllerAs: 'Product',
+                        templateUrl: '/templates/blog.html',
+                        controllerAs: 'Post',
                         controller: 'PostCtrl'
                     }
                 }
