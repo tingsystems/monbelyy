@@ -162,32 +162,7 @@
                     <div class="container" ng-controller="ShoppingCtrl as Shop">
                         <div class="row">
                             <div class="col-sm-4" ng-repeat="product in $data">
-                                <div class="box-simple" ng-if="!Product.isPost">
-                                    <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
-                                        <div class="box-header">
-                                            <div class="box-bg-img"
-                                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
-                                        </div>
-                                        <div class="box-container">
-                                            <div class="row align-items-center">
-                                                <div class="col-sm-8">
-                                                    <p>{{ product.name | limitTo:40}}</p>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <p>{{ product.price | currency }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="box-footer">
-                                            <div class="row"> 
-                                                <div class="col-sm-12">
-                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Comprar</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
+                                <ng-include src="'/templates/partials/box-product.html'" ng-if="!Product.isPost"></ng-include>
                                 <div class="box-prod" ng-if="Product.isPost">
                                     <a ui-sref="post_detail({slug:product.slug})">
                                         <div class="bg-prod"

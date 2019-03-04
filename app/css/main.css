@@ -466,11 +466,24 @@ audio:not([controls]),
 }
 .box-simple .box-container .box-title {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 16px;
+  margin-bottom: 0;
 }
-.box-simple .box-container p {
-  height: 50px;
-  padding: 10px 0;
+.box-simple .box-container .price {
+  font-weight: bold;
+}
+.box-simple .box-container .offer-price {
+  color: #ff4b4b;
+  padding: 0;
+  height: auto;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+.box-simple .box-container .old-price {
+  text-decoration: line-through;
+  height: auto;
+  padding: 0;
+  margin-bottom: 0;
 }
 .box-simple .box-footer {
   text-align: center;
@@ -1857,6 +1870,9 @@ body .content-area-web {
   background-color: #fff;
 }
 .no-pd-r {
+  padding-right: 0 !important;
+}
+.no-pd-l {
   padding-right: 0 !important;
 }
 h1,
