@@ -163,14 +163,16 @@
                     <h4><i class="fa fa-money"></i> Seleccione el método de pago</h4>
                     <hr>
                     <md-radio-group layout="row" ng-model="Payment.orderPaymentType">
-                        <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard">
+                        <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard"
+                                         ng-if="Payment.creditCardMethod">
                             Tarjeta
                         </md-radio-button>
-                        <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal" class="md-primary">
+                        <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal"
+                                         class="md-primary" ng-if="Payment.paypalMethod">
                             Pago con paypal
                         </md-radio-button>
                         <md-radio-button value="6" ng-click="Payment.depositBank=!Payment.depositBank"
-                                         class="md-primary">
+                                         class="md-primary" ng-if="Payment.depositMethod || Payment.depositMethods">
                             Depósito bancario
                         </md-radio-button>
                     </md-radio-group>
@@ -253,9 +255,9 @@
                                                 <button ui-sref="shipping-address" class="btn btn-outline-default">
                                                     Volver a dirección de envío
                                                 </button>
-                                                <button ng-disabled="Form.$invalid || Payment.creditCard"
+                                                <button ng-disabled="Form.$invalid || Payment.busyCreditCard"
                                                         class="btn btn-danger" type="submit">
-                                                    Realizar Pago <span ng-show="Payment.creditCard"><i
+                                                    Realizar Pago <span ng-show="Payment.busyCreditCard"><i
                                                         class="fa fa-spinner fa-spin"></i></span>
                                                 </button>
                                             </div>
@@ -274,11 +276,10 @@
                                     <img src="../../img/paypall.png" alt="" width="200">
                                     <p>Realice su pago, con la facilidad de Paypal.</p>
                                 </div>
-                                <button ng-if="Payment.paypal" class="btn btn-danger"
+                                <button ng-if="!Payment.busyPaypal" class="btn btn-danger"
                                         ng-click="Payment.createOrder()">{{Payment.paypalBtn}}<span
                                         ng-show="Payment.busyPaypal"><i class="fa fa-spinner fa-spin"></i>
                                     </span>
-                                    <div class="md-ripple-container">Procesar pago</div>
                                 </button>
                             </div>
                         </div>
@@ -293,7 +294,7 @@
                                         con <strong>{{ initConfig.branchOffice }}</strong> para finalizar su compra y
                                         realizar el envío.</p>
                                 </div>
-                                <button ng-if="Payment.depositBank" class="btn btn-danger"
+                                <button class="btn btn-danger"
                                         ng-click="Payment.createOrder()">Finalizar compra
                                 </button>
                             </div>

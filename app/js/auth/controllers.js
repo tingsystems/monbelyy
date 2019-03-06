@@ -38,7 +38,13 @@
                 $localStorage.appData.user.firstName = data.firstName;
                 self.branchDefault = { branchOffices: [$localStorage.appData.user.branchOffices[0].id] };
                 PriceListSrv.customer({ customers: $localStorage.appData.user.customer }).$promise.then(function (data) {
-                    $localStorage.priceList = data[0].slug;
+                    var list = '';
+                    try {
+                        list = data[0].slug;
+                        $localStorage.priceList = list;
+                    }
+                    catch (err) {
+                    }
                 });
                 // Redirect user here after a successful log in.
                 if (self.itemCount > 0) {

@@ -587,17 +587,75 @@
         self.shippingOption = angular.copy($stateParams.shipping);
         self.shiping = true;
 
+        var getPaymentType = function (branchOffice) {
+            self.notReady = true;
+            if ('mp' in branchOffice.metadata) {
+                if ('publicKey' in branchOffice.metadata.mp) {
+                    self.creditCardMethod = true;
+                    self.notReady = false;
+                }
+            }
+            if ('paypal' in branchOffice.metadata) {
+                if ('clientId' in branchOffice.metadata.paypal) {
+                    self.paypalMethod = true;
+                    self.notReady = false;
+                }
+            }
+            if ('bankAccount' in branchOffice.metadata) {
+                if ('account' in branchOffice.metadata.bankAccount) {
+                    self.depositMethod = true;
+                    self.notReady = false;
+                }
+            }
+            if ('bankAccounts' in branchOffice.metadata){
+                self.depositMethods = true;
+            }
+
+        };
+
         // get default branch office
         self.getDefaulBranchOffice = function () {
-            if (!user.branchOffices)
+            if (!user.branchOffices) {
+                self.defaultbranchOffice = {"id": null};
                 return;
-            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
-            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
-            self.branchOffices = user.branchOffices;
-            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+            }
+            try {
+                self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+
+            } catch (err) {
+                self.defaultbranchOffice = {"id": $localStorage.appData.user.branchId}
+
+            }
+
+            try {
+                self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+
+            }
+            catch (err) {
+                self.defaultWarehouse = {"id": $localStorage.appData.user.warehouseID}
+
+            }
+            try {
+                self.branchOffices = user.branchOffices;
+                $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+
+            }
+            catch (err) {
+                console.log(err)
+            }
+
+            try {
+                publishKey = self.defaultbranchOffice.metadata.mp.publicKey;
+            }
+            catch (err) {
+                publishKey = $localStorage.appData.user.mpPublicKey;
+            }
+
+            getPaymentType(self.defaultbranchOffice);
             return self.defaultbranchOffice;
 
         };
+
         self.getDefaulBranchOffice();
 
         var clearCart = function () {
@@ -749,6 +807,7 @@
         var successResponseHandler = function (status, response) {
             var data = response;
             initialOrder();
+            self.busyCreditCard = true;
             data.payment_method_id = self.params.paymentMethodId;
             delete self.params.year;
             delete self.params.month;
@@ -762,6 +821,7 @@
             data.payment_method_id = self.params.paymentMethodId;
             OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
                 self.creditCard = false;
+                self.busyCreditCard = false;
                 clearCart();
                 NotificationSrv.success('Compra completada correctamente');
                 $state.go('purchase-completed', {orderId: response.id});
