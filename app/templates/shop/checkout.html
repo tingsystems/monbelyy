@@ -193,7 +193,7 @@
                                         <div class="col-md-6">
                                             <md-input-container md-no-float class="md-block">
                                                 <label>Número de tarjeta</label>
-                                                <input type="text" ng-pattern="/^[0-9]*$/" md-maxlength="18"
+                                                <input type="text" ng-pattern="/^[0-9]*$/" maxlength="18"
                                                        id="cardNumber" data-checkout="cardNumber"
                                                        ng-model="Payment.params.cardNumber" required>
                                             </md-input-container>
@@ -204,7 +204,7 @@
                                                     <div class="col-md-6">
                                                         <md-input-container md-no-float class="md-block">
                                                             <label>Mes</label>
-                                                            <input type="text" md-maxlength="2" ng-pattern="/^[0-9]*$/"
+                                                            <input type="text" maxlength="2" ng-pattern="/^[0-9]*$/"
                                                                    ng-model="Payment.params.month"
                                                                    id="cardExpirationMonth"
                                                                    data-checkout="cardExpirationMonth" required>
@@ -219,7 +219,7 @@
                                                         <md-input-container md-no-float class="md-block"
                                                                             ng-class="{ 'has-error': Form.cardExpiryY.$touched && Form.cardExpiryY.$invalid }">
                                                             <label>Año</label>
-                                                            <input type="text" md-maxlength="4" ng-pattern="/^[0-9]*$/"
+                                                            <input type="text" maxlength="4" ng-pattern="/^[0-9]*$/"
                                                                    ng-model="Payment.params.year"
                                                                    id="cardExpirationYear"
                                                                    data-checkout="cardExpirationYear" required>
@@ -235,7 +235,7 @@
                                             <md-input-container md-no-float class="md-block"
                                                                 ng-class="{ 'has-error': Form.cardCVC.$touched && Form.cardCVC.$invalid }">
                                                 <label>CVC</label>
-                                                <input type="text" md-maxlength="3" ng-pattern="/^[0-9]*$/"
+                                                <input type="text" maxlength="3" ng-pattern="/^[0-9]*$/"
                                                        ng-minlength="3" id="securityCode" data-checkout="securityCode"
                                                        ng-model="Payment.params.cvc" required>
                                             </md-input-container>
