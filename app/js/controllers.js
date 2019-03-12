@@ -29,7 +29,6 @@
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
         paramsProducts.pageSize = 12;
-        paramsProducts.kind = 'group';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
@@ -38,7 +37,7 @@
         else {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
-        paramsProducts.kind = 'group';
+        paramsProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
@@ -51,7 +50,6 @@
         paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
         paramsItemProducts.isActive = 'True';
         paramsItemProducts.pageSize = 12;
-        paramsItemProducts.kind = 'group';
         paramsItemProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
@@ -60,7 +58,7 @@
         else {
             paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
-        paramsItemProducts.kind = 'group';
+        paramsItemProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
             self.productsItem = results.results;
             //get featureImage
@@ -347,7 +345,7 @@
                     else {
                         self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
                     }
-                    self.params.kind = 'group';
+                    self.params.kind = $rootScope.itemsKind;
                     return ProductSrv.get(self.params).$promise.then(function (results) {
                         self.listSearch = results.results;
                         //get featureImage
@@ -1014,7 +1012,7 @@
             else {
                 self.params.ordering = '-createdAt';
             }
-            self.params.kind = 'group';
+            self.params.kind = $rootScope.itemsKind;
             return ProductSrv.get(self.params).$promise.then(function (data) {
                 params.kind = 'group';
                 params.total(data.count);
