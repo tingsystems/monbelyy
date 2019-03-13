@@ -197,6 +197,7 @@
         $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
         $rootScope.itemsKind = 'group';
+        $rootScope.showWeb = false;
 
         var checkStatus = function(){
             MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {

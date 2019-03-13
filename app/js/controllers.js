@@ -28,14 +28,17 @@
 
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsProducts.showWeb = $rootScope.showWeb;
+        }
         paramsProducts.pageSize = 12;
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
         }
         paramsProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
@@ -49,14 +52,17 @@
         var paramsItemProducts = {};
         paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
         paramsItemProducts.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsItemProducts.showWeb = $rootScope.showWeb;
+        }
         paramsItemProducts.pageSize = 12;
         paramsItemProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
             paramsItemProducts.priceList = list;
         }
         else {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
         }
         paramsItemProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
@@ -998,6 +1004,9 @@
 
             }
             self.params.isActive = 'True';
+            if($rootScope.showWeb){
+                self.params.showWeb = $rootScope.showWeb;
+            }
             self.params.pageSize = 9;
             if (list !== '') {
                 self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
