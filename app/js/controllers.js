@@ -340,6 +340,9 @@
                     self.isPost = false;
                     var list = $localStorage.priceList ? $localStorage.priceList : '';
                     self.params.isActive = 'True';
+                    if($rootScope.showWeb){
+                        self.params.showWeb = $rootScope.showWeb;
+                    }
                     self.params.ordering = '-createdAt';
                     self.params.page = params.page();
                     self.params.pageSize = params.count();
