@@ -23,7 +23,9 @@
                                 <div class="col-sm-12">
                                     <h4>{{Product.detail.name}}..</h4>
                                     <br>
-                                    <h2 class="article-price">{{ Product.detail.price | currency}}</h2>
+                                    <h2 class="article-price" ng-if="Product.detail.offerPrice <= 0">{{ Product.detail.price | currency}}</h2>
+                                    <h2 class="offer-price" ng-if="Product.detail.offerPrice > 0">{{ Product.detail.offerPrice | currency}}</h2>
+                                    <p class="old-price" ng-if="Product.detail.offerPrice > 0">{{ Product.detail.price | currency}}</p>
                                     <span ng-if="Product.detail.inventory <= 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Producto agotado</span>
                                     <br>
 
@@ -51,7 +53,10 @@
                                     </form>
                                     <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies, shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax, stock: Product.detail.inventory}, Product.detail.qty)"
+                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
+                                         shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
+                                          stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice},
+                                           Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
                                             class="btn btn-optional"> <i class="fa fa-shopping-cart"></i>Agregar a carrito
                                     </button>

@@ -121,6 +121,7 @@
             $localStorage.shipmentTotal = 0;
             $localStorage.ship = false;
             $localStorage.taxInverse = 0;
+            delete $localStorage.cart;
 
         };
 
@@ -164,6 +165,9 @@
             self.shipmentPrice = 0;
             self.taxTotal = 0;
             angular.forEach(self.items, function (value, key) {
+                if(parseFloat(value.offerPrice) > 0){
+                    value.price = value.offerPrice;
+                }
                 //first Time calcule
                 if (value.typeTax === 0) {
                     var price = (parseFloat(value.price) / 1.16);
