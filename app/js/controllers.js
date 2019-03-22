@@ -45,6 +45,9 @@
             self.products = results.results;
             //get featureImage
             angular.forEach(self.products, function (obj, ind) {
+                if($rootScope.priceList){
+                    obj.price = obj.priceList;
+                }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 obj.offerPrice = parseFloat(obj.offerPrice);
             });
@@ -70,6 +73,9 @@
             self.productsItem = results.results;
             //get featureImage
             angular.forEach(self.productsItem, function (obj, ind) {
+                if($rootScope.priceList){
+                    obj.price = obj.priceList;
+                }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 obj.offerPrice = parseFloat(obj.offerPrice);
             });
@@ -361,6 +367,9 @@
                         self.listSearch = results.results;
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
+                            if($rootScope.priceList){
+                                obj.price = obj.priceList;
+                            }
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                             obj.offerPrice = parseFloat(obj.offerPrice);
                         });
@@ -584,6 +593,9 @@
             }
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
             console.log(self.detail.offerPrice);
+            if($rootScope.priceList){
+                self.detail.price = self.detail.priceList;
+            }
             $rootScope.post.title = self.detail.name;
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
@@ -646,6 +658,9 @@
                 self.detail.inventory = self.itemFromGroup.inventory;
                 self.detail.description = self.itemFromGroup.description;
                 self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
+                if($rootScope.priceList){
+                    self.detail.price = self.itemFromGroup.priceList;
+                }
                 // get featureImage
                 self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
                 //get galeries
@@ -1036,6 +1051,9 @@
                 params.total(data.count);
                 self.busy = false;
                 angular.forEach(data.results, function (obj, ind) {
+                    if($rootScope.priceList){
+                        obj.price = obj.priceList;
+                    }
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                     obj.offerPrice = parseFloat(obj.offerPrice);
                 });

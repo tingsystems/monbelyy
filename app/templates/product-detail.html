@@ -55,7 +55,8 @@
                                         price: Product.detail.price, image: Product.detail.featuredImage.url,
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
                                          shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
-                                          stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice},
+                                          stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
+                                           priceList: Product.detail.priceList},
                                            Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
                                             class="btn btn-optional"> <i class="fa fa-shopping-cart"></i>Agregar a carrito

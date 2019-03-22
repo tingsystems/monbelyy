@@ -198,6 +198,9 @@
         $rootScope.filterCategory = 'category';
         $rootScope.itemsKind = 'group';
         $rootScope.showWeb = false;
+        $rootScope.priceList = false;
+        $rootScope.multiplePrices = false;
+        $rootScope.multiplePricesConfig = {"limit": 12, "price1":"price", "price2": "priceList"};
 
         var checkStatus = function(){
             MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {

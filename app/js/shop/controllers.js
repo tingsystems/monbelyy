@@ -168,6 +168,18 @@
                 if(parseFloat(value.offerPrice) > 0){
                     value.price = value.offerPrice;
                 }
+                if($rootScope.multiplePrices){
+                    if(!value.priceCopy){
+                        value.priceCopy = angular.copy(value.price);
+                    }
+                    if(value.qty < $rootScope.multiplePricesConfig.limit){
+                        // priceList va a ser price
+                        value.price = value.priceList;
+                    }else{
+                        value.price = value.priceCopy;
+
+                    }
+                }
                 //first Time calcule
                 if (value.typeTax === 0) {
                     var price = (parseFloat(value.price) / 1.16);
