@@ -669,7 +669,6 @@
                 self.detail.description = self.itemFromGroup.description;
                 self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
                 if($rootScope.priceList){
-                    self.detail.price = self.itemFromGroup.priceList;
                     if('priceList' in self.itemFromGroup){
                         self.detail.price = self.itemFromGroup.priceList;
                     }
