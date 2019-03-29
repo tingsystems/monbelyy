@@ -20,7 +20,8 @@
                             <div class="row label-status">
                                 <div class="col-md-3">
                                     <h6>
-                                        <span class="item-number"><strong>Folio: </strong>#{{Purchase.purchase.id}}</span>
+                                        <span class="item-number" ng-if="Purchase.purchase.code"><strong>Folio: </strong>#{{Purchase.purchase.code}}</span>
+                                        <span class="item-number" ng-if="!Purchase.purchase.code"><strong>Folio: </strong>#{{Purchase.purchase.id}}</span>
                                     </h6>
                                 </div>
                                 <div class="col-md-3">
