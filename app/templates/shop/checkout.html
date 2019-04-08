@@ -163,14 +163,16 @@
                     <h4><i class="fa fa-money"></i> Seleccione el método de pago</h4>
                     <hr>
                     <md-radio-group layout="row" ng-model="Payment.orderPaymentType">
-                        <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard">
+                        <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard"
+                                         ng-if="Payment.creditCardMethod">
                             Tarjeta
                         </md-radio-button>
-                        <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal" class="md-primary">
+                        <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal"
+                                         class="md-primary" ng-if="Payment.paypalMethod">
                             Pago con paypal
                         </md-radio-button>
                         <md-radio-button value="6" ng-click="Payment.depositBank=!Payment.depositBank"
-                                         class="md-primary">
+                                         class="md-primary" ng-if="Payment.depositMethod || Payment.depositMethods">
                             Depósito bancario
                         </md-radio-button>
                     </md-radio-group>
@@ -191,7 +193,7 @@
                                         <div class="col-md-6">
                                             <md-input-container md-no-float class="md-block">
                                                 <label>Número de tarjeta</label>
-                                                <input type="text" ng-pattern="/^[0-9]*$/" md-maxlength="18"
+                                                <input type="text" ng-pattern="/^[0-9]*$/" maxlength="18"
                                                        id="cardNumber" data-checkout="cardNumber"
                                                        ng-model="Payment.params.cardNumber" required>
                                             </md-input-container>
@@ -202,7 +204,7 @@
                                                     <div class="col-md-6">
                                                         <md-input-container md-no-float class="md-block">
                                                             <label>Mes</label>
-                                                            <input type="text" md-maxlength="2" ng-pattern="/^[0-9]*$/"
+                                                            <input type="text" maxlength="2" ng-pattern="/^[0-9]*$/"
                                                                    ng-model="Payment.params.month"
                                                                    id="cardExpirationMonth"
                                                                    data-checkout="cardExpirationMonth" required>
@@ -217,7 +219,7 @@
                                                         <md-input-container md-no-float class="md-block"
                                                                             ng-class="{ 'has-error': Form.cardExpiryY.$touched && Form.cardExpiryY.$invalid }">
                                                             <label>Año</label>
-                                                            <input type="text" md-maxlength="4" ng-pattern="/^[0-9]*$/"
+                                                            <input type="text" maxlength="4" ng-pattern="/^[0-9]*$/"
                                                                    ng-model="Payment.params.year"
                                                                    id="cardExpirationYear"
                                                                    data-checkout="cardExpirationYear" required>
@@ -233,7 +235,7 @@
                                             <md-input-container md-no-float class="md-block"
                                                                 ng-class="{ 'has-error': Form.cardCVC.$touched && Form.cardCVC.$invalid }">
                                                 <label>CVC</label>
-                                                <input type="text" md-maxlength="3" ng-pattern="/^[0-9]*$/"
+                                                <input type="text" maxlength="3" ng-pattern="/^[0-9]*$/"
                                                        ng-minlength="3" id="securityCode" data-checkout="securityCode"
                                                        ng-model="Payment.params.cvc" required>
                                             </md-input-container>
@@ -253,9 +255,9 @@
                                                 <button ui-sref="shipping-address" class="btn btn-outline-default">
                                                     Volver a dirección de envío
                                                 </button>
-                                                <button ng-disabled="Form.$invalid || Payment.creditCard"
+                                                <button ng-disabled="Form.$invalid || Payment.busyCreditCard"
                                                         class="btn btn-danger" type="submit">
-                                                    Realizar Pago <span ng-show="Payment.creditCard"><i
+                                                    Realizar Pago <span ng-show="Payment.busyCreditCard"><i
                                                         class="fa fa-spinner fa-spin"></i></span>
                                                 </button>
                                             </div>
@@ -274,11 +276,10 @@
                                     <img src="../../img/paypall.png" alt="" width="200">
                                     <p>Realice su pago, con la facilidad de Paypal.</p>
                                 </div>
-                                <button ng-if="Payment.paypal" class="btn btn-danger"
+                                <button ng-if="!Payment.busyPaypal" class="btn btn-danger"
                                         ng-click="Payment.createOrder()">{{Payment.paypalBtn}}<span
                                         ng-show="Payment.busyPaypal"><i class="fa fa-spinner fa-spin"></i>
                                     </span>
-                                    <div class="md-ripple-container">Procesar pago</div>
                                 </button>
                             </div>
                         </div>
@@ -293,7 +294,7 @@
                                         con <strong>{{ initConfig.branchOffice }}</strong> para finalizar su compra y
                                         realizar el envío.</p>
                                 </div>
-                                <button ng-if="Payment.depositBank" class="btn btn-danger"
+                                <button class="btn btn-danger"
                                         ng-click="Payment.createOrder()">Finalizar compra
                                 </button>
                             </div>

@@ -121,6 +121,7 @@
             $localStorage.shipmentTotal = 0;
             $localStorage.ship = false;
             $localStorage.taxInverse = 0;
+            delete $localStorage.cart;
 
         };
 
@@ -164,6 +165,21 @@
             self.shipmentPrice = 0;
             self.taxTotal = 0;
             angular.forEach(self.items, function (value, key) {
+                if(parseFloat(value.offerPrice) > 0){
+                    value.price = value.offerPrice;
+                }
+                if($rootScope.multiplePrices){
+                    if(!value.priceCopy){
+                        value.priceCopy = angular.copy(value.price);
+                    }
+                    if(value.qty < $rootScope.multiplePricesConfig.limit){
+                        // priceList va a ser price
+                        value.price = value.priceList;
+                    }else{
+                        value.price = value.priceCopy;
+
+                    }
+                }
                 //first Time calcule
                 if (value.typeTax === 0) {
                     var price = (parseFloat(value.price) / 1.16);
@@ -357,6 +373,7 @@
         self.params.customer = self.customer;
         self.sendOptions = "0";
         self.busyAddresses = true;
+        self.addresses = [];
 
         self.getAddresses = function () {
             self.busyAddresses = true;
@@ -406,8 +423,15 @@
                 $localStorage.appData.user.address = data.id;
                 NotificationSrv.success('Domicilio agregado correctamente');
                 self.busy = false;
+                self.addAddress = false;
                 self.formData = {};
-                $state.go('checkout', {shipping: self.sendOptions});
+                self.addresses[0] = data;
+                self.address = data;
+                self.addAddress = false;
+                self.state = null;
+                self.city = null;
+                self.quoteShipment();
+
 
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
@@ -502,6 +526,7 @@
                 self.addAddress = false;
                 self.state = null;
                 self.city = null;
+                self.quoteShipment();
 
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
@@ -578,17 +603,75 @@
         self.shippingOption = angular.copy($stateParams.shipping);
         self.shiping = true;
 
+        var getPaymentType = function (branchOffice) {
+            self.notReady = true;
+            if ('mp' in branchOffice.metadata) {
+                if ('publicKey' in branchOffice.metadata.mp) {
+                    self.creditCardMethod = true;
+                    self.notReady = false;
+                }
+            }
+            if ('paypal' in branchOffice.metadata) {
+                if ('clientId' in branchOffice.metadata.paypal) {
+                    self.paypalMethod = true;
+                    self.notReady = false;
+                }
+            }
+            if ('bankAccount' in branchOffice.metadata) {
+                if ('account' in branchOffice.metadata.bankAccount) {
+                    self.depositMethod = true;
+                    self.notReady = false;
+                }
+            }
+            if ('bankAccounts' in branchOffice.metadata){
+                self.depositMethods = true;
+            }
+
+        };
+
         // get default branch office
         self.getDefaulBranchOffice = function () {
-            if (!user.branchOffices)
+            if (!user.branchOffices) {
+                self.defaultbranchOffice = {"id": null};
                 return;
-            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
-            self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
-            self.branchOffices = user.branchOffices;
-            $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+            }
+            try {
+                self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+
+            } catch (err) {
+                self.defaultbranchOffice = {"id": $localStorage.appData.user.branchId}
+
+            }
+
+            try {
+                self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+
+            }
+            catch (err) {
+                self.defaultWarehouse = {"id": $localStorage.appData.user.warehouseID}
+
+            }
+            try {
+                self.branchOffices = user.branchOffices;
+                $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+
+            }
+            catch (err) {
+                console.log(err)
+            }
+
+            try {
+                publishKey = self.defaultbranchOffice.metadata.mp.publicKey;
+            }
+            catch (err) {
+                publishKey = $localStorage.appData.user.mpPublicKey;
+            }
+
+            getPaymentType(self.defaultbranchOffice);
             return self.defaultbranchOffice;
 
         };
+
         self.getDefaulBranchOffice();
 
         var clearCart = function () {
@@ -740,6 +823,7 @@
         var successResponseHandler = function (status, response) {
             var data = response;
             initialOrder();
+            self.busyCreditCard = true;
             data.payment_method_id = self.params.paymentMethodId;
             delete self.params.year;
             delete self.params.month;
@@ -753,6 +837,7 @@
             data.payment_method_id = self.params.paymentMethodId;
             OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
                 self.creditCard = false;
+                self.busyCreditCard = false;
                 clearCart();
                 NotificationSrv.success('Compra completada correctamente');
                 $state.go('purchase-completed', {orderId: response.id});

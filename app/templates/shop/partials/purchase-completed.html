@@ -98,10 +98,27 @@
                     </div>
                     <hr>
                     <div class="instructionPayment" ng-if="Purchase.purchase.paymentType==6">
-                        <h4>Información de deposito</h4>
-                        <p>Cuenta: {{ Purchase.purchase.metadata.instructionsPayment.account }}</p>
-                        <p>Clabe: {{ Purchase.purchase.metadata.instructionsPayment.clabe}}</p>
-                        <p>Banco: {{ Purchase.purchase.metadata.instructionsPayment.bank}}</p>
+                        <div ng-if="Purchase.purchase.storeInfo.metadata.bankAccount">
+                            <h4>Información de deposito</h4>
+                            <p ng-if="Purchase.purchase.storeInfo.metadata.bankAccount.account">Cuenta: {{ Purchase.purchase.storeInfo.metadata.bankAccount.account }}</p>
+                            <p ng-if="Purchase.purchase.storeInfo.metadata.bankAccount.clabe">Clabe: {{ Purchase.purchase.storeInfo.metadata.bankAccount.clabe }}</p>
+                            <p ng-if="Purchase.purchase.storeInfo.metadata.bankAccount.bank">Banco: {{ Purchase.purchase.storeInfo.metadata.bankAccount.bank }}</p>
+                            <p ng-if="Purchase.purchase.storeInfo.metadata.bankAccount.ownAccount">A nombre de : {{ Purchase.purchase.storeInfo.metadata.bankAccount.ownAccount }}</p>
+                        </div>
+                        <div ng-if="Purchase.purchase.storeInfo.metadata.bankAccounts">
+                            <h4>Información de deposito</h4>
+                            <p>Puedes hacer un deposito a cualquiera de nuestras cuentas de banco.</p>
+                            <div ng-repeat="account in Purchase.purchase.storeInfo.metadata.bankAccounts">
+                                <p ng-if="account.account">Cuenta: {{ account.account }}</p>
+                                <p ng-if="account.clabe">Clabe: {{ account.clabe }}</p>
+                                <p ng-if="account.bank">Banco: {{ account.bank }}</p>
+                                <p ng-if="account.ownAccount">A nombre de : {{ account.ownAccount }}</p>
+                            </div>
+                            <p ng-if="Purchase.purchase.storeInfo.metadata.oxxo"> También puedes hacer una pago en <strong>Oxxo</strong> a nuestra tarjeta <strong>{{Purchase.purchase.storeInfo.metadata.oxxo.card}}</strong>. </p>
+
+                            <p><strong>Nota:</strong> No olvides enviarnos tu comprobante de pago a nuestro correo <strong>{{initConfig.email}} </strong> <span ng-if="Purchase.purchase.storeInfo.metadata.whatsapp"> ó a nuestro número de Whatsapp <strong>{{Purchase.purchase.storeInfo.metadata.whatsapp}}</strong>.</span></p>
+
+                        </div>
                     </div>
                     <div class="payment-mount">
                         <div class="pull-right btn-inv">

@@ -28,45 +28,63 @@
 
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsProducts.showWeb = $rootScope.showWeb;
+        }
         paramsProducts.pageSize = 12;
         paramsProducts.kind = 'group';
         paramsProducts.taxonomies = 'novedades1549313170';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
         }
-        paramsProducts.kind = 'group';
+        paramsProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
             self.products = results.results;
             //get featureImage
             angular.forEach(self.products, function (obj, ind) {
+                if($rootScope.priceList){
+                    if('priceList' in obj){
+                        obj.price = obj.priceList;
+                    }
+
+                }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.offerPrice = parseFloat(obj.offerPrice);
             });
         });
 
         var paramsItemProducts = {};
         paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
         paramsItemProducts.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsItemProducts.showWeb = $rootScope.showWeb;
+        }
         paramsItemProducts.pageSize = 12;
-        paramsItemProducts.kind = 'group';
         paramsItemProducts.ordering = '-createdAt';
         if (list !== '') {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
             paramsItemProducts.priceList = list;
         }
         else {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
         }
-        paramsItemProducts.kind = 'group';
+        paramsItemProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
             self.productsItem = results.results;
             //get featureImage
             angular.forEach(self.productsItem, function (obj, ind) {
+                if($rootScope.priceList){
+                    if('priceList' in obj){
+                        obj.price = obj.priceList;
+                    }
+                }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.offerPrice = parseFloat(obj.offerPrice);
             });
         });
 
@@ -337,23 +355,32 @@
                     self.isPost = false;
                     var list = $localStorage.priceList ? $localStorage.priceList : '';
                     self.params.isActive = 'True';
+                    if($rootScope.showWeb){
+                        self.params.showWeb = $rootScope.showWeb;
+                    }
                     self.params.ordering = '-createdAt';
                     self.params.page = params.page();
                     self.params.pageSize = params.count();
                     self.params.search = self.searchTerm;
                     if (list !== '') {
-                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code';
+                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
                         self.params.priceList = list;
                     }
                     else {
-                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code';
+                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
                     }
-                    self.params.kind = 'group';
+                    self.params.kind = $rootScope.itemsKind;
                     return ProductSrv.get(self.params).$promise.then(function (results) {
                         self.listSearch = results.results;
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
+                            if($rootScope.priceList){
+                                if('priceList' in obj){
+                                    obj.price = obj.priceList;
+                                }
+                            }
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                            obj.offerPrice = parseFloat(obj.offerPrice);
                         });
                         params.total(results.count);
                         self.busy = false;
@@ -549,11 +576,11 @@
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
 
         self.busy = true;
@@ -572,6 +599,13 @@
             if (!self.detail.featuredImage) {
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
+            }
+            self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+            if($rootScope.priceList){
+                if('priceList' in self.detail){
+                    self.detail.price = self.detail.priceList;
+                }
+
             }
             $rootScope.post.title = self.detail.name;
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
@@ -634,6 +668,12 @@
                 self.detail.kind = self.itemFromGroup.kind;
                 self.detail.inventory = self.itemFromGroup.inventory;
                 self.detail.description = self.itemFromGroup.description;
+                self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
+                if($rootScope.priceList){
+                    if('priceList' in self.itemFromGroup){
+                        self.detail.price = self.itemFromGroup.priceList;
+                    }
+                }
                 // get featureImage
                 self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
                 //get galeries
@@ -1001,13 +1041,16 @@
 
             }
             self.params.isActive = 'True';
+            if($rootScope.showWeb){
+                self.params.showWeb = $rootScope.showWeb;
+            }
             self.params.pageSize = 9;
             if (list !== '') {
-                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo';
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
                 self.params.priceList = list;
             }
             else {
-                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo';
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo,offerPrice,expiredOffer';
             }
             if (self.optionSelected) {
                 self.params.ordering = self.optionSelected.option;
@@ -1015,13 +1058,19 @@
             else {
                 self.params.ordering = '-createdAt';
             }
-            self.params.kind = 'group';
+            self.params.kind = $rootScope.itemsKind;
             return ProductSrv.get(self.params).$promise.then(function (data) {
                 params.kind = 'group';
                 params.total(data.count);
                 self.busy = false;
                 angular.forEach(data.results, function (obj, ind) {
+                    if($rootScope.priceList){
+                        if('priceList' in obj){
+                            obj.price = obj.priceList;
+                        }
+                    }
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    obj.offerPrice = parseFloat(obj.offerPrice);
                 });
                 return data.results;
 
@@ -1068,11 +1117,11 @@
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
             paramsProducts.priceList = list;
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
         }
 
         $localStorage.items = self.items;

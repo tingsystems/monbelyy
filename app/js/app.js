@@ -68,8 +68,8 @@
                 data: {pageTitle: ' Lady Paola'},
                 views: {
                     'content': {
-                        templateUrl: '/templates/categories.html',
-                        controllerAs: 'Product',
+                        templateUrl: '/templates/blog.html',
+                        controllerAs: 'Post',
                         controller: 'PostCtrl'
                     }
                 }
@@ -147,7 +147,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -179,7 +179,8 @@
         $rootScope.$state = $state;
         $rootScope.host = 'https://mercadomovil.com.mx';
         // $rootScope.host = 'http://' + $location.host() + ':8000';
-        // $rootScope.host = 'http://192.168.2.101';
+        // $rootScope.host = 'http://192.168.1.77';
+        // $rootScope.host = 'http://api.taki-dev.tingsystems.com';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3';
@@ -194,6 +195,11 @@
         $rootScope.filterSize = false;
         $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
+        $rootScope.itemsKind = 'group';
+        $rootScope.showWeb = false;
+        $rootScope.priceList = false;
+        $rootScope.multiplePrices = false;
+        $rootScope.multiplePricesConfig = {"limit": 12, "price1":"price", "price2": "priceList"};
 
         var checkStatus = function(){
             MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {

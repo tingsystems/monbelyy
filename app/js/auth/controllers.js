@@ -38,7 +38,13 @@
                 $localStorage.appData.user.firstName = data.firstName;
                 self.branchDefault = { branchOffices: [$localStorage.appData.user.branchOffices[0].id] };
                 PriceListSrv.customer({ customers: $localStorage.appData.user.customer }).$promise.then(function (data) {
-                    $localStorage.priceList = data[0].slug;
+                    var list = '';
+                    try {
+                        list = data[0].slug;
+                        $localStorage.priceList = list;
+                    }
+                    catch (err) {
+                    }
                 });
                 // Redirect user here after a successful log in.
                 if (self.itemCount > 0) {
@@ -694,11 +700,65 @@
     }
 
     function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
-        HistoryOrdersSrv, $filter) {
+        HistoryOrdersSrv, $filter, $element) {
         var self = this;
+        self.purchase = {
+            amount: 0,
+            name: '',
+            email: '',
+            phone: '',
+            cardNumber: ''
+        };
         self.busy = false;
         self.isPaypal = false;
+        self.error = false;
         self.PaypalUrl = '';
+        self.DoPayment = false;
+        self.params = {};
+        self.errorMessage = '';
+        var publishKey = '';
+        var setPublishableKey = function () {
+            Mercadopago.setPublishableKey(publishKey);
+        };
+
+        var successResponseHandler = function (status, response) {
+            var data = response;
+            data.payment_method_id = self.purchase.paymentMethodId;
+            $http.defaults.headers.common['PROJECT-ID'] = $stateParams.project;
+            OrdersSrv.paidMP({ dataPayment: data, orderId: self.purchase.id, amount: self.purchase.amount }).$promise.then(function (response) {
+                self.busy = true;
+                $state.go('public.success', { data: response });
+            }, function (error) {
+                NotificationSrv.error('Error al procesar su pago, contacte a ' + self.purchase.storeInfo.businessName);
+                self.busy = false;
+            });
+        };
+
+        var errorResponseHandler = function (error) {
+            var deferred = $q.defer();
+            deferred.promise.then(function (error) {
+                NotificationSrv.error(error.message_to_purchaser);
+            });
+            deferred.resolve(error);
+        };
+
+        var setPaymentMethodInfo = function (status, response) {
+            self.purchase.paymentMethodId = response[0].id;
+        }
+
+        var getBin = function () {
+            Mercadopago.getPaymentMethod({
+                bin: self.purchase.cardNumber
+            }, setPaymentMethodInfo);
+        }
+
+        self.processPaymentCard = function () {
+            self.busy = true;
+            setPublishableKey();
+            getBin();
+            Mercadopago.createToken($element.find('#pay'), successResponseHandler, errorResponseHandler);
+        };
+
         //aditional keys
         var aditionalKey = function (array) {
             if (self.purchase.metadata) {
@@ -734,6 +794,7 @@
                     self.isPaypal = true;
                     self.PaypalUrl = self.purchase.metadata.approvalUrl
                 }
+                publishKey = data.storeInfo.metadata.mp.publicKey;
                 self.purchase.items = aditionalKey(self.purchase.items);
                 getVoucher();
                 getComments(self.purchase);
@@ -814,7 +875,7 @@
         };
 
         CustomerSrv.customerByUser({ id: $localStorage.appData.user.id }).$promise.then(function (data) {
-           self.customer=data;
+            self.customer = data;
         });
 
         self.getData = function (params) {
@@ -840,7 +901,7 @@
                     if (value.paymentType === 9) {
                         self.shipped++;
                     }
-                    if (value.isPaid === 2 || value.isPaid === 1 ) {
+                    if (value.isPaid === 2 || value.isPaid === 1) {
                         self.pending++;
                     }
                     if (value.statusInfo.code !== 4 && value.statusInfo.code !== 6) {
@@ -897,6 +958,6 @@
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
-    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter'];
+    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter', '$element'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage', 'CustomerSrv'];
 })();
