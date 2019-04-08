@@ -9,8 +9,7 @@
                         </div>
                         <hr>
                     </div>
-                    <div class="content-pages" infinite-scroll='Post.getMorePosts()'
-                         infinite-scroll-disabled='Post.busy || !Post.next || Post.loadPosts'>
+                    <div class="content-pages">
                         <div class="row">
                             <div class="box-bordered col-sm-12 box-blog" ng-repeat="entry in Post.list">
                                 <a post-link="{ link: {url: entry.link, target: '_blank'} }"
@@ -38,6 +37,15 @@
                                 <h2 class="text-center no-content" ng-show="!Post.list.length">Lo sentimos no contamos
                                     con
                                     contenido disponible</h2>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12" style="margin-top: 2%" ng-if="!Post.busy && Post.next !== null">
+                                <div class="text-center">
+                                    <button class="btn btn-info" ng-click="Post.getMorePosts()">
+                                        Cargar más
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <!--post list -->
