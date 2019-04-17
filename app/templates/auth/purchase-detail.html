@@ -150,19 +150,23 @@
                                                                 currency}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th style="text-align: right;" colspan="3">Descuento</th>
-                                                            <td>{{Purchase.purchase.promoTotal | currency}}</td>
-                                                        </tr>
-                                                        <tr>
                                                             <th style="text-align: right;" colspan="3">Subtotal</th>
                                                             <td>{{Purchase.purchase.subTotal | currency}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th colspan="3" style="text-align: right;">IVA</th>
+                                                            <th colspan="3" style="text-align: right;">Impuestos</th>
                                                             <td>{{Purchase.purchase.taxTotal | currency}}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th colspan="3" style="text-align: right;">TOTAL</th>
+                                                            <th colspan="3" style="text-align: right;">Envio</th>
+                                                            <td>{{Purchase.purchase.shipmentTotal | currency}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th style="text-align: right;" colspan="3">Descuento</th>
+                                                            <td>{{Purchase.purchase.promoTotal | currency}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: right;">Total</th>
                                                             <td>{{Purchase.purchase.total | currency}}</td>
                                                         </tr>
                                                     </tbody>

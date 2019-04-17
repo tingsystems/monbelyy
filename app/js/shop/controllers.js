@@ -34,6 +34,7 @@
             console.log(err);
         }
 
+
         if ($auth.isAuthenticated()) {
             var user = $localStorage.appData.user;
             self.branchOffice = '';
