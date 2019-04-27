@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="lib/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="lib/ng-table/dist/ng-table.css" />
+    <link rel="stylesheet" href="lib/sweetalert/dist/sweetalert.css" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- inject:css -->
@@ -77,83 +78,7 @@
 <div ui-view="suspended" ng-if="$state.current.name === 'suspended'"></div>
 <div ui-view="building" ng-if="$state.current.name === 'building'"></div>
 <header class="header one-rows-nav" ng-show="!hideIndex">
-    <div class="first-row">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-2 col-sm-2 data-social-media">
-                    <ul class="navbar-nav navbar-expand-lg mobile-hidde">
-                        <li class="nav-item" ng-repeat="social in socialMedia">
-                            <a class="nav-link" href="{{ social.excerpt }}"><span
-                                ng-bind-html="social.content | trustHtml"></span></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6 col-sm-4 mobile-hidde" ng-controller="GetQuerySearchCtrl as Search">
-                    <form name="search" role="search" class="input-search"
-                          ng-submit="Search.globalSearch('product')">
-                        <md-input-container md-no-float>
-                            <input id="validationServerUsername" placeholder="Buscar"
-                                   aria-describedby="inputGroupPrepend3" ng-model="Search.searchTerm" required>
-                            <md-icon class="fa fa-search"></md-icon>
-                        </md-input-container>
-                    </form>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6" ng-controller="AccessCtrl as Access">
-                    <ul class="navbar-nav navbar-expand-lg justify-content-end ">
-                        <li class="nav-item">
-                            <a ui-sref="register({user:true, wholesale:false})" class="nav-link"
-                               ng-if="!Access.isAuthenticated()">
-                                <i class="fa fa-user-circle"></i> Iniciar sesión
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a ng-if="Access.isAuthenticated()" class="nav-link" ui-sref="dashboard">
-                                <i class="fa fa-user-circle"></i> {{user.username}}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://moneek.mx/category/ofertas" class="nav-link text-danger"> <i class="fa fa-gift"></i> Ofertas
-                            </a>
-                        </li>
-                        <li class="nav-item desk-hidde">
-                            <a ui-sref="shopcart" class="shopping-cart nav-link" ng-if="ecommerce"
-                                ng-controller="AccessCtrl as Access">
-                                <span class="qty-cart">{{ items.length }}</span>
-                                <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-dark nav-theme">
-        <div class="container">
-            <a ui-sref="home" class="navbar-brand">
-                <img src="img/logo.png" class="logo" alt="Hanny Pulido Cosméticos">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="fa fa-bars"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                <ul class="navbar-nav justify-content-center">
-                    <li class="nav-item" ng-repeat="item in mainNavMenu">
-                        <a class="nav-link" href="{{ item.link }}" ng-click="nav.close()">{{ item.name }}</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav navbar-expand-lg mobile-hidde" ng-controller="AccessCtrl as Access">
-                    <li>
-                        <a ui-sref="shopcart" class="shopping-cart" ng-if="ecommerce"
-                           ng-controller="AccessCtrl as Access">
-                            <span class="qty-cart">{{ items.length }}</span>
-                            <i class="icon ion-ios-cart"></i><span class="hidden-xs"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <ng-include src="'/templates/partials/header.html'"></ng-include>
 </header>
 
 <div class="content-area-web" ng-show="!hideIndex">
@@ -190,6 +115,7 @@
 <script src="lib/ng-file-upload/ng-file-upload.js"></script>
 <script src="lib/angular-ui-select/dist/select.js"></script>
 <script src="lib/ng-table/dist/ng-table.js"></script>
+<script src="lib/sweetalert/dist/sweetalert.min.js"></script>
 <script src="lib/ngSweetAlert/SweetAlert.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
