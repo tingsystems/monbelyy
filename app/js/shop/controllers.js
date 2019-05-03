@@ -34,6 +34,7 @@
             console.log(err);
         }
 
+
         if ($auth.isAuthenticated()) {
             var user = $localStorage.appData.user;
             self.branchOffice = '';
@@ -821,30 +822,37 @@
         };
 
         var successResponseHandler = function (status, response) {
-            var data = response;
-            initialOrder();
-            self.busyCreditCard = true;
-            data.payment_method_id = self.params.paymentMethodId;
-            delete self.params.year;
-            delete self.params.month;
-            delete self.params.cardNumber;
-            delete self.params.cvc;
-            self.params.store = self.defaultbranchOffice;
-            self.params.customerName = self.params.customer.businessName;
-            self.params.customerEmail = self.params.customer.contactPersonEmail;
-            self.params.customer = self.params.customer.id;
-            data.preOrder = self.params;
-            data.payment_method_id = self.params.paymentMethodId;
-            OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
-                self.creditCard = false;
-                self.busyCreditCard = false;
-                clearCart();
-                NotificationSrv.success('Compra completada correctamente');
-                $state.go('purchase-completed', {orderId: response.id});
-            }, function (error) {
-                NotificationSrv.error('Error al procesar su pago');
-                self.creditCard = false;
-            });
+            if(status === 200){
+                var data = response;
+                initialOrder();
+                self.busyCreditCard = true;
+                data.payment_method_id = self.params.paymentMethodId;
+                delete self.params.year;
+                delete self.params.month;
+                delete self.params.cardNumber;
+                delete self.params.cvc;
+                self.params.store = self.defaultbranchOffice ? self.defaultbranchOffice : $localStorage.appData.user.branchId;
+                self.params.customerName = self.params.customer.businessName;
+                self.params.customerEmail = self.params.customer.contactPersonEmail;
+                self.params.customer = self.params.customer.id;
+                data.preOrder = self.params;
+                data.payment_method_id = self.params.paymentMethodId;
+                OrderSrv.paidMP({dataPayment: data}).$promise.then(function (response) {
+                    self.creditCard = false;
+                    self.busyCreditCard = false;
+                    clearCart();
+                    NotificationSrv.success('Compra completada correctamente');
+                    $state.go('purchase-completed', {orderId: response.id});
+                }, function (error) {
+                    console.log('successResponseHandler error')
+                    NotificationSrv.error('Error al procesar su pago');
+                    self.creditCard = false;
+                    self.busyCreditCard = false;
+                });
+            }
+            else{
+                NotificationSrv.confirm('Por el momento no se puede completar su pago con esta tarjeta, intente más tarde o con una nueva, por favor.');
+            }
         };
 
         var errorResponseHandler = function (error) {
