@@ -698,7 +698,7 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter, $timeout) {
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter, $timeout, $location, $anchorScroll, $scope, ngTableEventsChannel) {
         var self = this;
 
         self.list = [];
@@ -1081,7 +1081,29 @@
             });
         };
 
-        self.tableParams = new NgTableParams({
+        var tableEvents = [];
+
+        function subscribeToTable(tableParams) {
+            var logAfterCreatedEvent = logEvent(tableEvents, "afterCreated");
+            ngTableEventsChannel.onAfterCreated(logAfterCreatedEvent, $scope, $scope.tableParams);
+            var logAfterReloadDataEvent = logEvent(tableEvents, "afterReloadData");
+            ngTableEventsChannel.onAfterReloadData(logAfterReloadDataEvent, $scope, $scope.tableParams);
+        }
+
+        function logEvent(list, name) {
+            var listLocal = list;
+            var nameLocal = name;
+            return function () {
+                console.log(">>>>>>> " + nameLocal);
+                $location.hash('top');
+                $anchorScroll();
+
+            };
+        }
+
+        $scope.$watch("tableParams", subscribeToTable);
+
+        $scope.tableParams = new NgTableParams({
             // default params
             page: 1, // The page number to show
             count: 9 // The number of items to show per page
@@ -1295,7 +1317,7 @@
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
-        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout'];
+        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout', '$location', '$anchorScroll', '$scope', 'ngTableEventsChannel'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
         'SweetAlert', 'ProductSrv', '$mdDialog', '$scope'];
 })();
