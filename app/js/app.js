@@ -200,7 +200,9 @@
         $rootScope.showWeb = false;
         $rootScope.priceList = false;
         $rootScope.multiplePrices = false;
-        $rootScope.multiplePricesConfig = {"limit": 12, "price1":"price", "price2": "priceList"};
+        //cambiar el slug de las listas
+        $rootScope.multiplePricesConfig = {"limit": 12, "prices" : {"price":"mayoreo1553209226",
+            "priceList": "menudeo"}};
 
         var checkStatus = function(){
             MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {

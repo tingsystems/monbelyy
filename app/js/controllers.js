@@ -35,7 +35,14 @@
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
-            paramsProducts.priceList = list;
+            if($rootScope.multiplePrices){
+                paramsProducts.priceList = '';
+
+            }else{
+                paramsProducts.priceList = list;
+
+            }
+
         }
         else {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -66,7 +73,13 @@
         paramsItemProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
-            paramsItemProducts.priceList = list;
+            if($rootScope.multiplePrices){
+                paramsItemProducts.priceList = '';
+
+            }else {
+                paramsItemProducts.priceList = list;
+            }
+
         }
         else {
             paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -575,7 +588,12 @@
         paramsProducts.isActive = 'True';
         if (list !== '') {
             paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
-            paramsProducts.priceList = list;
+            if($rootScope.multiplePrices){
+                paramsProducts.priceList = '';
+
+            }else {
+                paramsProducts.priceList = list;
+            }
         }
         else {
             paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
@@ -599,7 +617,6 @@
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
-            console.log(self.detail.offerPrice);
             if($rootScope.priceList){
                 if('priceList' in self.detail){
                     self.detail.price = self.detail.priceList;

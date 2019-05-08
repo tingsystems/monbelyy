@@ -175,10 +175,19 @@
                     }
                     if(value.qty < $rootScope.multiplePricesConfig.limit){
                         // priceList va a ser price
-                        value.price = value.priceList;
+                        angular.forEach(value.prices, function (obj) {
+                            if($rootScope.multiplePricesConfig.prices['priceList'] === obj.slug){
+                                value.price = obj.price;
+                            }
+                        })
                     }else{
                         value.price = value.priceCopy;
-
+                        angular.forEach(value.prices, function (obj) {
+                            console.log(obj);
+                            if($rootScope.multiplePricesConfig.prices['price'] === obj.slug){
+                                value.price = obj.price;
+                            }
+                        })
                     }
                 }
                 //first Time calcule
