@@ -230,8 +230,8 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
-            img_default: '../../img/img-default.jpg',
-            logo: '../../img/logo.png',
+            img_default: '../img/img-default.jpg',
+            logo: '../img/logo.png',
             email: 'ventas@moneek.mx',
             phone: '4531076764',
             branchOffice: 'Moneek - Venta de ropa, calzado y accesorios para Dama'
@@ -410,9 +410,9 @@
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
-        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app',
-        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload'])
+        'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI', 'duScroll', 'truncate', 'ngTouch', 'ngStorage',
+        'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select',
+        'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload','wipImageZoom'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)

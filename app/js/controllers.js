@@ -604,18 +604,40 @@
             self.parent = results.id;
             self.detail = results;
             self.detail.galleryImages = [];
+            self.detail.optionsZoom = {
+                zoomEnable          : true,
+                defaultIndex        : 0, // Order of the default selected Image
+                images              : [],
+                style               : 'box', // inner or box
+                boxPos              : 'right-top', // e.g., right-top, right-middle, right-bottom, top-center, top-left, top-right ...
+                boxW                : 300, // Box width
+                boxH                : 300, // Box height
+                method              : 'lens', // fallow 'lens' or 'pointer'
+                cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
+                lens                : true, // Lens toggle
+                zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                immersiveModeOptions: {}, // can extend immersed mode options
+                immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                prevThumbButton     : '&#9665;', // Prev thumb button (html)
+                nextThumbButton     : '&#9655;', // Next thumb button (html)
+                thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
+                thumbCol            : 3, // Thumb column count
+                thumbColPadding     : 4 // Padding between thumbs
+            };
             // get featureImage
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
-            // add gallery image and featured image
-            // self.detail.galleryImages.push(self.detail.featuredImage);
-            //get galeries
-            angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
-                self.detail.galleryImages.push(value);
-            });
             if (!self.detail.featuredImage) {
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
+            // add gallery image and featured image
+            self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
+            //get galeries
+            angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
+                self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
+            });
+
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
             if($rootScope.priceList){
                 if('priceList' in self.detail){
@@ -629,34 +651,6 @@
             self.busy = false;
             self.detail.qty = 1;
         });
-
-        /* Carousel slider */
-        self.owlOptionProduct = {
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            navigation: true,
-            //pagination: false,
-            autoplay: true,
-            items: 1,
-            autoplayHoverPause:true,
-            autoplayTimeout:5000,
-            margin: 0,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1,
-                    nav: true
-                },
-                600: {
-                    items: 1,
-                    nav: false
-                },
-                1000: {
-                    items: 1,
-                    nav: true,
-                    loop: true
-                }
-            }
-        };
 
         self.getProductFromGroup = function () {
             var taxonomies = [];
