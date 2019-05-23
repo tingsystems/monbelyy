@@ -31,7 +31,7 @@
         if($rootScope.showWeb){
             paramsProducts.showWeb = $rootScope.showWeb;
         }
-        paramsProducts.pageSize = 12;
+        paramsProducts.pageSize = $rootScope.itemsByPage;
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -69,7 +69,7 @@
         if($rootScope.showWeb){
             paramsItemProducts.showWeb = $rootScope.showWeb;
         }
-        paramsItemProducts.pageSize = 12;
+        paramsItemProducts.pageSize = $rootScope.itemsByPage;
         paramsItemProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -198,7 +198,7 @@
             EntrySrv.get({
                 taxonomies: $stateParams.slug,
                 isActive: 'True',
-                pageSize: 9,
+                pageSize: $rootScope.itemsByPage,
                 fields: 'attachments,title,slug,excerpt,createdAt',
                 ordering: '-createdAt',
                 page: self.page
@@ -244,7 +244,7 @@
                 taxonomies: 'blog1543005663',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
-                pageSize: 9,
+                pageSize: $rootScope.itemsByPage,
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -404,7 +404,7 @@
                         kind: 'post',
                         isActive: 'True',
                         fields: 'attachments,title,link,slug,excerpt',
-                        pageSize: 9,
+                        pageSize: $rootScope.itemsByPage,
                         ordering: '-createdAt',
                         search: self.searchTerm,
                         page: self.page
@@ -452,7 +452,7 @@
         $scope.tableParams = new NgTableParams({
             // default params
             page: 1, // The page number to show
-            count: 9 // The number of items to show per page
+            count: $rootScope.itemsByPage // The number of items to show per page
         }, {
             // default settings
             // page size buttons (right set of buttons in demo)
@@ -812,7 +812,7 @@
             self.sizes = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 10,
+                pageSize: $rootScope.itemsByPage,
                 fields: 'id,slug,name',
                 search: self.searchTerSize,
                 kind: self.filterSize
@@ -845,7 +845,7 @@
             self.types = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 10,
+                pageSize: $rootScope.itemsByPage,
                 fields: 'id,slug,name',
                 search: self.searchTerType,
                 kind: self.filterType
@@ -1054,7 +1054,7 @@
             if($rootScope.showWeb){
                 self.params.showWeb = $rootScope.showWeb;
             }
-            self.params.pageSize = 9;
+            self.params.pageSize = $rootScope.itemsByPage;
             if (list !== '') {
                 self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
                 self.params.priceList = list;
@@ -1117,7 +1117,7 @@
         $scope.tableParams = new NgTableParams({
             // default params
             page: 1, // The page number to show
-            count: 9 // The number of items to show per page
+            count: $rootScope.itemsByPage // The number of items to show per page
         }, {
             // default settings
             // page size buttons (right set of buttons in demo)

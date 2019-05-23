@@ -203,6 +203,7 @@
         //cambiar el slug de las listas
         $rootScope.multiplePricesConfig = {"limit": 12, "prices" : {"price":"mayoreo1553209226",
             "priceList": "menudeo"}};
+        $rootScope.itemsByPage = 12;
 
         var checkStatus = function(){
             MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {
