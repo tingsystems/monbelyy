@@ -924,7 +924,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            $scope.tableParams.reload();
         };
 
         self.getProductsSize = function () {
@@ -954,7 +954,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            $scope.tableParams.reload();
 
         };
 
@@ -985,7 +985,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            $scope.tableParams.reload();
 
 
         };
@@ -1006,7 +1006,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            $scope.tableParams.reload();
 
 
         };
@@ -1018,7 +1018,7 @@
             }
             self.catSelected = null;
             self.taxCat = [];
-            self.tableParams.reload();
+            $scope.tableParams.reload();
 
         };
 
@@ -1136,7 +1136,7 @@
             self.sizeSelected = false;
             self.typeSelected = false;
             self.taxonomies = [];
-            self.tableParams.reload();
+            $scope.tableParams.reload();
 
         }
     }
