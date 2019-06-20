@@ -144,6 +144,17 @@
                         templateUrl: '/templates/building.html'
                     }
                 }
+            })
+            .state('referrer', {
+                url: '/ref/seller/:project/:seller',
+                data: {pageTitle: ' Moneek'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/home.html',
+                        controllerAs: 'Home',
+                        controller: 'HomeCtrl'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');

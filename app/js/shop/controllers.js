@@ -822,6 +822,9 @@
                 self.params.metadata.getShop = $localStorage.appData.getShop
             }
             self.params.metadata.sendInvoice = self.isInvoiced;
+            if($localStorage.appData.ref){
+                self.params.seller = $localStorage.appData.ref;
+            }
         };
 
 

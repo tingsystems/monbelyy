@@ -1,12 +1,15 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage) {
+    function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage, $stateParams) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         self.active = 0;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
+        if($stateParams.seller){
+            $localStorage.refSeller = $stateParams.seller;
+        }
 
         $rootScope.toggleSidebar = function () {
             $rootScope.visible = !$rootScope.visible;
@@ -1315,7 +1318,7 @@
         .controller('ShoppingCtrl', ShoppingCtrl);
 
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage'];
+    HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage', '$stateParams'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];

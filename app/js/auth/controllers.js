@@ -36,6 +36,10 @@
             CustomerSrv.customerByUser({ id: self.idUser }).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
+                if(data.sellers.length){
+                    $localStorage.appData.ref = data.sellers[0];
+                }
+
                 self.branchDefault = { branchOffices: [$localStorage.appData.user.branchOffices[0].id] };
                 PriceListSrv.customer({ customers: $localStorage.appData.user.customer }).$promise.then(function (data) {
                     var list = '';
@@ -106,6 +110,7 @@
                         $localStorage.taxTotal = 0;
                         $localStorage.promoTotal = 0;
                         $localStorage.shipmentTotal = 0;
+                        delete $localStorage.appData.ref;
                         // Desconectamos al usuario y lo redirijimos
                         if ($state.current.name !== 'register') {
                             NotificationSrv.success("Te esperamos pronto", $rootScope.initConfig.branchOffice);
@@ -143,10 +148,14 @@
             account.dataAddress = address;
             account.city = self.city.id;
             account.state = self.state.id;
+            if($localStorage.refSeller){
+                account.sellers = [$localStorage.refSeller]
+            }
             RegisterSrv.save(account).$promise.then(function (data) {
                 NotificationSrv.success('Cuenta creada correctamente', "Ya falto poco para pertenecer a", $rootScope.initConfig.branchOffice);
                 self.busy = false;
                 self.formData = {};
+                delete $localStorage.refSeller;
                 $state.go('success');
             }, function (error) {
                 angular.forEach(error.data, function (key, value) {
