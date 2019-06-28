@@ -682,31 +682,56 @@
                 self.detail.inventory = self.itemFromGroup.inventory;
                 self.detail.description = self.itemFromGroup.description;
                 self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
+                self.detail.optionsZoom = {
+                    zoomEnable          : true,
+                    defaultIndex        : 0, // Order of the default selected Image
+                    images              : [],
+                    style               : 'box', // inner or box
+                    boxPos              : 'right-top', // e.g., right-top, right-middle, right-bottom, top-center, top-left, top-right ...
+                    boxW                : 300, // Box width
+                    boxH                : 300, // Box height
+                    method              : 'lens', // fallow 'lens' or 'pointer'
+                    cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
+                    lens                : true, // Lens toggle
+                    zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                    immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                    immersiveModeOptions: {}, // can extend immersed mode options
+                    immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                    prevThumbButton     : '&#9665;', // Prev thumb button (html)
+                    nextThumbButton     : '&#9655;', // Next thumb button (html)
+                    thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
+                    thumbCol            : 3, // Thumb column count
+                    thumbColPadding     : 4 // Padding between thumbs
+                };
                 if($rootScope.priceList){
                     if('priceList' in self.itemFromGroup){
                         self.detail.price = self.itemFromGroup.priceList;
                     }
                 }
-                // get featureImage
-                self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
-                //get galeries
-                self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
 
                 if (!self.detail.featuredImage) {
                     self.detail.featuredImage = {};
                     self.detail.featuredImage.url = $rootScope.initConfig.img_default;
                 }
 
+                // add gallery image and featured image
+                self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
+                //get galeries
+                angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
+                    self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
+                });
+
+                self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+                if($rootScope.priceList){
+                    if('priceList' in self.detail){
+                        self.detail.price = self.detail.priceList;
+                    }
+                }
+
                 $rootScope.post = self.itemFromGroup;
                 $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                 self.busy = false;
                 self.detail.qty = 1;
-                $rootScope.$broadcast('owlCarousel.changeStart');
-                $timeout(function(){
-                    self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
-                    // notify the carousel that data is changed
-                    $rootScope.$broadcast('owlCarousel.changeEnd');
-                });
             });
         };
 
