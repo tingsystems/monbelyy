@@ -32,7 +32,7 @@
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
         if($rootScope.showWeb){
-            paramsProducts.showWeb = $rootScope.showWeb;
+            paramsProducts.showWeb = 'True';
         }
         paramsProducts.pageSize = $rootScope.itemsByPage;
         paramsProducts.ordering = '-createdAt';
@@ -70,7 +70,7 @@
         paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
         paramsItemProducts.isActive = 'True';
         if($rootScope.showWeb){
-            paramsItemProducts.showWeb = $rootScope.showWeb;
+            paramsItemProducts.showWeb = 'True';
         }
         paramsItemProducts.pageSize = $rootScope.itemsByPage;
         paramsItemProducts.ordering = '-createdAt';
@@ -370,7 +370,7 @@
                     var list = $localStorage.priceList ? $localStorage.priceList : '';
                     self.params.isActive = 'True';
                     if($rootScope.showWeb){
-                        self.params.showWeb = $rootScope.showWeb;
+                        self.params.showWeb = 'True';
                     }
                     self.params.ordering = '-createdAt';
                     self.params.page = params.page();
@@ -666,7 +666,7 @@
                 parent: self.parent,
                 taxonomies: taxonomiesJoin,
                 fields: paramsProducts.fields,
-                priceList: list
+                priceList: paramsProducts.priceListlist
 
             };
             ProductSrv.group(paramsItemGroup).$promise.then(function (results) {
@@ -1080,7 +1080,7 @@
             }
             self.params.isActive = 'True';
             if($rootScope.showWeb){
-                self.params.showWeb = $rootScope.showWeb;
+                self.params.showWeb = 'True';
             }
             self.params.pageSize = $rootScope.itemsByPage;
             if (list !== '') {
