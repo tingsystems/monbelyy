@@ -347,7 +347,7 @@
     }
 
     function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage, $rootScope, NgTableParams, $scope,
-                        ngTableEventsChannel, $location, $anchorScroll) {
+                        ngTableEventsChannel, $location, $anchorScroll, PagerService, $state) {
         var self = this;
 
         self.listSearch = [];
@@ -356,14 +356,42 @@
         self.isPost = true;
         self.params = {ordering: 'name'};
 
-        self.getData = function (params) {
-            var sorting = '-createdAt';
-            // parser for ordering params
-            angular.forEach(params.sorting(), function (value, key) {
-                sorting = value === 'desc' ? '-' + key : key;
-            });
-            self.busy = true;
+        // init for pagination and ordering
+        self.totalResults = 0;
+        self.next = null;
+        self.previous = null;
+        self.numberPages = 1;
+        self.pageSizes = [
+            { 'id': '0', 'name': '12', 'size': 12 },
+            { 'id': '1', 'name': '24', 'size': 24 },
+            { 'id': '1', 'name': '36', 'size': 36 },
+            { 'id': '2', 'name': '64', 'size': 64 },
+            { 'id': '3', 'name': '128', 'size': 128 }
+        ];
+        self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
+            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        self.sorterOptionSelect = self.filterOrderingOptions[0];
+        self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
+        self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;
+        angular.forEach(self.pageSizes, function (obj) {
+            if (obj.size === self.pageSize) {
+                self.pageSizesSelect = obj;
+            }
+        });
+        self.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+        angular.forEach(self.filterOrderingOptions, function (obj) {
+            if (obj.property === self.ordering) {
+                self.optionSelected = obj;
+            }
+        });
+        self.pager = {};
+        self.setPage = setPage;
 
+        self.getData = function () {
+            self.params.page = self.page;
+            self.params.pageSize = $stateParams.pageSize ? $stateParams.pageSize : self.pageSize;
+            self.params.ordering = '-createdAt';
+            self.busy = true;
             if ($stateParams.q) {
                 if (self.kindTerm === 'product') {
                     self.isPost = false;
@@ -372,9 +400,6 @@
                     if($rootScope.showWeb){
                         self.params.showWeb = 'True';
                     }
-                    self.params.ordering = '-createdAt';
-                    self.params.page = params.page();
-                    self.params.pageSize = params.count();
                     self.params.search = self.searchTerm;
                     if (list !== '') {
                         self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
@@ -384,8 +409,10 @@
                         self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
                     }
                     self.params.kind = $rootScope.itemsKind;
-                    return ProductSrv.get(self.params).$promise.then(function (results) {
-                        self.listSearch = results.results;
+                    ProductSrv.get(self.params).$promise.then(function (results) {
+                        self.totalResults = results.count;
+                        self.next = results.next;
+                        self.previous = results.previous;
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
                             if($rootScope.priceList){
@@ -396,77 +423,51 @@
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                             obj.offerPrice = parseFloat(obj.offerPrice);
                         });
-                        params.total(results.count);
                         self.busy = false;
-                        return results.results
+                        self.listSearch = results.results;
+                        self.setPage(self.page);
                     });
 
                 }
                 else {
-                    return EntrySrv.get({
+                    EntrySrv.get({
                         kind: 'post',
                         isActive: 'True',
                         fields: 'attachments,title,link,slug,excerpt',
-                        pageSize: $rootScope.itemsByPage,
+                        pageSize: self.params.pageSize,
                         ordering: '-createdAt',
                         search: self.searchTerm,
-                        page: self.page
+                        page: self.params.page
                     }).$promise.then(function (results) {
-                        self.listSearch = results.results;
+                        self.totalResults = results.count;
+                        self.next = results.next;
+                        self.previous = results.previous;
+
                         self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                         });
-                        params.total(results.count);
                         self.busy = false;
-                        return results.results;
+                        self.listSearch = results.results;
+                        self.setPage(self.page);
                     });
 
                 }
             }
         };
 
-        var tableEvents = [];
+        self.getData();
 
-        function subscribeToTable(tableParams) {
-            var logAfterCreatedEvent = logEvent(tableEvents, "afterCreated");
-            ngTableEventsChannel.onAfterCreated(logAfterCreatedEvent, $scope, $scope.tableParams);
-            var logAfterReloadDataEvent = logEvent(tableEvents, "afterReloadData");
-            ngTableEventsChannel.onAfterReloadData(logAfterReloadDataEvent, $scope, $scope.tableParams);
+        function setPage(page) {
+            if (page < 1 || page > self.pager.totalPages) {
+                return;
+            }
+            // get pager object from service
+            self.pager = PagerService.GetPager(self.totalResults, page, self.pageSize);
+            // get current page of items
+            $state.go('.', {q:self.searchTerm, kind: self.kindTerm , page: parseInt(page), pageSize: self.pageSize, ordering: self.optionSelected.property});
         }
-
-        function logEvent(list, name) {
-            var listLocal = list;
-            var nameLocal = name;
-            return function () {
-                console.log(">>>>>>> " + nameLocal);
-
-                $location.hash('top');
-
-                // call $anchorScroll()
-                $anchorScroll();
-
-            };
-        }
-
-        $scope.$watch("tableParams", subscribeToTable);
-
-        $scope.tableParams = new NgTableParams({
-            // default params
-            page: 1, // The page number to show
-            count: $rootScope.itemsByPage // The number of items to show per page
-        }, {
-            // default settings
-            // page size buttons (right set of buttons in demo)
-            counts: [],
-            // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13,
-            paginationMinBlocks: 2,
-            getData: self.getData
-        });
-
-
     }
 
     function NavBarCtrl() {
@@ -737,12 +738,12 @@
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter, $timeout, $location, $anchorScroll, $scope, ngTableEventsChannel) {
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams,
+                                    $rootScope, $localStorage, $filter, $timeout, $location, $anchorScroll, $scope,
+                                    ngTableEventsChannel, $state, PagerService) {
         var self = this;
 
         self.list = [];
-        self.page = 0;
-        self.next = true;
         self.busy = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -769,9 +770,36 @@
         self.filterSize = $rootScope.filterSize ? $rootScope.filterSize : 'MEDIDA';
         self.filterCategory = $rootScope.filterCategory ? $rootScope.filterCategory : 'Tipo';
         var timeout = $timeout;
-        self.filterOrderingOptions = [{'option': 'name', 'name': 'Alfabeticamente de A-Z'},
-            {'option': 'price', 'name': 'Precio menor'}, {'option': '-price', 'name': 'Precio mayor'}];
-
+        // init for pagination and ordering
+        self.totalResults = 0;
+        self.next = null;
+        self.previous = null;
+        self.numberPages = 1;
+        self.pageSizes = [
+            { 'id': '0', 'name': '12', 'size': 12 },
+            { 'id': '1', 'name': '24', 'size': 24 },
+            { 'id': '1', 'name': '36', 'size': 36 },
+            { 'id': '2', 'name': '64', 'size': 64 },
+            { 'id': '3', 'name': '128', 'size': 128 }
+        ];
+        self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
+            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        self.sorterOptionSelect = self.filterOrderingOptions[0];
+        self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
+        self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;
+        angular.forEach(self.pageSizes, function (obj) {
+            if (obj.size === self.pageSize) {
+                self.pageSizesSelect = obj;
+            }
+        });
+        self.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+        angular.forEach(self.filterOrderingOptions, function (obj) {
+            if (obj.property === self.ordering) {
+                self.optionSelected = obj;
+            }
+        });
+        self.pager = {};
+        self.setPage = setPage;
         // get post by category
         if ($stateParams.slug) {
             ProductTaxonomySrv.get({
@@ -952,7 +980,7 @@
                 }
             }
 
-            $scope.tableParams.reload();
+            self.getData();
         };
 
         self.getProductsSize = function () {
@@ -982,7 +1010,7 @@
                 }
             }
 
-            $scope.tableParams.reload();
+            self.getData();
 
         };
 
@@ -1013,7 +1041,7 @@
                 }
             }
 
-            $scope.tableParams.reload();
+            self.getData();
 
 
         };
@@ -1034,7 +1062,7 @@
                 }
             }
 
-            $scope.tableParams.reload();
+            self.getData();
 
 
         };
@@ -1051,14 +1079,11 @@
         };
 
 
-        self.getData = function (params) {
-            var sorting = '-createdAt';
-            // parser for ordering params
-            angular.forEach(params.sorting(), function (value, key) {
-                sorting = value === 'desc' ? '-' + key : key;
-            });
-            self.params.page = params.page();
-            self.params.pageSize = params.count();
+        self.getData = function () {
+            self.params.page = self.page;
+            self.params.pageSize = $stateParams.pageSize ? $stateParams.pageSize : self.pageSize;
+            self.params.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+            self.params.search = $stateParams.search ? $stateParams.search : self.globalSearchTerm;
             self.busy = true;
             if (self.taxonomies.length > 0) {
                 if($rootScope.taxnomySearch){
@@ -1082,7 +1107,6 @@
             if($rootScope.showWeb){
                 self.params.showWeb = 'True';
             }
-            self.params.pageSize = $rootScope.itemsByPage;
             if (list !== '') {
                 self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
                 self.params.priceList = list;
@@ -1097,11 +1121,12 @@
                 self.params.ordering = '-createdAt';
             }
             self.params.kind = $rootScope.itemsKind;
-            return ProductSrv.get(self.params).$promise.then(function (data) {
-                params.kind = 'group';
-                params.total(data.count);
+            ProductSrv.get(self.params).$promise.then(function (data) {
+                self.totalResults = data.count;
+                self.next = data.next;
+                self.previous = data.previous;
                 self.busy = false;
-                angular.forEach(data.results, function (obj, ind) {
+                angular.forEach(data.results, function (obj) {
                     if($rootScope.priceList){
                         if('priceList' in obj){
                             obj.price = obj.priceList;
@@ -1110,8 +1135,8 @@
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                     obj.offerPrice = parseFloat(obj.offerPrice);
                 });
-                return data.results;
-
+                self.items = data.results;
+                self.setPage(self.page);
             }, function (error) {
                 angular.forEach(error, function (value, key) {
                     NotificationSrv.error(value + '' + key);
@@ -1120,41 +1145,26 @@
             });
         };
 
-        var tableEvents = [];
+        self.getData();
 
-        function subscribeToTable(tableParams) {
-            var logAfterCreatedEvent = logEvent(tableEvents, "afterCreated");
-            ngTableEventsChannel.onAfterCreated(logAfterCreatedEvent, $scope, $scope.tableParams);
-            var logAfterReloadDataEvent = logEvent(tableEvents, "afterReloadData");
-            ngTableEventsChannel.onAfterReloadData(logAfterReloadDataEvent, $scope, $scope.tableParams);
+        // funciones para controlar las acciones de la paginacion y ordenamiento
+        self.orderingChange = function () {
+            $state.go('.', {ordering: self.optionSelected.property, page: 1, pageSize: self.pageSize });
+        };
+        self.changePageSize = function () {
+            self.pageSize = self.pageSizesSelect.size;
+            $state.go('.', {page: 1, pageSize: self.pageSize, ordering: self.optionSelected.property});
+        };
+
+        function setPage(page) {
+            if (page < 1 || page > self.pager.totalPages) {
+                return;
+            }
+            // get pager object from service
+            self.pager = PagerService.GetPager(self.totalResults, page, self.pageSize);
+            // get current page of items
+            $state.go('.', {page: parseInt(page), pageSize: self.pageSize, ordering: self.optionSelected.property});
         }
-
-        function logEvent(list, name) {
-            var listLocal = list;
-            var nameLocal = name;
-            return function () {
-                console.log(">>>>>>> " + nameLocal);
-                $location.hash('top');
-                $anchorScroll();
-
-            };
-        }
-
-        $scope.$watch("tableParams", subscribeToTable);
-
-        $scope.tableParams = new NgTableParams({
-            // default params
-            page: 1, // The page number to show
-            count: $rootScope.itemsByPage // The number of items to show per page
-        }, {
-            // default settings
-            // page size buttons (right set of buttons in demo)
-            counts: [],
-            // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13,
-            paginationMinBlocks: 2,
-            getData: self.getData
-        });
 
         self.deleteFilters = function () {
             self.catSelected = false;
@@ -1350,13 +1360,14 @@
     ContactCtrl.$inject = ['NotificationTakiSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$state'];
     SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage', '$rootScope',
-        'NgTableParams', '$scope', 'ngTableEventsChannel', '$location', '$anchorScroll'];
+        'NgTableParams', '$scope', 'ngTableEventsChannel', '$location', '$anchorScroll', 'PagerService', '$state'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
     ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
-        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout', '$location', '$anchorScroll', '$scope', 'ngTableEventsChannel'];
+        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout', '$location', '$anchorScroll', '$scope',
+        'ngTableEventsChannel', '$state', 'PagerService'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
         'SweetAlert', 'ProductSrv', '$mdDialog', '$scope'];
 })();

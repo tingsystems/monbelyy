@@ -15,8 +15,8 @@
         </div>
     </section>
     <section class="content-area">
-        <div class="container" loading-container="tableParams.settings().$loading" id="top">
-            <div class="row" ng-table="tableParams" show-filter="false">
+        <div class="container" id="top">
+            <div class="row">
                 <div class="col-sm-3">
                     <div class="box-widget-white ng-scope">
                         <div class="box-widget-container">
@@ -147,7 +147,7 @@
                                                    ng-model="Product.optionSelected"
                                                    data-md-container-class="selectdemoSelectHeader"
                                                    name="options"
-                                                   ng-change="tableParams.reload(Product.selectFilter   )"
+                                                   ng-change="Product.orderingChange()"
                                                    aria-label="Opciones de ordenamiento">
                                             <md-option ng-value="option"
                                                        ng-repeat="option in Product.filterOrderingOptions">
@@ -156,12 +156,25 @@
                                         </md-select>
                                     </md-input-container>
                                 </div>
+                                <div class="col-sm-2">
+                                    <md-input-container>
+                                        <label>Número de resultados</label>
+                                        <md-select ng-model="Product.pageSizesSelect"
+                                                   style="min-width: 100px;"
+                                                   ng-change="Product.changePageSize()"
+                                                   data-md-container-class="selectdemoSelectHeader" aria-label="size">
+                                            <md-option ng-value="size" ng-repeat="size in Product.pageSizes">{{size.name}}
+                                            </md-option>
+                                        </md-select>
+
+                                    </md-input-container>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="container" ng-controller="ShoppingCtrl as Shop">
                         <div class="row">
-                            <div class="col-sm-4" ng-repeat="product in $data">
+                            <div class="col-sm-4" ng-repeat="product in Product.items">
                                 <ng-include src="'/templates/partials/box-product.html'" ng-if="!Product.isPost"></ng-include>
                                 <div class="box-prod" ng-if="Product.isPost">
                                     <a ui-sref="post_detail({slug:product.slug})">
@@ -176,17 +189,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="hide">
-                    <table>
-                        <tbody>
-                        <tr ng-repeat="order in $data">
-                            <td>{{ order.name }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
             <!--post list -->
+            <!-- pagination -->
+            <div class="ng-table-pager">
+                <ul ng-if="Product.pager.pages.length" class="pagination">
+                    <li ng-class="{disabled:Product.pager.currentPage === 1}">
+                        <a ng-click="Product.setPage(1)">Primera</a>
+                    </li>
+                    <li ng-class="{disabled:Product.pager.currentPage === 1}">
+                        <a ng-click="Product.setPage(Product.pager.currentPage - 1)">Anterior</a>
+                    </li>
+                    <li ng-repeat="page in Product.pager.pages" ng-class="{active:Product.pager.currentPage === page}">
+                        <a ng-click="Product.setPage(page)">{{page}}</a>
+                    </li>
+                    <li ng-class="{disabled:Product.pager.currentPage === Product.pager.totalPages}">
+                        <a ng-click="Product.setPage(Product.pager.currentPage + 1)">Siguiente</a>
+                    </li>
+                    <li ng-class="{disabled:Product.pager.currentPage === Product.pager.totalPages}">
+                        <a ng-click="Product.setPage(Product.pager.totalPages)">Última</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 </div>

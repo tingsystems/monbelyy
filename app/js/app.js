@@ -75,21 +75,24 @@
                 }
             })
             .state('category', {
-                url: '/category/:slug',
+                url: '/category/:slug?page&pageSize&ordering&search',
                 data: {pageTitle: ' Moneek'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
                         controllerAs: 'Product',
-                        controller: 'ProductsByCategoryCtrl'
+                        controller: 'ProductsByCategoryCtrl',
+                        params: {page: null, pageSize: null, sort: null, search: null}
                     }
                 }
             })
             .state('search', {
-                url: '/busqueda?q&kind',
+                url: '/busqueda?q&kind&page&pageSize',
                 params: {
                     q: null,
-                    kind: null
+                    kind: null,
+                    page: null,
+                    pageSize: null
                 },
                 views: {
                     'content': {
