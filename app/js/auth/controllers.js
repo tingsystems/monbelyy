@@ -31,6 +31,11 @@
         self.saveSession = function (response) {
             // save user info to local storage
             $localStorage.appData = { user: angular.copy(response.data.user) };
+            $localStorage.appData.token = {
+                expires_in: response.data.expires_in, token_type: response.data.token_type,
+                refresh_token: response.data.refresh_token, scope: response.data.scope,
+                user_last_login: Math.round((new Date().getTime() / 1000))
+            };
             $rootScope.user = $localStorage.appData.user;
             self.idUser = $localStorage.appData.user.id;
             CustomerSrv.customerByUser({ id: self.idUser }).$promise.then(function (data) {
