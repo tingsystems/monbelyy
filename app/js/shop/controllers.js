@@ -254,7 +254,7 @@
                 angular.forEach(self.items, function (obj, ind) {
                     items[ind] = {
                         id: obj.id,
-                        qty: obj.qty,
+                        qty: parseInt(obj.qty),
                         promotion: parseFloat(obj.discount.discount),
                         price: parseFloat(obj.price)
                     };
@@ -566,6 +566,12 @@
                         $localStorage.shipmentTotal = data.shipmentCost;
                         $localStorage.total = data.total;
                         $rootScope.$emit('newTotals', {data: false});
+                        if('retailShipment' in branchOffice.metadata){
+                            var retailShipment = parseFloat(branchOffice.metadata.retailShipment)
+                            if($localStorage.total >= retailShipment){
+                                $rootScope.$emit('newTotals', {data: true});
+                            }
+                        }
                     }, function (error) {
                         self.busyAddresses = false;
                         angular.forEach(error, function (key, value) {
@@ -577,6 +583,12 @@
                     $localStorage.shipmentTotal = $localStorage.cart.shipmentCost;
                     $localStorage.total = $localStorage.cart.total;
                     $rootScope.$emit('newTotals', {data: false});
+                    if('retailShipment' in branchOffice.metadata){
+                        var retailShipment = parseFloat(branchOffice.metadata.retailShipment)
+                        if($localStorage.total >= retailShipment){
+                            $rootScope.$emit('newTotals', {data: true});
+                        }
+                    }
                 }
             }
 
