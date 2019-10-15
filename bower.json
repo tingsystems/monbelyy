@@ -31,8 +31,7 @@
     "bootstrap": "^4.0.0",
     "popper.js": "^1.14.5",
     "wip-image-zoom": "^1.0.4",
-    "underscore": "^1.9.1",
-    "angular-http-auth": "^1.5.0"
+    "underscore": "^1.9.1"
   },
   "overrides": {
     "bootstrap": {

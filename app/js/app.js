@@ -190,7 +190,7 @@
      * @desc Update xsrf $http headers to align with Django's defaults
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
-                 $localStorage, MMOrderSrv, AccessSrv, authService) {
+                 $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
         // $rootScope.host = 'https://mercadomovil.com.mx';
         // $rootScope.host = 'http://' + $location.host() + ':8000';
@@ -405,34 +405,8 @@
             $localStorage.priceList = '';
         }
 
-        $rootScope.$on('event:auth-loginRequired', function (event, args) {
-            var token = $localStorage.appData.token;
-            if (token) {
-                // get current time in seconds
-                var now = Math.round(new Date().getTime() / 1000);
-                var user_last_login = token.user_last_login;
-                // check if token is expired
-                if (now >= user_last_login) {
-                    // send refresh token request
-                    var request = {
-                        token: token.refresh_token,
-                        client_id: 'CKLZaUXlx9ay0437WgsElHxKLMx0ZW4MFFrzNwG3',
-                        user: $localStorage.appData.user.id
-                    };
-                    AccessSrv.refresh(request).$promise.then(function (response) {
-                        $auth.setToken(response.access_token);
-                        // save token info
-                        $localStorage.appData.token = {
-                            expires_in: response.expires_in, token_type: response.token_type,
-                            refresh_token: response.refresh_token, scope: response.scope,
-                            user_last_login: Math.round((new Date().getTime() / 1000))
-                        };
-                        authService.loginConfirmed();
-                    }, function (error) {
-                    });
-                }
-            } else {
-                // logOut
+        $rootScope.$on('UNAUTHORIZED', function (event, args) {
+            if ($state.current.name !== 'register') {
                 $auth.logout()
                     .then(function () {
                         // delete appData
@@ -448,6 +422,7 @@
                     })
                     .catch(function (response) {
                         // Handle errors here, such as displaying a notification
+                        console.log(response);
                     });
             }
         });
@@ -457,14 +432,14 @@
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI', 'duScroll', 'truncate', 'ngTouch', 'ngStorage',
         'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select',
-        'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload', 'wipImageZoom', 'http-auth-interceptor'])
+        'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload', 'wipImageZoom'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv', 'AccessSrv', 'authService'];
+        'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider'];
     AuthProvider.$inject = ['$authProvider'];

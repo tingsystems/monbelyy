@@ -82,8 +82,7 @@
 
     // service for status project in MMCB
     function MMOrderSrv($resource) {
-        // var BaseUrl = 'https://mercadomovil.com.mx/api/v3/reports/project/';
-        var BaseUrl = 'http://192.168.2.101/api/v1/reports/project/';
+        var BaseUrl = 'https://mercadomovil.com.mx/api/v3/reports/project/';
         return $resource(BaseUrl + 'status', null, {
             'status': {
                 method: 'POST',
