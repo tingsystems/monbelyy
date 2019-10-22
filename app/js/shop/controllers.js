@@ -369,7 +369,7 @@
         self.formDataShip = {};
         self.formData = {};
         self.address = '';
-        self.cart = $localStorage.cart;
+        self.cart = $localStorage.cart ? $localStorage.cart : {};
         self.busy = false;
         self.addAddress = false;
         self.items = $localStorage.items ? $localStorage.items : [];
