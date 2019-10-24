@@ -178,9 +178,6 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
-        // $rootScope.host = 'http://' + $location.host() + ':8000';
-        // $rootScope.host = 'http://192.168.1.77';
-        // $rootScope.host = 'http://api.taki-dev.tingsystems.com';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
