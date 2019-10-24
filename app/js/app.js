@@ -177,13 +177,13 @@
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://mercadomovil.com.mx';
+        $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
         // $rootScope.host = 'http://' + $location.host() + ':8000';
         // $rootScope.host = 'http://192.168.1.77';
         // $rootScope.host = 'http://api.taki-dev.tingsystems.com';
-        $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
-        $rootScope.apiV = 'v1';
-        $rootScope.apiShop = 'v3';
+        $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
+        $rootScope.apiV = 'v2';
+        $rootScope.apiShop = 'v1';
         $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
         $http.defaults.headers.common['PROJECT-ID'] = 'c04c7086-92c1-4478-864e-afa080dfa672';
         $rootScope.hidePriceLogin = false;
@@ -227,15 +227,15 @@
         $rootScope.initConfig = {
             googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
-            img_default: '../../img/img-default.jpg',
+            img_default: '../img/img-default.jpg',
             email: 'ventas@ladypaolamayoreo.com.mx',
             phone: '353 105 02 63',
-            branchOffice: 'Lady Paola - Venta de calzado a mayoreo'
+            branchOffice: 'Calzalia - Venta de calzado'
 
         };
 
         $rootScope.post = {
-            'title': 'Lady Paola - Venta de calzado a mayoreo',
+            'title': 'Calzalia - Venta de calzado',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -250,7 +250,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Lady Paola',
+                'title': 'Calzalia - Venta de calzado',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -259,7 +259,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Lady Paola';
+        $rootScope.pageTitle = 'Calzalia - Venta de calzado';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
