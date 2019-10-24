@@ -59,7 +59,7 @@
                 url: '/history/sales',
                 data: {
                     requiredLogin : true,
-                    pageTitle: 'Compras - Lady Paola'
+                    pageTitle: 'Compras - Calzalia - Venta de calzado'
                 },
                 views: {
                     'content': {
