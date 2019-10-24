@@ -3,18 +3,18 @@
   "version": "0.0.1",
   "description": "Web for Tingsystems",
   "dependencies": {
-    "angular": "^1.6.8",
-    "angular-resource": "^1.6.8",
+    "angular": "1.5.8",
+    "angular-resource": "1.5.8",
     "angular-ui-router": "^1.0.13",
-    "angular-sanitize": "^1.6.8",
-    "angular-animate": "^1.6.8",
+    "angular-sanitize": "1.5.8",
+    "angular-animate": "1.5.8",
     "angular-truncate": "*",
-    "angular-touch": "^1.6.8",
-    "angular-material": "^1.1.6",
+    "angular-touch": "1.5.8",
+    "angular-aria": "1.5.8",
+    "angular-messages": "1.5.8",
+    "angular-material": "^1.1.18",
     "jquery": "^3.3.1",
     "animate.css": "^3.5.2",
-    "ngInfiniteScroll": "^1.3.4",
-    "owl.carousel": "^2.2.1",
     "angular-deckgrid": "^0.5.0",
     "lightbox2": "^2.10.0",
     "angular-block-ui": "^0.2.2",
@@ -29,7 +29,10 @@
     "ngSweetAlert": "angular-sweetalert#^1.1.2",
     "angular-bootstrap": "^2.5.0",
     "bootstrap": "^4.0.0",
-    "popper.js": "^1.14.5"
+    "popper.js": "^1.14.5",
+    "wip-image-zoom": "^1.0.4",
+    "underscore": "^1.9.1",
+    "owl.carousel": "^2.2.1"
   },
   "overrides": {
     "bootstrap": {
