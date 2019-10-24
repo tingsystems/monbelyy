@@ -714,12 +714,13 @@
                             self.detail.price = self.itemFromGroup.priceList;
                         }
                     }
-    
+
+                    self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];    
                     if (!self.detail.featuredImage) {
                         self.detail.featuredImage = {};
                         self.detail.featuredImage.url = $rootScope.initConfig.img_default;
                     }
-    
+                    console.log(self.detail.featuredImage)
                     // add gallery image and featured image
                     self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
                     //get galeries
