@@ -150,7 +150,7 @@
             })
             .state('referrer', {
                 url: '/ref/seller/:project/:seller',
-                data: {pageTitle: ' Moneek'},
+                data: {pageTitle: ' Calzalia - Venta de calzado'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -241,7 +241,7 @@
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
-            //checkStatus();
+            checkStatus();
         });
         //various config
         $rootScope.initConfig = {
