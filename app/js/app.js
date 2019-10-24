@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: ' Lady Paola'},
+                data: {pageTitle: ' Calzalia - Venta de calzado'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -75,21 +75,24 @@
                 }
             })
             .state('category', {
-                url: '/category/:slug',
-                data: {pageTitle: ' Lady Paola'},
+                url: '/category/:slug?page&pageSize&ordering&search',
+                data: {pageTitle: ' Calzalia - Venta de calzado'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
                         controllerAs: 'Product',
-                        controller: 'ProductsByCategoryCtrl'
+                        controller: 'ProductsByCategoryCtrl',
+                        params: {page: null, pageSize: null, sort: null, search: null}
                     }
                 }
             })
             .state('search', {
-                url: '/busqueda?q&kind',
+                url: '/busqueda?q&kind&page&pageSize',
                 params: {
                     q: null,
-                    kind: null
+                    kind: null,
+                    page: null,
+                    pageSize: null
                 },
                 views: {
                     'content': {
@@ -120,7 +123,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Lady Paola'},
+                data: {pageTitle: 'Calzalia - Venta de calzado'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -142,6 +145,17 @@
                 views: {
                     'building': {
                         templateUrl: '/templates/building.html'
+                    }
+                }
+            })
+            .state('referrer', {
+                url: '/ref/seller/:project/:seller',
+                data: {pageTitle: ' Moneek'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/home.html',
+                        controllerAs: 'Home',
+                        controller: 'HomeCtrl'
                     }
                 }
             });
@@ -175,7 +189,8 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage, MMOrderSrv) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
+                 $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
@@ -196,16 +211,24 @@
         $rootScope.showWeb = false;
         $rootScope.priceList = false;
         $rootScope.multiplePrices = false;
-        $rootScope.multiplePricesConfig = {"limit": 12, "price1":"price", "price2": "priceList"};
+        //cambiar el slug de las listas
+        $rootScope.multiplePricesConfig = {
+            "limit": 12, "prices": {
+                "price": "mayoreo1553209226",
+                "priceList": "menudeo"
+            }
+        };
+        $rootScope.itemsByPage = 12;
 
-        var checkStatus = function(){
-            MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {
+        var checkStatus = function () {
+            MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {
+            }, function (error) {
                 $rootScope.hideIndex = false;
-                if(error.status === 402){
+                if (error.status === 402) {
                     $state.go('suspended');
                     $rootScope.hideIndex = true;
                 }
-                else if(error.status === 307){
+                else if (error.status === 307) {
                     $state.go('building');
                     $rootScope.hideIndex = true;
                 }
@@ -362,7 +385,6 @@
         if (!angular.isDefined($localStorage.appData)) {
             $localStorage.appData = {};
         }
-
         //init $localStorage.appData
         if (!angular.isDefined($localStorage.globalDiscount)) {
             $localStorage.globalDiscount = {amount: 0};
@@ -403,9 +425,9 @@
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
-        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app',
-        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload'])
+        'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI', 'duScroll', 'truncate', 'ngTouch', 'ngStorage',
+        'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select',
+        'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload', 'wipImageZoom'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)

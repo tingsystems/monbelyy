@@ -6,19 +6,11 @@
                     <h2>{{Product.detail.name}}</h2>
                 </div>
                 <div class="col-sm-6">
-                        
-                    <data-owl-carousel class="owl-carousel owl-theme owl-theme-page" data-options="Product.owlOptionProduct" ng-if="Product.detail.galleryImages.length > 0">
-                        <div owl-carousel-item class="slider" ng-repeat="slide in Product.detail.galleryImages">
-                            <div class="item" style="width: 100%;">
-                                <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                                    <div class="slider-page"
-                                         style="background-image:url('{{ slide.url ? slide.url : initConfig.img_default }}');"></div>
-                                </a>
-                            </div>
-                        </div>
-                    </data-owl-carousel>
-                    <div class="bg-image-single" ng-if="Product.detail.galleryImages.length < 1"
-                         style="background-image:url('{{ Product.detail.featuredImage.url }}');"></div>
+                    <div class="wrapper" style="width: 300px; height: auto; ">
+                        <img class="img-responsive" src="{{Product.detail.featuredImage.url}}"
+                             wip-image-zoom="Product.detail.optionsZoom">
+                    </div>
+
                 </div>
                 <div class="col-sm-6">
                     <div class="article-description">
@@ -59,7 +51,7 @@
                                         qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
                                          shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
                                           stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
-                                           priceList: Product.detail.priceList},
+                                           priceList: Product.detail.priceList, prices: Product.detail.prices},
                                            Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
                                             class="btn btn-optional"> <i class="fa fa-shopping-cart"></i>Agregar a carrito

@@ -1,12 +1,15 @@
 (function () {
     'use strict';
 
-    function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage) {
+    function HomeCtrl(EntrySrv, ProductSrv, TaxonomySrv, $rootScope, $filter, $localStorage, $stateParams) {
         var self = this; // save reference of the scope
         self.mainSlider = [];
         self.active = 0;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
+        if($stateParams.seller){
+            $localStorage.refSeller = $stateParams.seller;
+        }
 
         $rootScope.toggleSidebar = function () {
             $rootScope.visible = !$rootScope.visible;
@@ -29,15 +32,22 @@
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
         if($rootScope.showWeb){
-            paramsProducts.showWeb = $rootScope.showWeb;
+            paramsProducts.showWeb = 'True';
         }
-        paramsProducts.pageSize = 12;
+        paramsProducts.pageSize = $rootScope.itemsByPage;;
         paramsProducts.kind = 'group';
         paramsProducts.taxonomies = 'novedades1549313170';
         paramsProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
-            paramsProducts.priceList = list;
+            if($rootScope.multiplePrices){
+                paramsProducts.priceList = '';
+
+            }else{
+                paramsProducts.priceList = list;
+
+            }
+
         }
         else {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -62,13 +72,19 @@
         paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
         paramsItemProducts.isActive = 'True';
         if($rootScope.showWeb){
-            paramsItemProducts.showWeb = $rootScope.showWeb;
+            paramsItemProducts.showWeb = 'True';
         }
-        paramsItemProducts.pageSize = 12;
+        paramsItemProducts.pageSize = $rootScope.itemsByPage;
         paramsItemProducts.ordering = '-createdAt';
         if (list !== '') {
             paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
-            paramsItemProducts.priceList = list;
+            if($rootScope.multiplePrices){
+                paramsItemProducts.priceList = '';
+
+            }else {
+                paramsItemProducts.priceList = list;
+            }
+
         }
         else {
             paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -187,7 +203,7 @@
             EntrySrv.get({
                 taxonomies: $stateParams.slug,
                 isActive: 'True',
-                pageSize: 9,
+                pageSize: $rootScope.itemsByPage,
                 fields: 'attachments,title,slug,excerpt,createdAt',
                 ordering: '-createdAt',
                 page: self.page
@@ -233,7 +249,7 @@
                 taxonomies: 'blog1546023742',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
-                pageSize: 9,
+                pageSize: $rootScope.itemsByPage,
                 ordering: '-createdAt',
                 page: self.page
             }).$promise.then(function (results) {
@@ -333,7 +349,7 @@
     }
 
     function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage, $rootScope, NgTableParams, $scope,
-                        ngTableEventsChannel, $location, $anchorScroll) {
+                        ngTableEventsChannel, $location, $anchorScroll, PagerService, $state) {
         var self = this;
 
         self.listSearch = [];
@@ -342,25 +358,50 @@
         self.isPost = true;
         self.params = {ordering: 'name'};
 
-        self.getData = function (params) {
-            var sorting = '-createdAt';
-            // parser for ordering params
-            angular.forEach(params.sorting(), function (value, key) {
-                sorting = value === 'desc' ? '-' + key : key;
-            });
-            self.busy = true;
+        // init for pagination and ordering
+        self.totalResults = 0;
+        self.next = null;
+        self.previous = null;
+        self.numberPages = 1;
+        self.pageSizes = [
+            { 'id': '0', 'name': '12', 'size': 12 },
+            { 'id': '1', 'name': '24', 'size': 24 },
+            { 'id': '1', 'name': '36', 'size': 36 },
+            { 'id': '2', 'name': '64', 'size': 64 },
+            { 'id': '3', 'name': '128', 'size': 128 }
+        ];
+        self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
+            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        self.sorterOptionSelect = self.filterOrderingOptions[0];
+        self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
+        self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;
+        angular.forEach(self.pageSizes, function (obj) {
+            if (obj.size === self.pageSize) {
+                self.pageSizesSelect = obj;
+            }
+        });
+        self.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+        angular.forEach(self.filterOrderingOptions, function (obj) {
+            if (obj.property === self.ordering) {
+                self.optionSelected = obj;
+            }
+        });
+        self.pager = {};
+        self.setPage = setPage;
 
+        self.getData = function () {
+            self.params.page = self.page;
+            self.params.pageSize = $stateParams.pageSize ? $stateParams.pageSize : self.pageSize;
+            self.params.ordering = '-createdAt';
+            self.busy = true;
             if ($stateParams.q) {
                 if (self.kindTerm === 'product') {
                     self.isPost = false;
                     var list = $localStorage.priceList ? $localStorage.priceList : '';
                     self.params.isActive = 'True';
                     if($rootScope.showWeb){
-                        self.params.showWeb = $rootScope.showWeb;
+                        self.params.showWeb = 'True';
                     }
-                    self.params.ordering = '-createdAt';
-                    self.params.page = params.page();
-                    self.params.pageSize = params.count();
                     self.params.search = self.searchTerm;
                     if (list !== '') {
                         self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
@@ -370,8 +411,10 @@
                         self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
                     }
                     self.params.kind = $rootScope.itemsKind;
-                    return ProductSrv.get(self.params).$promise.then(function (results) {
-                        self.listSearch = results.results;
+                    ProductSrv.get(self.params).$promise.then(function (results) {
+                        self.totalResults = results.count;
+                        self.next = results.next;
+                        self.previous = results.previous;
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
                             if($rootScope.priceList){
@@ -382,77 +425,51 @@
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                             obj.offerPrice = parseFloat(obj.offerPrice);
                         });
-                        params.total(results.count);
                         self.busy = false;
-                        return results.results
+                        self.listSearch = results.results;
+                        self.setPage(self.page);
                     });
 
                 }
                 else {
-                    return EntrySrv.get({
+                    EntrySrv.get({
                         kind: 'post',
                         isActive: 'True',
                         fields: 'attachments,title,link,slug,excerpt',
-                        pageSize: 9,
+                        pageSize: self.params.pageSize,
                         ordering: '-createdAt',
                         search: self.searchTerm,
-                        page: self.page
+                        page: self.params.page
                     }).$promise.then(function (results) {
-                        self.listSearch = results.results;
+                        self.totalResults = results.count;
+                        self.next = results.next;
+                        self.previous = results.previous;
+
                         self.listSearch = $filter('filter')(results.results, {'slug': '!slider'});
                         //get featureImage
                         angular.forEach(self.listSearch, function (obj, ind) {
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                         });
-                        params.total(results.count);
                         self.busy = false;
-                        return results.results;
+                        self.listSearch = results.results;
+                        self.setPage(self.page);
                     });
 
                 }
             }
         };
 
-        var tableEvents = [];
+        self.getData();
 
-        function subscribeToTable(tableParams) {
-            var logAfterCreatedEvent = logEvent(tableEvents, "afterCreated");
-            ngTableEventsChannel.onAfterCreated(logAfterCreatedEvent, $scope, $scope.tableParams);
-            var logAfterReloadDataEvent = logEvent(tableEvents, "afterReloadData");
-            ngTableEventsChannel.onAfterReloadData(logAfterReloadDataEvent, $scope, $scope.tableParams);
+        function setPage(page) {
+            if (page < 1 || page > self.pager.totalPages) {
+                return;
+            }
+            // get pager object from service
+            self.pager = PagerService.GetPager(self.totalResults, page, self.pageSize);
+            // get current page of items
+            $state.go('.', {q:self.searchTerm, kind: self.kindTerm , page: parseInt(page), pageSize: self.pageSize, ordering: self.optionSelected.property});
         }
-
-        function logEvent(list, name) {
-            var listLocal = list;
-            var nameLocal = name;
-            return function () {
-                console.log(">>>>>>> " + nameLocal);
-
-                $location.hash('top');
-
-                // call $anchorScroll()
-                $anchorScroll();
-
-            };
-        }
-
-        $scope.$watch("tableParams", subscribeToTable);
-
-        $scope.tableParams = new NgTableParams({
-            // default params
-            page: 1, // The page number to show
-            count: 9 // The number of items to show per page
-        }, {
-            // default settings
-            // page size buttons (right set of buttons in demo)
-            counts: [],
-            // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13,
-            paginationMinBlocks: 2,
-            getData: self.getData
-        });
-
-
     }
 
     function NavBarCtrl() {
@@ -567,7 +584,7 @@
         };
     }
 
-    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage, $timeout) {
+    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage, $timeout, NotificationSrv, $state) {
         var self = this;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
@@ -577,7 +594,12 @@
         paramsProducts.isActive = 'True';
         if (list !== '') {
             paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
-            paramsProducts.priceList = list;
+            if($rootScope.multiplePrices){
+                paramsProducts.priceList = '';
+
+            }else {
+                paramsProducts.priceList = list;
+            }
         }
         else {
             paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
@@ -588,18 +610,40 @@
             self.parent = results.id;
             self.detail = results;
             self.detail.galleryImages = [];
+            self.detail.optionsZoom = {
+                zoomEnable          : true,
+                defaultIndex        : 0, // Order of the default selected Image
+                images              : [],
+                style               : 'box', // inner or box
+                boxPos              : 'right-top', // e.g., right-top, right-middle, right-bottom, top-center, top-left, top-right ...
+                boxW                : 300, // Box width
+                boxH                : 300, // Box height
+                method              : 'lens', // fallow 'lens' or 'pointer'
+                cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
+                lens                : true, // Lens toggle
+                zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                immersiveModeOptions: {}, // can extend immersed mode options
+                immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                prevThumbButton     : '&#9665;', // Prev thumb button (html)
+                nextThumbButton     : '&#9655;', // Next thumb button (html)
+                thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
+                thumbCol            : 3, // Thumb column count
+                thumbColPadding     : 4 // Padding between thumbs
+            };
             // get featureImage
             self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
-            // add gallery image and featured image
-            // self.detail.galleryImages.push(self.detail.featuredImage);
-            //get galeries
-            angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
-                self.detail.galleryImages.push(value);
-            });
             if (!self.detail.featuredImage) {
                 self.detail.featuredImage = {};
                 self.detail.featuredImage.url = $rootScope.initConfig.img_default;
             }
+            // add gallery image and featured image
+            self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
+            //get galeries
+            angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
+                self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
+            });
+
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
             if($rootScope.priceList){
                 if('priceList' in self.detail){
@@ -614,35 +658,9 @@
             self.detail.qty = 1;
         });
 
-        /* Carousel slider */
-        self.owlOptionProduct = {
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            navigation: true,
-            //pagination: false,
-            autoplay: true,
-            items: 1,
-            autoplayHoverPause:true,
-            autoplayTimeout:5000,
-            margin: 0,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1,
-                    nav: true
-                },
-                600: {
-                    items: 1,
-                    nav: false
-                },
-                1000: {
-                    items: 1,
-                    nav: true,
-                    loop: true
-                }
-            }
-        };
-
         self.getProductFromGroup = function () {
+            self.itemFromGroup = {};
+            // self.detail = {};
             var taxonomies = [];
             self.detail.galleryImages = [];
             angular.forEach(self.optionSelected, function (obj) {
@@ -653,58 +671,89 @@
                 parent: self.parent,
                 taxonomies: taxonomiesJoin,
                 fields: paramsProducts.fields,
-                priceList: list
-
+                priceList: paramsProducts.priceListlist,
+                isActive : 'True'
             };
             ProductSrv.group(paramsItemGroup).$promise.then(function (results) {
-                self.itemFromGroup = results[0];
-                self.detail.stock = self.itemFromGroup.stock;
-                self.detail.price = self.itemFromGroup.price;
-                self.detail.id = self.itemFromGroup.id;
-                self.detail.name = self.itemFromGroup.name;
-                self.detail.shipmentPrice = self.itemFromGroup.shipmentPrice;
-                self.detail.typeTax = self.itemFromGroup.typeTax;
-                self.detail.code = self.itemFromGroup.code;
-                self.detail.kind = self.itemFromGroup.kind;
-                self.detail.inventory = self.itemFromGroup.inventory;
-                self.detail.description = self.itemFromGroup.description;
-                self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
-                if($rootScope.priceList){
-                    if('priceList' in self.itemFromGroup){
-                        self.detail.price = self.itemFromGroup.priceList;
+                if(results.length){
+                    self.itemFromGroup = results[0];
+                    self.detail.stock = self.itemFromGroup.stock;
+                    self.detail.price = self.itemFromGroup.price;
+                    self.detail.id = self.itemFromGroup.id;
+                    self.detail.name = self.itemFromGroup.name;
+                    self.detail.shipmentPrice = self.itemFromGroup.shipmentPrice;
+                    self.detail.typeTax = self.itemFromGroup.typeTax;
+                    self.detail.code = self.itemFromGroup.code;
+                    self.detail.kind = self.itemFromGroup.kind;
+                    self.detail.inventory = self.itemFromGroup.inventory;
+                    self.detail.description = self.itemFromGroup.description;
+                    self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
+                    self.detail.optionsZoom = {
+                        zoomEnable          : true,
+                        defaultIndex        : 0, // Order of the default selected Image
+                        images              : [],
+                        style               : 'box', // inner or box
+                        boxPos              : 'right-top', // e.g., right-top, right-middle, right-bottom, top-center, top-left, top-right ...
+                        boxW                : 300, // Box width
+                        boxH                : 300, // Box height
+                        method              : 'lens', // fallow 'lens' or 'pointer'
+                        cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
+                        lens                : true, // Lens toggle
+                        zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                        immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                        immersiveModeOptions: {}, // can extend immersed mode options
+                        immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                        prevThumbButton     : '&#9665;', // Prev thumb button (html)
+                        nextThumbButton     : '&#9655;', // Next thumb button (html)
+                        thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
+                        thumbCol            : 3, // Thumb column count
+                        thumbColPadding     : 4 // Padding between thumbs
+                    };
+                    if($rootScope.priceList){
+                        if('priceList' in self.itemFromGroup){
+                            self.detail.price = self.itemFromGroup.priceList;
+                        }
                     }
-                }
-                // get featureImage
-                self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];
-                //get galeries
-                self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
+    
+                    if (!self.detail.featuredImage) {
+                        self.detail.featuredImage = {};
+                        self.detail.featuredImage.url = $rootScope.initConfig.img_default;
+                    }
+    
+                    // add gallery image and featured image
+                    self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
+                    //get galeries
+                    angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
+                        self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
+                    });
+    
+                    self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+                    if($rootScope.priceList){
+                        if('priceList' in self.detail){
+                            self.detail.price = self.detail.priceList;
+                        }
+                    }
+    
+                    $rootScope.post = self.itemFromGroup;
+                    $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
+                    self.busy = false;
+                    self.detail.qty = 1;
 
-                if (!self.detail.featuredImage) {
-                    self.detail.featuredImage = {};
-                    self.detail.featuredImage.url = $rootScope.initConfig.img_default;
+                }else{
+                    NotificationSrv.error("Lo sentimos, no hay ningun producto con los criterios que estas buscando")
+                    $state.reload();
                 }
-
-                $rootScope.post = self.itemFromGroup;
-                $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
-                self.busy = false;
-                self.detail.qty = 1;
-                $rootScope.$broadcast('owlCarousel.changeStart');
-                $timeout(function(){
-                    self.detail.galleryImages = $filter('filter')(self.itemFromGroup.attachments, {kind: 'gallery_image'});
-                    // notify the carousel that data is changed
-                    $rootScope.$broadcast('owlCarousel.changeEnd');
-                });
             });
         };
 
     }
 
-    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams, $rootScope, $localStorage, $filter, $timeout) {
+    function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams,
+                                    $rootScope, $localStorage, $filter, $timeout, $location, $anchorScroll, $scope,
+                                    ngTableEventsChannel, $state, PagerService) {
         var self = this;
 
         self.list = [];
-        self.page = 0;
-        self.next = true;
         self.busy = false;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -731,9 +780,36 @@
         self.filterSize = $rootScope.filterSize ? $rootScope.filterSize : 'MEDIDA';
         self.filterCategory = $rootScope.filterCategory ? $rootScope.filterCategory : 'Tipo';
         var timeout = $timeout;
-        self.filterOrderingOptions = [{'option': 'name', 'name': 'Alfabeticamente de A-Z'},
-            {'option': 'price', 'name': 'Precio menor'}, {'option': '-price', 'name': 'Precio mayor'}];
-
+        // init for pagination and ordering
+        self.totalResults = 0;
+        self.next = null;
+        self.previous = null;
+        self.numberPages = 1;
+        self.pageSizes = [
+            { 'id': '0', 'name': '12', 'size': 12 },
+            { 'id': '1', 'name': '24', 'size': 24 },
+            { 'id': '1', 'name': '36', 'size': 36 },
+            { 'id': '2', 'name': '64', 'size': 64 },
+            { 'id': '3', 'name': '128', 'size': 128 }
+        ];
+        self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
+            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        self.sorterOptionSelect = self.filterOrderingOptions[0];
+        self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
+        self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;
+        angular.forEach(self.pageSizes, function (obj) {
+            if (obj.size === self.pageSize) {
+                self.pageSizesSelect = obj;
+            }
+        });
+        self.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+        angular.forEach(self.filterOrderingOptions, function (obj) {
+            if (obj.property === self.ordering) {
+                self.optionSelected = obj;
+            }
+        });
+        self.pager = {};
+        self.setPage = setPage;
         // get post by category
         if ($stateParams.slug) {
             ProductTaxonomySrv.get({
@@ -802,7 +878,7 @@
             self.sizes = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 10,
+                pageSize: $rootScope.itemsByPage,
                 fields: 'id,slug,name',
                 search: self.searchTerSize,
                 kind: self.filterSize
@@ -835,7 +911,7 @@
             self.types = [];
             ProductTaxonomySrv.get({
                 page: 1,
-                pageSize: 10,
+                pageSize: $rootScope.itemsByPage,
                 fields: 'id,slug,name',
                 search: self.searchTerType,
                 kind: self.filterType
@@ -914,7 +990,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            self.getData();
         };
 
         self.getProductsSize = function () {
@@ -944,7 +1020,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            self.getData();
 
         };
 
@@ -975,7 +1051,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            self.getData();
 
 
         };
@@ -996,7 +1072,7 @@
                 }
             }
 
-            self.tableParams.reload();
+            self.getData();
 
 
         };
@@ -1008,19 +1084,16 @@
             }
             self.catSelected = null;
             self.taxCat = [];
-            self.tableParams.reload();
+            $scope.tableParams.reload();
 
         };
 
 
-        self.getData = function (params) {
-            var sorting = '-createdAt';
-            // parser for ordering params
-            angular.forEach(params.sorting(), function (value, key) {
-                sorting = value === 'desc' ? '-' + key : key;
-            });
-            self.params.page = params.page();
-            self.params.pageSize = params.count();
+        self.getData = function () {
+            self.params.page = self.page;
+            self.params.pageSize = $stateParams.pageSize ? $stateParams.pageSize : self.pageSize;
+            self.params.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+            self.params.search = $stateParams.search ? $stateParams.search : self.globalSearchTerm;
             self.busy = true;
             if (self.taxonomies.length > 0) {
                 if($rootScope.taxnomySearch){
@@ -1042,9 +1115,8 @@
             }
             self.params.isActive = 'True';
             if($rootScope.showWeb){
-                self.params.showWeb = $rootScope.showWeb;
+                self.params.showWeb = 'True';
             }
-            self.params.pageSize = 9;
             if (list !== '') {
                 self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
                 self.params.priceList = list;
@@ -1059,11 +1131,12 @@
                 self.params.ordering = '-createdAt';
             }
             self.params.kind = $rootScope.itemsKind;
-            return ProductSrv.get(self.params).$promise.then(function (data) {
-                params.kind = 'group';
-                params.total(data.count);
+            ProductSrv.get(self.params).$promise.then(function (data) {
+                self.totalResults = data.count;
+                self.next = data.next;
+                self.previous = data.previous;
                 self.busy = false;
-                angular.forEach(data.results, function (obj, ind) {
+                angular.forEach(data.results, function (obj) {
                     if($rootScope.priceList){
                         if('priceList' in obj){
                             obj.price = obj.priceList;
@@ -1072,8 +1145,8 @@
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                     obj.offerPrice = parseFloat(obj.offerPrice);
                 });
-                return data.results;
-
+                self.items = data.results;
+                self.setPage(self.page);
             }, function (error) {
                 angular.forEach(error, function (value, key) {
                     NotificationSrv.error(value + '' + key);
@@ -1082,19 +1155,26 @@
             });
         };
 
-        self.tableParams = new NgTableParams({
-            // default params
-            page: 1, // The page number to show
-            count: 9 // The number of items to show per page
-        }, {
-            // default settings
-            // page size buttons (right set of buttons in demo)
-            counts: [],
-            // determines the pager buttons (left set of buttons in demo)
-            paginationMaxBlocks: 13,
-            paginationMinBlocks: 2,
-            getData: self.getData
-        });
+        self.getData();
+
+        // funciones para controlar las acciones de la paginacion y ordenamiento
+        self.orderingChange = function () {
+            $state.go('.', {ordering: self.optionSelected.property, page: 1, pageSize: self.pageSize });
+        };
+        self.changePageSize = function () {
+            self.pageSize = self.pageSizesSelect.size;
+            $state.go('.', {page: 1, pageSize: self.pageSize, ordering: self.optionSelected.property});
+        };
+
+        function setPage(page) {
+            if (page < 1 || page > self.pager.totalPages) {
+                return;
+            }
+            // get pager object from service
+            self.pager = PagerService.GetPager(self.totalResults, page, self.pageSize);
+            // get current page of items
+            $state.go('.', {page: parseInt(page), pageSize: self.pageSize, ordering: self.optionSelected.property});
+        }
 
         self.deleteFilters = function () {
             self.catSelected = false;
@@ -1104,7 +1184,7 @@
             self.sizeSelected = false;
             self.typeSelected = false;
             self.taxonomies = [];
-            self.tableParams.reload();
+            $scope.tableParams.reload();
 
         }
     }
@@ -1283,20 +1363,21 @@
         .controller('ShoppingCtrl', ShoppingCtrl);
 
     // inject dependencies to controllers
-    HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage'];
+    HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage', '$stateParams'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
     PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
     ContactCtrl.$inject = ['NotificationTakiSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$state'];
     SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage', '$rootScope',
-        'NgTableParams', '$scope', 'ngTableEventsChannel', '$location', '$anchorScroll'];
+        'NgTableParams', '$scope', 'ngTableEventsChannel', '$location', '$anchorScroll', 'PagerService', '$state'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
-    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout'];
+    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout','NotificationSrv','$state'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
-        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout'];
+        '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout', '$location', '$anchorScroll', '$scope',
+        'ngTableEventsChannel', '$state', 'PagerService'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
         'SweetAlert', 'ProductSrv', '$mdDialog', '$scope'];
 })();

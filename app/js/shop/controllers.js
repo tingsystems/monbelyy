@@ -175,10 +175,19 @@
                     }
                     if(value.qty < $rootScope.multiplePricesConfig.limit){
                         // priceList va a ser price
-                        value.price = value.priceList;
+                        angular.forEach(value.prices, function (obj) {
+                            if($rootScope.multiplePricesConfig.prices['priceList'] === obj.slug){
+                                value.price = obj.price;
+                            }
+                        })
                     }else{
                         value.price = value.priceCopy;
-
+                        angular.forEach(value.prices, function (obj) {
+                            console.log(obj);
+                            if($rootScope.multiplePricesConfig.prices['price'] === obj.slug){
+                                value.price = obj.price;
+                            }
+                        })
                     }
                 }
                 //first Time calcule
@@ -245,7 +254,7 @@
                 angular.forEach(self.items, function (obj, ind) {
                     items[ind] = {
                         id: obj.id,
-                        qty: obj.qty,
+                        qty: parseInt(obj.qty),
                         promotion: parseFloat(obj.discount.discount),
                         price: parseFloat(obj.price)
                     };
@@ -352,7 +361,7 @@
 
     }
 
-    function ShippingAddressCtrl(AddressSrv, ShipmentSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter) {
+    function ShippingAddressCtrl(AddressSrv, ShipmentSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter, CartsSrv) {
         var self = this;
         var user = $localStorage.appData.user;
         self.branchOffice = '';
@@ -360,7 +369,7 @@
         self.formDataShip = {};
         self.formData = {};
         self.address = '';
-        self.cart = $localStorage.cart;
+        self.cart = $localStorage.cart ? $localStorage.cart : {};
         self.busy = false;
         self.addAddress = false;
         self.items = $localStorage.items ? $localStorage.items : [];
@@ -375,6 +384,21 @@
         self.sendOptions = "0";
         self.busyAddresses = true;
         self.addresses = [];
+
+        if('metadata' in self.cart){
+            if('shipments' in self.cart.metadata){
+                delete self.cart.metadata.shipments;
+            }
+            if('rate' in self.cart.metadata){
+                delete self.cart.metadata.rate;
+
+            }
+            $localStorage.cart = self.cart;
+        }
+        if('shipmentCost' in self.cart){
+            self.cart.shipmentCost = 0;
+
+        }
 
         self.getAddresses = function () {
             self.busyAddresses = true;
@@ -557,6 +581,12 @@
                         $localStorage.shipmentTotal = data.shipmentCost;
                         $localStorage.total = data.total;
                         $rootScope.$emit('newTotals', {data: false});
+                        if('retailShipment' in branchOffice.metadata){
+                            var retailShipment = parseFloat(branchOffice.metadata.retailShipment)
+                            if($localStorage.total >= retailShipment){
+                                $rootScope.$emit('newTotals', {data: true});
+                            }
+                        }
                     }, function (error) {
                         self.busyAddresses = false;
                         angular.forEach(error, function (key, value) {
@@ -568,6 +598,103 @@
                     $localStorage.shipmentTotal = $localStorage.cart.shipmentCost;
                     $localStorage.total = $localStorage.cart.total;
                     $rootScope.$emit('newTotals', {data: false});
+                    if('retailShipment' in branchOffice.metadata){
+                        var retailShipment = parseFloat(branchOffice.metadata.retailShipment)
+                        if($localStorage.total >= retailShipment){
+                            $rootScope.$emit('newTotals', {data: true});
+                        }
+                    }
+                }
+            }
+
+        }
+
+        var contains = function(arr, element){
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] === element) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        self.validAddress = function(address){
+            self.validRetriveInStore = false;
+            if('zip' in address){
+                self.validRetriveInStore = contains(self.defaultbranchOffice.metadata.codeGetShop.array, address.zip)
+            }
+
+        }
+
+        self.changeTabServicelevel = function(){
+            self.providerRate = {};
+        }
+
+        self.setProvider = function(){
+            // meter en el metadata una key llamada rate
+            if('rate' in self.cart.metadata){
+                delete self.cart.metadata.rate;
+            }
+            if(self.providerRate){
+                self.cart.metadata.rate = angular.copy(self.providerRate);
+            }
+            updateCart(self.cart)
+            //actualizar el carrito
+        }
+
+        var updateCart = function(cart){
+            CartsSrv.update({id: $localStorage.cart.id}, cart).$promise.then(function (data) {
+                self.cart.shipmentCost = data.shipmentCost;
+                $localStorage.shipmentTotal = data.shipmentCost;
+                calculeShipment(self.cart);
+            });
+        }
+
+        var calculeShipment = function(cart){
+            var branchOffice = $localStorage.appData.user.branchOffices[0];
+            if('metadata' in branchOffice){
+                if('mienvio' in branchOffice.metadata){
+                    self.busyAddresses = false;
+                    $localStorage.cart = cart;
+                    self.cart = cart;
+                    self.total = cart.total;
+                    $localStorage.shipmentTotal = cart.shipmentCost;
+                    $localStorage.total = cart.total;
+                    $rootScope.$emit('newTotals', {data: false});
+                    // validar si es mayor a 1500 y si no esta en lista de precio
+                    if('retailShipment' in branchOffice.metadata){
+                        console.log('if tiene retailShipment')
+                        var retailShipment = parseFloat(branchOffice.metadata.retailShipment)
+                        if($localStorage.total >= retailShipment && $localStorage.priceList ===''){
+                            console.log('if validar si es mayor a 1500 y si no esta en lista de precio')
+                            $rootScope.$emit('newTotals', {data: true});
+                        }else{
+                            console.log('else validar si es mayor a 1500 y si no esta en lista de precio ')
+                        }
+                    }
+                    else{
+                        console.log('else retailShipment')
+                    }
+                }
+                else if('shipmentCost' in  branchOffice.metadata) {
+                    $localStorage.shipmentTotal = $localStorage.cart.shipmentCost;
+                    $localStorage.total = $localStorage.cart.total;
+                    $rootScope.$emit('newTotals', {data: false});
+                    // validar si es mayor a 1500 y si no esta en lista de precio
+                    if('retailShipment' in branchOffice.metadata){
+                        console.log('if validar si es mayor a 1500 y si no esta en lista de precio')
+                        var retailShipment = parseFloat(branchOffice.metadata.retailShipment)
+                        if($localStorage.total >= retailShipment && $localStorage.priceList ===''){
+                            console.log('if validar si es mayor a 1500 y si no esta en lista de precio')
+                            $rootScope.$emit('newTotals', {data: true});
+                        }
+                        else {
+                            console.log('else validar si es mayor a 1500 y si no esta en lista de precio ')
+                        }
+                    }
+                    else{
+                        console.log('else retailShipment')
+                    }
                 }
             }
 
@@ -813,6 +940,9 @@
                 self.params.metadata.getShop = $localStorage.appData.getShop
             }
             self.params.metadata.sendInvoice = self.isInvoiced;
+            if($localStorage.appData.ref){
+                self.params.seller = $localStorage.appData.ref;
+            }
         };
 
 
@@ -1145,7 +1275,7 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
-    ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter'];
+    ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter', 'CartsSrv'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];

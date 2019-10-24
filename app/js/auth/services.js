@@ -3,7 +3,8 @@
 
     function AccessSrv($resource) {
         return $resource('#host#/api/{{apiShop}}/auth/token', null, {
-            'logout': {method: 'POST', url: '#host#/api/{{apiShop}}/auth/revoke-token'}
+            'logout': {method: 'POST', url: '#host#/api/{{apiShop}}/auth/revoke-token'},
+            'refresh': {method: 'POST', url: '#host#/api/{{apiShop}}/auth/refresh-token'}
         });
     }
 

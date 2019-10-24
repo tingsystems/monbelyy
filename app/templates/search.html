@@ -6,25 +6,25 @@
                     <h3 class="text-uppercase">Resultados de la busqueda: {{ Search.searchTerm }}</h3>
                 </div>
             </div>
-            <div class="container" loading-container="tableParams.settings().$loading" id="top">
-                <div class="row" ng-table="tableParams" show-filter="false">
+            <div class="container" id="top">
+                <div class="row">
                     <div class="col-sm-12" ng-controller="AccessCtrl as Access">
                         <div class="container" ng-controller="ShoppingCtrl as Shop">
                             <div class="row">
-                                <div class="col-sm-4" ng-repeat="product in $data">
-                                    <div class="box-simple" ng-if="!Product.isPost">
-                                        <a ui-sref="product-detail({slug:product.slug})" title="Ver detalles del producto">
+                                <div class="col-sm-4" ng-repeat="item in Search.listSearch">
+                                    <div class="box-simple" ng-if="!Search.isPost">
+                                        <a ui-sref="Search-detail({slug:item.slug})" title="Ver detalles del producto">
                                             <div class="box-header">
                                                 <div class="box-bg-img"
-                                                     style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}')"></div>
+                                                     style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}')"></div>
                                             </div>
                                             <div class="box-container">
                                                 <div class="row align-items-center">
                                                     <div class="col-sm-8">
-                                                        <p>{{ product.name }}</p>
+                                                        <p>{{ item.name }}</p>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <p>{{ product.price | currency }}</p>
+                                                        <p>{{ item.price | currency }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -32,43 +32,46 @@
                                         <div class="box-footer">
                                             <div class="row"> 
                                                 <div class="col-sm-12">
-                                                    <a ui-sref="product-detail({slug:product.slug})" class="btn btn-block btn-white">Comprar</a>
+                                                    <a ui-sref="product-detail({slug:item.slug})" class="btn btn-block btn-white">Comprar</a>
                                                 </div>
-                                                <!--
-                                                <div class="col-sm-4">
-                                                    <button ng-click="Shop.showPreviewItem($event, product)"
-                                                            class="btn btn-dark"><i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                </div>
-                                                -->
                                             </div>
                                         </div>
                                     </div>
     
-                                    <div class="box-prod" ng-if="Product.isPost">
-                                        <a ui-sref="post_detail({slug:product.slug})">
+                                    <div class="box-prod" ng-if="Search.isPost">
+                                        <a ui-sref="post_detail({slug:item.slug})">
                                             <div class="bg-prod"
-                                                 style="background-image: url('{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default }}')"></div>
-                                            <h3 class="prod-descrip">{{product.title}}</h3>
+                                                 style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default }}')"></div>
+                                            <h3 class="prod-descrip">{{item.title}}</h3>
                                         </a>
-                                        <a ui-sref="post_detail({slug: product.slug})" class="btn btn-primary">Ver
+                                        <a ui-sref="post_detail({slug: item.slug})" class="btn btn-primary">Ver
                                             más</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="hide">
-                        <table>
-                            <tbody>
-                            <tr ng-repeat="order in $data">
-                                <td>{{ order.name }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
                 <!--post list -->
+                <div class="ng-table-pager">
+                    <ul ng-if="Search.pager.pages.length" class="pagination">
+                        <li ng-class="{disabled:Search.pager.currentPage === 1}">
+                            <a ng-click="Search.setPage(1)">Primera</a>
+                        </li>
+                        <li ng-class="{disabled:Search.pager.currentPage === 1}">
+                            <a ng-click="Search.setPage(Search.pager.currentPage - 1)">Anterior</a>
+                        </li>
+                        <li ng-repeat="page in Search.pager.pages" ng-class="{active:Search.pager.currentPage === page}">
+                            <a ng-click="Search.setPage(page)">{{page}}</a>
+                        </li>
+                        <li ng-class="{disabled:Search.pager.currentPage === Search.pager.totalPages}">
+                            <a ng-click="Search.setPage(Search.pager.currentPage + 1)">Siguiente</a>
+                        </li>
+                        <li ng-class="{disabled:Search.pager.currentPage === Search.pager.totalPages}">
+                            <a ng-click="Search.setPage(Search.pager.totalPages)">Última</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
