@@ -248,6 +248,7 @@
             googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
             img_default: '../img/img-default.jpg',
+            logo: '../img/logo.jpg',
             email: 'ventas@ladypaolamayoreo.com.mx',
             phone: '353 105 02 63',
             branchOffice: 'Calzalia - Venta de calzado'
