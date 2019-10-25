@@ -241,8 +241,8 @@
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
-            checkStatus();
-        });
+            //checkStatus(); 
+        }); 
         //various config
         $rootScope.initConfig = {
             googleKey: 'UA-53551138-9',
