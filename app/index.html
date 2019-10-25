@@ -73,17 +73,19 @@
     Para mejorar la experiencia..
 </p>
 <![endif]-->
-<header class="header one-rows-nav">
+<div ui-view="suspended" ng-if="$state.current.name === 'suspended'"></div>
+<div ui-view="building" ng-if="$state.current.name === 'building'"></div>
+<header class="header one-rows-nav" ng-show="!hideIndex">
     <div class="first-row">    
         <ng-include src="'/templates/partials/navbar.html'"></ng-include>
     </nav>
 </header>
 
-<div class="content-area-web">
+<div class="content-area-web" ng-show="!hideIndex">
     <div ui-view="content" autoscroll="true"></div>
 </div>
 
-<footer id="footer_area">
+<footer id="footer_area" ng-show="!hideIndex">
     <ng-include src="'/templates/partials/footer.html'"></ng-include>
 </footer>
 <!-- build:js js/vendor.min.js -->
