@@ -110,7 +110,8 @@ audio:not([controls]),
   padding-right: 0;
 }
 .one-rows-nav .navbar-brand .logo {
-  width: 120px;
+  width: 200px;
+  padding: 10px 0;
 }
 .three-rows-nav .first-row {
   padding: 15px 0;
@@ -456,8 +457,9 @@ audio:not([controls]),
   color: #555 !important;
 }
 .box-simple .box-header .box-bg-img {
-  background-position: center;
-  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
   height: 300px;
 }
 .box-simple .box-container {
@@ -784,7 +786,7 @@ audio:not([controls]),
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 300px;
+  height: 500px;
 }
 .tab-simple {
   border: 1px solid #ddd;
@@ -1094,19 +1096,6 @@ figure.effect-sadie:hover a {
   padding: 5px;
   color: #fff !important;
   font-size: 12px;
-}
-.offer-price {
-  color: #ff4b4b;
-  padding: 0;
-  height: auto;
-  margin-bottom: 0;
-  font-weight: bold;
-}
-.old-price {
-  text-decoration: line-through;
-  height: auto;
-  padding: 0;
-  margin-bottom: 0;
 }
 .block-ui-overlay {
   width: 100%;

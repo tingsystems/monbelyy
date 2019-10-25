@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: ' Lady Paola'},
+                data: {pageTitle: ' Calzalia'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug',
-                data: {pageTitle: ' Lady Paola'},
+                data: {pageTitle: ' Calzalia'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -120,7 +120,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Lady Paola'},
+                data: {pageTitle: 'Calzalia'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
