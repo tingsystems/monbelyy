@@ -8,8 +8,8 @@ from fabric.contrib.files import exists
 # config ssh
 
 env.use_ssh_config = True
-env.hosts = ['ts-24']
-remote_user = 'ladypaolamayoreo'
+env.hosts = ['calzalia']
+remote_user = 'calzalia.mx'
 remote_path = '/home/' + remote_user + '/www/'
 dist_dir = 'dist/'
 tar_file = 'dist.tar.gz'

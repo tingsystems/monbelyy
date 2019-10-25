@@ -221,7 +221,7 @@
         $rootScope.itemsByPage = 12;
 
         var checkStatus = function () {
-            MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {
+            MMOrderSrv.status({'projectId': $rootScope.projectId}).$promise.then(function (data) {
             }, function (error) {
                 $rootScope.hideIndex = false;
                 if (error.status === 402) {
