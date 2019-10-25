@@ -65,7 +65,11 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
+<<<<<<< HEAD
                 data: {pageTitle: ' Calzalia'},
+=======
+                data: {pageTitle: ' Calzalia - Venta de calzado'},
+>>>>>>> c5d81c6b5debbf2c87cf4a0d2a4d0bc7683bc1e9
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -75,21 +79,29 @@
                 }
             })
             .state('category', {
+<<<<<<< HEAD
                 url: '/category/:slug',
                 data: {pageTitle: ' Calzalia'},
+=======
+                url: '/category/:slug?page&pageSize&ordering&search',
+                data: {pageTitle: ' Calzalia - Venta de calzado'},
+>>>>>>> c5d81c6b5debbf2c87cf4a0d2a4d0bc7683bc1e9
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
                         controllerAs: 'Product',
-                        controller: 'ProductsByCategoryCtrl'
+                        controller: 'ProductsByCategoryCtrl',
+                        params: {page: null, pageSize: null, sort: null, search: null}
                     }
                 }
             })
             .state('search', {
-                url: '/busqueda?q&kind',
+                url: '/busqueda?q&kind&page&pageSize',
                 params: {
                     q: null,
-                    kind: null
+                    kind: null,
+                    page: null,
+                    pageSize: null
                 },
                 views: {
                     'content': {
@@ -120,7 +132,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Calzalia'},
+                data: {pageTitle: 'Calzalia - Venta de calzado'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -142,6 +154,17 @@
                 views: {
                     'building': {
                         templateUrl: '/templates/building.html'
+                    }
+                }
+            })
+            .state('referrer', {
+                url: '/ref/seller/:project/:seller',
+                data: {pageTitle: ' Calzalia - Venta de calzado'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/home.html',
+                        controllerAs: 'Home',
+                        controller: 'HomeCtrl'
                     }
                 }
             });
@@ -175,16 +198,14 @@
      * @name Run
      * @desc Update xsrf $http headers to align with Django's defaults
      */
-    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth, $localStorage, MMOrderSrv) {
+    function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
+                 $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
-        // $rootScope.host = 'http://' + $location.host() + ':8000';
-        // $rootScope.host = 'http://192.168.1.77';
-        // $rootScope.host = 'http://api.taki-dev.tingsystems.com';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
-        $rootScope.projectId = '5d951cfe-9a49-4b05-8708-c680e205d246';
+        $rootScope.projectId = 'c04c7086-92c1-4478-864e-afa080dfa672';
         $http.defaults.headers.common['PROJECT-ID'] = 'c04c7086-92c1-4478-864e-afa080dfa672';
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
@@ -199,16 +220,24 @@
         $rootScope.showWeb = false;
         $rootScope.priceList = false;
         $rootScope.multiplePrices = false;
-        $rootScope.multiplePricesConfig = {"limit": 12, "price1":"price", "price2": "priceList"};
+        //cambiar el slug de las listas
+        $rootScope.multiplePricesConfig = {
+            "limit": 12, "prices": {
+                "price": "mayoreo1553209226",
+                "priceList": "menudeo"
+            }
+        };
+        $rootScope.itemsByPage = 12;
 
-        var checkStatus = function(){
-            MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {}, function (error) {
+        var checkStatus = function () {
+            MMOrderSrv.status({'projectId': $rootScope.projectId}).$promise.then(function (data) {
+            }, function (error) {
                 $rootScope.hideIndex = false;
-                if(error.status === 402){
+                if (error.status === 402) {
                     $state.go('suspended');
                     $rootScope.hideIndex = true;
                 }
-                else if(error.status === 307){
+                else if (error.status === 307) {
                     $state.go('building');
                     $rootScope.hideIndex = true;
                 }
@@ -221,13 +250,14 @@
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
-            //checkStatus();
+            checkStatus();
         });
         //various config
         $rootScope.initConfig = {
             googleKey: 'UA-53551138-9',
             meta_color: '#337ab7',
             img_default: '../img/img-default.jpg',
+            logo: '../img/logo.jpg',
             email: 'ventas@ladypaolamayoreo.com.mx',
             phone: '353 105 02 63',
             branchOffice: 'Calzalia - Venta de calzado'
@@ -365,7 +395,6 @@
         if (!angular.isDefined($localStorage.appData)) {
             $localStorage.appData = {};
         }
-
         //init $localStorage.appData
         if (!angular.isDefined($localStorage.globalDiscount)) {
             $localStorage.globalDiscount = {amount: 0};
@@ -406,9 +435,9 @@
     }
 
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
-        'infinite-scroll', 'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI',
-        'duScroll', 'truncate', 'ngTouch', 'ngStorage', 'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app',
-        'shop.app', 'ngMessages', 'ui.select', 'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload'])
+        'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI', 'duScroll', 'truncate', 'ngTouch', 'ngStorage',
+        'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select',
+        'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload', 'wipImageZoom'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)

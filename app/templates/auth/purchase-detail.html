@@ -357,7 +357,7 @@
                                                 <i class="fa fa-angle-left"></i> Regresar
                                             </button>
                                             <button title="Regresar a mis compras" class="btn btn-md btn-primary"
-                                                ng-click="Purchase.DoPayment = true">
+                                                ng-click="Purchase.DoPayment = true" ng-if="Purchase.purchase.statusInfo.code !== 6">
                                                 <i class="fa fa-cash"></i> Abonar a la cuenta
                                             </button>
                                         </div>
