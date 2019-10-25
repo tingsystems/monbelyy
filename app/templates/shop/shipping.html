@@ -25,42 +25,47 @@
                     <hr>
                     <ng-include src="'/templates/shop/shipping-address.html'"></ng-include>
                     
-                    <div ng-if="Payment.cart.metadata.shipment && Payment.sendOptions === '0'">
+                    <div ng-if="Payment.minimum.value && Payment.sendOptions === '0'">
                         <h6>Detalles del envío</h6>
-                        <p>Envío {{ Payment.cart.metadata.shipment.servicelevel}} por <strong>{{Payment.cart.metadata.shipment.provider}}</strong> de {{Payment.cart.metadata.shipment.duration_terms}}</p>
+                        <p>Envío {{ Payment.minimum.value.servicelevel}} por <strong>{{Payment.minimum.value.provider}}</strong> de {{Payment.minimum.value.duration_terms}}</p>
                     </div>
-
-                    <div ng-if="Payment.cart.metadata.shipments && Payment.sendOptions === '0'">
-                        <h6>Selecciona el servicio de paqueteria</h6>
-                        <uib-tabset class="tab-simple" justified="true" active="Payment.activeTab">
-                            <uib-tab index="0" heading="Servicios Estandar" select="Payment.changeTabServicelevel()">
-                                <md-radio-group ng-model="Payment.providerRate" ng-change="Payment.setProvider()">
-                                    <div ng-repeat="provider in Payment.cart.metadata.shipments | filter : { servicelevel : 'estandar' }">
-                                        <md-radio-button class="md-primary" ng-value="provider"> 
-                                            <span class="fa fa-truck">
-                                                {{ provider.provider }} {{provider.servicelevel}} - {{ provider.duration_terms }} - <strong>{{provider.amount | currency}}</strong>
-                                            </span>
-                                        </md-radio-button>
-                                    </div>
-                                </md-radio-group>
-                            </uib-tab>
-                            <uib-tab index="1" heading="Servicios Express" select="Payment.changeTabServicelevel()">
-                                <md-radio-group ng-model="Payment.providerRate" ng-change="Payment.setProvider()">
-                                    <div ng-repeat="provider in Payment.cart.metadata.shipments | filter : { servicelevel : 'express' }" >
-                                        <md-radio-button class="md-primary" ng-value="provider"> 
-                                            <span class="fa fa-truck">
-                                                {{ provider.provider }} {{provider.servicelevel}} - {{ provider.duration_terms }} - <strong>{{provider.amount | currency}}</strong>
-                                            </span>
-                                        </md-radio-button>
-                                    </div>
-                                </md-radio-group>
-                            </uib-tab>
-                        </uib-tabset>
+                    <div ng-if="!Payment.lowerPrividerShip">
+                        <div ng-if="Payment.cart.metadata.shipments && Payment.sendOptions === '0'">
+                            <h6>Selecciona el servicio de paqueteria</h6>
+                            <uib-tabset class="tab-simple" justified="true" active="Payment.activeTab">
+                                <uib-tab index="0" heading="Servicios Estandar" select="Payment.changeTabServicelevel()">
+                                    <md-radio-group ng-model="Payment.providerRate" ng-change="Payment.setProvider(Payment.providerRate)">
+                                        <div ng-repeat="provider in Payment.cart.metadata.shipments | filter : { servicelevel : 'estandar' }">
+                                            <md-radio-button class="md-primary" ng-value="provider"> 
+                                                <span class="fa fa-truck">
+                                                    {{ provider.provider }} {{provider.servicelevel}} - {{ provider.duration_terms }} - <strong>{{provider.amount | currency}}</strong>
+                                                </span>
+                                            </md-radio-button>
+                                        </div>
+                                    </md-radio-group>
+                                </uib-tab>
+                                <uib-tab index="1" heading="Servicios Express" select="Payment.changeTabServicelevel()">
+                                    <md-radio-group ng-model="Payment.providerRate" ng-change="Payment.setProvider()">
+                                        <div ng-repeat="provider in Payment.cart.metadata.shipments | filter : { servicelevel : 'express' }" >
+                                            <md-radio-button class="md-primary" ng-value="provider"> 
+                                                <span class="fa fa-truck">
+                                                    {{ provider.provider }} {{provider.servicelevel}} - {{ provider.duration_terms }} - <strong>{{provider.amount | currency}}</strong>
+                                                </span>
+                                            </md-radio-button>
+                                        </div>
+                                    </md-radio-group>
+                                </uib-tab>
+                            </uib-tabset>
+                        </div>
                     </div>
                     <br>
-                    <button ng-if="Payment.address && Payment.sendOptions === '0' && Payment.providerRate" class="btn btn-danger" type="submit"
+                    <button ng-if="Payment.address && Payment.sendOptions === '0' && Payment.providerRate.object_id" class="btn btn-danger" type="submit"
                             ng-disabled="!Payment.address"
                             ng-click="Payment.saveShippingAddress()">Continuar
+                    </button>
+                    <button ng-if="Payment.address && Payment.sendOptions === '0' && Payment.minimum.value.object_id" class="btn btn-danger" type="submit"
+                        ng-disabled="!Payment.address"
+                        ng-click="Payment.saveShippingAddress()">Continuar
                     </button>
                     <br>
 

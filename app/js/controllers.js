@@ -712,7 +712,7 @@
                             self.detail.price = self.itemFromGroup.priceList;
                         }
                     }
-    
+                    self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];    
                     if (!self.detail.featuredImage) {
                         self.detail.featuredImage = {};
                         self.detail.featuredImage.url = $rootScope.initConfig.img_default;
