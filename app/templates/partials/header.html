@@ -7,6 +7,7 @@
                         <a class="nav-link" href="{{ social.excerpt }}"><span
                             ng-bind-html="social.content | trustHtml"></span></a>
                     </li>
+                    <li>hola</li>
                 </ul>
             </div>
             <div class="col-md-6 col-sm-4 mobile-hidde" ng-controller="GetQuerySearchCtrl as Search">
@@ -32,10 +33,6 @@
                             <i class="fa fa-user-circle"></i> {{user.username}}
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="https://moneek.mx/category/ofertas" class="nav-link text-danger"> <i class="fa fa-gift"></i> Ofertas
-                        </a>
-                    </li>
                     <li class="nav-item desk-hidde">
                         <a ui-sref="shopcart" class="shopping-cart nav-link" ng-if="ecommerce"
                             ng-controller="AccessCtrl as Access">
@@ -51,7 +48,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark nav-theme">
     <div class="container">
         <a ui-sref="home" class="navbar-brand">
-            <img src="img/logo.png" class="logo" alt="Hanny Pulido Cosméticos">
+            <img src="img/logo.png" class="logo" alt="calzalia.mx">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
