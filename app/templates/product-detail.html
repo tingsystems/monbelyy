@@ -27,8 +27,8 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <form name="FormQty">
-                                        <div class="row">
-                                            <ng-include style="width:100%" src="'/templates/partials/options-group.html'"></ng-include>
+                                        <div>
+                                            <ng-include src="'/templates/partials/options-group.html'"></ng-include>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -54,7 +54,7 @@
                                            priceList: Product.detail.priceList, prices: Product.detail.prices},
                                            Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
-                                            class="btn btn-optional"> <i class="fa fa-shopping-cart"></i>Agregar a carrito
+                                            class="btn btn-optional"> <i class="fa fa-shopping-cart"></i> Agregar a carrito
                                     </button>
 
                                 </div>

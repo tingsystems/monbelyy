@@ -110,7 +110,8 @@ audio:not([controls]),
   padding-right: 0;
 }
 .one-rows-nav .navbar-brand .logo {
-  width: 120px;
+  width: 200px;
+  padding: 10px 0;
 }
 .three-rows-nav .first-row {
   padding: 15px 0;
