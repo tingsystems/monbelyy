@@ -249,14 +249,14 @@
             meta_color: '#337ab7',
             img_default: '../img/img-default.jpg',
             logo: '../img/logo.jpg',
-            email: 'ventas@ladypaolamayoreo.com.mx',
+            email: 'ventas@calzalia.mx',
             phone: '353 105 02 63',
-            branchOffice: 'Calzalia - Venta de calzado'
+            branchOffice: 'Calzalia - Calzado de Mujer y Hombre'
 
         };
 
         $rootScope.post = {
-            'title': 'Calzalia - Venta de calzado',
+            'title': 'Calzalia - Calzado de Mujer y Hombre',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -271,7 +271,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Calzalia - Venta de calzado',
+                'title': 'Calzalia - Calzado de Mujer y Hombre',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -280,7 +280,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Calzalia - Venta de calzado';
+        $rootScope.pageTitle = 'Calzalia - Calzado de Mujer y Hombre';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
