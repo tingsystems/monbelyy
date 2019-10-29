@@ -111,23 +111,9 @@
             ordering: 'createdAt',
             fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
-            self.categoryProd = results.results;
+            self.infoShipping = results.results;
             //get featureImage
-            angular.forEach(self.categoryProd, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-            });
-        });
-
-        EntrySrv.get({
-            taxonomies: 'temporadas',
-            isActive: 'True',
-            pageSize: 1,
-            ordering: 'createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.seasonsSell = results.results;
-            //get featureImage
-            angular.forEach(self.seasonsSell, function (obj, ind) {
+            angular.forEach(self.infoShipping, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
