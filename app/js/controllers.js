@@ -416,7 +416,7 @@
                         self.next = results.next;
                         self.previous = results.previous;
                         //get featureImage
-                        angular.forEach(self.listSearch, function (obj, ind) {
+                        angular.forEach(results.results, function (obj, ind) {
                             if($rootScope.priceList){
                                 if('priceList' in obj){
                                     obj.price = obj.priceList;
@@ -714,7 +714,6 @@
                             self.detail.price = self.itemFromGroup.priceList;
                         }
                     }
-
                     self.detail.featuredImage = $filter('filter')(self.itemFromGroup.attachments, {kind: 'featuredImage'})[0];    
                     if (!self.detail.featuredImage) {
                         self.detail.featuredImage = {};

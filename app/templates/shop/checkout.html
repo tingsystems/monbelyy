@@ -27,7 +27,7 @@
                 <div class="col-md-6">
 
                     <label>¿Vas a requerir factura para esta compra?</label>
-                    <md-radio-group layout="row" ng-model="Payment.isInvoiced">
+                    <md-radio-group layout="row" ng-model="Payment.isInvoiced" ng-change="Payment.addTax()">
                         <md-radio-button value="0" class="md-primary">No</md-radio-button>
                         <md-radio-button value="1">Si</md-radio-button>
                     </md-radio-group>
