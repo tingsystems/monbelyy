@@ -161,7 +161,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -241,7 +241,7 @@
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
-            checkStatus(); 
+            //checkStatus(); 
         }); 
         //various config
         $rootScope.initConfig = {

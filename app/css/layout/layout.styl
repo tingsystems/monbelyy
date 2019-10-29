@@ -114,18 +114,25 @@ md-input-container
 
   /* SECTION TWO */
   .section-two
-    padding 30px 0 !important
+    padding 60px 0 !important
 
 
-  // silence is golg ..
+  // silence is gold ..
 
   /* SECTION THREE */
   .section-three
     text-align center
-    background-color #afb1f9
-    padding 40px 0
+    background-color #f5f5f5
+    padding 80px 0
+    img 
+      width 80px
+    h5 
+      text-transform uppercase
+      color fontClr
+      margin-top 25px
     p
-      font-size 18px
+      font-size 15px
+      text-transform uppercase
 
   /* SECTION FOUR */
   .section-four
@@ -162,12 +169,27 @@ md-input-container
 
 /* ------ TEMP PRODUCT DETAIL STYLE ----- */
 .temp-product-detail, .md-dialog-content
+  background-color #f6f6f6
+  .title-prd
+    font-size 26px
+    text-transform uppercase
+    border-top 1px solid fontClr
+    border-bottom 1px solid fontClr
+    padding 10px 0
+  .article-price 
+    font-size 22px  
+  md-input-container .md-input
+    background-color white
+    border 1px solid fontClr
+    color fontClr
   .md-select-value      
     padding 2px 8px 1px !important
+    background-color white
     md-input-container > md-select
-      border 1px solid #ddd
+      border 1px solid fontClr
+      color fontClr
     md-input-container .md-input
-      border 1px solid #ddd
+      border 1px solid fontClr
       padding 0 10px  
     md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input, md-input-container:not(.md-input-invalid).md-input-focused .md-input, md-input-container.md-default-theme:not(.md-input-invalid).md-input-resized .md-input, md-input-container:not(.md-input-invalid).md-input-resized .md-input
       border 1px solid black  
@@ -176,12 +198,13 @@ md-input-container
     background-position bottom
     height 600px
   .box-description-detail-product
-    padding 60px 0
+    padding 20px 0
+    border-top 1px solid fontClr
+    border-bottom 1px solid fontClr
+    margin-top 30px
     h4
-      text-transform uppercase    
-  .article-description
-    md-input-container
-      width 50%
+      text-transform uppercase  
+      padding-bottom: 20px;  
     .article-price
       padding 5px
       color fontClr
@@ -437,4 +460,4 @@ footer
     &._md
       max-height 240px
 md-input-container > md-select
-  border 1px solid #ddd
+  border 1px solid fontClr

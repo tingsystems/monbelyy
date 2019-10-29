@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-sm-4" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
+<div class="">
+    <div class="col-sm-5 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
         <md-input-container style="width: 100%"> 
             <label ng-if="option.kind === 'size'">Talla</label>
             <label ng-if="option.kind === 'color'">Color</label>
@@ -11,6 +11,19 @@
             </md-select>
             <div class="errors" ng-messages="FormQty.size.$error">
                 <div ng-message="required">Requerido</div>
+            </div>
+        </md-input-container>
+    </div>
+    <div class="col-md-5 no-padding">
+        <md-input-container class="md-block">
+            <label>Cantidad</label>
+            <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"
+                    ng-pattern="/^-?[0-9][^\.]*$/" name="qty" 
+                    compare-greater="Product.detail.inventory" required/>
+            <div class="errors" ng-messages="FormQty.qty.$error">
+                <div ng-message="required">Requiredo</div>
+                <div ng-message="pattern">Cantidad no valida</div>
+                <div ng-message="compareGreater">Cantidad de producto no disponible</div>
             </div>
         </md-input-container>
     </div>

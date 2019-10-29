@@ -15,7 +15,7 @@
         <div class="container">
             <div class="title-middle-line">
                 <div class="text-content">
-                    <h3 class="font-type">Temporada Otoño Invierno</h3>
+                    <h3 class="font-type">Temporada Otoño - Invierno</h3>
                 </div>
                 <hr>
             </div>
@@ -42,24 +42,17 @@
         </div>
     </section>
 
-    <section class="section-one">
+    <section class="section-three">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4" ng-repeat="item in Home.infoShipping">
-                    <figure class="snip1190">
-                        <div class="img-caption"
-                             style="background-image: url('{{item.featuredImage.url ? item.featuredImage.url : initConfig.img_default}}');"></div>
-                        <figcaption>
-                            <div class="square">
-                                <div></div>
-                            </div>
-                            <h2>{{ item.title }}</h2>
-                        </figcaption>
-                        <a post-link="{ link: {url: item.link, target: '_self'} }"></a>
-                    </figure>
+                <div class="col-sm-4 text-center" ng-repeat="item in Home.infoShipping">
+                    <a post-link="{ link: {url: item.link, target: '_self'} }">
+                        <img src="{{ item.featuredImage.url }}" alt="{{ item.title }}">
+                        <h5>{{ item.title }}</h5>
+                        <p>{{ item.excerpt }}</p>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
-
 </div>

@@ -105,7 +105,7 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'home-categories1545957608',
+            taxonomies: 'informacion-de-compra',
             isActive: 'True',
             pageSize: 6,
             ordering: 'createdAt',
