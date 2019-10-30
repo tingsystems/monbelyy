@@ -201,6 +201,7 @@
         // $rootScope.apiShop = 'v3';
         $rootScope.apiShop = 'v1';
         var projectId = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
+        $rootScope.projectId = projectId;
         $http.defaults.headers.common['PROJECT-ID'] = projectId;
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
