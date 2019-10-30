@@ -1,18 +1,18 @@
 <div class="temp-product-detail">
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
-            <article class="row">
+            <div class="row" id="product-detail" >
                 <div class="col-sm-12 desk-hidde">
                     <h2>{{Product.detail.name}}</h2>
                 </div>
-                <div class="col-sm-6">
-                    <div class="wrapper" style="width: 100%; height: auto; ">
+                <div class="col-sm-8">
+                    <div class="wrapper">
                         <img class="img-responsive" src="{{Product.detail.featuredImage.url}}"
                              wip-image-zoom="Product.detail.optionsZoom">
                     </div>
 
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="article-description">
                         <div class="container">
                             <div class="row">
@@ -39,7 +39,7 @@
                                            priceList: Product.detail.priceList, prices: Product.detail.prices},
                                            Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
-                                            class="btn btn-optional col-sm-5"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
+                                            class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
                                     </button>
 
                                 </div>
@@ -47,14 +47,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <article class="box-description-detail-product">
+            </div>
+            <div id="product-detail" class="row box-description-detail-product">
+                <div class="col-md-12">
+                    <article>
                         <h4>Descripción</h4>
                         <p class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
                             {{Product.detail.description}}</p>
                     </article>
                 </div>
-            </article>
+            </div>
         </div>
     </section>
 </div>

@@ -1355,12 +1355,29 @@ md-input-container {
 .md-dialog-content {
   background-color: #f6f6f6;
 }
+.temp-product-detail #product-detail,
+.md-dialog-content #product-detail {
+  background-color: #fff;
+}
+.temp-product-detail #product-detail .wrapper,
+.md-dialog-content #product-detail .wrapper {
+  padding: 30px 0;
+}
+.temp-product-detail #product-detail .wip-image-zoom .main-image,
+.md-dialog-content #product-detail .wip-image-zoom .main-image {
+  height: 400px;
+  width: auto;
+  margin: 0 auto;
+}
+.temp-product-detail #product-detail .article-description,
+.md-dialog-content #product-detail .article-description {
+  padding: 40px 0;
+  border-left: 1px solid #ddd;
+}
 .temp-product-detail .title-prd,
 .md-dialog-content .title-prd {
-  font-size: 26px;
+  font-size: 22px;
   text-transform: uppercase;
-  border-top: 1px solid #222;
-  border-bottom: 1px solid #222;
   padding: 10px 0;
 }
 .temp-product-detail .article-price,
@@ -1370,7 +1387,7 @@ md-input-container {
 .temp-product-detail md-input-container .md-input,
 .md-dialog-content md-input-container .md-input {
   background-color: #fff;
-  border: 1px solid #222;
+  border: 1px solid #ddd;
   color: #222;
 }
 .temp-product-detail .md-select-value,
@@ -1380,12 +1397,12 @@ md-input-container {
 }
 .temp-product-detail .md-select-value md-input-container > md-select,
 .md-dialog-content .md-select-value md-input-container > md-select {
-  border: 1px solid #222;
+  border: 1px solid #ddd;
   color: #222;
 }
 .temp-product-detail .md-select-value md-input-container .md-input,
 .md-dialog-content .md-select-value md-input-container .md-input {
-  border: 1px solid #222;
+  border: 1px solid #ddd;
   padding: 0 10px;
 }
 .temp-product-detail .md-select-value md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-input,
@@ -1396,7 +1413,7 @@ md-input-container {
 .md-dialog-content .md-select-value md-input-container.md-default-theme:not(.md-input-invalid).md-input-resized .md-input,
 .temp-product-detail .md-select-value md-input-container:not(.md-input-invalid).md-input-resized .md-input,
 .md-dialog-content .md-select-value md-input-container:not(.md-input-invalid).md-input-resized .md-input {
-  border: 1px solid #000;
+  border: 1px solid #ddd;
 }
 .temp-product-detail .bg-image-single,
 .md-dialog-content .bg-image-single {
@@ -1407,9 +1424,7 @@ md-input-container {
 .temp-product-detail .box-description-detail-product,
 .md-dialog-content .box-description-detail-product {
   padding: 20px 0;
-  border-top: 1px solid #222;
-  border-bottom: 1px solid #222;
-  margin-top: 30px;
+  border-top: 1px solid #ddd;
 }
 .temp-product-detail .box-description-detail-product h4,
 .md-dialog-content .box-description-detail-product h4 {
@@ -1714,7 +1729,7 @@ footer .contact-sty .download-app > i:hover {
   max-height: 240px;
 }
 md-input-container > md-select {
-  border: 1px solid #222;
+  border: 1px solid #ddd;
 }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .single_blog .comment-area {
@@ -1859,6 +1874,9 @@ md-input-container > md-select {
   }
 }
 @media only screen and (max-width: 767px) {
+  .box-simple {
+    padding: 0;
+  }
   .temp-product-detail .bg-image-single,
   .md-dialog-content .bg-image-single {
     background-size: 100%;
@@ -1868,23 +1886,24 @@ md-input-container > md-select {
   }
   .box-simple .box-header .box-bg-img {
     background-position: center;
-    background-size: 100%;
+    background-size: contain;
     height: 200px;
     background-repeat: no-repeat;
   }
   body .content-area-web {
-    padding-top: 120px;
+    padding-top: 102px;
   }
   .one-rows-nav .first-row .nav-item {
     margin: 0 8px;
   }
   .one-rows-nav .navbar-brand .logo {
     padding-left: 15px;
+    width: 120px;
   }
   .header {
     position: absolute;
     width: 100%;
-    z-index: 99999;
+    z-index: 999;
   }
   .navbar-collapse {
     border-top: 1px solid #ddd;
@@ -2037,8 +2056,9 @@ md-input-container > md-select {
   }
   .section-two .title-middle-line .text-content .font-type {
     text-transform: uppercase;
-    font-size: 24px;
+    font-size: 20px;
     margin-top: 6px;
+    text-align: center;
   }
   .section-one .rounded-cicle {
     margin-top: 15px;
