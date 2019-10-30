@@ -602,12 +602,12 @@
                 images              : [],
                 style               : 'box', // inner or box
                 boxPos              : 'right-top', // e.g., right-top, right-middle, right-bottom, top-center, top-left, top-right ...
-                boxW                : 300, // Box width
-                boxH                : 300, // Box height
+                boxW                : 350, // Box width
+                boxH                : 350, // Box height
                 method              : 'lens', // fallow 'lens' or 'pointer'
                 cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
                 lens                : true, // Lens toggle
-                zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                zoomLevel           : 1, // 0: not scales, uses the original large image size, use 1 and above to adjust.
                 immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
                 immersiveModeOptions: {}, // can extend immersed mode options
                 immersiveModeMessage: 'Click to Zoom', // Immersive mode message

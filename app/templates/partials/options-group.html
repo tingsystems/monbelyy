@@ -1,5 +1,5 @@
 <div class="">
-    <div class="col-sm-5 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
+    <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
         <md-input-container style="width: 100%"> 
             <label ng-if="option.kind === 'size'">Talla</label>
             <label ng-if="option.kind === 'color'">Color</label>
@@ -14,7 +14,7 @@
             </div>
         </md-input-container>
     </div>
-    <div class="col-md-5 no-padding">
+    <div class="col-md-8 no-padding">
         <md-input-container class="md-block">
             <label>Cantidad</label>
             <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"

@@ -127,6 +127,8 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px)
+  .box-simple
+    padding 0
   .temp-product-detail .bg-image-single, .md-dialog-content .bg-image-single 
     background-size 100%
     background-position center
@@ -135,20 +137,21 @@
 
   .box-simple .box-header .box-bg-img 
     background-position center
-    background-size 100%
+    background-size contain
     height 200px
     background-repeat no-repeat
   
   body .content-area-web
-    padding-top 120px
+    padding-top 102px
   .one-rows-nav .first-row .nav-item
     margin 0 8px
   .one-rows-nav .navbar-brand .logo
     padding-left 15px  
+    width 120px
   .header 
     position absolute  
     width 100%
-    z-index 99999
+    z-index 999
   .navbar-collapse 
     border-top 1px solid rgb(221, 221, 221)
     padding 20px
@@ -275,8 +278,9 @@
   .section-two
     .title-middle-line .text-content .font-type 
       text-transform uppercase
-      font-size 24px
+      font-size 20px
       margin-top 6px
+      text-align center
   .section-one
     .rounded-cicle
       margin-top 15px
