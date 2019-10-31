@@ -196,8 +196,14 @@
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
+<<<<<<< HEAD
         $rootScope.projectId = 'c04c7086-92c1-4478-864e-afa080dfa672';
         $http.defaults.headers.common['PROJECT-ID'] = 'c04c7086-92c1-4478-864e-afa080dfa672';
+=======
+        var projectId = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
+        $rootScope.projectId = projectId;
+        $http.defaults.headers.common['PROJECT-ID'] = projectId;
+>>>>>>> 5e64292582f31c6de1a511de8ca027e13def61bf
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;

@@ -31,12 +31,13 @@
                     </div>
                     <div ng-if="!Payment.lowerPrividerShip">
                         <div ng-if="Payment.cart.metadata.shipments && Payment.sendOptions === '0'">
-                            <h6>Selecciona el servicio de paqueteria</h6>
-                            <uib-tabset class="tab-simple" justified="true" active="Payment.activeTab">
+                            <h6 ng-if="Payment.cart.metadata.freeShipping !== true">Selecciona el servicio de paqueteria</h6>
+                            <h6 ng-if="Payment.cart.metadata.freeShipping === true" class="text-success"><strong>Felicidades, tienes envío gratis</strong></h6>
+                            <uib-tabset class="tab-simple" justified="true" active="Payment.activeTab" ng-show="Payment.cart.metadata.freeShipping !== true">
                                 <uib-tab index="0" heading="Servicios Estandar" select="Payment.changeTabServicelevel()">
                                     <md-radio-group ng-model="Payment.providerRate" ng-change="Payment.setProvider(Payment.providerRate)">
                                         <div ng-repeat="provider in Payment.cart.metadata.shipments | filter : { servicelevel : 'estandar' }">
-                                            <md-radio-button class="md-primary" ng-value="provider"> 
+                                            <md-radio-button class="md-primary" ng-value="provider" ng-disabled=" Payment.cart.metadata.freeShipping === true "> 
                                                 <span class="fa fa-truck">
                                                     {{ provider.provider }} {{provider.servicelevel}} - {{ provider.duration_terms }} - <strong>{{provider.amount | currency}}</strong>
                                                 </span>
@@ -44,10 +45,10 @@
                                         </div>
                                     </md-radio-group>
                                 </uib-tab>
-                                <uib-tab index="1" heading="Servicios Express" select="Payment.changeTabServicelevel()">
-                                    <md-radio-group ng-model="Payment.providerRate" ng-change="Payment.setProvider()">
+                                <uib-tab index="1" heading="Servicios Express" select="Payment.changeTabServicelevel()" disable=" Payment.cart.metadata.freeShipping === true ">
+                                    <md-radio-group ng-model="Payment.providerRateE" ng-change="Payment.setProvider(Payment.providerRateE)">
                                         <div ng-repeat="provider in Payment.cart.metadata.shipments | filter : { servicelevel : 'express' }" >
-                                            <md-radio-button class="md-primary" ng-value="provider"> 
+                                            <md-radio-button class="md-primary"  ng-value="provider" ng-disabled=" Payment.cart.metadata.freeShipping === true "> 
                                                 <span class="fa fa-truck">
                                                     {{ provider.provider }} {{provider.servicelevel}} - {{ provider.duration_terms }} - <strong>{{provider.amount | currency}}</strong>
                                                 </span>
@@ -281,4 +282,3 @@
         </div>
     </div>
 </div>
-
