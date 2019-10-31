@@ -105,29 +105,15 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'home-categories1545957608',
+            taxonomies: 'informacion-de-compra',
             isActive: 'True',
             pageSize: 6,
             ordering: 'createdAt',
             fields: 'title,content,attachments,slug,excerpt,link'
         }).$promise.then(function (results) {
-            self.categoryProd = results.results;
+            self.infoShipping = results.results;
             //get featureImage
-            angular.forEach(self.categoryProd, function (obj, ind) {
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-            });
-        });
-
-        EntrySrv.get({
-            taxonomies: 'temporadas',
-            isActive: 'True',
-            pageSize: 1,
-            ordering: 'createdAt',
-            fields: 'title,content,attachments,slug,excerpt,link'
-        }).$promise.then(function (results) {
-            self.seasonsSell = results.results;
-            //get featureImage
-            angular.forEach(self.seasonsSell, function (obj, ind) {
+            angular.forEach(self.infoShipping, function (obj, ind) {
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
             });
         });
@@ -616,12 +602,12 @@
                 images              : [],
                 style               : 'box', // inner or box
                 boxPos              : 'right-top', // e.g., right-top, right-middle, right-bottom, top-center, top-left, top-right ...
-                boxW                : 300, // Box width
-                boxH                : 300, // Box height
+                boxW                : 350, // Box width
+                boxH                : 350, // Box height
                 method              : 'lens', // fallow 'lens' or 'pointer'
                 cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
                 lens                : true, // Lens toggle
-                zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                zoomLevel           : 1, // 0: not scales, uses the original large image size, use 1 and above to adjust.
                 immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
                 immersiveModeOptions: {}, // can extend immersed mode options
                 immersiveModeMessage: 'Click to Zoom', // Immersive mode message

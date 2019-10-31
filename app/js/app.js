@@ -161,7 +161,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
@@ -196,8 +196,14 @@
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
+<<<<<<< HEAD
         $rootScope.projectId = 'c04c7086-92c1-4478-864e-afa080dfa672';
         $http.defaults.headers.common['PROJECT-ID'] = 'c04c7086-92c1-4478-864e-afa080dfa672';
+=======
+        var projectId = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
+        $rootScope.projectId = projectId;
+        $http.defaults.headers.common['PROJECT-ID'] = projectId;
+>>>>>>> 5e64292582f31c6de1a511de8ca027e13def61bf
         $rootScope.hidePriceLogin = false;
         $rootScope.createCustomerActive = true;
         $rootScope.registerExtend = true;
@@ -249,14 +255,14 @@
             meta_color: '#337ab7',
             img_default: '../img/img-default.jpg',
             logo: '../img/logo.jpg',
-            email: 'ventas@ladypaolamayoreo.com.mx',
+            email: 'ventas@calzalia.mx',
             phone: '353 105 02 63',
-            branchOffice: 'Calzalia - Venta de calzado'
+            branchOffice: 'Calzalia - Calzado de Mujer y Hombre'
 
         };
 
         $rootScope.post = {
-            'title': 'Calzalia - Venta de calzado',
+            'title': 'Calzalia - Calzado de Mujer y Hombre',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -271,7 +277,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Calzalia - Venta de calzado',
+                'title': 'Calzalia - Calzado de Mujer y Hombre',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -280,7 +286,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Calzalia - Venta de calzado';
+        $rootScope.pageTitle = 'Calzalia - Calzado de Mujer y Hombre';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
