@@ -369,7 +369,7 @@
             { 'id': '3', 'name': '128', 'size': 128 }
         ];
         self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
-            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}, {'property': '-createdAt', 'name': 'Recientes'}, {'property': 'createdAt', 'name': 'Antiguos'}];
         self.sorterOptionSelect = self.filterOrderingOptions[0];
         self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
         self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;
@@ -1123,7 +1123,7 @@
                 self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo,offerPrice,expiredOffer';
             }
             if (self.optionSelected) {
-                self.params.ordering = self.optionSelected.option;
+                self.params.ordering = self.optionSelected.property;
             }
             else {
                 self.params.ordering = '-createdAt';
@@ -1182,7 +1182,7 @@
             self.sizeSelected = false;
             self.typeSelected = false;
             self.taxonomies = [];
-            $scope.tableParams.reload();
+            self.getData();
 
         }
     }
