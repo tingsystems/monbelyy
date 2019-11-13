@@ -174,7 +174,7 @@
                     </div>
                     <div class="container" ng-controller="ShoppingCtrl as Shop">
                         <div class="row">
-                            <div class="col-sm-4" ng-repeat="product in Product.items">
+                            <div class="col-md-4 col-sm-6 col-6" ng-repeat="product in Product.items">
                                 <ng-include src="'/templates/partials/box-product.html'" ng-if="!Product.isPost"></ng-include>
                                 <div class="box-prod" ng-if="Product.isPost">
                                     <a ui-sref="post_detail({slug:product.slug})">
@@ -195,19 +195,19 @@
             <div class="ng-table-pager">
                 <ul ng-if="Product.pager.pages.length" class="pagination">
                     <li ng-class="{disabled:Product.pager.currentPage === 1}">
-                        <a ng-click="Product.setPage(1)">Primera</a>
+                        <a ng-click="Product.setPage(1)"><i class="fa fa-angle-double-left"></i></a>
                     </li>
                     <li ng-class="{disabled:Product.pager.currentPage === 1}">
-                        <a ng-click="Product.setPage(Product.pager.currentPage - 1)">Anterior</a>
+                        <a ng-click="Product.setPage(Product.pager.currentPage - 1)"><i class="fa fa-angle-left"></i></a>
                     </li>
                     <li ng-repeat="page in Product.pager.pages" ng-class="{active:Product.pager.currentPage === page}">
                         <a ng-click="Product.setPage(page)">{{page}}</a>
                     </li>
                     <li ng-class="{disabled:Product.pager.currentPage === Product.pager.totalPages}">
-                        <a ng-click="Product.setPage(Product.pager.currentPage + 1)">Siguiente</a>
+                        <a ng-click="Product.setPage(Product.pager.currentPage + 1)"><i class="fa fa-angle-right"></i></a>
                     </li>
                     <li ng-class="{disabled:Product.pager.currentPage === Product.pager.totalPages}">
-                        <a ng-click="Product.setPage(Product.pager.totalPages)">Última</a>
+                        <a ng-click="Product.setPage(Product.pager.totalPages)"><i class="fa fa-angle-double-right"></i></a>
                     </li>
                 </ul>
             </div>
