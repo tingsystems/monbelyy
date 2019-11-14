@@ -1,0 +1,93 @@
+<div class="temp-categories">
+    <section id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active">Servicios</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section class="content-area">
+        <div class="container" id="top">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="title-primary">
+                        <div class="container">
+                            <div class="row justify-content-between">
+                                <div class="col-sm-4">
+                                    <h1 class=text-uppercase>Servicios</h1>
+                                </div>
+                                <div class="col-sm-4">
+                                    <md-input-container class="md-block">
+                                        <md-select placeholder="Opciones de ordenamiento"
+                                                   ng-model="Service.optionSelected"
+                                                   data-md-container-class="selectdemoSelectHeader"
+                                                   name="options"
+                                                   ng-change="Service.orderingChange()"
+                                                   aria-label="Opciones de ordenamiento">
+                                            <md-option ng-value="option"
+                                                       ng-repeat="option in Service.filterOrderingOptions">
+                                                {{option.name}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-sm-2">
+                                    <md-input-container>
+                                        <label>Número de resultados</label>
+                                        <md-select ng-model="Service.pageSizesSelect"
+                                                   style="min-width: 100px;"
+                                                   ng-change="Service.changePageSize()"
+                                                   data-md-container-class="selectdemoSelectHeader" aria-label="size">
+                                            <md-option ng-value="size" ng-repeat="size in Service.pageSizes">{{size.name}}
+                                            </md-option>
+                                        </md-select>
+
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4" ng-repeat="service in Service.items">
+                                <ng-include src="'/templates/partials/box-service.html'"></ng-include>
+                                <div class="box-prod">
+                                    <a ui-sref="post_detail({slug:service.slug})">
+                                        <div class="bg-prod"
+                                             style="background-image: url('{{service.featuredImage.url ? service.featuredImage.url : initConfig.img_default }}')"></div>
+                                        <h3 class="prod-descrip">{{service.title}}</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--post list -->
+            <!-- pagination -->
+            <div class="ng-table-pager">
+                <ul ng-if="Service.pager.pages.length" class="pagination">
+                    <li ng-class="{disabled:Service.pager.currentPage === 1}">
+                        <a ng-click="Service.setPage(1)">Primera</a>
+                    </li>
+                    <li ng-class="{disabled:Service.pager.currentPage === 1}">
+                        <a ng-click="Service.setPage(Service.pager.currentPage - 1)">Anterior</a>
+                    </li>
+                    <li ng-repeat="page in Service.pager.pages" ng-class="{active:Service.pager.currentPage === page}">
+                        <a ng-click="Service.setPage(page)">{{page}}</a>
+                    </li>
+                    <li ng-class="{disabled:Service.pager.currentPage === Service.pager.totalPages}">
+                        <a ng-click="Service.setPage(Service.pager.currentPage + 1)">Siguiente</a>
+                    </li>
+                    <li ng-class="{disabled:Service.pager.currentPage === Service.pager.totalPages}">
+                        <a ng-click="Service.setPage(Service.pager.totalPages)">Última</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>

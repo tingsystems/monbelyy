@@ -158,6 +158,28 @@
                         controller: 'HomeCtrl'
                     }
                 }
+            }).state('services',{
+                url: '/services',
+                data: {pageTitle: ' Moneek'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/services.html',
+                        controllerAs: 'Service',
+                        controller: 'ServiceCtrl'
+                    }
+                }
+
+            })
+            .state('service-detail', {
+                url: '/service/detail/:slug\.html',
+                data: {pageTitle: 'Moneek'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/service-detail.html',
+                        controllerAs: 'Service',
+                        controller: 'ServiceCtrl'
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');

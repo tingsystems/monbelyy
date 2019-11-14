@@ -1343,6 +1343,224 @@
         };
     }
 
+    function ServiceCtrl(ProductSrv, NotificationSrv, $stateParams, $rootScope, $localStorage, $filter, $state, PagerService) {
+        var self = this;
+
+        var getDetail = function(slug){
+            var paramsProducts = {};
+            paramsProducts.slug = slug;
+            paramsProducts.isActive = 'True';
+            if (list !== '') {
+                paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+                if($rootScope.multiplePrices){
+                    paramsProducts.priceList = '';
+    
+                }else {
+                    paramsProducts.priceList = list;
+                }
+            }
+            else {
+                paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+            }
+    
+            self.busy = true;
+            ProductSrv.get(paramsProducts).$promise.then(function (results) {
+                self.parent = results.id;
+                self.detail = results;
+                self.detail.galleryImages = [];
+                self.detail.optionsZoom = {
+                    zoomEnable          : true,
+                    defaultIndex        : 0, // Order of the default selected Image
+                    images              : [],
+                    style               : 'box', // inner or box
+                    boxPos              : 'right-top', // e.g., right-top, right-middle, right-bottom, top-center, top-left, top-right ...
+                    boxW                : 300, // Box width
+                    boxH                : 300, // Box height
+                    method              : 'lens', // fallow 'lens' or 'pointer'
+                    cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
+                    lens                : true, // Lens toggle
+                    zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                    immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                    immersiveModeOptions: {}, // can extend immersed mode options
+                    immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                    prevThumbButton     : '&#9665;', // Prev thumb button (html)
+                    nextThumbButton     : '&#9655;', // Next thumb button (html)
+                    thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
+                    thumbCol            : 3, // Thumb column count
+                    thumbColPadding     : 4 // Padding between thumbs
+                };
+                // get featureImage
+                self.detail.featuredImage = $filter('filter')(self.detail.attachments, {kind: 'featuredImage'})[0];
+                if (!self.detail.featuredImage) {
+                    self.detail.featuredImage = {};
+                    self.detail.featuredImage.url = $rootScope.initConfig.img_default;
+                }
+                // add gallery image and featured image
+                self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
+                //get galeries
+                angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
+                    self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
+                });
+    
+                self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+                if($rootScope.priceList){
+                    if('priceList' in self.detail){
+                        self.detail.price = self.detail.priceList;
+                    }
+    
+                }
+                $rootScope.post.title = self.detail.name;
+                $rootScope.post.urlImages.original = self.detail.featuredImage.url;
+                $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
+                self.busy = false;
+            });
+
+        }
+
+        self.list = [];
+        self.busy = false;
+        var list = $localStorage.priceList ? $localStorage.priceList : '';
+        self.selectFilter = '1';
+        self.slugItem = $stateParams.slug;
+        self.lines = [];
+        self.brands = [];
+        self.sizes = [];
+        self.categories = [];
+        self.ready = false;
+        self.taxonomies = [];
+        self.taxBrand = [];
+        self.taxSize = [];
+        self.taxType = [];
+        self.taxCat = [];
+        self.params = {ordering: 'name'};
+        self.changeParams = false;
+        // init for pagination and ordering
+        self.totalResults = 0;
+        self.next = null;
+        self.previous = null;
+        self.numberPages = 1;
+        self.pageSizes = [
+            { 'id': '0', 'name': '12', 'size': 12 },
+            { 'id': '1', 'name': '24', 'size': 24 },
+            { 'id': '1', 'name': '36', 'size': 36 },
+            { 'id': '2', 'name': '64', 'size': 64 },
+            { 'id': '3', 'name': '128', 'size': 128 }
+        ];
+        self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
+            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        self.sorterOptionSelect = self.filterOrderingOptions[0];
+        self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
+        self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;
+        angular.forEach(self.pageSizes, function (obj) {
+            if (obj.size === self.pageSize) {
+                self.pageSizesSelect = obj;
+            }
+        });
+        self.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+        angular.forEach(self.filterOrderingOptions, function (obj) {
+            if (obj.property === self.ordering) {
+                self.optionSelected = obj;
+            }
+        });
+        self.pager = {};
+        self.setPage = setPage;
+    
+
+        self.getData = function () {
+            self.params.page = self.page;
+            self.params.pageSize = $stateParams.pageSize ? $stateParams.pageSize : self.pageSize;
+            self.params.ordering = $stateParams.ordering ? $stateParams.ordering: self.sorterOptionSelect.property;
+            self.params.search = $stateParams.search ? $stateParams.search : self.globalSearchTerm;
+            self.busy = true;
+            if (self.taxonomies.length > 0) {
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug + ',' + self.taxonomies.join();
+
+                }else {
+                    self.params.taxonomies = $stateParams.slug + ',' + self.taxonomies.join();
+                }
+
+            }
+            else {
+                if($rootScope.taxnomySearch){
+                    self.params.taxonomies = $rootScope.taxnomySearch + ',' + $stateParams.slug
+                }
+                else {
+                    self.params.taxonomies = $stateParams.slug;
+                }
+
+            }
+            self.params.isActive = 'True';
+            if($rootScope.showWeb){
+                self.params.showWeb = 'True';
+            }
+            if (list !== '') {
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
+                self.params.priceList = list;
+            }
+            else {
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo,offerPrice,expiredOffer';
+            }
+            if (self.optionSelected) {
+                self.params.ordering = self.optionSelected.property;
+            }
+            else {
+                self.params.ordering = '-createdAt';
+            }
+            self.params.kind = 'service';
+            ProductSrv.get(self.params).$promise.then(function (data) {
+                self.totalResults = data.count;
+                self.next = data.next;
+                self.previous = data.previous;
+                self.busy = false;
+                angular.forEach(data.results, function (obj) {
+                    if($rootScope.priceList){
+                        if('priceList' in obj){
+                            obj.price = obj.priceList;
+                        }
+                    }
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    obj.offerPrice = parseFloat(obj.offerPrice);
+                });
+                self.items = data.results;
+                self.setPage(self.page);
+            }, function (error) {
+                angular.forEach(error, function (value, key) {
+                    NotificationSrv.error(value + '' + key);
+                    self.busy = false;
+                });
+            });
+        };
+
+        if($stateParams.slug){
+            getDetail($stateParams.slug)
+
+        }else{
+            self.getData();
+        }
+
+        // funciones para controlar las acciones de la paginacion y ordenamiento
+        self.orderingChange = function () {
+            $state.go('.', {ordering: self.optionSelected.property, page: 1, pageSize: self.pageSize });
+        };
+        self.changePageSize = function () {
+            self.pageSize = self.pageSizesSelect.size;
+            $state.go('.', {page: 1, pageSize: self.pageSize, ordering: self.optionSelected.property});
+        };
+
+        function setPage(page) {
+            if (page < 1 || page > self.pager.totalPages) {
+                return;
+            }
+            // get pager object from service
+            self.pager = PagerService.GetPager(self.totalResults, page, self.pageSize);
+            // get current page of items
+            $state.go('.', {page: parseInt(page), pageSize: self.pageSize, ordering: self.optionSelected.property});
+        }
+    }
+
+    
+
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -1358,7 +1576,8 @@
         .controller('TabsCtrl', TabsCtrl)
         .controller('ProductDetailCtrl', ProductDetailCtrl)
         .controller('ProductsByCategoryCtrl', ProductsByCategoryCtrl)
-        .controller('ShoppingCtrl', ShoppingCtrl);
+        .controller('ShoppingCtrl', ShoppingCtrl)
+        .controller('ServiceCtrl', ServiceCtrl);
 
     // inject dependencies to controllers
     HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage', '$stateParams'];
@@ -1378,4 +1597,5 @@
         'ngTableEventsChannel', '$state', 'PagerService'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
         'SweetAlert', 'ProductSrv', '$mdDialog', '$scope'];
+    ServiceCtrl.$inject = ['ProductSrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter', '$state', 'PagerService'];
 })();
