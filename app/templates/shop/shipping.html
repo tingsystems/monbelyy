@@ -1,7 +1,7 @@
 <div class="content-area">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 address-form">
+            <div class="col-md-6 address-form" ng-if="!Payment.purchaseGuest">
 
                 <div class="col-md-12">
                     <h4><i class="fa fa-truck"></i> Selecciona la forma de envio</h4>
@@ -273,6 +273,193 @@
                                 ng-disabled="Form.$invalid || !Payment.validRetriveInStore || !Payment.shop" ng-click="Payment.retriveInStore()">Continuar y recoger en
                             tienda
                         </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 address-form" ng-if="Payment.purchaseGuest" ng-controller="AccessCtrl as Access">
+                <form name="Form" ng-submit="Access.purchaseGuestLogin()">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>Ingresa tus datos de contacto</h4>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="fa fa-plus-circle fa-2x" title="Mostrar"
+                                   ng-click="hideFirst=!hideFirst">
+                                </a>
+                            </div>
+                        </div>
+                        <div ng-if="!hideFirst">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <md-input-container md-no-float>
+                                        <input ng-model="Access.guest.contactPersonName" type="text"
+                                               id="contactPersonName"
+                                               name="contactPersonName"
+                                               placeholder="Nombre completo"
+                                               required>
+                                        <div class="help-block" ng-messages="Form.contactPersonName.$error"
+                                             ng-if="Form.contactPersonName.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <md-input-container md-no-float
+                                                        ng-class="{ 'has-error': Form.contactPersonEmail.$touched && Form.address.$invalid }">
+                                        <input ng-model="Access.guest.contactPersonEmail" type="email"
+                                               id="contactPersonEmail"
+                                               name="contactPersonEmail"
+                                               placeholder="Correo electronico"
+                                               required>
+                                        <div class="help-block" ng-messages="Form.contactPersonEmail.$error"
+                                             ng-if="Form.contactPersonEmail.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
+                                            <div class="text-danger" ng-message="email">Correo electrónico no válido.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <md-input-container md-no-float>
+                                        <input ng-model="Access.guest.contactPersonPhone" type="text"
+                                               id="contactPersonPhone"
+                                               name="contactPersonPhone"
+                                               placeholder="Teléfono"
+                                               required>
+                                        <div class="help-block" ng-messages="Form.contactPersonPhone.$error"
+                                             ng-if="Form.contactPersonPhone.$touched">
+                                            <div class="text-danger" ng-message="required">Este campo es requerido.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+                        <h4>Ingresa tus datos de entrega</h4>
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block">
+                                        <label>Estado</label>
+                                        <md-select ng-model="Access.state" md-on-open="Access.getStates()"
+                                                   data-md-container-class="selectdemoSelectHeader"
+                                                   md-on-close="searchState='';Payment.clearCities()" name="state"
+                                                   required>
+                                            <md-select-header class="demo-select-header">
+                                                <input ng-model="searchState" type="search"
+                                                       placeholder="Busca un estado..."
+                                                       class="demo-header-searchbox md-text"
+                                                       ng-keydown="$event.stopPropagation()">
+                                            </md-select-header>
+                                            <div layout="row" layout-align="center center"
+                                                 ng-if="Access.busyState">
+                                                <md-progress-circular md-mode="indeterminate"
+                                                                      class="md-warn md-default-theme"
+                                                                      style="transform: scale(1);"></md-progress-circular>
+                                            </div>
+                                            <md-option ng-repeat="state in Access.states | filter:searchState"
+                                                       ng-value="state">
+                                                {{state.name}}
+                                            </md-option>
+                                        </md-select>
+                                        <div class="errors" ng-messages="Form.state.$error">
+                                            <div ng-message="required">Requerido</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                                <div class="col-md-6">
+                                    <md-input-container class="md-block">
+                                        <label>Ciudad</label>
+                                        <md-select ng-model="Access.city" md-on-open="Access.getCitiesByState()"
+                                                   data-md-container-class="selectdemoSelectHeader"
+                                                   md-on-close="searchCity=''"
+                                                   ng-disabled="Payment.disableCity" name="city" required>
+                                            <md-select-header class="demo-select-header">
+                                                <input ng-model="searchCity" type="search"
+                                                       placeholder="Busca una ciudad de {{Payment.state.name}}"
+                                                       class="demo-header-searchbox md-text"
+                                                       ng-keydown="$event.stopPropagation()">
+                                            </md-select-header>
+                                            <div layout="row" layout-align="center center" ng-if="Access.busyCity">
+                                                <md-progress-circular md-mode="indeterminate"
+                                                                      class="md-warn md-default-theme"
+                                                                      style="transform: scale(1);"></md-progress-circular>
+                                            </div>
+                                            <md-option ng-repeat="city in Access.cities | filter:searchCity"
+                                                       ng-value="city">
+                                                {{city.name}}
+                                            </md-option>
+                                        </md-select>
+                                        <div class="errors" ng-messages="Form.city.$error">
+                                            <div ng-message="required">Requerido</div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <md-input-container md-no-float>
+                                    <input ng-model="Access.guest.dataAddress.address" type="text" id="address"
+                                           name="address"
+                                           placeholder="Calle y número"
+                                           required>
+                                    <div class="help-block" ng-messages="Form.address.$error"
+                                         ng-if="Form.address.$touched">
+                                        <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <md-input-container>
+                                    <input ng-model="Access.guest.dataAddress.neighborhood" type="text"
+                                           id="neighborhood"
+                                           name="neighborhood"
+                                           placeholder="Colonia"
+                                           required>
+                                    <div class="help-block" ng-messages="Form.address.$error"
+                                         ng-if="Form.address.$touched">
+                                        <div class="text-danger" ng-message="required">Este campo es requerido.</div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <md-input-container>
+                                    <input ng-model="Access.guest.dataAddress.zip" ng-pattern="/^[0-9]{5}$/"
+                                           maxlength="5" id="zip" name="zip"
+                                           placeholder="Código Postal"
+                                           required>
+                                    <div class="help-block" ng-messages="registerForm.zip.$error"
+                                         ng-if="registerForm.zip.$touched">
+                                        <div class="text-danger" ng-message="required">Este campo es requerido.
+                                        </div>
+                                        <div class="text-danger" ng-message="pattern">Formato no válido</div>
+                                    </div>
+                                </md-input-container>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right" style="margin-top: 30px;">
+                                <button class="btn btn-danger"
+                                        type="submit"
+                                        ng-disabled="Form.$invalid">
+                                    Continuar
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

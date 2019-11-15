@@ -2,7 +2,7 @@
     'use strict';
 
     function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
-        PriceListSrv, StateSrv, $anchorScroll, $stateParams) {
+        PriceListSrv, StateSrv, CartsSrv, $anchorScroll, $stateParams) {
         $anchorScroll();
         var self = this;
         self.busy = false;
@@ -229,6 +229,73 @@
         },
         { 'name': 'Roberto Sanchez de Tagle', 'id': '12' }, { 'name': 'Samanda Santos', 'id': '13' },
         { 'name': 'Otro', 'id': '14' }];
+
+
+        self.guest = {dataAddress: {city: null, state: null}};
+
+
+        self.purchaseGuestLogin = function () {
+            self.guest.dataAddress.city = self.city.id;
+            self.guest.dataAddress.state = self.state.id;
+            self.guest.email = self.guest.contactPersonEmail;
+            RegisterSrv.save(self.guest).$promise.then(function (data) {
+                self.busy = false;
+                self.guest = data;
+                $auth.login({
+                    "grant_type": 'password',
+                    "client_id": self.client_id,
+                    "username": data.metadata.series,
+                    "password": data.metadata.token
+                })
+                    .then(function (response) {
+                        $localStorage.appData = {user: angular.copy(response.data.user)};
+                        $localStorage.appData.user.customer = self.guest.id;
+                        $localStorage.appData.user.address = self.guest.metadata.addressId;
+                        $localStorage.appData.user.branchId = self.guest.metadata.branchId;
+                        $localStorage.appData.user.warehouseID = self.guest.metadata.warehouseDefault.id;
+                        $localStorage.appData.user.id = self.guest.metadata.employee;
+                        $localStorage.appData.user.mpPublicKey = self.guest.metadata.mpPublicKey;
+                        $localStorage.appData.user.saleGuest = true;
+                        // crear el carrito
+                        var itemsLocal = $localStorage.items;
+                        var items = [];
+                        var itemCount = itemsLocal.length;
+                        angular.forEach(itemsLocal, function (obj, ind) {
+                            items[ind] = {
+                                id: obj.id,
+                                qty: obj.qty,
+                                promotion: parseFloat(obj.discount.discount),
+                                price: parseFloat(obj.price)
+                            };
+
+                        });
+                        CartsSrv.save({
+                            items: items, store: self.guest.metadata.branchId, customer: self.guest.id,
+                            customerName: self.guest.contactPersonName,
+                            customerEmail: self.guest.contactPersonEmail,
+                            itemCount: itemCount, fromWeb: true, metadata: {}
+                        }).$promise.then(function (cart) {
+                            $localStorage.cart = cart;
+                            $localStorage.shipmentTotal = cart.shipmentCost;
+                            $localStorage.total = cart.total;
+                            $state.go('checkout', {shipping: 0});
+                        });
+                    })
+                    .catch(function (response) {
+                        // Handle errors here, such as displaying a notification
+                        // for invalid email and/or password.
+                        self.processing = false;
+                        NotificationSrv.error('Usuario o contraseña incorrectos');
+                    });
+
+
+            }, function (error) {
+                angular.forEach(error.data, function (key, value) {
+                    NotificationSrv.error(key, value);
+                    self.busy = false;
+                })
+            });
+        }
 
 
     }
@@ -965,7 +1032,7 @@
 
     // inject dependencies to controllers
     AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope',
-        'NotificationSrv', 'PriceListSrv', 'StateSrv', '$anchorScroll', '$stateParams'];
+        'NotificationSrv', 'PriceListSrv', 'StateSrv', 'CartsSrv', '$anchorScroll', '$stateParams'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];

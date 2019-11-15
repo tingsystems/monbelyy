@@ -367,11 +367,37 @@
             getTotal(data.data)
         });
 
+        self.goToPurchaseGuest = function () {
+            $state.go('shipping-address', {intent: 'guest'});
+        };
+
     }
 
-    function ShippingAddressCtrl(AddressSrv, ShipmentSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter, CartsSrv, $timeout) {
+    function ShippingAddressCtrl(AddressSrv, ShipmentSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter, CartsSrv, $timeout, $stateParams) {
         var self = this;
-        var user = $localStorage.appData.user;
+        
+        try {
+            var user = $localStorage.appData.user;
+        }
+        catch (err) {
+            console.log('compra como invitado');
+        }
+
+        try {
+            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+        }
+        catch (err) {
+            console.log('compra como invitado');
+        }
+
+        try {
+            self.customer = $localStorage.appData.user.customer;
+            self.params.customer = self.customer;
+        }
+        catch (err) {
+            console.log('compra como invitado');
+        }
+
         self.branchOffice = '';
         self.params = [];
         self.formDataShip = {};
@@ -381,8 +407,6 @@
         self.busy = false;
         self.addAddress = false;
         self.items = $localStorage.items ? $localStorage.items : [];
-        self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
-        self.customer = $localStorage.appData.user.customer;
         self.total = $localStorage.total;
         $localStorage.items = self.items;
         self.items = $localStorage.items;
@@ -392,6 +416,8 @@
         self.sendOptions = "0";
         self.busyAddresses = true;
         self.addresses = [];
+
+
         
         if('metadata' in self.cart){
             if('shipments' in self.cart.metadata){
@@ -413,6 +439,10 @@
         }
         catch (err) {
             self.askProvider = false;
+        }
+
+        if ($stateParams.intent === 'guest') {
+            self.purchaseGuest = true;
         }
 
 
@@ -1300,7 +1330,7 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
-    ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter','CartsSrv', '$timeout'];
+    ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter','CartsSrv', '$timeout', '$stateParams'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
