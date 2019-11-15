@@ -226,7 +226,7 @@
             self.total = (Math.round(self.total * 100) / 100);
             $localStorage.total = self.total;
             $localStorage.subTtotal = self.subTotal;
-            $localStorage.promoTotal = self.promoTotal;
+            $localStorage.promoTotal = (Math.round(self.promoTotal * 100) / 100);
             $localStorage.taxTotal = self.taxTotal;
 
             if ($localStorage.globalDiscount.isPercentage === 0) {
@@ -949,7 +949,7 @@
             }
             self.params.items = self.items;
             self.params.itemCount = self.items.length;
-            self.params.promoTotal = $localStorage.promoTotal;
+            self.params.promoTotal = (Math.round($localStorage.promoTotal * 100) / 100);
             self.params.shipmentTotal = $localStorage.shipmentTotal;
             self.params.taxTotal = $localStorage.taxTotal;
             if ($localStorage.appData.getShop) {
