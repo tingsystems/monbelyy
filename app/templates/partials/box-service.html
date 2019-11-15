@@ -1,0 +1,39 @@
+<div class="box-simple">
+    <div class="box-header">
+        <a ui-sref="service-detail({slug:service.slug})" title="Ver más">
+            <div class="box-bg-img"
+            style="background-image: url('{{service.featuredImage.url ? service.featuredImage.url : initConfig.img_default}}')"></div>
+        </a>
+    </div>
+    <div class="box-container">
+        <div class="row align-items-center">
+            <div ng-class="service.offerPrice > 0 ? 'col-sm-12': 'col-sm-8'">
+                <p class="box-title">{{ service.name | limitTo:40}}</p>
+            </div>
+            <div ng-class="service.offerPrice > 0 ? 'hide': 'col-sm-4'">
+                <p>{{ service.price | currency }}</p>
+            </div>
+            <div class="col-sm-12 no-padding" ng-if="service.offerPrice > 0">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 no-pd-r">
+                            <!--Offert price-->
+                            <p class="offer-price" ng-if="service.offerPrice > 0">{{ service.offerPrice | currency }}</p>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                                <!--old price-->
+                            <p class="old-price" ng-if="service.offerPrice > 0">{{ service.price | currency }}</p>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <a ui-sref="service-detail({slug:service.slug})" class="btn btn-block btn-white">Ver más</a>
+            </div>
+        </div>
+    </div>
+</div>
