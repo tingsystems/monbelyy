@@ -29,9 +29,16 @@
 
     <!-- Open Graph data -->
     <meta property="og:title" content="{{ post.title }}" ng-if="post"/>
-    <meta property="og:description" content="{{ post.excerpt }}" ng-if="post"/>
+    <meta property="og:description" content="{{ post.description }}" ng-if="post"/>
     <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post"/>
-    <meta property="og:type" content="website"/>
+    <meta property="og:type" content="store" ng-if="!post"/>
+    <meta property="og:type" content="product" ng-if="post"/>
+    <meta property="product:price:currency" content="MXN" ng-if="post"/>
+    <meta property="product:brand" content="Lady Paola" ng-if="post"/>
+    <meta property="product:condition" content="new" ng-if="post"/>
+    <meta property="product:price:amount" content="{{ post.price }}" ng-if="post"/>
+    <meta property="fb:app_id" content="1346933925479827" ng-if="post"/>
+    <meta property="retailer_id" content="{{post.id}}" ng-if="post"/>
     <meta property="og:url" content="https://www.calzalia.mx{{ $state.href($state.current.name) }}"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700" rel="stylesheet">
