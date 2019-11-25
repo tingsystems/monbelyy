@@ -651,6 +651,9 @@
             }
             $rootScope.post.title = self.detail.name;
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
+            $rootScope.post.price = self.detail.price;
+            $rootScope.post.id = self.detail.id;
+            $rootScope.post.description = self.detail.description;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
             self.detail.qty = 1;
