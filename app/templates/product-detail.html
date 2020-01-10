@@ -1,47 +1,34 @@
 <div class="temp-product-detail">
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
-            <article class="row">
-                <div class="col-sm-6">
-                    <div class="wrapper" style="width: 300px; height: auto; ">
+            <div class="row" id="product-detail" >
+                <div class="col-sm-12 desk-hidde">
+                    <h2>{{Product.detail.name}}</h2>
+                </div>
+                <div class="col-sm-8">
+                    <div class="wrapper">
                         <img class="img-responsive" src="{{Product.detail.featuredImage.url}}"
                              wip-image-zoom="Product.detail.optionsZoom">
                     </div>
 
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="article-description">
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h4>{{Product.detail.name}}..</h4>
-                                    <br>
-                                    <h2 class="article-price" ng-if="Product.detail.offerPrice <= 0">{{ Product.detail.price | currency}}</h2>
-                                    <h2 class="offer-price" ng-if="Product.detail.offerPrice > 0">{{ Product.detail.offerPrice | currency}}</h2>
-                                    <p class="old-price" ng-if="Product.detail.offerPrice > 0">{{ Product.detail.price | currency}}</p>
-                                    <span ng-if="Product.detail.inventory <= 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Producto agotado</span>
+                                    <h2 class="title-prd">{{Product.detail.name}}</h2>
+                                    <div class="unavailable">
+                                        <span ng-if="Product.detail.inventory <= 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Producto agotado</span>
+                                    </div>
+                                    <h1 class="article-price">{{ Product.detail.price | currency}}</h1>
                                     <br>
 
                                 </div>
                                 <div class="col-sm-12">
                                     <form name="FormQty">
-                                        <div class="row">
-                                            <ng-include style="width:100%" src="'/templates/partials/options-group.html'"></ng-include>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <md-input-container class="md-block">
-                                                    <label>Cantidad</label>
-                                                    <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"
-                                                            ng-pattern="/^-?[0-9][^\.]*$/" name="qty" 
-                                                            compare-greater="Product.detail.inventory" required/>
-                                                    <div class="errors" ng-messages="FormQty.qty.$error">
-                                                        <div ng-message="required">Requiredo</div>
-                                                        <div ng-message="pattern">Cantidad no valida</div>
-                                                        <div ng-message="compareGreater">Cantidad de producto no disponible</div>
-                                                    </div>
-                                                </md-input-container>
-                                            </div>
+                                        <div>
+                                            <ng-include src="'/templates/partials/options-group.html'"></ng-include>
                                         </div>
                                     </form>
                                     <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
@@ -52,23 +39,46 @@
                                            priceList: Product.detail.priceList, prices: Product.detail.prices},
                                            Product.detail.qty)"
                                             ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
-                                            class="btn btn-optional"> <i class="fa fa-shopping-cart"></i>Agregar a carrito
+                                            class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
                                     </button>
-
+                                    <hr>
+                                    <div class="type-payments">
+                                        <small>
+                                            Realiza tu pago con
+                                        </small>
+                                        <ul class="nav">
+                                            <li class="nav-item ">
+                                                <a class="nav-link disabled">
+                                                    <i class="fa fa-cc-mastercard fa-2x"></i>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link disabled">
+                                                    <i class="fa fa-cc-visa fa-2x"></i>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link disabled">
+                                                    <i class="fa fa-cc-paypal fa-2x"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <article class="box-description-detail-product">
+            </div>
+            <div id="product-detail" class="row box-description-detail-product">
+                <div class="col-md-12">
+                    <article>
                         <h4>Descripción</h4>
-                        <hr>
                         <p class="prod-detail-descrip" ng-bind-html="Product.detail.description | trustHtml">
                             {{Product.detail.description}}</p>
                     </article>
                 </div>
-            </article>
+            </div>
         </div>
     </section>
 </div>

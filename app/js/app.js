@@ -214,14 +214,14 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
                  $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
-        // $rootScope.host = 'https://mercadomovil.com.mx';
+        $rootScope.host = 'https://mercadomovil.com.mx';
         // $rootScope.host = 'http://' + $location.host() + ':8000';
         // $rootScope.host = 'http://192.168.1.77';
-        $rootScope.host = 'http://api.taki-dev.tingsystems.com';
+        //$rootScope.host = 'http://api.taki-dev.tingsystems.com';
         $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
-        // $rootScope.apiShop = 'v3';
-        $rootScope.apiShop = 'v1';
+        $rootScope.apiShop = 'v3';
+        //$rootScope.apiShop = 'v1';
         var projectId = 'c4a89a25-71c0-4050-9f85-42ed0d19cfb4';
         $rootScope.projectId = projectId;
         $http.defaults.headers.common['PROJECT-ID'] = projectId;
@@ -246,7 +246,7 @@
             }
         };
         $rootScope.itemsByPage = 12;
-
+        $rootScope.curentyear = new Date().getFullYear();
         var checkStatus = function () {
             MMOrderSrv.status({'projectId': projectId}).$promise.then(function (data) {
             }, function (error) {
@@ -278,7 +278,7 @@
             logo: '../img/logo.png',
             email: 'ventas@moneek.mx',
             phone: '4531076764',
-            branchOffice: 'Moneek - Venta de ropa, calzado y accesorios para Dama'
+            branchOffice: 'Moneek'
 
         };
 
