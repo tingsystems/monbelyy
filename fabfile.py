@@ -8,7 +8,7 @@ from fabric.contrib.files import exists
 # config ssh
 
 env.use_ssh_config = True
-env.hosts = ['calzalia']
+env.hosts = ['calzaliadb']
 remote_user = 'calzalia.mx'
 remote_path = '/home/' + remote_user + '/www/'
 dist_dir = 'dist/'
