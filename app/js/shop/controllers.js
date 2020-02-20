@@ -56,6 +56,9 @@
         }
 
         self.setItem = function (item, qty) {
+            if(!qty){
+                return;
+            }
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
             if (find_item) {
                 if (qty < 1) {
@@ -65,6 +68,66 @@
                     if (qty) {
                         self.items[self.items.indexOf(find_item)].qty = qty;
                     }
+                }
+                if ($auth.isAuthenticated()){
+                    angular.forEach(self.items, function (obj, ind) {
+                        items[ind] = {
+                            id: obj.id,
+                            qty: parseInt(obj.qty),
+                            promotion: parseFloat(obj.discount.discount),
+                            price: parseFloat(obj.price)
+                        };
+    
+                    });
+    
+                    var update = false;
+                    if ( 'cart' in  $localStorage) {
+                        if ('id' in $localStorage.cart) {
+                            update = true;
+                        }
+                    }
+    
+                    if (update) {
+                        CartsSrv.update({id: $localStorage.cart.id}, {
+                            items: items,
+                            store: self.defaultbranchOffice.id,
+                            customer: self.customer,
+                            customerName: self.customerName,
+                            customerEmail: self.email,
+                            itemCount: self.itemCount,
+                            fromWeb: true,
+                            metadata: {}
+                        }).$promise.then(function (data) {
+                            self.cart = data;
+                            if ('shipmentCost' in self.cart){
+                                self.cart.shipmentCost = $localStorage.shipmentTotal;
+                            }
+                            if ('metadata' in self.cart){
+                                if ('shipment' in self.cart.metadata){
+                                    delete self.cart.metadata.shipment;
+                                }
+                            }
+                            $localStorage.cart = self.cart;
+                            $rootScope.items = 0;
+                        });
+                    } else {
+                        CartsSrv.save({
+                            items: items,
+                            store: self.defaultbranchOffice.id,
+                            customer: self.customer,
+                            customerName: self.customerName,
+                            customerEmail: self.email,
+                            itemCount: self.itemCount,
+                            fromWeb: true,
+                            metadata: {}
+                        }).$promise.then(function (data) {
+                            self.cart = data;
+                            $localStorage.shipmentTotal = data.shipmentCost;
+                            $localStorage.cart = self.cart;
+                            $rootScope.items = 0;
+                        });
+                    }
+
                 }
             }
             getTotal();
@@ -295,9 +358,11 @@
                         customerName: self.customerName,
                         customerEmail: self.email,
                         itemCount: self.itemCount,
-                        fromWeb: true
+                        fromWeb: true,
+                        metadata: {}
                     }).$promise.then(function (data) {
                         self.cart = data;
+                        $localStorage.shipmentTotal = data.shipmentCost;
                         $localStorage.cart = self.cart;
                         $rootScope.items = 0;
                     });
