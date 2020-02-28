@@ -218,7 +218,7 @@
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v1';
-        var projectId = 'c04c7086-92c1-4478-864e-afa080dfa672';
+        var projectId = '9e44e80c-72b1-4614-95ea-87ae84237e8f';
         $rootScope.projectId = projectId;
         $http.defaults.headers.common['PROJECT-ID'] = projectId;
         $rootScope.hidePriceLogin = false;
@@ -231,7 +231,7 @@
         $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
         $rootScope.itemsKind = 'group';
-        $rootScope.showWeb = false;
+        $rootScope.showWeb = true;
         $rootScope.priceList = false;
         $rootScope.multiplePrices = false;
         //cambiar el slug de las listas

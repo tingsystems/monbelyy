@@ -1314,7 +1314,7 @@ md-input-container {
   width: 100%;
 }
 #home .section-two {
-  padding: 60px 0 !important;
+  padding: 60px 0 20px !important;
 }
 #home .section-three {
   text-align: center;
@@ -1332,6 +1332,9 @@ md-input-container {
 #home .section-three p {
   font-size: 15px;
   text-transform: uppercase;
+}
+#home .section-four {
+  padding: 20px 0 40px !important;
 }
 #home .section-four .list-group {
   margin-bottom: 15px;

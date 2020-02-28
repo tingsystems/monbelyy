@@ -36,8 +36,8 @@
         }
         paramsProducts.pageSize = $rootScope.itemsByPage;;
         paramsProducts.kind = 'group';
-        paramsProducts.taxonomies = 'novedades1549313170';
-        paramsProducts.ordering = '-createdAt';
+        paramsProducts.taxonomies = 'zapato1577816285';
+        paramsProducts.ordering = 'ordering';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
             if($rootScope.multiplePrices){
@@ -69,7 +69,7 @@
         });
 
         var paramsItemProducts = {};
-        paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
+        paramsItemProducts.taxonomies = 'huarache';
         paramsItemProducts.isActive = 'True';
         if($rootScope.showWeb){
             paramsItemProducts.showWeb = 'True';
@@ -778,8 +778,13 @@
             { 'id': '2', 'name': '64', 'size': 64 },
             { 'id': '3', 'name': '128', 'size': 128 }
         ];
-        self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
-            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        self.filterOrderingOptions = [
+            {'property': 'ordering', 'name': 'Por pagina del catálogo'},
+            {'property': 'name', 'name': 'Alfabeticamente de A-Z'},
+            {'property': '-name', 'name': 'Alfabeticamente de Z-A'},
+            {'property': 'price', 'name': 'Precio menor'}, 
+            {'property': '-price', 'name': 'Precio mayor'}
+        ];
         self.sorterOptionSelect = self.filterOrderingOptions[0];
         self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
         self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;
