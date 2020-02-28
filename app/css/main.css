@@ -467,7 +467,7 @@ audio:not([controls]),
   height: 300px;
 }
 .box-simple .box-header .img-box {
-  height: 200px;
+  height: 130px;
 }
 .box-simple .box-container {
   text-align: center;
@@ -1743,12 +1743,6 @@ footer .contact-sty .download-app > i:hover {
 }
 md-input-container > md-select {
   border: 1px solid #ddd;
-}
-.temp-thanks {
-  padding: 90px 0;
-}
-.temp-thanks p {
-  font-size: 18px;
 }
 @media only screen and (min-width: 991px) and (max-width: 1024px) {
   .single_blog .comment-area {
