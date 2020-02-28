@@ -56,6 +56,9 @@
         }
 
         self.setItem = function (item, qty) {
+            if(!qty){
+                return;
+            }
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
             if (find_item) {
                 if (qty < 1) {
@@ -65,6 +68,66 @@
                     if (qty) {
                         self.items[self.items.indexOf(find_item)].qty = qty;
                     }
+                }
+                if ($auth.isAuthenticated()){
+                    angular.forEach(self.items, function (obj, ind) {
+                        items[ind] = {
+                            id: obj.id,
+                            qty: parseInt(obj.qty),
+                            promotion: parseFloat(obj.discount.discount),
+                            price: parseFloat(obj.price)
+                        };
+    
+                    });
+    
+                    var update = false;
+                    if ( 'cart' in  $localStorage) {
+                        if ('id' in $localStorage.cart) {
+                            update = true;
+                        }
+                    }
+    
+                    if (update) {
+                        CartsSrv.update({id: $localStorage.cart.id}, {
+                            items: items,
+                            store: self.defaultbranchOffice.id,
+                            customer: self.customer,
+                            customerName: self.customerName,
+                            customerEmail: self.email,
+                            itemCount: self.itemCount,
+                            fromWeb: true,
+                            metadata: {}
+                        }).$promise.then(function (data) {
+                            self.cart = data;
+                            if ('shipmentCost' in self.cart){
+                                self.cart.shipmentCost = $localStorage.shipmentTotal;
+                            }
+                            if ('metadata' in self.cart){
+                                if ('shipment' in self.cart.metadata){
+                                    delete self.cart.metadata.shipment;
+                                }
+                            }
+                            $localStorage.cart = self.cart;
+                            $rootScope.items = 0;
+                        });
+                    } else {
+                        CartsSrv.save({
+                            items: items,
+                            store: self.defaultbranchOffice.id,
+                            customer: self.customer,
+                            customerName: self.customerName,
+                            customerEmail: self.email,
+                            itemCount: self.itemCount,
+                            fromWeb: true,
+                            metadata: {}
+                        }).$promise.then(function (data) {
+                            self.cart = data;
+                            $localStorage.shipmentTotal = data.shipmentCost;
+                            $localStorage.cart = self.cart;
+                            $rootScope.items = 0;
+                        });
+                    }
+
                 }
             }
             getTotal();
@@ -295,9 +358,11 @@
                         customerName: self.customerName,
                         customerEmail: self.email,
                         itemCount: self.itemCount,
-                        fromWeb: true
+                        fromWeb: true,
+                        metadata: {}
                     }).$promise.then(function (data) {
                         self.cart = data;
+                        $localStorage.shipmentTotal = data.shipmentCost;
                         $localStorage.cart = self.cart;
                         $rootScope.items = 0;
                     });
@@ -367,11 +432,37 @@
             getTotal(data.data)
         });
 
+        self.goToPurchaseGuest = function () {
+            $state.go('shipping-address', {intent: 'guest'});
+        };
+
     }
 
-    function ShippingAddressCtrl(AddressSrv, ShipmentSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter, CartsSrv, $timeout) {
+    function ShippingAddressCtrl(AddressSrv, ShipmentSrv, NotificationSrv, StateSrv, CustomerSrv, $localStorage, $rootScope, $state, $filter, CartsSrv, $timeout, $stateParams) {
         var self = this;
-        var user = $localStorage.appData.user;
+        
+        try {
+            var user = $localStorage.appData.user;
+        }
+        catch (err) {
+            console.log('compra como invitado');
+        }
+
+        try {
+            self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+        }
+        catch (err) {
+            console.log('compra como invitado');
+        }
+
+        try {
+            self.customer = $localStorage.appData.user.customer;
+            self.params.customer = self.customer;
+        }
+        catch (err) {
+            console.log('compra como invitado');
+        }
+
         self.branchOffice = '';
         self.params = [];
         self.formDataShip = {};
@@ -381,8 +472,6 @@
         self.busy = false;
         self.addAddress = false;
         self.items = $localStorage.items ? $localStorage.items : [];
-        self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
-        self.customer = $localStorage.appData.user.customer;
         self.total = $localStorage.total;
         $localStorage.items = self.items;
         self.items = $localStorage.items;
@@ -392,6 +481,8 @@
         self.sendOptions = "0";
         self.busyAddresses = true;
         self.addresses = [];
+
+
         
         if('metadata' in self.cart){
             if('shipments' in self.cart.metadata){
@@ -413,6 +504,10 @@
         }
         catch (err) {
             self.askProvider = false;
+        }
+
+        if ($stateParams.intent === 'guest') {
+            self.purchaseGuest = true;
         }
 
 
@@ -912,8 +1007,6 @@
                 self.params.coupon = coupon;
             }
             self.params.kind = 'order';
-            // status pendiente
-            self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
             self.params.paymentType = parseInt(self.orderPaymentType);
             self.params.isPaid = 2;
             self.params.itemCount = self.itemCount;
@@ -934,17 +1027,14 @@
             }
 
             if (self.params.paymentType === 8) {
-                self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
                 self.params.isPaid = 0;
             }
 
             if (self.params.paymentType === 6) {
-                self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
                 self.params.isPaid = 2;
             }
 
             if (self.params.paymentType === 3) {
-                self.params.status = 'a95bea87-1bec-44b8-9d27-96a1ed00e306';
                 self.params.isPaid = 2;
             }
             self.params.items = self.items;
@@ -1300,7 +1390,7 @@
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
-    ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter','CartsSrv', '$timeout'];
+    ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter','CartsSrv', '$timeout', '$stateParams'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];

@@ -242,7 +242,7 @@
             }
         };
         $rootScope.itemsByPage = 12;
-
+        $rootScope.curentyear = new Date().getFullYear();
         var checkStatus = function () {
             MMOrderSrv.status({'projectId': $rootScope.projectId}).$promise.then(function (data) {
             }, function (error) {

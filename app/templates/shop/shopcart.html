@@ -116,6 +116,16 @@
                                     ng-if="ShopCart.total >= ShopCart.minimumPurchase"><i
                                     class="fa fa-credit-card"></i> Procesar compra
                             </button>
+                            <div ng-controller="AccessCtrl as Access" style="margin-top: 5%">
+                                <div ng-if="!Access.isAuthenticated()">
+                                    <p class="text-center" style="margin-top: 3%">Ó</p>
+
+                                    <button class="btn btn-black btn-block" ng-click="ShopCart.goToPurchaseGuest()"><i
+                                            class="fa fa-credit-card"></i>Comprar como invitado
+                                    </button>
+                                </div>
+                            </div>
+                            
                             <p ng-if="ShopCart.total <= ShopCart.minimumPurchase"> El monto mínimo para completar la
                                 compra y poder continuar es de {{ShopCart.minimumPurchase | currency}}</p>
                         </div>

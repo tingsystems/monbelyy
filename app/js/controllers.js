@@ -607,14 +607,14 @@
                 method              : 'lens', // fallow 'lens' or 'pointer'
                 cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
                 lens                : true, // Lens toggle
-                zoomLevel           : 1, // 0: not scales, uses the original large image size, use 1 and above to adjust.
-                immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                immersiveMode       : '', // false or 0 for disable, always, max width(px) for trigger
                 immersiveModeOptions: {}, // can extend immersed mode options
                 immersiveModeMessage: 'Click to Zoom', // Immersive mode message
                 prevThumbButton     : '&#9665;', // Prev thumb button (html)
                 nextThumbButton     : '&#9655;', // Next thumb button (html)
                 thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
-                thumbCol            : 3, // Thumb column count
+                thumbCol            : 3, // 769Thumb column count
                 thumbColPadding     : 4 // Padding between thumbs
             };
             // get featureImage
@@ -639,6 +639,9 @@
             }
             $rootScope.post.title = self.detail.name;
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
+            $rootScope.post.price = self.detail.price;
+            $rootScope.post.id = self.detail.id;
+            $rootScope.post.description = self.detail.description;
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
             self.detail.qty = 1;
