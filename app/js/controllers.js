@@ -729,12 +729,6 @@
                     });
     
                     self.detail.offerPrice = parseFloat(self.detail.offerPrice);
-                    if($rootScope.priceList){
-                        if('priceList' in self.detail){
-                            self.detail.price = self.detail.priceList;
-                        }
-                    }
-    
                     $rootScope.post = self.itemFromGroup;
                     $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                     self.busy = false;
