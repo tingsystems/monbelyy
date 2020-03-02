@@ -43,7 +43,7 @@
             if($rootScope.multiplePrices){
                 paramsProducts.priceList = '';
 
-            }else{
+            } else {
                 paramsProducts.priceList = list;
 
             }
@@ -632,7 +632,7 @@
 
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
             if($rootScope.priceList){
-                if('priceList' in self.detail){
+                if('priceList' in self.detail) {
                     self.detail.price = self.detail.priceList;
                 }
 
@@ -698,7 +698,7 @@
                         thumbCol            : 3, // Thumb column count
                         thumbColPadding     : 4 // Padding between thumbs
                     };
-                    if($rootScope.priceList){
+                    if($rootScope.priceList) {
                         if('priceList' in self.itemFromGroup){
                             self.detail.price = self.itemFromGroup.priceList;
                         }
@@ -708,7 +708,6 @@
                         self.detail.featuredImage = {};
                         self.detail.featuredImage.url = $rootScope.initConfig.img_default;
                     }
-                    console.log(self.detail.featuredImage)
                     // add gallery image and featured image
                     self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
                     //get galeries
@@ -717,18 +716,14 @@
                     });
     
                     self.detail.offerPrice = parseFloat(self.detail.offerPrice);
-                    if($rootScope.priceList){
-                        if('priceList' in self.detail){
-                            self.detail.price = self.detail.priceList;
-                        }
-                    }
     
                     $rootScope.post = self.itemFromGroup;
                     $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                     self.busy = false;
                     self.detail.qty = 1;
+                    console.log(self.detail);
 
-                }else{
+                } else {
                     NotificationSrv.error("Lo sentimos, no hay ningun producto con los criterios que estas buscando")
                     $state.reload();
                 }

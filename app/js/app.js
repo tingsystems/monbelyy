@@ -214,10 +214,11 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
                  $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
+        // $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
+        $rootScope.host = 'http://192.168.1.128:8000';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
-        $rootScope.apiShop = 'v1';
+        $rootScope.apiShop = 'v3';
         var projectId = '9e44e80c-72b1-4614-95ea-87ae84237e8f';
         $rootScope.projectId = projectId;
         $http.defaults.headers.common['PROJECT-ID'] = projectId;
@@ -232,13 +233,13 @@
         $rootScope.filterCategory = 'category';
         $rootScope.itemsKind = 'group';
         $rootScope.showWeb = true;
-        $rootScope.priceList = false;
+        $rootScope.priceList = true;
         $rootScope.multiplePrices = false;
         //cambiar el slug de las listas
         $rootScope.multiplePricesConfig = {
-            "limit": 12, "prices": {
-                "price": "mayoreo1553209226",
-                "priceList": "menudeo"
+            "limit": 1, "prices": {
+                "price": "tienda-en-linea",
+                "priceList": "tienda-en-linea"
             }
         };
         $rootScope.itemsByPage = 12;
