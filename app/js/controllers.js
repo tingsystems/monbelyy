@@ -609,7 +609,7 @@
             self.detail = results;
             self.detail.galleryImages = [];
             self.detail.optionsZoom = {
-                zoomEnable          : true,
+                zoomEnable          : $rootScope.showResponsive ? false : true,
                 defaultIndex        : 0, // Order of the default selected Image
                 images              : [],
                 style               : 'box', // inner or box
@@ -622,7 +622,7 @@
                 zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
                 immersiveMode       : '', // false or 0 for disable, always, max width(px) for trigger
                 immersiveModeOptions: {}, // can extend immersed mode options
-                immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                immersiveModeMessage: '', // Immersive mode message
                 prevThumbButton     : '&#9665;', // Prev thumb button (html)
                 nextThumbButton     : '&#9655;', // Next thumb button (html)
                 thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
@@ -690,7 +690,7 @@
                     self.detail.description = self.itemFromGroup.description;
                     self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
                     self.detail.optionsZoom = {
-                        zoomEnable          : true,
+                        zoomEnable          : $rootScope.showResponsive ? false : true,
                         defaultIndex        : 0, // Order of the default selected Image
                         images              : [],
                         style               : 'box', // inner or box
@@ -703,7 +703,7 @@
                         zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
                         immersiveMode       : false, // false or 0 for disable, always, max width(px) for trigger
                         immersiveModeOptions: {}, // can extend immersed mode options
-                        immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                        immersiveModeMessage: '', // Immersive mode message
                         prevThumbButton     : '&#9665;', // Prev thumb button (html)
                         nextThumbButton     : '&#9655;', // Next thumb button (html)
                         thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
@@ -1145,7 +1145,7 @@
             self.sizeSelected = false;
             self.typeSelected = false;
             self.taxonomies = [];
-            self.getData();
+            $state.go('.', {page: 1, pageSize: self.pageSize, ordering: self.optionSelected.property, cat : null, brand: null});
 
         }
     }
@@ -1332,7 +1332,7 @@
                 self.detail = results;
                 self.detail.galleryImages = [];
                 self.detail.optionsZoom = {
-                    zoomEnable          : true,
+                    zoomEnable          : $rootScope.showResponsive ? false : true,
                     defaultIndex        : 0, // Order of the default selected Image
                     images              : [],
                     style               : 'box', // inner or box
@@ -1345,7 +1345,7 @@
                     zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
                     immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
                     immersiveModeOptions: {}, // can extend immersed mode options
-                    immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                    immersiveModeMessage: '', // Immersive mode message
                     prevThumbButton     : '&#9665;', // Prev thumb button (html)
                     nextThumbButton     : '&#9655;', // Next thumb button (html)
                     thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
