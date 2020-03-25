@@ -597,7 +597,7 @@
             self.detail = results;
             self.detail.galleryImages = [];
             self.detail.optionsZoom = {
-                zoomEnable          : true,
+                zoomEnable          : $rootScope.showResponsive ? false : true,
                 defaultIndex        : 0, // Order of the default selected Image
                 images              : [],
                 style               : 'box', // inner or box
@@ -610,7 +610,7 @@
                 zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
                 immersiveMode       : '', // false or 0 for disable, always, max width(px) for trigger
                 immersiveModeOptions: {}, // can extend immersed mode options
-                immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                immersiveModeMessage: '', // Immersive mode message
                 prevThumbButton     : '&#9665;', // Prev thumb button (html)
                 nextThumbButton     : '&#9655;', // Next thumb button (html)
                 thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
@@ -678,7 +678,7 @@
                     self.detail.description = self.itemFromGroup.description;
                     self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
                     self.detail.optionsZoom = {
-                        zoomEnable          : true,
+                        zoomEnable          : $rootScope.showResponsive ? false : true,
                         defaultIndex        : 0, // Order of the default selected Image
                         images              : [],
                         style               : 'box', // inner or box
@@ -689,9 +689,9 @@
                         cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
                         lens                : true, // Lens toggle
                         zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
-                        immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                        immersiveMode       : false, // false or 0 for disable, always, max width(px) for trigger
                         immersiveModeOptions: {}, // can extend immersed mode options
-                        immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                        immersiveModeMessage: '', // Immersive mode message
                         prevThumbButton     : '&#9665;', // Prev thumb button (html)
                         nextThumbButton     : '&#9655;', // Next thumb button (html)
                         thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
@@ -716,7 +716,6 @@
                     });
     
                     self.detail.offerPrice = parseFloat(self.detail.offerPrice);
-    
                     $rootScope.post = self.itemFromGroup;
                     $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                     self.busy = false;
@@ -800,6 +799,20 @@
         self.pager = {};
         self.setPage = setPage;
         // get post by category
+        if($stateParams.cat){
+            self.taxonomies.push($stateParams.cat);
+            ProductTaxonomySrv.get({slug: $stateParams.cat}).$promise.then(function (data) {
+                self.catSelected = data;
+            })
+        }
+        if($stateParams.brand){
+            self.taxonomies.push($stateParams.brand);
+            self.brands = [];
+            ProductTaxonomySrv.get({slug: $stateParams.brand}).$promise.then(function (data) {
+                self.brandSelected = data;
+                self.brands[0] = self.brandSelected;
+            })
+        }
         if ($stateParams.slug) {
             ProductTaxonomySrv.get({
                 slug: $stateParams.slug,
@@ -952,34 +965,9 @@
         };
 
 
-        self.getProductsBrand = function () {
-            self.changeParams = true;
-            var index = null;
-            if (self.brandSelected) {
-                if (typeof self.brandSelected === 'object') {
-                    index = self.taxBrand.indexOf(self.brandSelected.slug);
-
-                    if (index > -1) {
-                        self.taxBrand.splice(index, 1);
-
-                    } else {
-                        self.taxBrand = [];
-                        self.taxBrand.push(self.brandSelected.slug);
-                    }
-
-                }
-            }
-
-            if (self.taxBrand[0]) {
-                var indexTax = self.taxonomies.indexOf(self.brandSelected.slug);
-                if (indexTax > -1) {
-                    self.taxonomies.splice(indexTax, 1);
-                } else {
-                    self.taxonomies.push(self.taxBrand[0])
-                }
-            }
-
-            self.getData();
+        self.getProductsBrand = function (slug) {
+            $state.go('.', {ordering: self.optionSelected.property, page: 1, pageSize: self.pageSize, brand : slug });
+            
         };
 
         self.getProductsSize = function () {
@@ -1045,36 +1033,13 @@
 
         };
 
-        self.getProductsCategory = function () {
-            self.taxCat.push(self.catSelected.slug);
-            if (self.catSelected) {
-                if (typeof self.catSelected === 'object') {
-                    for (var i = 0; i < self.taxCat.length; i++) {
-                        var indexCat = self.taxonomies.indexOf(self.taxCat[i]);
-                        if (indexCat > -1) {
-                            self.taxonomies.splice(indexCat, 1);
-                        } else {
-                            self.taxonomies.push(self.taxCat[i]);
-                        }
-                    }
-
-                }
-            }
-
-            self.getData();
-
+        self.getProductsCategory = function (cat) {
+            $state.go('.', {ordering: self.optionSelected.property, page: 1, pageSize: self.pageSize, cat : cat  });
 
         };
 
-        self.deleteFilter = function (obj) {
-            var idx = self.taxonomies.indexOf(obj.slug);
-            if (idx > -1) {
-                self.taxonomies.splice(idx, 1);
-            }
-            self.catSelected = null;
-            self.taxCat = [];
-            $scope.tableParams.reload();
-
+        self.deleteFilter = function () {
+            $state.go('.', {page: 1, pageSize: self.pageSize, ordering: self.optionSelected.property, cat : null});
         };
 
 
@@ -1173,7 +1138,7 @@
             self.sizeSelected = false;
             self.typeSelected = false;
             self.taxonomies = [];
-            self.getData();
+            $state.go('.', {page: 1, pageSize: self.pageSize, ordering: self.optionSelected.property, cat : null, brand: null});
 
         }
     }
@@ -1360,7 +1325,7 @@
                 self.detail = results;
                 self.detail.galleryImages = [];
                 self.detail.optionsZoom = {
-                    zoomEnable          : true,
+                    zoomEnable          : $rootScope.showResponsive ? false : true,
                     defaultIndex        : 0, // Order of the default selected Image
                     images              : [],
                     style               : 'box', // inner or box
@@ -1373,7 +1338,7 @@
                     zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
                     immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
                     immersiveModeOptions: {}, // can extend immersed mode options
-                    immersiveModeMessage: 'Click to Zoom', // Immersive mode message
+                    immersiveModeMessage: '', // Immersive mode message
                     prevThumbButton     : '&#9665;', // Prev thumb button (html)
                     nextThumbButton     : '&#9655;', // Next thumb button (html)
                     thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
