@@ -35,14 +35,14 @@
                             <div class="box-widget-container" style="padding-bottom: 5px;">
                                 <div ng-if="Product.catSelected">
                                     <p>{{Product.catSelected.name}}
-                                        <a ng-click="Product.deleteFilter(Product.catSelected)" title="Eliminar filtro">
+                                        <a ng-click="Product.deleteFilter()" title="Eliminar filtro">
                                             <i class="fa fa-times delete-filter"></i>
                                         </a>
                                     </p>
                                 </div>
                                 <ul class="nav" ng-if="!Product.catSelected">
                                     <md-radio-group ng-model="Product.catSelected"
-                                                    ng-change="Product.getProductsCategory()">
+                                                    ng-change="Product.getProductsCategory(Product.catSelected.slug)">
                                         <md-radio-button ng-repeat="children in Product.categories" ng-value="children"
                                                          aria-label="{{ children.name }}">
                                             {{children.name}}
@@ -58,7 +58,7 @@
                                            data-md-container-class="selectdemoSelectHeader"
                                            name="brand" md-on-open="Product.searchBrands(true)"
                                            md-on-close="Product.clearBrands()"
-                                           ng-change="Product.getProductsBrand()" aria-label="Marcas">
+                                           ng-change="Product.getProductsBrand(Product.brandSelected.slug)" aria-label="Marcas">
                                     <md-select-header class="demo-select-header">
                                         <input ng-model="Product.searchTerBrand"
                                                type="search"

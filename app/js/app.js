@@ -75,7 +75,7 @@
                 }
             })
             .state('category', {
-                url: '/category/:slug?page&pageSize&ordering&search',
+                url: '/category/:slug?page&pageSize&ordering&cat&brand&search',
                 data: {pageTitle: ' Calzalia - Venta de calzado'},
                 views: {
                     'content': {
