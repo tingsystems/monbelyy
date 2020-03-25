@@ -36,14 +36,14 @@
         }
         paramsProducts.pageSize = $rootScope.itemsByPage;;
         paramsProducts.kind = 'group';
-        paramsProducts.taxonomies = 'novedades1549313170';
-        paramsProducts.ordering = '-createdAt';
+        paramsProducts.taxonomies = 'zapato1577816285';
+        paramsProducts.ordering = 'ordering';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
             if($rootScope.multiplePrices){
                 paramsProducts.priceList = '';
 
-            }else{
+            } else {
                 paramsProducts.priceList = list;
 
             }
@@ -69,7 +69,7 @@
         });
 
         var paramsItemProducts = {};
-        paramsItemProducts.taxonomies = 'lo-mas-buscado1548537829';
+        paramsItemProducts.taxonomies = 'huarache';
         paramsItemProducts.isActive = 'True';
         if($rootScope.showWeb){
             paramsItemProducts.showWeb = 'True';
@@ -607,14 +607,14 @@
                 method              : 'lens', // fallow 'lens' or 'pointer'
                 cursor              : 'crosshair', // 'none', 'default', 'crosshair', 'pointer', 'move'
                 lens                : true, // Lens toggle
-                zoomLevel           : 1, // 0: not scales, uses the original large image size, use 1 and above to adjust.
-                immersiveMode       : '769', // false or 0 for disable, always, max width(px) for trigger
+                zoomLevel           : 3, // 0: not scales, uses the original large image size, use 1 and above to adjust.
+                immersiveMode       : '', // false or 0 for disable, always, max width(px) for trigger
                 immersiveModeOptions: {}, // can extend immersed mode options
                 immersiveModeMessage: 'Click to Zoom', // Immersive mode message
                 prevThumbButton     : '&#9665;', // Prev thumb button (html)
                 nextThumbButton     : '&#9655;', // Next thumb button (html)
                 thumbsPos           : 'bottom', // Thumbs position: 'top', 'bottom'
-                thumbCol            : 3, // Thumb column count
+                thumbCol            : 3, // 769Thumb column count
                 thumbColPadding     : 4 // Padding between thumbs
             };
             // get featureImage
@@ -632,7 +632,7 @@
 
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
             if($rootScope.priceList){
-                if('priceList' in self.detail){
+                if('priceList' in self.detail) {
                     self.detail.price = self.detail.priceList;
                 }
 
@@ -698,7 +698,7 @@
                         thumbCol            : 3, // Thumb column count
                         thumbColPadding     : 4 // Padding between thumbs
                     };
-                    if($rootScope.priceList){
+                    if($rootScope.priceList) {
                         if('priceList' in self.itemFromGroup){
                             self.detail.price = self.itemFromGroup.priceList;
                         }
@@ -708,7 +708,6 @@
                         self.detail.featuredImage = {};
                         self.detail.featuredImage.url = $rootScope.initConfig.img_default;
                     }
-                    console.log(self.detail.featuredImage)
                     // add gallery image and featured image
                     self.detail.optionsZoom.images.push({"thumb":self.detail.featuredImage.url, "medium": self.detail.featuredImage.url, "large": self.detail.featuredImage.url});
                     //get galeries
@@ -717,18 +716,14 @@
                     });
     
                     self.detail.offerPrice = parseFloat(self.detail.offerPrice);
-                    if($rootScope.priceList){
-                        if('priceList' in self.detail){
-                            self.detail.price = self.detail.priceList;
-                        }
-                    }
     
                     $rootScope.post = self.itemFromGroup;
                     $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                     self.busy = false;
                     self.detail.qty = 1;
+                    console.log(self.detail);
 
-                }else{
+                } else {
                     NotificationSrv.error("Lo sentimos, no hay ningun producto con los criterios que estas buscando")
                     $state.reload();
                 }
@@ -781,8 +776,13 @@
             { 'id': '2', 'name': '64', 'size': 64 },
             { 'id': '3', 'name': '128', 'size': 128 }
         ];
-        self.filterOrderingOptions = [{'property': 'name', 'name': 'Alfabeticamente de A-Z'},{'property': '-name', 'name': 'Alfabeticamente de Z-A'},
-            {'property': 'price', 'name': 'Precio menor'}, {'property': '-price', 'name': 'Precio mayor'}];
+        self.filterOrderingOptions = [
+            {'property': 'ordering', 'name': 'Por pagina del catálogo'},
+            {'property': 'name', 'name': 'Alfabeticamente de A-Z'},
+            {'property': '-name', 'name': 'Alfabeticamente de Z-A'},
+            {'property': 'price', 'name': 'Precio menor'}, 
+            {'property': '-price', 'name': 'Precio mayor'}
+        ];
         self.sorterOptionSelect = self.filterOrderingOptions[0];
         self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
         self.pageSize = $stateParams.pageSize ? parseInt($stateParams.pageSize) : 12;

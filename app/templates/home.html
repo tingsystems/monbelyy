@@ -15,12 +15,28 @@
         <div class="container">
             <div class="title-middle-line">
                 <div class="text-content">
-                    <h3 class="font-type">Temporada Otoño - Invierno</h3>
+                    <h3 class="font-type">Catálago de Zapatos</h3>
                 </div>
                 <hr>
             </div>
             <div class="row">
                 <div class="col-sm-3 col-6" ng-repeat="product in Home.products">
+                    <ng-include src="'/templates/partials/box-product.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-four" ng-controller="ShoppingCtrl as Shop">
+        <div class="container">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h3 class="font-type">Catálago de Sandalias</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-6" ng-repeat="product in Home.productsItem">
                     <ng-include src="'/templates/partials/box-product.html'"></ng-include>
                 </div>
             </div>

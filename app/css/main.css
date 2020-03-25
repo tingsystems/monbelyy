@@ -192,15 +192,15 @@ audio:not([controls]),
 }
 .btn-success {
   color: #fff;
-  background: #85ce88;
+  background: #00a650;
   border-radius: 3px;
   padding: 5px 10px;
-  border: 1px solid #85ce88;
+  border: 1px solid #00a650;
 }
 .btn-success:hover,
 .btn-success:focus {
-  background-color: #85ce88;
-  border: 1px solid #85ce88;
+  background-color: #00a650;
+  border: 1px solid #00a650;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-warning {
@@ -322,16 +322,16 @@ audio:not([controls]),
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-outline-success {
-  color: #85ce88;
+  color: #00a650;
   background: transparent;
   border-radius: 3px;
   padding: 5px 10px;
-  border: 1px solid #85ce88;
+  border: 1px solid #00a650;
 }
 .btn-outline-success:hover,
 .btn-outline-success:focus {
-  background-color: #85ce88;
-  border: 1px solid #85ce88;
+  background-color: #00a650;
+  border: 1px solid #00a650;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-outline-warning {
@@ -467,7 +467,7 @@ audio:not([controls]),
   height: 300px;
 }
 .box-simple .box-header .img-box {
-  height: 200px;
+  height: 130px;
 }
 .box-simple .box-container {
   text-align: center;
@@ -538,10 +538,11 @@ audio:not([controls]),
 }
 .box-contact .list-icons-add .nav-link {
   color: #fff;
+  padding: 5px 0;
 }
 .box-contact .list-icons-add .nav-link p {
   margin: 0;
-  fon-size: 18px;
+  font-size: 18px;
 }
 .title-middle-line {
   padding: 20px 0;
@@ -1314,7 +1315,7 @@ md-input-container {
   width: 100%;
 }
 #home .section-two {
-  padding: 60px 0 !important;
+  padding: 60px 0 20px !important;
 }
 #home .section-three {
   text-align: center;
@@ -1332,6 +1333,9 @@ md-input-container {
 #home .section-three p {
   font-size: 15px;
   text-transform: uppercase;
+}
+#home .section-four {
+  padding: 20px 0 40px !important;
 }
 #home .section-four .list-group {
   margin-bottom: 15px;
