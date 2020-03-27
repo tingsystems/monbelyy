@@ -649,7 +649,9 @@
                 }
 
             }
+            $rootScope.post = self.detail;
             $rootScope.post.title = self.detail.name;
+            $rootScope.post.urlImages = {};
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.post.price = self.detail.price;
             $rootScope.post.id = self.detail.id;
@@ -729,7 +731,13 @@
                     });
     
                     self.detail.offerPrice = parseFloat(self.detail.offerPrice);
-                    $rootScope.post = self.itemFromGroup;
+                    $rootScope.post = self.detail;
+                    $rootScope.post.title = self.detail.name;
+                    $rootScope.post.urlImages = {};
+                    $rootScope.post.urlImages.original = self.detail.featuredImage.url;
+                    $rootScope.post.price = self.detail.price;
+                    $rootScope.post.id = self.detail.id;
+                    $rootScope.post.description = self.detail.description;
                     $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                     self.busy = false;
                     self.detail.qty = 1;
