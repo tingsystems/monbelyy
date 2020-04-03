@@ -62,7 +62,9 @@
 
                 }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                 obj.offerPrice = parseFloat(obj.offerPrice);
+                
             });
         });
 
@@ -98,7 +100,9 @@
                     }
                 }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                 obj.offerPrice = parseFloat(obj.offerPrice);
+                
             });
         });
 
@@ -421,7 +425,9 @@
                                 }
                             }
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                            obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                             obj.offerPrice = parseFloat(obj.offerPrice);
+                            
                         });
                         self.busy = false;
                         self.listSearch = results.results;
@@ -641,8 +647,9 @@
             angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
                 self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
             });
-
+            self.detail.colors = $filter('filter')(self.detail.taxonomies, {kind: 'color'});
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+            
             if($rootScope.priceList){
                 if('priceList' in self.detail){
                     self.detail.price = self.detail.priceList;
@@ -690,7 +697,9 @@
                     self.detail.kind = self.itemFromGroup.kind;
                     self.detail.inventory = self.itemFromGroup.inventory;
                     self.detail.description = self.itemFromGroup.description;
+                    self.detail.colors = $filter('filter')(self.itemFromGroup.taxonomies, {kind: 'color'});
                     self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
+                    
                     self.detail.optionsZoom = {
                         zoomEnable          : $rootScope.showResponsive ? false : true,
                         defaultIndex        : 0, // Order of the default selected Image
@@ -729,8 +738,9 @@
                     angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
                         self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
                     });
-    
+                    self.detail.colors = $filter('filter')(self.detail.taxonomies, {kind: 'color'});
                     self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+                    
                     $rootScope.post = self.detail;
                     $rootScope.post.title = self.detail.name;
                     $rootScope.post.urlImages = {};
@@ -1112,7 +1122,9 @@
                         }
                     }
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                     obj.offerPrice = parseFloat(obj.offerPrice);
+                    
                 });
                 self.items = data.results;
                 self.setPage(self.page);
@@ -1372,8 +1384,9 @@
                 angular.forEach($filter('filter')(self.detail.attachments, {kind: 'gallery_image'}), function (value) {
                     self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
                 });
-    
+                self.detail.colors = $filter('filter')(self.detail.taxonomies, {kind: 'color'});
                 self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+                
                 if($rootScope.priceList){
                     if('priceList' in self.detail){
                         self.detail.price = self.detail.priceList;
@@ -1491,7 +1504,9 @@
                         }
                     }
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                    obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                     obj.offerPrice = parseFloat(obj.offerPrice);
+                    ;
                 });
                 self.items = data.results;
                 self.setPage(self.page);
