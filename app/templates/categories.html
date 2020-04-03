@@ -85,7 +85,7 @@
                                            data-md-container-class="selectdemoSelectHeader"
                                            name="brand" md-on-open="Product.searchSizes(true)"
                                            md-on-close="Product.clearSizes()"
-                                           ng-change="Product.getProductsSize()" aria-label="Medidas">
+                                           ng-change="Product.getProductsSize(Product.sizeSelected.slug)" aria-label="Medidas">
                                     <md-select-header class="demo-select-header">
                                         <input ng-model="Product.searchTerSize"
                                                type="search"
@@ -112,7 +112,7 @@
                                            data-md-container-class="selectdemoSelectHeader"
                                            name="brand" md-on-open="Product.searchTypes(true)"
                                            md-on-close="Product.clearTypes()"
-                                           ng-change="Product.getProductsType()" aria-label="Tipos">
+                                           ng-change="Product.getProductsType(Product.typeSelected.slug)" aria-label="Tipos">
                                     <md-select-header class="demo-select-header">
                                         <input ng-model="Product.searchTerSize"
                                                type="search"
