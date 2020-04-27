@@ -72,6 +72,15 @@
                     showConfirmButton: true
                 });
 
+            },
+            confirmSuccess: function (title, msg) {
+                SweetAlert.swal({
+                    title: !title ? 'Mensaje' : title,
+                    text: msg,
+                    type: "success",
+                    showConfirmButton: true
+                });
+
             }
 
         };
