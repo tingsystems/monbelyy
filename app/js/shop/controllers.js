@@ -1046,6 +1046,9 @@
                 self.params.metadata.getShop = $localStorage.appData.getShop
             }
             self.params.metadata.sendInvoice = self.isInvoiced;
+            if(self.isInvoiced === '1'){
+                self.params.metadata.taxInverse = 1;
+            }
             if($localStorage.appData.ref){
                 self.params.seller = $localStorage.appData.ref;
             }
