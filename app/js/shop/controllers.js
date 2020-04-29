@@ -1058,7 +1058,7 @@
         };
 
         var successResponseHandler = function (status, response) {
-            if(status === 200){
+            if(status === 200 || status === 201){
                 var data = response;
                 initialOrder();
                 self.busyCreditCard = true;
@@ -1077,17 +1077,21 @@
                     self.creditCard = false;
                     self.busyCreditCard = false;
                     clearCart();
-                    NotificationSrv.success('Compra completada correctamente');
+                    NotificationSrv.confirmSuccess(response.message ? response.message : 'Compra completada correctamente');
                     $state.go('purchase-completed', {orderId: response.id});
                 }, function (error) {
                     console.log('successResponseHandler error')
-                    NotificationSrv.error('Error al procesar su pago');
+                    NotificationSrv.confirm('Error al procesar su pago, ' + error.data[0]);
                     self.creditCard = false;
                     self.busyCreditCard = false;
+                    Mercadopago.clearSession();
                 });
             }
             else{
                 NotificationSrv.confirm('Por el momento no se puede completar su pago con esta tarjeta, intente más tarde o con una nueva, por favor.');
+                self.creditCard = false;
+                Mercadopago.clearSession();
+                $state.reload();
             }
         };
 
