@@ -72,6 +72,15 @@
                     showConfirmButton: true
                 });
 
+            },
+            confirmSuccess: function (title, msg) {
+                SweetAlert.swal({
+                    title: !title ? 'Mensaje' : title,
+                    text: msg,
+                    type: "success",
+                    showConfirmButton: true
+                });
+
             }
 
         };
@@ -207,28 +216,28 @@
             // default to first page
             currentPage = currentPage || 1;
 
-            // default page size is 10
-            pageSize = pageSize || 10;
+            // default page size is 5
+            pageSize = pageSize || 3;
 
             // calculate total pages
             var totalPages = Math.ceil(totalItems / pageSize);
 
             var startPage, endPage;
-            if (totalPages <= 10) {
-                // less than 10 total pages so show all
+            if (totalPages <= 3) {
+                // less than 5 total pages so show all
                 startPage = 1;
                 endPage = totalPages;
             } else {
-                // more than 10 total pages so calculate start and end pages
-                if (currentPage <= 6) {
+                // more than 5 total pages so calculate start and end pages
+                if (currentPage <= 2) {
                     startPage = 1;
-                    endPage = 10;
-                } else if (currentPage + 4 >= totalPages) {
-                    startPage = totalPages - 9;
+                    endPage = 3;
+                } else if (currentPage + 2 >= totalPages) {
+                    startPage = totalPages - 1;
                     endPage = totalPages;
                 } else {
-                    startPage = currentPage - 5;
-                    endPage = currentPage + 4;
+                    startPage = currentPage - 2;
+                    endPage = currentPage + 1;
                 }
             }
 

@@ -885,13 +885,13 @@
         self.uploadFile = function () {
             //
             Upload.upload({
-                url: BaseUrlShop.get() + 'attachments',
+                url: 'https://mercadomovil.com.mx/api/v1/' + 'attachments',
                 data: {
                     attached_file: self.voucher,
                     reference: self.purchase.id,
                     kind: 'voucher',
                     name: self.voucher.name,
-                    project: $rootScope.siteId
+                    project: $rootScope.projectId
                 },
                 method: 'POST'
             }).then(function (data) {
@@ -909,7 +909,7 @@
         var getVoucher = function () {
             AttachmentCmsSrv.get({
                 reference: self.purchase.id,
-                project: $rootScope.siteId,
+                project: $rootScope.projectId,
                 kind: 'voucher',
                 page: 1,
                 pageSize: 1
