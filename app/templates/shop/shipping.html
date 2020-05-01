@@ -429,7 +429,7 @@
                                            name="neighborhood"
                                            placeholder="Colonia"
                                            required>
-                                    <div class="help-block" ng-messages="Form.address.$error"
+                                    <div class="help-block" ng-messages="Form.neighborhood.$error"
                                          ng-if="Form.address.$touched">
                                         <div class="text-danger" ng-message="required">Este campo es requerido.</div>
                                     </div>
@@ -441,8 +441,8 @@
                                            maxlength="5" id="zip" name="zip"
                                            placeholder="Código Postal"
                                            required>
-                                    <div class="help-block" ng-messages="registerForm.zip.$error"
-                                         ng-if="registerForm.zip.$touched">
+                                    <div class="help-block" ng-messages="Form.zip.$error"
+                                         ng-if="Form.zip.$touched">
                                         <div class="text-danger" ng-message="required">Este campo es requerido.
                                         </div>
                                         <div class="text-danger" ng-message="pattern">Formato no válido</div>
