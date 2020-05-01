@@ -214,8 +214,8 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
                  $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
-        // $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
-        $rootScope.host = 'http://192.168.1.128:8000';
+        $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
+        // $rootScope.host = 'http://192.168.1.128:8000';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
         $rootScope.apiShop = 'v3';
