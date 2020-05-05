@@ -61,7 +61,6 @@
                     if('priceList' in obj){
                         obj.price = obj.priceList;
                     }
-
                 }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
