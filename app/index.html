@@ -17,9 +17,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="{{ post.title }}" ng-if="post">
-    <meta itemprop="description" content="{{ post.excerpt }}" ng-if="post">
-    <meta itemprop="image" content="{{ post.urlImages.original }}" ng-if=" post">
+    <meta itemprop="name" content="{{ post.title }}" ng-if="post && $state.current.name !=='category'">
+    <meta itemprop="description" content="{{ post.excerpt }}" ng-if="post && $state.current.name !=='category'">
+    <meta itemprop="image" content="{{ post.urlImages.original }}" ng-if="post && $state.current.name !=='category'">
 
     <!-- Twitter Card data -->
     <meta name="twitter:title" content="{{ post.title }}" ng-if="post">
@@ -28,19 +28,20 @@
     <meta name="twitter:image:src" content="{{ post.urlImages.original }}" ng-if="post">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="{{ post.title }}" ng-if="post"/>
-    <meta property="og:description" content="{{ post.description }}" ng-if="post"/>
-    <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post"/>
-    <meta property="og:type" content="store" ng-if="!post"/>
-    <meta property="og:type" content="product" ng-if="post"/>
-    <meta property="product:price:currency" content="MXN" ng-if="post"/>
-    <meta property="product:brand" content="Lady Paola" ng-if="post"/>
-    <meta property="product:condition" content="new" ng-if="post"/>
-    <meta property="product:price:amount" content="{{ post.price }}" ng-if="post"/>
-    <meta property="product:availability" content="in stock" ng-if="post"/>
-    <meta property="fb:app_id" content="1346933925479827" ng-if="post"/>
-    <meta property="product:retailer_item_id" content="{{post.id}}" ng-if="post"/>
+    <meta property="og:title" content="{{ post.title }}" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="og:description" content="{{ post.description }}" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="og:type" content="store" ng-if="!post && $state.current.name !=='category'"/>
+    <meta property="og:type" content="product" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="product:price:currency" content="MXN" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="product:brand" content="Lady Paola" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="product:condition" content="new" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="product:price:amount" content="{{ post.price }}" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="product:availability" content="in stock" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="fb:app_id" content="1346933925479827" ng-if="post && $state.current.name !=='category'"/>
+    <meta property="product:retailer_item_id" content="{{post.id}}" ng-if="post && $state.current.name !=='category'"/>
     <meta property="og:url" content="https://www.calzalia.mx{{ $state.href($state.current.name) }}"/>
+    
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700" rel="stylesheet">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet"/>
@@ -72,7 +73,7 @@
         if (d.getElementById(id)) return;
         js = d.createElement(s);
         js.id = id;
-        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.10&appId=808603182547379";
+        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.10&appId=1346933925479827";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 </head>

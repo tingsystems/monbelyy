@@ -214,11 +214,11 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
                  $localStorage, MMOrderSrv) {
         $rootScope.$state = $state;
-        // $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
-        $rootScope.host = 'http://192.168.1.128:8000';
+        $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
+        // $rootScope.host = 'http://192.168.1.128:8000';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
-        $rootScope.apiShop = 'v3';
+        $rootScope.apiShop = 'v1';
         var projectId = '9e44e80c-72b1-4614-95ea-87ae84237e8f';
         $rootScope.projectId = projectId;
         $http.defaults.headers.common['PROJECT-ID'] = projectId;
