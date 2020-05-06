@@ -40,7 +40,7 @@
                                                 stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
                                                 priceList: Product.detail.priceList, prices: Product.detail.prices}, Product.detail.qty, true)"
                                                 ng-disabled="Shop.itemInCart(Product.detail.id) || FormQty.$invalid || Product.detail.kind ==='group' || Product.detail.inventory <= 0"
-                                                class="btn btn-optional" style="margin-bottom: 10%;"><i class="fa fa-shopping-cart"></i> Comprar ahora
+                                                class="btn btn-optional btn-block" style="margin-bottom: 10%;"><i class="fa fa-shopping-cart"></i> Comprar ahora
                                             </button>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                                        priceList: Product.detail.priceList, prices: Product.detail.prices},
                                                        Product.detail.qty, false)"
                                                         ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
-                                                        class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
+                                                        class="btn btn-optional btn-block"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
                                                 </button>
     
                                             </div>
