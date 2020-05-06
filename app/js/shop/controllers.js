@@ -108,6 +108,7 @@
                                 }
                             }
                             $localStorage.cart = self.cart;
+                            $localStorage.cartId = self.cart.id;
                             $rootScope.items = 0;
                         });
                     } else {
@@ -125,6 +126,7 @@
                             $localStorage.shipmentTotal = data.shipmentCost;
                             $localStorage.cart = self.cart;
                             $rootScope.items = 0;
+                            $localStorage.cartId = self.cart.id;
                         });
                     }
 
@@ -175,6 +177,7 @@
         };
 
         self.clearCart = function () {
+
             self.items = [];
             self.total = 0;
             $localStorage.items = [];
@@ -185,7 +188,41 @@
             $localStorage.shipmentTotal = 0;
             $localStorage.ship = false;
             $localStorage.taxInverse = 0;
-            delete $localStorage.cart;
+            var update = false;
+            if ( 'cart' in  $localStorage) {
+                if ('id' in $localStorage.cart) {
+                    update = true;
+                }
+            }
+
+            if (update && $auth.isAuthenticated()) {
+                CartsSrv.update({id: $localStorage.cart.id}, {
+                    items: self.items,
+                    store: self.defaultbranchOffice.id,
+                    customer: self.customer,
+                    customerName: self.customerName,
+                    customerEmail: self.email,
+                    itemCount: self.itemCount,
+                    fromWeb: true,
+                    metadata: {}
+                }).$promise.then(function (data) {
+                    self.cart = data;
+                    if ('shipmentCost' in self.cart){
+                        self.cart.shipmentCost = $localStorage.shipmentTotal;
+                    }
+                    if ('metadata' in self.cart){
+                        if ('shipment' in self.cart.metadata){
+                            delete self.cart.metadata.shipment;
+                        }
+                    }
+                    $localStorage.cart = self.cart;
+                    $localStorage.cartId = self.cart.id;
+                    $rootScope.items = 0;
+                    delete $localStorage.cartId;
+
+                });
+            }
+            $localStorage.cart = {};
 
         };
 
@@ -349,6 +386,7 @@
                         }
                         $localStorage.cart = self.cart;
                         $rootScope.items = 0;
+                        $localStorage.cartId = self.cart.id;
                     });
                 } else {
                     CartsSrv.save({
@@ -365,6 +403,7 @@
                         $localStorage.shipmentTotal = data.shipmentCost;
                         $localStorage.cart = self.cart;
                         $rootScope.items = 0;
+                        $localStorage.cartId = self.cart.id;
                     });
                 }
                 $state.go('shipping-address');
@@ -1082,6 +1121,7 @@
                     clearCart();
                     NotificationSrv.confirmSuccess(response.message ? response.message : 'Compra completada correctamente');
                     $state.go('purchase-completed', {orderId: response.id});
+                    delete $localStorage.cartId;
                 }, function (error) {
                     console.log('successResponseHandler error')
                     NotificationSrv.confirm('Error al procesar su pago, ' + error.data[0]);
@@ -1133,6 +1173,7 @@
                     $localStorage.orderPaypal = data.id;
                     $window.location.href = data.metadata.approvalUrl;
                 } else {
+                    delete $localStorage.cartId;
                     $state.go('purchase-completed', {orderId: data.id});
                 }
             }, function (data) {
@@ -1147,6 +1188,7 @@
             self.params.fields = 'id,customerName,metadata';
 
             OrderSrv.paidPaypal({paymentId: paymentId, payerId: PayerID}).$promise.then(function (data) {
+                delete $localStorage.cartId;
                 $state.go('purchase-completed', {orderId: data.id});
             }, function (error) {
                 ErrorSrv.error(error);

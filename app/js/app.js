@@ -423,6 +423,9 @@
         if (!angular.isDefined($localStorage.priceList)) {
             $localStorage.priceList = '';
         }
+        if (!angular.isDefined($localStorage.cartId)) {
+            $localStorage.cartId = '';
+        }
 
         $rootScope.$on('UNAUTHORIZED', function (event, args) {
             if ($state.current.name !== 'register') {
