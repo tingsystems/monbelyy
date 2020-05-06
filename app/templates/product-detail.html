@@ -31,26 +31,41 @@
                                             <ng-include src="'/templates/partials/options-group.html'"></ng-include>
                                         </div>
                                     </form>
-                                    <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
-                                        price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
-                                        shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
-                                         stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
-                                           priceList: Product.detail.priceList, prices: Product.detail.prices}, Product.detail.qty, true)"
-                                                    ng-disabled="Shop.itemInCart(Product.detail.id) || FormQty.$invalid || Product.detail.kind ==='group' || Product.detail.inventory <= 0"
-                                                    class="btn btn-optional"><i class="fa fa-shopping-cart"></i> Comprar ahora
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                                                price: Product.detail.price, image: Product.detail.featuredImage.url,
+                                                qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
+                                                shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
+                                                stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
+                                                priceList: Product.detail.priceList, prices: Product.detail.prices}, Product.detail.qty, true)"
+                                                ng-disabled="Shop.itemInCart(Product.detail.id) || FormQty.$invalid || Product.detail.kind ==='group' || Product.detail.inventory <= 0"
+                                                class="btn btn-optional" style="margin-bottom: 10%;"><i class="fa fa-shopping-cart"></i> Comprar ahora
+                                            </button>
+                                        </div>
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                                                    price: Product.detail.price, image: Product.detail.featuredImage.url,
+                                                    qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
+                                                     shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
+                                                      stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
+                                                       priceList: Product.detail.priceList, prices: Product.detail.prices},
+                                                       Product.detail.qty, false)"
+                                                        ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
+                                                        class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
+                                                </button>
+    
+                                            </div>
 
-                                    <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
-                                        price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
-                                         shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
-                                          stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
-                                           priceList: Product.detail.priceList, prices: Product.detail.prices},
-                                           Product.detail.qty, false)"
-                                            ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
-                                            class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
-                                    </button>
+                                        </div>
+
+
+
+
+
+
                                     <hr>
                                     <div class="type-payments">
                                         <small>
