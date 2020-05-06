@@ -2,7 +2,7 @@
     'use strict';
 
     function AccessCtrl(AccessSrv, CustomerSrv, RegisterSrv, $auth, $state, $localStorage, $rootScope, NotificationSrv,
-        PriceListSrv, StateSrv, CartsSrv, $anchorScroll, $stateParams) {
+        PriceListSrv, StateSrv, CartsSrv, $anchorScroll, $stateParams, $filter) {
         $anchorScroll();
         var self = this;
         self.busy = false;
@@ -30,6 +30,8 @@
         // Logic for save the session
         self.saveSession = function (response) {
             // save user info to local storage
+            self.items = $localStorage.items ? $localStorage.items : [];
+            self.itemCount = self.items.length;
             $localStorage.appData = { user: angular.copy(response.data.user) };
             $localStorage.appData.token = {
                 expires_in: response.data.expires_in, token_type: response.data.token_type,
@@ -54,12 +56,8 @@
                     }
                     catch (err) {
                     }
+                    self.retriveCart($localStorage.cartId);
                 });
-                // Redirect user here after a successful log in.
-                if (self.itemCount > 0) {
-                    $state.go('shopcart');
-                }
-                $state.go('dashboard');
             });
         };
 
@@ -295,6 +293,73 @@
                     self.busy = false;
                 })
             });
+        }
+
+        var parseItemsCart = function(items){
+            var itemsReturn = [];
+            angular.forEach(items, function(item){
+                //get featureImage
+                angular.forEach(item.attachments, function (obj, ind) {
+                    var image = $filter('filter')(item.attachments, { kind: 'featuredImage' })[0];
+                    if('url' in image){
+                        item.image = image.url;
+                    }
+                    
+                });
+                delete item.stock;
+                item.stock = item.inventory;
+                item.discount = {
+                    "value": 0,
+                    "isPercentage": "0",
+                    "discount": "0"
+                }
+                item.import = item.qty * parseFloat(item.price);
+                itemsReturn.push(item)
+            })
+            return itemsReturn;
+        
+        }    
+        self.retriveCart = function(id){
+            console.log(id);
+            if(id !== ''){
+                CartsSrv.get({id: id}).$promise.then(function (data) {
+                    if(data.id){
+                        self.cart = data;
+                        $localStorage.cart = self.cart;
+                        $localStorage.items = parseItemsCart(self.cart.items);
+                    }
+    
+                    $rootScope.items = 0;
+                    // Redirect user here after a successful log in.
+                    self.items = $localStorage.items ? $localStorage.items : [];
+                    self.itemCount = self.items.length;
+                    console.log(self.itemCount);
+                    if (self.itemCount > 0) {
+                        console.log(self.itemCount);
+                        $state.go('shopcart');
+                    }else{
+                        $state.go('dashboard');
+                    }
+                }, function(error){
+                    if(error.status === 404){
+                        delete $localStorage.cartId;
+                    }
+                    $state.go('dashboard');
+                });
+
+            }else{
+                // Redirect user here after a successful log in.
+                self.items = $localStorage.items ? $localStorage.items : [];
+                self.itemCount = self.items.length;
+                console.log(self.itemCount);
+                if (self.itemCount > 0) {
+                    console.log(self.itemCount);
+                    $state.go('shopcart');
+                }else{
+                    $state.go('dashboard');
+                }
+            }
+
         }
 
 
@@ -1032,7 +1097,7 @@
 
     // inject dependencies to controllers
     AccessCtrl.$inject = ['AccessSrv', 'CustomerSrv', 'RegisterSrv', '$auth', '$state', '$localStorage', '$rootScope',
-        'NotificationSrv', 'PriceListSrv', 'StateSrv', 'CartsSrv', '$anchorScroll', '$stateParams'];
+        'NotificationSrv', 'PriceListSrv', 'StateSrv', 'CartsSrv', '$anchorScroll', '$stateParams', '$filter'];
     RecoveryPasswordCtrl.$inject = ['RegisterSrv', 'NotificationSrv', '$state', '$stateParams'];
     ValidAccountCtrl.$inject = ['UserSrv', 'NotificationSrv', '$state', '$stateParams'];
     AddressCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'StateSrv', '$localStorage', '$rootScope', '$state', '$stateParams'];
