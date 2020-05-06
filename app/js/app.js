@@ -183,7 +183,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(false);
+        $locationProvider.html5Mode(true);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
