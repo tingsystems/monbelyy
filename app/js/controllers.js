@@ -1162,7 +1162,7 @@
         }
     }
 
-    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert, ProductSrv, $mdDialog, $scope) {
+    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert, ProductSrv, $mdDialog, $scope, CartsSrv) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -1180,12 +1180,40 @@
         $localStorage.items = self.items;
         $localStorage.total = self.total;
         $rootScope.items = $localStorage.items;
+
+        if ($auth.isAuthenticated()) {
+            var user = $localStorage.appData.user;
+            self.branchOffice = '';
+            self.defaultbranchOffice = '';
+            self.customer = $localStorage.appData.user.customer ? $localStorage.appData.user.customer : '';
+            self.email = $localStorage.appData.user.email ? $localStorage.appData.user.email : '';
+            self.customerName = $localStorage.appData.user.firstName ? $localStorage.appData.user.firstName : '';
+            // get default branch office
+            self.getDefaulBranchOffice = function () {
+                if (!user.branchOffices)
+                    return;
+                self.defaultbranchOffice = $filter('filter')(user.branchOffices, {default: true})[0];
+                self.defaultWarehouse = $filter('filter')(self.defaultbranchOffice.warehouses, {default: true})[0];
+                self.branchOffices = user.branchOffices;
+                $rootScope.defaultbranchOffice = self.defaultbranchOffice.name;
+                return self.defaultbranchOffice;
+            };
+            self.getDefaulBranchOffice();
+        }
+
         // items in localStorage
         self.clearCart = function () {
             self.items = [];
             self.total = 0;
             $localStorage.items = [];
             $localStorage.total = 0;
+            $localStorage.subTtotal = 0;
+            $localStorage.globalDiscount = {amount: 0};
+            $localStorage.promoTotal = 0;
+            $localStorage.shipmentTotal = 0;
+            $localStorage.ship = false;
+            $localStorage.taxInverse = 0;
+            $localStorage.cart = {};
         };
         self.itemInCart = function (item) {
             var find_item = $filter('filter')(self.items, {id: item})[0];
@@ -1206,8 +1234,76 @@
             $localStorage.total = self.total;
             $localStorage.shipmentTotal = self.shipmentPrice;
         };
-        self.setItem = function (item, qty) {
-            var find_item = $filter('filter')(self.items, {id: item.id})[0];
+        var cartCreateOrUpdate = function(){
+            if ($auth.isAuthenticated()){
+                self.isAuthenticated = true;
+                var items = [];
+                angular.forEach(self.items, function (obj, ind) {
+                    items[ind] = {
+                        id: obj.id,
+                        qty: parseInt(obj.qty),
+                        promotion: parseFloat(obj.discount.discount),
+                        price: parseFloat(obj.price)
+                    };
+    
+                });
+    
+                var update = false;
+                if ( 'cart' in  $localStorage) {
+                    if ('id' in $localStorage.cart) {
+                        update = true;
+                    }
+                }
+    
+                if (update) {
+                    CartsSrv.update({id: $localStorage.cart.id}, {
+                        items: items,
+                        store: self.defaultbranchOffice.id,
+                        customer: self.customer,
+                        customerName: self.customerName,
+                        customerEmail: self.email,
+                        itemCount: self.itemCount,
+                        fromWeb: true,
+                        metadata: {}
+                    }).$promise.then(function (data) {
+                        self.cart = data;
+                        if ('shipmentCost' in self.cart){
+                            self.cart.shipmentCost = $localStorage.shipmentTotal;
+                        }
+                        if ('metadata' in self.cart){
+                            if ('shipment' in self.cart.metadata){
+                                delete self.cart.metadata.shipment;
+                            }
+                        }
+                        $localStorage.cart = self.cart;
+                        $localStorage.cartId = self.cart.id;
+                        $rootScope.items = 0;
+                    });
+                } else {
+                    CartsSrv.save({
+                        items: items,
+                        store: self.defaultbranchOffice.id,
+                        customer: self.customer,
+                        customerName: self.customerName,
+                        customerEmail: self.email,
+                        itemCount: self.itemCount,
+                        fromWeb: true
+                    }).$promise.then(function (data) {
+                        self.cart = data;
+                        $localStorage.cart = self.cart;
+                        $rootScope.items = 0;
+                        $localStorage.cartId = self.cart.id;
+                    });
+                }
+    
+            }
+        }
+
+        self.setItem = function (item, qty, goShiping) {
+            if(!qty){
+                return;
+            }
+            var find_item = $filter('filter')(self.items, { id: item.id })[0];
             if (find_item) {
                 NotificationSrv.error("Este producto ya esta en el carrito.", item.name);
                 if (qty < 1) {
@@ -1218,6 +1314,7 @@
                         self.items[self.items.indexOf(find_item)].qty = qty;
                     }
                 }
+
             } else {
                 item.discount = {
                     value: 0,
@@ -1226,7 +1323,17 @@
                 };
                 if (item.qty && item.qty > 0) {
                     self.items.push(item);
-                    SweetAlert.swal({
+                    $localStorage.items = self.items;
+                    cartCreateOrUpdate();
+
+                    if(goShiping){
+                        if(self.isAuthenticated){
+                            $state.go('shipping-address');
+                        }else{
+                            $state.go('shipping-address', {intent: 'guest'});
+                        }
+                    }else{
+                        SweetAlert.swal({
                             title: "Producto agregado al carrito",
                             text: item.name,
                             type: "success",
@@ -1237,19 +1344,19 @@
                             closeOnConfirm: true,
                             closeOnCancel: true
                         },
-                        function (isConfirm) {
-                            if (!isConfirm) {
-                                $state.go('shopcart')
-                            }
+                            function (isConfirm) {
+                                if (!isConfirm) {
+                                    $state.go('shopcart')
+                                }
                         });
+                    }
 
-                    $localStorage.items = self.items;
                 } else {
                     NotificationSrv.error("Ingresa la cantidad, para poder  agregar", item.name)
                 }
             }
+
             getTotal();
-            $mdDialog.hide();
         };
         // remove item from cart
         self.removeItem = function (item) {
@@ -1574,6 +1681,6 @@
         '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout', '$location', '$anchorScroll', '$scope',
         'ngTableEventsChannel', '$state', 'PagerService'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
-        'SweetAlert', 'ProductSrv', '$mdDialog', '$scope'];
+        'SweetAlert', 'ProductSrv', '$mdDialog', '$scope', 'CartsSrv'];
     ServiceCtrl.$inject = ['ProductSrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter', '$state', 'PagerService'];
 })();

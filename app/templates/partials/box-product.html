@@ -1,15 +1,4 @@
 <div class="box-simple" itemscope itemtype="http://schema.org/Product">
-    
-    <meta itemprop="brand" content="Lady Paola">
-    <meta itemprop="name" content="{{ product.name | limitTo:40 }}">
-    <meta itemprop="price" content="{{ product.price | currency }}">
-    <meta itemprop="priceCurrency" content="MXN">
-    <meta itemprop="availability" content="in stock">
-    <meta itemprop="condition" content="new">
-    <meta itemprop="description" content="{{product.description}}">
-    <meta itemprop="productID" content="{{product.id}}">
-    <meta itemprop="image" content="{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}">
-    <meta itemprop="url" content="https://www.calzalia.mx/product/detail/{{product.slug}}.html"/>
     <div class="box-header">
         <a ui-sref="product-detail({slug:product.slug})" title="Ver más">
             <img class="img-box" src="{{product.featuredImage.url ? product.featuredImage.url : initConfig.img_default}}" alt="{{ product.name }}">
