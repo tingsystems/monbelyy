@@ -580,6 +580,72 @@
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
 
+        //CAROUSEL TE PUEDE INTERESAR
+        self.owlOptionsProducts = {
+            items:4,
+            loop:true,
+            margin:15,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:2,
+                    nav:true
+                },
+                600:{
+                    items:3,
+                    nav:false
+                },
+                1000:{
+                    items:5,
+                    nav:true,
+                    loop:false
+                }
+            }
+
+        }
+
+        //TE PUEDE INTERESAR
+        var paramsProductsCat = {};
+        paramsProductsCat.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsProductsCat.showWeb = 'True';
+        }
+        paramsProductsCat.pageSize = $rootScope.itemsByPage;;
+        paramsProductsCat.ordering = 'ordering';
+        if (list !== '') {
+            paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            if($rootScope.multiplePrices){
+                paramsProductsCat.priceList = '';
+
+            } else {
+                paramsProductsCat.priceList = list;
+
+            }
+
+        }
+        else {
+            paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+        }
+        paramsProductsCat.kind = $rootScope.itemsKind;
+        ProductSrv.get(paramsProductsCat).$promise.then(function (results) {
+            self.product = results.results;
+            //get featureImage
+            angular.forEach(self.product, function (obj, ind) {
+                if($rootScope.priceList){
+                    if('priceList' in obj){
+                        obj.price = obj.priceList;
+                    }
+
+                }
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+
+                obj.offerPrice = parseFloat(obj.offerPrice);
+            });
+        });
+
+
         var paramsProducts = {};
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
