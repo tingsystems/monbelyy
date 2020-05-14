@@ -966,6 +966,7 @@
             self.promoTotal = 0;
             self.typeTax = false;
             $localStorage.taxInverse = 0;
+            $localStorage.globalDiscount = {amount: 0};
         };
 
         self.cancelPayment = function () {
