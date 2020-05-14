@@ -9,6 +9,14 @@ audio:not([controls]),
 .header {
   position: initial;
 }
+.send-free-msj {
+  background-color: #e72820;
+  padding: 5px 0;
+}
+.send-free-msj p {
+  margin-bottom: 0;
+  color: #fff;
+}
 .shopping-cart {
   position: relative;
   top: 0;
@@ -31,14 +39,14 @@ audio:not([controls]),
   height: 15px;
 }
 .navbar-side-slider .nav-item:nth-child(5) a {
-  color: #fa6b6b;
+  color: #e72820;
 }
 .navbar-side-slider li a {
   color: #000;
   font-size: 18px;
 }
 .navbar-side-slider li a:nth-child(5) {
-  color: #fa6b6b;
+  color: #e72820;
 }
 .mobile-nav .nav-link {
   padding: 0 !important;
@@ -218,15 +226,15 @@ audio:not([controls]),
 }
 .btn-danger {
   color: #fff;
-  background: #ff4b4b;
+  background: #e72820;
   border-radius: 0;
   padding: 5px 10px;
-  border: 1px solid #ff4b4b;
+  border: 1px solid #e72820;
 }
 .btn-danger:hover,
 .btn-danger:focus {
-  background-color: #ff4b4b;
-  border: 1px solid #ff4b4b;
+  background-color: #e72820;
+  border: 1px solid #e72820;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-default {
@@ -277,22 +285,22 @@ audio:not([controls]),
 }
 .btn-black:hover,
 .btn-black:focus {
-  background-color: #fa6b6b;
-  border: 1px solid #fa6b6b;
+  background-color: #e72820;
+  border: 1px solid #e72820;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-optional {
   color: #fff;
-  background: #fa6b6b;
+  background: #e72820;
   border-radius: 3px;
   padding: 5px 10px;
-  border: 1px solid #fa6b6b;
+  border: 1px solid #e72820;
 }
 .btn-optional:hover,
 .btn-optional:focus {
   color: #fff;
-  background-color: #fa6b6b;
-  border: 1px solid #fa6b6b;
+  background-color: #e72820;
+  border: 1px solid #e72820;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-outline-primary {
@@ -348,24 +356,24 @@ audio:not([controls]),
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-outline-danger {
-  color: #ff4b4b;
+  color: #e72820;
   background: transparent;
   border-radius: 3px;
   padding: 5px 10px;
-  border: 1px solid #ff4b4b;
+  border: 1px solid #e72820;
 }
 .btn-outline-danger:hover,
 .btn-outline-danger:focus {
-  background-color: #ff4b4b;
-  border: 1px solid #ff4b4b;
+  background-color: #e72820;
+  border: 1px solid #e72820;
   box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .btn-outline-danger:disabled {
-  color: #ff4b4b;
+  color: #e72820;
   background: transparent;
   border-radius: 3px;
   padding: 5px 10px;
-  border: 1px solid #ff4b4b;
+  border: 1px solid #e72820;
   opacity: 0.5;
   cursor: no-drop;
 }
@@ -597,7 +605,7 @@ audio:not([controls]),
   font-size: 80px;
 }
 .owl-carousel-products .owl-nav button.owl-prev:hover {
-  color: #fa6b6b;
+  color: #e72820;
   background-color: transparent;
 }
 .owl-carousel-products .owl-nav button.owl-next {
@@ -608,7 +616,7 @@ audio:not([controls]),
   font-size: 80px;
 }
 .owl-carousel-products .owl-nav button.owl-next:hover {
-  color: #fa6b6b;
+  color: #e72820;
   background-color: transparent;
 }
 .owl-theme-page .owl-nav [class*='owl-'] {
@@ -617,7 +625,7 @@ audio:not([controls]),
 }
 .owl-theme-page .owl-nav [class*='owl-']:hover {
   background-color: transparent;
-  color: #ff4b4b;
+  color: #e72820;
 }
 .owl-theme-page .slider-page {
   height: 600px;
@@ -1229,7 +1237,7 @@ button[disabled],
   cursor: not-allowed;
 }
 .optional {
-  color: #fa6b6b !important;
+  color: #e72820 !important;
 }
 .no-padding {
   padding: 0 !important;
@@ -1305,7 +1313,7 @@ md-input-container {
   background-color: #fff;
 }
 #home .section-one a {
-  color: #ff4b4b;
+  color: #e72820;
 }
 #home .section-one p {
   font-size: 18px;
@@ -1353,7 +1361,7 @@ md-input-container {
   border: none;
 }
 #home .section-seven {
-  background-color: #ff4b4b;
+  background-color: #e72820;
 }
 #home .section-seven .title-primary h3 {
   color: #fff;
@@ -1495,7 +1503,7 @@ md-input-container {
   padding: 5px;
 }
 .temp-dashboard .jumbotron .text-right {
-  color: #ff4b4b;
+  color: #e72820;
 }
 .temp-dashboard .search-bar {
   margin-bottom: 20px;
@@ -1587,7 +1595,7 @@ md-input-container {
 }
 .top-footer {
   padding: 20px 0;
-  background-color: #fa6b6b;
+  background-color: #e72820;
   border-bottom: 1px solid rgba(255,255,255,0.5);
   color: #fff;
 }
@@ -1951,7 +1959,7 @@ md-input-container > md-select {
     left: 0;
   }
   .owl-carousel-products .owl-nav button.owl-prev:hover {
-    color: #fa6b6b;
+    color: #e72820;
     background-color: transparent;
   }
   .owl-carousel-products .owl-nav button.owl-next {
