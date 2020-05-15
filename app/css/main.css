@@ -522,7 +522,8 @@ audio:not([controls]),
   display: inline;
 }
 .box-bordered {
-  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  border: 1px solid #eee;
   padding: 15px;
 }
 .box-bordered a:hover {
@@ -852,11 +853,12 @@ audio:not([controls]),
   float: right;
 }
 .box-widget {
-  background-color: #f5f5f5;
+  background-color: #fff;
   border-radius: 2px;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   box-shadow: none;
+  height: 100%;
 }
 .box-widget .dividerw {
   border-color: #ddd;
@@ -1486,6 +1488,18 @@ md-input-container {
 .temp-product-detail h4,
 .md-dialog-content h4 {
   color: #222;
+}
+.temp-pages {
+  background-color: #f5f5f5;
+}
+.temp-pages .wrapp {
+  background-color: #fff;
+  padding-left: 25px;
+  padding-right: 25px;
+  border: 1px solid #eee;
+}
+#temp-blog {
+  background-color: #f5f5f5;
 }
 .temp-validate-account {
   padding: 50px 0;
