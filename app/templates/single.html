@@ -1,50 +1,54 @@
-<section id="breadcrumb">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a>
-                </li>
-                <li class="breadcrumb-item" ng-if="Post.detail.categories.length"><a
-                        ui-sref="category({slug: Post.detail.categories[0].slug })">{{ Post.detail.categories[0].name }}</a>
-                </li>
-                <li class="breadcrumb-item active">{{ Post.detail.title }}</li>
-            </ol>
-        </nav>
-    </div>
-</section>
-<section class="content-area">
-     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-8">
-                <div class="title-middle-line">
-                    <div class="text-left">
-                        <h3 class="text-uppercase">{{ Page.detail.title }}</h3>
-                    </div>
-                </div>
-
-                <div class="content-post">
-                    <div ng-if="!Post.isService">
-                        <img ng-if="Post.detail.urlImages.medium" ng-src="{{ Post.detail.urlImages.medium }}"
-                             class="pull-left img-responsive img-thumbnail margin10"/>
-                    </div>
-                    <article ng-bind-html="Post.detail.content | trustHtml"></article>
-
-                    <!--gallery here-->
-                    <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
-                        <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
-                            <a post-link="{ link: {url: card.link, target: '_blank'} }"
-                               href="{{ card.url }}"
-                               data-lightbox="gallery-images">
-                                <img class="thumbnail img-responsive" post-image="{{ card.url }}"
-                                     alt="{{ card.name }}">
-                            </a>
+<div class="temp-pages">
+    <section id="breadcrumb">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-angle-left"></i> Regresar a inicio</a>
+                    </li>
+                    <li class="breadcrumb-item" ng-if="Post.detail.categories.length"><a
+                            ui-sref="category({slug: Post.detail.categories[0].slug })">{{ Post.detail.categories[0].name }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ Post.detail.title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+    <section class="content-area">
+         <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <div class="wrapp">
+                        <div class="title-middle-line">
+                            <div class="text-left">
+                                <h3 class="text-uppercase">{{ Post.detail.title }}</h3>
+                            </div>
+                        </div>
+        
+                        <div class="content-post">
+                            <div ng-if="!Post.isService">
+                                <img ng-if="Post.detail.urlImages.medium" ng-src="{{ Post.detail.urlImages.medium }}"
+                                     class="pull-left img-responsive img-thumbnail margin10"/>
+                            </div>
+                            <article ng-bind-html="Post.detail.content | trustHtml"></article>
+        
+                            <!--gallery here-->
+                            <div deckgrid class="deckgrid gallery" source="Post.detail.galleryImages">
+                                <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
+                                    <a post-link="{ link: {url: card.link, target: '_blank'} }"
+                                       href="{{ card.url }}"
+                                       data-lightbox="gallery-images">
+                                        <img class="thumbnail img-fluid" post-image="{{ card.url }}"
+                                             alt="{{ card.name }}">
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-sm-4 widgets">
-                <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
+                <div class="col-md-4 col-sm-4 widgets">
+                    <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

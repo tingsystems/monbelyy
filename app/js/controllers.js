@@ -233,9 +233,9 @@
             self.busy = true;
             self.loadPosts = self.page % 3 == 0;
 
-            EntrySrv.get({
+            EntrySrv.get({ 
                 kind: 'post',
-                taxonomies: 'blog1546023742',
+                taxonomies: 'blog',
                 isActive: 'True',
                 fields: 'title,slug,excerpt,attachments,createdAt',
                 pageSize: $rootScope.itemsByPage,

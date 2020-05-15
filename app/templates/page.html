@@ -1,30 +1,41 @@
-<section class="content-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-8">
-                <div class="title-middle-line">
-                    <div class="text-left">
-                        <h3 class="text-uppercase">{{ Page.detail.title }}</h3>
+<div class="temp-pages">
+    <section class="content-area">
+         <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <div class="wrapp">
+                        <div class="title-middle-line">
+                            <div class="text-left">
+                                <h3 class="text-uppercase">{{ Page.detail.title }}</h3>
+                            </div>
+                        </div>
+        
+                        <div class="content-post">
+                            <div ng-if="!Post.isService">
+                                <img ng-if="Page.detail.urlImages.medium" ng-src="{{ Page.detail.urlImages.medium }}"
+                                     class="pull-left img-responsive img-thumbnail margin10"/>
+                            </div>
+                            
+                            <article ng-bind-html="Page.detail.content | trustHtml"></article>
+        
+                            <!--gallery here-->
+                            <div deckgrid class="deckgrid gallery" source="Page.detail.galleryImages">
+                                <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
+                                    <a post-link="{ link: {url: card.link, target: '_blank'} }"
+                                       href="{{ card.url }}"
+                                       data-lightbox="gallery-images">
+                                        <img class="thumbnail img-fluid" post-image="{{ card.url }}"
+                                             alt="{{ card.name }}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <img ng-src="{{ Page.detail.urlImages.medium }}" alt="{{ Page.detail.title }}"/>
-
-                <div ng-bind-html="Page.detail.content | trustHtml"></div>
-                <!--gallery here-->
-                <div deckgrid class="deckgrid gallery" source="Page.detail.galleryImages">
-                    <div class="a-card portfolio_content box-portfolio" data-wow-duration="2s">
-                        <a post-link="{ link: {url: card.link, target: '_blank'} }"
-                           href="{{ card.url }}"
-                           data-lightbox="gallery-images">
-                            <img class="img-thumbnail img-responsive" post-image="{{ card.url }}"
-                                 alt="{{ card.name }}">
-                        </a>
-                    </div>
+                <div class="col-md-4 col-sm-4 widgets">
+                    <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
                 </div>
-            </div>
-            <div class="col-md-4 col-sm-4 widgets">
-                <ng-include src="'/templates/partials/sidebar.html'"></ng-include>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
