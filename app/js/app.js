@@ -264,7 +264,11 @@
 
         $rootScope.$on('$locationChangeSuccess', function () {
             $('#header-mainMenu').collapse('hide');
+<<<<<<< HEAD
             //checkStatus(); 
+=======
+            // checkStatus(); 
+>>>>>>> development
         }); 
         //various config
         $rootScope.initConfig = {

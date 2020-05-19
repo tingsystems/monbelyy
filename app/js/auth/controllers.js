@@ -276,6 +276,7 @@
                             $localStorage.cart = cart;
                             $localStorage.shipmentTotal = cart.shipmentCost;
                             $localStorage.total = cart.total;
+                            $localStorage.cartId = cart.id;
                             $state.go('checkout', {shipping: 0});
                         });
                     })
@@ -360,6 +361,26 @@
                 }
             }
 
+        }
+
+        if($stateParams.username && $stateParams.token && $stateParams.cart){
+            // ajax request to send the formData
+            self.processing = true;
+            self.formDataLogin.username = $stateParams.username;
+            self.formDataLogin.password = $stateParams.token;
+            self.formDataLogin.grant_type = 'password';
+            self.formDataLogin.client_id = self.client_id;
+            $localStorage.cartId = $stateParams.cart;
+            $auth.login(self.formDataLogin)
+                .then(function (response) {
+                    self.saveSession(response);
+                })
+                .catch(function (response) {
+                    // Handle errors here, such as displaying a notification
+                    // for invalid email and/or password.
+                    self.processing = false;
+                    NotificationSrv.error('Usuario o contraseña incorrectos');
+                });
         }
 
 

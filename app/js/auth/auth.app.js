@@ -4,7 +4,7 @@
     function Routes($stateProvider) {
         $stateProvider
             .state('register', {
-                url: '/login',
+                url: '/login?username&token&cart',
                 data: {pageTitle: 'Calzalia'},
                 views: {
                     'content': {
