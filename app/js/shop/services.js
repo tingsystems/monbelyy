@@ -40,6 +40,10 @@
             'patch': {
                 method: 'PATCH',
                 url: BaseUrlShop.get() + 'carts/:id'
+            },
+            'cartPublic': {
+                method: 'GET',
+                url: BaseUrlShop.get() + 'public/cart/:id'
             }
         });
     }

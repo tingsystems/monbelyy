@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, ValidCouponSrv, $window) {
+    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, ValidCouponSrv, $window, $stateParams) {
         var self = this;
         self.total = $localStorage.total;
         $window.scrollTo(0, 0);
@@ -32,6 +32,53 @@
         catch (err) {
             self.minimumPurchase = 0;
             console.log(err);
+        }
+
+        var parseItemsCart = function(items){
+            var itemsReturn = [];
+            angular.forEach(items, function(item){
+                //get featureImage
+                angular.forEach(item.attachments, function (obj, ind) {
+                    var image = $filter('filter')(item.attachments, { kind: 'featuredImage' })[0];
+                    if('url' in image){
+                        item.image = image.url;
+                    }
+                    
+                });
+                delete item.stock;
+                item.stock = item.inventory;
+                item.discount = {
+                    "value": 0,
+                    "isPercentage": "0",
+                    "discount": "0"
+                }
+                item.import = item.qty * parseFloat(item.price);
+                itemsReturn.push(item)
+            })
+            return itemsReturn;
+        
+        }
+
+        if($stateParams.id){
+            CartsSrv.cartPublic({id: $stateParams.id}).$promise.then(function (data) {
+                if(data.id){
+                    self.cart = data;
+                    $localStorage.cart = self.cart;
+                    $localStorage.items = parseItemsCart(self.cart.items);
+                }
+
+                
+                // Redirect user here after a successful log in.
+                self.items = $localStorage.items ? $localStorage.items : [];
+                self.itemCount = self.items.length;
+                $rootScope.items = self.items.length;
+                getTotal();
+            }, function(error){
+                if(error.status === 404){
+                    NotificationSrv.error("Lo sentimos, no pudimos encontrar lo que buscas");
+                }
+                $state.go('home');
+            });
         }
 
 
@@ -1438,7 +1485,7 @@
         .controller('PurchaseCompletedCtrl', PurchaseCompletedCtrl);
 
     // inject dependencies to controllers
-    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
+    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window','$stateParams'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter','CartsSrv', '$timeout', '$stateParams'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
