@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug?page&pageSize&ordering&cat&brand&search',
-                data: {pageTitle: ' Calzalia - Venta de calzado'},
+                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -123,7 +123,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Calzalia - Venta de calzado'},
+                data: {pageTitle: 'Calzalia Tienda en Linea de Zapatos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -150,7 +150,7 @@
             })
             .state('referrer', {
                 url: '/ref/seller/:project/:seller',
-                data: {pageTitle: ' Calzalia - Venta de calzado'},
+                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -160,7 +160,7 @@
                 }
             }).state('services',{
                 url: '/services',
-                data: {pageTitle: ' Moneek'},
+                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/services.html',
@@ -172,7 +172,7 @@
             })
             .state('service-detail', {
                 url: '/service/detail/:slug\.html',
-                data: {pageTitle: 'Moneek'},
+                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos'},
                 views: {
                     'content': {
                         templateUrl: '/templates/service-detail.html',
@@ -275,12 +275,12 @@
             logo: '../img/logo.jpg',
             email: 'ventas@calzalia.mx',
             phone: '353 105 02 63',
-            branchOffice: 'Calzalia - Calzado de Mujer y Hombre'
+            branchOffice: 'Calzalia Tienda en Linea de Zapatos'
 
         };
 
         $rootScope.post = {
-            'title': 'Calzalia - Calzado de Mujer y Hombre',
+            'title': 'Calzalia Tienda en Linea de Zapatos',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -295,7 +295,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': 'Calzalia - Calzado de Mujer y Hombre',
+                'title': ' Calzalia Tienda en Linea de Zapatos',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -304,7 +304,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Calzalia - Calzado de Mujer y Hombre';
+        $rootScope.pageTitle = 'Calzalia Tienda en Linea de Zapatos';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
