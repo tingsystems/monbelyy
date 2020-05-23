@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title ng-bind="pageTitle">{{ initConfig.branchOffice }}</title>
     <meta name="description" content="{{ post.excerpt }}" ng-if="post && $state.current.name !=='category'">
-    <meta name="description" content="Venta de Calzado en Linea Para Hombre y Mujer">
+    <meta name="description" content="Venta de Calzado en Linea Para Hombre y Mujer" ng-if="!post && $state.current.name !== 'category'">
     <meta name="keywords" content="">
     <meta name="theme-color" content="{{ initConfig.meta_color }}">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
