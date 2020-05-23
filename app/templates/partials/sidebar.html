@@ -1,9 +1,8 @@
 <div class="box-widget">
     <h4 class="widget-title">Contáctanos</h4>
-    <hr class="dividerw">
     <div class="box-widget-container">
         <div class="list-icons-add" ng-repeat="post in contactData">
-            <a class="nav-link" href="{{ post.excerpt }}"><i class="{{ post.title }}"></i>
+            <a class="nav-link" href="{{ post.excerpt }}">
                 <span ng-bind-html="post.content | trustHtml"></span></a>
         </div>
     </div>

@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, ValidCouponSrv, $window) {
+    function ShopCartCtrl(CartsSrv, $rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, ValidCouponSrv, $window, $stateParams) {
         var self = this;
         self.total = $localStorage.total;
         $window.scrollTo(0, 0);
@@ -32,6 +32,53 @@
         catch (err) {
             self.minimumPurchase = 0;
             console.log(err);
+        }
+
+        var parseItemsCart = function(items){
+            var itemsReturn = [];
+            angular.forEach(items, function(item){
+                //get featureImage
+                angular.forEach(item.attachments, function (obj, ind) {
+                    var image = $filter('filter')(item.attachments, { kind: 'featuredImage' })[0];
+                    if('url' in image){
+                        item.image = image.url;
+                    }
+                    
+                });
+                delete item.stock;
+                item.stock = item.inventory;
+                item.discount = {
+                    "value": 0,
+                    "isPercentage": "0",
+                    "discount": "0"
+                }
+                item.import = item.qty * parseFloat(item.price);
+                itemsReturn.push(item)
+            })
+            return itemsReturn;
+        
+        }
+
+        if($stateParams.id){
+            CartsSrv.cartPublic({id: $stateParams.id}).$promise.then(function (data) {
+                if(data.id){
+                    self.cart = data;
+                    $localStorage.cart = self.cart;
+                    $localStorage.items = parseItemsCart(self.cart.items);
+                }
+
+                
+                // Redirect user here after a successful log in.
+                self.items = $localStorage.items ? $localStorage.items : [];
+                self.itemCount = self.items.length;
+                $rootScope.items = self.items.length;
+                getTotal();
+            }, function(error){
+                if(error.status === 404){
+                    NotificationSrv.error("Lo sentimos, no pudimos encontrar lo que buscas");
+                }
+                $state.go('home');
+            });
         }
 
 
@@ -108,6 +155,7 @@
                                 }
                             }
                             $localStorage.cart = self.cart;
+                            $localStorage.cartId = self.cart.id;
                             $rootScope.items = 0;
                         });
                     } else {
@@ -125,6 +173,7 @@
                             $localStorage.shipmentTotal = data.shipmentCost;
                             $localStorage.cart = self.cart;
                             $rootScope.items = 0;
+                            $localStorage.cartId = self.cart.id;
                         });
                     }
 
@@ -175,6 +224,7 @@
         };
 
         self.clearCart = function () {
+
             self.items = [];
             self.total = 0;
             $localStorage.items = [];
@@ -185,7 +235,41 @@
             $localStorage.shipmentTotal = 0;
             $localStorage.ship = false;
             $localStorage.taxInverse = 0;
-            delete $localStorage.cart;
+            var update = false;
+            if ( 'cart' in  $localStorage) {
+                if ('id' in $localStorage.cart) {
+                    update = true;
+                }
+            }
+
+            if (update && $auth.isAuthenticated()) {
+                CartsSrv.update({id: $localStorage.cart.id}, {
+                    items: self.items,
+                    store: self.defaultbranchOffice.id,
+                    customer: self.customer,
+                    customerName: self.customerName,
+                    customerEmail: self.email,
+                    itemCount: self.itemCount,
+                    fromWeb: true,
+                    metadata: {}
+                }).$promise.then(function (data) {
+                    self.cart = data;
+                    if ('shipmentCost' in self.cart){
+                        self.cart.shipmentCost = $localStorage.shipmentTotal;
+                    }
+                    if ('metadata' in self.cart){
+                        if ('shipment' in self.cart.metadata){
+                            delete self.cart.metadata.shipment;
+                        }
+                    }
+                    $localStorage.cart = self.cart;
+                    $localStorage.cartId = self.cart.id;
+                    $rootScope.items = 0;
+                    delete $localStorage.cartId;
+
+                });
+            }
+            $localStorage.cart = {};
 
         };
 
@@ -349,6 +433,7 @@
                         }
                         $localStorage.cart = self.cart;
                         $rootScope.items = 0;
+                        $localStorage.cartId = self.cart.id;
                     });
                 } else {
                     CartsSrv.save({
@@ -365,6 +450,7 @@
                         $localStorage.shipmentTotal = data.shipmentCost;
                         $localStorage.cart = self.cart;
                         $rootScope.items = 0;
+                        $localStorage.cartId = self.cart.id;
                     });
                 }
                 $state.go('shipping-address');
@@ -1082,6 +1168,7 @@
                     clearCart();
                     NotificationSrv.confirmSuccess(response.message ? response.message : 'Compra completada correctamente');
                     $state.go('purchase-completed', {orderId: response.id});
+                    delete $localStorage.cartId;
                 }, function (error) {
                     console.log('successResponseHandler error')
                     NotificationSrv.confirm('Error al procesar su pago, ' + error.data[0]);
@@ -1133,6 +1220,7 @@
                     $localStorage.orderPaypal = data.id;
                     $window.location.href = data.metadata.approvalUrl;
                 } else {
+                    delete $localStorage.cartId;
                     $state.go('purchase-completed', {orderId: data.id});
                 }
             }, function (data) {
@@ -1147,6 +1235,7 @@
             self.params.fields = 'id,customerName,metadata';
 
             OrderSrv.paidPaypal({paymentId: paymentId, payerId: PayerID}).$promise.then(function (data) {
+                delete $localStorage.cartId;
                 $state.go('purchase-completed', {orderId: data.id});
             }, function (error) {
                 ErrorSrv.error(error);
@@ -1396,7 +1485,7 @@
         .controller('PurchaseCompletedCtrl', PurchaseCompletedCtrl);
 
     // inject dependencies to controllers
-    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window'];
+    ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window','$stateParams'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter','CartsSrv', '$timeout', '$stateParams'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];

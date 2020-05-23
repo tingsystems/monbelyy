@@ -2,15 +2,11 @@
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
             <div class="row" id="product-detail" >
-                <div class="col-sm-12 desk-hidde">
-                    <h2>{{Product.detail.name}}</h2>
-                </div>
                 <div class="col-sm-8">
                     <div class="wrapper">
                         <img class="img-responsive" src="{{Product.detail.featuredImage.url}}"
                              wip-image-zoom="Product.detail.optionsZoom">
                     </div>
-
                 </div>
                 <div class="col-sm-4">
                     <div class="article-description">
@@ -31,16 +27,35 @@
                                             <ng-include src="'/templates/partials/options-group.html'"></ng-include>
                                         </div>
                                     </form>
-                                    <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
-                                        price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                        qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
-                                         shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
-                                          stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
-                                           priceList: Product.detail.priceList, prices: Product.detail.prices},
-                                           Product.detail.qty)"
-                                            ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
-                                            class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                                                price: Product.detail.price, image: Product.detail.featuredImage.url,
+                                                qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
+                                                shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
+                                                stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
+                                                priceList: Product.detail.priceList, prices: Product.detail.prices}, Product.detail.qty, true)"
+                                                ng-disabled="Shop.itemInCart(Product.detail.id) || FormQty.$invalid || Product.detail.kind ==='group' || Product.detail.inventory <= 0"
+                                                class="btn btn-black col-sm-8" style="margin-bottom: 10%;"><i class="fa fa-dollar"></i> Comprar ahora
+                                            </button>
+                                        </div>
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <button ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                                                    price: Product.detail.price, image: Product.detail.featuredImage.url,
+                                                    qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
+                                                     shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
+                                                      stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
+                                                       priceList: Product.detail.priceList, prices: Product.detail.prices},
+                                                       Product.detail.qty, false)"
+                                                        ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
+                                                        class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
+                                                </button>
+    
+                                            </div>
+
+                                        </div>
                                     <hr>
                                     <div class="type-payments">
                                         <small>
@@ -81,4 +96,46 @@
             </div>
         </div>
     </section>
+    <section class="interest-you container" ng-controller="ShoppingCtrl as Shop">
+        <div class="row">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h4 class="font-type">Quienes vieron este producto también compraron</h4>
+                </div>
+            </div>
+            <data-owl-carousel class="owl-carousel owl-theme owl-carousel-products" data-options="Product.owlOptionsProducts">
+                <div owl-carousel-item ng-cloak class="box-simple" ng-repeat="prod in Product.product">
+                    <div class="item">
+                        <div class="box-header">
+                            <a ui-sref="product-detail({slug:prod.slug})" title="Ver más">
+                                <img class="img-box" src="{{prod.featuredImage.url ? prod.featuredImage.url : initConfig.img_default}}" alt="{{ product.name }}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="box-container">
+                        <p>{{ prod.name | limitTo:40}}</p>
+                        <div class="text-center no-padding" ng-class="prod.priceOffer ? 'hide': 'col-sm-12'">
+                            <h6>{{ prod.price | currency }}</h6>
+                        </div>
+                        <div class="col-sm-12 no-padding" ng-if="prod.priceOffer">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-6 no-pd-r">
+                                        <!--Offert price-->
+                                        <p class="offer-price" ng-if="prod.priceOffer">{{ prod.offerPrice | currency }}</p>
+                                    </div>
+                                    <div class="col-sm-6 text-right">
+                                            <!--old price-->
+                                        <p class="old-price" ng-if="prod.priceOffer">{{ prod.price | currency }}</p>
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </data-owl-carousel>
+        
+        </div>
+    </section>
+
 </div>

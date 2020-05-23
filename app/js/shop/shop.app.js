@@ -99,6 +99,17 @@
                         controller: 'PaymentCtrl'
                     }
                 }
+            })
+            .state('shopcartRetrive', {
+                url: '/shopcart/:id',
+                data: { pageTitle: 'Carrito de compras' },
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/shopcart.html',
+                        controllerAs: 'ShopCart',
+                        controller: 'ShopCartCtrl'
+                    }
+                }
             });
 
     }
