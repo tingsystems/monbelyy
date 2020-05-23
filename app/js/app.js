@@ -274,12 +274,12 @@
             logo: '../img/logo.jpg',
             email: 'ventas@calzalia.mx',
             phone: '353 105 02 63',
-            branchOffice: 'Calzalia Tienda en Linea de Zapatos para Hombre y Mujer para Hombre y Mujer'
+            branchOffice: 'Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer'
 
         };
 
         $rootScope.post = {
-            'title': 'Calzalia Tienda en Linea de Zapatos para Hombre y Mujer',
+            'title': 'Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -294,7 +294,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': ' Calzalia Tienda en Linea de Zapatos para Hombre y Mujer',
+                'title': ' Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -303,7 +303,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = 'Calzalia Tienda en Linea de Zapatos para Hombre y Mujer';
+        $rootScope.pageTitle = ' Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
