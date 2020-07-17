@@ -34,9 +34,9 @@
         if($rootScope.showWeb){
             paramsProducts.showWeb = 'True';
         }
-        paramsProducts.pageSize = $rootScope.itemsByPage;;
+        paramsProducts.pageSize = 20;
         paramsProducts.kind = 'group';
-        paramsProducts.taxonomies = 'zapato1577816285';
+        paramsProducts.taxonomies = 'home-mujer';
         paramsProducts.ordering = 'ordering';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -70,7 +70,7 @@
         });
 
         var paramsItemProducts = {};
-        paramsItemProducts.taxonomies = 'huarache';
+        paramsItemProducts.taxonomies = 'home-hombre';
         paramsItemProducts.isActive = 'True';
         if($rootScope.showWeb){
             paramsItemProducts.showWeb = 'True';
@@ -95,6 +95,44 @@
             self.productsItem = results.results;
             //get featureImage
             angular.forEach(self.productsItem, function (obj, ind) {
+                if($rootScope.priceList){
+                    if('priceList' in obj){
+                        obj.price = obj.priceList;
+                    }
+                }
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
+                obj.offerPrice = parseFloat(obj.offerPrice);
+                
+            });
+        });
+
+        var paramsItemsForChildren = {};
+        paramsItemsForChildren.taxonomies = 'home-nino-y-nina';
+        paramsItemsForChildren.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsItemProducts.showWeb = 'True';
+        }
+        paramsItemsForChildren.pageSize = $rootScope.itemsByPage;
+        paramsItemsForChildren.ordering = '-createdAt';
+        if (list !== '') {
+            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            if($rootScope.multiplePrices){
+                paramsItemsForChildren.priceList = '';
+
+            }else {
+                paramsItemsForChildren.priceList = list;
+            }
+
+        }
+        else {
+            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+        }
+        paramsItemsForChildren.kind = $rootScope.itemsKind;
+        ProductSrv.get(paramsItemsForChildren).$promise.then(function (results) {
+            self.productsChildren = results.results;
+            //get featureImage
+            angular.forEach(self.productsChildren, function (obj, ind) {
                 if($rootScope.priceList){
                     if('priceList' in obj){
                         obj.price = obj.priceList;
