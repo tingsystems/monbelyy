@@ -134,13 +134,8 @@
             var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
-            if (self.activeTab === 2) {
-                account.priceListId = '560d7b10-b1c3-4e79-bd15-36e2966f6564'
-            }
-            else {
-                account.isActive = true;
-            }
-
+            account.priceListId = 'dfc502f3-ed7c-4a12-bf33-62e336e33caa';
+            account.isActive = true;
             address.zip = self.address.zip;
             address.neighborhood = self.address.neighborhood;
             address.phone = account.contactPersonPhone;
