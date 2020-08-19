@@ -231,6 +231,7 @@
             self.guest.dataAddress.city = self.city.id;
             self.guest.dataAddress.state = self.state.id;
             self.guest.email = self.guest.contactPersonEmail;
+            self.guest.priceListId = 'dfc502f3-ed7c-4a12-bf33-62e336e33caa';
             RegisterSrv.save(self.guest).$promise.then(function (data) {
                 self.busy = false;
                 self.guest = data;
