@@ -617,6 +617,7 @@
         var self = this;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
+        self.optionSelected = {};
 
         //CAROUSEL TE PUEDE INTERESAR
         self.owlOptionsProducts = {
@@ -739,6 +740,18 @@
                 self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
             });
             self.detail.colors = $filter('filter')(self.detail.taxonomies, {kind: 'color'});
+            self.detail.sizes = $filter('filter')(self.detail.taxonomies, {kind: 'size'});
+            if(self.detail.kind === 'group'){
+                var levelColor = $filter('filter')(self.detail.metadata.groups, {kind: 'color'})[0];
+                try {
+                    self.optionSelected[levelColor.level] = self.detail.colors[0];
+                    
+                } catch (error) {
+                    self.optionSelected = {};
+                }
+            }
+            
+
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
             
             if($rootScope.priceList){
@@ -841,7 +854,6 @@
                     $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                     self.busy = false;
                     self.detail.qty = 1;
-                    console.log(self.detail);
 
                 } else {
                     NotificationSrv.error("Lo sentimos, no hay ningun producto con los criterios que estas buscando")

@@ -1,4 +1,20 @@
 <div class="">
+    <!-- <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
+        <label ng-if="option.kind === 'size'">Talla</label>
+        <label ng-if="option.kind === 'color'">Color</label>
+        <label ng-if="option.kind === 'style'">Estilo</label>
+        <md-radio-group ng-model="Product.optionSelected[$index]" required name="size_{{$index}}" 
+                ng-change="Product.getProductFromGroup()" layout="row">
+
+            <md-radio-button ng-repeat="size in Product.detail.taxonomies | filter:option.kind"
+                             ng-value="size"
+                             aria-label="{{size.name}}" ng-class="{'color':'md-primary', 'size':'md-warn'}[option.kind]">{{size.name}}
+            </md-radio-button>
+          </md-radio-group>
+          <div class="errors" ng-messages="FormQty['size_' + $index].$error">
+            <div ng-message="required">Requerido</div>
+        </div>
+    </div> -->
     <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
         <md-input-container md-no-float style="width: 100%"> 
             <label ng-if="option.kind === 'size'">Talla</label>
