@@ -488,7 +488,6 @@ audio:not([controls]),
   font-weight: bold;
 }
 .box-simple .box-container .box-title {
-  height: 50px;
   font-size: 16px;
 }
 .box-simple .box-footer {
