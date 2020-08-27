@@ -65,6 +65,7 @@
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                 obj.offerPrice = parseFloat(obj.offerPrice);
+                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
                 
             });
         });
@@ -103,6 +104,7 @@
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                 obj.offerPrice = parseFloat(obj.offerPrice);
+                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
                 
             });
         });
@@ -141,6 +143,7 @@
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                 obj.offerPrice = parseFloat(obj.offerPrice);
+                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
                 
             });
         });
@@ -452,6 +455,7 @@
                             obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                             obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                             obj.offerPrice = parseFloat(obj.offerPrice);
+                            obj.shipmentPrice = parseFloat(obj.shipmentPrice);
                             
                         });
                         self.busy = false;
@@ -617,6 +621,7 @@
         var self = this;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
+        self.optionSelected = {};
 
         //CAROUSEL TE PUEDE INTERESAR
         self.owlOptionsProducts = {
@@ -678,8 +683,8 @@
 
                 }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-
                 obj.offerPrice = parseFloat(obj.offerPrice);
+                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
             });
         });
 
@@ -739,7 +744,20 @@
                 self.detail.optionsZoom.images.push({"thumb":value.url, "medium": value.url, "large": value.url})
             });
             self.detail.colors = $filter('filter')(self.detail.taxonomies, {kind: 'color'});
+            self.detail.sizes = $filter('filter')(self.detail.taxonomies, {kind: 'size'});
+            if(self.detail.kind === 'group' && self.detail.colors.length === 1){
+                var levelColor = $filter('filter')(self.detail.metadata.groups, {kind: 'color'})[0];
+                try {
+                    self.optionSelected[levelColor.level] = self.detail.colors[0];
+                    
+                } catch (error) {
+                    self.optionSelected = {};
+                }
+            }
+            
+
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+            self.detail.shipmentPrice = parseFloat(self.detail.shipmentPrice);
             
             if($rootScope.priceList){
                 if('priceList' in self.detail) {
@@ -790,7 +808,7 @@
                     self.detail.description = self.itemFromGroup.description;
                     self.detail.colors = $filter('filter')(self.itemFromGroup.taxonomies, {kind: 'color'});
                     self.detail.offerPrice = parseFloat(self.itemFromGroup.offerPrice);
-                    
+                    self.detail.shipmentPrice = parseFloat(self.detail.shipmentPrice);                    
                     self.detail.optionsZoom = {
                         zoomEnable          : $rootScope.showResponsive ? false : true,
                         defaultIndex        : 0, // Order of the default selected Image
@@ -830,6 +848,7 @@
                     });
                     self.detail.colors = $filter('filter')(self.detail.taxonomies, {kind: 'color'});
                     self.detail.offerPrice = parseFloat(self.detail.offerPrice);
+                    self.detail.shipmentPrice = parseFloat(self.detail.shipmentPrice);
                     
                     $rootScope.post = self.detail;
                     $rootScope.post.title = self.detail.name;
@@ -841,7 +860,6 @@
                     $rootScope.pageTitle = self.detail.name + ' - ' + $rootScope.initConfig.branchOffice;
                     self.busy = false;
                     self.detail.qty = 1;
-                    console.log(self.detail);
 
                 } else {
                     NotificationSrv.error("Lo sentimos, no hay ningun producto con los criterios que estas buscando")
@@ -1220,6 +1238,7 @@
                     obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                     obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
                     obj.offerPrice = parseFloat(obj.offerPrice);
+                    obj.shipmentPrice = parseFloat(obj.shipmentPrice);
                     
                 });
                 self.items = data.results;

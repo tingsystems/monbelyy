@@ -226,7 +226,7 @@
         $rootScope.registerExtend = true;
         $rootScope.registerInvoiced = false;
         $rootScope.taxnomySearch = false;
-        $rootScope.filterBrand = 'brand';
+        $rootScope.filterBrand = false;
         $rootScope.filterSize = false;
         $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
