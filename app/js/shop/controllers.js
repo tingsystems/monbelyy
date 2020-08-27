@@ -102,9 +102,25 @@
             self.getDefaulBranchOffice();
         }
 
-        self.setItem = function (item, qty) {
+        self.setItem = function (item, qty, operation) {
             if(!qty){
                 return;
+            }
+            qty = parseInt(qty);
+            if(operation === 'plus'){
+                qty += 1;
+
+            }else if(operation === 'minus'){
+                qty -= 1;
+
+            }
+            if('stock' in item){
+                //validar inventario
+                if(qty > item.stock){
+                    NotificationSrv.error('Lo sentimos, no contamos con suficiente inventario');
+                    return;
+
+                }
             }
             var find_item = $filter('filter')(self.items, {id: item.id})[0];
             if (find_item) {
@@ -146,14 +162,7 @@
                             metadata: {}
                         }).$promise.then(function (data) {
                             self.cart = data;
-                            if ('shipmentCost' in self.cart){
-                                self.cart.shipmentCost = $localStorage.shipmentTotal;
-                            }
-                            if ('metadata' in self.cart){
-                                if ('shipment' in self.cart.metadata){
-                                    delete self.cart.metadata.shipment;
-                                }
-                            }
+                            $localStorage.shipmentTotal = parseFloat(data.shipmentCost);
                             $localStorage.cart = self.cart;
                             $localStorage.cartId = self.cart.id;
                             $rootScope.items = 0;
@@ -170,7 +179,7 @@
                             metadata: {}
                         }).$promise.then(function (data) {
                             self.cart = data;
-                            $localStorage.shipmentTotal = data.shipmentCost;
+                            $localStorage.shipmentTotal = parseFloat(data.shipmentCost);
                             $localStorage.cart = self.cart;
                             $rootScope.items = 0;
                             $localStorage.cartId = self.cart.id;

@@ -1,21 +1,20 @@
 <div class="">
-    <!-- <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
+    <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
         <label ng-if="option.kind === 'size'">Talla</label>
         <label ng-if="option.kind === 'color'">Color</label>
         <label ng-if="option.kind === 'style'">Estilo</label>
         <md-radio-group ng-model="Product.optionSelected[$index]" required name="size_{{$index}}" 
                 ng-change="Product.getProductFromGroup()" layout="row">
-
             <md-radio-button ng-repeat="size in Product.detail.taxonomies | filter:option.kind"
                              ng-value="size"
-                             aria-label="{{size.name}}" ng-class="{'color':'md-primary', 'size':'md-warn'}[option.kind]">{{size.name}}
+                             aria-label="{{size.name}}" ng-class="{'color':'md-primary', 'size':'md-warn'}[option.kind]" flex="{{option.kind === 'size' ? 20 : 50}}">{{size.name}}
             </md-radio-button>
           </md-radio-group>
           <div class="errors" ng-messages="FormQty['size_' + $index].$error">
-            <div ng-message="required">Requerido</div>
+            <div ng-message="required"> <span class="text-danger">No olvides de seleccionar el color o talla.</span></div>
         </div>
-    </div> -->
-    <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
+    </div>
+<!--     <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
         <md-input-container md-no-float style="width: 100%"> 
             <label ng-if="option.kind === 'size'">Talla</label>
             <label ng-if="option.kind === 'color'">Color</label>
@@ -29,8 +28,8 @@
                 <div ng-message="required">Requerido</div>
             </div>
         </md-input-container>
-    </div>
-    <div class="col-md-8 no-padding">
+    </div> -->
+    <div class="col-md-8 no-padding" style="margin-top: 10%;">
         <md-input-container md-no-float class="md-block">
             <label>Cantidad</label>
             <input type="number" placeholder="0" ng-model="Product.detail.qty" min="1"

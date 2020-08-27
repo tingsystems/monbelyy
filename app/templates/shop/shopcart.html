@@ -45,6 +45,10 @@
                 <form name="itemsForm">
                     <div class="row">
                     <div class="col-md-9 text-center">
+                        <span ng-if="itemsForm.$invalid" class="text-danger"> Por favor revisa que todos tus productos tengan la cantidad para que puedas continuar con tu compra.</span>
+                        <span class="text-danger" ng-repeat="message in ShopCart.messages">
+                            {{message}} <br>
+                        </span>
                         <div class="col-sm-6 col-md-12 list-item-shoppingcart" ng-repeat="product in ShopCart.items">
                             <div class="row">
                                 <div class="col-sm-2 col-md-2">
@@ -57,31 +61,63 @@
                                         <h3>{{ product.price | currency }}</h3>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 col-md-2">
-
-                                    <div class="shopcart-qty">
-                                        <md-input-container md-no-float>
-                                            <input type="text" id="qty" ng-model="product.qty"
-                                                   ng-change="ShopCart.setItem({id: product.id, name: product.name,
-                                                price: product.price, qty: product.qty},
-                                               product.qty)"
-                                                   class="form-control cart-qty" compare-greater="product.stock"
-                                                   name="product_{{$index}}"
-                                                   ng-pattern="/^-?[0-9][^\.]*$/">
-                                            <div class="errors" ng-messages="itemsForm['product_' + $index].$error">
-                                                <div ng-message="required">Requiredo</div>
-                                                <div ng-message="pattern">Cantidad no válida</div>
-                                                <div ng-message="compareGreater">Cantidad de producto no
-                                                    disponible
-                                                </div>
+                                <div class="col-sm-2 col-md-4">
+                                    <div class="row" ng-if="!showResponsive">
+                                        <div class="col-md-4">
+                                            <div class="shopcart-delete-lg">
+                                                <a class="ion-ios-minus-outline" ng-click="ShopCart.setItem({id: product.id, name: product.name,
+                                                    price: product.price, qty: product.qty, stock: product.stock},
+                                                   product.qty,'minus')"
+                                                   title="Quitar una unidad"></a>
                                             </div>
-                                        </md-input-container>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p style="margin-top: 25px">{{product.qty}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="shopcart-delete-lg">
+                                                <a class="ion-ios-plus-outline" ng-click="ShopCart.setItem({id: product.id, name: product.name,
+                                                price: product.price, qty: product.qty, stock: product.stock},
+                                                product.qty,'plus')"
+                                                   title="Añadir una unidad"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div layout="row" ng-if="showResponsive">
+                                        <div flex="">
+                                            <div class="shopcart-delete-lg">
+                                            <a class="ion-ios-minus-outline" ng-click="ShopCart.setItem({id: product.id, name: product.name,
+                                                price: product.price, qty: product.qty, stock: product.stock},
+                                               product.qty, 'minus')"
+                                               title="Quitar una unidad"></a>
+                                            </div>
+                                        </div>
+                                        <div flex=""><p style="margin-top: 25px">{{product.qty}}</p></div>
+                                        <div flex="">
+                                            <div class="shopcart-delete-lg">
+                                                <a class="ion-ios-plus-outline" ng-click="ShopCart.setItem({id: product.id, name: product.name,
+                                                    price: product.price, qty: product.qty, stock: product.stock},
+                                                    product.qty, 'plus')"
+                                                       title="Añadir una unidad"></a>
+                                            </div>
+                                        </div>
+                                        <div flex="">
+                                            <div class="shopcart-delete-lg">
+                                                <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)"
+                                                   title="Eliminar producto"></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-1 col-sm-1 visible-lg">
-                                    <div class="shopcart-delete-lg">
-                                        <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)"
-                                           title="Eliminar producto"></a>
+                                <div class="col-md-1">
+                                    <div class="row" ng-if="!showResponsive">
+                                        <div class="col-md-12">
+                                            <div class="shopcart-delete-lg">
+                                                <a class="ion-ios-close-outline" ng-click="ShopCart.removeItem(product)"
+                                                   title="Eliminar producto"></a>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -112,20 +148,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div ng-controller="AccessCtrl as Access" style="margin-top: 5%" >
-                                <div ng-if="Access.isAuthenticated()">
-                                    <button class="btn btn-black btn-block" ng-click="ShopCart.processPurchase()"
-                                        ng-if="ShopCart.total >= ShopCart.minimumPurchase"><i
-                                        class="fa fa-credit-card"></i> Procesar compra
-                                    </button>
-                                </div>
-                                <div ng-if="!Access.isAuthenticated()">
-                                    <button class="btn btn-black btn-block" ng-click="ShopCart.goToPurchaseGuest()"><i
-                                            class="fa fa-credit-card"></i>Procesar compra
-                                    </button>
-                                </div>
-                            </div>
-                            
+                            <button class="btn btn-black btn-block" ng-click="ShopCart.processPurchase()"
+                                    ng-if="ShopCart.total >= ShopCart.minimumPurchase" ng-disabled="itemsForm.$invalid"><i
+                                    class="fa fa-credit-card"></i> Procesar compra
+                            </button>
                             <p ng-if="ShopCart.total <= ShopCart.minimumPurchase"> El monto mínimo para completar la
                                 compra y poder continuar es de {{ShopCart.minimumPurchase | currency}}</p>
                         </div>
