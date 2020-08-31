@@ -1,0 +1,35 @@
+<div class="content-area">
+    <div class="container">
+        <div class="col-md-offset-2 col-md-8">
+            <h2 class="text-center" ng-if="$state.current.name === 'order-pending'">
+                Estamos procesando tu pago.
+            </h2>
+            <h2 class="text-center" ng-if="$state.current.name === 'payment-cancel'">
+                Compra cancelada.
+            </h2>
+            <hr>
+            <div class="row" ng-if="$state.current.name === 'order-pending'">
+                <div class="col-md-6">
+                    <p class="">No te preocupes, en unas horas te avisaremos por e-mail si se acreditó tu pago.</p>
+                </div>
+                <div class="col-md-6">
+                    <p class=""> <a ui-sref="purchase-detail({id: Mercado.orderId})"> Aqui puedes revisar tu venta </a> para conocer el progreso o historial.</p>
+                </div>
+            </div>
+            <div class="row" ng-if="$state.current.name === 'payment-cancel'">
+                <div class="col-md-6">
+                    <p class="">Lamentamos que hayas cancelado el pago. Pero puedes intentar nuevamente.</p>
+                    <a href="{{Mercado.purchase.metadata.mp.init_point}}" class="btn btn-danger">Realizar el pago</a>
+                </div>
+                <div class="col-md-6">
+                    <p class=""> O puedes hacer un deposito bancario a esta cuenta:</p>
+                    <p> <strong>Cuenta: </strong> {{Mercado.purchase.metadata.instructionsPayment.account}}</p>
+                    <p> <strong>Banco: </strong> {{Mercado.purchase.metadata.instructionsPayment.bank}}</p>
+                    <p> <strong>CLABE: </strong> {{Mercado.purchase.metadata.instructionsPayment.clabe}}</p>
+                    <p><strong>A nombre de : </strong> {{Mercado.purchase.metadata.instructionsPayment.ownAccount}}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
