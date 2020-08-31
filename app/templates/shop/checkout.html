@@ -165,16 +165,11 @@
                     <md-radio-group layout="row" ng-model="Payment.orderPaymentType">
                         <md-radio-button value="10" ng-click="Payment.paypal=!Payment.paypal"
                             class="md-primary">
-                            Mercado Pago
-                        </md-radio-button>
-                        <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard"
-                                         ng-if="Payment.creditCardMethod">
                             Tarjeta
                         </md-radio-button>
-
                         <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal"
                                          class="md-primary" ng-if="Payment.paypalMethod">
-                            Pago con paypal
+                            Paypal
                         </md-radio-button>
                         <md-radio-button value="6" ng-click="Payment.depositBank=!Payment.depositBank"
                                          class="md-primary" ng-if="Payment.depositMethod || Payment.depositMethods">
