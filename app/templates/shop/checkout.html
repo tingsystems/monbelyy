@@ -163,10 +163,15 @@
                     <h4><i class="fa fa-money"></i> Seleccione el método de pago</h4>
                     <hr>
                     <md-radio-group layout="row" ng-model="Payment.orderPaymentType">
+                        <md-radio-button value="10" ng-click="Payment.paypal=!Payment.paypal"
+                            class="md-primary">
+                            Mercado Pago
+                        </md-radio-button>
                         <md-radio-button value="8" class="md-primary" ng-click="Payment.creditCard=!Payment.creditCard"
                                          ng-if="Payment.creditCardMethod">
                             Tarjeta
                         </md-radio-button>
+
                         <md-radio-button value="3" ng-click="Payment.paypal=!Payment.paypal"
                                          class="md-primary" ng-if="Payment.paypalMethod">
                             Pago con paypal
@@ -176,7 +181,23 @@
                             Depósito bancario
                         </md-radio-button>
                     </md-radio-group>
-
+                    <div class="items-dashboard" ng-if="Payment.orderPaymentType === '10'">
+                        <div class="container">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-md-12">
+                                    <!--<p>Luego de hacer clic en "Finalizar el pedido", serás
+                                        redirigido a PayPal para completar tu compra de forma segura.</p>-->
+                                    <img src="../../img/mercado-pago.png" alt="" width="200">
+                                    <p>Realice su pago, con la facilidad de Mercado Pago.</p>
+                                </div>
+                                <button ng-if="!Payment.busyPaypal" class="btn btn-danger"
+                                        ng-click="Payment.createOrder()">Realizar el pago<span
+                                        ng-show="Payment.busyPaypal"><i class="fa fa-spinner fa-spin"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="items-dashboard" ng-if="Payment.orderPaymentType === '8'">
                         <div class="container">
                             <div class="row">

@@ -1224,6 +1224,17 @@
             initialOrder();
             OrderSrv.save(self.params).$promise.then(function (data) {
                 clearCart();
+                if(data.paymentType === 10){
+                    try {
+                        $window.location.href = data.metadata.mp.init_point;
+                        
+                    } catch (error) {
+                        console.log(error)
+                        
+                    }
+                    console.log(data);
+                    return
+                }
                 if (data.paymentType === 3) {
                     self.busyPaypal = true;
                     self.paypalBtn = self.busyPaypal ? 'Procesando' : 'Realizar pago';
@@ -1485,6 +1496,56 @@
 
     }
 
+    function MercadoPagoHandlerCtrl(OrderSrv, $stateParams, NotificationSrv, $state, ErrorSrv){
+        var self = this;
+        var makePayment = function (collection_id, collection_status, external_reference, preference_id) {
+            var params = {
+                data: {
+                    collection_id: collection_id, 
+                    collection_status: collection_status, 
+                    external_reference: external_reference, 
+                    preference_id: preference_id}
+                }
+            OrderSrv.paidCHMP(params).$promise.then(function (data) {
+                if(data.collection_status === 'approved'){
+                    $state.go('purchase-completed', {orderId: data.external_reference});
+                }else if( data.collection_status === 'in_process'){
+                    $state.go('order-pending', {external_reference: $stateParams.external_reference});
+                }
+                
+            }, function (error) {
+                $state.go('order-pending', {external_reference: $stateParams.external_reference});
+            });
+        };
+
+        if ($state.current.name === 'mp-success') {
+            makePayment($stateParams.collection_id, $stateParams.collection_status, $stateParams.external_reference, $stateParams.preference_id);
+        }
+
+        if ($state.current.name === 'mp-pending') {
+            makePayment($stateParams.collection_id, $stateParams.collection_status, $stateParams.external_reference, $stateParams.preference_id);
+            
+        }
+
+        if ($state.current.name === 'order-pending') {
+            self.statusPending = true;
+            self.orderId = $stateParams.external_reference;
+        }
+
+        if ($state.current.name === 'mp-cancel') {
+            $state.go('payment-cancel', {external_reference: $stateParams.external_reference});
+
+        }
+        if($state.current.name === 'payment-cancel'){
+            OrderSrv.get({id: $stateParams.external_reference}).$promise.then(function (data) {
+                self.purchase = data;
+            }, function (e) {
+                NotificationSrv.error('No pudimos cargar su detalle de venta, le enviaremos un correo electronico');
+            });
+        }
+
+    }
+
 
 // create the module and assign controllers
     angular.module('shop.controllers', ['shop.services'])
@@ -1492,7 +1553,8 @@
         .controller('ShippingAddressCtrl', ShippingAddressCtrl)
         .controller('PaymentCtrl', PaymentCtrl)
         .controller('OrderCtrl', OrderCtrl)
-        .controller('PurchaseCompletedCtrl', PurchaseCompletedCtrl);
+        .controller('PurchaseCompletedCtrl', PurchaseCompletedCtrl)
+        .controller('MercadoPagoHandlerCtrl', MercadoPagoHandlerCtrl);
 
     // inject dependencies to controllers
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window','$stateParams'];
@@ -1500,4 +1562,5 @@
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
+    MercadoPagoHandlerCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv', '$state', 'ErrorSrv'];
 })();

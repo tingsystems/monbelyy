@@ -110,6 +110,61 @@
                         controller: 'ShopCartCtrl'
                     }
                 }
+            })
+            .state('mp-cancel', {
+                url: '/mp/failure?collection_id&collection_status&external_reference&payment_type&merchant_order_id&preference_id&site_id&processing_mode&merchant_account_id',
+                data: {pageTitle: 'Estado de tu compra'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/mp-handler.html',
+                        controllerAs: 'Mercado',
+                        controller: 'MercadoPagoHandlerCtrl'
+                    }
+                }
+            })
+            .state('mp-pending', {
+                url: '/mp/pending?collection_id&collection_status&external_reference&payment_type&merchant_order_id&preference_id&site_id&processing_mode&merchant_account_id',
+                data: {pageTitle: 'Estado de tu compra'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/mp-handler.html',
+                        controllerAs: 'Mercado',
+                        controller: 'MercadoPagoHandlerCtrl'
+                    }
+                }
+            })
+            .state('mp-success', {
+                url: '/mp/success?collection_id&collection_status&external_reference&payment_type&merchant_order_id&preference_id&site_id&processing_mode&merchant_account_id',
+                data: {pageTitle: 'Estado de tu compra'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/mp-handler.html',
+                        controllerAs: 'Mercado',
+                        controller: 'MercadoPagoHandlerCtrl'
+                    }
+                }
+            })
+            .state('order-pending', {
+                url: '/order/pending?external_reference',
+                data: {pageTitle: 'Estado de tu compra'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/mp-handler.html',
+                        controllerAs: 'Mercado',
+                        controller: 'MercadoPagoHandlerCtrl'
+                    }
+                }
+            })
+            .state('payment-cancel', {
+                url: '/order/cancel?external_reference',
+                data: {pageTitle: 'Estado de tu compra'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/mp-handler.html',
+                        controllerAs: 'Mercado',
+                        controller: 'MercadoPagoHandlerCtrl'
+                    }
+                }
             });
 
     }

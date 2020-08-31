@@ -78,6 +78,10 @@
             'paidPaypal': {
                 method: 'POST',
                 url: BaseUrlShop.get() + 'paypal/paid'
+            },
+            'paidCHMP': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'platforms/mp/validate'
             }
         });
     }
