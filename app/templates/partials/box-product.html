@@ -11,7 +11,7 @@
             <div class="col-sm-12">
                 <p class="box-title">{{ product.name | limitTo:40}}</p>
                 <span>
-                    <ng-pluralize style="font-size: 11px;" count="product.colors.length" when="{'1': 'Un color disponible', 'other': '{} colores disponibles.'}"></ng-pluralize>
+                    <ng-pluralize style="font-size: 11px; color: #888;" count="product.colors.length" when="{'1': 'Un color disponible', 'other': '{} colores disponibles.'}"></ng-pluralize>
                 </span>
             </div>
             <div class="col-md-12" ng-class="product.offerPrice > 0 ? 'hide': 'col-sm-4'">

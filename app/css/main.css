@@ -452,8 +452,11 @@ audio:not([controls]),
   font-size: 18px;
 }
 .box-simple {
+  border: 1px solid #eee;
+  padding: 0 !important;
   background-color: #fff;
   margin-bottom: 15px;
+  transition: all 0.3s;
 }
 .box-simple a {
   color: #222;
@@ -475,14 +478,31 @@ audio:not([controls]),
   height: 300px;
 }
 .box-simple .box-header .img-box {
-  height: 130px;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin-top: 35px;
 }
 .box-simple .box-container {
   text-align: center;
   margin-bottom: 15px;
-  padding-top: 15px;
+  padding-top: 25px;
+  padding-bottom: 20px;
   margin-top: 15px;
   border-top: 1px solid #ddd;
+}
+.box-simple .box-container p {
+  margin-bottom: 0;
+}
+.box-simple .box-container i.fa.fa-truck.text-success.ng-scope {
+  position: absolute;
+  bottom: 34%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 0;
+  width: 42%;
+  margin: 0 auto;
 }
 .box-simple .box-container .price {
   font-weight: bold;
@@ -495,8 +515,8 @@ audio:not([controls]),
 }
 .box-simple:hover {
   padding: 15px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0);
-  border: 1px solid transparent;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.092);
+  border: 1px solid #eee;
   border-radius: 3px;
 }
 .box-default {
@@ -1326,6 +1346,9 @@ md-input-container {
 #home .section-two {
   padding: 60px 0 20px !important;
 }
+#home .section-two .title-middle-line {
+  margin-bottom: 40px;
+}
 #home .section-three {
   text-align: center;
   background-color: #f5f5f5;
@@ -1886,8 +1909,22 @@ md-input-container > md-select {
     width: 100% !important;
     height: auto !important;
   }
+  .box-simple .box-container {
+    position: relative;
+  }
+  .box-simple .box-container i.fa.fa-truck.text-success.ng-scope {
+    position: absolute;
+    bottom: 92%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 0;
+    width: 71%;
+    margin: 0 auto;
+  }
   .box-simple .box-header .img-box {
     height: 120px;
+    width: 120px;
   }
   .box-simple {
     padding: 0;
