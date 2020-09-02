@@ -649,13 +649,22 @@
 
         }
 
+        var getRelated = function(taxonomies){
         //TE PUEDE INTERESAR
+        var taxonomiesLocal = [];
+        var exclude = ['otono-invierno-2020', 'botas-calzalia']
+        angular.forEach(taxonomies, function(tax){
+            if(tax.slug in exclude){
+                taxonomiesLocal.push(tax.slug)
+            }
+
+        })
         var paramsProductsCat = {};
         paramsProductsCat.isActive = 'True';
         if($rootScope.showWeb){
             paramsProductsCat.showWeb = 'True';
         }
-        paramsProductsCat.pageSize = $rootScope.itemsByPage;;
+        paramsProductsCat.pageSize = 5
         paramsProductsCat.ordering = 'ordering';
         if (list !== '') {
             paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
@@ -664,14 +673,13 @@
 
             } else {
                 paramsProductsCat.priceList = list;
-
             }
-
         }
         else {
             paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
         }
-        paramsProductsCat.kind = $rootScope.itemsKind;
+        paramsProductsCat.kind = 'group';
+        paramsProductsCat.related = taxonomiesLocal.join();
         ProductSrv.get(paramsProductsCat).$promise.then(function (results) {
             self.product = results.results;
             //get featureImage
@@ -680,14 +688,15 @@
                     if('priceList' in obj){
                         obj.price = obj.priceList;
                     }
-
                 }
                 obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
                 obj.offerPrice = parseFloat(obj.offerPrice);
                 obj.shipmentPrice = parseFloat(obj.shipmentPrice);
+                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
             });
         });
-
+            
+        }
 
         var paramsProducts = {};
         paramsProducts.slug = $stateParams.slug;
@@ -745,6 +754,7 @@
             });
             self.detail.colors = $filter('filter')(self.detail.taxonomies, {kind: 'color'});
             self.detail.sizes = $filter('filter')(self.detail.taxonomies, {kind: 'size'});
+            self.categories = $filter('filter')(self.detail.taxonomies, {kind: 'category'});
             if(self.detail.kind === 'group' && self.detail.colors.length === 1){
                 var levelColor = $filter('filter')(self.detail.metadata.groups, {kind: 'color'})[0];
                 try {
@@ -754,7 +764,6 @@
                     self.optionSelected = {};
                 }
             }
-            
 
             self.detail.offerPrice = parseFloat(self.detail.offerPrice);
             self.detail.shipmentPrice = parseFloat(self.detail.shipmentPrice);
@@ -775,6 +784,7 @@
             $rootScope.pageTitle = results.name + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
             self.detail.qty = 1;
+            getRelated(self.categories);
         });
 
         self.getProductFromGroup = function () {
