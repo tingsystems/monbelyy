@@ -652,10 +652,10 @@
         var getRelated = function(taxonomies){
         //TE PUEDE INTERESAR
         var taxonomiesLocal = [];
-        var exclude = ['otono-invierno-2020', 'botas-calzalia']
+        var exclude = ['', 'botas-calzalia']
         angular.forEach(taxonomies, function(tax){
-            if(tax.slug in exclude){
-                taxonomiesLocal.push(tax.slug)
+            if(tax.slug !== 'otono-invierno-2020'){
+                taxonomiesLocal.push(tax.slug) 
             }
 
         })
