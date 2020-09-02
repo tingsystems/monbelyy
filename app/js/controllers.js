@@ -652,8 +652,12 @@
         var getRelated = function(taxonomies){
         //TE PUEDE INTERESAR
         var taxonomiesLocal = [];
+        var exclude = ['otono-invierno-2020', 'botas-calzalia']
         angular.forEach(taxonomies, function(tax){
-            taxonomiesLocal.push(tax.slug)
+            if(tax.slug in exclude){
+                taxonomiesLocal.push(tax.slug)
+            }
+
         })
         var paramsProductsCat = {};
         paramsProductsCat.isActive = 'True';
