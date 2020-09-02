@@ -60,14 +60,12 @@
         }
 
         if($stateParams.id){
-            CartsSrv.cartPublic({id: $stateParams.id}).$promise.then(function (data) {
+            CartsSrv.cartPublic({id: $stateParams.id, fields:'id,attachments,items'} ).$promise.then(function (data) {
                 if(data.id){
                     self.cart = data;
                     $localStorage.cart = self.cart;
                     $localStorage.items = parseItemsCart(self.cart.items);
                 }
-
-                
                 // Redirect user here after a successful log in.
                 self.items = $localStorage.items ? $localStorage.items : [];
                 self.itemCount = self.items.length;
