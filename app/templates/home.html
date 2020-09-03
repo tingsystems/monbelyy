@@ -1,14 +1,29 @@
 <div id="home">
-    <section class="slider-box hide-xs">
-        <data-owl-carousel class="owl-carousel owl-theme owl-theme-slider" data-options="Home.owlOptionsSlider">
-            <div owl-carousel-item="" ng-repeat="slide in Home.mainSlider" class="item">
-                <div class="item" style="width: 100%;">
-                    <a post-link="{ link: {url: slide.link, target: '_self'} }">
-                        <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
-                    </a>
-                </div>
+    <section class="container slider-box slider-small">
+        <div class="row">
+            <div class="col-md-8">
+                <data-owl-carousel class="owl-carousel owl-theme owl-theme-slider" data-options="Home.owlOptionsSlider">
+                    <div owl-carousel-item="" ng-repeat="slide in Home.mainSlider" class="item">
+                        <div class="item" style="width: 100%;">
+                            <a post-link="{ link: {url: slide.link, target: '_self'} }">
+                                <div class="slider-img" style="background-image:url('{{ slide.featuredImage.url }}');"></div>
+                            </a>
+                        </div>
+                    </div>
+                </data-owl-carousel>
             </div>
-        </data-owl-carousel>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12 no-pd-l" ng-repeat="item in Home.promoHome">
+                        <div class="card">
+                            <a href="{{item.link}}"><img src="{{ item.featuredImage.url }}" class="card-img-top" alt="{{ item.title }}"></a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
     </section>
 
     <section class="section-two" ng-controller="ShoppingCtrl as Shop">

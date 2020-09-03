@@ -1,7 +1,7 @@
 <div class="temp-product-detail">
     <section class="article-content" ng-controller="ShoppingCtrl as Shop">
         <div class="container">
-            <div class="row" id="product-detail" >
+            <div class="row align-items-center" id="product-detail" >
                 <div class="col-sm-8">
                     <div class="wrapper">
                         <img class="img-responsive" src="{{Product.detail.featuredImage.url}}"
@@ -18,14 +18,18 @@
                                         <span ng-if="Product.detail.inventory <= 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Producto agotado</span>
                                     </div>
                                     <h2 class="article-price">{{ Product.detail.price | currency}}</h2>
-                                    <i class="fa fa-truck title-prd text-success" aria-hidden="true" ng-if="Product.detail.shipmentPrice === 0"> <span class="text-success title-prd">Envio gratis</span> </i>
-                                    <br>
+                                    <div class="available">
+                                        <span ng-if="Product.detail.inventory > 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Stock disponible</span>
+                                    </div>
+                                    <hr>
+                                    <i class="fa fa-truck text-success" aria-hidden="true" ng-if="Product.detail.shipmentPrice === 0"> <span class="text-success">Envio gratis</span> </i>
+                                    <br><br>
                                 </div>
                                 <div class="col-sm-12 type-payments">
-                                    <small>
-                                        Realiza tu pago con
-                                    </small>
-                                    <ul class="nav">
+                                    <span>
+                                      <i class="fa fa-credit-card"></i>  Realiza tu pago con
+                                    </span>
+                                    <ul class="nav" style="opacity: 0.6">
                                         <li class="nav-item ">
                                             <a class="nav-link disabled">
                                                 <i class="fa fa-cc-mastercard fa-2x"></i>
@@ -44,9 +48,11 @@
                                     </ul>
                                 </div>
                                 <div class="col-md-12" style="margin-bottom: 5%;">
+                                    <br>
                                     <i class="fa fa-undo text-success" aria-hidden="true"> <span class="text-success"> Devolución gratis</span> </i>
                                     <br>
                                 </div>
+                                
                                 <div class="col-sm-12">
                                     <form name="FormQty">
                                         <div>
@@ -62,28 +68,22 @@
                                                 stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
                                                 priceList: Product.detail.priceList, prices: Product.detail.prices}, Product.detail.qty, true)"
                                                 ng-disabled="Shop.itemInCart(Product.detail.id) || FormQty.$invalid || Product.detail.kind ==='group' || Product.detail.inventory <= 0"
-                                                class="btn btn-black col-sm-8" style="margin-bottom: 10%;"><i class="fa fa-dollar"></i> Comprar ahora
+                                                class="btn btn-black col-sm-8" style="margin-bottom: 10%;"><i class="fa fa-dollar"></i> Compra rápida                              </button>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <button id="addCart" ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
+                                                price: Product.detail.price, image: Product.detail.featuredImage.url,
+                                                qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
+                                                 shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
+                                                  stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
+                                                   priceList: Product.detail.priceList, prices: Product.detail.prices},
+                                                   Product.detail.qty, false)"
+                                                    ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
+                                                    class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
                                             </button>
+
                                         </div>
                                     </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <button id="addCart" ng-click="Shop.setItem({id: Product.detail.id, name: Product.detail.name,
-                                                    price: Product.detail.price, image: Product.detail.featuredImage.url,
-                                                    qty: Product.detail.qty, taxonomies : Product.detail.taxonomies,
-                                                     shipmentPrice: Product.detail.shipmentPrice, typeTax: Product.detail.typeTax,
-                                                      stock: Product.detail.inventory, offerPrice: Product.detail.offerPrice,
-                                                       priceList: Product.detail.priceList, prices: Product.detail.prices},
-                                                       Product.detail.qty, false)"
-                                                        ng-disabled="Shop.itemInCart(Product.detail.id)|| FormQty.$invalid || Product.detail.inventory <= 0"
-                                                        class="btn btn-optional col-sm-8"> <i class="fa fa-shopping-bag"></i> Agregar a carrito
-                                                </button>
-    
-                                            </div>
-
-                                        </div>
-                                    <hr>
-
                                 </div>
                             </div>
                         </div>
