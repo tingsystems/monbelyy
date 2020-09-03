@@ -4,7 +4,7 @@
     function Routes($stateProvider) {
         $stateProvider
             .state('shopcart', {
-                url: '/shopcart',
+                url: '/shopcart?id',
                 data: { pageTitle: 'Carrito de compras' },
                 views: {
                     'content': {

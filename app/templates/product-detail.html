@@ -101,7 +101,7 @@
             </div>
         </div>
     </section>
-    <section class="interest-you container" ng-controller="ShoppingCtrl as Shop">
+    <section class="interest-you container">
         <div class="row">
             <div class="title-middle-line">
                 <div class="text-content">
@@ -118,22 +118,31 @@
                         </div>
                     </div>
                     <div class="box-container">
-                        <p>{{ prod.name | limitTo:40}}</p>
-                        <div class="text-center no-padding" ng-class="prod.priceOffer ? 'hide': 'col-sm-12'">
-                            <h6>{{ prod.price | currency }}</h6>
-                        </div>
-                        <div class="col-sm-12 no-padding" ng-if="prod.priceOffer">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-6 no-pd-r">
-                                        <!--Offert price-->
-                                        <p class="offer-price" ng-if="prod.priceOffer">{{ prod.offerPrice | currency }}</p>
-                                    </div>
-                                    <div class="col-sm-6 text-right">
-                                            <!--old price-->
-                                        <p class="old-price" ng-if="prod.priceOffer">{{ prod.price | currency }}</p>
-                                    </div>
-                                </div>    
+                        <i class="fa fa-truck text-success" aria-hidden="true" ng-if="prod.shipmentPrice === 0"> <span class="text-success">Envio gratis</span> </i>
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <p class="box-title">{{ prod.name | limitTo:40}}</p>
+                                <span>
+                                    <ng-pluralize style="font-size: 11px; color: #888;" count="prod.colors.length" when="{'1': 'Un color disponible', 'other': '{} colores disponibles.'}"></ng-pluralize>
+                                </span>
+                            </div>
+                            <div class="col-md-12" ng-class="prod.offerPrice > 0 ? 'hide': 'col-sm-4'">
+                                <p class="price">{{ prod.price | currency }}</p>
+                
+                            </div>
+                            <div class="col-sm-12 no-padding" ng-if="prod.offerPrice > 0">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 no-pd-r">
+                                            <!--Offert price-->
+                                            <p class="offer-price" ng-if="prod.offerPrice > 0">{{ prod.offerPrice | currency }}</p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                                <!--old price-->
+                                            <p class="old-price" ng-if="prod.offerPrice > 0">{{ prod.price | currency }}</p>
+                                        </div>
+                                    </div>    
+                                </div>
                             </div>
                         </div>
                     </div>
