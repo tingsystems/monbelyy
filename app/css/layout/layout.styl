@@ -4,15 +4,21 @@
 -------------------------*/
 
 body
-  background-color white
   color fontClr
   font font-size 'Poppins', sans-serif
   .content-area-web
-    background-color white
+    padding-top 158px
+    background: rgba(237,237,237,1);
+    background: -moz-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(237,237,237,1)), color-stop(22%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 100%);
+    background: -ms-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(to bottom, rgba(237,237,237,1) 0%, rgba(255,255,255,1) 22%, rgba(255,255,255,1) 100%);
 .no-pd-r
   padding-right 0 !important
 .no-pd-l
-  padding-right 0 !important
+  padding-left 0 !important
 h1,h2,h3,h4,h5, h6
   font-family fontTitles
   margin 0
@@ -94,6 +100,15 @@ md-input-container
 
 /* ------ HOME STYLE ----- */
 #home
+  .slider-box 
+    .card 
+      border-radius 0
+      border none
+      margin-bottom 18px
+      .card-img-top 
+        object-fit cover
+        height 200px
+        width 100%
   /* sections in home page */
   .section-one, .section-two, .section-four,
   .section-five, .section-six,
@@ -174,6 +189,47 @@ md-input-container
 /* ------ TEMP PRODUCT DETAIL STYLE ----- */
 .temp-product-detail, .md-dialog-content
   background-color #f6f6f6
+  md-radio-button .md-container:before 
+    border-radius: 0;
+  md-radio-button.md-default-theme:not([disabled]).md-warn .md-on, md-radio-button:not([disabled]).md-warn .md-on, md-radio-button.md-default-theme:not([disabled]) .md-warn .md-on, md-radio-button:not([disabled]) .md-warn .md-on, md-radio-group.md-default-theme:not([disabled]).md-warn .md-on, md-radio-group:not([disabled]).md-warn .md-on, md-radio-group.md-default-theme:not([disabled]) .md-warn .md-on, md-radio-group:not([disabled]) .md-warn .md-on
+    background-color transparent  
+    border-color transparent
+  md-radio-button .md-on
+    background-color transparent
+  md-radio-group:not([disabled]) .md-primary .md-on, md-radio-group:not([disabled]) .md-primary.md-checked .md-off
+    background-color transparent
+  md-radio-group.row.ng-pristine.ng-untouched._md.ng-empty.ng-invalid.ng-invalid-required.layout-row
+    text-align center
+    margin-left 0
+  .layout-row > .flex-50
+    max-width 40%
+    text-align center
+    margin 5px 5px 5px 0px !important
+  .layout-row > .flex-20
+    max-width 10%
+    text-align center
+    margin 5px 5px 5px 0px !important
+  md-radio-button 
+    .md-container
+      width 100%
+      height 100%
+    .md-off 
+      width 100%
+      height 100%
+      border-radius 0
+    .md-on 
+      background-color: rgb(255, 255, 255);
+      border: 2px solid white;
+    .md-label
+      margin-left -8px
+      margin-right 0  
+  .md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off  
+    border-color black 
+  .md-default-theme .md-off, md-radio-button .md-off       
+    border-color rgba(0, 0, 0, 0.09)
+
+  .nav-link.disabled
+    padding 0 10px 0 0
   .interest-you
     padding-bottom 60px
     .title-middle-line
@@ -198,14 +254,16 @@ md-input-container
       border-left 1px solid #ddd
   .title-prd
     font-size 22px
+    font-weight 400
     text-transform uppercase
     padding 10px 0
   .article-price 
-    font-size 22px  
+    font-size 28px  
   md-input-container .md-input
     background-color white
     border 1px solid #ddd
     color fontClr
+    padding 0 10px
   .md-select-value      
     padding 2px 8px 1px !important
     background-color white
