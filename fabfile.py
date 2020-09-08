@@ -37,8 +37,8 @@ def update():
         run('chown -R %s:%s %s' % (remote_user, remote_user, path_upload_file_server))
         # remove dist.tar.gz
         run('rm %s%s ' % (remote_path, tar_file))
-        run('find %s -mtime +1  ' % delete_old_js_path)
-        run('find %s -mtime +1  ' % delete_old_css_path)
-        run("find %s -mtime +1  -exec rm {} \\;" % delete_old_js_path, shell=True)
-        run("find %s -mtime +1  -exec rm {} \\;" % delete_old_css_path, shell=True)
+        # run('find %s -mtime +1  ' % delete_old_js_path)
+        # run('find %s -mtime +1  ' % delete_old_css_path)
+        # run("find %s -mtime +1  -exec rm {} \\;" % delete_old_js_path, shell=True)
+        # run("find %s -mtime +1  -exec rm {} \\;" % delete_old_css_path, shell=True)
         local('rm %s' % tar_file)
