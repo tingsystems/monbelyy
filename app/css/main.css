@@ -1508,6 +1508,14 @@ md-input-container {
 .md-dialog-content .interest-you {
   padding-bottom: 60px;
 }
+.temp-product-detail .interest-you .box-simple .box-container,
+.md-dialog-content .interest-you .box-simple .box-container {
+  position: relative;
+}
+.temp-product-detail .interest-you .box-simple .box-container i.fa.fa-truck.text-success.ng-scope,
+.md-dialog-content .interest-you .box-simple .box-container i.fa.fa-truck.text-success.ng-scope {
+  bottom: 37%;
+}
 .temp-product-detail .interest-you .title-middle-line,
 .md-dialog-content .interest-you .title-middle-line {
   padding: 15px 15px 30px;
@@ -1522,7 +1530,6 @@ md-input-container {
 }
 .temp-product-detail .interest-you .owl-carousel .owl-item img,
 .md-dialog-content .interest-you .owl-carousel .owl-item img {
-  width: auto !important;
   margin: 0 auto;
 }
 .temp-product-detail #product-detail,
@@ -2004,6 +2011,10 @@ md-input-container > md-select {
   }
 }
 @media only screen and (max-width: 767px) {
+  .temp-product-detail .interest-you .box-simple .box-container i.fa.fa-truck.text-success.ng-scope,
+  .md-dialog-content .interest-you .box-simple .box-container i.fa.fa-truck.text-success.ng-scope {
+    bottom: 92%;
+  }
   #home .slider-box .card {
     margin-bottom: 0;
   }
