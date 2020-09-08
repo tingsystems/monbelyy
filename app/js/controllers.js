@@ -640,9 +640,9 @@
         //CAROUSEL TE PUEDE INTERESAR
         self.owlOptionsProducts = {
             items:4,
-            loop:true,
+            loop:false,
             margin:15,
-            autoplay:true,
+            autoplay:false,
             autoplayTimeout:5000,
             autoplayHoverPause:true,
             responsive:{
@@ -655,7 +655,7 @@
                     nav:false
                 },
                 1000:{
-                    items:5,
+                    items:4,
                     nav:true,
                     loop:false
                 }
