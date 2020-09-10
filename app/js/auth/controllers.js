@@ -39,7 +39,7 @@
                 user_last_login: Math.round((new Date().getTime() / 1000))
             };
             $rootScope.user = $localStorage.appData.user;
-            self.idUser = $localStorage.appData.user.id;
+            self.idUser = response.data.user.id;
             CustomerSrv.customerByUser({ id: self.idUser }).$promise.then(function (data) {
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
