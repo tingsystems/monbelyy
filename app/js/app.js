@@ -212,7 +212,7 @@
      * @desc Update xsrf $http headers to align with Django's defaults
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
-                 $localStorage, MMOrderSrv) {
+                 $localStorage, MMOrderSrv, $sessionStorage) {
         $rootScope.$state = $state;
         $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
@@ -316,29 +316,36 @@
         });
 
 
-        if (!$rootScope.mainNavMenu) {
+        if (!angular.isDefined($sessionStorage.mainNavMenu)) {
             TaxonomySrv.query({
                 parent: '67cc088a-76d4-42f6-8036-6758b6e6e52c',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
                 $rootScope.mainNavMenu = response;
+                $sessionStorage.mainNavMenu = response;
             }, function (error) {
             });
         }
+        else{
+            $rootScope.mainNavMenu = $sessionStorage.mainNavMenu;
+        }
 
-        if (!$rootScope.mainNavMenuHelp) {
+        if (!angular.isDefined($sessionStorage.mainNavMenuHelp)) {
             TaxonomySrv.query({
                 parent: 'db0a79d5-b467-47ac-aa8a-d574e33945de',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
                 $rootScope.mainNavMenuHelp = response;
+                $sessionStorage.mainNavMenuHelp = response;
             }, function (error) {
             });
+        }else{
+            $rootScope.mainNavMenuHelp = $sessionStorage.mainNavMenuHelp;
         }
 
-        if (!$rootScope.clientService) {
+        if (!angular.isDefined($sessionStorage.clientService)) {
             EntrySrv.get({
                 taxonomies: 'servicio-al-cliente1546028817',
                 isActive: 'True',
@@ -347,11 +354,14 @@
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
                 $rootScope.clientService = results.results;
+                $sessionStorage.clientService = results.results;
             });
 
+        }else{
+            $rootScope.clientService = $sessionStorage.clientService;
         }
 
-        if (!$rootScope.contactData) {
+        if (!angular.isDefined($sessionStorage.contactData)) {
             EntrySrv.get({
                 taxonomies: 'datos-de-contacto1546882036',
                 isActive: 'True',
@@ -360,11 +370,14 @@
                 fields: 'title,link,excerpt,content'
             }).$promise.then(function (results) {
                 $rootScope.contactData = results.results;
+                $sessionStorage.contactData = results.results;
             });
 
+        }else{
+            $rootScope.contactData = $sessionStorage.contactData;
         }
 
-        if (!$rootScope.information) {
+        if (!angular.isDefined($sessionStorage.information)) {
             EntrySrv.get({
                 taxonomies: 'informacion1546028802',
                 isActive: 'True',
@@ -373,10 +386,11 @@
                 fields: 'title,link,excerpt,content,slug'
             }).$promise.then(function (results) {
                 $rootScope.information = results.results;
+                $sessionStorage.information = results.results;
             });
         }
 
-        if (!$rootScope.socialMedia) {
+        if (!angular.isDefined($sessionStorage.socialMedia)) {
             EntrySrv.get({
                 taxonomies: 'redes-sociales1546028780',
                 isActive: 'True',
@@ -385,7 +399,10 @@
                 fields: 'title,content,attachments,slug,excerpt,link'
             }).$promise.then(function (results) {
                 $rootScope.socialMedia = results.results;
+                $sessionStorage.socialMedia = results.results;
             });
+        }else{
+            $rootScope.socialMedia = $sessionStorage.socialMedia;
         }
 
         $rootScope.ecommerce = true;
@@ -461,7 +478,7 @@
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv'];
+        'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv', '$sessionStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider'];
     AuthProvider.$inject = ['$authProvider'];
