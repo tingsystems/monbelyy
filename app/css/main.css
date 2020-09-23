@@ -1384,10 +1384,13 @@ md-input-container {
   text-transform: uppercase;
 }
 #home .section-four {
-  padding: 20px 0 40px !important;
+  padding: 80px 0 !important;
 }
 #home .section-four .list-group {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+}
+#home .section-four .card {
+  margin-bottom: 8px;
 }
 #home .section-five {
   background-color: #f1f1f1;
@@ -2023,6 +2026,9 @@ md-input-container > md-select {
   }
   .slider-box .no-pd-l {
     padding: 15px !important;
+  }
+  .section-four .col-sm-3 {
+    padding: 5px;
   }
   .temp-product-detail .article-description {
     border-left: none !important;
