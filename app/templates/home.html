@@ -23,7 +23,6 @@
                 
             </div>
         </div>
-        
     </section>
 
     <section class="section-two" ng-controller="ShoppingCtrl as Shop">
@@ -73,6 +72,20 @@
             </div>
         </div>
     </section>
+
+    <div class="section-four">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-6" ng-repeat="item in Home.categoryProducts">
+                    <div class="card">
+                        <a href="{{ item.link }}">
+                            <img src="{{ item.featuredImage.url }}" class="card-img-top" alt="{{ item.title }}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="section-three">
         <div class="container">

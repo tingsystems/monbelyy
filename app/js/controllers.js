@@ -43,6 +43,21 @@
             });
         });
 
+        EntrySrv.get({
+            taxonomies: 'categorias-de-producto',
+            isActive: 'True',
+            pageSize: 5,
+            ordering: 'createdAt',
+            fields: 'attachments,title,link,slug,excerpt,content'
+        }).$promise.then(function (results) {
+            self.categoryProducts = results.results;
+            //get featureImage
+            angular.forEach(self.categoryProducts, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+            });
+        });
+
+
         var paramsProducts = {};
         paramsProducts.isActive = 'True';
         if($rootScope.showWeb){
