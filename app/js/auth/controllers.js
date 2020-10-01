@@ -41,6 +41,7 @@
             $rootScope.user = $localStorage.appData.user;
             self.idUser = response.data.user.id;
             CustomerSrv.customerByUser({ id: self.idUser }).$promise.then(function (data) {
+                self.customer = data;
                 $localStorage.appData.user.customer = data.id;
                 $localStorage.appData.user.firstName = data.firstName;
                 if(data.sellers.length){
@@ -56,7 +57,7 @@
                     }
                     catch (err) {
                     }
-                    self.retriveCart($localStorage.cartId);
+                    self.retriveCart(self.customer.id);
                 });
             });
         };
@@ -319,48 +320,35 @@
             })
             return itemsReturn;
         
-        }    
+        }
+            
         self.retriveCart = function(id){
-            console.log(id);
-            if(id !== ''){
-                CartsSrv.get({id: id}).$promise.then(function (data) {
-                    if(data.id){
-                        self.cart = data;
+            CartsSrv.get({customer: id, pageSize: 10, page: 1}).$promise.then(function (data) {
+                if(data.count > 0){
+                    if(data.results[0].id){
+                        self.cart = data.results[0];
                         $localStorage.cart = self.cart;
                         $localStorage.items = parseItemsCart(self.cart.items);
+                        $rootScope.items = 0;
+                        // Redirect user here after a successful log in.
+                        self.items = $localStorage.items ? $localStorage.items : [];
+                        self.itemCount = self.items.length;
+                        if (self.itemCount > 0) {
+                            $state.go('shopcart');
+                        }else{
+                            $state.go('dashboard');
+                        }
                     }
-    
-                    $rootScope.items = 0;
-                    // Redirect user here after a successful log in.
-                    self.items = $localStorage.items ? $localStorage.items : [];
-                    self.itemCount = self.items.length;
-                    console.log(self.itemCount);
-                    if (self.itemCount > 0) {
-                        console.log(self.itemCount);
-                        $state.go('shopcart');
-                    }else{
-                        $state.go('dashboard');
-                    }
-                }, function(error){
-                    if(error.status === 404){
-                        delete $localStorage.cartId;
-                    }
-                    $state.go('dashboard');
-                });
-
-            }else{
-                // Redirect user here after a successful log in.
-                self.items = $localStorage.items ? $localStorage.items : [];
-                self.itemCount = self.items.length;
-                console.log(self.itemCount);
-                if (self.itemCount > 0) {
-                    console.log(self.itemCount);
-                    $state.go('shopcart');
                 }else{
                     $state.go('dashboard');
                 }
-            }
 
+            }, function(error){
+                if(error.status === 404){
+                    delete $localStorage.cartId;
+                }
+                $state.go('dashboard');
+            });
         }
 
         if($stateParams.username && $stateParams.token && $stateParams.cart){
