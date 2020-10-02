@@ -361,6 +361,26 @@
             $rootScope.clientService = $sessionStorage.clientService;
         }
 
+        if (!angular.isDefined($sessionStorage.categoryProducts)) {
+            EntrySrv.get({
+                taxonomies: 'categorias-de-producto',
+                isActive: 'True',
+                pageSize: 4,
+                ordering: 'createdAt',
+                fields: 'title,link,excerpt,content'
+            }).$promise.then(function (results) {
+                $rootScope.categoryProducts = results.results;
+                $sessionStorage.categoryProducts = results.results;
+                //get featureImage
+                angular.forEach(self.categoryProducts, function (obj, ind) {
+                    obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                });
+            });
+
+        }else{
+            $rootScope.categoryProducts = $sessionStorage.categoryProducts;
+        }
+
         if (!angular.isDefined($sessionStorage.contactData)) {
             EntrySrv.get({
                 taxonomies: 'datos-de-contacto1546882036',

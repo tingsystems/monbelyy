@@ -1,5 +1,5 @@
 <div class="box-widget">
-    <h4 class="widget-title">Contáctanos</h4>
+    <h6 class="widget-title">Contáctanos</h6>
     <div class="box-widget-container">
         <div class="list-icons-add" ng-repeat="post in contactData">
             <a class="nav-link" href="{{ post.excerpt }}">
@@ -7,13 +7,26 @@
         </div>
     </div>
     <hr class="dividerw">
-    <h4 class="widget-title">Síguenos en</h4>
-    <div class="box-widget-container" style="padding-bottom: 50px;">
+    <h6 class="widget-title">Síguenos en</h6>
+    <div class="box-widget-container">
         <ul class="nav">
             <li class="nav-item" ng-repeat="social in socialMedia">
                 <a class="nav-link" href="{{ social.excerpt }}"><span
                     ng-bind-html="social.content | trustHtml"></span></a>
             </li>
         </ul>
+    </div>
+    <hr class="dividerw">
+    <div class="box-widget-container" ng-controller="HomeCtrl as Home">
+        
+        <div class="row">
+            <div class="col-12" ng-repeat="item in Home.categoryProducts">
+                <div class="card" style="margin-bottom: 15px;">
+                    <a href="{{ item.link }}">
+                        <img src="{{ item.featuredImage.url }}" class="card-img-top" alt="{{ item.title }}">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
