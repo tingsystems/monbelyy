@@ -186,7 +186,7 @@
         $locationProvider.html5Mode(false);
     }
 
-    function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider) {
+    function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider, StripeElementsProvider) {
         blockUIConfig.templateUrl = '/templates/partials/block-ui.html';
         // Change the default overlay message
         blockUIConfig.message = 'Cargando...';
@@ -197,6 +197,9 @@
         // Set interceptor
         $httpProvider.interceptors.push('HttpInterceptor');
         $uiViewScrollProvider.useAnchorScroll();
+
+        // Stripe provider
+        StripeElementsProvider.setAPIKey('pk_test_51HfDHWKc0VAeqCwd2XDXDfxjtNYR3q1YXLyCjdILTndV31dPbDZPelcLq2dPgcHy6awDgAkq0zgte7Yl7mT9SSsW00CRldAnnZ')
 
     }
 
@@ -214,10 +217,11 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
                  $localStorage, MMOrderSrv, $sessionStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
+        // $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
+        $rootScope.host = 'http://192.168.1.81';
         $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
         $rootScope.apiV = 'v2';
-        $rootScope.apiShop = 'v1';
+        $rootScope.apiShop = 'v3';
         var projectId = '9e44e80c-72b1-4614-95ea-87ae84237e8f';
         $rootScope.projectId = projectId;
         $http.defaults.headers.common['PROJECT-ID'] = projectId;
@@ -491,7 +495,7 @@
     angular.module('annalise', ['ui.router', 'ts.controllers', 'ts.directives', 'ts.filters', 'ngSanitize', 'app.templates',
         'akoenig.deckgrid', 'ngAnimate', 'ui.bootstrap', 'blockUI', 'duScroll', 'truncate', 'ngTouch', 'ngStorage',
         'ngStorage', 'oitozero.ngSweetAlert', 'satellizer', 'auth.app', 'shop.app', 'ngMessages', 'ui.select',
-        'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload', 'wipImageZoom'])
+        'ngTable', 'ngMaterial', 'angulartics.google.analytics', 'ngFileUpload', 'wipImageZoom', 'angularjs-stripe-elements'])
         .config(Routes)
         .config(AppConfig)
         .config(AuthProvider)
@@ -500,6 +504,6 @@
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
         'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv', '$sessionStorage'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-    AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider'];
+    AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider', 'StripeElementsProvider'];
     AuthProvider.$inject = ['$authProvider'];
 })();

@@ -82,6 +82,10 @@
             'paidCHMP': {
                 method: 'POST',
                 url: BaseUrlShop.get() + 'platforms/mp/validate'
+            },
+            'stripeCH': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'platforms/stripe/checkout'
             }
         });
     }

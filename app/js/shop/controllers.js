@@ -905,7 +905,7 @@
         }
     }
 
-    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element, StateSrv) {
+    function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element, StateSrv, StripeElements) {
         var self = this;
         var user = $localStorage.appData.user;
         var taxInverse = $localStorage.taxInverse ? $localStorage.taxInverse : 0;
@@ -924,7 +924,7 @@
         self.email = $localStorage.appData.user.email;
         self.address = $localStorage.appData.user.address;
         self.phone = ''; //$localStorage.appData.user.phone;
-        self.orderPaymentType = '10';
+        self.orderPaymentType = '8';
         self.busyPaypal = false;
         self.paypalBtn = 'Realizar pago';
         self.shipping = angular.copy($stateParams.shipping);
@@ -934,6 +934,20 @@
         self.busyCard = false;
         self.shippingOption = angular.copy($stateParams.shipping);
         self.shiping = true;
+
+        self.elements = StripeElements.elements();
+        console.log(self.elements);
+        self.element = self.elements.create('card', {})
+        console.log(self.element);
+        self.cardErrors = null;
+
+        self.element.on('change', handleChange)
+
+        function handleChange (e) {
+            self.cardErrors = e.error ? e.error.message : ''
+            console.log(self.cardErrors);
+        }
+
 
         var getPaymentType = function (branchOffice) {
             self.notReady = true;
@@ -1332,6 +1346,19 @@
             }
 
         }
+
+
+
+        self.createOrderStripe = function () {
+            initialOrder();
+            OrderSrv.save(self.params).$promise.then(function (data) {
+                console.log(data);
+                StripeElements.redirectToCheckout({sessionId: data.metadata.stripe.id})
+                clearCart();
+            }, function (data) {
+                ErrorSrv.error(data);
+            });
+        };
     }
 
     function OrderCtrl(OrderSrv, AddressSrv, NotificationSrv, $localStorage, $rootScope, $state, $filter) {
@@ -1558,7 +1585,7 @@
     ShopCartCtrl.$inject = ['CartsSrv', '$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv', 'ValidCouponSrv', '$window','$stateParams'];
     ShippingAddressCtrl.$inject = ['AddressSrv', 'ShipmentSrv', 'NotificationSrv', 'StateSrv', 'CustomerSrv', '$localStorage', '$rootScope', '$state', '$filter','CartsSrv', '$timeout', '$stateParams'];
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
-    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv'];
+    PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv', 'StripeElements'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
     MercadoPagoHandlerCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv', '$state', 'ErrorSrv'];
 })();
