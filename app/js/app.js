@@ -199,7 +199,7 @@
         $uiViewScrollProvider.useAnchorScroll();
 
         // Stripe provider
-        StripeElementsProvider.setAPIKey('pk_test_51HfDHWKc0VAeqCwd2XDXDfxjtNYR3q1YXLyCjdILTndV31dPbDZPelcLq2dPgcHy6awDgAkq0zgte7Yl7mT9SSsW00CRldAnnZ')
+        StripeElementsProvider.setAPIKey('pk_live_51HfDHWKc0VAeqCwdpYga0Jky5Epq1iGJLecR0l3ayGr8Bq1iBKdFIMnpKxjW2P7cti6aLzoIv2443wnWx8K3QBlN00RssQuZXo')
 
     }
 
