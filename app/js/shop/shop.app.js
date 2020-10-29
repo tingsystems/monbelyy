@@ -167,7 +167,7 @@
                 }
             })
             .state('stripe-cancel', {
-                url: 'stripe/cancel?session',
+                url: '/stripe/cancel?session',
                 data: {pageTitle: 'Estado de tu compra'},
                 views: {
                     'content': {
@@ -178,7 +178,7 @@
                 }
             })
             .state('stripe-payment', {
-                url: 'stripe?key',
+                url: '/stripe?key',
                 data: {pageTitle: 'Pago con Stripe'},
                 views: {
                     'content': {
