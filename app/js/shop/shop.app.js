@@ -165,6 +165,28 @@
                         controller: 'MercadoPagoHandlerCtrl'
                     }
                 }
+            })
+            .state('stripe-cancel', {
+                url: 'stripe/cancel?session',
+                data: {pageTitle: 'Estado de tu compra'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/mp-handler.html',
+                        controllerAs: 'Mercado',
+                        controller: 'MercadoPagoHandlerCtrl'
+                    }
+                }
+            })
+            .state('stripe-payment', {
+                url: 'stripe?key',
+                data: {pageTitle: 'Pago con Stripe'},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/shop/partials/mp-handler.html',
+                        controllerAs: 'Mercado',
+                        controller: 'MercadoPagoHandlerCtrl'
+                    }
+                }
             });
 
     }

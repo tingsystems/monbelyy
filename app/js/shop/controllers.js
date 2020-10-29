@@ -1521,7 +1521,7 @@
 
     }
 
-    function MercadoPagoHandlerCtrl(OrderSrv, $stateParams, NotificationSrv, $state, ErrorSrv){
+    function MercadoPagoHandlerCtrl(OrderSrv, $stateParams, NotificationSrv, $state, ErrorSrv, StripeElements){
         var self = this;
         var makePayment = function (collection_id, collection_status, external_reference, preference_id) {
             var params = {
@@ -1568,6 +1568,15 @@
                 NotificationSrv.error('No pudimos cargar su detalle de venta, le enviaremos un correo electronico');
             });
         }
+        if ($state.current.name === 'stripe-cancel'){
+            var session = $stateParams.session;
+            //StripeElements.redirectToCheckout({sessionId: session})
+
+        }
+        if ($state.current.name === 'stripe-payment'){
+            var key = $stateParams.key;
+            StripeElements.redirectToCheckout({sessionId: key})
+        }
 
     }
 
@@ -1587,5 +1596,5 @@
     OrderCtrl.$inject = ['OrderSrv', 'AddressSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$state', '$filter'];
     PaymentCtrl.$inject = ['CustomerSrv', 'OrderSrv', 'AddressSrv', 'ErrorSrv', '$rootScope', '$state', '$localStorage', 'NotificationSrv', '$q', '$filter', '$window', '$stateParams', '$element', 'StateSrv', 'StripeElements'];
     PurchaseCompletedCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv'];
-    MercadoPagoHandlerCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv', '$state', 'ErrorSrv'];
+    MercadoPagoHandlerCtrl.$inject = ['OrderSrv', '$stateParams', 'NotificationSrv', '$state', 'ErrorSrv', 'StripeElements'];
 })();
