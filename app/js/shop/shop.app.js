@@ -15,7 +15,7 @@
                 }
             })
             .state('shipping-address', {
-                url: '/shipping/address?intent',
+                url: '/shipping/address?intent&address',
                 data: { pageTitle: 'Datos de envío' },
                 views: {
                     'content': {

@@ -903,6 +903,15 @@
                 $localStorage.shipmentTotal = data.shipmentCost;
             });
         }
+
+        if($stateParams.address){
+            AddressSrv.get({id: $stateParams.address}).$promise.then(function(response){
+                self.address = response;
+                self.addresses[0] = self.address;
+                self.quoteShipment();
+            })
+            
+        }
     }
 
     function PaymentCtrl(CustomerSrv, OrderSrv, AddressSrv, ErrorSrv, $rootScope, $state, $localStorage, NotificationSrv, $q, $filter, $window, $stateParams, $element, StateSrv, StripeElements) {

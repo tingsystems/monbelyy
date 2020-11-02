@@ -274,7 +274,7 @@
                             $localStorage.shipmentTotal = cart.shipmentCost;
                             $localStorage.total = cart.total;
                             $localStorage.cartId = cart.id;
-                            $state.go('checkout', {shipping: 0});
+                            $state.go('shipping-address', {address: self.guest.metadata.addressId, intent: null});
                         });
                     })
                     .catch(function (response) {
