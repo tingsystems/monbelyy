@@ -65,10 +65,10 @@
         }
         paramsProducts.pageSize = 20;
         paramsProducts.kind = 'group';
-        paramsProducts.taxonomies = 'home-mujer';
-        paramsProducts.ordering = 'ordering';
+        paramsProducts.taxonomies = 'mujer-tiendas-fisicas-calzalia';
+        paramsProducts.ordering = '-sales';
         if (list !== '') {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
             if($rootScope.multiplePrices){
                 paramsProducts.priceList = '';
 
@@ -79,7 +79,7 @@
 
         }
         else {
-            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
         }
         paramsProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
@@ -100,15 +100,15 @@
         });
 
         var paramsItemProducts = {};
-        paramsItemProducts.taxonomies = 'home-hombre';
+        paramsItemProducts.taxonomies = 'hombre-tiendas-fisicas-calzalia';
         paramsItemProducts.isActive = 'True';
         if($rootScope.showWeb){
             paramsItemProducts.showWeb = 'True';
         }
         paramsItemProducts.pageSize = $rootScope.itemsByPage;
-        paramsItemProducts.ordering = '-createdAt';
+        paramsItemProducts.ordering = '-sales';
         if (list !== '') {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
             if($rootScope.multiplePrices){
                 paramsItemProducts.priceList = '';
 
@@ -118,7 +118,7 @@
 
         }
         else {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
         }
         paramsItemProducts.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
@@ -145,9 +145,9 @@
             paramsItemProducts.showWeb = 'True';
         }
         paramsItemsForChildren.pageSize = $rootScope.itemsByPage;
-        paramsItemsForChildren.ordering = '-createdAt';
+        paramsItemsForChildren.ordering = '-sales';
         if (list !== '') {
-            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
             if($rootScope.multiplePrices){
                 paramsItemsForChildren.priceList = '';
 
@@ -157,7 +157,7 @@
 
         }
         else {
-            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
         }
         paramsItemsForChildren.kind = $rootScope.itemsKind;
         ProductSrv.get(paramsItemsForChildren).$promise.then(function (results) {
@@ -463,11 +463,11 @@
                     }
                     self.params.search = self.searchTerm;
                     if (list !== '') {
-                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
+                        self.params.fields = 'id,attachments,description,name,price,slug,priceList,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer,sales';
                         self.params.priceList = list;
                     }
                     else {
-                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer';
+                        self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,kind,metadata,code,offerPrice,expiredOffer,sales';
                     }
                     self.params.kind = $rootScope.itemsKind;
                     ProductSrv.get(self.params).$promise.then(function (results) {
@@ -696,7 +696,7 @@
         paramsProductsCat.pageSize = 5
         paramsProductsCat.ordering = 'ordering';
         if (list !== '') {
-            paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
             if($rootScope.multiplePrices){
                 paramsProductsCat.priceList = '';
 
@@ -705,7 +705,7 @@
             }
         }
         else {
-            paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb';
+            paramsProductsCat.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
         }
         paramsProductsCat.kind = 'group';
         paramsProductsCat.related = taxonomiesLocal.join();
@@ -731,7 +731,7 @@
         paramsProducts.slug = $stateParams.slug;
         paramsProducts.isActive = 'True';
         if (list !== '') {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,sales';
             if($rootScope.multiplePrices){
                 paramsProducts.priceList = '';
 
@@ -740,7 +740,7 @@
             }
         }
         else {
-            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer';
+            paramsProducts.fields = 'attachments,id,name,price,slug,description,code,taxonomies,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,sales';
         }
 
         self.busy = true;
@@ -955,10 +955,12 @@
         ];
         self.filterOrderingOptions = [
             {'property': 'ordering', 'name': 'Por pagina del catálogo'},
+            {'property': '-sales', 'name': 'Más vendidos'},
             {'property': 'name', 'name': 'Alfabeticamente de A-Z'},
             {'property': '-name', 'name': 'Alfabeticamente de Z-A'},
             {'property': 'price', 'name': 'Precio menor'}, 
             {'property': '-price', 'name': 'Precio mayor'}
+            ,
         ];
         self.sorterOptionSelect = self.filterOrderingOptions[0];
         self.page = $stateParams.page ? parseInt($stateParams.page) : 1;
@@ -1250,11 +1252,11 @@
                 self.params.showWeb = 'True';
             }
             if (list !== '') {
-                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer';
+                self.params.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,priceList,taxonomiesInfo,offerPrice,expiredOffer,sales';
                 self.params.priceList = list;
             }
             else {
-                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo,offerPrice,expiredOffer';
+                self.params.fields = 'id,attachments,description,name,price,slug,shipmentPrice,typeTax,code,kind,metadata,taxonomiesInfo,offerPrice,expiredOffer,sales';
             }
             if (self.optionSelected) {
                 self.params.ordering = self.optionSelected.property;
