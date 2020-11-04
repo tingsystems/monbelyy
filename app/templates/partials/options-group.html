@@ -17,21 +17,12 @@
             </div>
         </div>
     </div>
-<!--     <div class="col-sm-8 no-padding" ng-repeat="option in Product.detail.metadata.groups | orderBy: 'level'">
-        <md-input-container md-no-float style="width: 100%"> 
-            <label ng-if="option.kind === 'size'">Talla</label>
-            <label ng-if="option.kind === 'color'">Color</label>
-            <label ng-if="option.kind === 'style'">Estilo</label>
-            <md-select ng-model="Product.optionSelected[$index]" required name="size" ng-change="Product.getProductFromGroup()">
-                <md-option ng-repeat="size in Product.detail.taxonomies | filter:option.kind" ng-value="size">
-                    {{size.name}}
-                </md-option>
-            </md-select>
-            <div class="errors" ng-messages="FormQty.size.$error">
-                <div ng-message="required">Requerido</div>
-            </div>
-        </md-input-container>
-    </div> -->
+    <ng-pluralize ng-if="Product.detail.kind === 'product'" style="font-size: 13px;" count="Product.detail.inventory" when="{ 
+        '0':'Producto agotado', 
+        '1':'Último disponible',
+        'other':'{{Product.detail.inventory}} disponibles', 
+        }"> 
+    </ng-pluralize> 
     <div class="col-md-8 no-padding" style="margin-top: 10%;">
         <md-input-container md-no-float class="md-block">
             <label>Cantidad</label>

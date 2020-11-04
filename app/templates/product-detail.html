@@ -13,17 +13,16 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <ng-pluralize style="font-size: 13px;" count="Product.detail.sales" when="{ 
+                                        '0':'', 
+                                        '1':'{{Product.detail.sales}} vendido', 
+                                        'other':'{{Product.detail.sales}} vendidos', 
+                                        }"> 
+                                    </ng-pluralize> 
                                     <h2 class="title-prd">{{Product.detail.name}}</h2>
-                                    <div class="unavailable">
-                                        <span ng-if="Product.detail.inventory <= 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Producto agotado</span>
-                                    </div>
                                     <h2 class="article-price">{{ Product.detail.price | currency}}</h2>
-                                    <div class="available">
-                                        <span ng-if="Product.detail.inventory > 0 && Product.detail.kind === 'product'" style="font-size: 13px;"> Stock disponible</span>
-                                    </div>
                                     <hr>
                                     <i class="fa fa-truck text-success" aria-hidden="true" ng-if="Product.detail.shipmentPrice === 0"> <span class="text-success">Envio gratis</span> </i>
-                                    <br><br>
                                 </div>
                                 <div class="col-sm-12 type-payments">
                                     <span>
