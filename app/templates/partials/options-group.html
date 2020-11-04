@@ -17,12 +17,18 @@
             </div>
         </div>
     </div>
-    <ng-pluralize ng-if="Product.detail.kind === 'product'" style="font-size: 13px;" count="Product.detail.inventory" when="{ 
-        '0':'Producto agotado', 
-        '1':'Último disponible',
-        'other':'{{Product.detail.inventory}} disponibles', 
-        }"> 
-    </ng-pluralize> 
+    <div ng-class="{'text-danger': Product.detail.inventory === 0, 'text-warning' : (Product.detail.inventory > 0 && Product.detail.inventory < 6 ), 'text-success': Product.detail.inventory > 5}">
+        <ng-pluralize ng-if="Product.detail.kind === 'product'" count="Product.detail.inventory" when="{ 
+            '0':'Producto agotado', 
+            '1':'Último disponible',
+            '2':'Últimos {{Product.detail.inventory}} disponibles',
+            '3':'Últimos {{Product.detail.inventory}} disponibles',
+            '4':'Últimos {{Product.detail.inventory}} disponibles',
+            '5':'Últimos {{Product.detail.inventory}} disponibles',
+            'other':'{{Product.detail.inventory}} disponibles', 
+            }"> 
+        </ng-pluralize> 
+    </div>
     <div class="col-md-8 no-padding" style="margin-top: 10%;">
         <md-input-container md-no-float class="md-block">
             <label>Cantidad</label>
