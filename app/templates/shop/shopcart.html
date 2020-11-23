@@ -149,13 +149,13 @@
                                 </table>
                             </div>
                             <div ng-controller="AccessCtrl as Access">
-                                <button ng-if="Access.isAuthenticated()" class="btn btn-black btn-block" ng-click="ShopCart.processPurchase()"
-                                    ng-if="ShopCart.total >= ShopCart.minimumPurchase" ng-disabled="itemsForm.$invalid"><i
+                                <button ng-if="Access.isAuthenticated() && ShopCart.total >= ShopCart.minimumPurchase" class="btn btn-black btn-block" ng-click="ShopCart.processPurchase()"
+                                     ng-disabled="itemsForm.$invalid"><i
                                     class="fa fa-credit-card"></i> Procesar compra
                                 </button>
 
-                                <button ng-if="!Access.isAuthenticated()" class="btn btn-black btn-block" ui-sref="shipping-address({intent:'guest'})"
-                                ng-if="ShopCart.total >= ShopCart.minimumPurchase" ng-disabled="itemsForm.$invalid"><i
+                                <button ng-if="!Access.isAuthenticated() && ShopCart.total >= ShopCart.minimumPurchase" class="btn btn-black btn-block" ui-sref="shipping-address({intent:'guest'})"
+                                     ng-disabled="itemsForm.$invalid"><i
                                 class="fa fa-credit-card"></i> Procesar compra
                             </button>
 

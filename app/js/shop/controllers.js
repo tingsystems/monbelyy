@@ -22,7 +22,7 @@
         self.shipmentTotal = $localStorage.shipmentTotal ? $localStorage.shipmentTotal : 0;
         $localStorage.ship = false;
         try {
-            self.minimumPurchase = $localStorage.appData.user.branchOffices[0].metadata.minusMount;
+            self.minimumPurchase = parseFloat($localStorage.appData.user.branchOffices[0].metadata.minusMount);
             if (self.minimumPurchase === undefined) {
                 self.minimumPurchase = 0;
 
