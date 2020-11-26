@@ -855,7 +855,7 @@
     }
 
     function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
-        HistoryOrdersSrv, $filter, $element) {
+        HistoryOrdersSrv, $filter, $element, ErrorSrv) {
         var self = this;
         self.purchase = {
             amount: 0,
@@ -1003,6 +1003,19 @@
                 self.busy = false;
             });
         };
+        self.dataShipmentTracking = {};
+        self.getShipmentTracking = function() {
+            if(self.purchase.shipmentLabel.label_url) {
+                OrderSrv.getShipmentTracking({
+                    trackingNumber: self.purchase.shipmentLabel.tracking_number,
+                    provider: self.purchase.shipmentLabel.rate.provider
+                }).$promise.then(function (data) {
+                    self.dataShipmentTracking = data;
+                }, function (data) {
+                    ErrorSrv.error(data);
+                });
+            }
+        };
     }
 
     function ProfilePanelCtrl(OrderSrv, NotificationSrv, NgTableParams, PriceListSrv, $timeout, $localStorage, CustomerSrv) {
@@ -1113,6 +1126,6 @@
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
-    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter', '$element'];
+    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter', '$element', 'ErrorSrv'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage', 'CustomerSrv'];
 })();

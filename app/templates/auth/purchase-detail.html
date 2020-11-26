@@ -367,24 +367,37 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="container hide-print" ng-if="!Purchase.DoPayment">
-                        <div class="row">
-                            <div class="items-dashboard" style="background-color:#f5f5f5; width: 100%">
-                                <div class="container">
-                                    <h4><i class="fa fa-comment"></i> Mensajes</h4>
-                                </div>
-                                <hr>
-                                <div class="container">
+                    <md-content>
+                        <md-tabs class="md-warning hide-print" md-center-tabs>
+                            <md-tab label="Mensajes">
+                                <md-content class="md-padding">
                                     <div class="message-branch" ng-repeat=" message in Purchase.comments" ng-if="message.isActive === true">
                                         <p>
                                             {{message.comments}}
                                         </p>
+
                                         <small>Fecha: {{message.createdAt | date : 'short' }}</small>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="message-branch">
+                                        <p ng-if="!Purchase.comments.length">
+                                            Sin mensajes
+                                        </p>
+
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                            <md-tab label="Envío" md-on-select="Purchase.getShipmentTracking()" ng-disabled="!Purchase.purchase.shipmentLabel">
+                                <md-content class="md-padding">
+                                    <div class="message-branch" ng-repeat=" event in Purchase.dataShipmentTracking">
+                                        <p>
+                                            {{event.description}}
+                                        </p>
+                                        <small>Fecha: {{event.date}} {{event.time }}</small>
+                                    </div>
+                                </md-content>
+                            </md-tab>
+                        </md-tabs>
+                    </md-content>
                 </div>
             </div>
         </div>
