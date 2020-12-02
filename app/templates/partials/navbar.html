@@ -56,7 +56,7 @@
                 </ul>
                 <ul class="navbar-nav navbar-expand-lg mobile-hidde" ng-controller="AccessCtrl as Access">
                     <li class="nav-item">
-                        <a ui-sref="register({user:true, wholesale:false})" class="nav-link"
+                        <a ui-sref="register({'action': 'login'})" class="nav-link"
                            ng-if="!Access.isAuthenticated()">
                             <i class="fa fa-user-circle"></i> Iniciar sesión
                         </a>
@@ -105,7 +105,7 @@
                     </a> 
                 </li>
                 <li class="nav-item"  ng-if="!Access.isAuthenticated()">
-                    <a ui-sref="register({user:true, wholesale:false})" class="nav-link">
+                    <a ui-sref="register({'action': 'login'})" class="nav-link">
                         <i class="fa fa-user-circle"></i>
                     </a>
                 </li>

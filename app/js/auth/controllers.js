@@ -15,6 +15,13 @@
         self.user = $stateParams.user;
         self.wholesale = $stateParams.wholesale;
         self.activeTab = 0;
+        if($stateParams.action === 'register'){
+            self.activeTab = 1;
+        }
+        if($stateParams.action === 'login'){
+            self.activeTab = 0;
+        }
+
         if ($stateParams.wholesale === true) {
             self.activeTab = 2;
         }
@@ -24,7 +31,7 @@
 
         self.items = $localStorage.items ? $localStorage.items.length : [];
         self.itemCount = self.items.length;
-
+        
         self.processing = false;
 
         // Logic for save the session
@@ -135,13 +142,8 @@
             var address = {};
             self.busy = true;
             account.email = account.contactPersonEmail;
-            if (self.activeTab === 2) {
-                account.priceListId = '560d7b10-b1c3-4e79-bd15-36e2966f6564'
-            }
-            else {
-                account.isActive = true;
-            }
-
+            account.priceListId = 'dfc502f3-ed7c-4a12-bf33-62e336e33caa';
+            account.isActive = true;
             address.zip = self.address.zip;
             address.neighborhood = self.address.neighborhood;
             address.phone = account.contactPersonPhone;
@@ -323,7 +325,7 @@
         }
             
         self.retriveCart = function(id){
-            CartsSrv.get({customer: id, pageSize: 10, page: 1}).$promise.then(function (data) {
+            CartsSrv.get({customer: id, pageSize: 10, page: 1, kind: 'cart'}).$promise.then(function (data) {
                 if(data.count > 0){
                     if(data.results[0].id){
                         self.cart = data.results[0];
@@ -340,14 +342,26 @@
                         }
                     }
                 }else{
-                    $state.go('dashboard');
+                    self.items = $localStorage.items ? $localStorage.items : [];
+                    self.itemCount = self.items.length;
+                    if (self.itemCount > 0) {
+                        $state.go('shopcart');
+                    }else{
+                        $state.go('dashboard');
+                    }
                 }
 
             }, function(error){
                 if(error.status === 404){
                     delete $localStorage.cartId;
                 }
-                $state.go('dashboard');
+                self.items = $localStorage.items ? $localStorage.items : [];
+                self.itemCount = self.items.length;
+                if (self.itemCount > 0) {
+                    $state.go('shopcart');
+                }else{
+                    $state.go('dashboard');
+                }
             });
         }
 
