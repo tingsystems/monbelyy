@@ -86,6 +86,10 @@
             'stripeCH': {
                 method: 'POST',
                 url: BaseUrlShop.get() + 'platforms/stripe/checkout'
+            },
+            'getShipmentTracking': {
+                method: 'POST',
+                url: BaseUrlShop.get() + 'platforms/mienvio/tracking'
             }
         });
     }

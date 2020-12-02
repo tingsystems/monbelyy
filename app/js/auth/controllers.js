@@ -15,6 +15,13 @@
         self.user = $stateParams.user;
         self.wholesale = $stateParams.wholesale;
         self.activeTab = 0;
+        if($stateParams.action === 'register'){
+            self.activeTab = 1;
+        }
+        if($stateParams.action === 'login'){
+            self.activeTab = 0;
+        }
+
         if ($stateParams.wholesale === true) {
             self.activeTab = 2;
         }
@@ -24,7 +31,7 @@
 
         self.items = $localStorage.items ? $localStorage.items.length : [];
         self.itemCount = self.items.length;
-
+        
         self.processing = false;
 
         // Logic for save the session
@@ -319,7 +326,7 @@
         }
             
         self.retriveCart = function(id){
-            CartsSrv.get({customer: id, pageSize: 10, page: 1}).$promise.then(function (data) {
+            CartsSrv.get({customer: id, pageSize: 10, page: 1, kind: 'cart'}).$promise.then(function (data) {
                 if(data.count > 0){
                     if(data.results[0].id){
                         self.cart = data.results[0];
@@ -336,14 +343,26 @@
                         }
                     }
                 }else{
-                    $state.go('dashboard');
+                    self.items = $localStorage.items ? $localStorage.items : [];
+                    self.itemCount = self.items.length;
+                    if (self.itemCount > 0) {
+                        $state.go('shopcart');
+                    }else{
+                        $state.go('dashboard');
+                    }
                 }
 
             }, function(error){
                 if(error.status === 404){
                     delete $localStorage.cartId;
                 }
-                $state.go('dashboard');
+                self.items = $localStorage.items ? $localStorage.items : [];
+                self.itemCount = self.items.length;
+                if (self.itemCount > 0) {
+                    $state.go('shopcart');
+                }else{
+                    $state.go('dashboard');
+                }
             });
         }
 
@@ -851,7 +870,7 @@
     }
 
     function PurchaseDetailCtrl($stateParams, OrderSrv, Upload, BaseUrlShop, $rootScope, NotificationSrv, AttachmentCmsSrv,
-        HistoryOrdersSrv, $filter, $element) {
+        HistoryOrdersSrv, $filter, $element, ErrorSrv) {
         var self = this;
         self.purchase = {
             amount: 0,
@@ -999,6 +1018,19 @@
                 self.busy = false;
             });
         };
+        self.dataShipmentTracking = {};
+        self.getShipmentTracking = function() {
+            if(self.purchase.shipmentLabel.label_url) {
+                OrderSrv.getShipmentTracking({
+                    trackingNumber: self.purchase.shipmentLabel.tracking_number,
+                    provider: self.purchase.shipmentLabel.rate.provider
+                }).$promise.then(function (data) {
+                    self.dataShipmentTracking = data;
+                }, function (data) {
+                    ErrorSrv.error(data);
+                });
+            }
+        };
     }
 
     function ProfilePanelCtrl(OrderSrv, NotificationSrv, NgTableParams, PriceListSrv, $timeout, $localStorage, CustomerSrv) {
@@ -1109,6 +1141,6 @@
     AddressListCtrl.$inject = ['AddressSrv', 'NotificationSrv', 'NgTableParams', 'StateSrv', '$localStorage', '$rootScope', '$timeout', 'SweetAlert'];
     ProfileCtrl.$inject = ['CustomerSrv', 'StateSrv', 'NotificationSrv', '$localStorage', '$rootScope', '$stateParams', '$state', '$filter'];
     PurchaseListCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', '$timeout', '$rootScope', '$localStorage'];
-    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter', '$element'];
+    PurchaseDetailCtrl.$inject = ['$stateParams', 'OrderSrv', 'Upload', 'BaseUrlShop', '$rootScope', 'NotificationSrv', 'AttachmentCmsSrv', 'HistoryOrdersSrv', '$filter', '$element', 'ErrorSrv'];
     ProfilePanelCtrl.$inject = ['OrderSrv', 'NotificationSrv', 'NgTableParams', 'PriceListSrv', '$timeout', '$localStorage', 'CustomerSrv'];
 })();

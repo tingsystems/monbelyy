@@ -237,6 +237,7 @@
         $rootScope.showWeb = true;
         $rootScope.priceList = true;
         $rootScope.multiplePrices = false;
+        $rootScope.guestPurchase = false;
         //cambiar el slug de las listas
         $rootScope.multiplePricesConfig = {
             "limit": 1, "prices": {

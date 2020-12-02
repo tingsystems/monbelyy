@@ -399,7 +399,7 @@
 
         self.processPurchase = function () {
             if (!$auth.isAuthenticated()) {
-                $state.go('register');
+                $state.go('register',{'action':'register'});
             } else {
                 angular.forEach(self.items, function (obj, ind) {
                     items[ind] = {
@@ -1477,6 +1477,7 @@
         }, function (error) {
             NotificationSrv.error("Error");
         });
+        
 
     }
 

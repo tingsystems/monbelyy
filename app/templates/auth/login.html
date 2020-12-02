@@ -1,6 +1,13 @@
 <section id="login" class="content-area">
     <div class="bg-login">
         <div class="container">
+            <div class="row" ng-if="Access.activeTab === 1">
+                <div class="col-md-6 offset-md-3">
+                    <div class="alert alert-warning text-center" role="alert">
+                        <i class="fa fa-warning"></i> Completa tu registro para concluir tu compra.
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <uib-tabset class="tab-simple" active="Access.activeTab" justified="true">
@@ -55,7 +62,7 @@
                                 </md-input-container>
 
                                 <md-input-container md-no-float>
-                                    <input type="text" ng-minlength="5" ng-maxlength="10"
+                                    <input type="text" ng-minlength="5" ng-maxlength="30"
                                            ng-model="Access.formData.username"
                                            id="username" name="username"
                                            placeholder="Usuario" required>
@@ -63,7 +70,7 @@
                                          ng-if="registerForm.username.$touched">
                                         <div class="text-danger" ng-message="required">Este campo es requerido.</div>
                                         <div class="text-danger" ng-message="minlength">Mínimo 6 caracteres.</div>
-                                        <div class="text-danger" ng-message="maxlength">Máximo 10 caracteres.</div>
+                                        <div class="text-danger" ng-message="maxlength">Máximo 30 caracteres.</div>
                                     </div>
                                 </md-input-container>
 

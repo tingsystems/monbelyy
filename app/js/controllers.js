@@ -1326,7 +1326,7 @@
         }
     }
 
-    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert, ProductSrv, $mdDialog, $scope, CartsSrv) {
+    function ShoppingCtrl($rootScope, $auth, $state, $localStorage, $filter, NotificationSrv, SweetAlert, ProductSrv, $mdDialog, $scope, CartsSrv, $window) {
         var self = this;
         self.items = $localStorage.items ? $localStorage.items : [];
         self.total = $localStorage.total;
@@ -1509,7 +1509,10 @@
                             closeOnCancel: true
                         },
                             function (isConfirm) {
-                                if (!isConfirm) {
+                                if(isConfirm){
+                                    $window.history.back();
+                                }
+                                if(!isConfirm) {
                                     $state.go('shopcart')
                                 }
                         });
@@ -1845,6 +1848,6 @@
         '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout', '$location', '$anchorScroll', '$scope',
         'ngTableEventsChannel', '$state', 'PagerService'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
-        'SweetAlert', 'ProductSrv', '$mdDialog', '$scope', 'CartsSrv'];
+        'SweetAlert', 'ProductSrv', '$mdDialog', '$scope', 'CartsSrv', '$window'];
     ServiceCtrl.$inject = ['ProductSrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter', '$state', 'PagerService'];
 })();
