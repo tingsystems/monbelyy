@@ -49,6 +49,9 @@
                         <span class="text-danger" ng-repeat="message in ShopCart.messages">
                             {{message}} <br>
                         </span>
+                        <span ng-if="ShopCart.total <= 500" class="text-info" style="font-size: 16px;">
+                            Añade <strong> {{(500 - ShopCart.total | currency)}}</strong> en productos para obtener envío <strong> Gratis </strong>
+                        </span>
                         <div class="col-sm-6 col-md-12 list-item-shoppingcart" ng-repeat="product in ShopCart.items">
                             <div class="row">
                                 <div class="col-sm-2 col-md-2">
@@ -147,6 +150,13 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span ng-if="ShopCart.total <= 500" class="text-info" style="font-size: 14px;">
+                                        Añade <strong> {{(500 - ShopCart.total | currency)}}</strong> en productos para obtener envío <strong> Gratis </strong>
+                                    </span>
+                                </div>
                             </div>
                             <div ng-controller="AccessCtrl as Access">
                                 <div ng-if="!guestPurchase">
