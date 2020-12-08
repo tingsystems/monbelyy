@@ -402,7 +402,7 @@
     function GetQuerySearchCtrl($state) {
         var self = this;
         self.globalSearch = function (kind) {
-            $state.go('search', {q: self.searchTerm, kind: kind});
+            $state.go('search', {q: self.searchTerm, kind: kind, page:1, pageSize: 12});
             self.searchTerm = '';
         };
     }
