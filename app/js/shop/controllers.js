@@ -933,7 +933,7 @@
         self.email = $localStorage.appData.user.email;
         self.address = $localStorage.appData.user.address;
         self.phone = ''; //$localStorage.appData.user.phone;
-        self.orderPaymentType = '8';
+        self.orderPaymentType = '10';
         self.busyPaypal = false;
         self.paypalBtn = 'Realizar pago';
         self.shipping = angular.copy($stateParams.shipping);
