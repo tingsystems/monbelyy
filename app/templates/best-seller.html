@@ -1,0 +1,63 @@
+<div id="home">
+    <section class="section-two">
+        <div class="container">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h3 class="font-type">Lo Más Vendido Para Ella</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-6" ng-repeat="product in Home.products">
+                    <ng-include src="'/templates/partials/box-product.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-two">
+        <div class="container">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h3 class="font-type">Lo Más Vendido Para Él</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-6" ng-repeat="product in Home.productsItem">
+                    <ng-include src="'/templates/partials/box-product.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-two">
+        <div class="container">
+            <div class="title-middle-line">
+                <div class="text-content">
+                    <h3 class="font-type">Lo Más Vendido Para Niño y Niña</h3>
+                </div>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-6" ng-repeat="product in Home.productsChildren">
+                    <ng-include src="'/templates/partials/box-product.html'"></ng-include>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-three">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 text-center" ng-repeat="item in Home.infoShipping">
+                    <a post-link="{ link: {url: item.link, target: '_self'} }">
+                        <img src="{{ item.featuredImage.url }}" alt="{{ item.title }}">
+                        <h5>{{ item.title }}</h5>
+                        <p>{{ item.excerpt }}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
