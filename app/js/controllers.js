@@ -15,6 +15,14 @@
             $rootScope.visible = !$rootScope.visible;
         };
 
+        self.taxonomiesHome = {
+            "mujer": 'mujer-tiendas-fisicas-calzalia,primavera-verano-2021',
+            "hombre": 'hombre-tiendas-fisicas-calzalia,primavera-verano-2021',
+            "ninos": 'home-nino-y-nina,primavera-verano-2021',
+            "all": 'primavera-verano-2021'
+
+        }
+
         EntrySrv.get({
             taxonomies: 'slider1545956166',
             isActive: 'True',
@@ -65,7 +73,7 @@
         }
         paramsProducts.pageSize = 20;
         paramsProducts.kind = 'group';
-        paramsProducts.taxonomies = 'mujer-tiendas-fisicas-calzalia';
+        paramsProducts.taxonomies = self.taxonomiesHome['mujer'];
         paramsProducts.ordering = '-sales';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
@@ -100,7 +108,7 @@
         });
 
         var paramsItemProducts = {};
-        paramsItemProducts.taxonomies = 'hombre-tiendas-fisicas-calzalia';
+        paramsItemProducts.taxonomies = self.taxonomiesHome['hombre'];;
         paramsItemProducts.isActive = 'True';
         if($rootScope.showWeb){
             paramsItemProducts.showWeb = 'True';
@@ -139,7 +147,7 @@
         });
 
         var paramsItemsForChildren = {};
-        paramsItemsForChildren.taxonomies = 'home-nino-y-nina';
+        paramsItemsForChildren.taxonomies = self.taxonomiesHome['ninos'];;
         paramsItemsForChildren.isActive = 'True';
         if($rootScope.showWeb){
             paramsItemProducts.showWeb = 'True';
@@ -1811,8 +1819,155 @@
         }
     }
 
-    
+    function BestSellerCtrl(ProductSrv, EntrySrv, $rootScope, $filter, $localStorage, $stateParams) {
+        var self = this; // save reference of the scope
+        self.mainSlider = [];
+        self.active = 0;
+        $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
+        var list = $localStorage.priceList ? $localStorage.priceList : '';
+        if($stateParams.seller){
+            $localStorage.refSeller = $stateParams.seller;
+        }
 
+        $rootScope.toggleSidebar = function () {
+            $rootScope.visible = !$rootScope.visible;
+        };
+
+
+        var paramsProducts = {};
+        paramsProducts.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsProducts.showWeb = 'True';
+        }
+        paramsProducts.pageSize = 20;
+        paramsProducts.kind = 'group';
+        paramsProducts.taxonomies = 'mujer-tiendas-fisicas-calzalia';
+        paramsProducts.ordering = '-sales';
+        if (list !== '') {
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
+            if($rootScope.multiplePrices){
+                paramsProducts.priceList = '';
+
+            } else {
+                paramsProducts.priceList = list;
+
+            }
+
+        }
+        else {
+            paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
+        }
+        paramsProducts.kind = $rootScope.itemsKind;
+        ProductSrv.get(paramsProducts).$promise.then(function (results) {
+            self.products = results.results;
+            //get featureImage
+            angular.forEach(self.products, function (obj, ind) {
+                if($rootScope.priceList){
+                    if('priceList' in obj){
+                        obj.price = obj.priceList;
+                    }
+                }
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
+                obj.offerPrice = parseFloat(obj.offerPrice);
+                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
+                
+            });
+        });
+
+        var paramsItemProducts = {};
+        paramsItemProducts.taxonomies = 'hombre-tiendas-fisicas-calzalia';
+        paramsItemProducts.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsItemProducts.showWeb = 'True';
+        }
+        paramsItemProducts.pageSize = $rootScope.itemsByPage;
+        paramsItemProducts.ordering = '-sales';
+        if (list !== '') {
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
+            if($rootScope.multiplePrices){
+                paramsItemProducts.priceList = '';
+
+            }else {
+                paramsItemProducts.priceList = list;
+            }
+
+        }
+        else {
+            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
+        }
+        paramsItemProducts.kind = $rootScope.itemsKind;
+        ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
+            self.productsItem = results.results;
+            //get featureImage
+            angular.forEach(self.productsItem, function (obj, ind) {
+                if($rootScope.priceList){
+                    if('priceList' in obj){
+                        obj.price = obj.priceList;
+                    }
+                }
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
+                obj.offerPrice = parseFloat(obj.offerPrice);
+                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
+                
+            });
+        });
+
+        var paramsItemsForChildren = {};
+        paramsItemsForChildren.taxonomies = 'home-nino-y-nina';
+        paramsItemsForChildren.isActive = 'True';
+        if($rootScope.showWeb){
+            paramsItemProducts.showWeb = 'True';
+        }
+        paramsItemsForChildren.pageSize = $rootScope.itemsByPage;
+        paramsItemsForChildren.ordering = '-sales';
+        if (list !== '') {
+            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
+            if($rootScope.multiplePrices){
+                paramsItemsForChildren.priceList = '';
+
+            }else {
+                paramsItemsForChildren.priceList = list;
+            }
+
+        }
+        else {
+            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
+        }
+        paramsItemsForChildren.kind = $rootScope.itemsKind;
+        ProductSrv.get(paramsItemsForChildren).$promise.then(function (results) {
+            self.productsChildren = results.results;
+            //get featureImage
+            angular.forEach(self.productsChildren, function (obj, ind) {
+                if($rootScope.priceList){
+                    if('priceList' in obj){
+                        obj.price = obj.priceList;
+                    }
+                }
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
+                obj.offerPrice = parseFloat(obj.offerPrice);
+                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
+                
+            });
+        });
+
+        EntrySrv.get({
+            taxonomies: 'informacion-de-compra',
+            isActive: 'True',
+            pageSize: 6,
+            ordering: 'createdAt',
+            fields: 'title,content,attachments,slug,excerpt,link'
+        }).$promise.then(function (results) {
+            self.infoShipping = results.results;
+            //get featureImage
+            angular.forEach(self.infoShipping, function (obj, ind) {
+                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
+            });
+        });
+
+    }
 
     // create the module and assign controllers
     angular.module('ts.controllers', ['ts.services'])
@@ -1829,7 +1984,8 @@
         .controller('ProductDetailCtrl', ProductDetailCtrl)
         .controller('ProductsByCategoryCtrl', ProductsByCategoryCtrl)
         .controller('ShoppingCtrl', ShoppingCtrl)
-        .controller('ServiceCtrl', ServiceCtrl);
+        .controller('ServiceCtrl', ServiceCtrl)
+        .controller('BestSellerCtrl', BestSellerCtrl);
 
     // inject dependencies to controllers
     HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage', '$stateParams'];
@@ -1850,4 +2006,5 @@
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
         'SweetAlert', 'ProductSrv', '$mdDialog', '$scope', 'CartsSrv', '$window'];
     ServiceCtrl.$inject = ['ProductSrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter', '$state', 'PagerService'];
+    BestSellerCtrl.$inject = ['ProductSrv', 'EntrySrv', '$rootScope', '$filter', '$localStorage', '$stateParams'];
 })();

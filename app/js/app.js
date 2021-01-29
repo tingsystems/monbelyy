@@ -180,10 +180,22 @@
                         controller: 'ServiceCtrl'
                     }
                 }
+            })
+            .state('best-seller', {
+                url: '/best-seller',
+                data: {},
+                views: {
+                    'content': {
+                        templateUrl: '/templates/best-seller.html',
+                        controllerAs: 'Home',
+                        controller: 'BestSellerCtrl'
+
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider, StripeElementsProvider) {
@@ -489,6 +501,8 @@
                     });
             }
         });
+
+
 
     }
 
