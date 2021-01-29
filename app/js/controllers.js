@@ -18,7 +18,8 @@
         self.taxonomiesHome = {
             "mujer": 'mujer-tiendas-fisicas-calzalia,primavera-verano-2021',
             "hombre": 'hombre-tiendas-fisicas-calzalia,primavera-verano-2021',
-            "ninos": 'home-nino-y-nina,primavera-verano-2021'
+            "ninos": 'home-nino-y-nina,primavera-verano-2021',
+            "all": 'primavera-verano-2021'
 
         }
 
