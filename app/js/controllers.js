@@ -24,7 +24,7 @@
         }
 
         EntrySrv.get({
-            taxonomies: 'slider1545956166',
+            taxonomies: 'slider',
             isActive: 'True',
             pageSize: 5,
             ordering: '-createdAt',
@@ -107,84 +107,6 @@
             });
         });
 
-        var paramsItemProducts = {};
-        paramsItemProducts.taxonomies = self.taxonomiesHome['hombre'];;
-        paramsItemProducts.isActive = 'True';
-        if($rootScope.showWeb){
-            paramsItemProducts.showWeb = 'True';
-        }
-        paramsItemProducts.pageSize = $rootScope.itemsByPage;
-        paramsItemProducts.ordering = '-sales';
-        if (list !== '') {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
-            if($rootScope.multiplePrices){
-                paramsItemProducts.priceList = '';
-
-            }else {
-                paramsItemProducts.priceList = list;
-            }
-
-        }
-        else {
-            paramsItemProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
-        }
-        paramsItemProducts.kind = $rootScope.itemsKind;
-        ProductSrv.get(paramsItemProducts).$promise.then(function (results) {
-            self.productsItem = results.results;
-            //get featureImage
-            angular.forEach(self.productsItem, function (obj, ind) {
-                if($rootScope.priceList){
-                    if('priceList' in obj){
-                        obj.price = obj.priceList;
-                    }
-                }
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
-                obj.offerPrice = parseFloat(obj.offerPrice);
-                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
-                
-            });
-        });
-
-        var paramsItemsForChildren = {};
-        paramsItemsForChildren.taxonomies = self.taxonomiesHome['ninos'];;
-        paramsItemsForChildren.isActive = 'True';
-        if($rootScope.showWeb){
-            paramsItemProducts.showWeb = 'True';
-        }
-        paramsItemsForChildren.pageSize = $rootScope.itemsByPage;
-        paramsItemsForChildren.ordering = '-sales';
-        if (list !== '') {
-            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
-            if($rootScope.multiplePrices){
-                paramsItemsForChildren.priceList = '';
-
-            }else {
-                paramsItemsForChildren.priceList = list;
-            }
-
-        }
-        else {
-            paramsItemsForChildren.fields = 'name,description,attachments,slug,code,taxonomy,price,id,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
-        }
-        paramsItemsForChildren.kind = $rootScope.itemsKind;
-        ProductSrv.get(paramsItemsForChildren).$promise.then(function (results) {
-            self.productsChildren = results.results;
-            //get featureImage
-            angular.forEach(self.productsChildren, function (obj, ind) {
-                if($rootScope.priceList){
-                    if('priceList' in obj){
-                        obj.price = obj.priceList;
-                    }
-                }
-                obj.featuredImage = $filter('filter')(obj.attachments, {kind: 'featuredImage'})[0];
-                obj.colors = $filter('filter')(obj.taxonomies, {kind: 'color'});
-                obj.offerPrice = parseFloat(obj.offerPrice);
-                obj.shipmentPrice = parseFloat(obj.shipmentPrice);
-                
-            });
-        });
-
         EntrySrv.get({
             taxonomies: 'informacion-de-compra',
             isActive: 'True',
@@ -200,7 +122,7 @@
         });
 
         EntrySrv.get({
-            taxonomies: 'blog1543005663',
+            taxonomies: 'blog',
             isActive: 'True',
             pageSize: 1,
             ordering: '-createdAt',

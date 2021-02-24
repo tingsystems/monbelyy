@@ -4,7 +4,6 @@
 -------------------------*/
 
 .header
-  position absolute
   width 100%
 .send-free-msj
   background-color optional
@@ -15,22 +14,26 @@
 /* Shopping cart */
 .shopping-cart
   position relative
-  top 0
-  margin-left 30px
+  //top -10px
+  margin-left 15px
   i
-    font-size 28px
-    color shoppingCart
+    font-size 32px
+    color fontClr
   .qty-cart
     position absolute
-    color fontClr
+    color white
+    border 2px solid #f5f5f5
     text-align center
     border-radius 30px
-    background-color white
-    font-size 13px
-    top -15px
-    left 5px
-    width 15px
-    height 15px
+    background-color danger
+    font-size 14px
+    top 15px
+    left 20px
+    width 22px
+    height 22px
+    z-index 999
+    line-height 18px
+
 
 .navbar-side-slider
   .nav-item
@@ -44,8 +47,6 @@
 
 /* header three rows style */
 .mobile-nav 
-  .nav-link
-    padding 0 !important
   .navbar-collapse
     .navbar-nav
       flex-direction column !important  
@@ -79,6 +80,7 @@
       font-size 12px
       color white
       padding 15px 8px
+      font-family 'Fjalla One', sans-serif
   md-input-container
     margin 8px 0 8px
   md-input-container .md-errors-spacer
@@ -93,15 +95,19 @@
       padding-right 30px
     .navbar-nav .nav-link
       color fontClr
-      font-size 16px
+      font-size 18px
       text-transform uppercase
+      font-family 'Fjalla One', sans-serif
+      padding 21px 8px
+      .dropdown-item 
+        font-family 'Fjalla One', sans-serif
+
   .nav
     margin-top 10px
     > li > .shopping-cart
       padding-right 0
   .navbar-brand .logo
-    width 200px
-    padding 10px 0
+    width 100px
 
 /* header three rows style */
 .three-rows-nav
@@ -143,3 +149,177 @@
     .navbar-nav .nav-link
       color white
       font-size 16px
+.navbar-fixed-top.scrolled 
+  background-color black !important
+  transition all 200ms linear
+  position fixed
+  width 100%
+  .logo 
+    filter brightness(0) invert(1)
+  .nav-link, .ion-bag
+    color white !important
+  .qty-cart
+    position absolute
+    color #e6127b
+    border 3px solid #e6127b
+    text-align center
+    border-radius 30px
+    background-color white
+    font-size 14px
+    font-weight bold
+    top 15px
+    left 20px
+    width 22px
+    height 22px
+    z-index 999
+    line-height 18px 
+  .search-bar
+    background-color transparent     
+  .search-icon 
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    z-index: -1;
+    background-color transparent
+
+  .search-icon:after 
+    content: "";
+    position: absolute;
+    top: 19.07px;
+    left: 17.07px;
+    transform: rotate(45deg);
+    height: 2px;
+    width: 10px;
+    background-color: white;
+    border-radius: 10px;
+  .shopping-cart i
+    color white   
+   
+.navbar-fixed-top 
+  transition 500ms ease   
+.hover-dropdown:hover>.dropdown-menu 
+  display block
+.hover-dropdown  
+  .dropdown-menu  
+    border-radius 0  
+    margin-top 0px
+    border-radius 3px
+    border-color #f5f5f5
+    background-color #f5f5f5
+    box-shadow 0 0 10px rgba(0,0,0,0.1989)
+  .dropdown-menu:after
+    position: absolute;
+    right: 50%;
+    top: -8px;
+    width: 0;
+    height: 0;
+    content: '';
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 10px solid #f5f5f5;  
+  .dropdown-item 
+    font-family 'Fjalla One', sans-serif 
+.dropdown-toggle::after
+    display none    
+//SEARCH BAR
+
+.search-bar {
+  height: auto;
+  width: auto;
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  margin-left -55px
+  transform: translate(0%, -50%);
+  box-sizing: border-box;
+  background-color transparent
+  z-index 9
+}
+.search-bar input {
+  height: 44px;
+  width: 44px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-size: 18px;
+  border: 2px solid transparent;
+  border-radius: 44px;
+  cursor: pointer;
+  background-color: transparent;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  color: white;
+}
+.search-bar input::-moz-placeholder {
+  color: transparent;
+  background-color: #FFF;
+}
+.search-bar input:-ms-input-placeholder {
+  color: transparent;
+  background-color: #FFF;
+}
+.search-bar input::placeholder {
+  color: transparent;
+  background-color: #FFF;
+}
+.search-bar input:invalid {
+  box-shadow: none;
+}
+.search-bar input:focus, .search-bar input:valid {
+  width: 300px;
+  border: 2px solid #000;
+  outline: none;
+  cursor: auto;
+  background-color: #FFF;
+  color: #000;
+}
+.search-bar input:focus::-moz-placeholder, .search-bar input:valid::-moz-placeholder {
+  color: #999;
+  background-color: #FFF;
+}
+.search-bar input:focus:-ms-input-placeholder, .search-bar input:valid:-ms-input-placeholder {
+  color: #999;
+  background-color: #FFF;
+}
+.search-bar input:focus::placeholder, .search-bar input:valid::placeholder {
+  color: #999;
+  background-color: #FFF;
+}
+.search-bar input:focus + .search-icon, .search-bar input:valid + .search-icon {
+  z-index: 0;
+  border-color: #000;
+  right: 20px;
+  background-color: #FFF;
+}
+.search-bar input:focus + .search-icon:after, .search-bar input:valid + .search-icon:after {
+  background-color: #000;
+}
+
+.search-icon {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid black;
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  z-index: -1;
+  background-color white
+}
+.search-icon:after {
+  content: "";
+  position: absolute;
+  top: 19.07px;
+  left: 17.07px;
+  transform: rotate(45deg);
+  height: 2px;
+  width: 10px;
+  background-color: black;
+  border-radius: 10px;
+}
+

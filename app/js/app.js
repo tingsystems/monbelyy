@@ -65,7 +65,7 @@
             })
             .state('category-content', {
                 url: '/content/category/:slug',
-                data: {pageTitle: ' Calzalia - Venta de calzado'},
+                data: {pageTitle: ' Monbelyy - Ceramic Tiles'},
                 views: {
                     'content': {
                         templateUrl: '/templates/blog.html',
@@ -76,7 +76,7 @@
             })
             .state('category', {
                 url: '/category/:slug?page&pageSize&ordering&cat&brand&search',
-                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos para Hombre y Mujer'},
+                data: {pageTitle: ' Monbelyy - Ceramic Tiles'},
                 views: {
                     'content': {
                         templateUrl: '/templates/categories.html',
@@ -123,7 +123,7 @@
             })
             .state('product-detail', {
                 url: '/product/detail/:slug\.html',
-                data: {pageTitle: 'Calzalia Tienda en Linea de Zapatos para Hombre y Mujer'},
+                data: {pageTitle: 'Monbelyy - Ceramic Tiles'},
                 views: {
                     'content': {
                         templateUrl: '/templates/product-detail.html',
@@ -150,7 +150,7 @@
             })
             .state('referrer', {
                 url: '/ref/seller/:project/:seller',
-                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos para Hombre y Mujer'},
+                data: {pageTitle: ' Monbelyy - Ceramic Tiles'},
                 views: {
                     'content': {
                         templateUrl: '/templates/home.html',
@@ -160,7 +160,7 @@
                 }
             }).state('services',{
                 url: '/services',
-                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos para Hombre y Mujer'},
+                data: {pageTitle: ' Monbelyy - Ceramic Tiles'},
                 views: {
                     'content': {
                         templateUrl: '/templates/services.html',
@@ -172,7 +172,7 @@
             })
             .state('service-detail', {
                 url: '/service/detail/:slug\.html',
-                data: {pageTitle: ' Calzalia Tienda en Linea de Zapatos para Hombre y Mujer'},
+                data: {pageTitle: ' Monbelyy - Ceramic Tiles'},
                 views: {
                     'content': {
                         templateUrl: '/templates/service-detail.html',
@@ -229,11 +229,12 @@
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
                  $localStorage, MMOrderSrv, $sessionStorage) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://apicalzalia.mercadomovil.com.mx';
-        $rootScope.hostAnnalise = 'https://apicalzalia.mercadomovil.com.mx';
-        $rootScope.apiV = 'v2';
-        $rootScope.apiShop = 'v1';
-        var projectId = '9e44e80c-72b1-4614-95ea-87ae84237e8f';
+        $rootScope.host = 'https://mercadomovil.com.mx';
+        $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
+        $rootScope.apiV = 'v1';
+        $rootScope.apiShop = 'v3'
+
+        var projectId = '2e04ff91-ba48-49d8-93ac-5d695bb2fb33';
         $rootScope.projectId = projectId;
         $http.defaults.headers.common['PROJECT-ID'] = projectId;
         $rootScope.hidePriceLogin = false;
@@ -288,14 +289,14 @@
             meta_color: '#337ab7',
             img_default: '../img/img-default.jpg',
             logo: '../img/logo.jpg',
-            email: 'ventas@calzalia.mx',
+            email: 'ventas@monbelyy.mx',
             phone: '353 105 02 63',
-            branchOffice: 'Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer'
+            branchOffice: 'Monbelyy - Ceramic Tiles'
 
         };
 
         $rootScope.post = {
-            'title': 'Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer',
+            'title': 'Monbelyy - Ceramic Tiles',
             'excerpt': '',
             'urlImages': {
                 'original': "../img/img-default.jpg"
@@ -310,7 +311,7 @@
             $window.ga('require', 'displayfeatures');
             // Init var post for meta tags index
             $rootScope.post = {
-                'title': ' Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer',
+                'title': ' Monbelyy - Ceramic Tiles',
                 'excerpt': '',
                 'urlImages': {
                     'original': $rootScope.initConfig.img_default
@@ -319,7 +320,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = ' Calzalia Tienda en Linea de Zapatos Para Hombre y Mujer';
+        $rootScope.pageTitle = ' Monbelyy - Ceramic Tiles';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -363,7 +364,7 @@
 
         if (!angular.isDefined($sessionStorage.clientService)) {
             EntrySrv.get({
-                taxonomies: 'servicio-al-cliente1546028817',
+                taxonomies: 'servicio-al-cliente',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -399,7 +400,7 @@
 
         if (!angular.isDefined($sessionStorage.contactData)) {
             EntrySrv.get({
-                taxonomies: 'datos-de-contacto1546882036',
+                taxonomies: 'datos-de-contacto',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -415,7 +416,7 @@
 
         if (!angular.isDefined($sessionStorage.information)) {
             EntrySrv.get({
-                taxonomies: 'informacion1546028802',
+                taxonomies: 'informacion',
                 isActive: 'True',
                 pageSize: 5,
                 ordering: 'createdAt',
@@ -428,7 +429,7 @@
 
         if (!angular.isDefined($sessionStorage.socialMedia)) {
             EntrySrv.get({
-                taxonomies: 'redes-sociales1546028780',
+                taxonomies: 'redes-sociales',
                 isActive: 'True',
                 pageSize: 6,
                 ordering: 'createdAt',
