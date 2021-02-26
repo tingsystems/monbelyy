@@ -59,7 +59,7 @@
                 url: '/history/sales',
                 data: {
                     requiredLogin : true,
-                    pageTitle: 'Compras - Calzalia - Venta de calzado'
+                    pageTitle: 'Compras - Monbelyy - Ceramic Tiles'
                 },
                 views: {
                     'content': {

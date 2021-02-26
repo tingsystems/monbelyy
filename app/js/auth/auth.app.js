@@ -5,7 +5,7 @@
         $stateProvider
             .state('register', {
                 url: '/login?username&token&cart&action',
-                data: {pageTitle: 'Calzalia'},
+                data: {pageTitle: 'Monbelly'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/login.html',
@@ -17,7 +17,7 @@
             })
             .state('success', {
                 url: '/account/success',
-                data: {pageTitle: 'Calzalia'},
+                data: {pageTitle: 'Monbelly'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/validate_account.html'
@@ -26,7 +26,7 @@
             })
             .state('validate', {
                 url: '/validate/:token',
-                data: {pageTitle: 'Calzalia'},
+                data: {pageTitle: 'Monbelly'},
                 views: {
                     'content': {
                         templateUrl: '/templates/auth/partials/account_activated.html',
@@ -39,7 +39,7 @@
                 url: '/account/dashboard',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Calzalia'
+                    pageTitle: 'Mobbelly'
                 },
                 views: {
                     'content': {
@@ -79,7 +79,7 @@
                 url: '/account/profile',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Perfil - Calzalia'
+                    pageTitle: 'Perfil - Monbelyy'
                 },
                 views: {
                     'content': {
@@ -93,7 +93,7 @@
                 url: '/account/addresses',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Calzalia'
+                    pageTitle: 'Direcciones - Monbelyy'
                 },
                 views: {
                     'content': {
@@ -107,7 +107,7 @@
                 url: '/account/address',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Calzalia'
+                    pageTitle: 'Direcciones - Monbelyy'
                 },
                 views: {
                     'content': {
@@ -121,7 +121,7 @@
                 url: '/account/address/update/:id',
                 data: {
                     requiredLogin: true,
-                    pageTitle: 'Direcciones - Calzalia'
+                    pageTitle: 'Direcciones - Monbelyy'
                 },
                 views: {
                     'content': {
@@ -134,7 +134,7 @@
             .state('recovery-password', {
                 url: '/account/recovery/password',
                 data: {
-                    pageTitle: 'Recuperar contraseña - Calzalia'
+                    pageTitle: 'Recuperar contraseña - Monbelyy'
                 },
                 views: {
                     'content': {
@@ -147,7 +147,7 @@
             .state('new-password', {
                 url: '/account/new/password/:token',
                 data: {
-                    pageTitle: 'Reestablecer contraseña - Calzalia'
+                    pageTitle: 'Reestablecer contraseña - Monbelyy'
                 },
                 views: {
                     'content': {
