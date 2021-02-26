@@ -285,12 +285,12 @@
         }); 
         //various config
         $rootScope.initConfig = {
-            googleKey: 'UA-53551138-9',
+            googleKey: 'G-S7HJ8BR1XK',
             meta_color: '#337ab7',
             img_default: '../img/img-default.jpg',
             logo: '../img/logo.jpg',
             email: 'ventas@monbelyy.mx',
-            phone: '353 105 02 63',
+            phone: '353 123 71 64',
             branchOffice: 'Monbelyy - Ceramic Tiles'
 
         };
