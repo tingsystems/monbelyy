@@ -335,7 +335,7 @@
 
         if (!angular.isDefined($sessionStorage.mainNavMenu)) {
             TaxonomySrv.query({
-                parent: '67cc088a-76d4-42f6-8036-6758b6e6e52c',
+                parent: '79fe98e9-7538-4a8f-9210-196aded69430',
                 isActive: 'True',
                 ordering: 'order'
             }).$promise.then(function (response) {
