@@ -246,7 +246,7 @@
         $rootScope.filterSize = false;
         $rootScope.filterType = false;
         $rootScope.filterCategory = 'category';
-        $rootScope.itemsKind = 'group';
+        $rootScope.itemsKind = 'product';
         $rootScope.showWeb = true;
         $rootScope.priceList = true;
         $rootScope.multiplePrices = false;
