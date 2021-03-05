@@ -6,13 +6,13 @@
         
     </div>
     <div class="box-container">
-        <i class="fa fa-truck text-success" aria-hidden="true" ng-if="product.shipmentPrice === 0"> <span class="text-success">Envio gratis</span> </i>
+        <!--<i class="fa fa-truck text-success" aria-hidden="true" ng-if="product.shipmentPrice === 0"> <span class="text-success">Envio gratis</span> </i>-->
         <div class="row align-items-center">
             <div class="col-sm-12">
                 <p class="box-title">{{ product.name | limitTo:40}}</p>
-                <span>
+                <!--<span>
                     <ng-pluralize style="font-size: 11px; color: #888;" count="product.colors.length" when="{'1': 'Un color disponible', 'other': '{} colores disponibles.'}"></ng-pluralize>
-                </span>
+                </span>-->
             </div>
             <div class="col-md-12" ng-class="product.offerPrice > 0 ? 'hide': 'col-sm-4'">
                 <p class="price">{{ product.price | currency }}</p>

@@ -675,8 +675,7 @@ audio:not([controls]),
 .box-simple .box-container {
   text-align: center;
   margin-bottom: 15px;
-  padding-top: 25px;
-  padding-bottom: 20px;
+  padding: 20px;
   margin-top: 15px;
   border-top: 1px solid #ddd;
 }

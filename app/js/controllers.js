@@ -15,14 +15,6 @@
             $rootScope.visible = !$rootScope.visible;
         };
 
-        self.taxonomiesHome = {
-            "mujer": 'mujer-tiendas-fisicas-calzalia,primavera-verano-2021',
-            "hombre": 'hombre-tiendas-fisicas-calzalia,primavera-verano-2021',
-            "ninos": 'home-nino-y-nina,primavera-verano-2021',
-            "all": 'primavera-verano-2021'
-
-        }
-
         EntrySrv.get({
             taxonomies: 'slider',
             isActive: 'True',
@@ -72,8 +64,7 @@
             paramsProducts.showWeb = 'True';
         }
         paramsProducts.pageSize = 20;
-        paramsProducts.kind = 'group';
-        paramsProducts.taxonomies = self.taxonomiesHome['mujer'];
+        paramsProducts.kind = 'product';
         paramsProducts.ordering = '-sales';
         if (list !== '') {
             paramsProducts.fields = 'name,description,attachments,slug,code,taxonomy,price,id,priceList,shipmentPrice,typeTax,kind,metadata,offerPrice,expiredOffer,showWeb,sales';
