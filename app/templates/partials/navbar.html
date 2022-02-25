@@ -19,7 +19,7 @@
                         </div>  
                     </li>
                     <!--mobile nav-->
-                    <li class="nav-item dropdown hide-lg hide-md" ng-repeat="item in mainNavMenu">
+                    <li class="nav-item dropdown hide-lg hide-md" ng-repeat="item in mainNavMenu" hide-gt-lg>
                         <a class="nav-link dropdown-toggle" href="{{ item.link }}" data-toggle="dropdown" ng-click="nav.close()" ng-if="item.children.length>0">{{ item.name }}</a>
                         <a class="nav-link" href="{{ item.link }}" ng-click="nav.close()" ng-if="!item.children.length>0">{{ item.name }}</a>
                         <div class="dropdown-menu" ng-if="item.children.length>0">
