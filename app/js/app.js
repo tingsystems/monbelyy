@@ -425,6 +425,8 @@
                 $rootScope.information = results.results;
                 $sessionStorage.information = results.results;
             });
+        }else{
+            $rootScope.information = $sessionStorage.information;
         }
 
         if (!angular.isDefined($sessionStorage.socialMedia)) {
