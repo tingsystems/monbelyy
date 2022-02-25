@@ -9,7 +9,7 @@ from fabric.contrib.files import exists
 
 env.use_ssh_config = True
 env.hosts = ['ts-24']
-remote_user = 'monbel.mx'
+remote_user = 'monbelyy.mx'
 remote_path = '/home/' + remote_user + '/www/'
 dist_dir = 'dist/'
 tar_file = 'dist.tar.gz'

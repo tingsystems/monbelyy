@@ -195,7 +195,7 @@
             });
 
         $urlRouterProvider.otherwise('/');
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false);
     }
 
     function AppConfig($httpProvider, blockUIConfig, $uiViewScrollProvider, StripeElementsProvider) {
@@ -320,7 +320,7 @@
             $anchorScroll();
         });
         // init for page title
-        $rootScope.pageTitle = ' Monbelyy - Ceramic Tiles';
+        $rootScope.pageTitle = 'Monbelyy - Ceramic Tiles';
 
         function showResponsive($window) {
             return $window.innerWidth <= 768;
@@ -525,8 +525,6 @@
           $transitions.onSuccess({ to: 'home' }, function($transition){
             MetaTagsService.setTags({});
           });
-
-
 
     }
 
