@@ -227,10 +227,10 @@
      * @desc Update xsrf $http headers to align with Django's defaults
      */
     function Run($http, $rootScope, $state, $window, $location, TaxonomySrv, $anchorScroll, EntrySrv, $auth,
-                 $localStorage, MMOrderSrv, $sessionStorage) {
+                 $localStorage, MMOrderSrv, $sessionStorage, $transitions, MetaTagsService) {
         $rootScope.$state = $state;
-        $rootScope.host = 'https://mercadomovil.com.mx';
-        $rootScope.hostAnnalise = 'https://mercadomovil.com.mx';
+        $rootScope.host = 'https://api.mercadomovil.com.mx';
+        $rootScope.hostAnnalise = 'https://api.mercadomovil.com.mx';
         $rootScope.apiV = 'v1';
         $rootScope.apiShop = 'v3'
 
@@ -503,6 +503,29 @@
             }
         });
 
+        MetaTagsService.setDefaultTags({
+            // General SEO
+            'title': 'Monbelyy - Ceramic Tiles',
+            'author': 'Mercado Móvil Cloud Business',
+            'description': 'Tienda en línea',
+            // Indexing / Spiders
+            'googlebot': 'all',
+            'bingbot': 'all',
+            'robots': 'all',
+            // OpenGraph
+            'og:type': 'store',
+            'og:title': 'Monbelyy - Ceramic Tiles',
+            'og:description': 'Tienda en línea',
+            'og:site_name': 'Monbelyy - Ceramic Tiles',
+            'og:url': 'https://www.monbelyy.mx',
+            'og:image': 'https://www.monbelyy.mx/img/img-default.jpg',
+            'og:image:width': '500',
+            'og:image:height': '500'
+          });
+          $transitions.onSuccess({ to: 'home' }, function($transition){
+            MetaTagsService.setTags({});
+          });
+
 
 
     }
@@ -517,7 +540,7 @@
         .run(Run);
 
     Run.$inject = ['$http', '$rootScope', '$state', '$window', '$location', 'TaxonomySrv', '$anchorScroll',
-        'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv', '$sessionStorage'];
+        'EntrySrv', '$auth', '$localStorage', 'MMOrderSrv', '$sessionStorage', '$transitions', 'MetaTagsService'];
     Routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
     AppConfig.$inject = ['$httpProvider', 'blockUIConfig', '$uiViewScrollProvider', 'StripeElementsProvider'];
     AuthProvider.$inject = ['$authProvider'];

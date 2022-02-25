@@ -247,7 +247,7 @@
         $rootScope.pageTitle = 'Blog' + ' - ' + $rootScope.initConfig.branchOffice;
     }
 
-    function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter) {
+    function PostDetailCtrl(EntrySrv, $stateParams, $rootScope, $filter, MetaTagsService) {
         var self = this;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
 
@@ -272,6 +272,13 @@
             $rootScope.post.urlImages.original = self.detail.featuredImage.url;
             $rootScope.pageTitle = results.title + ' - ' + $rootScope.initConfig.branchOffice;
             self.busy = false;
+            MetaTagsService.setTags({
+                'title': results.title,
+                // OpenGraph
+                'og:title': results.title + ' - ' + $rootScope.initConfig.branchOffice,
+                'og:url': 'https://www.monbelyy.mx' + $rootScope.$state.href($rootScope.$state.current.name),
+                'og:image': self.detail.featuredImage.url,
+            })
         });
     }
 
@@ -329,7 +336,7 @@
     }
 
     function SearchCtrl(EntrySrv, ProductSrv, $filter, $stateParams, $localStorage, $rootScope, NgTableParams, $scope,
-                        ngTableEventsChannel, $location, $anchorScroll, PagerService, $state) {
+                        ngTableEventsChannel, $location, $anchorScroll, PagerService, $state, MetaTagsService) {
         var self = this;
 
         self.listSearch = [];
@@ -337,6 +344,11 @@
         self.kindTerm = angular.copy($stateParams.kind);
         self.isPost = true;
         self.params = {ordering: 'name'};
+        MetaTagsService.setTags({
+            'title': 'Resultados de la búsqueda ' + self.searchTerm ,
+            // OpenGraph
+            'og:title': 'Resultados de la búsqueda ' + self.searchTerm,
+        })
 
         // init for pagination and ordering
         self.totalResults = 0;
@@ -567,7 +579,7 @@
         };
     }
 
-    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage, $timeout, NotificationSrv, $state) {
+    function ProductDetailCtrl(ProductSrv, $stateParams, $rootScope, $filter, $localStorage, $timeout, NotificationSrv, $state, MetaTagsService) {
         var self = this;
         $rootScope.pageTitle = $rootScope.initConfig.branchOffice;
         var list = $localStorage.priceList ? $localStorage.priceList : '';
@@ -597,6 +609,31 @@
                 }
             }
 
+        }
+
+        function removeTags(str) {
+            if ((str===null) || (str===''))
+            return false;
+            else
+            str = str.toString();
+            return str.replace( /(<([^>]+)>)/ig, '');
+        }
+
+        var getAvailability = function(item) {
+            // must return in_stock or out_of_stock
+            // si es grupo validad que este activo en web
+            // si es producto validar con el inventory
+            var status_stock = "out_of_stock"
+            if(item.kind === 'product'){
+                if(item.inventory > 0){
+                    status_stock = "in_stock";
+                }
+            }else if (item.kind === 'group'){
+                if(item.showWeb){
+                    status_stock = "in_stock";
+                }
+            }
+            return status_stock;
         }
 
         var getRelated = function(taxonomies){
@@ -666,6 +703,7 @@
 
         self.busy = true;
         ProductSrv.get(paramsProducts).$promise.then(function (results) {
+            self.group = angular.copy(results);
             self.parent = results.id;
             self.detail = results;
             self.detail.galleryImages = [];
@@ -735,6 +773,20 @@
             self.busy = false;
             self.detail.qty = 1;
             getRelated(self.categories);
+            MetaTagsService.setTags({
+                'title': self.group.name,
+                // OpenGraph
+                'og:type': 'product',
+                'og:title': self.group.name,
+                'og:description': removeTags(self.detail.description),
+                'og:image': self.detail.featuredImage.url,
+                'og:url': 'https://www.monbelyy.mx' + $rootScope.$state.href($rootScope.$state.current.name),
+                'product:brand':'Monbelyy',
+                'product:condition':'new',
+                'product:price:amount': self.detail.price,
+                'product:price:currency': 'MXN',
+                'product:availability': getAvailability(self.detail),
+            })
         });
 
         self.getProductFromGroup = function () {
@@ -832,7 +884,7 @@
 
     function ProductsByCategoryCtrl(ProductSrv, ProductTaxonomySrv, NotificationSrv, NgTableParams, $stateParams,
                                     $rootScope, $localStorage, $filter, $timeout, $location, $anchorScroll, $scope,
-                                    ngTableEventsChannel, $state, PagerService) {
+                                    ngTableEventsChannel, $state, PagerService, MetaTagsService) {
         var self = this;
 
         self.list = [];
@@ -900,21 +952,7 @@
         self.pager = {};
         self.setPage = setPage;
         // get post by category
-        if($stateParams.cat){
-            self.taxonomies.push($stateParams.cat);
-            ProductTaxonomySrv.get({slug: $stateParams.cat}).$promise.then(function (data) {
-                self.catSelected = data;
-            })
-        }
-        if($stateParams.brand){
-            self.taxonomies.push($stateParams.brand);
-            self.brands = [];
-            ProductTaxonomySrv.get({slug: $stateParams.brand}).$promise.then(function (data) {
-                self.brandSelected = data;
-                self.brands[0] = self.brandSelected;
-            })
-        }
-        if ($stateParams.slug) {
+        if($stateParams.slug && $stateParams.cat){
             ProductTaxonomySrv.get({
                 slug: $stateParams.slug,
                 isActive: 'True'
@@ -923,7 +961,17 @@
                     self.categoryName = results.name;
                     self.categoryId = results.id;
                     self.category = results;
-                    $rootScope.pageTitle = self.categoryName + ' - ' + $rootScope.initConfig.branchOffice;
+                    self.taxonomies.push($stateParams.cat);
+                    ProductTaxonomySrv.get({slug: $stateParams.cat}).$promise.then(function (data) {
+                        self.catSelected = data;
+                        self.titleCategories = self.categoryName + ' ' + data.name
+                        MetaTagsService.setTags({
+                            'title': self.titleCategories,
+                            // OpenGraph
+                            'og:title': self.titleCategories + ' - ' + 'Monbelyy',
+                            'og:url': 'https://www.monbelyy.mx' + $rootScope.$state.href($rootScope.$state.current.name),
+                        })
+                    })
                 }
                 ProductTaxonomySrv.query({
                     parent: results.id,
@@ -936,6 +984,43 @@
                     self.ready = true;
                 });
             });
+
+
+        } else if ($stateParams.slug) {
+            ProductTaxonomySrv.get({
+                slug: $stateParams.slug,
+                isActive: 'True'
+            }).$promise.then(function (results) {
+                if (results) {
+                    self.categoryName = results.name;
+                    self.categoryId = results.id;
+                    self.category = results;
+                    MetaTagsService.setTags({
+                        'title': self.categoryName,
+                        // OpenGraph
+                        'og:title': self.categoryName + ' - ' + 'Monbelyy',
+                        'og:url': 'https://www.monbelyy.mx' + $rootScope.$state.href($rootScope.$state.current.name),
+                    })
+                }
+                ProductTaxonomySrv.query({
+                    parent: results.id,
+                    isActive: 'True'
+                }).$promise.then(function (data) {
+                    self.childrens = data;
+                    angular.forEach(self.childrens, function (obj, ind) {
+                        self.categories.push(obj);
+                    });
+                    self.ready = true;
+                });
+            });
+        }
+        if($stateParams.brand){
+            self.taxonomies.push($stateParams.brand);
+            self.brands = [];
+            ProductTaxonomySrv.get({slug: $stateParams.brand}).$promise.then(function (data) {
+                self.brandSelected = data;
+                self.brands[0] = self.brandSelected;
+            })
         }
         self.busyBrands = false;
         self.searchBrands = function (open) {
@@ -1904,18 +1989,18 @@
     HomeCtrl.$inject = ['EntrySrv', 'ProductSrv', 'TaxonomySrv', '$rootScope', '$filter', '$localStorage', '$stateParams'];
     PostCtrl.$inject = ['EntrySrv', '$stateParams', 'TaxonomySrv', '$rootScope', '$filter'];
     BlogCtrl.$inject = ['EntrySrv', '$rootScope', '$filter'];
-    PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter'];
+    PostDetailCtrl.$inject = ['EntrySrv', '$stateParams', '$rootScope', '$filter','MetaTagsService'];
     ContactCtrl.$inject = ['NotificationTakiSrv', 'NotificationSrv', '$rootScope', '$state'];
     GetQuerySearchCtrl.$inject = ['$state'];
     SearchCtrl.$inject = ['EntrySrv', 'ProductSrv', '$filter', '$stateParams', '$localStorage', '$rootScope',
-        'NgTableParams', '$scope', 'ngTableEventsChannel', '$location', '$anchorScroll', 'PagerService', '$state'];
+        'NgTableParams', '$scope', 'ngTableEventsChannel', '$location', '$anchorScroll', 'PagerService', '$state','MetaTagsService'];
     NavBarCtrl.$inject = [];
     ProductsCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'AttachmentCmsSrv', '$filter', '$rootScope'];
     TabsCtrl.$inject = ['EntrySrv', 'TaxonomySrv'];
-    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout','NotificationSrv','$state'];
+    ProductDetailCtrl.$inject = ['ProductSrv', '$stateParams', '$rootScope', '$filter', '$localStorage', '$timeout','NotificationSrv','$state','MetaTagsService'];
     ProductsByCategoryCtrl.$inject = ['ProductSrv', 'ProductTaxonomySrv', 'NotificationSrv', 'NgTableParams',
         '$stateParams', '$rootScope', '$localStorage', '$filter', '$timeout', '$location', '$anchorScroll', '$scope',
-        'ngTableEventsChannel', '$state', 'PagerService'];
+        'ngTableEventsChannel', '$state', 'PagerService','MetaTagsService'];
     ShoppingCtrl.$inject = ['$rootScope', '$auth', '$state', '$localStorage', '$filter', 'NotificationSrv',
         'SweetAlert', 'ProductSrv', '$mdDialog', '$scope', 'CartsSrv', '$window'];
     ServiceCtrl.$inject = ['ProductSrv', 'NotificationSrv', '$stateParams', '$rootScope', '$localStorage', '$filter', '$state', 'PagerService'];

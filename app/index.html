@@ -4,9 +4,6 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title ng-bind="pageTitle">{{ initConfig.branchOffice }}</title>
-    <meta name="description" content="{{ post.excerpt }}" ng-if="post && $state.current.name !=='category'">
-    <meta name="description" content="Monbely - Ceramic Tiles" ng-if="!post && $state.current.name !== 'category'">
     <meta name="keywords" content="">
     <meta name="theme-color" content="{{ initConfig.meta_color }}">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
@@ -18,28 +15,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">
 
-    <!-- Twitter Card data -->
-    <meta name="twitter:title" content="{{ post.title }}" ng-if="post">
-    <meta name="twitter:description" content="{{ post.excerpt }}" ng-if="post">
-    <!-- Twitter summary card with large image must be at least 280x150px -->
-    <meta name="twitter:image:src" content="{{ post.urlImages.original }}" ng-if="post">
-
-    <!-- Open Graph data -->
-    <meta property="og:title" content="{{ post.title }}" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="og:description" content="{{ post.description }}" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="og:image" content="{{ post.urlImages.original }}" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="og:type" content="store" ng-if="!post && $state.current.name !=='category'"/>
-    <meta property="og:type" content="product" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="product:price:currency" content="MXN" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="product:brand" content="Monbelyy" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="product:condition" content="new" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="product:price:amount" content="{{ post.price }}" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="product:availability" content="in stock" ng-if="post && $state.current.name !=='category'"/>
-    <!--<meta property="fb:app_id" content="1346933925479827" ng-if="post && $state.current.name !=='category'"/>-->
-    <meta property="product:retailer_item_id" content="{{post.id}}" ng-if="post && $state.current.name !=='category'"/>
-    <meta property="og:url" content="https://www.monbel.mx{{ $state.href($state.current.name) }}"/>
-    
-    <meta name="p:domain_verify" content="28d54fa945d5d6952e7d63800b3767bc"/>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700" rel="stylesheet">
@@ -133,7 +108,7 @@
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/popper.js/dist/umd/popper.js"></script>
-<script src="lib/underscore/underscore.js"></script>
+<script src="lib/underscore/underscore-umd.js"></script>
 <script src="lib/owl.carousel/dist/owl.carousel.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
